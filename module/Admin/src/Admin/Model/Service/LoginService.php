@@ -34,6 +34,12 @@ class LoginService
                         'name' => 'Roles',
                         'url' => 'admin/rol',
                         'icon' => 'fa-circle-o',
+                        'active' => true,
+                    ),
+                    array(
+                        'name' => 'Recursos',
+                        'url' => 'admin/recurso',
+                        'icon' => 'fa-circle-o',
                         'active' => false,
                     ),
                     array(
@@ -46,7 +52,7 @@ class LoginService
                         'name' => 'Usuarios',
                         'url' => 'admin/usuario',
                         'icon' => 'fa-circle-o',
-                        'active' => true,
+                        'active' => false,
                     ),
                 )
             ),
