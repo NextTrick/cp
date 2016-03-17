@@ -1,0 +1,9 @@
+<?php $this->layout()->title = array('Permiso', 'Modificar') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Permiso'),
+    array('url' => null, 'name' => 'Modificar'),
+);
+?>
+
+<?php echo $this->partial('admin/permiso/_form.phtml', array('form' => $form)); ?>

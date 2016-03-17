@@ -1,0 +1,8 @@
+
+//validation quote
+$resource = $this->_getDbAdapter()->getDriver()->getConnection()->getResource();
+$resource->quote($value);
+
+
+// sql expression
+$where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("'1' = ?", '1'));

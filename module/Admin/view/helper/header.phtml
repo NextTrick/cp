@@ -1,0 +1,70 @@
+<header class="main-header">
+
+    <!-- Logo -->
+    <a href="" class="logo">
+        <!-- mini logo for sidebar mini 50x50 pixels -->
+        <span class="logo-mini"><b>Coney </b>park</span>
+        <!-- logo for regular state and mobile devices -->
+        <span class="logo-lg"><b>Admin </b>Coney park</span>
+    </a>
+
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="javascript:;" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Cambiar navegación</span>
+        </a>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <?php foreach ($notifications as $type => $notification) : ?>
+                    <li class="dropdown notifications-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa <?php echo $notification['icon']; ?>"></i>
+                            <?php $children = isset($notification['children']) ? $notification['children'] : array(); ?>
+                            <span class="label label-<?php echo $type; ?>"><?php echo count($children); ?></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="header"><?php echo $notification['name'] ?></li>
+                            <li>
+                                <ul class="menu">
+                                    <?php foreach ($children as $child) : ?>
+                                        <li>
+                                            <a href="<?php echo $child['url']; ?>">
+                                                <i class="fa <?php echo $child['icon']; ?>"></i> <?php echo $child['name']; ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                            <li class="footer"><a href="#">View all</a></li>
+                        </ul>
+                    </li>
+                <?php endforeach; ?>
+
+                <li class="dropdown user user-menu">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="<?php echo $user->urlImage; ?>" class="user-image" alt="<?php echo $user->username; ?>">
+                        <span class="hidden-xs"><?php echo $user->username; ?></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="user-header">
+                            <img src="<?php echo $user->urlImage; ?>" class="img-circle" alt="<?php echo $user->username; ?>">
+                            <p>
+                                <?php echo $user->username; ?>
+                                <small>User</small>
+                            </p>
+                        </li>
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="<?php echo $user->urlProfile; ?>" class="btn btn-default btn-flat">Perfil</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="<?php echo BASE_URL; ?>admin/login/logout" class="btn btn-default btn-flat">Salir</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

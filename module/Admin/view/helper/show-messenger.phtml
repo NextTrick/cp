@@ -1,0 +1,20 @@
+<?php if (count($flashMessage) > 0) : ?>
+<div>
+    <?php foreach ($flashMessage as $msg) :?>
+        <?php foreach ($msg as $type => $message) : ?>
+            <?php if ($type == 'success') : ?>
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($type == 'error') : ?>
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <?php echo $message; ?>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+</div>
+<?php endif; ?>

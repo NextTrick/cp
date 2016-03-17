@@ -1,0 +1,61 @@
+<?php $this->form->prepare(); ?>
+<div class="box">
+    <div class="box-header with-border">
+        <label>Usuario</label>
+    </div>
+    <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-horizontal')); ?>
+    <div class="box-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="rol_id">Rol <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('rol_id')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('rol_id')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Email <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('email')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('email')); ?></span>
+            </div>
+        </div>
+        <?php if ($repeat) : ?>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="password">Password <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('password')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('password')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="password">Repetir password <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('password_repeat')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('password_repeat')); ?></span>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="imagen">Imagen</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('imagen')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('imagen')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="estado">Estado</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('estado')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('estado')); ?></span>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default" href="<?php echo BASE_URL; ?>admin/usuario/index">Regresar</a>
+            <?php if (!empty($id)) : ?>
+            <a class="btn btn-warning" href="<?php echo BASE_URL; ?>admin/usuario/editar-password/<?php echo $id; ?>">Modificar Password</a>
+            <?php endif; ?>
+            <button class="btn btn-success" type="submit">Aceptar</button>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>

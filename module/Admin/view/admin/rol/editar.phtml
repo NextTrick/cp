@@ -1,0 +1,9 @@
+<?php $this->layout()->title = array('Rol', 'Modificar') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Rol'),
+    array('url' => null, 'name' => 'Modificar'),
+);
+?>
+
+<?php echo $this->partial('admin/rol/_form.phtml', array('form' => $form)); ?>

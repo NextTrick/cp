@@ -1,0 +1,9 @@
+<?php $this->layout()->title = array('Recurso', 'Modificar') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Recurso'),
+    array('url' => null, 'name' => 'Modificar'),
+);
+?>
+
+<?php echo $this->partial('admin/recurso/_form.phtml', array('form' => $form)); ?>
