@@ -60,12 +60,19 @@ class RecursoForm extends Form
             ));
         $this->add($url);
         
-        $nivel = new Element\Text('nivel');
+        $nivel = new Element\Text('orden');
         $nivel->setAttributes(array(
-                'id' => 'nivel',
+                'id' => 'orden',
                 'maxlength' => '5',
             ));
         $this->add($nivel);
+        
+        $icono = new Element\Text('icono');
+        $icono->setAttributes(array(
+                'id' => 'icono',
+                'maxlength' => '50',
+            ));
+        $this->add($icono);
         
         $estado = new Element\Checkbox('estado');
         $estado->setUseHiddenElement(true);

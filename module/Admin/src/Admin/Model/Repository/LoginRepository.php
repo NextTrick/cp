@@ -135,7 +135,7 @@ class LoginRepository
             $sql = new \Zend\Db\Sql\Sql($this->_adapter);
             $select = $sql->select();
             $select->from(array('a' => 'admin_usuario'));
-            $select->columns(array('id', 'email', 'imagen'));
+            $select->columns(array('id', 'email', 'rol_id', 'imagen'));
             $select->where(array('a.email' => $username, 'a.estado' => 1));
             $statement = $sql->prepareStatementForSqlObject($select);
             $results = $statement->execute();
@@ -147,6 +147,7 @@ class LoginRepository
                 $data->id = $result['id'];
                 $data->username = array_shift($partEmail);
                 $data->email = $result['email'];
+                $data->rol_id = $result['rol_id'];
                 $data->image = $result['imagen'];
                 return $data;
             }

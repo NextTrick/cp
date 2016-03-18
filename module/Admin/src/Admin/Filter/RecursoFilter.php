@@ -45,11 +45,18 @@ class RecursoFilter extends Zf2InputFilter
             )
         ));
         $this->add(array(
-            'name' => 'nivel',
+            'name' => 'orden',
             'required' => true,
             'validators' => array(
-                self::validatorNotEmpty('Nivel'),
-                self::validatorDigits('Nivel'),
+                self::validatorNotEmpty('Orden'),
+                self::validatorDigits('Orden'),
+            )
+        ));
+        $this->add(array(
+            'name' => 'icono',
+            'required' => false,
+            'validators' => array(
+                self::validatorNotEmpty('Icono'),
             )
         ));
     }

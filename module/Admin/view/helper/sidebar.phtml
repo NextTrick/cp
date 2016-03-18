@@ -14,16 +14,16 @@
             <?php $classActive = $parent['active'] ? 'active' : ''; ?>
             <li class="<?php echo $classActive; ?> treeview">
                 <a href="<?php echo (empty($parent['url']) ? 'javascript:;' : BASE_URL . $parent['url']); ?>">
-                    <i class="fa <?php echo $parent['icon']; ?>"></i> 
-                    <span><?php echo $parent['name']; ?></span>
+                    <i class="fa <?php echo $parent['icono']; ?>"></i> 
+                    <span><?php echo $parent['nombre']; ?></span>
                     <i class="fa fa-angle-left pull-right"></i>
                 </a>
-                <?php $children1 = isset($parent['children']) ? $parent['children'] : array(); ?>
+                <?php $children1 = isset($parent['hijos']) ? $parent['hijos'] : array(); ?>
                 <?php if (!empty($children1)) : ?>
                     <ul class="treeview-menu">
                         <?php foreach ($children1 as $child1) : ?>
                         <?php $classActive = $child1['active'] ? 'active' : ''; ?>
-                            <li class="<?php echo $classActive; ?>"><a href="<?php echo BASE_URL . $child1['url']; ?>"><i class="fa <?php echo  $child1['icon']; ?>"></i><?php echo  $child1['name']; ?></a></li>
+                            <li class="<?php echo $classActive; ?>"><a href="<?php echo BASE_URL . $child1['url']; ?>"><i class="fa <?php echo  $child1['icono']; ?>"></i><?php echo  $child1['nombre']; ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 <?php endif; ?>

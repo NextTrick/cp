@@ -120,7 +120,8 @@ class RecursoController extends SecurityAdminController
                 $paramsIn = array(
                     'nombre' => $data['nombre'],
                     'url' => $data['url'],
-                    'nivel' => $data['nivel'],
+                    'orden' => $data['orden'],
+                    'icono' => $data['icono'],
                     'estado' => $data['estado'],
                 );
 

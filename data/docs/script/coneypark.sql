@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2016 a las 13:14:46
+-- Tiempo de generación: 18-03-2016 a las 05:40:30
 -- Versión del servidor: 5.6.25
 -- Versión de PHP: 5.6.11
 
@@ -59,7 +59,8 @@ CREATE TABLE IF NOT EXISTS `admin_recurso` (
   `recurso_id` int(11) DEFAULT NULL,
   `nombre` varchar(60) NOT NULL,
   `url` varchar(120) DEFAULT NULL,
-  `nivel` int(11) NOT NULL,
+  `orden` int(11) NOT NULL,
+  `icono` varchar(50) DEFAULT NULL,
   `fecha_creacion` datetime DEFAULT NULL,
   `fecha_edicion` datetime DEFAULT NULL,
   `estado` smallint(1) NOT NULL DEFAULT '1'
@@ -69,12 +70,12 @@ CREATE TABLE IF NOT EXISTS `admin_recurso` (
 -- Volcado de datos para la tabla `admin_recurso`
 --
 
-INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `nivel`, `fecha_creacion`, `fecha_edicion`, `estado`) VALUES
-(3, NULL, 'Seguridad', '', 1, '2016-03-16 06:13:49', NULL, 1),
-(4, 3, 'Usuarios', 'admin/usuario', 2, '2016-03-16 06:16:29', NULL, 1),
-(5, 3, 'Recurso', 'admin/recurso', 2, '2016-03-17 05:00:59', NULL, 1),
-(6, 3, 'Rol', 'admin/rol', 2, '2016-03-17 05:01:34', NULL, 1),
-(7, 3, 'Permiso', 'admin/permiso', 2, '2016-03-17 05:02:22', NULL, 1);
+INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `orden`, `icono`, `fecha_creacion`, `fecha_edicion`, `estado`) VALUES
+(3, NULL, 'Seguridad', '', 1, 'fa-dashboard', '2016-03-16 06:13:49', '2016-03-17 23:32:23', 1),
+(4, 3, 'Usuarios', 'admin/usuario', 1, 'fa-circle-o', '2016-03-16 06:16:29', '2016-03-17 22:52:16', 1),
+(5, 3, 'Recurso', 'admin/recurso', 2, 'fa-circle-o', '2016-03-17 05:00:59', '2016-03-17 22:52:37', 1),
+(6, 3, 'Rol', 'admin/rol', 3, 'fa-circle-o', '2016-03-17 05:01:34', '2016-03-17 23:37:24', 1),
+(7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-17 22:52:31', 1);
 
 -- --------------------------------------------------------
 

@@ -9,6 +9,7 @@
 namespace Admin\Model\Repository;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 class RecursoRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 {
@@ -18,5 +19,33 @@ class RecursoRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     public function __construct(Adapter $adapter)
     {
         parent::__construct($adapter);
+    }
+    
+    public function findSidebarMenus($rolId)
+    {
+        try {
+            $cClomuns = array(
+                'id',
+                'recurso_id',
+                'nombre',
+                'url',
+                'orden',
+                'icono',
+            );
+            $sql = new Sql($this->getAdapter());
+            $select = $sql->select();
+            $select->quantifier(\Zend\Db\Sql\Select::QUANTIFIER_DISTINCT);
+            $select->from(array('a' => 'admin_permiso'));
+            $select->columns(array());
+            $select->join(array('c' => 'admin_recurso'), 'a.recurso_id = c.id', $cClomuns, 'left');
+            $select->where(array('a.rol_id' => $rolId));
+            
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $rows = $this->resultSetPrototype->initialize($statement->execute())
+                ->toArray();
+            return $rows;
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
     }
 }

@@ -20,7 +20,8 @@ $this->layout()->breadcrumb = array(
                     <th>Menú padre</th>
                     <th>Menú</th>
                     <th>Url</th>
-                    <th>Nivel</th>
+                    <th>Orden</th>
+                    <th>Icono</th>
                     <th>Estado</th>
                     <th style="max-width: 60px"></th>
                 </tr>
@@ -31,7 +32,8 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['recurso_id'] ?></td>
                         <td><?php echo $row['nombre'] ?></td>
                         <td><?php echo $row['url'] ?></td>
-                        <td><?php echo $row['nivel'] ?></td>
+                        <td><?php echo $row['orden'] ?></td>
+                        <td><?php echo $row['icono'] ?></td>
                         <td><?php echo ($row['estado'] == 1) ? '<i class="fa fa-check-square-o"></i>' : '<i class="fa fa-times"></i>'; ?></td>
                         <td>
                             <a href="<?php echo BASE_URL ?>admin/recurso/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
