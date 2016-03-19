@@ -138,9 +138,27 @@ class UsuarioController extends SecurityAdminController
         $data = $request->getPost()->toArray();
 
         $repeat = (in_array($action, array(AC_CREAR, self::AC_EDITAR_PASS))) ? true : false;
-        $form->setInputFilter(new \Admin\Filter\UsuarioFilter(array('repeat' => $repeat)));
+        
+        $filter = new \Admin\Filter\UsuarioFilter(array('repeat' => $repeat));
+
+        $form->setInputFilter($filter);
         $form->setData($data);
-        if ($form->isValid()) {
+        
+        $valid = true;
+        if (!empty($data['email'])) {
+            $existsEmail = 'El Email que intenta registrar ya existe';
+            $row = $this->_getUsuarioService()->getRepository()
+                ->findOne(array('where' => array('email' => $data['email'])));
+ 
+            if (isset($row['id']) && empty($id)) {
+                $valid = false;
+                $form->get('email')->setMessages(array('existsEmail' => $existsEmail));
+            } elseif (isset($row['id']) && $row['id'] != $id) {
+                $valid = false;
+                $form->get('email')->setMessages(array('existsEmail' => $existsEmail));
+            }
+        }
+        if ($form->isValid() && $valid) {
             $data = $form->getData();
 
             try {

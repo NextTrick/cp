@@ -83,13 +83,17 @@ class RolController extends SecurityAdminController
         if ($request->isPost()) {
             $id = $this->params('id', null);
             if (!empty($id)) {
-                $exist = $this->_getRolService()->getRepository()->existsChildren($id);
-                if ($exist == false) {
-                    $this->_getRolService()->getRepository()
-                        ->delete(array('id' => $id));
-                } else {
+                $existsPermiso = $this->_getPermisoService()->getRepository()
+                    ->findExists(array('where' => array('rol_id' => $id)));
+                $existsUsuario = $this->_getUsuarioService()->getRepository()
+                    ->findExists(array('where' => array('rol_id' => $id)));
+
+                if ($existsPermiso || $existsUsuario) {
                     $this->_getRolService()->getRepository()
                         ->save(array('estado' => 0), $id);
+                } else {
+                    $this->_getRolService()->getRepository()
+                        ->delete(array('id' => $id));
                 }
                 
                 $results = array('success' => true, 'msg' => OK_ELIMINAR);
@@ -179,5 +183,15 @@ class RolController extends SecurityAdminController
     protected function _getRolService()
     {
         return $this->getServiceLocator()->get('Admin\Model\Service\RolService');
+    }
+    
+    protected function _getPermisoService()
+    {
+        return $this->getServiceLocator()->get('Admin\Model\Service\PermisoService');
+    }
+    
+    protected function _getUsuarioService()
+    {
+        return $this->getServiceLocator()->get('Admin\Model\Service\UsuarioService');
     }
 }

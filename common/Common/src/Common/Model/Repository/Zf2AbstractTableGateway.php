@@ -71,7 +71,7 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
         }
     }
 
-    public function findAll($criteria)
+    public function findAll($criteria = array())
     {
         $this->setCriteria($criteria);
         try {
@@ -172,7 +172,7 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
         }
     }
     
-    public function findAssoc($criteria)
+    public function findAssoc($criteria = array())
     {       
         $this->setCriteria($criteria);
         try {
@@ -209,7 +209,7 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
         }
     }
 
-    public function findCol($criteria)
+    public function findCol($criteria = array())
     {
         $this->setCriteria($criteria);
         try {
@@ -246,7 +246,34 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
         }
     }
     
-    public function findPairs($criteria)
+    public function findExists($criteria = array())
+    {
+        $this->setCriteria($criteria);
+        try {
+            $sql = new Sql($this->getAdapter());
+            $select = $sql->select()->from(array('a' => $this->table));
+            $select->columns(array('num_rows' => new \Zend\Db\Sql\Expression('COUNT(*)')));
+            
+            if (!empty($this->crWhere)) {
+                $select->where($this->crWhere);
+            }
+
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $row = $this->resultSetPrototype->initialize($statement->execute())
+                ->current();
+
+            $numRows = isset($row['num_rows']) ? (int) $row['num_rows'] : 0;
+            if ($numRows > 0) {
+                return true;
+            }
+            
+            return false;
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+    
+    public function findPairs($criteria = array())
     {       
         $this->setCriteria($criteria);
         try {

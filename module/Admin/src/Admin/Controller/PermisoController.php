@@ -23,7 +23,14 @@ class PermisoController extends SecurityAdminController
         
         $form = $this->crearBuscarForm();
         $form->setData($params);
-        
+
+        if (empty($params['rol_id'])) {
+            $roles = $form->get('rol_id')->getValueOptions();
+            foreach ($roles as $key => $value) {
+                $params['rol_id'] = $key;
+                break;
+            }
+        }
         $criteria = array(
             'where' => $params,
         );

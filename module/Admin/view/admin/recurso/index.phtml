@@ -17,7 +17,6 @@ $this->layout()->breadcrumb = array(
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Menú padre</th>
                     <th>Menú</th>
                     <th>Url</th>
                     <th>Orden</th>
@@ -29,8 +28,7 @@ $this->layout()->breadcrumb = array(
             <tbody>
                 <?php foreach ($gridList as $row) : ?>
                     <tr>
-                        <td><?php echo $row['recurso_id'] ?></td>
-                        <td><?php echo $row['nombre'] ?></td>
+                        <td><?php echo $row['prefix'] . ' ' . $row['nombre'] ?></td>
                         <td><?php echo $row['url'] ?></td>
                         <td><?php echo $row['orden'] ?></td>
                         <td><?php echo $row['icono'] ?></td>

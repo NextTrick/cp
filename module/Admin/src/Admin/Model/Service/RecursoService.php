@@ -12,7 +12,8 @@ class RecursoService
 {
     protected $_repository = null;
     protected $_sl = null;
-    private $_menus = array();
+    private $_sidebarMenus = array();
+    private $_ddlMenus = array();
 
     public function __construct($repository, $serviceLocator)
     {
@@ -20,13 +21,13 @@ class RecursoService
         $this->_sl = $serviceLocator;
     }
 
-    private function recursiveItems($id, $uriPath)
+    private function _sidebarRecursiveItems($id, $uriPath)
     {
         $menus = array();
         $newActive = false;
-        foreach ($this->_menus as $key => $row) {
+        foreach ($this->_sidebarMenus as $key => $row) {
             if ($row['recurso_id'] == $id) {
-                $xmenus = $this->recursiveItems($row['id'], $uriPath);
+                $xmenus = $this->_sidebarRecursiveItems($row['id'], $uriPath);
                 
                 $active = false;
                 if ($xmenus['active'] === true) {
@@ -43,7 +44,7 @@ class RecursoService
                 $row['active'] = $active;
                 
                 $menus[$row['orden']] = $row;
-                unset($this->_menus[$key]);
+                unset($this->_sidebarMenus[$key]);
             }
         }
         ksort($menus);
@@ -54,14 +55,14 @@ class RecursoService
     }
 
 
-    public function getMenus($rolId, $uriPath)
+    public function getSidebarMenus($rolId, $uriPath)
     {
-        $this->_menus = $this->getRepository()->findSidebarMenus($rolId);
+        $this->_sidebarMenus = $this->getRepository()->findSidebarMenus($rolId);
         
         $menus = array();
-        foreach ($this->_menus as $key => $row) {
+        foreach ($this->_sidebarMenus as $key => $row) {
             if (empty($row['recurso_id'])) {
-                $xmenus = $this->recursiveItems($row['id'], $uriPath);
+                $xmenus = $this->_sidebarRecursiveItems($row['id'], $uriPath);
                 
                 $active = false;
                 if ($xmenus['active'] === true) {
@@ -74,7 +75,7 @@ class RecursoService
                 $row['active'] = $active;
 
                 $menus[$row['orden']] = $row;
-                unset($this->_menus[$key]);
+                unset($this->_sidebarMenus[$key]);
             }
         }
         ksort($menus);
@@ -82,6 +83,80 @@ class RecursoService
         return $menus;
     }
     
+    private function _ddlRecursiveItems($id)
+    {
+        $menus = array();
+        foreach ($this->_ddlMenus as $key => $row) {
+            if ($row['recurso_id'] == $id) {
+                $row['prefix'] = isset($row['prefix']) ? '--' . $row['prefix'] : '----';
+                $row['hijos'] = $this->_ddlRecursiveItems($row['id']);
+                $menus[$row['orden']] = $row;
+                unset($this->_ddlMenus[$key]);
+            }
+        }
+        ksort($menus);
+        
+        $newMenus = array();
+        foreach ($menus as $row) {
+            $hijos = $row['hijos'];
+            unset($row['hijos']);
+            if (!empty($hijos)) {
+                $newMenus[] = $row;
+                foreach ($hijos as $row2) {
+                    $newMenus[] = $row2;
+                }
+            } else {
+                $newMenus[] = $row;
+            }
+        }
+        
+        return $newMenus;
+    }
+    
+    public function getDropDownListMenus()
+    {
+        $newMenus = $this->getListMenus();
+        
+        $rows = array();
+        foreach ($newMenus as $row) {
+            $rows[$row['id']] = $row['prefix'] . ' ' . $row['nombre'];
+        }
+
+        return $rows;
+    }
+
+    public function getListMenus($criteria = array())
+    {
+        $this->_ddlMenus = $this->getRepository()->search($criteria);
+
+        $menus = array();
+        foreach ($this->_ddlMenus as $key => $row) {
+            if (empty($row['recurso_id'])) {
+                $row['prefix'] = '--';
+                $row['hijos'] = $this->_ddlRecursiveItems($row['id']);
+                $menus[$row['orden']] = $row;
+                unset($this->_ddlMenus[$key]);
+            }
+        }
+        ksort($menus);
+
+        $newMenus = array();
+        foreach ($menus as $row) {
+            $hijos = $row['hijos'];
+            unset($row['hijos']);
+            if (!empty($hijos)) {
+                $newMenus[] = $row;
+                foreach ($hijos as $row2) {
+                    $newMenus[] = $row2;
+                }
+            } else {
+                $newMenus[] = $row;
+            }
+        }
+        
+        return $newMenus;
+    }
+
     public function getRepository()
     {
         return $this->_repository;

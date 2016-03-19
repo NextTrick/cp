@@ -25,14 +25,23 @@ class UsuarioFilter extends Zf2InputFilter
         $this->add(array(
             'name' => 'rol_id',
             'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Rol'),
                 self::validatorDigits('Rol'),
             )
         ));
+        
         $this->add(array(
             'name' => 'email',
             'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Email'),
                 self::validatorEmailAddress('Email'),
@@ -43,6 +52,10 @@ class UsuarioFilter extends Zf2InputFilter
             $this->add(array(
                 'name' => 'password',
                 'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
                 'validators' => array(
                     self::validatorNotEmpty('Password'),
                 )
@@ -51,6 +64,10 @@ class UsuarioFilter extends Zf2InputFilter
             $this->add(array(
                 'name' => 'password_repeat',
                 'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
                 'validators' => array(
                     self::validatorNotEmpty('Repetir password'),
                     array(
@@ -58,7 +75,7 @@ class UsuarioFilter extends Zf2InputFilter
                         'options' => array(
                             'token' => 'password',
                             'message' => array(
-                                \Zend\Validator\Identical::NOT_SAME => "Los Passwors no coinciden.",
+                                \Zend\Validator\Identical::NOT_SAME => "Los Passwords no coinciden.",
                                 \Zend\Validator\Identical::MISSING_TOKEN => 'Repetir password por favor.',
                             ),
                             'break_chain_on_failure' => true,
@@ -71,14 +88,23 @@ class UsuarioFilter extends Zf2InputFilter
         $this->add(array(
             'name' => 'estado',
             'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Estado'),
                 self::validatorDigits('Estado'),
             )
         ));
+        
         $this->add(array(
             'name' => 'imagen',
             'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Imagen'),
             )

@@ -34,11 +34,7 @@ class RecursoForm extends Form
 
     protected function _addElements()
     {
-        $criteria = array(
-            'columns' => array('id', 'nombre'),
-            'order' => array('nombre ASC'),
-        );
-        $recursos = $this->_getRecursoService()->getRepository()->findPairs($criteria);
+        $recursos = $this->_getRecursoService()->getDropDownListMenus();
         $recursoId = new Element\Select('recurso_id');
         $recursoId->setAttributes(array('id' => 'recurso_id'));
         $recursoId->setValueOptions($recursos);

@@ -25,36 +25,60 @@ class RecursoFilter extends Zf2InputFilter
         $this->add(array(
             'name' => 'recurso_id',
             'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Menú'),
                 self::validatorDigits('Menú'),
             )
         ));
+        
         $this->add(array(
             'name' => 'nombre',
             'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Nombre'),
             )
         ));
+        
         $this->add(array(
             'name' => 'url',
             'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Url'),
             )
         ));
+        
         $this->add(array(
             'name' => 'orden',
             'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Orden'),
                 self::validatorDigits('Orden'),
             )
         ));
+        
         $this->add(array(
             'name' => 'icono',
             'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Icono'),
             )

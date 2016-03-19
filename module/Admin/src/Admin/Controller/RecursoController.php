@@ -34,7 +34,7 @@ class RecursoController extends SecurityAdminController
                 'url' => $params['url'],
             ),
         );
-        $gridList = $this->_getRecursoService()->getRepository()->search($criteria);
+        $gridList = $this->_getRecursoService()->getListMenus($criteria);
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
@@ -92,8 +92,19 @@ class RecursoController extends SecurityAdminController
         if ($request->isPost()) {
             $id = $this->params('id', null);
             if (!empty($id)) {
-                $this->_getRecursoService()->getRepository()
+                $existsPermiso = $this->_getPermisoService()->getRepository()
+                    ->findExists(array('where' => array('recurso_id' => $id)));
+                $existsRecurso = $this->_getRecursoService()->getRepository()
+                    ->findExists(array('where' => array('recurso_id' => $id)));
+                
+                if ($existsPermiso || $existsRecurso) {
+                    $this->_getRecursoService()->getRepository()
                         ->save(array('estado' => 0), $id);
+                } else {
+                    $this->_getRecursoService()->getRepository()
+                        ->delete(array('id' => $id));
+                }
+                
                 $results = array('success' => true, 'msg' => OK_ELIMINAR);
             }
             
@@ -188,5 +199,10 @@ class RecursoController extends SecurityAdminController
     protected function _getRecursoService()
     {
         return $this->getServiceLocator()->get('Admin\Model\Service\RecursoService');
+    }
+    
+    protected function _getPermisoService()
+    {
+        return $this->getServiceLocator()->get('Admin\Model\Service\PermisoService');
     }
 }

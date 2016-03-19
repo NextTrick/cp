@@ -44,7 +44,7 @@ class Security
                 'Admin\Controller\Usuario' => array(
                     'R' => array('index'),
                     'C' => array('crear'),
-                    'U' => array('editar'),
+                    'U' => array('editar', 'editar-password'),
                     'D' => array('eliminar'),
                 ),
                 'Admin\Controller\Permiso' => array(

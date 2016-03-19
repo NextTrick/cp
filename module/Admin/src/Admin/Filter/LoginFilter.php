@@ -19,13 +19,9 @@ class LoginFilter extends InputFilter
         $this->add(array(
             'name' => 'username',
             'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StripTags'
-                ),
-                array(
-                    'name' => 'StringTrim'
-                )
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
             ),
             'validators' => array(
                 array(
@@ -38,16 +34,13 @@ class LoginFilter extends InputFilter
                 )
             )
         ));
+        
         $this->add(array(
             'name' => 'password',
             'required' => true,
-            'filters' => array(
-                array(
-                    'name' => 'StripTags'
-                ),
-                array(
-                    'name' => 'StringTrim'
-                )
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
             ),
             'validators' => array(
                 array(

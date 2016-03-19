@@ -25,6 +25,10 @@ class RolFilter extends Zf2InputFilter
         $this->add(array(
             'name' => 'nombre',
             'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Nombre'),
             )
@@ -33,6 +37,10 @@ class RolFilter extends Zf2InputFilter
         $this->add(array(
             'name' => 'estado',
             'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorDigits('Estado'),
             )

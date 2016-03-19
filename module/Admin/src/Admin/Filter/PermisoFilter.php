@@ -25,13 +25,22 @@ class PermisoFilter extends Zf2InputFilter
         $this->add(array(
             'name' => 'rol_id',
             'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'validators' => array(
                 self::validatorNotEmpty('Rol'),
                 self::validatorDigits('Rol'),
             )
         ));
+        
         $this->add(array(
             'name' => 'recurso_id',
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
             'required' => true,
             'validators' => array(
                 self::validatorNotEmpty('Recurso'),
