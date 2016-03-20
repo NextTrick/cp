@@ -1,0 +1,81 @@
+<?php $this->layout()->title = array('Usuario', 'Listado') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Usuario'),
+    array('url' => null, 'name' => 'Listado'),
+);
+?>
+
+<div class="box">
+    <div class="box-header with-border">
+        <?php echo $this->partial('usuario/usuario/_buscar.phtml', array('form' => $form)); ?>
+    </div>
+    <div class="box-body">
+        <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
+        <a href="<?php echo BASE_URL; ?>usuario/usuario/crear" class="btn btn-success">Registrar</a>
+        <hr class="separator">
+        <table id="gridMain" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Token</th>
+                    <th>Red</th>
+                    <th>Estado</th>
+                    <th>Imagen</th>
+                    <th>Nombres</th>
+                    <th>Paterno</th>
+                    <th>Materno</th>
+                    <th>Fecha_nac</th>
+                    <th>Cod_pais</th>
+                    <th>Cod_depa</th>
+                    <th>Cod_prov</th>
+                    <th>Cod_dist</th>
+                    <th>Fecha_creacion</th>
+                    <th>Fecha_edicion</th>
+                    <th style="max-width: 60px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($gridList as $row) : ?>
+                    <tr>
+                        <td><?php echo $row['email'] ?></td>
+                        <td><?php echo $row['password'] ?></td>
+                        <td><?php echo $row['token'] ?></td>
+                        <td><?php echo $row['red'] ?></td>
+                        <td><?php echo $row['estado'] ?></td>
+                        <td><?php echo $row['imagen'] ?></td>
+                        <td><?php echo $row['nombres'] ?></td>
+                        <td><?php echo $row['paterno'] ?></td>
+                        <td><?php echo $row['materno'] ?></td>
+                        <td><?php echo $row['fecha_nac'] ?></td>
+                        <td><?php echo $row['cod_pais'] ?></td>
+                        <td><?php echo $row['cod_depa'] ?></td>
+                        <td><?php echo $row['cod_prov'] ?></td>
+                        <td><?php echo $row['cod_dist'] ?></td>
+                        <td><?php echo $row['fecha_creacion'] ?></td>
+                        <td><?php echo $row['fecha_edicion'] ?></td>
+                        <td>
+                            <a href="<?php echo BASE_URL ?>usuario/usuario/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo BASE_URL ?>usuario/usuario/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#gridMain').DataTable({
+            "pageLength": 25,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true
+        });
+        common.deleteRemote();
+    });
+</script>

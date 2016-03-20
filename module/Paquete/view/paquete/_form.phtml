@@ -1,0 +1,49 @@
+<?php $this->form->prepare(); ?>
+<div class="box">
+    <div class="box-header with-border">
+        <label>Paquete</label>
+    </div>
+    <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-horizontal')); ?>
+    <div class="box-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="nombre">Nombre</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('nombre')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('nombre')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="coney_bonos">Coney_bonos</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('coney_bonos')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('coney_bonos')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="coney_bonos_plus">Coney_bonos_plus</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('coney_bonos_plus')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('coney_bonos_plus')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="tickets">Tickets</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('tickets')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('tickets')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="monto_total">Monto_total</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('monto_total')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('monto_total')); ?></span>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default" href="<?php echo BASE_URL; ?>paquete/paquete/index">Regresar</a>
+            <button class="btn btn-success" type="submit">Aceptar</button>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>

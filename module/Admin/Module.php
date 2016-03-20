@@ -18,8 +18,15 @@ class Module
         ), 101);
         
         $eventManager->attach(MvcEvent::EVENT_DISPATCH, function(MvcEvent $event) {
-            $viewModel = $event->getViewModel();
-            $viewModel->setTemplate('layout/admin-layout');
+            $currentNamespaceController = $event->getRouteMatch()->getParam('controller');        
+            $controllerPart = explode('\\', $currentNamespaceController);
+            $currentModule = array_shift($controllerPart);
+
+
+            if (!in_array($currentModule, array('Application'))) {
+                $viewModel = $event->getViewModel();
+                $viewModel->setTemplate('layout/admin-layout');
+            }
         }, 200);
         
         $moduleRouteListener = new ModuleRouteListener();
