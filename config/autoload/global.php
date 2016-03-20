@@ -27,8 +27,8 @@ return array(
     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
-        'database' => 'cuadrati_dev',
-        'username' => 'cuadrati_dev',
+        'database' => 'projectuser',
+        'username' => 'projectpass',
         'password' => '',
         'port' => '3306',        
         'driver_options' => array(
@@ -62,11 +62,11 @@ return array(
             'exception_handler' => array('throw_exceptions' => false),
             'serializer'
         )
-    ),
+    ),    
     'fileDir' => array(
         'usuario_usuario' => array(
             'up' => APP_PATH . '/public/files/usuario/usuario',
-            'down' => 'http://development.cuadraticas.com/files/usuario/usuario',
+            'down' => 'http://dev.recargas.coneypark.pe/files/usuario/usuario',
         ),
     ),
     'mails' => array(
