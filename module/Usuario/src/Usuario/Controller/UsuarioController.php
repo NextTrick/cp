@@ -18,21 +18,9 @@ class UsuarioController extends SecurityAdminController
     {
         $params = array(
             'email' => String::xssClean($this->params()->fromQuery('email')),
-            'password' => String::xssClean($this->params()->fromQuery('password')),
-            'token' => String::xssClean($this->params()->fromQuery('token')),
-            'red' => String::xssClean($this->params()->fromQuery('red')),
-            'estado' => String::xssClean($this->params()->fromQuery('estado')),
-            'imagen' => String::xssClean($this->params()->fromQuery('imagen')),
             'nombres' => String::xssClean($this->params()->fromQuery('nombres')),
             'paterno' => String::xssClean($this->params()->fromQuery('paterno')),
             'materno' => String::xssClean($this->params()->fromQuery('materno')),
-            'fecha_nac' => String::xssClean($this->params()->fromQuery('fecha_nac')),
-            'cod_pais' => String::xssClean($this->params()->fromQuery('cod_pais')),
-            'cod_depa' => String::xssClean($this->params()->fromQuery('cod_depa')),
-            'cod_prov' => String::xssClean($this->params()->fromQuery('cod_prov')),
-            'cod_dist' => String::xssClean($this->params()->fromQuery('cod_dist')),
-            'fecha_creacion' => String::xssClean($this->params()->fromQuery('fecha_creacion')),
-            'fecha_edicion' => String::xssClean($this->params()->fromQuery('fecha_edicion')),
         );
         
         $form = $this->crearBuscarForm();
