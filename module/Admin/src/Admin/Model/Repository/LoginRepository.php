@@ -12,6 +12,7 @@ use Zend\Authentication\AuthenticationService;
 use Zend\Db\Adapter\Adapter;
 use Zend\Authentication\Adapter\DbTable as AuthAdapter;
 use Zend\Authentication\Result;
+use Zend\Authentication\Storage\Session as SessionStorage;
 
 class LoginRepository
 {
@@ -37,6 +38,7 @@ class LoginRepository
     {
         $this->_adapter = $adapter;
         $this->_auth = new AuthenticationService();
+        $this->_auth->setStorage(new SessionStorage('session_admin'));
         $authAdapter = new AuthAdapter($this->_adapter, 'admin_usuario', 'email', 'password');
         $this->_auth->setAdapter($authAdapter);
     }

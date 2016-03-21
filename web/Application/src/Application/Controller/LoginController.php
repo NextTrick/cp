@@ -42,10 +42,19 @@ class LoginController extends AbstractActionController
     
     public function twitterCallbackAction()
     {
-        $oauth = $this->_getOauthCallbackService();
+        $oauth = $this->_getOauthTwitterService();
         
         $oauth->callback();
         echo 't';exit;
+    }
+    
+    public function logoutAction()
+    {
+        $oauth1 = $this->_getOauthTwitterService();
+        $oauth2 = $this->_getOauthTwitterService();
+        
+        $oauth1->logout();
+        $oauth2->logout();
     }
     
     protected function _getOauthFacebookService()

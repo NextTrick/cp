@@ -9,7 +9,6 @@
 namespace Usuario\Model\Service;
 
 use Zend\Session\Container;
-use Abraham\TwitterOAuth\TwitterOAuth;
 
 class OauthTwitterService
 {
@@ -34,49 +33,7 @@ class OauthTwitterService
     
     public function login()
     {
-        $accessToken = $this->_container->offsetGet('access_token');
 
-        // twitter session with your credentials
-        $twitter = new \Simplon\Twitter\Twitter($this->_config->consumer_key, $this->_config->consumer_secret);
-
-        try {
-            $oauthRequestTokenVo = $twitter->requestOauthRequestToken($this->_config->redirect_callback);
-
-            echo "Twitter redirect url:\n";
-            echo $twitter->getAuthenticationUrl($oauthRequestTokenVo->getOauthToken());
-            echo "\n\n";
-        } catch (\Simplon\Twitter\TwitterException $e) {
-            throw new \Exception('Error: ' . $e->getMessage());
-        }
-        exit;
-        try
-        {
-            // retrieve access tokens and profile data from user
-            $oauthAccessTokenVo = $twitter->requestOauthAccessToken($this->_config->oauth_access_token, $this->_config->oauth_access_token_secret);
-
-            var_dump($oauthAccessTokenVo);
-
-           // var_dump result would look something like this:
-
-            // class Simplon\Twitter\OauthAccessTokenVo#4 (5) {
-            // protected $oauthToken =>
-            // string(50) "3197060333-xxxx4chX0Sega3iMF0r55PP96BAGyXXXFTwjpgW"
-            // protected $oauthTokenSecret =>
-            // string(45) "FeIpfZ1qK4jTaKXXXXTaQAlfny0dFgBV4K15vbnFd3XX"
-            // protected $userId =>
-            // string(10) "1234567899"
-            // protected $screenName =>
-            // string(12) "foobar user"
-            // protected $xAuthExpires =>
-            // string(1) "0"
-            // }
-        }
-        catch (\Simplon\Twitter\TwitterException $e)
-        {
-            var_dump($e->getMessage());
-        }
-
-        exit;
     }
 
     public function isLogin()

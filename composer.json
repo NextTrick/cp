@@ -11,7 +11,7 @@
         "php": ">=5.5",
         "zendframework/zendframework": "~2.5",  
         "facebook/php-sdk-v4" : "~5.0",
-        "simplon/twitter": "~0.2.4",
+        "kompas/twitter-oauth": "~1.0.1",
         "zendframework/zftool": "dev-master"
     }
 }

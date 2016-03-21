@@ -15,6 +15,8 @@ class MainController extends SecurityAdminController
 {
     public function indexAction()
     {
+//        var_dump($_SESSION);
+//        exit;
         return new ViewModel();
     }
 }
