@@ -15,8 +15,7 @@ class LoginController extends SecurityAdminController
 {
 
     public function indexAction()
-    { 
-        $e
+    {
         $form = $this->_getLoginForm();
         $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
             'controller' => 'login',

@@ -9,8 +9,7 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager = $e->getApplication()->getEventManager();
-        $eventManager->attach('dispatch', array($this, 'initEnvironment'), 100);
+        $eventManager = $e->getApplication()->getEventManager();        
 
         $eventManager->attach(MvcEvent::EVENT_DISPATCH, array(
             $this,
@@ -62,21 +61,6 @@ class Module
     public function getViewHelperConfig()
     {
         return include __DIR__ . '/config/viewhelper.config.php';
-    }
-    
-    public function initEnvironment(MvcEvent $e)
-    {          
-       $app = $e->getParam('application');
-       $config = $app->getServiceManager()->get('config');
-       $settings = $config['php']['settings'];
-
-       foreach ($settings as $key => $setting) {
-           if ($key == 'error_reporting') {
-               error_reporting($setting);
-               continue;
-           }
-           ini_set($key, $setting);
-       }
     }
     
     public function boforeDispatch(MvcEvent $e)

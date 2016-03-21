@@ -3,7 +3,7 @@
 
 Vagrant.configure(2) do |config|
     
-    config.vm.box = "puphpet/centos65-x64"
+    config.vm.box = "nrel/CentOS-6.5-x86_64"
     config.vm.hostname = "CENTOS65-cp-ZEND"
     config.vm.boot_timeout = 120
 
