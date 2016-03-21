@@ -19,16 +19,34 @@ return array(
             'date.timezone' => 'America/Lima',
             'intl.default_locale' => 'es_PE',
             'display_startup_errors' => false,
-            'display_errors' => false,
+            'display_errors' => true,
             'error_reporting' => 0,
             'post_max_size' => '804857600',            
         )
     ),
+    
+    'error' => array(
+        'send_mail' => false,
+        'local_log' => true,        
+    ),
+    
+    'view_manager' => array(
+        'base_path' => "http://dev.recargas.coneypark.pe/",
+        //'display_not_found_reason' => false,
+        //'display_exceptions' => false,
+        'charset' => 'UTF-8',
+        'doctype' => 'HTML5',
+        'title' => 'Recargas Coney Park',
+        'strategies' => array(
+           'ViewJsonStrategy',
+        ),
+    ),
+    
     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
-        'database' => 'cuadrati_dev',
-        'username' => 'cuadrati_dev',
+        'database' => 'projectuser',
+        'username' => 'projectpass',
         'password' => '',
         'port' => '3306',        
         'driver_options' => array(
@@ -62,11 +80,11 @@ return array(
             'exception_handler' => array('throw_exceptions' => false),
             'serializer'
         )
-    ),
+    ),    
     'fileDir' => array(
         'usuario_usuario' => array(
             'up' => APP_PATH . '/public/files/usuario/usuario',
-            'down' => 'http://development.cuadraticas.com/files/usuario/usuario',
+            'down' => 'http://dev.recargas.coneypark.pe/files/usuario/usuario',
         ),
     ),
     'mails' => array(

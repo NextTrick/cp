@@ -1,0 +1,12 @@
+---
+mysql_user: projectuser
+mysql_password: projectpass
+
+database: coneypark
+    
+master_db_sql: 
+    - 000_db.sql    
+    - 001_masterdata.sql   
+    
+project_name: cp
+
