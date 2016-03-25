@@ -12,3 +12,4 @@ nbproject
 /data/cache/*
 /data/log/*
 composer.phar
+VirtualBox-*

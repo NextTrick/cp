@@ -3,6 +3,7 @@
 return array(
     'factories' => array(
         //services
+        'Usuario\Model\Service\LoginService' => 'Usuario\Model\Service\Factory\LoginFactory',
         'Usuario\Model\Service\UsuarioService' => 'Usuario\Model\Service\Factory\UsuarioFactory',
         'Usuario\Model\Service\OauthFacebookService' => 'Usuario\Model\Service\Factory\OauthFacebookFactory',
         'Usuario\Model\Service\OauthTwitterService' => 'Usuario\Model\Service\Factory\OauthTwitterFactory',

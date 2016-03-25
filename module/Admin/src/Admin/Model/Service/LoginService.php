@@ -8,8 +8,6 @@
 
 namespace Admin\Model\Service;
 
-namespace Admin\Model\Service;
-
 class LoginService
 {
     protected $_repository = null;

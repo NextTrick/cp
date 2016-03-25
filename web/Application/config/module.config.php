@@ -22,7 +22,7 @@ return array(
                     ),
                 ),
             ),
-            'login' => array(
+            'login-web' => array(
                 'type' => 'Literal',
                 'options' => array(
                     'route'    => '/login',
@@ -33,15 +33,15 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'crud' => array(
+                    'modalidad' => array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '[/:action[/:id]]',
+                            'route' => '[/:action[/:option]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'id' => '[0-9]+',
+                                'opcion' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                             'defaults' => array(
                                 // Change this value to reflect the namespace in which

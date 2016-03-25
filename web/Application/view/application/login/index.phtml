@@ -1,29 +1,33 @@
-<table>
-    <tr>
-        <td>
-            <a href="<?php echo BASE_URL; ?>login/facebook">Facebook</a>
-            <a href="<?php echo BASE_URL; ?>login/twitter">Twitter</a>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Email:
-        </td>
-        <td>
-            <input type="text" id="email" name="email">
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Password:
-        </td>
-        <td>
-            <input type="text" id="password" name="password">
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <input type="button" value="Aceptar">
-        </td>
-    </tr>
-</table>
+<?php $form = $this->form->prepare(); ?>
+
+<p class="login-box-msg">Ingrese Email y Password</p>
+<a href="<?php echo BASE_URL; ?>login/facebook">Facebook</a>
+<a href="<?php echo BASE_URL; ?>login/twitter">Twitter</a>
+<br>
+<?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
+<?php if (count($flashMessage) > 0) : ?>
+    <ul>
+        <?php foreach ($flashMessage as $msg) :?>
+            <?php foreach ($msg as $type => $message) : ?>
+                <li><span class="<?php echo $type; ?>"><?php echo $message; ?></span></li>
+            <?php endforeach; ?>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
+
+<?php echo $this->form()->openTag($form); ?>
+    <div class="form-group has-feedback">
+        <?php echo $this->formInput($form->get('email')); ?>
+        <span class="error"><?php echo $this->formElementerrors($form->get('email')); ?></span>
+    </div>
+    <div class="form-group has-feedback">
+        <?php echo $this->formInput($form->get('password')); ?>
+        <span class="error"><?php echo $this->formElementerrors($form->get('password')); ?></span>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <?php echo $this->formRow($form->get('token_csrf')); ?>
+            <?php echo $this->formInput($form->get('aceptar')); ?>
+        </div>
+    </div>
+<?php echo $this->form()->closeTag(); ?>
