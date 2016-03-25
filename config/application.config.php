@@ -15,17 +15,18 @@ return array(
         'Orden',
         'Tarjeta',
         'Paquete',
-        'Sistema',
+        'Sistema',        
+        'PaymentProcessor'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
             './module',
             './web',
             './vendor',
-            './common',
+            './common'
         ),
         'config_glob_paths' => array(
-            'config/autoload/{{,*.}constants,{,*.}global,{,*.}local}.php',
-        ),
-    ),
+            'config/autoload/{{,*.}constants,{,*.}global,{,*.}local}.php'
+        )
+    )
 );
