@@ -21,7 +21,7 @@ class OauthTwitterService
     {
         $this->_repository = $repository;
         $this->_sl = $serviceLocator;
-        $this->_container = new Container('usuario_web');
+        $this->_container = new Container('session_usuario');
         $this->_setCofig();
     }
 
@@ -39,7 +39,7 @@ class OauthTwitterService
         $oauthTokenSecretSession = $this->_container->offsetGet('oauth_token_secret');
         if (!empty($oauthToken) && $oauthTokenSession !== $oauthToken) {
             $this->logout();
-            throw new \Exception('Token invalido.');
+            throw new \Exception('Falló la validación con Twitter, token invalido.');
         }
 
         //Create TwitteroAuth object with app key/secret and token key/secret from default phase
@@ -62,42 +62,47 @@ class OauthTwitterService
             $getfield = '?screen_name=' . $accessToken['screen_name'];
                 
             $data = $connection->get($url. $getfield);
-            $data['id'];
-            $data['name'];
-
-          //The user has been verified and the access tokens can be saved for future use
-//          $_SESSION['status'] = 'verified';
-//          header('Location: ./index.php');
-            var_dump('ok');exit;
+            if (!empty($data->id)) {
+                return array(
+                    'id' => $data->id,
+                    'email' => null,
+                    'gateway' => LoginGatewayService::LOGIN_TWITTER,
+                );
+            } else {
+                return false;
+            }
         } else {
             $this->logout();
-            throw new \Exception('Error');
+            throw new \Exception('Falló la validación con Twitter, error.');
         }
     }
 
     public function login()
     {
-        //Build TwitterOAuth object with client credentials
-        $connection = new \TwitterOAuth\Api($this->_config->consumer_key, $this->_config->consumer_secret);
+        try {
+            //Build TwitterOAuth object with client credentials
+            $twitter = new \TwitterOAuth\Api($this->_config->consumer_key, $this->_config->consumer_secret);
 
-        //Get temporary credentials
-        $requestToken = $connection->getRequestToken($this->_config->redirect_callback);
+            //Get temporary credentials
+            $requestToken = $twitter->getRequestToken($this->_config->redirect_callback);
 
-        //Save temporary credentials to session
-        $token = $requestToken['oauth_token'];
-        $this->_container->offsetSet('oauth_token', $token);
-        $this->_container->offsetSet('oauth_token_secret', $requestToken['oauth_token_secret']);
+            //Save temporary credentials to session
+            $token = $requestToken['oauth_token'];
+            $this->_container->offsetSet('oauth_token', $token);
+            $this->_container->offsetSet('oauth_token_secret', $requestToken['oauth_token_secret']);
 
-        //If last connection failed don't display authorization link.
-        switch ($connection->http_code) {
-          case 200:
-            //Build authorize URL and redirect user to Twitter
-            $url = $connection->getAuthorizeURL($token);
-            header("location: $url"); 
-            break;
-          default:
-            //Show notification if something went wrong
-            throw new \Exception('Could not connect to Twitter. Refresh the page or try again later.');
+            switch ($twitter->http_code) {
+              case 200:
+                $url = $twitter->getAuthorizeURL($token);
+                header("location: $url"); 
+                break;
+              default:
+                $this->logout();
+                throw new \Exception('Falló la validación con Twitter, intentelo nuevamenete.');
+            }
+        } catch (\Exception $e) {
+            $this->logout();
+            throw new \Exception($e->getMessage(), $e->getCode());
         }
     }
 

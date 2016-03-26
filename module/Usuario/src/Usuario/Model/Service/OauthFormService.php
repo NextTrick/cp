@@ -14,7 +14,7 @@ use Zend\Authentication\Adapter\DbTable as AuthAdapter;
 use Zend\Authentication\Result;
 use Zend\Authentication\Storage\Session as SessionStorage;
 
-class LoginService
+class OauthFormService
 {
     private $_auth;
     private $_adapter;

@@ -303,10 +303,10 @@ CREATE TABLE IF NOT EXISTS `usuario_perfil_pago` (
 DROP TABLE IF EXISTS `usuario_usuario`;
 CREATE TABLE IF NOT EXISTS `usuario_usuario` (
   `id` int(11) NOT NULL,
+  `facebook_id` varchar(30) DEFAULT NULL,
+  `twitter_id` varchar(30) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `token` varchar(200) DEFAULT NULL,
-  `red` varchar(2) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   `imagen` varchar(50) DEFAULT NULL,
   `nombres` varchar(30) NOT NULL,

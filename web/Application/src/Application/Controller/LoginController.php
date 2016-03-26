@@ -2,15 +2,15 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Application\Controller\SecurityWebController;
 
-class LoginController extends AbstractActionController
+class LoginController extends SecurityWebController
 {
     public function indexAction()
     {
         $form = $this->_getLoginForm();
-        $form->setAttribute('action', $this->url()->fromRoute('login-web/modalidad', array(
+        $form->setAttribute('action', $this->url()->fromRoute('web-login/modalidad', array(
             'controller' => 'login',
             'action' => 'validate',
             'option' => 'form',
@@ -18,16 +18,12 @@ class LoginController extends AbstractActionController
         return new ViewModel(array('form' => $form));
     }
 
-    protected function _toUrlLogin()
+    public function validateSocialAction()
     {
-        return $this->redirect()->toRoute('login-web/modalidad', array('controller' => 'login'));
-    }
-    
-    protected function _toUrlMain()
-    {
-        echo 'Mis tarjetas';
-        exit;
-        //return $this->redirect()->toRoute('login-web/modalidad', array('controller' => 'main'));
+        //Return in callback
+        $opcion = $this->params('opcion');
+        $this->_getLoginGatewayService()->setGateway($opcion)->login();
+        exit();
     }
     
     public function validateAction()
@@ -35,102 +31,63 @@ class LoginController extends AbstractActionController
         if (!$this->request->isPost()) {
             return $this->_toUrlLogin();
         }
-        
-        $opcion = $this->params('opcion', 'form');
-        if (in_array($opcion, array('form'))) {
-            $form = $this->_getLoginForm();
-            $form->setInputFilter(new \Application\Filter\LoginFilter());
-            $data = $this->request->getPost();
-            $form->setData($data);
-            if (!$form->isValid()) {
-                $url = $this->url()->fromRoute('login-web/modalidad', array(
-                    'controller' => 'login',
-                    'action' => 'validate',
-                ));
-                $form->setAttribute('action', $url);
-                $viewModel = new ViewModel(array('form' => $form));
-                $viewModel->setTemplate('application/login/index');
-                return $viewModel;
-            }
 
-            $values = $form->getData();
-            $email = $values['email'];
-            $password = $values['password'];
+        $opcion = 'form';
+        $form = $this->_getLoginForm();
+        $form->setInputFilter(new \Application\Filter\LoginFilter());
+        $data = $this->request->getPost();
+        $form->setData($data);
+        if (!$form->isValid()) {
+            $url = $this->url()->fromRoute('web-login/modalidad', array(
+                'controller' => 'login',
+                'action' => 'validate',
+            ));
+            $form->setAttribute('action', $url);
+            $viewModel = new ViewModel(array('form' => $form));
+            $viewModel->setTemplate('application/login/index');
+            return $viewModel;
+        }
 
-            $result = $this->_getLoginService()->login($email, $password)->getResultLogin();
+        $values = $form->getData();
+        $email = $values['email'];
+        $password = $values['password'];
 
-            if ($result->error === false) {
-                return $this->_toUrlMain();
-            } else {
-                $this->flashMessenger()->addMessage(array('error' => $result->mesagge));
-                return $this->_toUrlLogin();
-            }
+        $result = $this->_getLoginGatewayService()
+                ->setGateway($opcion)
+                ->setCredential($email, $password)
+                ->login();
+
+        if ($result->error === false) {
+            return $this->_toUrlMain();
         } else {
-            throw new \Exception('Modalidad de validación incorrecta');
+            $this->flashMessenger()->addMessage(array('error' => $result->mesagge));
+            return $this->_toUrlLogin();
         }
     }
 
-    public function facebookAction()
+    public function callbackAction()
     {
-        $oauth = $this->_getOauthFacebookService();
-        
-        $oauth->login();
-        
-        echo 'f';exit;
-    }
-    
-    public function facebookCallbackAction()
-    {
-        $oauth = $this->_getOauthFacebookService();
-        $data = $oauth->callback();
-        var_dump($data);
-        exit;
-    }
-    
-    public function twitterAction()
-    {
-        $oauth = $this->_getOauthTwitterService();
-        
-        $oauth->login();
-        echo 't';exit;
-    }
-    
-    public function twitterCallbackAction()
-    {
-        $oauth = $this->_getOauthTwitterService();
-        
-        $oauth->callback();
-        echo 't';exit;
+        try {
+            $opcion = $this->params('opcion');
+            $data = $this->_getLoginGatewayService()->setGateway($opcion)->callback();
+            var_dump($data);exit;
+            if ($data !== false) {
+                $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'tarjeta'));
+            } else {
+                $this->redirect()->toRoute('web-login/modalidad', array('controller' => 'login'));
+            }
+        } catch (\Exception $e) {
+            $this->redirect()->toRoute('web-login/modalidad', array('controller' => 'login'));
+        }
     }
     
     public function logoutAction()
     {
-        $oauth1 = $this->_getLoginService();
-        $oauth2 = $this->_getOauthFacebookService();
-        $oauth3 = $this->_getOauthTwitterService();
-        
-        $oauth1->logout();
-        $oauth2->logout();
-        $oauth3->logout();
+        $this->_getLoginGatewayService()->logout();
     }
     
     protected function _getLoginForm()
     {
         return $this->getServiceLocator()->get('Application\Form\LoginForm');
-    }
-    
-    protected function _getLoginService()
-    {
-        return $this->getServiceLocator()->get('Usuario\Model\Service\LoginService');
-    }
-    
-    protected function _getOauthFacebookService()
-    {
-        return $this->getServiceLocator()->get('Usuario\Model\Service\OauthFacebookService');
-    }
-    
-    protected function _getOauthTwitterService()
-    {
-        return $this->getServiceLocator()->get('Usuario\Model\Service\OauthTwitterService');
     }
 }

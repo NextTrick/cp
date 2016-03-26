@@ -42,6 +42,11 @@ class Module
         );
     }
     
+    public function getControllerConfig()
+    {        
+        return include __DIR__ . '/config/controller.config.php';
+    }
+    
     public function getServiceConfig()
     {
         return include __DIR__ . '/config/service.config.php';

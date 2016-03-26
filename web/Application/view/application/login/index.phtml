@@ -1,8 +1,8 @@
 <?php $form = $this->form->prepare(); ?>
 
 <p class="login-box-msg">Ingrese Email y Password</p>
-<a href="<?php echo BASE_URL; ?>login/facebook">Facebook</a>
-<a href="<?php echo BASE_URL; ?>login/twitter">Twitter</a>
+<a href="<?php echo BASE_URL; ?>login/validate-social/facebook">Facebook</a>
+<a href="<?php echo BASE_URL; ?>login/validate-social/twitter">Twitter</a>
 <br>
 <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
 <?php if (count($flashMessage) > 0) : ?>

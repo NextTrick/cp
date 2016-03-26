@@ -10,16 +10,12 @@ namespace Usuario\Model\Service\Factory;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
-use Usuario\Model\Service\LoginService;
-use Usuario\Model\Repository\UsuarioRepository;
+use Usuario\Model\Service\LoginGatewayService;
 
-class LoginFactory implements FactoryInterface
+class LoginGatewayFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $adapter = $serviceLocator->get('dbAdapter');
-        $repository = new UsuarioRepository($adapter);
-
-        return new LoginService($adapter, $repository, $serviceLocator);
+        return new LoginGatewayService($serviceLocator);
     }
 }

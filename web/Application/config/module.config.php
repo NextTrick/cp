@@ -22,7 +22,7 @@ return array(
                     ),
                 ),
             ),
-            'login-web' => array(
+            'web-login' => array(
                 'type' => 'Literal',
                 'options' => array(
                     'route'    => '/login',
@@ -37,7 +37,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '[/:action[/:option]]',
+                            'route' => '[/:action[/:opcion]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -48,6 +48,38 @@ return array(
                                 // the controllers for your module are found
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Login',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                )
+            ),
+            'web-panel' => array(
+                'type' => 'Literal',
+                'options' => array(
+                    'route'    => '/inbox',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Tarjeta',
+                        'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'inbox' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            // Change this to something specific to your module
+                            'route' => '[/:action[/:code]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                // Change this value to reflect the namespace in which
+                                // the controllers for your module are found
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Tarjeta',
                                 'action'        => 'index',
                             ),
                         ),
@@ -73,12 +105,6 @@ return array(
                 'base_dir' => __DIR__ . '/../language',
                 'pattern'  => '%s.mo',
             ),
-        ),
-    ),
-    'controllers' => array(
-        'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController',
-            'Application\Controller\Login' => 'Application\Controller\LoginController',
         ),
     ),
     'view_manager' => array(

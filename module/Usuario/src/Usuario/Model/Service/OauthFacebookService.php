@@ -21,7 +21,7 @@ class OauthFacebookService
     {
         $this->_repository = $repository;
         $this->_sl = $serviceLocator;
-        $this->_container = new Container('usuario_web');
+        $this->_container = new Container('session_usuario');
         $this->_setCofig();
     }
     
@@ -47,39 +47,30 @@ class OauthFacebookService
                 $accessToken = $helper->getAccessToken();
                 $this->_container->offsetSet('access_token', $accessToken);
             } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                // When Graph returns an error
-                throw new \Exception('Graph returned an error: ' . $e->getMessage());
+                $this->logout();
+                throw new \Exception($e->getMessage(), $e->getCode());
             } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                // When validation fails or other local issues
-                throw new \Exception('Facebook SDK returned an error: ' . $e->getMessage());
+                $this->logout();
+                throw new \Exception($e->getMessage(), $e->getCode());
+            } catch (\Exception $e) {
+                $this->logout();
+                throw new \Exception($e->getMessage(), $e->getCode());
             }
 
             if (!isset($accessToken)) {
                 if ($helper->getError()) {
-                    header('HTTP/1.0 401 Unauthorized');
-                    //'Error: ' . $helper->getError()
-                    //'Error Code: ' . $helper->getErrorCode()
-                    //'Error Reason: ' . $helper->getErrorReason()
-                    //'Error Description: ' . $helper->getErrorDescription()
-                    throw new \Exception('Error ' . $helper->getErrorCode() . ' :' 
-                            . $helper->getErrorDescription());
+                    $this->logout();
+                    throw new \Exception('HTTP/1.0 401 Unauthorized');
                 } else {
-                    header('HTTP/1.0 400 Bad Request');
+                    $this->logout();
                     throw new \Exception('HTTP/1.0 400 Bad Request');
                 }
             }
         }
 
-        // The OAuth 2.0 client handler helps us manage access tokens
         $oAuth2Client = $fb->getOAuth2Client();
-
-        // Get the access token metadata from /debug_token
         $tokenMetadata = $oAuth2Client->debugToken($accessToken);
-
-        // Validation (these will throw FacebookSDKException's when they fail)
         $tokenMetadata->validateAppId($this->_config->app_id);
-        // If you know the user ID this access token belongs to, you can validate it here
-        //$tokenMetadata->validateUserId('123');
         $tokenMetadata->validateExpiration();
 
         if (!$accessToken->isLongLived()) {
@@ -88,37 +79,58 @@ class OauthFacebookService
               $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
               $this->_container->offsetSet('access_token', $accessToken);
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                throw new \Exception('Error getting long-lived access token: ' . $e->getMessage());
+                $this->logout();
+                throw new \Exception($e->getMessage(), $e->getCode());
+            } catch (\Exception $e) {
+                $this->logout();
+                throw new \Exception($e->getMessage(), $e->getCode());
             }
         }
 
-        
         $fb->setDefaultAccessToken($accessToken);
         try {
             $response = $fb->get('/me?fields=name,email,first_name,last_name,gender');
-            $userNode = $response->getGraphUser();
-            return $userNode;
+            $data = $response->getGraphUser();
+            if (!empty($data['id'])) {
+                return array(
+                    'id' => $data['id'],
+                    'email' => $data['id'],
+                    'gateway' => LoginGatewayService::LOGIN_FACEBOOK,
+                );
+            } else {
+                return false;
+            }
         } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-            throw new \Exception('Graph returned an error: ' . $e->getMessage());
+            $this->logout();
+            throw new \Exception($e->getMessage(), $e->getCode());
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-            throw new \Exception('Facebook SDK returned an error: ' . $e->getMessage());
+            $this->logout();
+            throw new \Exception($e->getMessage(), $e->getCode());
+        } catch (\Exception $e) {
+            $this->logout();
+            throw new \Exception($e->getMessage(), $e->getCode());
         }
     }
 
     public function login()
     {
-        $fb = new \Facebook\Facebook(array(
-            'app_id' => $this->_config->app_id,
-            'app_secret' => $this->_config->api_secret,
-            'default_graph_version' => 'v2.5',
-        ));
-        
-        $helper = $fb->getRedirectLoginHelper();
-        $permissions = array('email'); // Optional permissions
-        $loginUrl = $helper->getLoginUrl($this->_config->redirect_callback, $permissions);
-        
-        header("location: $loginUrl");
-        exit;
+        try {
+            $fb = new \Facebook\Facebook(array(
+                'app_id' => $this->_config->app_id,
+                'app_secret' => $this->_config->api_secret,
+                'default_graph_version' => 'v2.5',
+            ));
+
+            $helper = $fb->getRedirectLoginHelper();
+            $permissions = array('email'); // Optional permissions
+            $loginUrl = $helper->getLoginUrl($this->_config->redirect_callback, $permissions);
+
+            header("location: $loginUrl");
+            exit();
+        } catch (\Exception $e) {
+            $this->logout();
+            throw new \Exception($e->getMessage(), $e->getCode());
+        }
     }
     
     public function isLogin()
