@@ -1,28 +1,26 @@
 <?php
-/*
- * Autor       : Juan Carlos Ludeña Montesinos
- * Año         : Diciembre 2015
- * Descripción :
- *
- */
 
-namespace Admin\Model\Service;
+namespace PaymentProcessor\Model\Gateway;
 
-namespace Admin\Model\Service;
+use PaymentProcessor\Model\Gateway\Processor\VisaProcessor;
+use PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor;
 
-class LoginService
-{
-    protected $_repository = null;
-    protected $_sl = null;
-
-    public function __construct($repository, $serviceLocator)
+class PaymentProcessorGateway
+{   
+    public static function getProcessor($alias, $serviceLocator)
     {
-        $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
-    }
-
-    public function getRepository()
-    {
-        return $this->_repository;
+        $processor = null;        
+        switch ($alias) {
+            case VisaProcessor::ALIAS: 
+                $processor = new VisaProcessor($serviceLocator);
+                break;
+            case PagoEfectivoProcessor::ALIAS: 
+                $processor = new PagoEfectivoProcessor($serviceLocator);
+                break;            
+            default :                 
+                break;
+        }
+        
+        return $processor;
     }
 }
