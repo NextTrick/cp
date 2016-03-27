@@ -19,6 +19,11 @@ class PaymentProcessor
     
     public function createCharge($data)
     {
-        $this->processor->createCharge($data);
+        return $this->processor->createCharge($data);
     }        
+    
+    public function processCallback($params)
+    {
+        return $this->processor->processCallback($params);
+    }            
 }

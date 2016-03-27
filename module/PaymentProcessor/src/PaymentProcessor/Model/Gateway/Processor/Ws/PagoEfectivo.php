@@ -9,23 +9,7 @@ use PaymentProcessor\Model\Gateway\Processor\Ws\PagoEfectivo\Service;
 class PagoEfectivo extends Service 
 {
     public static $_instance;
-    
-//    protected $_options = array(
-//        'apiKey' => PE_MERCHAND_ID,
-//        'url2' => PE_WSGENCIP,
-//        'crypto' => array(
-//            'securityPath' => PE_SECURITY_PATH,
-//            'publicKey' => PE_PUBLICKEY,
-//            'privateKey' => PE_PRIVATEKEY,
-//            'url' => PE_WSCRYPTA
-//        ),
-//        'gen' => array('url' => PE_WSGENPAGO),
-//        'mailAdmin' => PE_EMAIL_CONTACTO,
-//        'medioPago' => PE_MEDIO_PAGO,
-//            //                        'imgbarra' =>PE_WSCIPIMG
-//    );
-    
-    
+       
     protected $_options = array(
         'apiKey' => '',
         'url2' => '',
