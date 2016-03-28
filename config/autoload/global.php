@@ -29,7 +29,7 @@ return array(
         'send_mail' => false,
         'local_log' => true,        
     ),
-    
+            
     'view_manager' => array(
         'base_path' => "http://dev.recargas.coneypark.pe/",
         //'display_not_found_reason' => false,
@@ -104,6 +104,33 @@ return array(
                     'ssl' => 'tls',
                 ),
             )
+        ),
+    ),
+    //Application config params 
+    'app' => array(
+        'environment' => 'development',
+        
+        'paymentProcessor' => array(
+            'pagoEfectivo' => array(
+                'merchanId' => 'PRU',
+                'baseUrl' => 'http://pre.pagoefectivo.pe/',
+                'wscrypta' => 'PagoEfectivoWSCrypto/WSCrypto.asmx?WSDL', //data encrypt ws
+                'wscip2' => 'PagoEfectivoWSGeneralv2/service.asmx?WSDL', //cip generator ws 
+                'wsgenpago' => 'GenPago.aspx', //PE's CIP window
+                'wsgenpagoiframe' => 'GenPagoIF.aspx', //
+                'securityPath' => '/', //PE's key path
+                'publickey' => '', //PE's public key
+                'privatekey' => '', // PE's secret key                
+                'medioPago' => '1,2',
+                'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key           
+            ),
+            'visa' => array(                
+                'baseUrl' => 'http://qas.multimerchantvisanet.com/',
+                'wsEticket' => 'WSGenerarEticket/WSEticket.asmx?wsdl',                
+                'formularioPago' => 'formularioweb/formulariopago.asp',
+                'wsConsultaTicket' => 'WSConsulta/WSConsultaEticket.asmx?wsdl',
+                'codigoComercio' => '',
+            ),
         ),
     ),
 );

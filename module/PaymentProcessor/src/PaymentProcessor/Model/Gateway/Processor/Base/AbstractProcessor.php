@@ -1,28 +1,22 @@
 <?php
-/*
- * Autor       : Juan Carlos Ludeña Montesinos
- * Año         : Diciembre 2015
- * Descripción :
- *
- */
 
-namespace Admin\Model\Service;
+namespace PaymentProcessor\Model\Gateway\Processor\Base;
 
-namespace Admin\Model\Service;
-
-class LoginService
-{
-    protected $_repository = null;
-    protected $_sl = null;
-
-    public function __construct($repository, $serviceLocator)
+abstract class AbstractProcessor
+{        
+    public $ws;
+    
+    public $sl;
+    
+    public function __construct($serviceLocator)
     {
-        $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        $this->sl = $serviceLocator;
     }
-
-    public function getRepository()
+    
+    public function getServiceLocator()
     {
-        return $this->_repository;
+        return $this->sl;
     }
+    
+    abstract public function createCharge($data);    
 }

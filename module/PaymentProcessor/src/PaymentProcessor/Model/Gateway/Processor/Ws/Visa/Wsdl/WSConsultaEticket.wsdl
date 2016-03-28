@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://www.multimerchantvisanet.com/ConsultaEnLineaEticket" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="https://www.multimerchantvisanet.com/ConsultaEnLineaEticket" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consultas en Linea resultado de la transacción</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://www.multimerchantvisanet.com/ConsultaEnLineaEticket">
+      <s:element name="ConsultaEticket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlIn" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultaEticketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConsultaEticketResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultaEticketSoapIn">
+    <wsdl:part name="parameters" element="tns:ConsultaEticket" />
+  </wsdl:message>
+  <wsdl:message name="ConsultaEticketSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultaEticketResponse" />
+  </wsdl:message>
+  <wsdl:portType name="WSConsultaEticketSoap">
+    <wsdl:operation name="ConsultaEticket">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consulta resultado de la transaccion</wsdl:documentation>
+      <wsdl:input message="tns:ConsultaEticketSoapIn" />
+      <wsdl:output message="tns:ConsultaEticketSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSConsultaEticketSoap" type="tns:WSConsultaEticketSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaEticket">
+      <soap:operation soapAction="https://www.multimerchantvisanet.com/ConsultaEnLineaEticket/ConsultaEticket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WSConsultaEticketSoap12" type="tns:WSConsultaEticketSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultaEticket">
+      <soap12:operation soapAction="https://www.multimerchantvisanet.com/ConsultaEnLineaEticket/ConsultaEticket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WSConsultaEticket">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Consultas en Linea resultado de la transacción</wsdl:documentation>
+    <wsdl:port name="WSConsultaEticketSoap" binding="tns:WSConsultaEticketSoap">
+      <soap:address location="https://www.multimerchantvisanet.com/WSConsulta/WSConsultaEticket.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WSConsultaEticketSoap12" binding="tns:WSConsultaEticketSoap12">
+      <soap12:address location="https://www.multimerchantvisanet.com/WSConsulta/WSConsultaEticket.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,28 +1,25 @@
 <?php
-/*
- * Autor       : Juan Carlos Ludeña Montesinos
- * Año         : Diciembre 2015
- * Descripción :
- *
- */
 
-namespace Admin\Model\Service;
+namespace PaymentProcessor\Model\Gateway\Processor;
 
-namespace Admin\Model\Service;
-
-class LoginService
+class VisaProcessor
 {
-    protected $_repository = null;
-    protected $_sl = null;
-
-    public function __construct($repository, $serviceLocator)
+    const ALIAS = 'VISA';
+    
+    public $ws;
+    
+    public function __construct($serviceLocator)
     {
-        $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        parent::__construct($serviceLocator);
+        
+        $config = $this->getServiceLocator()->get('config');
+        $wsConfig = $config['app']['paymentProcessor']['visa'];
+        
+        $this->ws = new Visa($wsConfig);
     }
-
-    public function getRepository()
+    
+    public function createPayment($data) 
     {
-        return $this->_repository;
+        
     }
 }
