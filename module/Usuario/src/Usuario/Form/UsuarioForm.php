@@ -48,20 +48,6 @@ class UsuarioForm extends Form
             ));
         $this->add($password);
         
-        $token = new Element\Text('token');
-        $token->setAttributes(array(
-                'id' => 'token',
-                'maxlength' => '20',
-            ));
-        $this->add($token);
-        
-        $red = new Element\Text('red');
-        $red->setAttributes(array(
-                'id' => 'red',
-                'maxlength' => '20',
-            ));
-        $this->add($red);
-        
         $estado = new Element\Text('estado');
         $estado->setAttributes(array(
                 'id' => 'estado',

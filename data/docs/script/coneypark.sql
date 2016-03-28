@@ -312,6 +312,8 @@ CREATE TABLE IF NOT EXISTS `usuario_usuario` (
   `nombres` varchar(30) NOT NULL,
   `paterno` varchar(30) NOT NULL,
   `materno` varchar(30) NOT NULL,
+  `di_tipo` int(11) DEFAULT NULL,
+  `di_valor` varchar(11) DEFAULT NULL,
   `fecha_nac` date DEFAULT NULL,
   `cod_pais` varchar(2) NOT NULL,
   `cod_depa` varchar(2) DEFAULT NULL,
@@ -320,7 +322,6 @@ CREATE TABLE IF NOT EXISTS `usuario_usuario` (
   `fecha_creacion` datetime DEFAULT NULL,
   `fecha_edicion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Índices para tablas volcadas
 --
@@ -426,7 +427,9 @@ ALTER TABLE `usuario_perfil_pago`
 -- Indices de la tabla `usuario_usuario`
 --
 ALTER TABLE `usuario_usuario`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `index_facebook_id` (`facebook_id`),
+  ADD KEY `index_twitter_id` (`twitter_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas

@@ -1,0 +1,99 @@
+<?php $this->form->prepare(); ?>
+<div class="box">
+    <div class="box-header with-border">
+        <label>Registrarse</label>
+    </div>
+    <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-horizontal')); ?>
+    <div class="box-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="email">Correo <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('email')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('email')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="password">Contreseña <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('password')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('password')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="password_repeat">Repetir contreseña <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('password_repeat')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('password_repeat')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="nombres">Nombres <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('nombres')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('nombres')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="paterno">Apellido paterno <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('paterno')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('paterno')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="materno">Apellido materno <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('materno')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('materno')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="di_tipo">Documento de identidad <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('di_tipo')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('di_tipo')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('di_valor')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('di_valor')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="cod_pais">Pais <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('cod_pais')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('cod_pais')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="cod_depa">Departamento <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('cod_depa')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('cod_depa')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="cod_dist">Distrito <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('cod_dist')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('cod_dist')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="fecha_nac">Fecha Nacimiento <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('fecha_nac')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('fecha_nac')); ?></span>
+            </div>
+        </div>
+        <div class="box-footer">
+            <?php echo $this->formRow($form->get('token_csrf')); ?>
+            <a class="btn btn-default" href="<?php echo BASE_URL; ?>usuario/usuario/index">Regresar</a>
+            <button class="btn btn-success" type="submit">Aceptar</button>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>

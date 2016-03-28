@@ -10,6 +10,9 @@ namespace Usuario\Model\Service;
 
 class UsuarioService
 {
+    const DI_DNI = 1;
+    const DI_PASAPORTE = 2;
+    
     protected $_repository = null;
     protected $_sl = null;
 
@@ -17,6 +20,14 @@ class UsuarioService
     {
         $this->_repository = $repository;
         $this->_sl = $serviceLocator;
+    }
+
+    public function getDocumentoIdentidadTipo()
+    {
+        return array(
+            self::DI_DNI => 'DNI',
+            self::DI_PASAPORTE => 'Pasaporte',
+        );
     }
 
     public function getRepository()

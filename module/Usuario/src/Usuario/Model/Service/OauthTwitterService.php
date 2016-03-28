@@ -35,8 +35,8 @@ class OauthTwitterService
     {
         //If the oauth_token is old redirect to the connect page
         $oauthToken = $this->get('oauth_token');
-        $oauthTokenSession = $this->_container->offsetGet('oauth_token');
-        $oauthTokenSecretSession = $this->_container->offsetGet('oauth_token_secret');
+        $oauthTokenSession = $this->_container->offsetGet('temp_oauth_token');
+        $oauthTokenSecretSession = $this->_container->offsetGet('temp_oauth_token_secret');
         if (!empty($oauthToken) && $oauthTokenSession !== $oauthToken) {
             $this->logout();
             throw new \Exception('Falló la validación con Twitter, token invalido.');
@@ -52,8 +52,8 @@ class OauthTwitterService
         
         $this->_container->offsetSet('access_token', $accessToken);
         
-        $this->_container->offsetUnset('oauth_token');
-        $this->_container->offsetUnset('oauth_token_secret');
+        $this->_container->offsetUnset('temp_oauth_token');
+        $this->_container->offsetUnset('temp_oauth_token_secret');
         
         //If HTTP response is 200 continue otherwise send to connect page to retry
         if ($connection->http_code == 200) {
@@ -63,11 +63,18 @@ class OauthTwitterService
                 
             $data = $connection->get($url. $getfield);
             if (!empty($data->id)) {
-                return array(
+                $criteria = array('where' => array('facebook_id' => $data->id));
+                $registrado = $this->getRepository()->findExists($criteria);
+                $data = array(
                     'id' => $data->id,
                     'email' => null,
                     'gateway' => LoginGatewayService::LOGIN_TWITTER,
+                    'registrado' => $registrado,
                 );
+                if ($registrado == false) {
+                    $this->_container->offsetSet('temp_registro', $data);
+                }
+                return $data;
             } else {
                 return false;
             }
@@ -87,13 +94,12 @@ class OauthTwitterService
             $requestToken = $twitter->getRequestToken($this->_config->redirect_callback);
 
             //Save temporary credentials to session
-            $token = $requestToken['oauth_token'];
-            $this->_container->offsetSet('oauth_token', $token);
-            $this->_container->offsetSet('oauth_token_secret', $requestToken['oauth_token_secret']);
+            $this->_container->offsetSet('temp_oauth_token', $requestToken['oauth_token']);
+            $this->_container->offsetSet('temp_oauth_token_secret', $requestToken['oauth_token_secret']);
 
             switch ($twitter->http_code) {
               case 200:
-                $url = $twitter->getAuthorizeURL($token);
+                $url = $twitter->getAuthorizeURL($requestToken['oauth_token']);
                 header("location: $url"); 
                 break;
               default:
@@ -116,7 +122,7 @@ class OauthTwitterService
     
     public function logout()
     {
-        $this->_container->offsetUnset('access_token');
+        $this->_container->getManager()->getStorage()->clear();
     }
     
     private function get($name)

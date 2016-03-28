@@ -92,11 +92,18 @@ class OauthFacebookService
             $response = $fb->get('/me?fields=name,email,first_name,last_name,gender');
             $data = $response->getGraphUser();
             if (!empty($data['id'])) {
-                return array(
+                $criteria = array('where' => array('facebook_id' => $data['id']));
+                $registrado = $this->getRepository()->findExists($criteria);
+                $data = array(
                     'id' => $data['id'],
                     'email' => $data['id'],
                     'gateway' => LoginGatewayService::LOGIN_FACEBOOK,
+                    'registrado' => $registrado,
                 );
+                if ($registrado == false) {
+                    $this->_container->offsetSet('temp_registro', $data);
+                }
+                return $data;
             } else {
                 return false;
             }
@@ -143,7 +150,7 @@ class OauthFacebookService
     
     public function logout()
     {
-        $this->_container->offsetUnset('access_token');
+        $this->_container->getManager()->getStorage()->clear();
     }
 
     public function getRepository()

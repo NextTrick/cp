@@ -50,6 +50,7 @@ class UsuarioForm extends Form
         $email->setAttributes(array(
                 'id' => 'email',
                 'maxlength' => '30',
+                'autocomplete' => 'off',
             ));
         $this->add($email);
         
@@ -57,6 +58,7 @@ class UsuarioForm extends Form
         $password->setAttributes(array(
                 'id' => 'password',
                 'maxlength' => '100',
+                'autocomplete' => 'off',
             ));
         $this->add($password);
         
@@ -64,6 +66,7 @@ class UsuarioForm extends Form
         $passwordRep->setAttributes(array(
                 'id' => 'password_repeat',
                 'maxlength' => '100',
+                'autocomplete' => 'off',
             ));
         $this->add($passwordRep);
 

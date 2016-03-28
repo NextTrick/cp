@@ -22,6 +22,26 @@ return array(
                     ),
                 ),
             ),
+            'web-registro' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/registrate[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-completa-tu-registro' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/completa-tu-registro[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'completa-tu-registro',
+                    ),
+                ),
+            ),
             'web-login' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -37,7 +57,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '[/:action[/:opcion]]',
+                            'route' => '/[:action[/:opcion]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -69,7 +89,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '[/:action[/:code]]',
+                            'route' => '/[:action[/:code]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
