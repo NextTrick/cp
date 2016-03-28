@@ -108,6 +108,8 @@ return array(
     ),
     //Application config params 
     'app' => array(
+        'environment' => 'development',
+        
         'paymentProcessor' => array(
             'pagoEfectivo' => array(
                 'merchanId' => 'PRU',
@@ -122,9 +124,13 @@ return array(
                 'medioPago' => '1,2',
                 'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key           
             ),
-            'visa' => array(
-                'baseUrl' => '',                
-            ),            
+            'visa' => array(                
+                'baseUrl' => 'http://qas.multimerchantvisanet.com/',
+                'wsEticket' => 'WSGenerarEticket/WSEticket.asmx?wsdl',                
+                'formularioPago' => 'formularioweb/formulariopago.asp',
+                'wsConsultaTicket' => 'WSConsulta/WSConsultaEticket.asmx?wsdl',
+                'codigoComercio' => '',
+            ),
         ),
     ),
 );
