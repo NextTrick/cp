@@ -86,7 +86,7 @@ class LoginController extends SecurityWebController
         $this->_getLoginGatewayService()->logout();
     }
     
-    protected function _getLoginForm()
+    private function _getLoginForm()
     {
         return $this->getServiceLocator()->get('Application\Form\LoginForm');
     }

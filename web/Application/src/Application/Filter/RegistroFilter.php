@@ -30,10 +30,11 @@ class RegistroFilter extends Zf2InputFilter
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Email'),
+                self::validatorNotEmpty('Correo electrónico'),
+                self::validatorEmailAddress('Correo electrónico'),
             )
         ));
-
+        
         $this->add(array(
             'name' => 'password',
             'required' => true,
@@ -42,58 +43,33 @@ class RegistroFilter extends Zf2InputFilter
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Password'),
+                self::validatorNotEmpty('Contraseña'),
             )
         ));
 
         $this->add(array(
-            'name' => 'token',
+            'name' => 'password_repeat',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Token'),
+                self::validatorNotEmpty('Repetir contraseña'),
+                array(
+                    'name' => 'Identical',
+                    'options' => array(
+                        'token' => 'password',
+                        'message' => array(
+                            \Zend\Validator\Identical::NOT_SAME => "Las contraseñas no coinciden.",
+                            \Zend\Validator\Identical::MISSING_TOKEN => 'Repetir contraseña por favor.',
+                        ),
+                        'break_chain_on_failure' => true,
+                    ),
+                ),
             )
         ));
-
-        $this->add(array(
-            'name' => 'red',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Red'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'estado',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Estado'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'imagen',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Imagen'),
-            )
-        ));
-
+        
         $this->add(array(
             'name' => 'nombres',
             'required' => true,
@@ -114,7 +90,7 @@ class RegistroFilter extends Zf2InputFilter
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Paterno'),
+                self::validatorNotEmpty('Apellido paterno'),
             )
         ));
 
@@ -126,19 +102,7 @@ class RegistroFilter extends Zf2InputFilter
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Materno'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'fecha_nac',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Fecha_nac'),
+                self::validatorNotEmpty('Apellido materno'),
             )
         ));
 
@@ -150,7 +114,7 @@ class RegistroFilter extends Zf2InputFilter
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Cod_pais'),
+                self::validatorNotEmpty('Pais'),
             )
         ));
 
@@ -162,19 +126,7 @@ class RegistroFilter extends Zf2InputFilter
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Cod_depa'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'cod_prov',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Cod_prov'),
+                self::validatorNotEmpty('Departamento'),
             )
         ));
 
@@ -186,34 +138,45 @@ class RegistroFilter extends Zf2InputFilter
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Cod_dist'),
+                self::validatorNotEmpty('Distrito'),
             )
         ));
-
+        
         $this->add(array(
-            'name' => 'fecha_creacion',
+            'name' => 'di_tipo',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Fecha_creacion'),
+                self::validatorNotEmpty('Documento de Identidad'),
             )
         ));
-
+        
         $this->add(array(
-            'name' => 'fecha_edicion',
+            'name' => 'di_valor',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Fecha_edicion'),
+                self::validatorNotEmpty('Documento de Identidad'),
             )
         ));
 
+        $this->add(array(
+            'name' => 'fecha_nac',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                self::validatorNotEmpty('Fecha de nacimiento'),
+            )
+        ));
     }
 
     protected function _getValueDefault($key)

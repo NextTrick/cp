@@ -31,10 +31,25 @@ class RegistroController extends AbstractActionController
         $form->setData($dataIni);
         
         if ($this->request->isPost()) {
+            $form->setInputFilter(new \Application\Filter\RegistroFilter());
             $data = $this->request->getPost();
             $form->setData($data);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $gateway = $this->_getDataRegistroTemp('gateway');
+                switch ($gateway) {
+                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
+                        $data['facebook_id'] = $this->_getDataRegistroTemp('id');
+                        break;
+                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
+                        $data['twitter_id'] = $this->_getDataRegistroTemp('id');
+                        break;
+                }
+                
+                $repository = $this->_getUsuarioService()->getRepository();
+                $repository->save($data);
+            }
         }
-        
         
         return new ViewModel(array('form' => $form));
     }
@@ -58,5 +73,10 @@ class RegistroController extends AbstractActionController
     private function _getRegistroForm()
     {
         return $this->getServiceLocator()->get('Application\Form\RegistroForm');
+    }
+    
+    private function _getUsuarioService()
+    {
+        return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
     }
 }
