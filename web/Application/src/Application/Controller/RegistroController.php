@@ -17,7 +17,7 @@ class RegistroController extends AbstractActionController
         $dataIni = array();
         if ($this->request->isPost()) {
             //desde formulario
-            $dataIni['email'] = $this->request->getPost();
+            $dataIni['email'] = $this->request->getPost('email');
         } else {
             // desde red social
             $dataIni['email'] = $this->_getDataRegistroTemp('email');
@@ -29,8 +29,9 @@ class RegistroController extends AbstractActionController
             'action' => 'completa-tu-registro',
         )));
         $form->setData($dataIni);
-        
-        if ($this->request->isPost()) {
+     
+        $registroForm = (float)$this->request->getPost('registro_form', 0);
+        if ($this->request->isPost() && $registroForm) {
             $form->setInputFilter(new \Application\Filter\RegistroFilter());
             $data = $this->request->getPost();
             $form->setData($data);
@@ -47,7 +48,10 @@ class RegistroController extends AbstractActionController
                 }
                 
                 $repository = $this->_getUsuarioService()->getRepository();
-                $repository->save($data);
+                $save = $repository->save($data);
+                if ($save) {
+                    $this->_removeDataRegistroTemp();
+                }
             }
         }
         
