@@ -34,17 +34,19 @@ class UsuarioService
         $this->_config = (object)$config['api']['true_fi'];
     }
     
-    private function getUrl()
+    private function getUrl($tipo)
     {
-        return array(
+        $urls = array(
             self::METHOD_NEW_MEMBER => $this->_config->url . 'NewMember.php',
             self::METHOD_LOGON => $this->_config->url . 'logon.php',
         );
+        
+        return isset($urls[$tipo]) ? $urls[$tipo] : null;
     }
     
-    private function getRules()
+    private function getRules($tipo)
     {
-        return array(
+        $rules = array(
             self::METHOD_NEW_MEMBER => array(
                 'FirstName',
                 'LastName',
@@ -53,6 +55,8 @@ class UsuarioService
                 'Type',
             )
         );
+        
+        return isset($rules[$tipo]) ? $rules[$tipo] : array();
     }
 
     private function validate($data, $tipo)
@@ -78,7 +82,7 @@ class UsuarioService
             $dataValid = array();
             foreach ($data as $key => $value) {
                 if (in_array($key, $rules)) {
-                    $dataValid[] = $data[$key];
+                    $dataValid[$key] = $data[$key];
                 }
             } 
 
@@ -90,11 +94,19 @@ class UsuarioService
     }
 
     public function newMember($data)
-    { 
+    {
         $result = $this->validate($data, self::METHOD_NEW_MEMBER);
         if ($result['success']) {
-            $jsonData = json_decode($result['data']);
-            return Response::curl($this->getUrl(self::METHOD_NEW_MEMBER), $jsonData);
+            $jsonData = json_encode($result['data']);
+            $url = $this->getUrl(self::METHOD_NEW_MEMBER);
+            $data = Response::curl($url, $this->_config, $jsonData);
+            if ($data['success']) {
+                $result['success'] = true;
+                $result['mguid'] = $data['data']->Data->MGUID;
+                return $result;
+            } else {
+                $result['msg'] = 'Error';
+            }
         } else {
             return $result;
         }

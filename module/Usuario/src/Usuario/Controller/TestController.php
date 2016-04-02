@@ -16,6 +16,7 @@ class TestController extends SecurityAdminController
 {
     public function indexAction()
     {
+        //{EBAB4CD7-EE8E-48DF-90C1-7C8F283EF3AE}
         $service = $this->_getTrueFiUsuarioService();
         $data = array(
             'FirstName' => 'Juan Carlos',
