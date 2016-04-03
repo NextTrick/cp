@@ -19,8 +19,7 @@ abstract class SecurityWebController extends AbstractActionController
     
     protected function _toUrlMain()
     {
-        
-        return $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'tarjeta'));
+        return $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'inicio'));
     }
     
     protected function _getLoginGatewayService()

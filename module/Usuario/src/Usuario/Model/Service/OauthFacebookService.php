@@ -47,22 +47,17 @@ class OauthFacebookService
                 $accessToken = $helper->getAccessToken();
                 $this->_container->offsetSet('access_token', $accessToken);
             } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                $this->logout();
                 throw new \Exception($e->getMessage(), $e->getCode());
             } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                $this->logout();
                 throw new \Exception($e->getMessage(), $e->getCode());
             } catch (\Exception $e) {
-                $this->logout();
                 throw new \Exception($e->getMessage(), $e->getCode());
             }
 
             if (!isset($accessToken)) {
                 if ($helper->getError()) {
-                    $this->logout();
                     throw new \Exception('HTTP/1.0 401 Unauthorized');
                 } else {
-                    $this->logout();
                     throw new \Exception('HTTP/1.0 400 Bad Request');
                 }
             }
@@ -79,10 +74,8 @@ class OauthFacebookService
               $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
               $this->_container->offsetSet('access_token', $accessToken);
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                $this->logout();
                 throw new \Exception($e->getMessage(), $e->getCode());
             } catch (\Exception $e) {
-                $this->logout();
                 throw new \Exception($e->getMessage(), $e->getCode());
             }
         }
@@ -96,7 +89,7 @@ class OauthFacebookService
                 $registrado = $this->getRepository()->findExists($criteria);
                 $data = array(
                     'id' => $data['id'],
-                    'email' => $data['id'],
+                    'email' => $data['email'],
                     'gateway' => LoginGatewayService::LOGIN_FACEBOOK,
                     'registrado' => $registrado,
                 );
@@ -108,13 +101,10 @@ class OauthFacebookService
                 return false;
             }
         } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-            $this->logout();
             throw new \Exception($e->getMessage(), $e->getCode());
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-            $this->logout();
             throw new \Exception($e->getMessage(), $e->getCode());
         } catch (\Exception $e) {
-            $this->logout();
             throw new \Exception($e->getMessage(), $e->getCode());
         }
     }
@@ -122,6 +112,7 @@ class OauthFacebookService
     public function login()
     {
         try {
+            $this->logout();
             $fb = new \Facebook\Facebook(array(
                 'app_id' => $this->_config->app_id,
                 'app_secret' => $this->_config->api_secret,
@@ -135,7 +126,6 @@ class OauthFacebookService
             header("location: $loginUrl");
             exit();
         } catch (\Exception $e) {
-            $this->logout();
             throw new \Exception($e->getMessage(), $e->getCode());
         }
     }

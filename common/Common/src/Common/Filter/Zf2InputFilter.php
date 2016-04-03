@@ -18,7 +18,22 @@ class Zf2InputFilter extends InputFilter
             'name' => 'NotEmpty',
             'options' => array(
                 'messages' => array(
-                    \Zend\Validator\NotEmpty::IS_EMPTY => "$labelName es requerido."
+                    \Zend\Validator\NotEmpty::IS_EMPTY => "Este campo es requerido y no puede estar vacío."
+                ),
+                'break_chain_on_failure' => true,
+            )
+        );
+    }
+    
+    public static function validatorStringLength($labelName)
+    {
+        return array(
+            'name' => 'StringLength',
+            'options' => array(
+                'messages' => array(
+                    \Zend\Validator\StringLength::INVALID => 'Tipo de dato invalido, vuelva a ingresar',
+                    \Zend\Validator\StringLength::TOO_SHORT => "La $labelName debe tener por lo menos %min% caracteres",
+                    \Zend\Validator\StringLength::TOO_LONG => "La $labelName debe tener máximo %max% caracteres",
                 ),
                 'break_chain_on_failure' => true,
             )

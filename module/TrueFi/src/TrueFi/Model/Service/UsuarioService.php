@@ -17,6 +17,8 @@ class UsuarioService
 
     const METHOD_NEW_MEMBER = 'newMember';
     const METHOD_LOGON = 'logon';
+    const METHOD_ACTIVATE_MEMBER = 'activateMember';
+    const METHOD_DELETE_MEMBER = 'deleteMember';
 
 
     protected $_sl = null;
@@ -39,6 +41,8 @@ class UsuarioService
         $urls = array(
             self::METHOD_NEW_MEMBER => $this->_config->url . 'NewMember.php',
             self::METHOD_LOGON => $this->_config->url . 'logon.php',
+            self::METHOD_ACTIVATE_MEMBER => $this->_config->url . 'ActivateMember.php',
+            self::METHOD_DELETE_MEMBER => $this->_config->url . 'DeleteMember.php',
         );
         
         return isset($urls[$tipo]) ? $urls[$tipo] : null;
@@ -53,7 +57,13 @@ class UsuarioService
                 'EMail',
                 'Password',
                 'Type',
-            )
+            ),
+            self::METHOD_ACTIVATE_MEMBER => array(
+                'MGUID',
+            ),
+            self::METHOD_DELETE_MEMBER => array(
+                'MGUID',
+            ),
         );
         
         return isset($rules[$tipo]) ? $rules[$tipo] : array();
@@ -64,7 +74,8 @@ class UsuarioService
         $rules = $this->getRules($tipo);
         $result = array(
             'success' => false,
-            'msg' => 'Error de validación',
+            'data' => array(),
+            'message' => 'Error de validación',
         );
         $keyData = array_keys($data);
         $errorRules = array();
@@ -77,7 +88,7 @@ class UsuarioService
         }
         
         if (!$valid) {
-            $result['msg'] = 'Ingrese los campos obligatorios ' . implode(', ', $errorRules);
+            $result['message'] = 'Ingrese los campos obligatorios ' . implode(', ', $errorRules);
         } else {
             $dataValid = array();
             foreach ($data as $key => $value) {
@@ -87,6 +98,7 @@ class UsuarioService
             } 
 
             $result['success'] = true;
+            $result['message'] = null;
             $result['data'] = $dataValid;
         }
         
@@ -99,17 +111,71 @@ class UsuarioService
         if ($result['success']) {
             $jsonData = json_encode($result['data']);
             $url = $this->getUrl(self::METHOD_NEW_MEMBER);
-            $data = Response::curl($url, $this->_config, $jsonData);
-            if ($data['success']) {
-                $result['success'] = true;
-                $result['mguid'] = $data['data']->Data->MGUID;
-                return $result;
+            $curlData = Response::curl($url, $this->_config, $jsonData);
+            if ($curlData['success']) {
+                if ($curlData['data']->Code == 0) {
+                    $result['success'] = true;
+                    $result['mguid'] = $curlData['data']->Data->MGUID;
+                } else {
+                    $result['success'] = false;
+                    $result['message'] = $curlData['data']->Message;
+                }
             } else {
-                $result['msg'] = 'Error';
+                $result['success'] = false;
+                $result['message'] = $curlData['message'];
             }
-        } else {
-            return $result;
         }
+        
+        unset($result['data']);
+        return $result;
+    }
+    
+    public function activateMember($data)
+    {
+        $result = $this->validate($data, self::METHOD_ACTIVATE_MEMBER);
+        if ($result['success']) {
+            $jsonData = json_encode($result['data']);
+            $url = $this->getUrl(self::METHOD_ACTIVATE_MEMBER);
+            $curlData = Response::curl($url, $this->_config, $jsonData);
+            if ($curlData['success']) {
+                if ($curlData['data']->Code == 0) {
+                    $result['success'] = true;
+                } else {
+                    $result['success'] = false;
+                    $result['message'] = $curlData['data']->Message;
+                }
+            } else {
+                $result['success'] = false;
+                $result['message'] = $curlData['message'];
+            }
+        }
+        
+        unset($result['data']);
+        return $result;
+    }
+    
+    public function deleteMember($data)
+    {
+        $result = $this->validate($data, self::METHOD_DELETE_MEMBER);
+        if ($result['success']) {
+            $jsonData = json_encode($result['data']);
+            $url = $this->getUrl(self::METHOD_DELETE_MEMBER);
+            $curlData = Response::curl($url, $this->_config, $jsonData);
+            if ($curlData['success']) {
+                if ($curlData['data']->Code == 0) {
+                    $result['success'] = true;
+                } else {
+                    $result['success'] = false;
+                    $result['message'] = $curlData['data']->Message;
+                }
+            } else {
+                $result['success'] = false;
+                $result['message'] = $curlData['message'];
+            }
+        }
+        
+        unset($result['data']);
+        return $result;
     }
     
     public function logon()

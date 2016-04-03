@@ -42,6 +42,26 @@ return array(
                     ),
                 ),
             ),
+            'web-notificar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/notificar-registro[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'notificar',
+                    ),
+                ),
+            ),
+            'web-confirmar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/confirmar-registro[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'confirmar',
+                    ),
+                ),
+            ),
             'web-login' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -89,7 +109,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '/[:action[/:code]]',
+                            'route' => '/[:controller[:action[/:code]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',

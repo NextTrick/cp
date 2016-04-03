@@ -30,6 +30,30 @@ class TestController extends SecurityAdminController
         exit;
     }
     
+    public function activateMemberAction()
+    {
+        //{EBAB4CD7-EE8E-48DF-90C1-7C8F283EF3AE}
+        $service = $this->_getTrueFiUsuarioService();
+        $data = array(
+            'MGUID' => '{EBAB4CD7-EE8E-48DF-90C1-7C8F283EF3AE}',
+        );
+        $result = $service->activateMember($data);
+        var_dump($result);
+        exit;
+    }
+    
+    public function deleteMemberAction()
+    {
+        //{EBAB4CD7-EE8E-48DF-90C1-7C8F283EF3AE}
+        $service = $this->_getTrueFiUsuarioService();
+        $data = array(
+            'MGUID' => '{EBAB4CD7-EE8E-48DF-90C1-7C8F283EF3AE}',
+        );
+        $result = $service->deleteMember($data);
+        var_dump($result);
+        exit;
+    }
+    
     
     protected function _getTrueFiUsuarioService()
     {

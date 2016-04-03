@@ -70,11 +70,10 @@ class LoginController extends SecurityWebController
         try {
             $opcion = $this->params('opcion');
             $data = $this->_getLoginGatewayService()->setGateway($opcion)->callback();
-            var_dump($data);exit;
-            if ($data !== false) {
-                $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'tarjeta'));
+            if (!empty($data) && $data['registrado'] === true) {
+                $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'inicio'));
             } else {
-                $this->redirect()->toRoute('web-login/modalidad', array('controller' => 'login'));
+                $this->redirect()->toRoute('web-completa-tu-registro');
             }
         } catch (\Exception $e) {
             $this->redirect()->toRoute('web-login/modalidad', array('controller' => 'login'));
