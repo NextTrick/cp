@@ -32,6 +32,13 @@ class RegistroController extends AbstractActionController
      
         $registroForm = (float)$this->request->getPost('registro_form');
         if ($this->request->isPost() && !$registroForm) {
+            $codPais = $this->request->getPost('cod_pais');
+            $codDep = $this->request->getPost('cod_depa');
+            $departamentos = $this->_getUbigeoService()->getDepartamentos($codPais);
+            $form->get('cod_depa')->setValueOptions($departamentos);
+            $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDep);
+            $form->get('cod_dist')->setValueOptions($distritos);
+            
             $form->setInputFilter(new \Application\Filter\RegistroFilter());
             $data = $this->request->getPost();
             $form->setData($data);
@@ -95,7 +102,20 @@ class RegistroController extends AbstractActionController
             //registrar en True-Fi
             $resultTrueFi = $this->_getUsuarioService()->registrarEnTrueFi($dataTrueFi);
             if ($resultTrueFi['success']) {
-                $save = $repository->save($data);
+                $dataIn = array(
+                    'email' => $data['email'],
+                    'password' => $data['password'],
+                    'nombres' => $data['nombres'],
+                    'paterno' => $data['paterno'],
+                    'materno' => $data['materno'],
+                    'di_tipo' => $data['di_tipo'],
+                    'di_valor' => $data['di_valor'],
+                    'cod_pais' => $data['cod_pais'],
+                    'cod_depa' => $data['cod_depa'],
+                    'cod_dist' => $data['cod_dist'],
+                    'fecha_nac' => $data['fecha_nac'],
+                );
+                $save = $repository->save($dataIn);
                 if ($save) {
                     $result['success'] = true;
                     $result['message'] = null;
@@ -147,5 +167,10 @@ class RegistroController extends AbstractActionController
     private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
+    }
+    
+    protected function _getUbigeoService()
+    {
+        return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
     }
 }

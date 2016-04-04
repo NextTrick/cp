@@ -97,3 +97,47 @@
     </div>
     <?php echo $this->form()->closeTag(); ?>
 </div>
+
+<script type="text/javascript">
+    var ubigeo = {
+        loadDepartameto:function(){
+            $.ajax({
+                type: "GET",
+                url: '<?php echo BASE_URL; ?>ubigeo/departamento',
+                data:{cod_pais:$('#cod_pais').val()},
+                dataType: 'json',
+                success: function(data){
+                    var htmlDdl = '<option value="">- Seleccione -</option>';
+                    for (var key in data) {
+                        htmlDdl = htmlDdl+'<option value="'+key+'">'+data[key]+'</option>';
+                    }
+                    $('#cod_depa').html(htmlDdl);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                }
+            });
+        },
+        loadDistrito:function(){
+            $.ajax({
+                type: "GET",
+                url: '<?php echo BASE_URL; ?>ubigeo/distrito',
+                data:{cod_pais:$('#cod_pais').val(), cod_depa:$('#cod_depa').val()},
+                dataType: 'json',
+                success: function(data){
+                    var htmlDdl = '<option value="">- Seleccione -</option>';
+                    for (var key in data) {
+                        htmlDdl = htmlDdl+'<option value="'+key+'">'+data[key]+'</option>';
+                    }
+                    $('#cod_dist').html(htmlDdl);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                }
+            });
+        }
+    };
+    
+    $(document).ready(function(){
+        $('#cod_pais').change(function(){ubigeo.loadDepartameto();});
+        $('#cod_depa').change(function(){ubigeo.loadDistrito();});
+    });
+</script>

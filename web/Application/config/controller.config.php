@@ -1,5 +1,5 @@
 <?php
-namespace Usuario;
+namespace Application;
 
 return array(
     'invokables' => array(
@@ -8,5 +8,6 @@ return array(
         'Application\Controller\Login' => 'Application\Controller\LoginController',
         'Application\Controller\Registro' => 'Application\Controller\RegistroController',
         'Application\Controller\Tarjeta' => 'Application\Controller\TarjetaController',
+        'Application\Controller\Ubigeo' => 'Application\Controller\UbigeoController',
     ),
 );

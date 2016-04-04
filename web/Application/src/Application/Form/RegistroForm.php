@@ -102,25 +102,26 @@ class RegistroForm extends Form
             ));
         $this->add($diValor);
 
-        $codPais = new Element\Text('cod_pais');
-        $codPais->setAttributes(array(
-                'id' => 'cod_pais',
-                'maxlength' => '20',
-            ));
+        $pais = $this->_getUbigeoService()->getPaises();
+        $codPais = new Element\Select('cod_pais');
+        $codPais->setAttributes(array('id' => 'cod_pais'));
+        $codPais->setValueOptions($pais);
+        $codPais->setEmptyOption('- Seleccione -');
+        $codPais->setDisableInArrayValidator(true);
         $this->add($codPais);
         
-        $codDepa = new Element\Text('cod_depa');
-        $codDepa->setAttributes(array(
-                'id' => 'cod_depa',
-                'maxlength' => '20',
-            ));
+        $codDepa = new Element\Select('cod_depa');
+        $codDepa->setAttributes(array('id' => 'cod_depa'));
+        $codDepa->setValueOptions(array());
+        $codDepa->setEmptyOption('- Seleccione -');
+        $codDepa->setDisableInArrayValidator(true);
         $this->add($codDepa);
         
-        $codDist = new Element\Text('cod_dist');
-        $codDist->setAttributes(array(
-                'id' => 'cod_dist',
-                'maxlength' => '20',
-            ));
+        $codDist = new Element\Select('cod_dist');
+        $codDist->setAttributes(array('id' => 'cod_dist'));
+        $codDist->setValueOptions(array());
+        $codDist->setEmptyOption('- Seleccione -');
+        $codDist->setDisableInArrayValidator(true);
         $this->add($codDist);
         
         $fechaNac = new Element\Text('fecha_nac');
@@ -144,5 +145,10 @@ class RegistroForm extends Form
     protected function _getUsuarioService()
     {
         return $this->_sl->get('Usuario\Model\Service\UsuarioService');
+    }
+    
+    protected function _getUbigeoService()
+    {
+        return $this->_sl->get('Sistema\Model\Service\UbigeoService');
     }
 }
