@@ -77,10 +77,11 @@ return array(
             'web-confirmar' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/confirmar-registro[/]',
+                    'route'    => '/confirmar-registro[/:codigo]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
                         'action'     => 'confirmar',
+                        'codigo' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                 ),
             ),

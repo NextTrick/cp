@@ -42,4 +42,9 @@ class Util
     {
         return hash('sha256', hash('sha512', $password));
     }
+    
+    public static function generateToken($data)
+    {
+        return hash('sha256', hash('sha512', $data . microtime()));
+    }
 }
