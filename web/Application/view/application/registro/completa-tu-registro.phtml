@@ -103,7 +103,7 @@
         loadDepartameto:function(){
             $.ajax({
                 type: "GET",
-                url: '<?php echo BASE_URL; ?>ubigeo/departamento',
+                url: '<?php echo BASE_URL; ?>application/ubigeo/departamento',
                 data:{cod_pais:$('#cod_pais').val()},
                 dataType: 'json',
                 success: function(data){
@@ -120,7 +120,7 @@
         loadDistrito:function(){
             $.ajax({
                 type: "GET",
-                url: '<?php echo BASE_URL; ?>ubigeo/distrito',
+                url: '<?php echo BASE_URL; ?>application/ubigeo/distrito',
                 data:{cod_pais:$('#cod_pais').val(), cod_depa:$('#cod_depa').val()},
                 dataType: 'json',
                 success: function(data){

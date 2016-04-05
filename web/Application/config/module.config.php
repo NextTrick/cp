@@ -27,7 +27,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '[:controller[/:action[/:code]]]',
+                            'route' => 'application[/:controller[/:action[/:code]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
