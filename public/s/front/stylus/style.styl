@@ -1,8 +1,20 @@
+@require 'sprite/sprite.styl'
 body
 	background url(../images/bg.jpg) repeat
+.box_center
+	width 960px
+	margin 0 auto
 header
 	img
 		width 100%
 		position absolute
 		top 0
 		left 0
+		z-index -1
+	.social_icons
+		span
+			display inline-block
+			&.fb
+				sprite($fb)
+			&.in
+				sprite($in)
