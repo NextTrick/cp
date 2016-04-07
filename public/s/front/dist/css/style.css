@@ -96,3 +96,48 @@ header nav ul li.logo {
   width: 230px;
   margin-top: -10px;
 }
+.right_options {
+  position: absolute;
+  right: 20px;
+  top: 190px;
+  width: 90px;
+  height: 334px;
+  background: url("../images/bg_rectangle_right.png");
+}
+.right_options ul {
+  margin: 0;
+  padding: 0;
+}
+.right_options ul li {
+  display: block;
+  list-style: none;
+  text-align: center;
+  width: 70px;
+  margin: 35px auto 20px;
+}
+.right_options ul li a {
+  font-size: 10px;
+  text-decoration: none;
+}
+.right_options ul li a span.icon {
+  display: block;
+  margin: 0 auto 5px;
+}
+.right_options ul li a span.icon_gold {
+  background-image: url("../images/sprite.png");
+  background-position: -40px -78px;
+  width: 40px;
+  height: 40px;
+}
+.right_options ul li a span.icon_card {
+  background-image: url("../images/sprite.png");
+  background-position: -49px 0px;
+  width: 49px;
+  height: 40px;
+}
+.right_options ul li a span.icon_birthday {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -40px;
+  width: 44px;
+  height: 38px;
+}
