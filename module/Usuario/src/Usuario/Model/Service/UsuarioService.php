@@ -30,8 +30,23 @@ class UsuarioService
         );
     }
 
+    public function registrarEnTrueFi($data)
+    {
+        return $this->_getTrueFiUsuarioService()->newMember($data);
+    }
+    
+    public function activarEnTrueFi($data)
+    {
+        return $this->_getTrueFiUsuarioService()->activateMember($data);
+    }
+
     public function getRepository()
     {
         return $this->_repository;
+    }
+    
+    protected function _getTrueFiUsuarioService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\UsuarioService');
     }
 }

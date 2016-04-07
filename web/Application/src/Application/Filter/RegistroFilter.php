@@ -44,6 +44,7 @@ class RegistroFilter extends Zf2InputFilter
             ),
             'validators' => array(
                 self::validatorNotEmpty('Contraseña'),
+                self::validatorStringLength('contraseña'),
             )
         ));
 
@@ -61,7 +62,7 @@ class RegistroFilter extends Zf2InputFilter
                     'options' => array(
                         'token' => 'password',
                         'message' => array(
-                            \Zend\Validator\Identical::NOT_SAME => "Las contraseñas no coinciden.",
+                            \Zend\Validator\Identical::NOT_SAME => "Las contraseñas ingresadas no coinciden.",
                             \Zend\Validator\Identical::MISSING_TOKEN => 'Repetir contraseña por favor.',
                         ),
                         'break_chain_on_failure' => true,

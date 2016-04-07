@@ -5,16 +5,64 @@ body
 	width 960px
 	margin 0 auto
 header
-	img
+	img.bg
 		width 100%
+		min-height 190px
 		position absolute
 		top 0
 		left 0
 		z-index -1
 	.social_icons
+		margin-top 5px
 		span
 			display inline-block
 			&.fb
 				sprite($fb)
+				margin-right 5px
 			&.in
 				sprite($in)
+	nav
+		ul
+			margin 10px 0 0
+			li
+				width 100px
+				height 80px
+				list-style none
+				display inline-block
+				vertical-align top
+				text-align center
+				a
+					text-decoration none
+					color #CB91C1
+					font-size 10px
+					position relative
+					.icon
+						height 54px
+						span
+							display block
+							margin 0 auto 5px
+							&.icon_local
+								sprite($local)
+							&.icon_offers
+								sprite($promo)
+							&.icon_atraction
+								sprite($atraction)
+							&.icon_sale
+								sprite($sale)
+							&.icon_card
+								sprite($card)
+							&.icon_gold
+								sprite($gold)
+				&.logo
+					width 230px
+					margin-top -10px
+
+
+
+
+
+
+
+
+
+

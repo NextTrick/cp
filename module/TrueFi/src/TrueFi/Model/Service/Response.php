@@ -10,9 +10,9 @@ namespace TrueFi\Model\Service;
 
 class Response
 {
-    public static function curl($url, $jsonData)
+    public static function curl($url, $config, $jsonData)
     {
-        $token = sha1($jsonData . $this->_password);
+        $token = sha1($jsonData . $config->password);
         $client = new \Zend\Http\Client(null, array(
             'adapter' => 'Zend\Http\Client\Adapter\Curl',
             'curloptions' => array(
@@ -21,14 +21,12 @@ class Response
                 CURLOPT_TIMEOUT => 60,
             ),
         ));
+
         $client->setUri($url);
         $client->setMethod('POST');
         $client->setParameterPost(array(
             'Token' => $token,
             'Data' => $jsonData,
-        ));
-        $client->setHeaders(array(
-            'Content-Type' => 'application/json',
         ));
         
         $responseData = array(

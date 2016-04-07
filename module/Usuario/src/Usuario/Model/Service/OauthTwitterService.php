@@ -38,7 +38,6 @@ class OauthTwitterService
         $oauthTokenSession = $this->_container->offsetGet('temp_oauth_token');
         $oauthTokenSecretSession = $this->_container->offsetGet('temp_oauth_token_secret');
         if (!empty($oauthToken) && $oauthTokenSession !== $oauthToken) {
-            $this->logout();
             throw new \Exception('Falló la validación con Twitter, token invalido.');
         }
 
@@ -79,13 +78,13 @@ class OauthTwitterService
                 return false;
             }
         } else {
-            $this->logout();
             throw new \Exception('Falló la validación con Twitter, error.');
         }
     }
 
     public function login()
     {
+        $this->logout();
         try {
             //Build TwitterOAuth object with client credentials
             $twitter = new \TwitterOAuth\Api($this->_config->consumer_key, $this->_config->consumer_secret);
@@ -103,11 +102,9 @@ class OauthTwitterService
                 header("location: $url"); 
                 break;
               default:
-                $this->logout();
                 throw new \Exception('Falló la validación con Twitter, intentelo nuevamenete.');
             }
         } catch (\Exception $e) {
-            $this->logout();
             throw new \Exception($e->getMessage(), $e->getCode());
         }
     }

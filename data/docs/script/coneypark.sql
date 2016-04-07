@@ -303,6 +303,7 @@ CREATE TABLE IF NOT EXISTS `usuario_perfil_pago` (
 DROP TABLE IF EXISTS `usuario_usuario`;
 CREATE TABLE IF NOT EXISTS `usuario_usuario` (
   `id` int(11) NOT NULL,
+  `mguid` varchar(40) NOT NULL,
   `facebook_id` varchar(30) DEFAULT NULL,
   `twitter_id` varchar(30) DEFAULT NULL,
   `email` varchar(30) NOT NULL,
@@ -320,8 +321,10 @@ CREATE TABLE IF NOT EXISTS `usuario_usuario` (
   `cod_prov` varchar(2) DEFAULT NULL,
   `cod_dist` varchar(2) DEFAULT NULL,
   `fecha_creacion` datetime DEFAULT NULL,
-  `fecha_edicion` datetime DEFAULT NULL
+  `fecha_edicion` datetime DEFAULT NULL,
+  `codigo_activar` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Índices para tablas volcadas
 --

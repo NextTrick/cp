@@ -51,11 +51,15 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
     public function setCriteria($criteria)
     {
         $this->clearCriteria();
-        if (isset($criteria['where']) && is_array($criteria['where'])) {
-            $this->crWhere = $criteria['where'];
+        if (isset($criteria['where'])) {
+            if (is_array($criteria['where']) || $criteria['where'] instanceof \Zend\Db\Sql\Where) {
+                $this->crWhere = $criteria['where'];
+            }
         }
-        if (isset($criteria['whereLike']) && is_array($criteria['whereLike'])) {
-            $this->crWhereLike = $criteria['whereLike'];
+        if (isset($criteria['whereLike'])) {
+            if (is_array($criteria['whereLike'])) {
+                $this->crWhereLike = $criteria['whereLike'];
+            }
         }
         if (isset($criteria['columns']) && is_array($criteria['columns'])) {
             $this->crColumns = $criteria['columns'];
@@ -112,17 +116,22 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
                 $select->columns($this->crColumns);
             }
             
-            $where = new \Zend\Db\Sql\Where();
+            $where = array();
+            if ($this->crWhere instanceof \Zend\Db\Sql\Where) {
+                $where = $this->crWhere;
+            } else {
+                $where = new \Zend\Db\Sql\Where();
 
-            foreach ($this->crWhere as $key => $value) {
-                if (!empty($value)) {
-                    $where->or->equalTo($key, $value) ;
+                foreach ($this->crWhere as $key => $value) {
+                    if (!empty($value)) {
+                        $where->or->equalTo($key, $value) ;
+                    }
                 }
-            }
 
-            foreach ($this->crWhereLike as $key => $value) {
-                if (!empty($value)) {
-                    $where->or->like($key, "%$value%") ;
+                foreach ($this->crWhereLike as $key => $value) {
+                    if (!empty($value)) {
+                        $where->or->like($key, "%$value%") ;
+                    }
                 }
             }
             

@@ -5,25 +5,94 @@ body {
   width: 960px;
   margin: 0 auto;
 }
-header img {
+header img.bg {
   width: 100%;
+  min-height: 190px;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
+}
+header .social_icons {
+  margin-top: 5px;
 }
 header .social_icons span {
   display: inline-block;
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -26px 0px;
+  background-position: -138px -75px;
   width: 25px;
   height: 26px;
+  margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: 0px 0px;
+  background-position: -138px -49px;
   width: 26px;
   height: 26px;
+}
+header nav ul {
+  margin: 10px 0 0;
+}
+header nav ul li {
+  width: 100px;
+  height: 80px;
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: #cb91c1;
+  font-size: 10px;
+  position: relative;
+}
+header nav ul li a .icon {
+  height: 54px;
+}
+header nav ul li a .icon span {
+  display: block;
+  margin: 0 auto 5px;
+}
+header nav ul li a .icon span.icon_local {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -118px;
+  width: 33px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_offers {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -78px;
+  width: 40px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_atraction {
+  background-image: url("../images/sprite.png");
+  background-position: -138px 0px;
+  width: 32px;
+  height: 49px;
+}
+header nav ul li a .icon span.icon_sale {
+  background-image: url("../images/sprite.png");
+  background-position: -80px -78px;
+  width: 37px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_card {
+  background-image: url("../images/sprite.png");
+  background-position: 0px 0px;
+  width: 49px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_gold {
+  background-image: url("../images/sprite.png");
+  background-position: -98px 0px;
+  width: 40px;
+  height: 40px;
+}
+header nav ul li.logo {
+  width: 230px;
+  margin-top: -10px;
 }

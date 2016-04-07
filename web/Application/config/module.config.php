@@ -21,6 +21,28 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'application' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            // Change this to something specific to your module
+                            'route' => 'application[/:controller[/:action[/:code]]]',
+                            'constraints' => array(
+                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            ),
+                            'defaults' => array(
+                                // Change this value to reflect the namespace in which
+                                // the controllers for your module are found
+                                '__NAMESPACE__' => 'Application\Controller',
+                                'controller'    => 'Index',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                )
             ),
             'web-registro' => array(
                 'type' => 'Segment',
@@ -39,6 +61,27 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
                         'action'     => 'completa-tu-registro',
+                    ),
+                ),
+            ),
+            'web-notificar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/notificar-registro[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'notificar',
+                    ),
+                ),
+            ),
+            'web-confirmar' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/confirmar-registro[/:codigo]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'confirmar',
+                        'codigo' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                 ),
             ),
@@ -89,7 +132,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '/[:action[/:code]]',
+                            'route' => '/[:controller[/:action[/:code]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
