@@ -1,0 +1,228 @@
+body {
+  background: url("../images/bg.jpg") repeat;
+}
+.box_center {
+  width: 960px;
+  margin: 0 auto;
+}
+header img.bg {
+  width: 100%;
+  min-height: 190px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+header .social_icons {
+  margin-top: 5px;
+}
+header .social_icons span {
+  display: inline-block;
+}
+header .social_icons span.fb {
+  background-image: url("../images/sprite.png");
+  background-position: -138px -75px;
+  width: 25px;
+  height: 26px;
+  margin-right: 5px;
+}
+header .social_icons span.in {
+  background-image: url("../images/sprite.png");
+  background-position: -138px -49px;
+  width: 26px;
+  height: 26px;
+}
+header nav ul {
+  margin: 10px 0 0;
+}
+header nav ul li {
+  width: 100px;
+  height: 80px;
+  list-style: none;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+}
+header nav ul li a {
+  text-decoration: none;
+  color: #cb91c1;
+  font-size: 10px;
+  position: relative;
+}
+header nav ul li a .icon {
+  height: 54px;
+}
+header nav ul li a .icon span {
+  display: block;
+  margin: 0 auto 5px;
+}
+header nav ul li a .icon span.icon_local {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -118px;
+  width: 33px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_offers {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -78px;
+  width: 40px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_atraction {
+  background-image: url("../images/sprite.png");
+  background-position: -138px 0px;
+  width: 32px;
+  height: 49px;
+}
+header nav ul li a .icon span.icon_sale {
+  background-image: url("../images/sprite.png");
+  background-position: -80px -78px;
+  width: 37px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_card {
+  background-image: url("../images/sprite.png");
+  background-position: 0px 0px;
+  width: 49px;
+  height: 40px;
+}
+header nav ul li a .icon span.icon_gold {
+  background-image: url("../images/sprite.png");
+  background-position: -98px 0px;
+  width: 40px;
+  height: 40px;
+}
+header nav ul li.logo {
+  width: 230px;
+  margin-top: -10px;
+}
+.right_options {
+  position: absolute;
+  right: 20px;
+  top: 190px;
+  width: 90px;
+  height: 334px;
+  background: url("../images/bg_rectangle_right.png");
+}
+.right_options ul {
+  margin: 0;
+  padding: 0;
+}
+.right_options ul li {
+  display: block;
+  list-style: none;
+  text-align: center;
+  width: 70px;
+  margin: 35px auto 20px;
+}
+.right_options ul li a {
+  font-size: 10px;
+  text-decoration: none;
+}
+.right_options ul li a span.icon {
+  display: block;
+  margin: 0 auto 5px;
+}
+.right_options ul li a span.icon_gold {
+  background-image: url("../images/sprite.png");
+  background-position: -40px -78px;
+  width: 40px;
+  height: 40px;
+}
+.right_options ul li a span.icon_card {
+  background-image: url("../images/sprite.png");
+  background-position: -49px 0px;
+  width: 49px;
+  height: 40px;
+}
+.right_options ul li a span.icon_birthday {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -40px;
+  width: 44px;
+  height: 38px;
+}
+section {
+  padding-top: 120px;
+  color: #fff;
+}
+section .btn {
+  text-decoration: none;
+  color: #fff;
+  text-align: center;
+}
+section h3 {
+  font-size: 22px;
+}
+section .box_left {
+  float: left;
+  width: 48%;
+}
+section .box_left .grid_340 {
+  width: 340px;
+  text-align: center;
+}
+section .box_left .grid_340 .social_buttons {
+  display: block;
+  height: 40px;
+}
+section .box_left .grid_340 .social_buttons .btn {
+  display: inline-block;
+  width: 160px;
+  padding: 10px 0;
+}
+section .box_left .grid_340 .social_buttons .btn.btn_fb {
+  background: #3b5998;
+  margin-right: 5px;
+  float: left;
+}
+section .box_left .grid_340 .social_buttons .btn.btn_tw {
+  background: #1b95e0;
+  margin-left: 5px;
+  float: right;
+}
+section .box_left .grid_340 .box_email_register {
+  width: 100%;
+  margin-bottom: 10px;
+}
+section .box_left .grid_340 .box_email_register input {
+  width: 100%;
+  height: 42px;
+  padding: 0 10px;
+  border: 0;
+  background: #cb8fc2;
+  color: #fff;
+  box-sizing: border-box;
+}
+section .box_left .grid_340 .box_email_register input::-webkit-input-placeholder {
+  color: #fff;
+}
+section .box_left .grid_340 .box_email_register input:-moz-placeholder {
+  color: #fff;
+}
+section .box_left .grid_340 .box_email_register input::-moz-placeholder {
+  color: #fff;
+}
+section .box_left .grid_340 .box_email_register input:-ms-input-placeholder {
+  color: #fff;
+}
+section .box_left .grid_340 .box_email_register .btn {
+  width: 100%;
+  display: block;
+  padding: 12px 0;
+  margin-top: 10px;
+}
+section .box_left .grid_340 .box_email_register .btn.btn_register {
+  background: #ff6909;
+  color: #fff;
+}
+section .box_left .grid_340 .login_link {
+  width: auto;
+  text-decoration: none;
+  color: #fff;
+  margin-top: 20px;
+  border-bottom: 1px solid #cb8fc2;
+}
+section .box_right {
+  float: right;
+  width: 48%;
+}
