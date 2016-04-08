@@ -85,6 +85,26 @@ return array(
                     ),
                 ),
             ),
+            'web-recuperar-password' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/recuperar-password[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'recuperar-password',
+                    ),
+                ),
+            ),
+            'web-modificar-password' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/modificar-password[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'modificar-password',
+                    ),
+                ),
+            ),
             'web-login' => array(
                 'type' => 'Literal',
                 'options' => array(

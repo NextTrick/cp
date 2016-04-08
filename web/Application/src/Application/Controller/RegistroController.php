@@ -156,6 +156,25 @@ class RegistroController extends AbstractActionController
         return new ViewModel();
     }
 
+    public function recuperarPasswordAction()
+    {
+        if ($this->request->isPost()) {
+            $email = $this->request->getPost('email');
+            var_dump($email);exit;
+        }
+        return new ViewModel();
+    }
+    
+    public function modificarPasswordAction()
+    {
+        if ($this->request->isPost()) {
+            $email = $this->request->getPost('email');
+            var_dump($email);exit;
+        }
+        return new ViewModel();
+    }
+
+
     private function _getDataRegistroTemp($campo)
     {
         $session = new \Zend\Session\Container('session_usuario');
