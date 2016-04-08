@@ -1,0 +1,15 @@
+<nuevo_eticket>
+    <parametros>
+        <parametro id="CANAL">3</parametro>
+        <parametro id="PRODUCTO">1</parametro>
+        <parametro id="CODTIENDA"><?php echo $commerceCode; ?></parametro>
+        <parametro id="NUMORDEN"><?php echo $id; ?></parametro>
+        <parametro id="MOUNT"><?php echo $amount; ?></parametro>
+        <parametro id="NOMBRE"><?php echo $profileName; ?></parametro>
+        <parametro id="APELLIDO"><?php echo $profileLastName; ?></parametro>
+        <parametro id="CIUDAD"><?php echo $city; ?></parametro>
+        <parametro id="DIRECCION"><?php echo $address; ?></parametro>
+        <parametro id="CORREO"><?php echo $userEmail; ?></parametro>
+        <parametro id="DATO_COMERCIO">PAGO</parametro>
+    </parametros>
+</nuevo_eticket>

@@ -12,7 +12,9 @@ class Visa
 
     public function __construct($config, $environment) 
     {
-        $this->environment = $environment;        
+        $this->environment = $environment;      
+        
+        $this->config = $config;
     }
     
     public function createEticket($data)
@@ -23,8 +25,10 @@ class Visa
         } 
         $this->client = new \SoapClient($this->wsdl, array('trace' => 1));
         
-        $requestData = getCreateEticketRequestData($data);                        
+        $requestData = $this->getCreateEticketRequestData($data);                        
         $response = $this->client->GeneraEticket($requestData);
+        
+        var_dump($response);
     }
     
     public function retrieveTicket($data)
@@ -35,17 +39,35 @@ class Visa
         }        
         $this->client = new \SoapClient($this->wsdl, array('trace' => 1));
         
-        $requestData = getRetrieveEticketRequestData($data);         
+        $requestData = $this->getRetrieveEticketRequestData($data);         
         $response = $this->client->ConsultaEticket($requestData);
     }
     
     protected function getCreateEticketRequestData($data)
-    {
+    {                
         $createEticketRequestData = array(
-            
+            'commerceCode' => $this->config['codigoComercio'],
+            'id' => $data['id'],
+            'amount' => $data['monto'],
+            'profileName' => $data['perfilpago_nombres'],
+            'profileLastName' => $data['perfilpago_paterno'] . ' ' . $data['perfilpago_materno'],
+            'city' => 'LIMA',
+            'address' => $data['perfilpago_direccion'],
+            'userEmail' => $data['usuario_email'],            
         );
         
-        return $createEticketRequestData;
+        $view = new ViewModel();
+        $view->setTerminal(true)                
+                ->setTemplate('Xml/eticked.xml')
+                ->setVariables(array(
+                    'userData' => $userData,
+                    'token' => $token,                        
+                ));
+        
+        $viewRenderer = $this->_sl->get('viewrenderer');      
+        $html = $viewRenderer->render($view);
+        
+        return array('xmlIn' => $createEticketRequestXml);
     }
     
     protected function getRetrieveEticketRequestData($data)

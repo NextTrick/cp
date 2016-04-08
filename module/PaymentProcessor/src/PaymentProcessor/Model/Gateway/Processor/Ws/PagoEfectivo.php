@@ -44,10 +44,10 @@ class PagoEfectivo extends Service
             $this->_options['gen']['url'] = $config['baseUrl'] . $config['wsgenpago'];
             $this->_options['mailAdmin'] = $config['adminEmail'];
             $this->_options['medioPago'] = $config['medioPago'];                                    
-        }
+        }        
         parent::__construct($config);
         
-        $this->_crypto = Crypto::getInstance($this->_options['crypto']);
+        $this->_crypto = Crypto::getInstance($this->_options);
     }
 
     /*

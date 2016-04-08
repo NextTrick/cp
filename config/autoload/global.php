@@ -112,15 +112,15 @@ return array(
         
         'paymentProcessor' => array(
             'pagoEfectivo' => array(
-                'merchanId' => 'PRU',
+                'merchanId' => 'HOK',
                 'baseUrl' => 'http://pre.pagoefectivo.pe/',
                 'wscrypta' => 'PagoEfectivoWSCrypto/WSCrypto.asmx?WSDL', //data encrypt ws
                 'wscip2' => 'PagoEfectivoWSGeneralv2/service.asmx?WSDL', //cip generator ws 
                 'wsgenpago' => 'GenPago.aspx', //PE's CIP window
                 'wsgenpagoiframe' => 'GenPagoIF.aspx', //
-                'securityPath' => '/', //PE's key path
-                'publickey' => '', //PE's public key
-                'privatekey' => '', // PE's secret key                
+                'securityPath' => APP_PATH . '/data/private/', //PE's key path
+                'publickey' => 'SPE_PublicKey.1pz', //PE's public key
+                'privatekey' => 'ACI_PrivateKey.1pz', // PE's secret key                
                 'medioPago' => '1,2',
                 'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key           
             ),
@@ -129,7 +129,7 @@ return array(
                 'wsEticket' => 'WSGenerarEticket/WSEticket.asmx?wsdl',                
                 'formularioPago' => 'formularioweb/formulariopago.asp',
                 'wsConsultaTicket' => 'WSConsulta/WSConsultaEticket.asmx?wsdl',
-                'codigoComercio' => '',
+                'codigoComercio' => '490345336',
             ),
         ),
     ),

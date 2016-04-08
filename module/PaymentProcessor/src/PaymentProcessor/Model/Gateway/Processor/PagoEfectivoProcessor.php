@@ -18,7 +18,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
         
         $config = $this->getServiceLocator()->get('config');
         $wsConfig = $config['app']['paymentProcessor']['pagoEfectivo'];
-        
+                                
         $this->ws = new PagoEfectivo($wsConfig);
     }
     
@@ -30,15 +30,18 @@ class PagoEfectivoProcessor extends AbstractProcessor
         
         //Creación de la solicitud
         $xml = $this->getSolicitud($data);
+        
         try {            
             //Obtención del valor del Cip                                    
-            $paymentRequest = $this->ws->solicitarPago($xml);                    
+            $paymentResponse = $this->ws->solicitarPago($xml);     
+            
+            var_dump($paymentResponse); exit; 
             
             $return['data'] = array(
-                'status' => $paymentRequest->Estado,
-                'token' => $paymentRequest->Token,
-                'clientReference' => $paymentRequest->NumeroOrdenPago,
-                'reference' => $paymentRequest->CodTrans,
+                'status' => $paymentResponse->Estado,
+                'token' => $paymentResponse->Token,
+                'clientReference' => $paymentResponse->NumeroOrdenPago,
+                'reference' => $paymentResponse->CodTrans,
             );
         } catch (\Exception $e) {
             $return['success'] = false;
@@ -97,7 +100,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'MetodosPago' => $options['medioPago'],
                     'CodServicio' => $options['apiKey'],
                     'Codtransaccion' => $data['id'],
-                    'EmailComercio' => $data['mailAdmin'],
+                    'EmailComercio' => $options['mailAdmin'],
                     'FechaAExpirar' => $expirationDate,
                     'UsuarioId' => '001',
                     'DataAdicional' => '',
