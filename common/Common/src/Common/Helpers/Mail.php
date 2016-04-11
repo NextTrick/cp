@@ -8,6 +8,7 @@ class Mail
 {
     protected $_config = array();
     protected $_options = array();
+    protected $_dirTemplate = null;
 
     public function __construct($config)
     {
@@ -32,6 +33,10 @@ class Mail
     {
         $data = array_merge($this->_config, $data);
 
+        if (empty($data['toEmail'])) {
+            throw new \Exception('Email de destino no existe.');
+        }
+        
         $transport = new \Zend\Mail\Transport\Smtp();
         $options = new \Zend\Mail\Transport\SmtpOptions($this->_options);
         $transport->setOptions($options);
@@ -54,12 +59,20 @@ class Mail
         $transport->send($mail);
     }
     
-    protected function _getView($view)
+    public function setDirTemplate($dirTemplate)
     {
-        $resolver = new TemplatePathStack(array(
-            'script_paths' => array(APP_PATH . '/module/TemplateMail')
-        ));
-        
+        $this->_dirTemplate = $dirTemplate;
+    }
+
+    private function _getView($view)
+    {
+        $resolver = new TemplatePathStack();
+        if (!empty($this->_dirTemplate)) {
+            $resolver = new TemplatePathStack(array(
+                'script_paths' => array($this->_dirTemplate)
+            ));
+        }
+
         $renderer = new PhpRenderer();
         $renderer->setResolver($resolver);
         

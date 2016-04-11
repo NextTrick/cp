@@ -7,16 +7,16 @@
  */
 
 namespace TrueFi\Model\Service;
-
 use TrueFi\Model\Service\Response;
 use TrueFi\Model\Service\Request;
 
-class TarjetaService
+class PromocionService
 {
+    const METHOD_GET_PROMOTIONS = 'GetPromotions';
+
+
     protected $_sl = null;
     protected $_config = null;
-    
-    const METHOD_GET_CARD = 'GetCard';
 
     public function __construct($serviceLocator)
     {
@@ -33,7 +33,7 @@ class TarjetaService
     private function getUrl($tipo)
     {
         $urls = array(
-            self::METHOD_GET_CARD => $this->_config->url . self::METHOD_GET_CARD . '.php',
+            self::METHOD_GET_PROMOTIONS => $this->_config->url . self::METHOD_GET_PROMOTIONS . '.php',
         );
         
         return isset($urls[$tipo]) ? $urls[$tipo] : null;
@@ -42,26 +42,24 @@ class TarjetaService
     private function getRules($tipo)
     {
         $rules = array(
-            self::METHOD_GET_CARD => array(
-                'CGUID',
+            self::METHOD_GET_PROMOTIONS => array(
             ),
         );
         
         return isset($rules[$tipo]) ? $rules[$tipo] : array();
     }
 
-    public function getCard($data)
+    public function getPromotions()
     {
-        $result = Request::validate($data, $this->getRules(self::METHOD_GET_CARD));
+        $result = Request::validate(array(), $this->getRules(self::METHOD_GET_PROMOTIONS));
         if ($result['success']) {
             $jsonData = json_encode($result['data']);
-            $url = $this->getUrl(self::METHOD_GET_CARD);
+            $url = $this->getUrl(self::METHOD_GET_PROMOTIONS);
             $curlData = Response::curl($url, $this->_config, $jsonData);
-            var_dump($curlData);exit;
             if ($curlData['success']) {
                 if ($curlData['data']['code'] == 0) {
                     $result['success'] = true;
-                    $result['mguid'] = $curlData['data']['data']['mguid'];
+                    $result['result'] = $curlData['data']['data'];
                 } else {
                     $result['success'] = false;
                     $result['message'] = $curlData['data']['message'];
@@ -74,10 +72,5 @@ class TarjetaService
         
         unset($result['data']);
         return $result;
-    }
-
-    public function creditPurchase()
-    {
-        
     }
 }

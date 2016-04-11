@@ -171,12 +171,12 @@ class UsuarioController extends SecurityAdminController
                 $repository = $this->_getUsuarioService()->getRepository();
                 if (!empty($id)) {
                     if ($repeat) {
-                        $paramsIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password']);
+                        $paramsIn['password'] = \Common\Helpers\Util::passwordHash($data['password']);
                     }
                     $paramsIn['fecha_edicion'] = date('Y-m-d H:i:s');
                     $repository->save($paramsIn, $id);
                 } else {
-                    $paramsIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password']);
+                    $paramsIn['password'] = \Common\Helpers\Util::passwordHash($data['password']);
                     $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
                     $repository->save($paramsIn);
                 }

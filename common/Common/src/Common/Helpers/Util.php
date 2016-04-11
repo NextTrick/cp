@@ -38,13 +38,29 @@ class Util
         return true;
     }
     
-    public static function passwordEncrypt($password)
+    public static function passwordHash($password)
     {
         return hash('sha256', hash('sha512', $password));
+    }
+    
+    public static function passwordEncrypt($password, $email)
+    {
+        return Crypto::encrypt($password, $email);
     }
     
     public static function generateToken($data)
     {
         return hash('sha256', hash('sha512', $data . microtime()));
+    }
+    
+    public static function arrayChangeKeyCaseRecursive(array $data, $case = null) {
+        $case = empty($case) ? CASE_LOWER : $case;
+        $data = array_change_key_case($data, $case);
+        foreach ($data as $key => $val) {
+            if (is_array($val)) {
+                $data[$key] = self::arrayChangeKeyCaseRecursive($val, $case);
+            }
+        }
+        return $data;
     }
 }

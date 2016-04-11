@@ -98,10 +98,11 @@ return array(
             'web-modificar-password' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/modificar-password[/]',
+                    'route'    => '/modificar-password[/:codigo]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
                         'action'     => 'modificar-password',
+                        'codigo' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                 ),
             ),

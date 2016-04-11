@@ -326,6 +326,15 @@ CREATE TABLE IF NOT EXISTS `usuario_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Volcado de datos para la tabla `usuario_usuario`
+--
+
+INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `cod_pais`, `cod_depa`, `cod_prov`, `cod_dist`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
+(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', 'PE', '15', NULL, '42', NULL, NULL, NULL),
+(5, '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 0, NULL, 'Juan Carlos', 'test', 'test', 1, '2324232', '2015-03-02', 'PE', '23', NULL, '08', NULL, NULL, 'd27c393c942947426e370624076ec81c201b3b480a358895870e8e23ce4a06a5');
+
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -431,6 +440,8 @@ ALTER TABLE `usuario_perfil_pago`
 --
 ALTER TABLE `usuario_usuario`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`),
+  ADD UNIQUE KEY `mguid_UNIQUE` (`mguid`),
   ADD KEY `index_facebook_id` (`facebook_id`),
   ADD KEY `index_twitter_id` (`twitter_id`);
 

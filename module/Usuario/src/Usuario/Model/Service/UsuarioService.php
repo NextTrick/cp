@@ -39,6 +39,11 @@ class UsuarioService
     {
         return $this->_getTrueFiUsuarioService()->activateMember($data);
     }
+    
+    public function usuarioEnTrueFi($data)
+    {
+        return array();
+    }
 
     public function getRepository()
     {
