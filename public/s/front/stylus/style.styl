@@ -4,6 +4,10 @@ body
 .box_center
 	width 960px
 	margin 0 auto
+.bold
+	font-weight bold
+*:focus
+	outline 0px
 header
 	img.bg
 		width 100%
@@ -87,13 +91,15 @@ header
 						sprite($birthday)
 section
 	padding-top 120px
+	padding-bottom 50px
+	overflow hidden
 	color white
 	.btn
 		text-decoration none
 		color white
 		text-align center
 	h3
-		font-size 22px
+		font-size 24px
 	.box_left
 		float left
 		width 48%
@@ -117,7 +123,7 @@ section
 						float right
 			.box_email_register
 				width 100%
-				margin-bottom 10px
+				margin-bottom 20px
 				input
 					width 100%
 					height 42px
@@ -126,6 +132,7 @@ section
 					background #CB8FC2
 					color white
 					box-sizing border-box
+					margin-bottom 10px
 					&::-webkit-input-placeholder
 						color white
 					&:-moz-placeholder
@@ -138,19 +145,96 @@ section
 					width 100%
 					display block
 					padding 12px 0
-					margin-top 10px
 					&.btn_register
 						background #FF6909
 						color white
-			.login_link
-				width auto
-				text-decoration none
-				color white
-				margin-top 20px
-				border-bottom 1px solid #CB8FC2
+	.purple_link
+		width auto
+		text-decoration none
+		color white
+		border-bottom 1px solid #CB8FC2
+		line-height 22px
 	.box_right
 		float right
 		width 48%
+		.box_rectangle
+			width 280px
+			height 140px
+			background #99E5FF
+	.box_signin
+		width 620px
+		margin 0 auto
+		text-align center
+		form
+			p
+				&.bold
+					margin 30px 0
+			.box_form
+				display block
+				height 42px
+				.left
+					float left
+					margin-top 7px
+				.right
+					float right
+					width 400px
+				select
+					height 32px
+					border none
+					border-radius 2px
+					color white
+					opacity 0.6
+					&.large
+						width 100%
+					&.dni_type
+						float left
+						width 120px
+					&.day
+						float left
+						margin-right 5px
+						width 90px
+					&.month
+						float left
+						width 180px
+					&.year
+						float right
+						width 120px
+				input
+					opacity 0.6
+					height 32px
+					border none
+					border-radius 2px
+					padding 0 5px
+					color white
+					&.dni_number
+						float right
+						width 270px
+					&.btn_signin
+						opacity 1
+						background #FF6909
+						color white
+						margin-bottom 20px
+				.purple_light
+					background #CC90C3
+				.purple_dark
+					background #000000
+footer
+	display block
+	img.bg
+		width 100%
+		z-index -1
+	ul
+		padding 0
+		margin-top -40px
+		text-align center
+		li
+			list-style none
+			display inline-block
+			margin 0 5px 
+			a
+				color #972383
+				text-decoration none
+				font-size 12px
 
 
 

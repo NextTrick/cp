@@ -5,6 +5,12 @@ body {
   width: 960px;
   margin: 0 auto;
 }
+.bold {
+  font-weight: bold;
+}
+*:focus {
+  outline: 0px;
+}
 header img.bg {
   width: 100%;
   min-height: 190px;
@@ -143,6 +149,8 @@ header nav ul li.logo {
 }
 section {
   padding-top: 120px;
+  padding-bottom: 50px;
+  overflow: hidden;
   color: #fff;
 }
 section .btn {
@@ -151,7 +159,7 @@ section .btn {
   text-align: center;
 }
 section h3 {
-  font-size: 22px;
+  font-size: 24px;
 }
 section .box_left {
   float: left;
@@ -182,7 +190,7 @@ section .box_left .grid_340 .social_buttons .btn.btn_tw {
 }
 section .box_left .grid_340 .box_email_register {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 section .box_left .grid_340 .box_email_register input {
   width: 100%;
@@ -192,6 +200,7 @@ section .box_left .grid_340 .box_email_register input {
   background: #cb8fc2;
   color: #fff;
   box-sizing: border-box;
+  margin-bottom: 10px;
 }
 section .box_left .grid_340 .box_email_register input::-webkit-input-placeholder {
   color: #fff;
@@ -209,20 +218,117 @@ section .box_left .grid_340 .box_email_register .btn {
   width: 100%;
   display: block;
   padding: 12px 0;
-  margin-top: 10px;
 }
 section .box_left .grid_340 .box_email_register .btn.btn_register {
   background: #ff6909;
   color: #fff;
 }
-section .box_left .grid_340 .login_link {
+section .purple_link {
   width: auto;
   text-decoration: none;
   color: #fff;
-  margin-top: 20px;
   border-bottom: 1px solid #cb8fc2;
+  line-height: 22px;
 }
 section .box_right {
   float: right;
   width: 48%;
+}
+section .box_right .box_rectangle {
+  width: 280px;
+  height: 140px;
+  background: #99e5ff;
+}
+section .box_signin {
+  width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+section .box_signin form p.bold {
+  margin: 30px 0;
+}
+section .box_signin form .box_form {
+  display: block;
+  height: 42px;
+}
+section .box_signin form .box_form .left {
+  float: left;
+  margin-top: 7px;
+}
+section .box_signin form .box_form .right {
+  float: right;
+  width: 400px;
+}
+section .box_signin form .box_form select {
+  height: 32px;
+  border: none;
+  border-radius: 2px;
+  color: #fff;
+  opacity: 0.6;
+}
+section .box_signin form .box_form select.large {
+  width: 100%;
+}
+section .box_signin form .box_form select.dni_type {
+  float: left;
+  width: 120px;
+}
+section .box_signin form .box_form select.day {
+  float: left;
+  margin-right: 5px;
+  width: 90px;
+}
+section .box_signin form .box_form select.month {
+  float: left;
+  width: 180px;
+}
+section .box_signin form .box_form select.year {
+  float: right;
+  width: 120px;
+}
+section .box_signin form .box_form input {
+  opacity: 0.6;
+  height: 32px;
+  border: none;
+  border-radius: 2px;
+  padding: 0 5px;
+  color: #fff;
+}
+section .box_signin form .box_form input.dni_number {
+  float: right;
+  width: 270px;
+}
+section .box_signin form .box_form input.btn_signin {
+  opacity: 1;
+  background: #ff6909;
+  color: #fff;
+  margin-bottom: 20px;
+}
+section .box_signin form .box_form .purple_light {
+  background: #cc90c3;
+}
+section .box_signin form .box_form .purple_dark {
+  background: #000;
+}
+footer {
+  display: block;
+}
+footer img.bg {
+  width: 100%;
+  z-index: -1;
+}
+footer ul {
+  padding: 0;
+  margin-top: -40px;
+  text-align: center;
+}
+footer ul li {
+  list-style: none;
+  display: inline-block;
+  margin: 0 5px;
+}
+footer ul li a {
+  color: #972383;
+  text-decoration: none;
+  font-size: 12px;
 }
