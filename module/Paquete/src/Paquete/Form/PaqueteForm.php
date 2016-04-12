@@ -34,26 +34,40 @@ class PaqueteForm extends Form
 
     protected function _addElements()
     {
-        $nombre = new Element\Text('nombre');
-        $nombre->setAttributes(array(
-                'id' => 'nombre',
+        $titulo1 = new Element\Text('titulo1');
+        $titulo1->setAttributes(array(
+                'id' => 'titulo1',
                 'maxlength' => '200',
             ));
-        $this->add($nombre);
+        $this->add($titulo1);
         
-        $coney_bonos = new Element\Text('coney_bonos');
-        $coney_bonos->setAttributes(array(
-                'id' => 'coney_bonos',
+        $titulo2 = new Element\Text('titulo2');
+        $titulo2->setAttributes(array(
+                'id' => 'titulo2',
+                'maxlength' => '200',
+            ));
+        $this->add($titulo2);
+        
+        $importeMinimo = new Element\Text('importe_minimo');
+        $importeMinimo->setAttributes(array(
+                'id' => 'importe_minimo',
                 'maxlength' => '10',
             ));
-        $this->add($coney_bonos);
+        $this->add($importeMinimo);
         
-        $coney_bonos_plus = new Element\Text('coney_bonos_plus');
-        $coney_bonos_plus->setAttributes(array(
-                'id' => 'coney_bonos_plus',
+        $importeEmoney = new Element\Text('importe_emoney');
+        $importeEmoney->setAttributes(array(
+                'id' => 'importe_emoney',
                 'maxlength' => '10',
             ));
-        $this->add($coney_bonos_plus);
+        $this->add($importeEmoney);
+        
+        $importeBonus = new Element\Text('importe_bonus');
+        $importeBonus->setAttributes(array(
+                'id' => 'importe_bonus',
+                'maxlength' => '10',
+            ));
+        $this->add($importeBonus);
         
         $tickets = new Element\Text('tickets');
         $tickets->setAttributes(array(
@@ -62,11 +76,15 @@ class PaqueteForm extends Form
             ));
         $this->add($tickets);
         
-        $monto_total = new Element\Text('monto_total');
-        $monto_total->setAttributes(array(
+        $montoTotal = new Element\Text('monto_total');
+        $montoTotal->setAttributes(array(
                 'id' => 'monto_total',
                 'maxlength' => '10',
             ));
-        $this->add($monto_total);        
+        $this->add($montoTotal);
+        
+        $image = new Element\File('imagen');
+        $image->setAttribute('id', 'imagen');
+        $this->add($image);
     }
 }

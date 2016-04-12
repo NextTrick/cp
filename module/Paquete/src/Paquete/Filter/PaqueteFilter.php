@@ -23,38 +23,62 @@ class PaqueteFilter extends Zf2InputFilter
     protected function _addElements()
     {
         $this->add(array(
-            'name' => 'nombre',
+            'name' => 'titulo1',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Nombre'),
+                self::validatorNotEmpty('Titulo 1'),
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'titulo2',
+            'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                self::validatorNotEmpty('Titulo 2'),
             )
         ));
 
         $this->add(array(
-            'name' => 'coney_bonos',
+            'name' => 'importe_minimo',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Coney bonos'),
+                self::validatorNotEmpty('Importe Mínimo'),
             )
         ));
 
         $this->add(array(
-            'name' => 'coney_bonos_plus',
+            'name' => 'importe_emoney',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Coney bonos plus'),
+                self::validatorNotEmpty('Importe Emoney'),
+            )
+        ));
+        
+        $this->add(array(
+            'name' => 'importe_bonus',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                self::validatorNotEmpty('Importe Bonus'),
             )
         ));
 
@@ -81,6 +105,28 @@ class PaqueteFilter extends Zf2InputFilter
                 self::validatorNotEmpty('Monto total'),
             )
         ));
+        
+        $image = new \Zend\InputFilter\FileInput('imagen');
+        $image->setRequired(false);
+        $image->getValidatorChain()
+            ->attachByName('filesize', array('max' => 204800))
+            ->attachByName('fileextension',  array(
+                'jpg', 'jpeg', 'png', 'gif'
+            ))
+            ->attachByName('fileimagesize', array('maxWidth' => 500, 'maxHeight' => 500));
+        
+        $image->getFilterChain()->attachByName(
+            'filerenameupload',
+            array(
+                'target' => $this->_getValueDefault('uploadDir'),
+                'use_upload_name' => true,
+                'use_upload_extension' => true,
+                'overwrite' => true,
+                'randomize' => false,
+            )
+        );
+        
+        $this->add($image);
     }
 
     protected function _getValueDefault($key)

@@ -21,7 +21,7 @@ return array(
                         'type'    => 'Segment',
                         'options' => array(
                             // Change this to something specific to your module
-                            'route' => '[/:controller[/:action[/:id]]]',
+                            'route' => '/[:controller[/:action[/:id]]]',
                             'constraints' => array(
                                 'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
                                 'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
@@ -31,7 +31,7 @@ return array(
                                 // Change this value to reflect the namespace in which
                                 // the controllers for your module are found
                                 '__NAMESPACE__' => 'Admin\Controller',
-                                'controller'    => 'Index',
+                                'controller'    => 'Login',
                                 'action'        => 'index',
                             ),
                         ),

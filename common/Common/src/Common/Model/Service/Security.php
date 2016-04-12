@@ -15,6 +15,7 @@ class Security
     protected $_sl = null;
     
     const MODULE_ADMIN = 'Admin';
+    const MODULE_PAQUETE = 'Paquete';
 
     public function __construct(ServiceLocatorInterface $serviceLocator)
     {
@@ -62,6 +63,14 @@ class Security
                 'Admin\Controller\Recurso' => array(
                     'R' => array('index'),
                     'C' => array('crear'),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
+            ),
+            self::MODULE_PAQUETE => array(
+                'Paquete\Controller\Paquete' => array(
+                    'R' => array('index'),
+                    'C' => array('crear', 'pre-crear'),
                     'U' => array('editar'),
                     'D' => array('eliminar'),
                 ),
