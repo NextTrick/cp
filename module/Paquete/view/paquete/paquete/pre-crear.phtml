@@ -1,0 +1,39 @@
+<?php $this->layout()->title = array('Paquete', 'Crear') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Paquete'),
+    array('url' => null, 'name' => 'Crear'),
+);
+?>
+<div class="box">
+    <div class="box-header with-border">
+        <label>Promociones True-Fi</label>
+    </div>
+    <div class="box-body">
+
+    <table class="table-responsive table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Importe Mínimo</th>
+                <th>Importe Emoney</th>
+                <th>Importe Bonus</th>
+                <th>Tickets</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($rows as $row) : ?>
+            <tr>
+                <td><?php echo $row['value'] ?></td>
+                <td><?php echo $row['emoney'] ?></td>
+                <td><?php echo $row['bonus'] ?></td>
+                <td><?php echo $row['gamepoints'] ?></td>
+                <td>
+                    <a href="<?php echo BASE_URL ?>paquete/paquete/crear?codigo=<?php echo $row['codigo']; ?>" class="btn btn-success" title="Seleccionar"><i class="fa fa-check"></i></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    </div>
+</div>

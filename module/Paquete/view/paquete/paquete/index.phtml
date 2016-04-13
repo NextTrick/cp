@@ -12,31 +12,31 @@ $this->layout()->breadcrumb = array(
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
-        <a href="<?php echo BASE_URL; ?>paquete/paquete/crear" class="btn btn-success">Registrar</a>
+        <a href="<?php echo BASE_URL; ?>paquete/paquete/pre-crear" class="btn btn-success">Registrar</a>
         <hr class="separator">
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Coney_bonos</th>
-                    <th>Coney_bonos_plus</th>
+                    <th>Titulo 1</th>
+                    <th>Titulo 2</th>
+                    <th>Importe Mínimo</th>
+                    <th>Importe Emoney</th>
+                    <th>Importe Bonus</th>
                     <th>Tickets</th>
-                    <th>Monto_total</th>
-                    <th>Fecha_creacion</th>
-                    <th>Fecha_edicion</th>
+                    <th>Monto Total</th>
                     <th style="max-width: 60px"></th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($gridList as $row) : ?>
                     <tr>
-                        <td><?php echo $row['nombre'] ?></td>
-                        <td><?php echo $row['coney_bonos'] ?></td>
-                        <td><?php echo $row['coney_bonos_plus'] ?></td>
+                        <td><?php echo $row['titulo1'] ?></td>
+                        <td><?php echo $row['titulo2'] ?></td>
+                        <td><?php echo $row['importe_minimo'] ?></td>
+                        <td><?php echo $row['importe_emoney'] ?></td>
+                        <td><?php echo $row['importe_bonus'] ?></td>
                         <td><?php echo $row['tickets'] ?></td>
                         <td><?php echo $row['monto_total'] ?></td>
-                        <td><?php echo $row['fecha_creacion'] ?></td>
-                        <td><?php echo $row['fecha_edicion'] ?></td>
                         <td>
                             <a href="<?php echo BASE_URL ?>paquete/paquete/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                             <a href="<?php echo BASE_URL ?>paquete/paquete/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>

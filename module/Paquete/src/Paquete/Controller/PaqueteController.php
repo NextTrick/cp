@@ -13,24 +13,19 @@ use Zend\View\Model\ViewModel;
 use \Common\Helpers\String;
 
 class PaqueteController extends SecurityAdminController
-{
+{   
     public function indexAction()
     {
         $params = array(
-            'nombre' => String::xssClean($this->params()->fromQuery('nombre')),
-            'coney_bonos' => String::xssClean($this->params()->fromQuery('coney_bonos')),
-            'coney_bonos_plus' => String::xssClean($this->params()->fromQuery('coney_bonos_plus')),
-            'tickets' => String::xssClean($this->params()->fromQuery('tickets')),
-            'monto_total' => String::xssClean($this->params()->fromQuery('monto_total')),
-            'fecha_creacion' => String::xssClean($this->params()->fromQuery('fecha_creacion')),
-            'fecha_edicion' => String::xssClean($this->params()->fromQuery('fecha_edicion')),
+            'titulo1' => String::xssClean($this->params()->fromQuery('titulo1')),
+            'titulo2' => String::xssClean($this->params()->fromQuery('titulo2')),
         );
         
         $form = $this->crearBuscarForm();
         $form->setData($params);
         
         $criteria = array(
-            'where' => $params,
+            'whereLike' => $params,
         );
         $gridList = $this->_getPaqueteService()->getRepository()->search($criteria);
 
@@ -40,6 +35,26 @@ class PaqueteController extends SecurityAdminController
         return $view;
     }
 
+    public function preCrearAction()
+    {
+
+        $results = $this->_getPaqueteService()->promocionesEnTrueFi();
+        $rows = array();
+        if ($results['success']) {
+            $results = $results['result'];
+            foreach ($results as $row) {
+                $json = json_encode($row);
+                $row['codigo'] = base64_encode($json);
+                $rows[] = $row;
+            }
+        }
+
+        $view = new ViewModel();
+        $view->setVariable('rows', $rows);
+
+        return $view;
+    }
+    
     public function crearAction()
     {
         $request = $this->getRequest();
@@ -47,6 +62,17 @@ class PaqueteController extends SecurityAdminController
         
         if ($request->isPost()) {            
             $this->_prepareSave(AC_CREAR, $form);
+        } else {
+            $codigo = $this->params()->fromQuery('codigo');
+            $data = (array)json_decode(base64_decode($codigo), true);
+            if (empty($data)) {
+                throw new \Exception('Datos de promoción es inconsistente.');
+            }
+
+            $form->get('importe_minimo')->setValue($data['value']);
+            $form->get('importe_emoney')->setValue($data['emoney']);
+            $form->get('importe_bonus')->setValue($data['bonus']);
+            $form->get('tickets')->setValue($data['gamepoints']);
         }
         
         $view = new ViewModel();
@@ -107,22 +133,40 @@ class PaqueteController extends SecurityAdminController
     protected function _prepareSave($action, $form, $id = null)
     {
         $request = $this->getRequest();
-        $data = $request->getPost()->toArray();
 
-        $form->setInputFilter(new \Paquete\Filter\PaqueteFilter());
+        $data = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+        );
+
+        $newFileName = null;
+        if (!empty($data['imagen']['name'])) {
+            $nombreImg = md5($request->getPost('titulo1'));
+            $ext = strtolower(pathinfo($data['imagen']['name'], PATHINFO_EXTENSION));   
+            $newFileName = \Common\Helpers\String::parseSlugName($nombreImg)
+                    . '-'  . date('Ymd') . '.' . $ext;
+
+            $data['imagen']['name'] = $newFileName;
+        }
+
+        $config = $this->getServiceLocator()->get('config');
+        $form->setInputFilter(new \Paquete\Filter\PaqueteFilter(array(
+            'uploadDir' => $config['fileDir']['paquete_paquete']['up'],
+        )));
         $form->setData($data);
+        
         if ($form->isValid()) {
             $data = $form->getData();
 
             try {
                 $paramsIn = array(
-                    'nombre' => $data['nombre'],
-                    'coney_bonos' => $data['coney_bonos'],
-                    'coney_bonos_plus' => $data['coney_bonos_plus'],
+                    'titulo1' => $data['titulo1'],
+                    'titulo2' => $data['titulo2'],
+                    'importe_minimo' => $data['importe_minimo'],
+                    'importe_emoney' => $data['importe_emoney'],
+                    'importe_bonus' => $data['importe_bonus'],
                     'tickets' => $data['tickets'],
                     'monto_total' => $data['monto_total'],
-                    'fecha_creacion' => $data['fecha_creacion'],
-                    'fecha_edicion' => $data['fecha_edicion'],
                 );
 
                 $repository = $this->_getPaqueteService()->getRepository();
@@ -141,7 +185,7 @@ class PaqueteController extends SecurityAdminController
                 ));
             }
 
-            $this->redirect()->toRoute('admin/crud', array(
+            $this->redirect()->toRoute('paquete/crud', array(
                 'controller' => 'paquete', 'action' => 'index'
             ));
         }
@@ -159,7 +203,7 @@ class PaqueteController extends SecurityAdminController
         }
         
         $form = $this->_getPaqueteForm();
-        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', $options));
+        $form->setAttribute('action', $this->url()->fromRoute('paquete/crud', $options));
 
         return $form;
     }
@@ -167,19 +211,19 @@ class PaqueteController extends SecurityAdminController
     public function crearBuscarForm()
     {
         $form = $this->_getPaqueteForm();
-        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
+        $form->setAttribute('action', $this->url()->fromRoute('paquete/crud', array(
         'controller' => 'paquete', 'action' => 'index'
         )));
         $form->setAttribute('method', 'get');
         return $form;
     }
     
-    protected function _getPaqueteForm()
+    private function _getPaqueteForm()
     {
         return $this->getServiceLocator()->get('Paquete\Form\PaqueteForm');
     }
 
-    protected function _getPaqueteService()
+    private function _getPaqueteService()
     {
         return $this->getServiceLocator()->get('Paquete\Model\Service\PaqueteService');
     }
