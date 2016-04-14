@@ -65,4 +65,9 @@ class IndexController extends AbstractActionController
         
         exit;
     }
+    
+    public function phpinfoAction()
+    {
+        echo phpinfo(); exit;
+    }
 }
