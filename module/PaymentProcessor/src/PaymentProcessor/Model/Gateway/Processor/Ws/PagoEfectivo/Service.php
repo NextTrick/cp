@@ -45,6 +45,7 @@ abstract class Service
         }
 
         try {
+            var_dump($service, $data); exit;
             $soap = new \SoapClient($url, array('ssl' => array('peer_verify' => false, 'verify_peer_name' => false)));
 //var_dump($data); echo '<br><br>';
             $info = $soap->$service($data);
