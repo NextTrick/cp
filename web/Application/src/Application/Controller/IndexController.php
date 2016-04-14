@@ -28,11 +28,16 @@ class IndexController extends AbstractActionController
             'monto' => 20.00
         );
         
+        try {
+            $alias = \PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor::ALIAS;        
+            $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
+
+            $paymentProcessor->createCharge($data);
+        } catch (\Exception $e) {
+            var_dump($e->getMessage(), $e->getTraceAsString()); exit;
+        }
         
-        $alias = \PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor::ALIAS;        
-        $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
-        
-        $paymentProcessor->createCharge($data);
+        echo 'fin'; exit;
         
         exit;
     }
