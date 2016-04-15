@@ -30,10 +30,18 @@ class PaqueteForm extends Form
     {
         $this->setAttribute('id', 'formPaquete');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype', 'multipart/form-data');
     }
 
     protected function _addElements()
     {
+        $referencia = new Element\Text('referencia');
+        $referencia->setAttributes(array(
+                'id' => 'referencia',
+                'maxlength' => '32',
+            ));
+        $this->add($referencia);
+        
         $titulo1 = new Element\Text('titulo1');
         $titulo1->setAttributes(array(
                 'id' => 'titulo1',
