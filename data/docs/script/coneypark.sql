@@ -238,6 +238,7 @@ CREATE TABLE IF NOT EXISTS `orden_request_historial` (
 DROP TABLE IF EXISTS `paquete_paquete`;
 CREATE TABLE IF NOT EXISTS `paquete_paquete` (
   `id` int(11) NOT NULL,
+  `referencia` varchar(32) NOT NULL,
   `titulo1` varchar(200) NOT NULL,
   `titulo2` varchar(200) DEFAULT NULL,
   `imagen` varchar(120) DEFAULT NULL,
@@ -417,7 +418,8 @@ ALTER TABLE `orden_request_historial`
 -- Indices de la tabla `paquete_paquete`
 --
 ALTER TABLE `paquete_paquete`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `referencia_index` (`referencia`);
 
 --
 -- Indices de la tabla `sistema_ubigeo`
