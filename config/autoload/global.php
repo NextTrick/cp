@@ -106,6 +106,12 @@ return array(
             'redirect_callback' => 'http://dev.recargas.coneypark.pe/login/callback/twitter',
         ),
     ),
+    'api' => array(
+        'true_fi' => array(
+            'url' => 'http://65.52.221.92:8088/ITFIMemberServices/',
+            'password' => 'Admin123.',
+        ),
+    ),
     //Application config params 
     'app' => array(
         'environment' => 'development',
