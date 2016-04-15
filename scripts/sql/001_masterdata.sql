@@ -12,11 +12,12 @@ INSERT INTO `admin_rol` (`id`, `nombre`, `fecha_creacion`, `fecha_edicion`, `est
 
 INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `orden`, `icono`, `fecha_creacion`, `fecha_edicion`, `estado`) VALUES
 (3, NULL, 'Seguridad', '', 1, 'fa-dashboard', '2016-03-16 06:13:49', '2016-03-17 23:32:23', 1),
-(4, 3, 'Usuarios', 'admin/usuario', 1, 'fa-circle-o', '2016-03-16 06:16:29', '2016-03-17 22:52:16', 1),
+(4, 3, 'Usuarios', 'admin/usuario', 1, 'fa-circle-o', '2016-03-16 06:16:29', '2016-04-04 22:29:09', 1),
 (5, 3, 'Recurso', 'admin/recurso', 2, 'fa-circle-o', '2016-03-17 05:00:59', '2016-03-17 22:52:37', 1),
 (6, 3, 'Rol', 'admin/rol', 3, 'fa-circle-o', '2016-03-17 05:01:34', '2016-03-17 23:37:24', 1),
-(7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-17 22:52:31', 1);
-
+(7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-19 08:15:17', 1),
+(8, NULL, 'Mantenimiento', '', 2, 'fa-dashboard', '2016-04-11 20:48:28', NULL, 1),
+(9, 8, 'Paquetes', 'paquete/paquete', 1, '', '2016-04-11 20:49:31', NULL, 1);
 --
 -- Volcado de datos para la tabla `admin_permiso`
 --
@@ -26,7 +27,9 @@ INSERT INTO `admin_permiso` (`id`, `acl`, `rol_id`, `recurso_id`, `fecha_creacio
 (4, 'RCUD', 1, 7, NULL, NULL),
 (5, 'RCUD', 1, 4, NULL, NULL),
 (6, 'RCUD', 1, 6, NULL, NULL),
-(7, 'RCUD', 1, 5, NULL, NULL);
+(7, 'RCUD', 1, 5, NULL, NULL),
+(8, '', 1, 8, NULL, NULL),
+(9, 'RCUD', 1, 9, NULL, NULL);
 
 --
 -- Volcado de datos para la tabla `admin_usuario`
