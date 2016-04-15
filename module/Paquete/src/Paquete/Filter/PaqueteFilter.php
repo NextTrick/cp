@@ -45,66 +45,6 @@ class PaqueteFilter extends Zf2InputFilter
                 self::validatorNotEmpty('Titulo 2'),
             )
         ));
-
-        $this->add(array(
-            'name' => 'importe_minimo',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Importe Mínimo'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'importe_emoney',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Importe Emoney'),
-            )
-        ));
-        
-        $this->add(array(
-            'name' => 'importe_bonus',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Importe Bonus'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'tickets',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Tickets'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'monto_total',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Monto total'),
-            )
-        ));
         
         $image = new \Zend\InputFilter\FileInput('imagen');
         $image->setRequired(false);

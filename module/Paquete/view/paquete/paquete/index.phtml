@@ -23,7 +23,9 @@ $this->layout()->breadcrumb = array(
                     <th>Importe Emoney</th>
                     <th>Importe Bonus</th>
                     <th>Tickets</th>
-                    <th>Monto Total</th>
+                    <th>Fecha</th>
+                    <th>Activo</th>
+                    <th>Destacado</th>
                     <th style="max-width: 60px"></th>
                 </tr>
             </thead>
@@ -36,7 +38,9 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['importe_emoney'] ?></td>
                         <td><?php echo $row['importe_bonus'] ?></td>
                         <td><?php echo $row['tickets'] ?></td>
-                        <td><?php echo $row['monto_total'] ?></td>
+                        <td><?php echo $row['fecha_creacion'] ?></td>
+                        <td><?php echo $row['activo'] ?></td>
+                        <td><?php echo $row['destacado'] ?></td>
                         <td>
                             <a href="<?php echo BASE_URL ?>paquete/paquete/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                             <a href="<?php echo BASE_URL ?>paquete/paquete/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>

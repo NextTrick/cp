@@ -1,6 +1,6 @@
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 
 -- -----------------------------------------------------
@@ -175,6 +175,9 @@ CREATE  TABLE IF NOT EXISTS `paquete_paquete` (
   `importe_bonus` FLOAT NOT NULL ,
   `tickets` FLOAT NOT NULL ,
   `monto_total` FLOAT NOT NULL ,
+  `legal` TEXT NULL ,
+  `activo` TINYINT(1) NULL DEFAULT 0 ,
+  `destacado` TINYINT(1) NULL DEFAULT 0 ,
   `fecha_creacion` DATETIME NULL ,
   `fecha_edicion` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
