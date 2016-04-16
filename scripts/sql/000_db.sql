@@ -194,13 +194,25 @@ DROP TABLE IF EXISTS `orden_orden` ;
 CREATE  TABLE IF NOT EXISTS `orden_orden` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NOT NULL ,
-  `comprobante_tipo` TINYINT(5) NULL ,
+  `comprobante_tipo` TINYINT(1) NOT NULL ,
   `comprobante_numero` VARCHAR(10) NULL ,
-  `estado` TINYINT(1) NULL ,
+  `fac_razon_social` VARCHAR(150) NULL ,
+  `fac_ruc` VARCHAR(11) NULL ,
+  `fac_direccion_fiscal` VARCHAR(150) NULL ,
+  `fac_direccion_entrega_factura` VARCHAR(150) NULL ,
+  `nombres` VARCHAR(30) NULL ,
+  `paterno` VARCHAR(30) NULL ,
+  `materno` VARCHAR(30) NULL ,
+  `ciudadania` TINYINT(1) NULL ,
+  `doc_identidad` VARCHAR(10) NULL ,
+  `direccion` VARCHAR(150) NULL ,
+  `pais_id` INT NULL ,
+  `distrito_id` INT NULL ,
   `pago_referencia` VARCHAR(30) NULL ,
   `pago_estado` VARCHAR(1) NULL ,
   `pago_tarjeta` VARCHAR(5) NULL ,
   `monto` FLOAT NULL ,
+  `estado` TINYINT(1) NULL ,
   `fecha_creacion` DATETIME NULL ,
   `fecha_edicion` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
@@ -260,8 +272,16 @@ DROP TABLE IF EXISTS `usuario_perfil_pago` ;
 CREATE  TABLE IF NOT EXISTS `usuario_perfil_pago` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NOT NULL ,
-  `comprobante` TINYINT(1) NOT NULL ,
-  `ciudadania` TINYINT(1) NOT NULL ,
+  `comprobante_tipo` TINYINT(1) NOT NULL ,
+  `comprobante_numero` VARCHAR(10) NULL ,
+  `fac_razon_social` VARCHAR(150) NULL ,
+  `fac_ruc` VARCHAR(11) NULL ,
+  `fac_direccion_fiscal` VARCHAR(150) NULL ,
+  `fac_direccion_entrega_factura` VARCHAR(150) NULL ,
+  `nombres` VARCHAR(30) NULL ,
+  `paterno` VARCHAR(30) NULL ,
+  `materno` VARCHAR(30) NULL ,
+  `ciudadania` TINYINT(1) NULL ,
   `doc_identidad` VARCHAR(10) NULL ,
   `direccion` VARCHAR(150) NULL ,
   `pais_id` INT NULL ,
@@ -328,13 +348,11 @@ DROP TABLE IF EXISTS `orden_carrito` ;
 CREATE  TABLE IF NOT EXISTS `orden_carrito` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NOT NULL ,
-  `comprobante_tipo` TINYINT(5) NULL ,
-  `comprobante_numero` VARCHAR(10) NULL ,
-  `estado` TINYINT(1) NULL ,
   `pago_referencia` VARCHAR(30) NULL ,
   `pago_estado` VARCHAR(1) NULL ,
   `pago_tarjeta` VARCHAR(5) NULL ,
   `monto_total` FLOAT NULL ,
+  `estado` TINYINT(1) NULL ,
   `fecha_creacion` DATETIME NULL ,
   `fecha_edicion` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
@@ -384,6 +402,25 @@ CREATE  TABLE IF NOT EXISTS `orden_detalle_carrito` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `cms_contenido`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cms_contenido` ;
+
+CREATE  TABLE IF NOT EXISTS `cms_contenido` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `codigo` VARCHAR(60) NOT NULL ,
+  `tipo` INT NOT NULL ,
+  `titulo` VARCHAR(200) NULL ,
+  `contenido` TEXT NOT NULL ,
+  `estado` TINYINT(1) NULL DEFAULT 1 ,
+  `fecha_creacion` DATETIME NULL ,
+  `fecha_modificacion` DATETIME NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) )
+ENGINE = InnoDB;
 
 
 

@@ -1,0 +1,49 @@
+<?php $this->form->prepare(); ?>
+<div class="box">
+    <div class="box-header with-border">
+        <label>Contenido</label>
+    </div>
+    <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-horizontal')); ?>
+    <div class="box-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="codigo">Codigo</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('codigo')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('codigo')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="tipo">Tipo</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('tipo')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('tipo')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="titulo">Titulo</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('titulo')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('titulo')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="contenido">Contenido</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('contenido')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('contenido')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="estado">Estado</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('estado')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('estado')); ?></span>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default" href="<?php echo BASE_URL; ?>cms/contenido/index">Regresar</a>
+            <button class="btn btn-success" type="submit">Aceptar</button>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>

@@ -1,0 +1,61 @@
+<?php $this->layout()->title = array('Contenido', 'Listado') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Contenido'),
+    array('url' => null, 'name' => 'Listado'),
+);
+?>
+
+<div class="box">
+    <div class="box-header with-border">
+        <?php echo $this->partial('cms/contenido/_buscar.phtml', array('form' => $form)); ?>
+    </div>
+    <div class="box-body">
+        <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
+        <a href="<?php echo BASE_URL; ?>cms/contenido/crear" class="btn btn-success">Registrar</a>
+        <hr class="separator">
+        <table id="gridMain" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Tipo</th>
+                    <th>Titulo</th>
+                    <th>Contenido</th>
+                    <th>Estado</th>
+                    <th>Fecha_creacion</th>
+                    <th style="max-width: 60px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($gridList as $row) : ?>
+                    <tr>
+                        <td><?php echo $row['codigo'] ?></td>
+                        <td><?php echo $row['tipo'] ?></td>
+                        <td><?php echo $row['titulo'] ?></td>
+                        <td><?php echo $row['contenido'] ?></td>
+                        <td><?php echo $row['estado'] ?></td>
+                        <td><?php echo $row['fecha_creacion'] ?></td>
+                        <td>
+                            <a href="<?php echo BASE_URL ?>cms/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo BASE_URL ?>cms/contenido/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#gridMain').DataTable({
+            "pageLength": 25,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true
+        });
+        common.deleteRemote();
+    });
+</script>

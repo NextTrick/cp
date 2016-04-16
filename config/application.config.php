@@ -9,6 +9,7 @@ return array(
     'modules' => array(
         'Admin',
         'Common',
+        'Cms',
         'TrueFi',
         'Util',
         'Application',
