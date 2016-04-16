@@ -41,11 +41,12 @@ class ContenidoForm extends Form
             ));
         $this->add($codigo);
         
-        $tipo = new Element\Text('tipo');
-        $tipo->setAttributes(array(
-                'id' => 'tipo',
-                'maxlength' => '20',
-            ));
+        $tipos = $this->_getContenidoService()->getTipos();
+        $tipo = new Element\Select('tipo');
+        $tipo->setAttributes(array('id' => 'tipo'));
+        $tipo->setValueOptions($tipos);
+        $tipo->setEmptyOption('- Seleccione -');
+        $tipo->setDisableInArrayValidator(true);
         $this->add($tipo);
         
         $titulo = new Element\Text('titulo');
@@ -55,10 +56,12 @@ class ContenidoForm extends Form
             ));
         $this->add($titulo);
         
-        $contenido = new Element\Text('contenido');
+        $contenido = new Element\Textarea('contenido');
         $contenido->setAttributes(array(
                 'id' => 'contenido',
                 'maxlength' => '20',
+                'rows' => 10,
+                'cols' => 80,
             ));
         $this->add($contenido);
 
@@ -68,5 +71,10 @@ class ContenidoForm extends Form
         $estado->setUncheckedValue('0');
         $estado->setValue('0');
         $this->add($estado);
+    }
+    
+    protected function _getContenidoService()
+    {
+        return $this->_sl->get('Cms\Model\Service\ContenidoService');
     }
 }

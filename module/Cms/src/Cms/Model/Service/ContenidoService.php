@@ -12,6 +12,9 @@ class ContenidoService
 {
     protected $_repository = null;
     protected $_sl = null;
+    
+    const TIPO_PAGINA = 1;
+    const TIPO_SECCION = 2;
 
     public function __construct($repository, $serviceLocator)
     {
@@ -22,5 +25,13 @@ class ContenidoService
     public function getRepository()
     {
         return $this->_repository;
+    }
+    
+    public function getTipos()
+    {
+        return array(
+            self::TIPO_PAGINA => 'Página',
+            self::TIPO_SECCION => 'Sección',
+        );
     }
 }
