@@ -130,7 +130,7 @@ class OauthFacebookService
         }
     }
     
-    public function isLogin()
+    public function isLoggedIn()
     {
         if ($this->_container->offsetExists('access_token')) {
             return true;

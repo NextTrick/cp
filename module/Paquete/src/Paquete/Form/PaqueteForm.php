@@ -94,5 +94,35 @@ class PaqueteForm extends Form
         $image = new Element\File('imagen');
         $image->setAttribute('id', 'imagen');
         $this->add($image);
+        
+        $legal = new Element\Textarea('legal');
+        $legal->setAttributes(array(
+                'id' => 'legal',
+                'maxlength' => '1000',
+                'rows' => 3,
+                'style' => 'width: 100%',
+            ));
+        $this->add($legal);
+        
+        $fechaCreacion = new Element\Text('fecha_creacion');
+        $fechaCreacion->setAttributes(array(
+                'id' => 'fecha_creacion',
+                'maxlength' => '19',
+            ));
+        $this->add($fechaCreacion);
+        
+        $activo = new Element\Checkbox('activo');
+        $activo->setUseHiddenElement(true);
+        $activo->setCheckedValue('1');
+        $activo->setUncheckedValue('0');
+        $activo->setValue('0');
+        $this->add($activo);
+        
+        $destacado = new Element\Checkbox('destacado');
+        $destacado->setUseHiddenElement(true);
+        $destacado->setCheckedValue('1');
+        $destacado->setUncheckedValue('0');
+        $destacado->setValue('0');
+        $this->add($destacado);
     }
 }

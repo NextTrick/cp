@@ -16,6 +16,8 @@ class Security
     
     const MODULE_ADMIN = 'Admin';
     const MODULE_PAQUETE = 'Paquete';
+    const MODULE_ORDEN = 'Orden';
+    const MODULE_CMS = 'Cms';
 
     public function __construct(ServiceLocatorInterface $serviceLocator)
     {
@@ -71,6 +73,28 @@ class Security
                 'Paquete\Controller\Paquete' => array(
                     'R' => array('index'),
                     'C' => array('crear', 'pre-crear'),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
+            ),
+            self::MODULE_ORDEN => array(
+                'Orden\Controller\Orden' => array(
+                    'R' => array('index'),
+                    'C' => array('crear',),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
+                'Orden\Controller\Carrito' => array(
+                    'R' => array('index'),
+                    'C' => array('crear',),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
+            ),
+            self::MODULE_CMS => array(
+                'Cms\Controller\Contenido' => array(
+                    'R' => array('index'),
+                    'C' => array('crear',),
                     'U' => array('editar'),
                     'D' => array('eliminar'),
                 ),

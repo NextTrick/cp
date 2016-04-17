@@ -200,7 +200,6 @@ class UsuarioService
             $jsonData = json_encode($result['data']);
             $url = $this->getUrl(self::METHOD_SET_MEMBER);
             $curlData = Response::curl($url, $this->_config, $jsonData);
-            var_dump($curlData);exit;
             if ($curlData['success']) {
                 if ($curlData['data']['code'] == 0) {
                     $result['success'] = true;
@@ -264,11 +263,6 @@ class UsuarioService
         
         unset($result['data']);
         return $result;
-    }
-
-    public function activeMember()
-    {
-        
     }
 
     public function recoverPassword($data)

@@ -48,4 +48,31 @@ class RecursoRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             throw new \Exception($e->getMessage());
         }
     }
+    
+    public function getOrdenNext($orden, $recursoId = null)
+    {
+        $recursos = array();
+        if (!empty($recursoId)) {
+            $recursos = $this->findAll(array('where' => array(
+                'recurso_id' => $recursoId
+            )));
+        } else {
+            $where = new \Zend\Db\Sql\Where();
+            $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("recurso_id IS NULL OR recurso_id = ''"));
+            $recursos = $this->findAll(array('where' => $where));
+        }
+        
+        $existe = false;
+        $ordenMax = 0;
+        foreach ($recursos as $recurso) {
+            if ($recurso['orden'] == $orden) {
+                $existe = true;
+            }
+            if ($recurso['orden'] > $ordenMax) {
+                $ordenMax = $recurso['orden'];
+            }
+        }
+
+        return $existe ? $ordenMax + 1 : $orden;
+    }
 }

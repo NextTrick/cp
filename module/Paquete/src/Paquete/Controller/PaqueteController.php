@@ -39,7 +39,7 @@ class PaqueteController extends SecurityAdminController
     {
         $results = $this->_getPaqueteService()->promocionesEnTrueFi();
         $rows = array();
-        $referencia = array();
+        $referencias = array();
         if ($results['success']) {
             $results = $results['result'];
             foreach ($results as $row) {
@@ -47,16 +47,16 @@ class PaqueteController extends SecurityAdminController
                 $codigo = base64_encode($json);
                 $row['codigo'] = $codigo;
                 $row['referencia'] = md5($codigo);
-                $referencia[] = md5($codigo);
+                $referencias[] = md5($codigo);
                 $rows[] = $row;
             }
         }
 
-        $results2 = $this->_getPaqueteService()->getRepository()->findByReferencia($referencia);
+        $results2 = $this->_getPaqueteService()->getRepository()->findByReferencia($referencias);
         
         foreach ($rows as $key => $row) {
             $referencia = $row['referencia'];
-            if (isset($results2[$referencia]) && $referencia == $results2[$referencia]) {
+            if (isset($results2[$referencia])) {
                 unset($rows[$key]);
             }
         }
@@ -71,27 +71,21 @@ class PaqueteController extends SecurityAdminController
     {
         $request = $this->getRequest();
         $codigo = $this->params()->fromQuery('codigo');
-        $data = (array)json_decode(base64_decode($codigo), true);
-        if (empty($data)) {
+        $dataStatic = (array)json_decode(base64_decode($codigo), true);
+        if (empty($dataStatic)) {
             throw new \Exception('Datos de promoción es inconsistente.');
         }
 
         $form = $this->crearCrudForm(AC_CREAR, null, $codigo);
-        $form->get('importe_minimo')->setValue($data['value']);
-        $form->get('importe_emoney')->setValue($data['emoney']);
-        $form->get('importe_bonus')->setValue($data['bonus']);
-        $form->get('tickets')->setValue($data['gamepoints']);
+        $form->get('importe_minimo')->setValue($dataStatic['value']);
+        $form->get('importe_emoney')->setValue($dataStatic['emoney']);
+        $form->get('importe_bonus')->setValue($dataStatic['bonus']);
+        $form->get('tickets')->setValue($dataStatic['gamepoints']);
+        $form->get('fecha_creacion')->setValue(date('Y-m-d H:i:s'));
 
         if ($request->isPost()) {
-            $input = array(
-                'referencia' => md5($codigo),
-                'importe_minimo' => $data['value'],
-                'importe_emoney' => $data['emoney'],
-                'importe_bonus' => $data['bonus'],
-                'tickets' => $data['gamepoints'],
-                'monto_total' => (float)$data['emoney'] + (float)$data['bonus'],
-            );
-            $this->_prepareSave(AC_CREAR, $form, null, $input);
+            $dataStatic['referencia'] = md5($codigo);
+            $this->_prepareSave(AC_CREAR, $form, null, $dataStatic);
         }
         
         $view = new ViewModel();
@@ -149,17 +143,12 @@ class PaqueteController extends SecurityAdminController
         return $response;
     }
     
-    protected function _prepareSave($action, $form, $id = null, $input = array())
+    protected function _prepareSave($action, $form, $id = null, $dataStatic = array())
     {
         $request = $this->getRequest();
 
-        $data1 = array_merge_recursive(
-            $input,
-            $request->getPost()->toArray()
-        );
-        
         $data = array_merge_recursive(
-            $data1,
+            $request->getPost()->toArray(),
             $request->getFiles()->toArray()
         );
 
@@ -180,20 +169,26 @@ class PaqueteController extends SecurityAdminController
         $form->setData($data);
         if ($form->isValid()) {
             $data = $form->getData();
-
             try {
                 $paramsIn = array(
-                    'referencia' => $data['referencia'],
                     'titulo1' => $data['titulo1'],
                     'titulo2' => $data['titulo2'],
-                    'importe_minimo' => $data['importe_minimo'],
-                    'importe_emoney' => $data['importe_emoney'],
-                    'importe_bonus' => $data['importe_bonus'],
-                    'tickets' => $data['tickets'],
-                    'monto_total' => $data['monto_total'],
+                    'legal' => $data['legal'],
+                    'activo' => $data['activo'],
+                    'destacado' => $data['destacado'],
                     'imagen' => $newFileName,
                 );
 
+                if ($action == AC_CREAR) {
+                    $paramsIn['monto_total'] = (float)$dataStatic['emoney'] + (float)$dataStatic['bonus'];
+                    $paramsIn['importe_minimo'] = $dataStatic['value'];
+                    $paramsIn['importe_emoney'] = $dataStatic['emoney'];
+                    $paramsIn['importe_bonus'] = $dataStatic['bonus'];
+                    $paramsIn['tickets'] = $dataStatic['gamepoints'];
+                    $paramsIn['referencia'] = $dataStatic['referencia'];
+                    $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
+                }
+                
                 $repository = $this->_getPaqueteService()->getRepository();
                 if (!empty($id)) {
                     $repository->save($paramsIn, $id);
@@ -227,7 +222,7 @@ class PaqueteController extends SecurityAdminController
             $options['id'] = $id;
         }
         
-        $form = $this->_getPaqueteForm();
+        $form = $this->_getPaqueteForm();        
         $url = $this->url()->fromRoute('paquete/crud', $options);
         if (!empty($codigo)) {
             $url = $url . '?codigo=' . $codigo;

@@ -146,14 +146,33 @@ class PermisoController extends SecurityAdminController
                 
                 $repository = $this->_getPermisoService()->getRepository();
                 if (!empty($id)) {
-                    $repository->save($paramsIn, $id);
+                    $permiso = $repository->findOne(array('where' => array(
+                        'rol_id' => $data['rol_id'],
+                        'recurso_id' => $data['recurso_id'],
+                    )));
+                    if (!empty($permiso) && $permiso['id'] == $id) {
+                        $repository->save($paramsIn, $id);
+                    } else {
+                        $this->flashMessenger()->addMessage(array(
+                            'error' => 'La combinación de recurso y rol ya fue asignado.',
+                        ));
+                    }
                 } else {
-                    $repository->save($paramsIn);
+                    $permiso = $repository->findOne(array('where' => array(
+                        'rol_id' => $data['rol_id'],
+                        'recurso_id' => $data['recurso_id'],
+                    )));
+                    if (!empty($permiso)) {
+                        $this->flashMessenger()->addMessage(array(
+                            'error' => 'La combinación de recurso y rol ya fue asignado.',
+                        ));
+                    } else {
+                        $repository->save($paramsIn);
+                        $this->flashMessenger()->addMessage(array(
+                            'success' => ($action == AC_CREAR) ? OK_CREAR : OK_EDITAR,
+                        ));
+                    }
                 }
-                
-                $this->flashMessenger()->addMessage(array(
-                    'success' => ($action == AC_CREAR) ? OK_CREAR : OK_EDITAR,
-                ));
             } catch (\Exception $e) {
                 $this->flashMessenger()->addMessage(array(
                     'error' => ($action == AC_CREAR) ? ER_CREAR : ER_EDITAR,
