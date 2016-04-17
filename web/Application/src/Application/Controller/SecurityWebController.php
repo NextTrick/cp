@@ -21,6 +21,11 @@ abstract class SecurityWebController extends AbstractActionController
     {
         return $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'inicio'));
     }
+
+    protected function _isLogin()
+    {
+        return $this->_getLoginGatewayService()->isLoggedIn();
+    }
     
     protected function _getLoginGatewayService()
     {
@@ -30,10 +35,5 @@ abstract class SecurityWebController extends AbstractActionController
     protected function _getDbAdapter()
     {
         return $this->getServiceLocator()->get('dbAdapter');
-    }
-    
-    protected function _isLogin()
-    {
-        
     }
 }
