@@ -54,7 +54,7 @@ class IndexController extends AbstractActionController
             'comprobante_tipo' => 'DNI',
             'comprobante_numero' => '11872911',
             'usuario_email' => 'ing.angeljara@gmail.com',
-            'monto' => 20.00
+            'monto' => '20.00'
         );
         
         
