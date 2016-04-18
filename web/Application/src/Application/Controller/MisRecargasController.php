@@ -12,15 +12,27 @@ class MisRecargasController extends SecurityWebController
             return $this->_toUrlLogin();
         }
         
-        $tarjetasAsoc = 
-        var_dump($this->_isLogin());
-        exit;
+        $usuario = $this->_getUsuarioData();
+        
+        $criteria = array(
+            'like' => array(
+                $usuario->id,
+            ),
+            'order' => 'fecha_creacion DESC',
+        );
+        $gridList = $this->_getTarjetaService()->getRepository()->findAll($criteria);
         $view = new ViewModel();
+        $view->setVariable('gridList', $gridList);
         return $view;
     }
     
     private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
+    }
+    
+    private function _getTarjetaService()
+    {
+        return $this->getServiceLocator()->get('Tarjeta\Model\Service\TarjetaService');
     }
 }

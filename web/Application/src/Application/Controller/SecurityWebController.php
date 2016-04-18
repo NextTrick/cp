@@ -27,6 +27,16 @@ abstract class SecurityWebController extends AbstractActionController
         return $this->_getLoginGatewayService()->isLoggedIn();
     }
     
+    protected function _getUsuarioData()
+    {
+        $usuario = new \stdClass();
+        $usuario->id = 6;
+        $usuario->nombres = null;
+        $usuario->email = null;
+        
+        return $usuario;
+    }
+    
     protected function _getLoginGatewayService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\LoginGatewayService');

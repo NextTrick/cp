@@ -169,7 +169,7 @@ DROP TABLE IF EXISTS `paquete_paquete` ;
 CREATE  TABLE IF NOT EXISTS `paquete_paquete` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `referencia` VARCHAR(32) NOT NULL ,
-  `titulo1` VARCHAR(200) NOT NULL ,
+  `titulo1` VARCHAR(200) NULL ,
   `titulo2` VARCHAR(200) NULL ,
   `imagen` VARCHAR(120) NULL ,
   `importe_minimo` FLOAT NOT NULL ,

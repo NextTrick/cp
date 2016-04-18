@@ -27,10 +27,13 @@ class PaqueteController extends SecurityAdminController
         $criteria = array(
             'whereLike' => $params,
             'limit' => LIMIT_BUSCAR,
+            'order' => array('id DESC'),
         );
+        
+        $this->_syncPaquetes();
+        
         $gridList = $this->_getPaqueteService()->getRepository()->search($criteria);
         $countList = $this->_getPaqueteService()->getRepository()->countTotal($criteria);
-
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
         $view->setVariable('countList', $countList);
@@ -38,7 +41,7 @@ class PaqueteController extends SecurityAdminController
         return $view;
     }
 
-    public function preCrearAction()
+    private function _syncPaquetes()
     {
         $results = $this->_getPaqueteService()->promocionesEnTrueFi();
         $rows = array();
@@ -48,7 +51,6 @@ class PaqueteController extends SecurityAdminController
             foreach ($results as $row) {
                 $json = json_encode($row);
                 $codigo = base64_encode($json);
-                $row['codigo'] = $codigo;
                 $row['referencia'] = md5($codigo);
                 $referencias[] = md5($codigo);
                 $rows[] = $row;
@@ -63,40 +65,20 @@ class PaqueteController extends SecurityAdminController
                 unset($rows[$key]);
             }
         }
-
-        $view = new ViewModel();
-        $view->setVariable('rows', $rows);
-
-        return $view;
-    }
-    
-    public function crearAction()
-    {
-        $request = $this->getRequest();
-        $codigo = $this->params()->fromQuery('codigo');
-        $dataStatic = (array)json_decode(base64_decode($codigo), true);
-        if (empty($dataStatic)) {
-            throw new \Exception('Datos de promoción es inconsistente.');
-        }
-
-        $form = $this->crearCrudForm(AC_CREAR, null, $codigo);
-        $form->get('importe_minimo')->setValue($dataStatic['value']);
-        $form->get('importe_emoney')->setValue($dataStatic['emoney']);
-        $form->get('importe_bonus')->setValue($dataStatic['bonus']);
-        $form->get('tickets')->setValue($dataStatic['gamepoints']);
-        $form->get('fecha_creacion')->setValue(date('Y-m-d H:i:s'));
-
-        if ($request->isPost()) {
-            $dataStatic['referencia'] = md5($codigo);
-            $this->_prepareSave(AC_CREAR, $form, null, $dataStatic);
-        }
         
-        $view = new ViewModel();
-        $view->setVariable('form', $form);
-
-        return $view;
+        foreach ($rows as $row) {
+            $this->_getPaqueteService()->getRepository()->save(array(
+                'referencia' => $row['referencia'],
+                'importe_minimo' => $row['value'],
+                'importe_emoney' => $row['emoney'],
+                'importe_bonus' => $row['bonus'],
+                'tickets' => $row['gamepoints'],
+                'monto_total' => (float)$row['emoney'] + (float)$row['bonus'],
+                'fecha_creacion' => date('Y-m-d H:i:s'),
+            ));
+        }
     }
-    
+
     public function editarAction()
     {
         $id = $this->params('id', null);
