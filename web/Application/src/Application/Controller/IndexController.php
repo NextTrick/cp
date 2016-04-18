@@ -45,7 +45,7 @@ class IndexController extends AbstractActionController
     public function testVisaAction()
     {                                
         $data = array(
-            'id' => 1,
+            'id' => 10,
             'perfilpago_nombres' => 'Angel',
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
