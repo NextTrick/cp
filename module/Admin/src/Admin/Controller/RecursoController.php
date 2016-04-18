@@ -33,11 +33,14 @@ class RecursoController extends SecurityAdminController
                 'nombre' => $params['nombre'],
                 'url' => $params['url'],
             ),
+            'limit' => LIMIT_BUSCAR,
         );
         $gridList = $this->_getRecursoService()->getListMenus($criteria);
+        $countList = $this->_getRecursoService()->getRepository()->countTotal($criteria);
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }

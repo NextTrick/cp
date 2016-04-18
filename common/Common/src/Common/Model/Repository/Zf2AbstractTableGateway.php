@@ -154,6 +154,46 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
         }
     }
     
+    public function countTotal($criteria)
+    {
+        $this->setCriteria($criteria);
+        try {
+            $sql = new Sql($this->getAdapter());
+            $select = $sql->select()->from(array('a' => $this->table));
+            $select->columns(array('num_rows' => new \Zend\Db\Sql\Expression('COUNT(*)')));
+            
+            $where = array();
+            if ($this->crWhere instanceof \Zend\Db\Sql\Where) {
+                $where = $this->crWhere;
+            } else {
+                $where = new \Zend\Db\Sql\Where();
+
+                foreach ($this->crWhere as $key => $value) {
+                    if (!empty($value)) {
+                        $where->or->equalTo($key, $value) ;
+                    }
+                }
+
+                foreach ($this->crWhereLike as $key => $value) {
+                    if (!empty($value)) {
+                        $where->or->like($key, "%$value%") ;
+                    }
+                }
+            }
+            
+            $select->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);
+
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $row = $this->resultSetPrototype->initialize($statement->execute())
+                ->current();
+
+            return isset($row['num_rows']) ? (int) $row['num_rows'] : 0;
+            
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+    
     public function findOne($criteria)
     {
         $this->setCriteria($criteria);

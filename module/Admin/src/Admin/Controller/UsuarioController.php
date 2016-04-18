@@ -28,11 +28,14 @@ class UsuarioController extends SecurityAdminController
         
         $criteria = array(
             'whereLike' => $params,
+            'limit' => LIMIT_BUSCAR,
         );
         $gridList = $this->_getUsuarioService()->getRepository()->search($criteria);
+        $countList = $this->_getUsuarioService()->getRepository()->countTotal($criteria);
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }
