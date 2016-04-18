@@ -33,11 +33,14 @@ class PermisoController extends SecurityAdminController
         }
         $criteria = array(
             'where' => $params,
+            'limit' => LIMIT_BUSCAR,
         );
         $gridList = $this->_getPermisoService()->getRepository()->search($criteria);
+        $countList = $this->_getPermisoService()->getRepository()->countTotal($criteria);
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }

@@ -27,11 +27,14 @@ class ContenidoController extends SecurityAdminController
         
         $criteria = array(
             'where' => $params,
+            'limit' => LIMIT_BUSCAR,
         );
         $gridList = $this->_getContenidoService()->getRepository()->search($criteria);
+        $countList = $this->_getContenidoService()->getRepository()->countTotal($criteria);
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }
@@ -121,7 +124,7 @@ class ContenidoController extends SecurityAdminController
 
                 $repository = $this->_getContenidoService()->getRepository();
                 if (!empty($id)) {
-                    $paramsIn['fecha_modificacion'] = date('Y-m-d H:i:s');
+                    $paramsIn['fecha_edicion'] = date('Y-m-d H:i:s');
                     $repository->save($paramsIn, $id);
                 } else {
                     $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');

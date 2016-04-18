@@ -53,13 +53,17 @@ $this->layout()->breadcrumb = array(
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+        
         $('#gridMain').DataTable({
             "pageLength": 25,
             "paging": true,
             "lengthChange": true,
-            "searching": true,
+            "searching": false,
             "ordering": false,
-            "info": true,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "info": "Registros de _START_ al _END_, de un total de <?php echo $countList; ?>"
+            },
             "autoWidth": true
         });
         common.deleteRemote();

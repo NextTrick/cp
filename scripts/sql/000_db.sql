@@ -144,12 +144,14 @@ DROP TABLE IF EXISTS `tarjeta_tarjeta` ;
 CREATE  TABLE IF NOT EXISTS `tarjeta_tarjeta` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `usuario_id` INT NOT NULL ,
-  `cguid` VARCHAR(40) NULL ,
-  `numero` VARCHAR(12) NULL ,
+  `cguid` VARCHAR(40) NOT NULL ,
+  `estado_truefi` TINYINT(1) NOT NULL ,
+  `numero` VARCHAR(12) NOT NULL ,
   `fecha_creacion` DATETIME NULL ,
   `fecha_edicion` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_tarjeta_tarjeta_usuario_usuario1_idx` (`usuario_id` ASC) ,
+  UNIQUE INDEX `cguid_UNIQUE` (`cguid` ASC) ,
   CONSTRAINT `fk_tarjeta_tarjeta_usuario_usuario1`
     FOREIGN KEY (`usuario_id` )
     REFERENCES `usuario_usuario` (`id` )
@@ -417,7 +419,7 @@ CREATE  TABLE IF NOT EXISTS `cms_contenido` (
   `contenido` TEXT NOT NULL ,
   `estado` TINYINT(1) NULL DEFAULT 1 ,
   `fecha_creacion` DATETIME NULL ,
-  `fecha_modificacion` DATETIME NULL ,
+  `fecha_edicion` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) )
 ENGINE = InnoDB;

@@ -177,6 +177,14 @@ class TestController extends SecurityAdminController
         exit;
     }
     
+    public function syncTarjetasAction()
+    {
+        $service = $this->_getUsuarioService();
+        $result = $service->syncTarjetasCliente(5, $this->mguid);
+        var_dump($result);
+        exit;
+    }
+    
     public function ecryAction()
     {
         $password = $this->getRequest()->getQuery('password', null);
@@ -203,6 +211,11 @@ class TestController extends SecurityAdminController
     private function _getTrueFiUsuarioService()
     {
         return $this->getServiceLocator()->get('TrueFi\Model\Service\UsuarioService');
+    }
+    
+    private function _getUsuarioService()
+    {
+        return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
     }
     
     private function _getTrueFiTarjetaService()
