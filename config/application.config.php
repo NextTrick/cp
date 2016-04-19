@@ -9,8 +9,9 @@ return array(
     'modules' => array(
         'Admin',
         'Common',
+        'Cms',
         'TrueFi',
-        'Util',
+        //'Util', No usar en todo caso crear la clase en common/Common/src/Common/Helpers/
         'Application',
         'Usuario',
         'Orden',

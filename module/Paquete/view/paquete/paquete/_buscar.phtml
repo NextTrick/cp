@@ -1,0 +1,16 @@
+<?php $this->form->prepare(); ?>
+<?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-inline isearch')); ?>
+    <div class="box-body">
+        <div class="form-group">
+            <label class="control-label" for="titulo1">Titulo 1</label>
+            <?php echo $this->formElement($this->form->get('titulo1')->setAttribute('class', 'form-control')) ?>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="titulo2">Titulo 2</label>
+            <?php echo $this->formElement($this->form->get('titulo2')->setAttribute('class', 'form-control')) ?>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+    </div>
+<?php echo $this->form()->closeTag(); ?>

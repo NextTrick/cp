@@ -19,4 +19,15 @@ class PaqueteRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     {
         parent::__construct($adapter);
     }
+    
+    public function findByReferencia($referencias)
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->in('referencia', $referencias);
+        $criteria = array(
+            'where' => $where,
+            'columns' => array('referencia', 'id')
+        );
+        return $this->findPairs($criteria);
+    }
 }

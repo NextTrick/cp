@@ -103,7 +103,7 @@ class RegistroController extends AbstractActionController
         if ($resultTrueFi['success']) {
             $dataIn = array(
                 'email' => $data['email'],
-                'password' => \Common\Helpers\Util::passwordEncrypt($data['password']),
+                'password' => \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']),
                 'mguid' => $resultTrueFi['mguid'],
                 'codigo_activar' => \Common\Helpers\Util::generateToken($resultTrueFi['mguid']),
                 'nombres' => $data['nombres'],
@@ -158,22 +158,106 @@ class RegistroController extends AbstractActionController
 
     public function recuperarPasswordAction()
     {
+        $form = $this->_getRecuperarPasswordForm();
+        $form->setAttribute('action', $this->url()->fromRoute('web-recuperar-password', array(
+            'controller' => 'registro',
+            'action' => 'recuperar-password',
+        )));
+        
         if ($this->request->isPost()) {
-            $email = $this->request->getPost('email');
-            var_dump($email);exit;
+            $form->setInputFilter(new \Application\Filter\RecuperarPasswordFilter());
+            $data = $this->request->getPost()->toArray();
+            $form->setData($data);
+            
+            $criteria = array('where' => array('email' => $data['email']));
+            $existe = $this->_getUsuarioService()->getRepository()->findExists($criteria);
+            
+            $usuarioTrueFi = array();
+            if ($existe === false) {
+                $dataTrueFi = array(
+                    'EMail' => $data['email'],
+                );
+                $usuarioTrueFi = $this->_getUsuarioService()->usuarioEnTrueFi($dataTrueFi);
+                $existe = empty($usuarioTrueFi) ? false : true;
+            }
+            
+            $noExistsEmail = 'El correo electrónico no se ecuentra registrado.';
+            if ($existe === false) {
+                $form->get('email')->setMessages(array('noExistsEmail' => $noExistsEmail));
+            } elseif ($form->isValid()) {
+                if (!empty($usuarioTrueFi)) {
+                    //registrar usuario en el sistema con datos devueltos de TrueFi
+                }
+
+                $criteria = array('where' => array('email' => $data['email']));
+                $usuario = $this->_getUsuarioService()->getRepository()->findOne($criteria);
+                if (!empty($usuario)) {
+                    //generar y guardar token de verificación
+                    $codigoRecuperar = \Common\Helpers\Util::generateToken($usuario['mguid']);
+                    $this->_getUsuarioService()->getRepository()->save(array(
+                        'codigo_activar' => $codigoRecuperar
+                    ), $usuario['id']);
+                    
+                    $serviceLocator = $this->getServiceLocator();
+                    $email = new \Usuario\Model\Email\RecuperarPassword($serviceLocator);
+                    $data['codigo_activar'] = $codigoRecuperar;
+                    $ok = $email->sendMail($data);
+                    if ($ok) {
+                        $message = '<b>Felicidades, ya estás a punto de ser parte de Coney Club.</b> '
+                            . 'Te hemos enviado un correo con las instrucciones para actualizar tu cuenta';
+                        $this->flashMessenger()->addMessage(array(
+                            'success' => $message,
+                        ));
+                        return $this->redirect()->toRoute('web-notificar');
+                    } else {
+                        $errorSend = 'Error al eviar correo electrónico.';
+                        $form->get('email')->setMessages(array('errorSend' => $errorSend));
+                    }
+                } else {
+                    $form->get('email')->setMessages(array('existsEmail' => $noExistsEmail));
+                }
+            }
         }
-        return new ViewModel();
+        
+        $view = new ViewModel();
+        $view->setVariable('form', $form);
+        return $view;
     }
     
     public function modificarPasswordAction()
     {
+        $codigo = $this->params('codigo', null);
+        $form = $this->_getModificarPasswordForm();
+        $form->setAttribute('action', $this->url()->fromRoute('web-modificar-password', array(
+            'controller' => 'registro',
+            'action' => 'modificar-password',
+        )));
+        $form->get('codigo')->setValue($codigo);
+        
         if ($this->request->isPost()) {
-            $email = $this->request->getPost('email');
-            var_dump($email);exit;
+            $form->setInputFilter(new \Application\Filter\ModificarPasswordFilter());
+            $data = $this->request->getPost()->toArray();
+            $form->setData($data);
+            if ($form->isValid()) {
+                $data = $form->getData();
+                $repository = $this->_getUsuarioService()->getRepository();
+                $criteria = array('where' => array('codigo_activar' => $data['codigo']));
+                $row = $repository->findOne($criteria);
+                if (!empty($row)) {
+                    $dataIn = array(
+                        'password' => \Common\Helpers\Util::passwordEncrypt($data['password'], $row['email']),
+                        'codigo_activar' => null,
+                    );
+                    $repository->save($dataIn, $row['id']);
+                    //modificar password en True-Fi
+                }
+            }
         }
-        return new ViewModel();
+        
+        $view = new ViewModel();
+        $view->setVariable('form', $form);
+        return $view;
     }
-
 
     private function _getDataRegistroTemp($campo)
     {
@@ -194,6 +278,16 @@ class RegistroController extends AbstractActionController
     private function _getRegistroForm()
     {
         return $this->getServiceLocator()->get('Application\Form\RegistroForm');
+    }
+    
+    private function _getRecuperarPasswordForm()
+    {
+        return $this->getServiceLocator()->get('Application\Form\RecuperarPasswordForm');
+    }
+    
+    private function _getModificarPasswordForm()
+    {
+        return $this->getServiceLocator()->get('Application\Form\ModificarPasswordForm');
     }
     
     private function _getUsuarioService()

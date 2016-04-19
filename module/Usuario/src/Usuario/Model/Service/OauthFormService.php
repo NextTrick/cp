@@ -56,7 +56,7 @@ class OauthFormService
         $this->_resultLogin->mesagge = $this->mesagges[self::INVALID_LOGIN];
 
         if (!empty($email) && !empty($password)) {
-            $password = \Common\Helpers\Util::passwordEncrypt($password);
+            $password = \Common\Helpers\Util::passwordEncrypt($password, $email);
             $this->_auth->getAdapter()->setIdentity($email);
             $this->_auth->getAdapter()->setCredential($password);
             $result = $this->_auth->authenticate();

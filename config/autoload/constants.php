@@ -15,6 +15,6 @@ define('AC_EDITAR', 'editar');
 define('NO_DATA', 'No existe data');
 define('ERROR_303', 'No tiene acceso.');
 
-define('LIMIT_BUSCAR', 15);
+define('LIMIT_BUSCAR', 100);
 
 return array();

@@ -50,7 +50,7 @@ class LoginRepository
         $this->_resultLogin->mesagge = $this->mesagges[self::INVALID_LOGIN];
 
         if (!empty($username) && !empty($password)) {
-            $password = \Common\Helpers\Util::passwordEncrypt($password);
+            $password = \Common\Helpers\Util::passwordHash($password);
             $this->_auth->getAdapter()->setIdentity($username);
             $this->_auth->getAdapter()->setCredential($password);
             $result = $this->_auth->authenticate();

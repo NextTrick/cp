@@ -33,11 +33,14 @@ class RecursoController extends SecurityAdminController
                 'nombre' => $params['nombre'],
                 'url' => $params['url'],
             ),
+            'limit' => LIMIT_BUSCAR,
         );
         $gridList = $this->_getRecursoService()->getListMenus($criteria);
+        $countList = $this->_getRecursoService()->getRepository()->countTotal($criteria);
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }
@@ -131,16 +134,20 @@ class RecursoController extends SecurityAdminController
                 $paramsIn = array(
                     'nombre' => $data['nombre'],
                     'url' => $data['url'],
-                    'orden' => $data['orden'],
                     'icono' => $data['icono'],
                     'estado' => $data['estado'],
                 );
 
+                $orden = 1;
+                $repository = $this->_getRecursoService()->getRepository();
                 if (!empty($data['recurso_id'])) {
                     $paramsIn['recurso_id'] = $data['recurso_id'];
+                    $orden = $repository->getOrdenNext($data['orden'], $data['recurso_id']);
+                } else {
+                    $orden = $repository->getOrdenNext($data['orden']);
                 }
+                $paramsIn['orden'] = $orden;
                 
-                $repository = $this->_getRecursoService()->getRepository();
                 if (!empty($id)) {
                     $paramsIn['fecha_edicion'] = date('Y-m-d H:i:s');
                     $repository->save($paramsIn, $id);

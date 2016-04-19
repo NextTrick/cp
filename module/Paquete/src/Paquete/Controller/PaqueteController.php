@@ -13,48 +13,72 @@ use Zend\View\Model\ViewModel;
 use \Common\Helpers\String;
 
 class PaqueteController extends SecurityAdminController
-{
+{   
     public function indexAction()
     {
         $params = array(
-            'nombre' => String::xssClean($this->params()->fromQuery('nombre')),
-            'coney_bonos' => String::xssClean($this->params()->fromQuery('coney_bonos')),
-            'coney_bonos_plus' => String::xssClean($this->params()->fromQuery('coney_bonos_plus')),
-            'tickets' => String::xssClean($this->params()->fromQuery('tickets')),
-            'monto_total' => String::xssClean($this->params()->fromQuery('monto_total')),
-            'fecha_creacion' => String::xssClean($this->params()->fromQuery('fecha_creacion')),
-            'fecha_edicion' => String::xssClean($this->params()->fromQuery('fecha_edicion')),
+            'titulo1' => String::xssClean($this->params()->fromQuery('titulo1')),
+            'titulo2' => String::xssClean($this->params()->fromQuery('titulo2')),
         );
         
         $form = $this->crearBuscarForm();
         $form->setData($params);
         
         $criteria = array(
-            'where' => $params,
+            'whereLike' => $params,
+            'limit' => LIMIT_BUSCAR,
+            'order' => array('id DESC'),
         );
+        
+        $this->_syncPaquetes();
+        
         $gridList = $this->_getPaqueteService()->getRepository()->search($criteria);
-
+        $countList = $this->_getPaqueteService()->getRepository()->countTotal($criteria);
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }
 
-    public function crearAction()
+    private function _syncPaquetes()
     {
-        $request = $this->getRequest();
-        $form = $this->crearCrudForm(AC_CREAR);
+        $results = $this->_getPaqueteService()->promocionesEnTrueFi();
+        $rows = array();
+        $referencias = array();
+        if ($results['success']) {
+            $results = $results['result'];
+            foreach ($results as $row) {
+                $json = json_encode($row);
+                $codigo = base64_encode($json);
+                $row['referencia'] = md5($codigo);
+                $referencias[] = md5($codigo);
+                $rows[] = $row;
+            }
+        }
+
+        $results2 = $this->_getPaqueteService()->getRepository()->findByReferencia($referencias);
         
-        if ($request->isPost()) {            
-            $this->_prepareSave(AC_CREAR, $form);
+        foreach ($rows as $key => $row) {
+            $referencia = $row['referencia'];
+            if (isset($results2[$referencia])) {
+                unset($rows[$key]);
+            }
         }
         
-        $view = new ViewModel();
-        $view->setVariable('form', $form);
-
-        return $view;
+        foreach ($rows as $row) {
+            $this->_getPaqueteService()->getRepository()->save(array(
+                'referencia' => $row['referencia'],
+                'importe_minimo' => $row['value'],
+                'importe_emoney' => $row['emoney'],
+                'importe_bonus' => $row['bonus'],
+                'tickets' => $row['gamepoints'],
+                'monto_total' => (float)$row['emoney'] + (float)$row['bonus'],
+                'fecha_creacion' => date('Y-m-d H:i:s'),
+            ));
+        }
     }
-    
+
     public function editarAction()
     {
         $id = $this->params('id', null);
@@ -104,27 +128,52 @@ class PaqueteController extends SecurityAdminController
         return $response;
     }
     
-    protected function _prepareSave($action, $form, $id = null)
+    protected function _prepareSave($action, $form, $id = null, $dataStatic = array())
     {
         $request = $this->getRequest();
-        $data = $request->getPost()->toArray();
 
-        $form->setInputFilter(new \Paquete\Filter\PaqueteFilter());
+        $data = array_merge_recursive(
+            $request->getPost()->toArray(),
+            $request->getFiles()->toArray()
+        );
+
+        $newFileName = null;
+        if (!empty($data['imagen']['name'])) {
+            $nombreImg = md5($request->getPost('titulo1'));
+            $ext = strtolower(pathinfo($data['imagen']['name'], PATHINFO_EXTENSION));   
+            $newFileName = \Common\Helpers\String::parseSlugName($nombreImg)
+                    . '-'  . date('Ymd') . '.' . $ext;
+
+            $data['imagen']['name'] = $newFileName;
+        }
+
+        $config = $this->getServiceLocator()->get('config');
+        $form->setInputFilter(new \Paquete\Filter\PaqueteFilter(array(
+            'uploadDir' => $config['fileDir']['paquete_paquete']['up'],
+        )));
         $form->setData($data);
         if ($form->isValid()) {
             $data = $form->getData();
-
             try {
                 $paramsIn = array(
-                    'nombre' => $data['nombre'],
-                    'coney_bonos' => $data['coney_bonos'],
-                    'coney_bonos_plus' => $data['coney_bonos_plus'],
-                    'tickets' => $data['tickets'],
-                    'monto_total' => $data['monto_total'],
-                    'fecha_creacion' => $data['fecha_creacion'],
-                    'fecha_edicion' => $data['fecha_edicion'],
+                    'titulo1' => $data['titulo1'],
+                    'titulo2' => $data['titulo2'],
+                    'legal' => $data['legal'],
+                    'activo' => $data['activo'],
+                    'destacado' => $data['destacado'],
+                    'imagen' => $newFileName,
                 );
 
+                if ($action == AC_CREAR) {
+                    $paramsIn['monto_total'] = (float)$dataStatic['emoney'] + (float)$dataStatic['bonus'];
+                    $paramsIn['importe_minimo'] = $dataStatic['value'];
+                    $paramsIn['importe_emoney'] = $dataStatic['emoney'];
+                    $paramsIn['importe_bonus'] = $dataStatic['bonus'];
+                    $paramsIn['tickets'] = $dataStatic['gamepoints'];
+                    $paramsIn['referencia'] = $dataStatic['referencia'];
+                    $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
+                }
+                
                 $repository = $this->_getPaqueteService()->getRepository();
                 if (!empty($id)) {
                     $repository->save($paramsIn, $id);
@@ -141,13 +190,13 @@ class PaqueteController extends SecurityAdminController
                 ));
             }
 
-            $this->redirect()->toRoute('admin/crud', array(
+            $this->redirect()->toRoute('paquete/crud', array(
                 'controller' => 'paquete', 'action' => 'index'
             ));
         }
     }
     
-    public function crearCrudForm($action, $id = null)
+    public function crearCrudForm($action, $id = null, $codigo = null)
     {
         $options = array(
         'controller' => 'paquete',
@@ -158,8 +207,13 @@ class PaqueteController extends SecurityAdminController
             $options['id'] = $id;
         }
         
-        $form = $this->_getPaqueteForm();
-        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', $options));
+        $form = $this->_getPaqueteForm();        
+        $url = $this->url()->fromRoute('paquete/crud', $options);
+        if (!empty($codigo)) {
+            $url = $url . '?codigo=' . $codigo;
+        }
+        
+        $form->setAttribute('action', $url);
 
         return $form;
     }
@@ -167,19 +221,19 @@ class PaqueteController extends SecurityAdminController
     public function crearBuscarForm()
     {
         $form = $this->_getPaqueteForm();
-        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
+        $form->setAttribute('action', $this->url()->fromRoute('paquete/crud', array(
         'controller' => 'paquete', 'action' => 'index'
         )));
         $form->setAttribute('method', 'get');
         return $form;
     }
     
-    protected function _getPaqueteForm()
+    private function _getPaqueteForm()
     {
         return $this->getServiceLocator()->get('Paquete\Form\PaqueteForm');
     }
 
-    protected function _getPaqueteService()
+    private function _getPaqueteService()
     {
         return $this->getServiceLocator()->get('Paquete\Model\Service\PaqueteService');
     }

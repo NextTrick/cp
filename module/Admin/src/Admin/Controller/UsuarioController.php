@@ -28,11 +28,14 @@ class UsuarioController extends SecurityAdminController
         
         $criteria = array(
             'whereLike' => $params,
+            'limit' => LIMIT_BUSCAR,
         );
         $gridList = $this->_getUsuarioService()->getRepository()->search($criteria);
+        $countList = $this->_getUsuarioService()->getRepository()->countTotal($criteria);
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }
@@ -171,12 +174,12 @@ class UsuarioController extends SecurityAdminController
                 $repository = $this->_getUsuarioService()->getRepository();
                 if (!empty($id)) {
                     if ($repeat) {
-                        $paramsIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password']);
+                        $paramsIn['password'] = \Common\Helpers\Util::passwordHash($data['password']);
                     }
                     $paramsIn['fecha_edicion'] = date('Y-m-d H:i:s');
                     $repository->save($paramsIn, $id);
                 } else {
-                    $paramsIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password']);
+                    $paramsIn['password'] = \Common\Helpers\Util::passwordHash($data['password']);
                     $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
                     $repository->save($paramsIn);
                 }

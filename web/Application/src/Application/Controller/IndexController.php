@@ -27,12 +27,17 @@ class IndexController extends AbstractActionController
             'usuario_email' => 'ing.angeljara@gmail.com',
             'monto' => 20.00
         );
+                        
+        try {
+            $alias = \PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor::ALIAS;        
+            $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
+
+            $paymentProcessor->createCharge($data);
+        } catch (\Exception $e) {
+            var_dump($e->getMessage(), $e->getTraceAsString()); exit;
+        }
         
-        
-        $alias = \PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor::ALIAS;        
-        $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
-        
-        $paymentProcessor->createCharge($data);
+        echo 'fin'; exit;
         
         exit;
     }
@@ -40,7 +45,7 @@ class IndexController extends AbstractActionController
     public function testVisaAction()
     {                                
         $data = array(
-            'id' => 1,
+            'id' => 10,
             'perfilpago_nombres' => 'Angel',
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
@@ -49,7 +54,7 @@ class IndexController extends AbstractActionController
             'comprobante_tipo' => 'DNI',
             'comprobante_numero' => '11872911',
             'usuario_email' => 'ing.angeljara@gmail.com',
-            'monto' => 20.00
+            'monto' => '1000.10'
         );
         
         
@@ -59,5 +64,10 @@ class IndexController extends AbstractActionController
         $paymentProcessor->createCharge($data);
         
         exit;
+    }
+    
+    public function phpinfoAction()
+    {
+        echo phpinfo(); exit;
     }
 }

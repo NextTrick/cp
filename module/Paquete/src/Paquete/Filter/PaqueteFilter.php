@@ -23,64 +23,50 @@ class PaqueteFilter extends Zf2InputFilter
     protected function _addElements()
     {
         $this->add(array(
-            'name' => 'nombre',
+            'name' => 'titulo1',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Nombre'),
+                self::validatorNotEmpty('Titulo 1'),
             )
         ));
-
+        
         $this->add(array(
-            'name' => 'coney_bonos',
-            'required' => true,
+            'name' => 'titulo2',
+            'required' => false,
             'filters'  => array(
                 array('name' => 'StripTags'),
                 array('name' => 'StringTrim'),
             ),
             'validators' => array(
-                self::validatorNotEmpty('Coney bonos'),
+                self::validatorNotEmpty('Titulo 2'),
             )
         ));
-
-        $this->add(array(
-            'name' => 'coney_bonos_plus',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Coney bonos plus'),
+        
+        $image = new \Zend\InputFilter\FileInput('imagen');
+        $image->setRequired(false);
+        $image->getValidatorChain()
+            ->attachByName('filesize', array('max' => 204800))
+            ->attachByName('fileextension',  array(
+                'jpg', 'jpeg', 'png', 'gif'
+            ))
+            ->attachByName('fileimagesize', array('maxWidth' => 500, 'maxHeight' => 500));
+        
+        $image->getFilterChain()->attachByName(
+            'filerenameupload',
+            array(
+                'target' => $this->_getValueDefault('uploadDir'),
+                'use_upload_name' => true,
+                'use_upload_extension' => true,
+                'overwrite' => true,
+                'randomize' => false,
             )
-        ));
-
-        $this->add(array(
-            'name' => 'tickets',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Tickets'),
-            )
-        ));
-
-        $this->add(array(
-            'name' => 'monto_total',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Monto total'),
-            )
-        ));
+        );
+        
+        $this->add($image);
     }
 
     protected function _getValueDefault($key)

@@ -23,4 +23,14 @@ class PaqueteService
     {
         return $this->_repository;
     }
+    
+    public function promocionesEnTrueFi()
+    {
+        return $this->_getTrueFiPaqueteService()->getPromotions();
+    }
+    
+    protected function _getTrueFiPaqueteService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\PromocionService');
+    }
 }

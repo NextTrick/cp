@@ -76,7 +76,7 @@ class LoginController extends SecurityAdminController
     public function generateAction()
     {
         $password = $this->getRequest()->getQuery('password', null);
-        $password1 = \Common\Helpers\Util::passwordEncrypt($password);
+        $password1 = \Common\Helpers\Util::passwordHash($password);
         var_dump($password1);
         exit;
     }

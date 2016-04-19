@@ -30,30 +30,52 @@ class PaqueteForm extends Form
     {
         $this->setAttribute('id', 'formPaquete');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype', 'multipart/form-data');
     }
 
     protected function _addElements()
     {
-        $nombre = new Element\Text('nombre');
-        $nombre->setAttributes(array(
-                'id' => 'nombre',
+        $referencia = new Element\Text('referencia');
+        $referencia->setAttributes(array(
+                'id' => 'referencia',
+                'maxlength' => '32',
+            ));
+        $this->add($referencia);
+        
+        $titulo1 = new Element\Text('titulo1');
+        $titulo1->setAttributes(array(
+                'id' => 'titulo1',
                 'maxlength' => '200',
             ));
-        $this->add($nombre);
+        $this->add($titulo1);
         
-        $coney_bonos = new Element\Text('coney_bonos');
-        $coney_bonos->setAttributes(array(
-                'id' => 'coney_bonos',
+        $titulo2 = new Element\Text('titulo2');
+        $titulo2->setAttributes(array(
+                'id' => 'titulo2',
+                'maxlength' => '200',
+            ));
+        $this->add($titulo2);
+        
+        $importeMinimo = new Element\Text('importe_minimo');
+        $importeMinimo->setAttributes(array(
+                'id' => 'importe_minimo',
                 'maxlength' => '10',
             ));
-        $this->add($coney_bonos);
+        $this->add($importeMinimo);
         
-        $coney_bonos_plus = new Element\Text('coney_bonos_plus');
-        $coney_bonos_plus->setAttributes(array(
-                'id' => 'coney_bonos_plus',
+        $importeEmoney = new Element\Text('importe_emoney');
+        $importeEmoney->setAttributes(array(
+                'id' => 'importe_emoney',
                 'maxlength' => '10',
             ));
-        $this->add($coney_bonos_plus);
+        $this->add($importeEmoney);
+        
+        $importeBonus = new Element\Text('importe_bonus');
+        $importeBonus->setAttributes(array(
+                'id' => 'importe_bonus',
+                'maxlength' => '10',
+            ));
+        $this->add($importeBonus);
         
         $tickets = new Element\Text('tickets');
         $tickets->setAttributes(array(
@@ -62,11 +84,45 @@ class PaqueteForm extends Form
             ));
         $this->add($tickets);
         
-        $monto_total = new Element\Text('monto_total');
-        $monto_total->setAttributes(array(
+        $montoTotal = new Element\Text('monto_total');
+        $montoTotal->setAttributes(array(
                 'id' => 'monto_total',
                 'maxlength' => '10',
             ));
-        $this->add($monto_total);        
+        $this->add($montoTotal);
+        
+        $image = new Element\File('imagen');
+        $image->setAttribute('id', 'imagen');
+        $this->add($image);
+        
+        $legal = new Element\Textarea('legal');
+        $legal->setAttributes(array(
+                'id' => 'legal',
+                'maxlength' => '1000',
+                'rows' => 3,
+                'style' => 'width: 100%',
+            ));
+        $this->add($legal);
+        
+        $fechaCreacion = new Element\Text('fecha_creacion');
+        $fechaCreacion->setAttributes(array(
+                'id' => 'fecha_creacion',
+                'maxlength' => '19',
+            ));
+        $this->add($fechaCreacion);
+        
+        $activo = new Element\Checkbox('activo');
+        $activo->setUseHiddenElement(true);
+        $activo->setCheckedValue('1');
+        $activo->setUncheckedValue('0');
+        $activo->setValue('0');
+        $this->add($activo);
+        
+        $destacado = new Element\Checkbox('destacado');
+        $destacado->setUseHiddenElement(true);
+        $destacado->setCheckedValue('1');
+        $destacado->setUncheckedValue('0');
+        $destacado->setValue('0');
+        $this->add($destacado);
     }
 }

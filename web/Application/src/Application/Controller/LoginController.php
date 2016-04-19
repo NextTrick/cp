@@ -2,8 +2,8 @@
 
 namespace Application\Controller;
 
-use Zend\View\Model\ViewModel;
 use Application\Controller\SecurityWebController;
+use Zend\View\Model\ViewModel;
 
 class LoginController extends SecurityWebController
 {

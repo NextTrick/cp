@@ -25,10 +25,14 @@ class RolController extends SecurityAdminController
         
         $criteria = array(
             'whereLike' => $params,
+            'limit' => LIMIT_BUSCAR,
         );
         $gridList = $this->_getRolService()->getRepository()->search($criteria);
+        $countList = $this->_getRolService()->getRepository()->countTotal($criteria);
+        
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
+        $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
         return $view;
     }

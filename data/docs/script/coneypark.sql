@@ -45,7 +45,9 @@ INSERT INTO `admin_permiso` (`id`, `acl`, `rol_id`, `recurso_id`, `fecha_creacio
 (4, 'RCUD', 1, 7, NULL, NULL),
 (5, 'RCUD', 1, 4, NULL, NULL),
 (6, 'RCUD', 1, 6, NULL, NULL),
-(7, 'RCUD', 1, 5, NULL, NULL);
+(7, 'RCUD', 1, 5, NULL, NULL),
+(8, '', 1, 8, NULL, NULL),
+(9, 'RCUD', 1, 9, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -72,10 +74,13 @@ CREATE TABLE IF NOT EXISTS `admin_recurso` (
 
 INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `orden`, `icono`, `fecha_creacion`, `fecha_edicion`, `estado`) VALUES
 (3, NULL, 'Seguridad', '', 1, 'fa-dashboard', '2016-03-16 06:13:49', '2016-03-17 23:32:23', 1),
-(4, 3, 'Usuarios', 'admin/usuario', 1, 'fa-circle-o', '2016-03-16 06:16:29', '2016-03-17 22:52:16', 1),
+(4, 3, 'Usuarios', 'admin/usuario', 1, 'fa-circle-o', '2016-03-16 06:16:29', '2016-04-04 22:29:09', 1),
 (5, 3, 'Recurso', 'admin/recurso', 2, 'fa-circle-o', '2016-03-17 05:00:59', '2016-03-17 22:52:37', 1),
 (6, 3, 'Rol', 'admin/rol', 3, 'fa-circle-o', '2016-03-17 05:01:34', '2016-03-17 23:37:24', 1),
-(7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-17 22:52:31', 1);
+(7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-19 08:15:17', 1),
+(8, NULL, 'Mantenimiento', '', 2, 'fa-dashboard', '2016-04-11 20:48:28', NULL, 1),
+(9, 8, 'Paquetes', 'paquete/paquete', 1, '', '2016-04-11 20:49:31', NULL, 1);
+
 
 -- --------------------------------------------------------
 
@@ -233,10 +238,14 @@ CREATE TABLE IF NOT EXISTS `orden_request_historial` (
 DROP TABLE IF EXISTS `paquete_paquete`;
 CREATE TABLE IF NOT EXISTS `paquete_paquete` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(200) NOT NULL,
-  `coney_bonos` float DEFAULT NULL,
-  `coney_bonos_plus` float DEFAULT NULL,
-  `tickets` float DEFAULT NULL,
+  `referencia` varchar(32) NOT NULL,
+  `titulo1` varchar(200) NOT NULL,
+  `titulo2` varchar(200) DEFAULT NULL,
+  `imagen` varchar(120) DEFAULT NULL,
+  `importe_minimo` float NOT NULL,
+  `importe_emoney` float NOT NULL,
+  `importe_bonus` float NOT NULL,
+  `tickets` float NOT NULL,
   `monto_total` float NOT NULL,
   `fecha_creacion` datetime DEFAULT NULL,
   `fecha_edicion` datetime DEFAULT NULL
@@ -326,6 +335,15 @@ CREATE TABLE IF NOT EXISTS `usuario_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Volcado de datos para la tabla `usuario_usuario`
+--
+
+INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `cod_pais`, `cod_depa`, `cod_prov`, `cod_dist`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
+(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', 'PE', '15', NULL, '42', NULL, NULL, NULL),
+(5, '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 0, NULL, 'Juan Carlos', 'test', 'test', 1, '2324232', '2015-03-02', 'PE', '23', NULL, '08', NULL, NULL, 'd27c393c942947426e370624076ec81c201b3b480a358895870e8e23ce4a06a5');
+
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -400,7 +418,8 @@ ALTER TABLE `orden_request_historial`
 -- Indices de la tabla `paquete_paquete`
 --
 ALTER TABLE `paquete_paquete`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `referencia_index` (`referencia`);
 
 --
 -- Indices de la tabla `sistema_ubigeo`
@@ -431,6 +450,8 @@ ALTER TABLE `usuario_perfil_pago`
 --
 ALTER TABLE `usuario_usuario`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`),
+  ADD UNIQUE KEY `mguid_UNIQUE` (`mguid`),
   ADD KEY `index_facebook_id` (`facebook_id`),
   ADD KEY `index_twitter_id` (`twitter_id`);
 

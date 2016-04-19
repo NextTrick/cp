@@ -20,13 +20,13 @@ return array(
             'intl.default_locale' => 'es_PE',
             'display_startup_errors' => false,
             'display_errors' => true,
-            'error_reporting' => 0,
+            'error_reporting' => E_ALL,
             'post_max_size' => '804857600',            
         )
     ),
     
     'error' => array(
-        'send_mail' => false,
+        'send_mail' => true,
         'local_log' => true,        
     ),
             
@@ -80,30 +80,62 @@ return array(
             'exception_handler' => array('throw_exceptions' => false),
             'serializer'
         )
-    ),    
+    ),
     'fileDir' => array(
         'usuario_usuario' => array(
-            'up' => APP_PATH . '/public/files/usuario/usuario',
+            'up' => APP_PATH . '/public/s/files/usuario/usuario',
             'down' => 'http://dev.recargas.coneypark.pe/files/usuario/usuario',
         ),
+        'paquete_paquete' => array(
+            'up' => APP_PATH . '/public/s/files/paquete/paquete',
+            'down' => 'http://dev.recargas.coneypark.pe/files/paquete/paquete',
+        ),
     ),
-    'mails' => array(
-        'confirmOrder' => array(
-            'fromEmail' => 'test@gmail.com',
-            'fromName' => 'Coneypark',
-            'toEmail' => 'admin@gmail.com',
-            'subject' => 'Pedido',
+    'social' => array(
+        'facebook' => array(
+            'app_id' => '1676429382610359',
+            'api_secret' => 'c29480e4a45c99ce0040cb4b0801d6ee',
+            'default_scope' => 'email,user_friends,user_location',
+            'redirect_callback' => 'http://dev.recargas.coneypark.pe/login/callback/facebook',
+        ),
+        'twitter' => array(
+            'oauth_access_token' => '382920909-7o6d7IzogwJTc8PtKDMpC8oUm5TaXXEA50NHDm62',
+            'oauth_access_token_secret' => '4VfBvFULklW59WTPsJa5gS0zrPCILltVHcxJFcdEC9ovi',
+            'consumer_key' => 'KAkyvbsAq5GvegoIuhdMLuBo0',
+            'consumer_secret' => 'FC9HkFAi8B0yY4wn2NxObQDqRJcx0BcD6vtYNVlWxT0JDh71J4',
+            'redirect_callback' => 'http://dev.recargas.coneypark.pe/login/callback/twitter',
+        ),
+    ),
+    
+    'mail' => array(
+        'transport' => array(
             'options' => array(
-                'name' => 'smtp.gmail.com',
-                'host' => 'smtp.gmail.com',
+                'host' => '204.232.198.40',
                 'port' => 587,
                 'connection_class'  => 'login',
-                'connection_config' => array(
-                    'username' => 'stmpadmin@gmail.com',
-                    'password' => '',
-                    'ssl' => 'tls',
-                ),
-            )
+//                'connection_config' => array(
+//                    'username' => 'AKIAJSU2S4UPKXV4LUTA',
+//                    'password' => 'Aq/U/Mx/COu9VZpqAPASSkhjG958LHnBP9NeIujEF/qN',
+//                    'ssl' => 'tls',
+//                ),
+            ),
+        ),
+        'fromEmail' => 'contacto@coneypark.co',
+        'fromName' => 'ConeyPark',
+        'subject' => 'ConeyPark'
+    ),    
+                
+    //Emails
+    'emails' => array(
+        'admin' => 'ing.angeljara@gmail.com', // email del administrador
+        'developers' => 'ing.angeljara@gmail.com', // emails de los dev
+        'from' => 'contacto@coneypark.pe',
+    ), 
+    
+    'api' => array(
+        'true_fi' => array(
+            'url' => 'http://65.52.221.92:8088/ITFIMemberServices/',
+            'password' => 'Admin123.',
         ),
     ),
     //Application config params 
@@ -113,7 +145,7 @@ return array(
         'paymentProcessor' => array(
             'pagoEfectivo' => array(
                 'merchanId' => 'HOK',
-                'baseUrl' => 'http://pre.pagoefectivo.pe/',
+                'baseUrl' => 'https://pre.2b.pagoefectivo.pe/',
                 'wscrypta' => 'PagoEfectivoWSCrypto/WSCrypto.asmx?WSDL', //data encrypt ws
                 'wscip2' => 'PagoEfectivoWSGeneralv2/service.asmx?WSDL', //cip generator ws 
                 'wsgenpago' => 'GenPago.aspx', //PE's CIP window
