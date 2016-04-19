@@ -185,6 +185,8 @@ section .btn {
 }
 section .purple_box {
   background: #470446;
+  border-radius: 20px;
+  padding: 20px 0;
 }
 section .purple_box p {
   margin-bottom: 20px;
@@ -196,7 +198,7 @@ section .purple_box hr {
 }
 section .purple_box .content {
   overflow: hidden;
-  padding: 20px;
+  padding: 20px 20px 0;
 }
 section .purple_box .left {
   width: 45%;
@@ -233,7 +235,7 @@ section .purple_box .right input {
 }
 section .purple_box .login_link {
   text-align: center;
-  padding: 20px 0;
+  padding: 20px 0 10px;
 }
 section .purple_box .login_link a {
   color: #ff5800;
@@ -245,6 +247,12 @@ section .left {
 }
 section .right {
   float: right;
+}
+section .offers_box {
+  margin-top: 40px;
+}
+section .offers_box .col_3 {
+  width: 33%;
 }
 footer {
   display: block;
