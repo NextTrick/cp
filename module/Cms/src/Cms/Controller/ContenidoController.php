@@ -11,6 +11,7 @@ namespace Cms\Controller;
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
 use \Common\Helpers\String;
+use Cms\Model\Service\ContenidoService;
 
 class ContenidoController extends SecurityAdminController
 {
@@ -18,7 +19,7 @@ class ContenidoController extends SecurityAdminController
     {
         $params = array(
             'codigo' => String::xssClean($this->params()->fromQuery('codigo')),
-            'tipo' => String::xssClean($this->params()->fromQuery('tipo')),
+            'tipo'   => String::xssClean($this->params()->fromQuery('tipo')),
             'titulo' => String::xssClean($this->params()->fromQuery('titulo')),
         );
         
@@ -29,13 +30,18 @@ class ContenidoController extends SecurityAdminController
             'where' => $params,
             'limit' => LIMIT_BUSCAR,
         );
-        $gridList = $this->_getContenidoService()->getRepository()->search($criteria);
-        $countList = $this->_getContenidoService()->getRepository()->countTotal($criteria);
+
+        $gridList       = $this->_getContenidoService()->getRepository()->search($criteria);
+        $countList      = $this->_getContenidoService()->getRepository()->countTotal($criteria);
+        $dataTipoPagina = ContenidoService::getAllTipos();
+
 
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
         $view->setVariable('countList', $countList);
         $view->setVariable('form', $form);
+        $view->setVariable('dataTipoPagina', $dataTipoPagina);
+
         return $view;
     }
 

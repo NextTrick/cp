@@ -11,10 +11,13 @@ namespace Cms\Model\Service;
 class ContenidoService
 {
     protected $_repository = null;
-    protected $_sl = null;
+    protected $_sl         = null;
     
-    const TIPO_PAGINA = 1;
-    const TIPO_SECCION = 2;
+    const TIPO_PAGINA         = 1;
+    const TIPO_SECCION        = 2;
+    const NOMBRE_TIPO_PAGINA  = 'página';
+    const NOMBRE_TIPO_SECCION = 'sección';
+
 
     public function __construct($repository, $serviceLocator)
     {
@@ -32,6 +35,17 @@ class ContenidoService
         return array(
             self::TIPO_PAGINA => 'Página',
             self::TIPO_SECCION => 'Sección',
+        );
+    }
+
+
+    public static function getAllTipos()
+    {
+        return array(
+            'tipoPagina'        => self::TIPO_PAGINA,
+            'tipoSeccion'       => self::TIPO_SECCION,
+            'nombreTipoPagina'  => ucfirst(self::NOMBRE_TIPO_PAGINA),
+            'nombreTipoSeccion' => ucfirst(self::NOMBRE_TIPO_SECCION),
         );
     }
 }
