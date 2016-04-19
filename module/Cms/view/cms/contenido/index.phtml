@@ -1,4 +1,3 @@
-<?php $this->layout()->title = array('Contenido', 'Listado') ?>
 <?php
 $this->layout()->breadcrumb = array(
     array('url' => null, 'name' => 'Contenido'),
@@ -12,7 +11,7 @@ $this->layout()->breadcrumb = array(
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
-        <a href="<?php echo BASE_URL; ?>cms/contenido/crear" class="btn btn-success">Registrar</a>
+        <a href="<?php echo BASE_URL; ?>cms/contenido/crear" class="btn btn-success">Crear</a>
         <hr class="separator">
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
@@ -30,7 +29,7 @@ $this->layout()->breadcrumb = array(
                 <?php foreach ($gridList as $row) : ?>
                     <tr>
                         <td><?php echo $row['codigo'] ?></td>
-                        <td><?php echo $row['tipo'] ?></td>
+                        <td><?php echo (trim($row['tipo']) == $dataTipoPagina['tipoPagina'])? $dataTipoPagina['nombreTipoPagina']: $dataTipoPagina['nombreTipoSeccion']; ?></td>
                         <td><?php echo $row['titulo'] ?></td>
                         <td><?php echo $row['contenido'] ?></td>
                         <td><?php echo $row['estado'] ?></td>
