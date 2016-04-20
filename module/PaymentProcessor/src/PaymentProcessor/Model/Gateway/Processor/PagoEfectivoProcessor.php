@@ -28,9 +28,9 @@ class PagoEfectivoProcessor extends AbstractProcessor
             'success' => true,            
         );
         
-        //Creación de la solicitud
+        //Creación de la solicitud        
         $xml = $this->getSolicitud($data);
-        
+                        
         try {            
             //Obtención del valor del Cip                                    
             $paymentResponse = $this->ws->solicitarPago($xml);     

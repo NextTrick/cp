@@ -20,13 +20,13 @@ return array(
             'intl.default_locale' => 'es_PE',
             'display_startup_errors' => false,
             'display_errors' => true,
-            'error_reporting' => 0,
+            'error_reporting' => E_ALL,
             'post_max_size' => '804857600',            
         )
     ),
     
     'error' => array(
-        'send_mail' => false,
+        'send_mail' => true,
         'local_log' => true,        
     ),
             
@@ -106,6 +106,32 @@ return array(
             'redirect_callback' => 'http://dev.recargas.coneypark.pe/login/callback/twitter',
         ),
     ),
+    
+    'mail' => array(
+        'transport' => array(
+            'options' => array(
+                'host' => '204.232.198.40',
+                'port' => 587,
+                'connection_class'  => 'login',
+//                'connection_config' => array(
+//                    'username' => 'AKIAJSU2S4UPKXV4LUTA',
+//                    'password' => 'Aq/U/Mx/COu9VZpqAPASSkhjG958LHnBP9NeIujEF/qN',
+//                    'ssl' => 'tls',
+//                ),
+            ),
+        ),
+        'fromEmail' => 'contacto@coneypark.co',
+        'fromName' => 'ConeyPark',
+        'subject' => 'ConeyPark'
+    ),    
+                
+    //Emails
+    'emails' => array(
+        'admin' => 'ing.angeljara@gmail.com', // email del administrador
+        'developers' => 'ing.angeljara@gmail.com', // emails de los dev
+        'from' => 'contacto@coneypark.pe',
+    ), 
+    
     'api' => array(
         'true_fi' => array(
             'url' => 'http://65.52.221.92:8088/ITFIMemberServices/',
@@ -119,7 +145,7 @@ return array(
         'paymentProcessor' => array(
             'pagoEfectivo' => array(
                 'merchanId' => 'HOK',
-                'baseUrl' => 'http://pre.pagoefectivo.pe/',
+                'baseUrl' => 'https://pre.2b.pagoefectivo.pe/',
                 'wscrypta' => 'PagoEfectivoWSCrypto/WSCrypto.asmx?WSDL', //data encrypt ws
                 'wscip2' => 'PagoEfectivoWSGeneralv2/service.asmx?WSDL', //cip generator ws 
                 'wsgenpago' => 'GenPago.aspx', //PE's CIP window
