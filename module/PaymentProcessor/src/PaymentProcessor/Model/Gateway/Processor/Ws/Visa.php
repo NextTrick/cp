@@ -2,6 +2,10 @@
 
 namespace PaymentProcessor\Model\Gateway\Processor\Ws;
 
+use Zend\View\Resolver\TemplatePathStack;
+use Zend\View\Renderer\PhpRenderer;
+use Zend\View\Model\ViewModel;
+
 class Visa
 {
     protected $client;
@@ -18,14 +22,16 @@ class Visa
     }
     
     public function createEticket($data)
-    {                  
+    {                          
         $this->wsdl = __DIR__ . '/Visa/Wsdl/WSEticketQAS.wsdl';
         if ($this->environment == 'production') {
             $this->wsdl = __DIR__ . '/Visa/Wsdl/WSEticket.wsdl';
-        } 
-        $this->client = new \SoapClient($this->wsdl, array('trace' => 1));
+        }
         
-        $requestData = $this->getCreateEticketRequestData($data);                        
+        $this->client = new \SoapClient($this->wsdl, array('trace' => 1));
+                
+        $requestData = $this->getCreateEticketRequestData($data); 
+        
         $response = $this->client->GeneraEticket($requestData);
         
         var_dump($response);
@@ -55,17 +61,8 @@ class Visa
             'address' => $data['perfilpago_direccion'],
             'userEmail' => $data['usuario_email'],            
         );
-        
-        $view = new ViewModel();
-        $view->setTerminal(true)                
-                ->setTemplate('Xml/eticked.xml')
-                ->setVariables(array(
-                    'userData' => $userData,
-                    'token' => $token,                        
-                ));
-        
-        $viewRenderer = $this->_sl->get('viewrenderer');      
-        $html = $viewRenderer->render($view);
+                        
+        $createEticketRequestXml = $this->getViewXml('eticket.xml', $createEticketRequestData);
         
         return array('xmlIn' => $createEticketRequestXml);
     }
@@ -77,5 +74,21 @@ class Visa
         );
         
         return $retrieveEticketRequestData;
+    }
+    
+    public function getViewXml($path, $data = array())
+    {
+        $resolver = new TemplatePathStack(array(
+            'script_paths' => array(__DIR__ . '/Visa/Xml/')
+        ));                
+        
+        $renderer = new PhpRenderer();
+        $renderer->setResolver($resolver);
+        $view = new ViewModel();
+        $view->setTemplate($path);
+                
+        $view->setVariables($data);
+        
+        return $renderer->render($view);
     }
 }
