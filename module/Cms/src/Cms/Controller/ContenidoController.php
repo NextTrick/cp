@@ -49,8 +49,6 @@ class ContenidoController extends SecurityAdminController
         } catch (\Exception $e) {
             echo $e->getMessage();exit;
         }
-
-
     }
 
     public function crearAction()
