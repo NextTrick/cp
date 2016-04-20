@@ -17,32 +17,40 @@ class ContenidoController extends SecurityAdminController
 {
     public function indexAction()
     {
-        $params = array(
-            'codigo' => String::xssClean($this->params()->fromQuery('codigo')),
-            'tipo'   => String::xssClean($this->params()->fromQuery('tipo')),
-            'titulo' => String::xssClean($this->params()->fromQuery('titulo')),
-        );
-        
-        $form = $this->crearBuscarForm();
-        $form->setData($params);
-        
-        $criteria = array(
-            'where' => $params,
-            'limit' => LIMIT_BUSCAR,
-        );
+        try {
+            $params = array(
+                String::xssClean($this->params()->fromPost('cmbFiltro')) => String::xssClean($this->params()->fromPost('txtBuscar')),
+            );
 
-        $gridList       = $this->_getContenidoService()->getRepository()->search($criteria);
-        $countList      = $this->_getContenidoService()->getRepository()->countTotal($criteria);
-        $dataTipoPagina = ContenidoService::getAllTipos();
+            $form = $this->getServiceLocator()->get('Cms\Form\BuscarForm');
+            $form->setAttribute('action', $this->url()->fromRoute('cms/crud', array(
+                'controller' => 'contenido', 'action' => 'index'
+            )));
+
+            $form->setData($this->params()->fromPost());
+
+            $criteria = array(
+                'whereLike' => $params,
+                'limit' => LIMIT_BUSCAR,
+            );
+
+            $gridList       = $this->_getContenidoService()->getRepository()->search($criteria);
+            $countList      = $this->_getContenidoService()->getRepository()->countTotal($criteria);
+            $dataTipoPagina = ContenidoService::getAllTipos();
+
+            $view = new ViewModel();
+            $view->setVariable('gridList', $gridList);
+            $view->setVariable('countList', $countList);
+            $view->setVariable('form', $form);
+            $view->setVariable('dataTipoPagina', $dataTipoPagina);
+
+            return $view;
+
+        } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+        }
 
 
-        $view = new ViewModel();
-        $view->setVariable('gridList', $gridList);
-        $view->setVariable('countList', $countList);
-        $view->setVariable('form', $form);
-        $view->setVariable('dataTipoPagina', $dataTipoPagina);
-
-        return $view;
     }
 
     public function crearAction()
@@ -175,7 +183,7 @@ class ContenidoController extends SecurityAdminController
         $form->setAttribute('action', $this->url()->fromRoute('cms/crud', array(
         'controller' => 'contenido', 'action' => 'index'
         )));
-        $form->setAttribute('method', 'get');
+        $form->setAttribute('method', 'post');
         return $form;
     }
     
