@@ -77,7 +77,7 @@ class TarjetaService
             if ($curlData['success']) {
                 if ($curlData['data']['code'] == 0) {
                     $result['success'] = true;
-                    $result['mguid'] = $curlData['data']['data']['mguid'];
+                    $result['result'] = $curlData['data']['data'];
                 } else {
                     $result['success'] = false;
                     $result['message'] = $curlData['data']['message'];
