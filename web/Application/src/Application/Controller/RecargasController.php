@@ -11,16 +11,7 @@ class RecargasController extends SecurityWebController
         if ($this->_isLogin() === false) {
             return $this->_toUrlLogin();
         }
-        
-        $usuario = $this->_getUsuarioData();
-        
-        $criteria = array(
-            'like' => array(
-                $usuario->id,
-            ),
-            'order' => 'fecha_creacion DESC',
-        );
-        $gridList = $this->_getTarjetaService()->getRepository()->findAll($criteria);
+        $gridList = $this->_getPaqueteService()->getRepository()->findAllGrid();
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
         return $view;
