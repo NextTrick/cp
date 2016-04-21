@@ -26,6 +26,26 @@ class MisRecargasController extends SecurityWebController
         return $view;
     }
     
+    public function asociarNuevaTarjetaAction()
+    {
+        if ($this->_isLogin() === false) {
+            return $this->_toUrlLogin();
+        }
+
+        if ($this->request->isPost()) {
+            $result = array(
+                'succes' => true,
+            );
+            
+            echo json_encode($result);
+            exit;
+        }
+        
+        $view = new ViewModel();
+        $view->setTerminal(true);
+        return $view;
+    }
+    
     private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');

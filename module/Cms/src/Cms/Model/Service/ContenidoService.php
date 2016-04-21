@@ -22,7 +22,7 @@ class ContenidoService
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        $this->_sl         = $serviceLocator;
     }
 
     public function getRepository()
@@ -33,7 +33,7 @@ class ContenidoService
     public function getTipos()
     {
         return array(
-            self::TIPO_PAGINA => 'Página',
+            self::TIPO_PAGINA  => 'Página',
             self::TIPO_SECCION => 'Sección',
         );
     }
@@ -46,6 +46,15 @@ class ContenidoService
             'tipoSeccion'       => self::TIPO_SECCION,
             'nombreTipoPagina'  => ucfirst(self::NOMBRE_TIPO_PAGINA),
             'nombreTipoSeccion' => ucfirst(self::NOMBRE_TIPO_SECCION),
+        );
+    }
+
+    public function getFiltrosBuscar()
+    {
+        return array(
+            'codigo'    => 'Código',
+            'titulo'    => 'Título',
+            'contenido' => 'Contenido',
         );
     }
 }
