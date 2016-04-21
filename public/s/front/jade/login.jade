@@ -13,6 +13,9 @@ block section
 					|que no te puedes perder.
 				.yellow_box Inicia sesión
 				.purple_box
+					.error_message
+						span.icon
+						span.text Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde
 					.content
 						.left
 							p Usando tus redes sociales
@@ -24,11 +27,16 @@ block section
 								span.text Twitter
 						.right
 							p Con tu correo electrónico
-							input(type="text" placeholder="ejemplo@micorreo.com")
-							input(type="password" placeholder="contraseña")
-							button.btn.btn_signin Iniciar Sesión
+							form(action="#" data-parsley-validate)
+								.form_control
+									input.email(type="text" placeholder="ejemplo@micorreo.com" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-pattern="/^[a-z0-9\_\-]+(.?[a-z0-9\_\-]+)+@\w+([\.-]?\w+)(\.[a-z]{2,10})$/i" data-parsley-pattern-message="Ingrese un correo válido")
+								.form_control
+									input.password(type="password" placeholder="contraseña" data-parsley-required data-parsley-required-message="Dato obligatorio")
+								button.btn.btn_orange.btn_login(type="submit") Iniciar Sesión
 							.login_link
-								a(href="") Olvidé mi contraseña
+								a(href="#modal_recovery_password", name="modal") Olvidé mi contraseña
+							.login_link
+								a(href="#modal_new_password", name="modal") Nueva contraseña
 					hr
 					.login_link
 						a(href="") Aún no tengo cuenta como socio de Coney Club
@@ -61,6 +69,35 @@ block section
 							|soles adicionales 
 							strong + S/.30 
 							|en Coney Bonos
+			#modal_recovery_password.modal_box
+				.modal_content.modal_recovery_content
+					span.icon_logo
+					h3 Recuperar contraseña
+					p Ingresa la dirección de correo electrónico que usaste para registrarte.
+					input(type="text" placeholder="Correo electrónico")
+					a#btn_recovery.btn.btn_orange(href='#modal_recovery_response', name='modal') Recuperar contraseña
+			#modal_recovery_response.modal_box
+				.modal_content.modal_recovery_content
+					span.icon_logo
+					h3 Recuperar contraseña
+					p Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.
+					button.close.btn.btn_orange Aceptar
+			#modal_new_password.modal_box
+				.modal_content.modal_recovery_content
+					span.icon_logo
+					h3 Nueva contraseña
+					p Ingresa una nueva contraseña
+					input(type="text" placeholder="Ingresa tu nueva contraseña")
+					input(type="text" placeholder="Repite tu nueva contraseña")
+					a#btn_change_password.btn.btn_orange(href='#modal_new_password_response', name='modal') Cambiar contraseña
+			#modal_new_password_response.modal_box
+				.modal_content.modal_recovery_content
+					span.icon_logo
+					h3 Nueva contraseña
+					p Felicidades, tu contraseña se actualizó correctamente
+					button.close.btn.btn_orange Aceptar
+			#mask
+
 
 
 
