@@ -94,130 +94,108 @@ section
 	padding-bottom 50px
 	overflow hidden
 	color white
-	.btn
-		text-decoration none
-		color white
+	h2
+		span
+			color #FFB000
+	.welcome_box
 		text-align center
-	h3
+	.yellow_box
+		background #FFB000
+		width 200px
+		height 42px
+		text-align center
+		padding-top 8px
+		box-sizing border-box
+		color #470446
 		font-size 24px
-	.box_left
-		float left
-		width 48%
-		.grid_340
-			width 340px
-			text-align center
-			.social_buttons
-				display block
-				height 40px
-				.btn
-					display inline-block
-					width 160px
-					padding 10px 0
-					&.btn_fb
-						background #3B5998
-						margin-right 5px
-						float left
-					&.btn_tw
-						background #1B95E0
-						margin-left 5px
-						float right
-			.box_email_register
-				width 100%
-				margin-bottom 20px
-				input
-					width 100%
-					height 42px
-					padding 0 10px
-					border 0
-					background #CB8FC2
-					color white
-					box-sizing border-box
-					margin-bottom 10px
-					&::-webkit-input-placeholder
-						color white
-					&:-moz-placeholder
-						color white
-					&::-moz-placeholder
-						color white
-					&:-ms-input-placeholder
-						color white
-				.btn
-					width 100%
-					display block
-					padding 12px 0
-					&.btn_register
-						background #FF6909
-						color white
-	.purple_link
-		width auto
-		text-decoration none
-		color white
-		border-bottom 1px solid #CB8FC2
-		line-height 22px
-	.box_right
-		float right
-		width 48%
-		.box_rectangle
-			width 280px
-			height 140px
-			background #99E5FF
-	.box_signin
-		width 620px
+		font-weight bold
+		border-radius 20px
 		margin 0 auto
+		margin-bottom -20px
+		z-index 999
+		position relative
+		margin-top 60px
+	.btn
+		border 0
+		padding 10px
+		box-sizing border-box
+		border-radius 10px
+		color white
+		&.btn_fb
+			background #3B5998
+		&.btn_tw
+			background #1B95E0
+		&.btn_orange
+			background #FF5800
+	.purple_box
+		background #470446
+		border-radius 20px
+		padding 20px 0
+		p
+			margin-bottom 20px
+			font-size 20px
+		hr
+			border-style dashed
+			color #8C008C
+		.content
+			overflow hidden
+			padding 20px 20px 0
+		.left
+			width 45%
+			text-align center
+			button
+				width 100%
+				margin-bottom 8px
+		.right
+			width 45%
+			text-align center
+			button
+				width 100%
+	input
+		width 100%
+		border 0
+		margin-bottom 8px
+		height 36px
+		border-radius 10px
+		padding 0px 10px
 		text-align center
-		form
-			p
-				&.bold
-					margin 30px 0
-			.box_form
-				display block
-				height 42px
-				.left
-					float left
-					margin-top 7px
-				.right
-					float right
-					width 400px
-				select
-					height 32px
-					border none
-					border-radius 2px
-					color white
-					opacity 0.6
-					&.large
-						width 100%
-					&.dni_type
-						float left
-						width 120px
-					&.day
-						float left
-						margin-right 5px
-						width 90px
-					&.month
-						float left
-						width 180px
-					&.year
-						float right
-						width 120px
-				input
-					opacity 0.6
-					height 32px
-					border none
-					border-radius 2px
-					padding 0 5px
-					color white
-					&.dni_number
-						float right
-						width 270px
-					&.btn_signin
-						opacity 1
-						background #FF6909
-						color white
-						margin-bottom 20px
-				.purple_light
-					background #CC90C3
-				.purple_dark
-					background #000000
+	.login_link
+		text-align center
+		padding 20px 0 10px
+		a
+			color #FF5800
+			text-decoration none
+			font-size 18px
+	.left
+		float left
+	.right
+		float right
+	.offers_box
+		margin-top 40px
+		.col_3
+			width 33%
+	.error_message
+		background #F1222D
+		opacity 0.8
+		color white
+		text-align center
+		padding 10px
+		width 650px
+		margin 0 auto
+		border-radius 10px
+		position absolute
+		left 23.5%
+		span
+			display inline-block
+			vertical-align top
+			&.icon
+				sprite($close_icon)
+				cursor pointer
+			&.text
+				margin-left 10px
+				margin-top 5px
+		&.hide
+			display none
 footer
 	display block
 	img.bg
@@ -235,6 +213,68 @@ footer
 				color #972383
 				text-decoration none
 				font-size 12px
+
+
+//modal
+/* Z-index of #mask must lower than #boxes .window */
+#mask
+	position absolute
+	z-index 9000
+	background-color #000
+	display none
+	top 0
+	left 0
+
+.modal_box
+	position absolute
+	width 440px
+	height 200px
+	display none
+	z-index 9999
+	.modal_content
+		padding 20px
+		width 400px
+		margin 200px auto 0
+		span.icon_logo
+			sprite($logo_2)
+			display block
+			margin 0 auto
+		h3
+			color #FEB200
+			font-size 28px
+			font-weight bold
+		input
+			width 400px
+		button
+		a
+			width 400px
+			text-decoration none
+			display block
+		&.modal_recovery_content
+			text-align center
+#modal_new_password
+	.modal_content
+		margin-top 150px
+/* Customize your modal window here, you can add background image too */
+#modal_recovery_password
+#modal_recovery_response
+#modal_new_password
+#modal_new_password_response
+	width 651px
+	height 686px
+	background url(../images/modal_bg.png)
+	
+
+
+//parsley
+ul.parsley-errors-list
+	text-align left
+	padding 0
+	margin 0 0 5px
+	font-size 12px
+	li
+		list-style none
+		color red
 
 
 

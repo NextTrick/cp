@@ -123,13 +123,13 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
                 $where = new \Zend\Db\Sql\Where();
 
                 foreach ($this->crWhere as $key => $value) {
-                    if (!empty($value)) {
+                    if (!empty($value) && !empty($key)) {
                         $where->or->equalTo($key, $value) ;
                     }
                 }
 
                 foreach ($this->crWhereLike as $key => $value) {
-                    if (!empty($value)) {
+                    if (!empty($value) && !empty($key)) {
                         $where->or->like($key, "%$value%") ;
                     }
                 }
@@ -169,13 +169,13 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
                 $where = new \Zend\Db\Sql\Where();
 
                 foreach ($this->crWhere as $key => $value) {
-                    if (!empty($value)) {
+                    if (!empty($value) && !empty($key)) {
                         $where->or->equalTo($key, $value) ;
                     }
                 }
 
                 foreach ($this->crWhereLike as $key => $value) {
-                    if (!empty($value)) {
+                    if (!empty($value) && !empty($key)) {
                         $where->or->like($key, "%$value%") ;
                     }
                 }

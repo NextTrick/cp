@@ -109,7 +109,7 @@ class TestController extends SecurityAdminController
     {
         $service = $this->_getTrueFiTarjetaService();
         $data = array(
-            'CGUID' => '{2AC405C3-9056-45F9-8AFA-5559CF6F75CA}',
+            'CGUID' => $this->cguid,
         );
         
         $result = $service->getCard($data);

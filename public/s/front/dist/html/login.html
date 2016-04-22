@@ -39,26 +39,78 @@
     </div>
     <section>
       <div class="box_center">
-        <div class="box_left">
-          <div class="grid_340">
-            <h3>Inicia sesión</h3>
-            <p>Con tus redes sociales</p>
-            <div class="social_buttons"><a href="" class="btn btn_fb"><span class="icon"></span><span class="text">Facebook</span></a><a href="" class="btn btn_tw"><span class="icon"></span><span class="text">Twitter</span></a></div>
-            <p>o con tu correo electrónico</p>
-            <div class="box_email_register">
-              <input type="text" placeholder="correo electrónico"/>
-              <input type="text" placeholder="contraseña"/><a href="" class="btn btn_register">Iniciar sesión</a>
-            </div><a href="" class="purple_link bold">Olvidé mi contraseña</a><br/><br/><a href="" class="purple_link bold">Aún no tengo cuenta como socio de <br/>Coney Club</a>
+        <div class="welcome_box">
+          <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
+          <p>Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>
+          <div class="yellow_box">Inicia sesión</div>
+          <div class="purple_box">
+            <div class="error_message"><span class="icon"></span><span class="text">Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde</span></div>
+            <div class="content">
+              <div class="left">
+                <p>Usando tus redes sociales</p>
+                <button class="btn btn_fb"><span class="icon"></span><span class="text">Facebook</span></button>
+                <button class="btn btn_tw"><span class="icon"></span><span class="text">Twitter</span></button>
+              </div>
+              <div class="right">
+                <p>Con tu correo electrónico</p>
+                <form action="#" data-parsley-validate="data-parsley-validate">
+                  <div class="form_control">
+                    <input type="text" placeholder="ejemplo@micorreo.com" data-parsley-required="data-parsley-required" data-parsley-required-message="Dato obligatorio" data-parsley-pattern="/^[a-z0-9_-]+(.?[a-z0-9_-]+)+@w+([.-]?w+)(.[a-z]{2,10})$/i" data-parsley-pattern-message="Ingrese un correo válido" class="email"/>
+                  </div>
+                  <div class="form_control">
+                    <input type="password" placeholder="contraseña" data-parsley-required="data-parsley-required" data-parsley-required-message="Dato obligatorio" class="password"/>
+                  </div>
+                  <button type="submit" class="btn btn_orange btn_login">Iniciar Sesión</button>
+                </form>
+                <div class="login_link"><a href="#modal_recovery_password" name="modal">Olvidé mi contraseña</a></div>
+                <div class="login_link"><a href="#modal_new_password" name="modal">Nueva contraseña</a></div>
+              </div>
+            </div>
+            <hr/>
+            <div class="login_link"><a href="">Aún no tengo cuenta como socio de Coney Club<span></span></a></div>
+          </div>
+          <div class="offers_box">
+            <div class="col_3 left"><img src="../images/promo1.png" alt=""/>
+              <p>Por lanzamiento, recarga <strong>S/.100 </strong>y obten<strong>S/.50</strong>soles adicionales <strong>+ S/.30 </strong>en Coney Bonos</p>
+            </div>
+            <div class="col_3 left"><img src="../images/promo2.png" alt=""/>
+              <p>Por lanzamiento, recarga <strong>S/.100 </strong>y obten<strong>S/.50</strong>soles adicionales <strong>+ S/.30 </strong>en Coney Bonos</p>
+            </div>
+            <div class="col_3 right"><img src="../images/promo3.png" alt=""/>
+              <p>Por lanzamiento, recarga <strong>S/.100 </strong>y obten<strong>S/.50</strong>soles adicionales <strong>+ S/.30 </strong>en Coney Bonos</p>
+            </div>
           </div>
         </div>
-        <div class="box_right">
-          <h3>¡Ahora recárgate de diversión con un solo click!</h3>
-          <p>Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, sin necesidad de hacer colas, además, tendrás promociones exclusivas que no te puedes perder.</p>
-          <p class="bold">Recargas S/.100 y obtén S/.25 Coney Bonus</p>
-          <div class="box_rectangle"></div>
-          <p class="bold">Recargas S/.100 y obtén S/.25 Coney Bonus</p>
-          <div class="box_rectangle"></div>
+        <div id="modal_recovery_password" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Recuperar contraseña</h3>
+            <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
+            <input type="text" placeholder="Correo electrónico"/><a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Recuperar contraseña</a>
+          </div>
         </div>
+        <div id="modal_recovery_response" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Recuperar contraseña</h3>
+            <p>Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.</p>
+            <button class="close btn btn_orange">Aceptar</button>
+          </div>
+        </div>
+        <div id="modal_new_password" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Nueva contraseña</h3>
+            <p>Ingresa una nueva contraseña</p>
+            <input type="text" placeholder="Ingresa tu nueva contraseña"/>
+            <input type="text" placeholder="Repite tu nueva contraseña"/><a id="btn_change_password" href="#modal_new_password_response" name="modal" class="btn btn_orange">Cambiar contraseña</a>
+          </div>
+        </div>
+        <div id="modal_new_password_response" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Nueva contraseña</h3>
+            <p>Felicidades, tu contraseña se actualizó correctamente</p>
+            <button class="close btn btn_orange">Aceptar</button>
+          </div>
+        </div>
+        <div id="mask"></div>
       </div>
     </section>
     <!--FOOTER-->
@@ -71,6 +123,7 @@
     </footer>
     <!--JS-->
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="../js/plugins/parsley.min.js"></script>
     <script src="../js/index.js"></script>
   </body>
 </html>

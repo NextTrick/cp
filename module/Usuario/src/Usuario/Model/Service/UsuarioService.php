@@ -50,6 +50,39 @@ class UsuarioService
         return array();
     }
 
+    public function asociarTarjeta($data)
+    {
+        $usuario = $this->_repository->findOne(array('where' => array('id' => $data['usuario_id'])));
+        $result = array(
+            'success' => false,
+            'message' => 'Error al asociar la tarjeta.',
+        );
+        if (!empty($usuario)) {
+            $dataServ = array(
+                'MGUID' => $usuario['mguid'],
+                'Card' => $data['numero'],
+            );
+            $res = $this->_getTrueFiTarjetaService()->addCard($dataServ);
+            if ($res['success']) {
+                $card = $res['result'];
+                $save = $this->_getTarjetaService()->getRepository()->save(array(
+                    'usuario_id' => $data['usuario_id'],
+                    'nombre' => $data['nombre'],
+                    'cguid' => $card['cguid'],
+                    'fecha_creacion' => date('Y-m-d H:i:s'),
+                    'estado_truefi' => $card['status'],
+                ));
+                if (!empty($save)) {
+                    $result['success'] = true;
+                    $result['message'] = null;
+                }
+            } else {
+                $result['message'] = $res['message'];
+            }
+        }
+        return $result;
+    }
+
     public function syncTarjetasCliente($usuarioId, $mguid)
     {
         $result = $this->traerDeTrueFi(array('MGUID' => $mguid));

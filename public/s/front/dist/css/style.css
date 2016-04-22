@@ -27,14 +27,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -138px -75px;
+  background-position: -143px -75px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -138px -49px;
+  background-position: -143px -49px;
   width: 26px;
   height: 26px;
 }
@@ -64,37 +64,37 @@ header nav ul li a .icon span {
 }
 header nav ul li a .icon span.icon_local {
   background-image: url("../images/sprite.png");
-  background-position: 0px -118px;
+  background-position: -77px -96px;
   width: 33px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_offers {
   background-image: url("../images/sprite.png");
-  background-position: 0px -78px;
+  background-position: -103px -40px;
   width: 40px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_atraction {
   background-image: url("../images/sprite.png");
-  background-position: -138px 0px;
+  background-position: -143px 0px;
   width: 32px;
   height: 49px;
 }
 header nav ul li a .icon span.icon_sale {
   background-image: url("../images/sprite.png");
-  background-position: -80px -78px;
+  background-position: -40px -96px;
   width: 37px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: 0px 0px;
+  background-position: -54px 0px;
   width: 49px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_gold {
   background-image: url("../images/sprite.png");
-  background-position: -98px 0px;
+  background-position: -103px 0px;
   width: 40px;
   height: 40px;
 }
@@ -131,19 +131,19 @@ header nav ul li.logo {
 }
 .right_options ul li a span.icon_gold {
   background-image: url("../images/sprite.png");
-  background-position: -40px -78px;
+  background-position: 0px -96px;
   width: 40px;
   height: 40px;
 }
 .right_options ul li a span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -49px 0px;
+  background-position: 0px -56px;
   width: 49px;
   height: 40px;
 }
 .right_options ul li a span.icon_birthday {
   background-image: url("../images/sprite.png");
-  background-position: 0px -40px;
+  background-position: -49px -56px;
   width: 44px;
   height: 38px;
 }
@@ -153,162 +153,136 @@ section {
   overflow: hidden;
   color: #fff;
 }
-section .btn {
-  text-decoration: none;
-  color: #fff;
+section h2 span {
+  color: #ffb000;
+}
+section .welcome_box {
   text-align: center;
 }
-section h3 {
-  font-size: 24px;
-}
-section .box_left {
-  float: left;
-  width: 48%;
-}
-section .box_left .grid_340 {
-  width: 340px;
-  text-align: center;
-}
-section .box_left .grid_340 .social_buttons {
-  display: block;
-  height: 40px;
-}
-section .box_left .grid_340 .social_buttons .btn {
-  display: inline-block;
-  width: 160px;
-  padding: 10px 0;
-}
-section .box_left .grid_340 .social_buttons .btn.btn_fb {
-  background: #3b5998;
-  margin-right: 5px;
-  float: left;
-}
-section .box_left .grid_340 .social_buttons .btn.btn_tw {
-  background: #1b95e0;
-  margin-left: 5px;
-  float: right;
-}
-section .box_left .grid_340 .box_email_register {
-  width: 100%;
-  margin-bottom: 20px;
-}
-section .box_left .grid_340 .box_email_register input {
-  width: 100%;
+section .yellow_box {
+  background: #ffb000;
+  width: 200px;
   height: 42px;
-  padding: 0 10px;
-  border: 0;
-  background: #cb8fc2;
-  color: #fff;
+  text-align: center;
+  padding-top: 8px;
   box-sizing: border-box;
-  margin-bottom: 10px;
-}
-section .box_left .grid_340 .box_email_register input::-webkit-input-placeholder {
-  color: #fff;
-}
-section .box_left .grid_340 .box_email_register input:-moz-placeholder {
-  color: #fff;
-}
-section .box_left .grid_340 .box_email_register input::-moz-placeholder {
-  color: #fff;
-}
-section .box_left .grid_340 .box_email_register input:-ms-input-placeholder {
-  color: #fff;
-}
-section .box_left .grid_340 .box_email_register .btn {
-  width: 100%;
-  display: block;
-  padding: 12px 0;
-}
-section .box_left .grid_340 .box_email_register .btn.btn_register {
-  background: #ff6909;
-  color: #fff;
-}
-section .purple_link {
-  width: auto;
-  text-decoration: none;
-  color: #fff;
-  border-bottom: 1px solid #cb8fc2;
-  line-height: 22px;
-}
-section .box_right {
-  float: right;
-  width: 48%;
-}
-section .box_right .box_rectangle {
-  width: 280px;
-  height: 140px;
-  background: #99e5ff;
-}
-section .box_signin {
-  width: 620px;
+  color: #470446;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 20px;
   margin: 0 auto;
+  margin-bottom: -20px;
+  z-index: 999;
+  position: relative;
+  margin-top: 60px;
+}
+section .btn {
+  border: 0;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #fff;
+}
+section .btn.btn_fb {
+  background: #3b5998;
+}
+section .btn.btn_tw {
+  background: #1b95e0;
+}
+section .btn.btn_orange {
+  background: #ff5800;
+}
+section .purple_box {
+  background: #470446;
+  border-radius: 20px;
+  padding: 20px 0;
+}
+section .purple_box p {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+section .purple_box hr {
+  border-style: dashed;
+  color: #8c008c;
+}
+section .purple_box .content {
+  overflow: hidden;
+  padding: 20px 20px 0;
+}
+section .purple_box .left {
+  width: 45%;
   text-align: center;
 }
-section .box_signin form p.bold {
-  margin: 30px 0;
+section .purple_box .left button {
+  width: 100%;
+  margin-bottom: 8px;
 }
-section .box_signin form .box_form {
-  display: block;
-  height: 42px;
+section .purple_box .right {
+  width: 45%;
+  text-align: center;
 }
-section .box_signin form .box_form .left {
-  float: left;
-  margin-top: 7px;
-}
-section .box_signin form .box_form .right {
-  float: right;
-  width: 400px;
-}
-section .box_signin form .box_form select {
-  height: 32px;
-  border: none;
-  border-radius: 2px;
-  color: #fff;
-  opacity: 0.6;
-}
-section .box_signin form .box_form select.large {
+section .purple_box .right button {
   width: 100%;
 }
-section .box_signin form .box_form select.dni_type {
-  float: left;
-  width: 120px;
+section input {
+  width: 100%;
+  border: 0;
+  margin-bottom: 8px;
+  height: 36px;
+  border-radius: 10px;
+  padding: 0px 10px;
+  text-align: center;
 }
-section .box_signin form .box_form select.day {
-  float: left;
-  margin-right: 5px;
-  width: 90px;
+section .login_link {
+  text-align: center;
+  padding: 20px 0 10px;
 }
-section .box_signin form .box_form select.month {
-  float: left;
-  width: 180px;
+section .login_link a {
+  color: #ff5800;
+  text-decoration: none;
+  font-size: 18px;
 }
-section .box_signin form .box_form select.year {
+section .left {
+  float: left;
+}
+section .right {
   float: right;
-  width: 120px;
 }
-section .box_signin form .box_form input {
-  opacity: 0.6;
-  height: 32px;
-  border: none;
-  border-radius: 2px;
-  padding: 0 5px;
+section .offers_box {
+  margin-top: 40px;
+}
+section .offers_box .col_3 {
+  width: 33%;
+}
+section .error_message {
+  background: #f1222d;
+  opacity: 0.8;
   color: #fff;
+  text-align: center;
+  padding: 10px;
+  width: 650px;
+  margin: 0 auto;
+  border-radius: 10px;
+  position: absolute;
+  left: 23.5%;
 }
-section .box_signin form .box_form input.dni_number {
-  float: right;
-  width: 270px;
+section .error_message span {
+  display: inline-block;
+  vertical-align: top;
 }
-section .box_signin form .box_form input.btn_signin {
-  opacity: 1;
-  background: #ff6909;
-  color: #fff;
-  margin-bottom: 20px;
+section .error_message span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -143px -101px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
-section .box_signin form .box_form .purple_light {
-  background: #cc90c3;
+section .error_message span.text {
+  margin-left: 10px;
+  margin-top: 5px;
 }
-section .box_signin form .box_form .purple_dark {
-  background: #000;
+section .error_message.hide {
+  display: none;
 }
 footer {
   display: block;
@@ -331,4 +305,72 @@ footer ul li a {
   color: #972383;
   text-decoration: none;
   font-size: 12px;
+}
+/* Z-index of #mask must lower than #boxes .window */
+#mask {
+  position: absolute;
+  z-index: 9000;
+  background-color: #000;
+  display: none;
+  top: 0;
+  left: 0;
+}
+.modal_box {
+  position: absolute;
+  width: 440px;
+  height: 200px;
+  display: none;
+  z-index: 9999;
+}
+.modal_box .modal_content {
+  padding: 20px;
+  width: 400px;
+  margin: 200px auto 0;
+}
+.modal_box .modal_content span.icon_logo {
+  background-image: url("../images/sprite.png");
+  background-position: 0px 0px;
+  width: 54px;
+  height: 56px;
+  display: block;
+  margin: 0 auto;
+}
+.modal_box .modal_content h3 {
+  color: #feb200;
+  font-size: 28px;
+  font-weight: bold;
+}
+.modal_box .modal_content input {
+  width: 400px;
+}
+.modal_box .modal_content button,
+.modal_box .modal_content a {
+  width: 400px;
+  text-decoration: none;
+  display: block;
+}
+.modal_box .modal_content.modal_recovery_content {
+  text-align: center;
+}
+#modal_new_password .modal_content {
+  margin-top: 150px;
+}
+/* Customize your modal window here, you can add background image too */
+#modal_recovery_password,
+#modal_recovery_response,
+#modal_new_password,
+#modal_new_password_response {
+  width: 651px;
+  height: 686px;
+  background: url("../images/modal_bg.png");
+}
+ul.parsley-errors-list {
+  text-align: left;
+  padding: 0;
+  margin: 0 0 5px;
+  font-size: 12px;
+}
+ul.parsley-errors-list li {
+  list-style: none;
+  color: #f00;
 }

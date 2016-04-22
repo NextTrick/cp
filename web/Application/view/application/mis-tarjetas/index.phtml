@@ -1,0 +1,54 @@
+<div>
+    <?php foreach ($gridList as $row) : ?>
+        <?php echo $row['nombre']; ?>
+        <?php echo $row['numero']; ?>
+        <?php echo $row['importe_emoney']; ?>
+        <?php echo $row['importe_bonus']; ?>
+    <br>
+    <br>
+    <?php endforeach; ?>
+    <br>
+    <br>
+    <div id="nuevaTarjeta">
+        <a class="asociar-nueva-tarjeta" href="<?php echo BASE_URL ?>inbox/mis-tarjetas/asociar-nueva-tarjeta">Asociar nueva tarjeta</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function asociarNuevaTarjeta()
+    {
+        $('.asociar-nueva-tarjeta').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "GET",
+                url: $(this).attr('href'),
+                success: function(sHtml){
+                    $('#nuevaTarjeta').html(sHtml);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert(common.ajaxError);
+                }
+            });
+        });
+    }
+    function sendAsociarNuevaTarjeta()
+    {
+        $.ajax({
+            type: "POST",
+            url: $('#formAsociarNuevaTarjeta').attr('action'),
+            dataType: 'json',
+            success: function(data){
+                if (data.success) {
+                    location.reload();
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert(common.ajaxError);
+            }
+        });
+    }
+    
+    $(document).ready(function(){
+        asociarNuevaTarjeta();
+    });
+</script>

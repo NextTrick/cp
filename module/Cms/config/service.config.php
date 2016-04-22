@@ -7,6 +7,7 @@ return array(
         
         //forms
         'Cms\Form\ContenidoForm' => 'Cms\Form\Factory\ContenidoFactory',
+        'Cms\Form\BuscarForm' => 'Cms\Form\Factory\BuscarFactory',
     ),
     'invokables' => array(
     ),
