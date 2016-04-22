@@ -15,7 +15,9 @@ class LoginController extends SecurityWebController
             'action' => 'validate',
             'option' => 'form',
         )));
-        return new ViewModel(array('form' => $form));
+        $view = new ViewModel(array('form' => $form));
+        $view->setTerminal(true);
+        return $view;
     }
 
     public function validateSocialAction()

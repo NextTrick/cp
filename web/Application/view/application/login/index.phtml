@@ -1,36 +1,117 @@
-<?php $form = $this->form->prepare(); ?>
-
-<p class="login-box-msg">Ingrese Email y Password</p>
-<a href="<?php echo BASE_URL; ?>login/validate-social/facebook">Facebook</a>
-<a href="<?php echo BASE_URL; ?>login/validate-social/twitter">Twitter</a>
-<br>
-<?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
-<?php if (count($flashMessage) > 0) : ?>
-    <ul>
-        <?php foreach ($flashMessage as $msg) :?>
-            <?php foreach ($msg as $type => $message) : ?>
-                <li><span class="<?php echo $type; ?>"><?php echo $message; ?></span></li>
-            <?php endforeach; ?>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
-
-<?php echo $this->form()->openTag($form); ?>
-    <div class="form-group has-feedback">
-        <?php echo $this->formInput($form->get('email')); ?>
-        <span class="error"><?php echo $this->formElementerrors($form->get('email')); ?></span>
-    </div>
-    <div class="form-group has-feedback">
-        <?php echo $this->formInput($form->get('password')); ?>
-        <span class="error"><?php echo $this->formElementerrors($form->get('password')); ?></span>
-    </div>
-    <div class="row">
-        <div class="col-xs-4">
-            <?php echo $this->formRow($form->get('token_csrf')); ?>
-            <?php echo $this->formInput($form->get('aceptar')); ?>
-        </div>
-    </div>
-<?php echo $this->form()->closeTag(); ?>
-<a href="<?php echo BASE_URL; ?>recuperar-password">Olvide mi contraseña</a>
-<br>
-<a href="<?php echo BASE_URL; ?>registrate">Aun no tengo cuenta en Coney Club</a>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Coney Park</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="<?php echo URL_RESOURCES ?>front/dist/css/normalize.css"/>
+        <link rel="stylesheet" href="<?php echo URL_RESOURCES ?>front/dist/css/style.css"/>
+    </head>
+    <body>
+        <?php echo $this->sectionHeader(); ?>
+        <?php echo $this->sectionRightOption(); ?>
+        <section>
+            <div class="box_center">
+                <div class="welcome_box">
+                    <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
+                    <p>Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>
+                    <div class="yellow_box">Inicia sesión</div>
+                    <div class="purple_box">
+                        <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
+                        <?php if (count($flashMessage) > 0) : ?>
+                            <?php foreach ($flashMessage as $msg) :?>
+                                <?php foreach ($msg as $type => $message) : ?>
+                                    <div class="error_message"><span class="icon"></span><span class="text"><?php echo $message; ?></span></div>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <div class="content">
+                            <div class="left">
+                                <p>Usando tus redes sociales</p>
+                                <button class="btn btn_fb" data-href="<?php echo BASE_URL; ?>login/validate-social/facebook"><span class="icon"></span><span class="text">Facebook</span></button>
+                                <button class="btn btn_tw" data-href="<?php echo BASE_URL; ?>login/validate-social/twitter"><span class="icon"></span><span class="text">Twitter</span></button>
+                            </div>
+                            <div class="right">
+                                <p>Con tu correo electrónico</p>
+                                <?php $form = $this->form->prepare(); ?>
+                                <?php echo $this->form()->openTag($form); ?>
+                                    <div class="form_control">
+                                        <?php echo $this->formInput($form->get('email')->setAttributes(array(
+                                            'placeholder' => 'ejemplo@micorreo.com',
+                                            'data-parsley-required' => 'data-parsley-required',
+                                            'data-parsley-required-message' => 'Dato obligatorio',
+                                            'data-parsley-pattern' => '/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/i',
+                                            'data-parsley-pattern-message' => 'Ingrese un correo válido',
+                                            'class' => 'email',
+                                        ))); ?>
+                                        <ul class="parsley-errors-list filled">
+                                            <li class="parsley-required"><?php echo $this->formElementerrors($form->get('email')); ?></li>
+                                        </ul>
+                                    </div>
+                                    <div class="form_control">
+                                        <?php echo $this->formInput($form->get('password')->setAttributes(array(
+                                            'placeholder' => 'contraseña',
+                                            'data-parsley-required' => 'data-parsley-required',
+                                            'data-parsley-required-message' => 'Dato obligatorio',
+                                            'class' => 'password',
+                                        ))); ?>
+                                        <ul class="parsley-errors-list filled">
+                                            <li class="parsley-required"><?php echo $this->formElementerrors($form->get('password')); ?></li>
+                                        </ul>
+                                    </div>
+                                    <?php echo $this->formRow($form->get('token_csrf')); ?>
+                                    <button type="submit" class="btn btn_orange btn_login">Iniciar Sesión</button>
+                                <?php echo $this->form()->closeTag(); ?>
+                                <div class="login_link"><a href="#modal_recovery_password" name="modal">Olvidé mi contraseña</a></div>
+                                <div class="login_link"><a href="#modal_new_password" name="modal">Nueva contraseña</a></div>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="login_link"><a href="<?php echo BASE_URL; ?>registrate">Aún no tengo cuenta como socio de Coney Club<span></span></a></div>
+                    </div>
+                    <?php echo $this->sectionOffersBox(); ?>
+                </div>
+                <div id="modal_recovery_password" class="modal_box">
+                    <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+                        <h3>Recuperar contraseña</h3>
+                        <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
+                        <input type="text" placeholder="Correo electrónico"/><a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Recuperar contraseña</a>
+                    </div>
+                </div>
+                <div id="modal_recovery_response" class="modal_box">
+                    <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+                        <h3>Recuperar contraseña</h3>
+                        <p>Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.</p>
+                        <button class="close btn btn_orange">Aceptar</button>
+                    </div>
+                </div>
+                <div id="modal_new_password" class="modal_box">
+                    <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+                        <h3>Nueva contraseña</h3>
+                        <p>Ingresa una nueva contraseña</p>
+                        <input type="text" placeholder="Ingresa tu nueva contraseña"/>
+                        <input type="text" placeholder="Repite tu nueva contraseña"/><a id="btn_change_password" href="#modal_new_password_response" name="modal" class="btn btn_orange">Cambiar contraseña</a>
+                    </div>
+                </div>
+                <div id="modal_new_password_response" class="modal_box">
+                    <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+                        <h3>Nueva contraseña</h3>
+                        <p>Felicidades, tu contraseña se actualizó correctamente</p>
+                        <button class="close btn btn_orange">Aceptar</button>
+                    </div>
+                </div>
+                <div id="mask"></div>
+            </div>
+        </section>
+        <?php echo $this->sectionFooter(); ?>
+        <!--JS-->
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script src="<?php echo URL_RESOURCES ?>front/dist/js/plugins/parsley.min.js"></script>
+        <script src="<?php echo URL_RESOURCES ?>front/dist/js/index.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.btn_fb').click(function(){location.href = $(this).data('href');});
+                $('.btn_tw').click(function(){location.href = $(this).data('href');});
+            });
+        </script>
+    </body>
+</html>

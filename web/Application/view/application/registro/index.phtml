@@ -1,10 +1,54 @@
-
-<p class="login-box-msg">Registrate</p>
-<a href="<?php echo BASE_URL; ?>login/validate-social/facebook">Facebook</a>
-<a href="<?php echo BASE_URL; ?>login/validate-social/twitter">Twitter</a>
-<br>
-<form action="<?php echo BASE_URL; ?>completa-tu-registro" method="post">
-    <input type="hidden" id="registro_form" name="registro_form" value="1">
-    <input type="text" id="email" name="email" placeholder="Correo electrónico">
-    <input type="submit" value="Registrarme">
-</form>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Coney Park</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Welcome"/>
+        <link rel="stylesheet" href="<?php echo URL_RESOURCES ?>front/dist/css/normalize.css"/>
+        <link rel="stylesheet" href="<?php echo URL_RESOURCES ?>front/dist/css/style.css"/>
+    </head>
+    <body>
+        <?php echo $this->sectionHeader(); ?>
+        <?php echo $this->sectionRightOption(); ?>
+        <section>
+            <div class="box_center">
+                <div class="welcome_box">
+                    <h2>¡Bienvenido a <span>Coney Club </span>recargas virtuales!</h2>
+                    <h3>¡Un club creadopara todos aquellos que buscan <span>más diversión </span>por mucho menos!</h3>
+                    <p>Ahora podrás hacer tus recargas <strong>sin necesidad, </strong>además podrás gozar de <strong>muchos beneficios</strong></p>
+                    <div class="yellow_box">Regístrate</div>
+                    <div class="purple_box">
+                        <div class="content">
+                            <div class="left">
+                                <p>Usando tus redes sociales</p>
+                                <button class="btn btn_fb" data-href="<?php echo BASE_URL; ?>login/validate-social/facebook"><span class="icon"></span><span class="text">Facebook</span></button>
+                                <button class="btn btn_tw" data-href="<?php echo BASE_URL; ?>login/validate-social/twitter"><span class="icon"></span><span class="text">Twitter</span></button>
+                            </div>
+                            <div class="right">
+                                <form action="<?php echo BASE_URL; ?>completa-tu-registro" method="post">
+                                    <p>Registrando tu correo electrónico</p>
+                                    <input type="hidden" id="registro_form" name="registro_form" value="1">
+                                    <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com"/>
+                                    <button class="btn btn_orange">Registrarme</button>
+                                </form>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="login_link"><a href="<?php echo BASE_URL; ?>login">Ya tengo una cuenta en Coner Park<span></span></a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <?php echo $this->sectionFooter(); ?>
+        <!--JS-->
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script src="<?php echo URL_RESOURCES ?>front/dist/js/plugins/parsley.min.js"></script>
+        <script src="<?php echo URL_RESOURCES ?>front/dist/js/index.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('.btn_fb').click(function(){location.href = $(this).data('href');});
+                $('.btn_tw').click(function(){location.href = $(this).data('href');});
+            });
+        </script>
+    </body>
+</html>
