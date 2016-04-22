@@ -4,7 +4,7 @@ namespace Application\Controller;
 use Application\Controller\SecurityWebController;
 use Zend\View\Model\ViewModel;
 
-class MisRecargasController extends SecurityWebController
+class MisTarjetasController extends SecurityWebController
 {
     public function indexAction()
     {
@@ -33,12 +33,26 @@ class MisRecargasController extends SecurityWebController
         }
 
         if ($this->request->isPost()) {
-            $result = array(
-                'succes' => true,
-            );
+            $usuario = $this->_getUsuarioData();
+            $numero = $this->request->getPost('numero');
+            $nombre = $this->request->getPost('nombre');
             
-            echo json_encode($result);
-            exit;
+            $result = array(
+                'success' => true,
+                'message' => 'Ingrese el número y nombre.'
+            );
+            if (!empty($numero) && !empty($nombre)) {
+                $data = array(
+                    'usuario_id' => $usuario->id,
+                    'numero' => $numero,
+                    'nombre' => $nombre,
+                );
+                $result = $this->_getUsuarioService()->asociarTarjeta($data);
+            }
+
+            $response = $this->getResponse();
+            $jsonModel =  new \Zend\View\Model\JsonModel($result);
+            return $response->setContent($jsonModel->serialize());
         }
         
         $view = new ViewModel();

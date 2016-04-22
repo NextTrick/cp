@@ -10,7 +10,7 @@
     <br>
     <br>
     <div id="nuevaTarjeta">
-        <a class="asociar-nueva-tarjeta" href="<?php echo BASE_URL ?>inbox/mis-recargas/asociar-nueva-tarjeta">Asociar nueva tarjeta</a>
+        <a class="asociar-nueva-tarjeta" href="<?php echo BASE_URL ?>inbox/mis-tarjetas/asociar-nueva-tarjeta">Asociar nueva tarjeta</a>
     </div>
 </div>
 
@@ -35,9 +35,12 @@
     {
         $.ajax({
             type: "POST",
-            url: $(this).attr('href'),
-            success: function(sHtml){
-                $('#nuevaTarjeta').html(sHtml);
+            url: $('#formAsociarNuevaTarjeta').attr('action'),
+            dataType: 'json',
+            success: function(data){
+                if (data.success) {
+                    location.reload();
+                }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert(common.ajaxError);

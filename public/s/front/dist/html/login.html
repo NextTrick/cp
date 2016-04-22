@@ -44,6 +44,7 @@
           <p>Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>
           <div class="yellow_box">Inicia sesión</div>
           <div class="purple_box">
+            <div class="error_message"><span class="icon"></span><span class="text">Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde</span></div>
             <div class="content">
               <div class="left">
                 <p>Usando tus redes sociales</p>
@@ -52,10 +53,17 @@
               </div>
               <div class="right">
                 <p>Con tu correo electrónico</p>
-                <input type="text" placeholder="ejemplo@micorreo.com"/>
-                <input type="password" placeholder="contraseña"/>
-                <button class="btn btn_signin">Iniciar Sesión</button>
-                <div class="login_link"><a href="">Olvidé mi contraseña</a></div>
+                <form action="#" data-parsley-validate="data-parsley-validate">
+                  <div class="form_control">
+                    <input type="text" placeholder="ejemplo@micorreo.com" data-parsley-required="data-parsley-required" data-parsley-required-message="Dato obligatorio" data-parsley-pattern="/^[a-z0-9_-]+(.?[a-z0-9_-]+)+@w+([.-]?w+)(.[a-z]{2,10})$/i" data-parsley-pattern-message="Ingrese un correo válido" class="email"/>
+                  </div>
+                  <div class="form_control">
+                    <input type="password" placeholder="contraseña" data-parsley-required="data-parsley-required" data-parsley-required-message="Dato obligatorio" class="password"/>
+                  </div>
+                  <button type="submit" class="btn btn_orange btn_login">Iniciar Sesión</button>
+                </form>
+                <div class="login_link"><a href="#modal_recovery_password" name="modal">Olvidé mi contraseña</a></div>
+                <div class="login_link"><a href="#modal_new_password" name="modal">Nueva contraseña</a></div>
               </div>
             </div>
             <hr/>
@@ -73,6 +81,36 @@
             </div>
           </div>
         </div>
+        <div id="modal_recovery_password" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Recuperar contraseña</h3>
+            <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
+            <input type="text" placeholder="Correo electrónico"/><a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Recuperar contraseña</a>
+          </div>
+        </div>
+        <div id="modal_recovery_response" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Recuperar contraseña</h3>
+            <p>Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.</p>
+            <button class="close btn btn_orange">Aceptar</button>
+          </div>
+        </div>
+        <div id="modal_new_password" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Nueva contraseña</h3>
+            <p>Ingresa una nueva contraseña</p>
+            <input type="text" placeholder="Ingresa tu nueva contraseña"/>
+            <input type="text" placeholder="Repite tu nueva contraseña"/><a id="btn_change_password" href="#modal_new_password_response" name="modal" class="btn btn_orange">Cambiar contraseña</a>
+          </div>
+        </div>
+        <div id="modal_new_password_response" class="modal_box">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Nueva contraseña</h3>
+            <p>Felicidades, tu contraseña se actualizó correctamente</p>
+            <button class="close btn btn_orange">Aceptar</button>
+          </div>
+        </div>
+        <div id="mask"></div>
       </div>
     </section>
     <!--FOOTER-->
@@ -85,6 +123,7 @@
     </footer>
     <!--JS-->
     <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="../js/plugins/parsley.min.js"></script>
     <script src="../js/index.js"></script>
   </body>
 </html>
