@@ -90,12 +90,13 @@
                         <button class="close btn btn_orange">Aceptar</button>
                     </div>
                 </div>
-                <div id="modal_new_password" class="modal_box">
+                <div id="modal_new_password" class="modal_box" data-open="<?php echo $openPopapChangePassword; ?>">
                     <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
                         <h3>Nueva contraseña</h3>
                         <p>Ingresa una nueva contraseña</p>
-                        <input id="password" name="password" type="text" placeholder="Ingresa tu nueva contraseña"/>
+                        <input id="password_new" name="password_new" type="text" placeholder="Ingresa tu nueva contraseña"/>
                         <input id="password_repeat" name="password_repeat" type="text" placeholder="Repite tu nueva contraseña"/>
+                        <input id="codigo_recuperacion" name="codigo_recuperacion" type="hidden" value="<?php echo isset($codigoRecuperacion) ? $codigoRecuperacion : ''; ?>"/>
                         <ul class="parsley-errors-list filled">
                             <li id="error_new_password" class="parsley-required"></li>
                         </ul>

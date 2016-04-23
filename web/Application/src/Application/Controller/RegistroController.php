@@ -245,36 +245,77 @@ class RegistroController extends AbstractActionController
     
     public function modificarPasswordAction()
     {
-        $codigo = $this->params('codigo', null);
-        $form = $this->_getModificarPasswordForm();
-        $form->setAttribute('action', $this->url()->fromRoute('web-modificar-password', array(
-            'controller' => 'registro',
-            'action' => 'modificar-password',
-        )));
-        $form->get('codigo')->setValue($codigo);
-        
+        $codigo = $this->params('codigo', null);        
         if ($this->request->isPost()) {
-            $form->setInputFilter(new \Application\Filter\ModificarPasswordFilter());
-            $data = $this->request->getPost()->toArray();
-            $form->setData($data);
-            if ($form->isValid()) {
-                $data = $form->getData();
+            $result = array('success' => false, 'message' => null, 'token' => null);
+            
+            $response = $this->getResponse();
+            $jsonModel =  new \Zend\View\Model\JsonModel();
+            
+            //validar y generar token
+            $token = $this->request->getPost('token');
+            $validator1 = new \Zend\Validator\Csrf(array('name' => 'token_csrf'));
+            $isValidToken = $validator1->isValid($token);
+            $result['token'] = $validator1->getHash(true);
+            if (!$isValidToken) {
+                $result['message'] = 'Token invalido.';
+                $jsonModel->setVariables($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+        
+            //recuperar password y validar
+            $password = $this->request->getPost('password');
+            $passwordRepeat = $this->request->getPost('password_repeat');
+            if (empty($password)) {
+                $result['message'] = 'Ingrese contraseña por favor.';
+                $jsonModel->setVariables($result);
+                return $response->setContent($jsonModel->serialize());
+            } elseif ($passwordRepeat != $password) {
+                $result['message'] = 'Las contraseñas ingresadas no coinciden.';
+                $jsonModel->setVariables($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+
+            //verificar el codigo de recuperacion
+            $codigoRecuperacion = $this->request->getPost('codigo_recuperacion');
+            if (!empty($codigoRecuperacion)) {
                 $repository = $this->_getUsuarioService()->getRepository();
-                $criteria = array('where' => array('codigo_activar' => $data['codigo']));
+                $criteria = array('where' => array('codigo_activar' => $codigoRecuperacion));
                 $row = $repository->findOne($criteria);
                 if (!empty($row)) {
                     $dataIn = array(
-                        'password' => \Common\Helpers\Util::passwordEncrypt($data['password'], $row['email']),
+                        'password' => \Common\Helpers\Util::passwordEncrypt($password, $row['email']),
                         'codigo_activar' => null,
                     );
                     $repository->save($dataIn, $row['id']);
                     //modificar password en True-Fi
+                    
+                    $result['success'] = true;
+                    $result['message'] = null;
+                } else {
+                    $result['message'] = 'El enlace que se envio a su correo '
+                            . 'electrónico, ya vencio o ya fue usada.';
                 }
+            } else {
+                $result['message'] = 'Por favor verifique su correo electrónico, '
+                        . 'se le envio un enlace para modificar su contraseña.';
             }
+            
+            $jsonModel->setVariables($result);
+            return $response->setContent($jsonModel->serialize());
         }
-        
-        $view = new ViewModel();
-        $view->setVariable('form', $form);
+
+        $form = $this->_getLoginForm();
+        $form->setAttribute('action', $this->url()->fromRoute('web-login/modalidad', array(
+            'controller' => 'login',
+            'action' => 'validate',
+            'option' => 'form',
+        )));
+        $view = new ViewModel(array('form' => $form));
+        $view->setTemplate('application/login/index');
+        $view->setVariable('openPopapChangePassword', 1);
+        $view->setVariable('codigoRecuperacion', $codigo);
+        $view->setTerminal(true);
         return $view;
     }
 
@@ -299,14 +340,9 @@ class RegistroController extends AbstractActionController
         return $this->getServiceLocator()->get('Application\Form\RegistroForm');
     }
     
-//    private function _getRecuperarPasswordForm()
-//    {
-//        return $this->getServiceLocator()->get('Application\Form\RecuperarPasswordForm');
-//    }
-    
-    private function _getModificarPasswordForm()
+    private function _getLoginForm()
     {
-        return $this->getServiceLocator()->get('Application\Form\ModificarPasswordForm');
+        return $this->getServiceLocator()->get('Application\Form\LoginForm');
     }
     
     private function _getUsuarioService()

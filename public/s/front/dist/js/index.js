@@ -84,7 +84,12 @@ $(function() {
           $.ajax({
             type: "POST",
             url: baseUrl+'modificar-password',
-            data:{password:$('#password').val(), password_repeat:$('#password_repeat').val(), token:$('#token_csrf').val()},
+            data:{
+                password:$('#password_new').val(),
+                password_repeat:$('#password_repeat').val(),
+                codigo_recuperacion:$('#codigo_recuperacion').val(),
+                token:$('#token_csrf').val()
+            },
             dataType: 'json',
             success: function(data){
                 $('#token_csrf').val(data.token);
