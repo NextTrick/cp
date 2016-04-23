@@ -49,6 +49,11 @@ class ContenidoService
         );
     }
 
+    /**
+     * Retorna un array que se utilizar en la busqueda
+     * @return array
+     * @author Diómedes Pablo A. <diomedex10@gmail.com>
+     */
     public function getFiltrosBuscar()
     {
         return array(

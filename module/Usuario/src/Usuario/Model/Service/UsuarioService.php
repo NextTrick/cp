@@ -10,22 +10,22 @@ namespace Usuario\Model\Service;
 
 class UsuarioService
 {
-    const DI_DNI = 1;
+    const DI_DNI       = 1;
     const DI_PASAPORTE = 2;
     
     protected $_repository = null;
-    protected $_sl = null;
+    protected $_sl         = null;
 
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        $this->_sl         = $serviceLocator;
     }
 
     public function getDocumentoIdentidadTipo()
     {
         return array(
-            self::DI_DNI => 'DNI',
+            self::DI_DNI       => 'DNI',
             self::DI_PASAPORTE => 'Pasaporte',
         );
     }
@@ -135,4 +135,5 @@ class UsuarioService
     {
         return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
     }
+
 }
