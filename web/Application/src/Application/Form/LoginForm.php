@@ -38,7 +38,6 @@ class LoginForm extends Form
                 'type' => 'text',
                 'placeholder' => 'Email',
                 'autocomplete' => 'off',
-                'class' => 'form-control',
             ),
         ));
         
@@ -52,7 +51,6 @@ class LoginForm extends Form
                 'id' => 'password',
                 'placeholder' => 'Password',
                 'autocomplete' => 'off',
-                'class' => 'form-control',
             ),
         ));
         
@@ -63,7 +61,10 @@ class LoginForm extends Form
                 'csrf_options' => array(
                     'timeout' => 3600
                 )
-            )
+            ),
+            'attributes' => array(
+                'id' => 'token_csrf',
+            ),
         ));
     }
 }

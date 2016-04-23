@@ -61,10 +61,44 @@ $(function() {
         return $('.modal_box').hide();
       },
       closeRecoveryModal: function() {
-        return $('#modal_recovery_password').hide();
+        $.ajax({
+            type: "POST",
+            url: baseUrl+'recuperar-password',
+            data:{email:$('#email').val(), token:$('#token_csrf').val()},
+            dataType: 'json',
+            success: function(data){
+                $('#token_csrf').val(data.token);
+                if (data.success) {
+                    $('#error_recuperar_password').html('');
+                    $('#modal_recovery_password').hide();
+                } else {
+                    $('#error_recuperar_password').html(data.message);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            }
+        });
+        return true;
       },
       closeNewPassModal: function() {
-        return $('#modal_new_password').hide();
+          $.ajax({
+            type: "POST",
+            url: baseUrl+'modificar-password',
+            data:{password:$('#password').val(), password_repeat:$('#password_repeat').val(), token:$('#token_csrf').val()},
+            dataType: 'json',
+            success: function(data){
+                $('#token_csrf').val(data.token);
+                if (data.success) {
+                    $('#error_new_password').html('');
+                    $('#modal_new_password').hide();
+                } else {
+                    $('#error_new_password').html(data.message);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            }
+        });
+        return true;
       },
       closeErrorMessage: function() {
         return dom.errorMessage.addClass('hide');

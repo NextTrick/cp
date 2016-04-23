@@ -160,24 +160,38 @@ class RegistroController extends AbstractActionController
 
     public function recuperarPasswordAction()
     {
-        $form = $this->_getRecuperarPasswordForm();
-        $form->setAttribute('action', $this->url()->fromRoute('web-recuperar-password', array(
-            'controller' => 'registro',
-            'action' => 'recuperar-password',
-        )));
+        $result = array('success' => false, 'message' => null, 'token' => null);
+        $response = $this->getResponse();
+        $jsonModel =  new \Zend\View\Model\JsonModel();
         
-        if ($this->request->isPost()) {
-            $form->setInputFilter(new \Application\Filter\RecuperarPasswordFilter());
-            $data = $this->request->getPost()->toArray();
-            $form->setData($data);
+        $token = $this->request->getPost('token');
+        $validator1 = new \Zend\Validator\Csrf();
+        $validator1->setName('token_csrf');
+        $isValidToken = $validator1->isValid($token);
+        $result['token'] = $validator1->getHash(true);
+        
+        if (!$isValidToken) {
+            $result['message'] = 'Token invalido.';
+            $jsonModel->setVariables($result);
+            return $response->setContent($jsonModel->serialize());
+        }
             
-            $criteria = array('where' => array('email' => $data['email']));
+        if ($this->request->isPost()) {
+            $email = $this->request->getPost('mail');
+            $validator2 = new \Zend\Validator\EmailAddress();
+            if (!$validator2->isValid($email)) {
+                $result['message'] = 'Ingrese un email correcto.';
+                $jsonModel->setVariables($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+            
+            $criteria = array('where' => array('email' => $email));
             $existe = $this->_getUsuarioService()->getRepository()->findExists($criteria);
             
             $usuarioTrueFi = array();
             if ($existe === false) {
                 $dataTrueFi = array(
-                    'EMail' => $data['email'],
+                    'EMail' => $email,
                 );
                 $usuarioTrueFi = $this->_getUsuarioService()->usuarioEnTrueFi($dataTrueFi);
                 $existe = empty($usuarioTrueFi) ? false : true;
@@ -185,16 +199,18 @@ class RegistroController extends AbstractActionController
             
             $noExistsEmail = 'El correo electrónico no se ecuentra registrado.';
             if ($existe === false) {
-                $form->get('email')->setMessages(array('noExistsEmail' => $noExistsEmail));
-            } elseif ($form->isValid()) {
+                $result['message'] = $noExistsEmail;
+                $jsonModel->setVariables($result);
+                return $response->setContent($jsonModel->serialize());
+            } else {
                 if (!empty($usuarioTrueFi)) {
                     //registrar usuario en el sistema con datos devueltos de TrueFi
                 }
 
-                $criteria = array('where' => array('email' => $data['email']));
+                $criteria = array('where' => array('email' => $email));
                 $usuario = $this->_getUsuarioService()->getRepository()->findOne($criteria);
                 if (!empty($usuario)) {
-                    //generar y guardar token de verificación
+                    //generar y guardar codigo de verificación
                     $codigoRecuperar = \Common\Helpers\Util::generateToken($usuario['mguid']);
                     $this->_getUsuarioService()->getRepository()->save(array(
                         'codigo_activar' => $codigoRecuperar
@@ -205,25 +221,26 @@ class RegistroController extends AbstractActionController
                     $data['codigo_activar'] = $codigoRecuperar;
                     $ok = $email->sendMail($data);
                     if ($ok) {
-                        $message = '<b>Felicidades, ya estás a punto de ser parte de Coney Club.</b> '
-                            . 'Te hemos enviado un correo con las instrucciones para actualizar tu cuenta';
-                        $this->flashMessenger()->addMessage(array(
-                            'success' => $message,
-                        ));
-                        return $this->redirect()->toRoute('web-notificar');
+                        $result['success'] = true;
+                        $result['message'] = null;
+                        $jsonModel->setVariables($result);
+                        return $response->setContent($jsonModel->serialize());
                     } else {
-                        $errorSend = 'Error al eviar correo electrónico.';
-                        $form->get('email')->setMessages(array('errorSend' => $errorSend));
+                        $result['message'] = 'Error al eviar correo electrónico.';
+                        $jsonModel->setVariables($result);
+                        return $response->setContent($jsonModel->serialize());
                     }
                 } else {
-                    $form->get('email')->setMessages(array('existsEmail' => $noExistsEmail));
+                    $result['message'] = $noExistsEmail;
+                    $jsonModel->setVariables($result);
+                    return $response->setContent($jsonModel->serialize());
                 }
             }
         }
         
-        $view = new ViewModel();
-        $view->setVariable('form', $form);
-        return $view;
+        $result['message'] = 'Ocurrio un error, por favor intentelo nuevamente.';
+        $jsonModel->setVariables($result);
+        return $response->setContent($jsonModel->serialize());
     }
     
     public function modificarPasswordAction()
@@ -282,10 +299,10 @@ class RegistroController extends AbstractActionController
         return $this->getServiceLocator()->get('Application\Form\RegistroForm');
     }
     
-    private function _getRecuperarPasswordForm()
-    {
-        return $this->getServiceLocator()->get('Application\Form\RecuperarPasswordForm');
-    }
+//    private function _getRecuperarPasswordForm()
+//    {
+//        return $this->getServiceLocator()->get('Application\Form\RecuperarPasswordForm');
+//    }
     
     private function _getModificarPasswordForm()
     {
