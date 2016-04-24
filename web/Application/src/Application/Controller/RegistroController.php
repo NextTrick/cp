@@ -10,7 +10,6 @@ class RegistroController extends AbstractActionController
     public function indexAction()
     {
         $view = new ViewModel();
-        $view->setTerminal(true);
         return $view;
     }
     
@@ -315,7 +314,6 @@ class RegistroController extends AbstractActionController
         $view->setTemplate('application/login/index');
         $view->setVariable('openPopapChangePassword', 1);
         $view->setVariable('codigoRecuperacion', $codigo);
-        $view->setTerminal(true);
         return $view;
     }
 
