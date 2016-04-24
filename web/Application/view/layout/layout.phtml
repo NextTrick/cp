@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <title>Coneypark</title>
-        
+        <title>Coney Park</title>
+        <meta name="description" content="Welcome"/>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script src="<?php echo URL_RESOURCES; ?>b/adminlte/plugins/jQuery/jQuery-2.1.4.min.js?v=<?php echo VERSION; ?>"></script>
+        <link rel="stylesheet" href="<?php echo URL_RESOURCES ?>front/dist/css/normalize.css"/>
+        <link rel="stylesheet" href="<?php echo URL_RESOURCES ?>front/dist/css/style.css"/>
+        <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+        <script>var baseUrl = '<?php echo BASE_URL; ?>';</script>
     </head>
-    <body class="cc-notbg">
-        <div class="main">
-            <div class="container-fluid">
-                <div class="col-md-10 col-sm-10">
-                    <div class="container-fluid cc-left">
-                        <?php echo $this->content; ?>
-                    </div>
-                </div>
-            </div>            
-        </div>
+    <body>
+        <?php echo $this->sectionHeader(); ?>
+        <?php echo $this->sectionRightOption(); ?>
+        <?php echo $this->content; ?>
+        <?php echo $this->sectionFooter(); ?>
+        <!--JS-->
+        <script src="<?php echo URL_RESOURCES ?>front/dist/js/plugins/parsley.min.js"></script>
+        <script src="<?php echo URL_RESOURCES ?>front/dist/js/index.js"></script>
     </body>
 </html>

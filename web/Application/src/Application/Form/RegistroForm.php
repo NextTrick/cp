@@ -90,7 +90,6 @@ class RegistroForm extends Form
         $diTipo = new Element\Select('di_tipo');
         $diTipo->setAttributes(array('id' => 'di_tipo'));
         $diTipo->setValueOptions($tipos);
-        $diTipo->setEmptyOption('- Seleccione -');
         $diTipo->setDisableInArrayValidator(true);
         $this->add($diTipo);
         
@@ -124,13 +123,24 @@ class RegistroForm extends Form
         $codDist->setDisableInArrayValidator(true);
         $this->add($codDist);
         
-        $fechaNac = new Element\Text('fecha_nac');
-        $fechaNac->setAttributes(array(
-                'id' => 'fecha_nac',
-                'maxlength' => '20',
-            ));
-        $this->add($fechaNac);
+        $anio = new Element\Select('anio');
+        $anio->setAttributes(array('id' => 'anio'));
+        $anio->setValueOptions($this->_getAnios());
+        $anio->setDisableInArrayValidator(true);
+        $this->add($anio);
         
+        $mes = new Element\Select('mes');
+        $mes->setAttributes(array('id' => 'mes'));
+        $mes->setValueOptions($this->_getMeses());
+        $mes->setDisableInArrayValidator(true);
+        $this->add($mes);
+        
+        $dia = new Element\Select('dia');
+        $dia->setAttributes(array('id' => 'dia'));
+        $dia->setValueOptions($this->_getDias());
+        $dia->setDisableInArrayValidator(true);
+        $this->add($dia);
+
         $this->add(array(
             'type' => 'Zend\Form\Element\Csrf',
             'name' => 'token_csrf',
@@ -142,12 +152,52 @@ class RegistroForm extends Form
         ));
     }
     
-    protected function _getUsuarioService()
+    private function _getMeses()
+    {
+        return array(
+            '01' => 'Enero',
+            '02' => 'Febrero',
+            '03' => 'Marzo',
+            '04' => 'Abril',
+            '05' => 'Mayo',
+            '06' => 'Junio',
+            '07' => 'Julio',
+            '08' => 'Agosto',
+            '09' => 'Septiembre',
+            '10' => 'Octubre',
+            '11' => 'Noviembre',
+            '12' => 'Diciembre',
+        );
+    }
+    
+    private function _getAnios()
+    {
+        $anios = array();
+        $anioActual = (int)date('Y');
+        for ($anio = 1980; $anio < $anioActual; $anio++) {
+            $anios[$anio] = $anio;
+        }
+        
+        return $anios;
+    }
+    
+    private function _getDias()
+    {
+        $anios = array();
+        for ($dia = 1; $dia < 31; $dia++) {
+            $sDia = $dia < 10 ? str_pad($dia, 2, '0', STR_PAD_LEFT) : $dia;
+            $anios[$sDia] = $sDia;
+        }
+        
+        return $anios;
+    }
+    
+    private function _getUsuarioService()
     {
         return $this->_sl->get('Usuario\Model\Service\UsuarioService');
     }
     
-    protected function _getUbigeoService()
+    private function _getUbigeoService()
     {
         return $this->_sl->get('Sistema\Model\Service\UbigeoService');
     }
