@@ -10,22 +10,22 @@ namespace Usuario\Model\Service;
 
 class UsuarioService
 {
-    const DI_DNI = 1;
+    const DI_DNI       = 1;
     const DI_PASAPORTE = 2;
     
     protected $_repository = null;
-    protected $_sl = null;
+    protected $_sl         = null;
 
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        $this->_sl         = $serviceLocator;
     }
 
     public function getDocumentoIdentidadTipo()
     {
         return array(
-            self::DI_DNI => 'DNI',
+            self::DI_DNI       => 'DNI',
             self::DI_PASAPORTE => 'Pasaporte',
         );
     }
@@ -48,6 +48,39 @@ class UsuarioService
     public function usuarioEnTrueFi($data)
     {
         return array();
+    }
+
+    public function asociarTarjeta($data)
+    {
+        $usuario = $this->_repository->findOne(array('where' => array('id' => $data['usuario_id'])));
+        $result = array(
+            'success' => false,
+            'message' => 'Error al asociar la tarjeta.',
+        );
+        if (!empty($usuario)) {
+            $dataServ = array(
+                'MGUID' => $usuario['mguid'],
+                'Card' => $data['numero'],
+            );
+            $res = $this->_getTrueFiTarjetaService()->addCard($dataServ);
+            if ($res['success']) {
+                $card = $res['result'];
+                $save = $this->_getTarjetaService()->getRepository()->save(array(
+                    'usuario_id' => $data['usuario_id'],
+                    'nombre' => $data['nombre'],
+                    'cguid' => $card['cguid'],
+                    'fecha_creacion' => date('Y-m-d H:i:s'),
+                    'estado_truefi' => $card['status'],
+                ));
+                if (!empty($save)) {
+                    $result['success'] = true;
+                    $result['message'] = null;
+                }
+            } else {
+                $result['message'] = $res['message'];
+            }
+        }
+        return $result;
     }
 
     public function syncTarjetasCliente($usuarioId, $mguid)
@@ -102,4 +135,5 @@ class UsuarioService
     {
         return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
     }
+
 }

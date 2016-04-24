@@ -9,6 +9,7 @@ return array(
         'Application\Controller\Registro' => 'Application\Controller\RegistroController',
         'Application\Controller\Tarjeta' => 'Application\Controller\TarjetaController',
         'Application\Controller\Ubigeo' => 'Application\Controller\UbigeoController',
+        'Application\Controller\MisTarjetas' => 'Application\Controller\MisTarjetasController',
         'Application\Controller\MisRecargas' => 'Application\Controller\MisRecargasController',
     ),
 );

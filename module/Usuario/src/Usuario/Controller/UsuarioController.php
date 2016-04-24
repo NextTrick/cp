@@ -16,25 +16,39 @@ class UsuarioController extends SecurityAdminController
 {
     public function indexAction()
     {
-        $params = array(
-            'email' => String::xssClean($this->params()->fromQuery('email')),
-            'nombres' => String::xssClean($this->params()->fromQuery('nombres')),
-            'paterno' => String::xssClean($this->params()->fromQuery('paterno')),
-            'materno' => String::xssClean($this->params()->fromQuery('materno')),
-        );
-        
-        $form = $this->crearBuscarForm();
-        $form->setData($params);
-        
-        $criteria = array(
-            'where' => $params,
-        );
-        $gridList = $this->_getUsuarioService()->getRepository()->search($criteria);
+        try {
+            $params = array(
+                String::xssClean($this->params()->fromPost('cmbFiltro')) => String::xssClean($this->params()->fromPost('txtBuscar')),
+                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
+                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbEstado')),
+                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
+                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
+            );
 
-        $view = new ViewModel();
-        $view->setVariable('gridList', $gridList);
-        $view->setVariable('form', $form);
-        return $view;
+            $form = $this->getServiceLocator()->get('Usuario\Form\BuscarForm');
+            $form->setAttribute('action', $this->url()->fromRoute('usuario/crud', array(
+                'controller' => 'usuario', 'action' => 'index'
+            )));
+
+            $form->setData($this->params()->fromPost());
+
+            $criteria = array(
+                'whereLike' => $params,
+                'limit'     => LIMIT_BUSCAR,
+            );
+
+            $gridList  = $this->_getUsuarioService()->getRepository()->search($criteria);
+            $countList = $this->_getUsuarioService()->getRepository()->countTotal($criteria);
+
+            $view = new ViewModel();
+            $view->setVariable('gridList', $gridList);
+            $view->setVariable('countList', $countList);
+            $view->setVariable('form', $form);
+
+            return $view;
+        } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+        }
     }
 
     public function crearAction()

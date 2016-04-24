@@ -15,7 +15,10 @@ class LoginController extends SecurityWebController
             'action' => 'validate',
             'option' => 'form',
         )));
-        return new ViewModel(array('form' => $form));
+        $view = new ViewModel(array('form' => $form));
+        $view->setVariable('openPopapChangePassword', 0);
+        $view->setTerminal(true);
+        return $view;
     }
 
     public function validateSocialAction()
@@ -44,6 +47,7 @@ class LoginController extends SecurityWebController
             ));
             $form->setAttribute('action', $url);
             $viewModel = new ViewModel(array('form' => $form));
+            $viewModel->setVariable('openPopapChangePassword', 0);
             $viewModel->setTemplate('application/login/index');
             return $viewModel;
         }

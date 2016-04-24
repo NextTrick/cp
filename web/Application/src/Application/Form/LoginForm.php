@@ -22,8 +22,7 @@ class LoginForm extends Form
 
         $this->setAttribute('method', 'post');
         $this->setAttribute('role', 'form');
-        $this->setAttribute('id', 'formLogin');
-        $this->setAttribute('name', 'formLogin');
+        $this->setAttribute('data-parsley-validate', 'data-parsley-validate');
         $this->_addElements();
     }
 
@@ -39,7 +38,6 @@ class LoginForm extends Form
                 'type' => 'text',
                 'placeholder' => 'Email',
                 'autocomplete' => 'off',
-                'class' => 'form-control',
             ),
         ));
         
@@ -53,7 +51,6 @@ class LoginForm extends Form
                 'id' => 'password',
                 'placeholder' => 'Password',
                 'autocomplete' => 'off',
-                'class' => 'form-control',
             ),
         ));
         
@@ -64,16 +61,10 @@ class LoginForm extends Form
                 'csrf_options' => array(
                     'timeout' => 3600
                 )
-            )
-        ));
-        
-        $this->add(array(
-            'name' => 'aceptar',
+            ),
             'attributes' => array(
-                'type' => 'submit',
-                'value' => 'Aceptar',
-                'class' => 'btn btn-primary btn-block btn-flat'
-            )
+                'id' => 'token_csrf',
+            ),
         ));
     }
 }

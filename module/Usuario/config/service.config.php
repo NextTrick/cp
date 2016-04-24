@@ -11,6 +11,7 @@ return array(
         
         //forms
         'Usuario\Form\UsuarioForm' => 'Usuario\Form\Factory\UsuarioFactory',
+        'Usuario\Form\BuscarForm'  => 'Usuario\Form\Factory\BuscarFactory',
     ),
     'invokables' => array(
     ),
