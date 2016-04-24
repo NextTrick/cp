@@ -4,14 +4,13 @@ namespace Application\Controller;
 use Application\Controller\SecurityWebController;
 use Zend\View\Model\ViewModel;
 
-class RecargasController extends SecurityWebController
+class BeneficiosController extends SecurityWebController
 {
     public function indexAction()
     {
         if ($this->_isLogin() === false) {
             return $this->_toUrlLogin();
         }
-
         $view = new ViewModel();
         return $view;
     }

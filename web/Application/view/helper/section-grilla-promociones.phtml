@@ -1,0 +1,13 @@
+<?php if (!empty($rows['destacado'])) : ?>
+<?php foreach ($rows['destacado'] as $row) : ?>
+    <?php echo $row['id']; ?> <br>
+    <?php echo $row['titulo1']; ?> <br>
+    <?php echo $row['titulo2']; ?> <br>
+<?php endforeach; ?>
+<?php endif; ?>
+
+<?php foreach ($rows['normal'] as $row) : ?>
+    <?php echo $row['id']; ?> <br>
+    <?php echo $row['titulo1']; ?> <br>
+    <?php echo $row['titulo2']; ?> <br>
+<?php endforeach; ?>
