@@ -74,27 +74,34 @@ class BuscarForm extends Form
         $cmbPais->setDisableInArrayValidator(true);
         $this->add($cmbPais);
 
-        $filtroProvincias = $this->getProvincias();
+        $cmbDepartamento     = new Element\Select('cmbDepartamento');
+        $cmbDepartamento->setAttributes(array('id' => 'cmbDepartamento'));
+        $cmbDepartamento->setValueOptions(array());
+        $cmbDepartamento->setEmptyOption('- Seleccione -');
+        $cmbDepartamento->setDisableInArrayValidator(true);
+        $this->add($cmbDepartamento);
+
         $cmbProvincia     = new Element\Select('cmbProvincia');
         $cmbProvincia->setAttributes(array('id' => 'cmbProvincia'));
-        $cmbProvincia->setValueOptions($filtroProvincias);
+        $cmbProvincia->setValueOptions(array());
         $cmbProvincia->setEmptyOption('- Seleccione -');
         $cmbProvincia->setDisableInArrayValidator(true);
         $this->add($cmbProvincia);
 
-        $filtroDistritos = $this->getDistritos();
         $cmbDistrito     = new Element\Select('cmbDistrito');
         $cmbDistrito->setAttributes(array('id' => 'cmbDistrito'));
-        $cmbDistrito->setValueOptions($filtroDistritos);
+        $cmbDistrito->setValueOptions(array());
         $cmbDistrito->setEmptyOption('- Seleccione -');
         $cmbDistrito->setDisableInArrayValidator(true);
         $this->add($cmbDistrito);
 
+        //var_dump($this->getProvincias2());exit;
+
     }
-    
-    protected function _getUsuarioService()
+
+    protected function _getUbigeoService()
     {
-        return $this->_sl->get('Usuario\Model\Service\UsuarioService');
+        return $this->_sl->get('Sistema\Model\Service\UbigeoService');
     }
 
     private function getEstados()
@@ -109,17 +116,26 @@ class BuscarForm extends Form
 
     private function getPaises()
     {
-        return array();
+        return $this->_getUbigeoService()->getPaises();
     }
 
-    private function getProvincias()
+    public function setDataUbigeo($params)
     {
-        return array();
-    }
+        if (!empty($params['cmbPais'])) {
+            $dataDepa = $this->_getUbigeoService()->getDepartamentos($params['cmbPais']);
+            $this->get('cmbDepartamento')->setOptions($dataDepa);
+        }
 
-    private function getDistritos()
-    {
-        return array();
+        if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento'])) {
+            $dataProv = $this->_getUbigeoService()->getProvincias($params['cmbPais'],$params['cmbDepartamento']);
+            $this->get('cmbProvincia')->setOptions($dataProv);
+        }
+
+        if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento']) && !empty($params['cmbDistrito'])) {
+            $dataDist = $this->_getUbigeoService()->getDistritos($params['cmbPais'], $params['cmbDepartamento'], $params['cmbDistrito']);
+            $this->get('cmbDistrito')->setOptions($dataDist);
+        }
+
     }
 
     /**

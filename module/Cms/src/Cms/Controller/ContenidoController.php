@@ -54,7 +54,7 @@ class ContenidoController extends SecurityAdminController
     public function crearAction()
     {
         $request = $this->getRequest();
-        $form = $this->crearCrudForm(AC_CREAR);
+        $form    = $this->crearCrudForm(AC_CREAR);
         
         if ($request->isPost()) {            
             $this->_prepareSave(AC_CREAR, $form);

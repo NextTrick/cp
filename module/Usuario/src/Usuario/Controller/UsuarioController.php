@@ -12,17 +12,21 @@ use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
 use \Common\Helpers\String;
 
+
 class UsuarioController extends SecurityAdminController
 {
     public function indexAction()
     {
         try {
+            $nameFilter = String::xssClean($this->params()->fromPost('cmbFiltro'));
             $params = array(
-                String::xssClean($this->params()->fromPost('cmbFiltro')) => String::xssClean($this->params()->fromPost('txtBuscar')),
-                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
-                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbEstado')),
-                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
-                'cmbTipoDoc'                                             => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
+                $nameFilter => String::xssClean($this->params()->fromPost('txtBuscar')),
+                'di_tipo'   => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
+                'estado'    => String::xssClean($this->params()->fromPost('cmbEstado')),
+                'cod_pais'  => String::xssClean($this->params()->fromPost('cmbPais')),
+                'cod_depa'  => String::xssClean($this->params()->fromPost('cmbDepartamento')),
+                'cod_prov'  => String::xssClean($this->params()->fromPost('cmbProvincia')),
+                'cod_dist'  => String::xssClean($this->params()->fromPost('cmbDistrito')),
             );
 
             $form = $this->getServiceLocator()->get('Usuario\Form\BuscarForm');
@@ -30,6 +34,7 @@ class UsuarioController extends SecurityAdminController
                 'controller' => 'usuario', 'action' => 'index'
             )));
 
+            $form->setDataUbigeo($this->params()->fromPost());
             $form->setData($this->params()->fromPost());
 
             $criteria = array(
@@ -50,6 +55,84 @@ class UsuarioController extends SecurityAdminController
             echo $e->getMessage();exit;
         }
     }
+
+    public function exportarExcelAction()
+    {
+        try {
+
+            $nameFilter = String::xssClean($this->params()->fromPost('cmbFiltro'));
+            $params = array(
+                $nameFilter => String::xssClean($this->params()->fromPost('txtBuscar')),
+                'di_tipo'   => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
+                'estado'    => String::xssClean($this->params()->fromPost('cmbEstado')),
+                'cod_pais'  => String::xssClean($this->params()->fromPost('cmbPais')),
+                'cod_depa'  => String::xssClean($this->params()->fromPost('cmbDepartamento')),
+                'cod_prov'  => String::xssClean($this->params()->fromPost('cmbProvincia')),
+                'cod_dist'  => String::xssClean($this->params()->fromPost('cmbDistrito')),
+            );
+
+            $criteria = array(
+                'whereLike' => $params,
+                'limit'     => LIMIT_BUSCAR,
+            );
+
+            $data = $this->_getUsuarioService()->getRepository()->search($criteria);
+
+
+
+        } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+        }
+    }
+
+    public function getDistritosAction()
+    {
+        try {
+            $codPais        = String::xssClean($this->params()->fromPost('cmbPais'));
+            $codDepa        = String::xssClean($this->params()->fromPost('cmbDepartamento'));
+            $codProv        = String::xssClean($this->params()->fromPost('cmbProvincia'));
+            $ubigeoService  = $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
+            $result['data'] = $ubigeoService->getDistritos($codPais, $codDepa, $codProv);
+
+            return json_encode($result);
+
+        } catch (\Exception $e) {
+            $result['data'] = array();
+            return $result['data'];
+        }
+    }
+
+    public function getProvinciasAction()
+    {
+        try {
+            $codPais        = String::xssClean($this->params()->fromPost('cmbPais'));
+            $codDepa        = String::xssClean($this->params()->fromPost('cmbDepa'));
+            $ubigeoService  = $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
+            $result['data'] = $ubigeoService->getProvincias($codPais, $codDepa);
+
+            return json_encode($result);
+
+        } catch (\Exception $e) {
+            $result['data'] = array();
+            return $result['data'];
+        }
+    }
+
+    public function getDepartamentosAction()
+    {
+        try {
+            $codPais        = String::xssClean($this->params()->fromPost('cmbPais'));
+            $ubigeoService  = $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
+            $result['data'] = $ubigeoService->getDepartamentos($codPais);
+
+            return json_encode($result);
+
+        } catch (\Exception $e) {
+            $result['data'] = array();
+            return $result['data'];
+        }
+    }
+
 
     public function crearAction()
     {
