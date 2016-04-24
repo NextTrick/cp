@@ -8,7 +8,7 @@ return array(
             'cms' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/cms',
+                    'route'    => '/admin/cms',
                     'defaults' => array(
                         'controller' => 'Cms\Controller\Index',
                         'action' => 'index',
