@@ -30,14 +30,4 @@ class PaqueteRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         );
         return $this->findPairs($criteria);
     }
-    
-    public function findAllGrid()
-    {
-        $where = new \Zend\Db\Sql\Where();
-        $where->equalTo('status', 1);
-        $criteria = array(
-            'where' => $where,
-        );
-        return $this->findAll($criteria);
-    }
 }

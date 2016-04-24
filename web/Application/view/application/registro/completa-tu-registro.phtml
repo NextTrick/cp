@@ -1,103 +1,130 @@
 <?php $this->form->prepare(); ?>
-<div class="box">
-    <div class="box-header with-border">
-        <label>Registrarse</label>
+<section>
+    <div class="box_center">
+        <div class="welcome_box">
+            <div class="yellow_box">Completa tu registro</div>
+            <div class="purple_box">
+                <div class="error_message hide"><span class="icon"></span><span class="text">Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde</span></div>
+                <?php echo $this->form()->openTag($this->form->setAttribute('class', 'signin_form')); ?>
+                    <h3>Tus datos de cuenta</h3>
+                    <div class="content_form">
+                        <div class="form_control">
+                            <label class="left" for="email">Correo</label>
+                            <?php echo $this->formElement($this->form->get('email')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('email')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="password">Contraseña</label>
+                            <?php echo $this->formElement($this->form->get('password')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('password')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="password_repeat">Repetir contraseña</label>
+                            <?php echo $this->formElement($this->form->get('password_repeat')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('password_repeat')); ?></span>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h3>Tus datos personales</h3>
+                    <div class="content_form">
+                        <div class="form_control">
+                            <label class="left" for="nombres">Nombre</label>
+                            <?php echo $this->formElement($this->form->get('nombres')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('nombres')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="paterno">Apellido paterno</label>
+                            <?php echo $this->formElement($this->form->get('paterno')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('paterno')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="materno">Apellido materno</label>
+                            <?php echo $this->formElement($this->form->get('materno')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('materno')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="di_valor">Documento de identidad</label>
+                            <div class="right">
+                                <?php echo $this->formElement($this->form->get('di_tipo')->setAttributes(array(
+                                    'class' => '',
+                                ))) ?>
+                                
+                                <?php echo $this->formElement($this->form->get('di_valor')->setAttributes(array(
+                                    'class' => '',
+                                    'placeholder' => 'Nro de documento',
+                                ))) ?>
+                                <span class="error"><?php echo $this->formElementerrors($form->get('di_valor')); ?></span>
+                            </div>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="cod_pais">País</label>
+                            <?php echo $this->formElement($this->form->get('cod_pais')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('cod_pais')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="cod_depa">Departamento</label>
+                            <?php echo $this->formElement($this->form->get('cod_depa')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('cod_depa')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="cod_dist">Distrito</label>
+                            <?php echo $this->formElement($this->form->get('cod_dist')->setAttributes(array(
+                                'class' => 'right',
+                            ))) ?>
+                            <span class="error"><?php echo $this->formElementerrors($form->get('cod_dist')); ?></span>
+                        </div>
+                        <div class="form_control">
+                            <label class="left">Fecha de nacimiento</label>
+                            <div class="right">
+                                <?php echo $this->formElement($this->form->get('dia')->setAttributes(array(
+                                    'class' => '',
+                                ))) ?>
+                                <?php echo $this->formElement($this->form->get('mes')->setAttributes(array(
+                                    'class' => '',
+                                ))) ?>
+                                <?php echo $this->formElement($this->form->get('anio')->setAttributes(array(
+                                    'class' => '',
+                                ))) ?>
+                            </div>
+                        </div>
+                        <div class="form_control">
+                            <div class="right">
+                                <?php echo $this->formRow($form->get('token_csrf')); ?>
+                                <button type="submit" class="btn btn_orange btn_save_signin">Registrarme</button>
+                            </div>
+                        </div>
+                    </div>
+                <?php echo $this->form()->closeTag(); ?>
+                <hr/>
+                <div class="login_link"><a href="login.html">Ya tengo una cuenta en Coney Park<span></span></a></div>
+            </div>
+        </div>
+        <div id="modal_recovery_password" class="modal_box">
+            <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+                <h3>Recuperar contraseña</h3>
+                <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
+                <input type="text" placeholder="Correo electrónico"/><a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Recuperar contraseña</a>
+            </div>
+        </div>
+        <div id="mask"></div>
     </div>
-    <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-horizontal')); ?>
-    <div class="box-body">
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="email">Correo <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('email')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('email')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="password">Contreseña <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('password')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('password')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="password_repeat">Repetir contreseña <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('password_repeat')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('password_repeat')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="nombres">Nombres <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('nombres')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('nombres')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="paterno">Apellido paterno <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('paterno')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('paterno')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="materno">Apellido materno <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('materno')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('materno')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="di_tipo">Documento de identidad <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('di_tipo')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('di_tipo')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label"></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('di_valor')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('di_valor')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="cod_pais">Pais <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('cod_pais')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('cod_pais')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="cod_depa">Departamento <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('cod_depa')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('cod_depa')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="cod_dist">Distrito <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('cod_dist')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('cod_dist')); ?></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label" for="fecha_nac">Fecha Nacimiento <span>*</span></label>
-            <div class="col-sm-8">
-                <?php echo $this->formElement($this->form->get('fecha_nac')->setAttribute('class', 'form-control')) ?>
-                <span class="error"><?php echo $this->formElementerrors($form->get('fecha_nac')); ?></span>
-            </div>
-        </div>
-        <div class="box-footer">
-            <?php echo $this->formRow($form->get('token_csrf')); ?>
-            <a class="btn btn-default" href="<?php echo BASE_URL; ?>usuario/usuario/index">Regresar</a>
-            <button class="btn btn-success" type="submit">Aceptar</button>
-        </div>
-    </div>
-    <?php echo $this->form()->closeTag(); ?>
-</div>
-
+</section>
 <script type="text/javascript">
     var ubigeo = {
         loadDepartameto:function(){

@@ -166,18 +166,6 @@ class RegistroFilter extends Zf2InputFilter
                 self::validatorNotEmpty('Documento de Identidad'),
             )
         ));
-
-        $this->add(array(
-            'name' => 'fecha_nac',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Fecha de nacimiento'),
-            )
-        ));
     }
 
     protected function _getValueDefault($key)

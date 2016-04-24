@@ -46,6 +46,18 @@ class PaqueteFilter extends Zf2InputFilter
             )
         ));
         
+        $this->add(array(
+            'name' => 'tipo',
+            'required' => false,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                self::validatorDigits('Tipo'),
+            )
+        ));
+        
         $image = new \Zend\InputFilter\FileInput('imagen');
         $image->setRequired(false);
         $image->getValidatorChain()

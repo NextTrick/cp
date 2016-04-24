@@ -176,18 +176,20 @@ CREATE  TABLE IF NOT EXISTS `paquete_paquete` (
   `referencia` VARCHAR(32) NOT NULL ,
   `titulo1` VARCHAR(200) NULL ,
   `titulo2` VARCHAR(200) NULL ,
+  `tipo` INT NOT NULL ,
   `imagen` VARCHAR(120) NULL ,
   `importe_minimo` FLOAT NOT NULL ,
   `importe_emoney` FLOAT NOT NULL ,
   `importe_bonus` FLOAT NOT NULL ,
-  `monto_total` FLOAT NOT NULL ,
+  `tickets` FLOAT NOT NULL ,
   `legal` TEXT NULL ,
   `activo` TINYINT(1) NULL DEFAULT 0 ,
   `destacado` TINYINT(1) NULL DEFAULT 0 ,
   `fecha_creacion` DATETIME NULL ,
   `fecha_edicion` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `referencia_index` (`referencia` ASC) )
+  INDEX `referencia_index` (`referencia` ASC) ,
+  INDEX `tipo_index` (`tipo` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

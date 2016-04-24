@@ -16,7 +16,7 @@ class LoginController extends SecurityWebController
             'option' => 'form',
         )));
         $view = new ViewModel(array('form' => $form));
-        $view->setTerminal(true);
+        $view->setVariable('openPopapChangePassword', 0);
         return $view;
     }
 
@@ -46,6 +46,7 @@ class LoginController extends SecurityWebController
             ));
             $form->setAttribute('action', $url);
             $viewModel = new ViewModel(array('form' => $form));
+            $viewModel->setVariable('openPopapChangePassword', 0);
             $viewModel->setTemplate('application/login/index');
             return $viewModel;
         }
