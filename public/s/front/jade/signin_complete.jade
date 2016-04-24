@@ -1,0 +1,86 @@
+extends layout/layout.jade
+block section
+	section
+		.box_center
+			.welcome_box
+				.yellow_box Completa tu registro
+				.purple_box
+					.error_message.hide
+						span.icon
+						span.text Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde
+					
+					form.signin_form(action="")
+						h3 Tus datos de cuenta
+						.content_form
+							.form_control
+								label.left Correo
+								input.right(type="text")
+							.form_control
+								label.left Contraseña
+								input.right(type="text")
+							.form_control
+								label.left Repetir contraseña
+								input.right(type="text")
+						hr
+						h3 Tus datos personales
+						.content_form
+							.form_control
+								label.left Nombre
+								input.right(type="text")
+							.form_control
+								label.left Apellido paterno
+								input.right(type="text")
+							.form_control
+								label.left Apellido materno
+								input.right(type="text")
+							.form_control
+								label.left Documento de identidad
+								.right
+									select#doc_type(name="doc_type")
+										option(value="") DNI
+										option(value="") Pasaporte
+									input(type="text" placeholder="Nro de documento") 
+							.form_control
+								label.left País
+								select.right(name="country")
+									option(value="") DNI
+									option(value="") Pasaporte
+							.form_control
+								label.left Departamento
+								select.right(name="country")
+									option(value="") DNI
+									option(value="") Pasaporte
+							.form_control
+								select.right(name="country")
+									option(value="") DNI
+									option(value="") Pasaporte
+							.form_control
+								label.left Fecha de nacimiento
+								.right
+									select(name="country")
+										option(value="") DNI
+										option(value="") Pasaporte
+									select(name="country")
+										option(value="") DNI
+										option(value="") Pasaporte
+									select(name="country")
+										option(value="") DNI
+										option(value="") Pasaporte
+							.form_control
+								.right
+									button.btn.btn_orange.btn_save_signin(type="submit") Registrarme
+					hr
+					.login_link
+						a(href="login.html") Ya tengo una cuenta en Coney Park
+							span
+				
+			#modal_recovery_password.modal_box
+				.modal_content.modal_recovery_content
+					span.icon_logo
+					h3 Recuperar contraseña
+					p Ingresa la dirección de correo electrónico que usaste para registrarte.
+					input(type="text" placeholder="Correo electrónico")
+					a#btn_recovery.btn.btn_orange(href='#modal_recovery_response', name='modal') Recuperar contraseña
+			
+			#mask
+			

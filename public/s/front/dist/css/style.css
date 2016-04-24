@@ -161,10 +161,10 @@ section .welcome_box {
 }
 section .yellow_box {
   background: #ffb000;
-  width: 200px;
   height: 42px;
+  display: inline-block;
+  padding: 8px 20px;
   text-align: center;
-  padding-top: 8px;
   box-sizing: border-box;
   color: #470446;
   font-size: 24px;
@@ -283,6 +283,24 @@ section .error_message span.text {
 }
 section .error_message.hide {
   display: none;
+}
+section form .form_control {
+  overflow: hidden;
+}
+section form .form_control .left {
+  width: 35%;
+  text-align: left;
+}
+section form .form_control .right {
+  width: 63%;
+}
+section form .form_control .right .button {
+  width: 100%;
+  margin-top: 20px;
+}
+section form.signin_form .content_form {
+  width: 500px;
+  margin: 0 auto;
 }
 footer {
   display: block;
