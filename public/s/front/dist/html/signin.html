@@ -38,7 +38,35 @@
       </ul>
     </div>
     <section>
-      <div class="box_center"></div>
+      <div class="box_center">
+        <div class="welcome_box">
+          <h2>¡Benvenido a  <span>Coney Club  </span>y recargas virtuales!</h2>
+          <p class="medium">Un club creado para todos aquellos que buscan <span>más diversión</span>por mucho menos!</p>
+          <p class="small">Ahora podrás hacer tus recargas<strong>sin necesidad de hacer colas</strong>, además podrás gozar de <strong>mucho beneficios</strong></p>
+          <div class="yellow_box">Regístrate</div>
+          <div class="purple_box">
+            <div class="error_message"><span class="icon"></span><span class="text">Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde</span></div>
+            <div class="content">
+              <div class="left">
+                <p>Usando tus redes sociales</p>
+                <button class="btn btn_fb"><span class="icon"></span><span class="text">Facebook</span></button>
+                <button class="btn btn_tw"><span class="icon"></span><span class="text">Twitter</span></button>
+              </div>
+              <div class="right">
+                <p>Registrando tu correo electrónico</p>
+                <form action="signin_complete.html" data-parsley-validate="data-parsley-validate">
+                  <div class="form_control">
+                    <input type="email" placeholder="ejemplo@micorreo.com" data-parsley-required="data-parsley-required" data-parsley-required-message="Dato obligatorio" data-parsley-type="email" data-parsley-type-message="Ingrese un correo válido" class="email"/>
+                  </div>
+                  <button type="submit" class="btn btn_orange">Registrarme</button>
+                </form>
+              </div>
+            </div>
+            <hr/>
+            <div class="login_link"><a href="login.html">Ya tengo una cuenta en Coney Park<span></span></a></div>
+          </div>
+        </div>
+      </div>
     </section>
     <!--FOOTER-->
     <footer><img src="../images/bottom.png" alt="" class="bg"/>

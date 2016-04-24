@@ -101,10 +101,10 @@ section
 		text-align center
 	.yellow_box
 		background #FFB000
-		width 200px
 		height 42px
+		display inline-block
+		padding 8px 20px
 		text-align center
-		padding-top 8px
 		box-sizing border-box
 		color #470446
 		font-size 24px
@@ -196,6 +196,21 @@ section
 				margin-top 5px
 		&.hide
 			display none
+	form
+		.form_control
+			overflow hidden
+			.left
+				width 35%
+				text-align left
+			.right
+				width 63%
+				.button
+					width 100%
+					margin-top 20px
+		&.signin_form
+			.content_form
+				width 500px
+				margin 0 auto
 footer
 	display block
 	img.bg
