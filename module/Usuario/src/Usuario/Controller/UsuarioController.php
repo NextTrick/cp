@@ -11,24 +11,14 @@ namespace Usuario\Controller;
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
 use \Common\Helpers\String;
-
+use PHPExcel;
+use \PHPExcel_IOFactory;
 
 class UsuarioController extends SecurityAdminController
 {
     public function indexAction()
     {
         try {
-            $nameFilter = String::xssClean($this->params()->fromPost('cmbFiltro'));
-            $params = array(
-                $nameFilter => String::xssClean($this->params()->fromPost('txtBuscar')),
-                'di_tipo'   => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
-                'estado'    => String::xssClean($this->params()->fromPost('cmbEstado')),
-                'cod_pais'  => String::xssClean($this->params()->fromPost('cmbPais')),
-                'cod_depa'  => String::xssClean($this->params()->fromPost('cmbDepartamento')),
-                'cod_prov'  => String::xssClean($this->params()->fromPost('cmbProvincia')),
-                'cod_dist'  => String::xssClean($this->params()->fromPost('cmbDistrito')),
-            );
-
             $form = $this->getServiceLocator()->get('Usuario\Form\BuscarForm');
             $form->setAttribute('action', $this->url()->fromRoute('usuario/crud', array(
                 'controller' => 'usuario', 'action' => 'index'
@@ -37,10 +27,7 @@ class UsuarioController extends SecurityAdminController
             $form->setDataUbigeo($this->params()->fromPost());
             $form->setData($this->params()->fromPost());
 
-            $criteria = array(
-                'whereLike' => $params,
-                'limit'     => LIMIT_BUSCAR,
-            );
+            $criteria = $this->_getUsuarioService()->getDataCriteria($this->params()->fromPost());
 
             $gridList  = $this->_getUsuarioService()->getRepository()->search($criteria);
             $countList = $this->_getUsuarioService()->getRepository()->countTotal($criteria);
@@ -59,26 +46,103 @@ class UsuarioController extends SecurityAdminController
     public function exportarExcelAction()
     {
         try {
+            $view = new ViewModel();
+            $view->setTerminal(true);
 
-            $nameFilter = String::xssClean($this->params()->fromPost('cmbFiltro'));
-            $params = array(
-                $nameFilter => String::xssClean($this->params()->fromPost('txtBuscar')),
-                'di_tipo'   => String::xssClean($this->params()->fromPost('cmbTipoDoc')),
-                'estado'    => String::xssClean($this->params()->fromPost('cmbEstado')),
-                'cod_pais'  => String::xssClean($this->params()->fromPost('cmbPais')),
-                'cod_depa'  => String::xssClean($this->params()->fromPost('cmbDepartamento')),
-                'cod_prov'  => String::xssClean($this->params()->fromPost('cmbProvincia')),
-                'cod_dist'  => String::xssClean($this->params()->fromPost('cmbDistrito')),
-            );
-
-            $criteria = array(
-                'whereLike' => $params,
-                'limit'     => LIMIT_BUSCAR,
-            );
-
+            $criteria = $this->_getUsuarioService()->getDataCriteria($this->params()->fromPost());
             $data = $this->_getUsuarioService()->getRepository()->search($criteria);
 
+            $objPHPExcel = new PHPExcel();
+            $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
 
+            $objPHPExcel->setActiveSheetIndex(0);
+            $sheet = $objPHPExcel->getActiveSheet();
+
+            $style['cabecera'] = array(
+                'font' => array(
+                    'name'  => 'Calibri',
+                    'bold'  => true,
+                    'color' => array(
+                        'rgb' => '1F497D'
+                    )
+                ),
+                'fill' => array(
+                    'type'  => \PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'DBE5F1')
+                ),
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('rgb' => '4F81BD')
+                    )
+                )
+            );
+            $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($style['cabecera']);
+
+            $sheet->setCellValue('A1', 'Email');
+            $sheet->setCellValue('B1', 'Nombre');
+            $sheet->setCellValue('C1', 'A. Paterno');
+            $sheet->setCellValue('D1', 'A. Materno');
+            $sheet->setCellValue('E1', 'Tipo Doc');
+            $sheet->setCellValue('F1', 'Nro. Doc.');
+            $sheet->setCellValue('G1', 'Pais');
+            $sheet->setCellValue('H1', 'Departamento');
+            $sheet->setCellValue('I1', 'Provincia');
+            $sheet->setCellValue('J1', 'Distrito');
+            $sheet->setCellValue('K1', 'Estado');
+
+            $index = 2;
+            foreach ($data as $key => $reg) {
+                $sheet->setCellValue('A'.$index, $reg['email']);
+                $sheet->setCellValue('B'.$index, $reg['nombres']);
+                $sheet->setCellValue('C'.$index, $reg['paterno']);
+                $sheet->setCellValue('D'.$index, $reg['materno']);
+                $sheet->setCellValue('E'.$index, $reg['di_tipo']);
+                $sheet->setCellValue('F'.$index, $reg['di_valor']);
+                $sheet->setCellValue('G'.$index, $reg['nombrePais']);
+                $sheet->setCellValue('H'.$index, $reg['nombreDepa']);
+                $sheet->setCellValue('I'.$index, $reg['nombreProv']);
+                $sheet->setCellValue('J'.$index, $reg['nombreDist']);
+                $sheet->setCellValue('K'.$index, $reg['estado']);
+                $index ++;
+            }
+
+            $style['body'] = array(
+                'font' => array(
+                    'name'  => 'Calibri'
+                ),
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('rgb' => '4F81BD')
+                    )
+                )
+            );
+
+            $objPHPExcel->getActiveSheet()->getStyle('A2:K'.($index-1))->applyFromArray($style['body']);
+
+            // Rename worksheet
+            $objPHPExcel->getActiveSheet()->setTitle('Lista de Usuarios');
+            // Redirect output to a client’s web browser (Excel2007)
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="01simple.xlsx"');
+            header('Cache-Control: max-age=0');
+            // If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
+            // If you're serving to IE over SSL, then the following may be needed
+            header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+            header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header ('Pragma: public'); // HTTP/1.0
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+            exit;
 
         } catch (\Exception $e) {
             echo $e->getMessage();exit;

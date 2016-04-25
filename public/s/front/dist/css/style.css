@@ -27,14 +27,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -143px -75px;
+  background-position: -175px -92px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -143px -49px;
+  background-position: -175px -66px;
   width: 26px;
   height: 26px;
 }
@@ -64,13 +64,13 @@ header nav ul li a .icon span {
 }
 header nav ul li a .icon span.icon_local {
   background-image: url("../images/sprite.png");
-  background-position: -77px -96px;
+  background-position: -175px 0px;
   width: 33px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_offers {
   background-image: url("../images/sprite.png");
-  background-position: -103px -40px;
+  background-position: -103px 0px;
   width: 40px;
   height: 40px;
 }
@@ -94,7 +94,7 @@ header nav ul li a .icon span.icon_card {
 }
 header nav ul li a .icon span.icon_gold {
   background-image: url("../images/sprite.png");
-  background-position: -103px 0px;
+  background-position: -103px -40px;
   width: 40px;
   height: 40px;
 }
@@ -153,10 +153,44 @@ section {
   overflow: hidden;
   color: #fff;
 }
+section.app_content {
+  padding-top: 50px;
+}
+section.app_content .menu {
+  background: #ececec;
+  width: 295px;
+  color: #000;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: -14px;
+}
+section.app_content .menu ul {
+  margin: 0;
+  padding: 0;
+}
+section.app_content .menu ul li {
+  display: inline-block;
+  list-style: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+section.app_content .menu ul li.first {
+  border-right: 1px solid #d3d3d3;
+}
+section.app_content .menu ul li.last {
+  border-left: 1px solid #d3d3d3;
+}
+section.app_content .menu ul li.active {
+  background: #f7a100;
+}
 section h2 span {
   color: #ffb000;
 }
 section .welcome_box {
+  text-align: center;
+}
+section .app_box {
+  padding: 40px 0;
   text-align: center;
 }
 section .yellow_box {
@@ -192,14 +226,35 @@ section .btn.btn_tw {
 section .btn.btn_orange {
   background: #ff5800;
 }
+section .btn.btn_save_signin {
+  margin-top: 20px;
+}
 section .purple_box {
-  background: #470446;
+  background: #6c006c;
   border-radius: 20px;
   padding: 20px 0;
 }
 section .purple_box p {
   margin-bottom: 20px;
   font-size: 20px;
+}
+section .purple_box p.yellow_text {
+  color: #f7a100;
+}
+section .purple_box p.small_text {
+  font-size: 18px;
+}
+section .purple_box p.term {
+  font-size: 12px;
+}
+section .purple_box p.term a {
+  color: #fff;
+}
+section .purple_box p.p_16 {
+  font-size: 16px;
+}
+section .purple_box p.p_16 span {
+  color: #f7a100;
 }
 section .purple_box hr {
   border-style: dashed;
@@ -224,6 +279,103 @@ section .purple_box .right {
 section .purple_box .right button {
   width: 100%;
 }
+section .purple_box .options {
+  overflow: hidden;
+}
+section .purple_box .options .col_3 {
+  width: 33%;
+}
+section .purple_box .options .col_3 .circle {
+  width: 150px;
+  height: 150px;
+  border-radius: 200px;
+  background: #410041;
+  display: block;
+  margin: 0 auto;
+}
+section .purple_box .options .col_3 p {
+  width: 85%;
+  margin: 10px auto 0;
+}
+section .purple_box .bar_info {
+  overflow: hidden;
+  background: #310041;
+  height: 85px;
+  padding: 22px;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+section .purple_box .bar_info p {
+  margin: 10px 0 0;
+}
+section .purple_box .bar_info button span {
+  display: inline-block;
+  vertical-align: middle;
+}
+section .purple_box .bar_info button span.icon {
+  margin: -7px 0px 0px 5px;
+  background-image: url("../images/sprite.png");
+  background-position: -175px -40px;
+  width: 32px;
+  height: 26px;
+}
+section .purple_box .benefits_offers {
+  width: 95%;
+  margin: 0 auto;
+}
+section .purple_box .benefits_offers .offers_box_two {
+  overflow: hidden;
+}
+section .purple_box .benefits_offers .offers_box_two .left {
+  width: 50%;
+  height: 220px;
+  background: #f29224;
+  padding: 20px;
+  box-sizing: border-box;
+}
+section .purple_box .benefits_offers .offers_box_two .right {
+  padding: 20px;
+  height: 220px;
+  width: 50%;
+  background: #fff;
+  box-sizing: border-box;
+}
+section .purple_box .benefits_offers .offers_box_two .right p {
+  color: #000;
+}
+section .purple_box .benefits_offers .offers_box_two .right button {
+  width: 300px;
+}
+section .purple_box .benefits_offers .offers_box_three {
+  margin: 20px 0;
+  overflow: hidden;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 {
+  width: 32%;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 .box_white {
+  background: #fff;
+  border-radius: 15px;
+  color: #000;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3:first-child {
+  margin-right: 2%;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 .image {
+  height: 145px;
+  overflow: hidden;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 .image img {
+  width: 100%;
+}
+section .purple_box .info_box {
+  text-align: left;
+  width: 65%;
+  padding: 5px 25px;
+}
+section .purple_box .info_box span.text {
+  font-size: 14px;
+}
 section input {
   width: 100%;
   border: 0;
@@ -232,6 +384,50 @@ section input {
   border-radius: 10px;
   padding: 0px 10px;
   text-align: center;
+}
+section input.inp_right {
+  width: 200px;
+  float: right;
+}
+section select {
+  height: 36px;
+  line-height: 36px;
+  background: url("../images/arrow_select.png") no-repeat right;
+  padding: 0px 10px;
+  border: 0;
+  color: #808080;
+/*for firefox*/
+  -moz-appearance: none;
+/*for chrome*/
+  -webkit-appearance: none;
+}
+section select::-ms-expand {
+  display: none;
+}
+section .bg_white {
+  background: #fff;
+  border-radius: 20px;
+}
+section .bg_white select {
+  width: 100%;
+}
+section .bg_white.doc_type {
+  width: 100px;
+  overflow: hidden;
+  float: left;
+}
+section .bg_white.day {
+  width: 80px;
+  float: left;
+  margin-right: 5px;
+}
+section .bg_white.month {
+  width: 137px;
+  float: left;
+}
+section .bg_white.year {
+  width: 90px;
+  float: right;
 }
 section .login_link {
   text-align: center;
@@ -272,7 +468,7 @@ section .error_message span {
 }
 section .error_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -143px -101px;
+  background-position: -143px -49px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -286,6 +482,7 @@ section .error_message.hide {
 }
 section form .form_control {
   overflow: hidden;
+  margin-bottom: 10px;
 }
 section form .form_control .left {
   width: 35%;
@@ -377,7 +574,8 @@ footer ul li a {
 #modal_recovery_password,
 #modal_recovery_response,
 #modal_new_password,
-#modal_new_password_response {
+#modal_new_password_response,
+#modal_response_signin {
   width: 651px;
   height: 686px;
   background: url("../images/modal_bg.png");
@@ -385,7 +583,7 @@ footer ul li a {
 ul.parsley-errors-list {
   text-align: left;
   padding: 0;
-  margin: 0 0 5px;
+  margin: -1px 0 5px;
   font-size: 12px;
 }
 ul.parsley-errors-list li {

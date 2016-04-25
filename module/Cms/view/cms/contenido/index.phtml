@@ -21,7 +21,7 @@ $this->layout()->breadcrumb = array(
                     <th>Titulo</th>
                     <th>Contenido</th>
                     <th>Estado</th>
-                    <th>Fecha_creacion</th>
+                    <th>Fecha Creación</th>
                     <th style="max-width: 60px"></th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo (trim($row['tipo']) == $dataTipoPagina['tipoPagina'])? $dataTipoPagina['nombreTipoPagina']: $dataTipoPagina['nombreTipoSeccion']; ?></td>
                         <td><?php echo $row['titulo'] ?></td>
                         <td><?php echo $row['contenido'] ?></td>
-                        <td><?php echo $row['estado'] ?></td>
+                        <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
                         <td><?php echo $row['fecha_creacion'] ?></td>
                         <td>
                             <a href="<?php echo BASE_URL ?>cms/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
@@ -53,7 +53,6 @@ $this->layout()->breadcrumb = array(
             "searching": false,
             "ordering": false,
             "language": {
-                "lengthMenu": "Mostrar _MENU_ registros",
                 "info": "Registros de _START_ al _END_, de un total de <?php echo $countList; ?>"
             },
             "autoWidth": true

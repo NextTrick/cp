@@ -26,7 +26,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     {
         $this->setCriteria($criteria);
         try {
-            $sql        = new Sql($this->getAdapter());
+            $sql= new Sql($this->getAdapter());
 
             $selectPais = $sql->select();
             $selectPais->quantifier(\Zend\Db\Sql\Select::QUANTIFIER_DISTINCT);
@@ -70,7 +70,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
                 if (!empty($value) && !empty($key)) {
-                    $where->or->equalTo($key, $value) ;
+                    $where->AND->equalTo($key, $value) ;
                 }
             }
 
@@ -89,11 +89,13 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             if (!empty($this->crLimit)) {
                 $selectMain->limit($this->crLimit);
             }
+            //echo $selectMain->getSqlString($this->getAdapter()->getPlatform());
 
             $statement = $sql->prepareStatementForSqlObject($selectMain);
-            $rows = $this->resultSetPrototype->initialize($statement->execute())
-                ->toArray();
+            $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();
+
             return $rows;
+
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
