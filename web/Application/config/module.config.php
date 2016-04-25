@@ -116,6 +116,16 @@ return array(
                     ),
                 ),
             ),
+            'beneficios' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/beneficios[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Beneficios',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'web-login' => array(
                 'type' => 'Literal',
                 'options' => array(

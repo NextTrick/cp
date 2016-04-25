@@ -2121,3 +2121,17 @@ INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALU
 INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALUES ('PE', '25', '03', '03', 'CURIMANA');
 INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALUES ('PE', '25', '04', '00', 'PURUS');
 INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALUES ('PE', '25', '04', '01', 'PURUS');
+
+
+--
+-- Volcado de datos para la tabla `usuario_usuario`
+--
+
+INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `cod_pais`, `cod_depa`, `cod_prov`, `cod_dist`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
+(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', 'PE', '15', NULL, '42', NULL, NULL, NULL),
+(5, '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 0, NULL, 'Juan Carlos', 'test', 'test', 1, '2324232', '2015-03-02', 'PE', '23', NULL, '08', NULL, NULL, 'd27c393c942947426e370624076ec81c201b3b480a358895870e8e23ce4a06a5');
+
+
+INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `estado_truefi`, `numero`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `fecha_creacion`, `fecha_edicion`) VALUES
+(1, 5, NULL, '{54A0B670-9C39-464D-ABE2-79B62240043A}', 2, '000-123456-3', NULL, NULL, NULL, NULL, NULL, '2016-04-18 06:14:24');
+
