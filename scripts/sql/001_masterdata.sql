@@ -17,13 +17,14 @@ INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `orden`, `icon
 (6, 3, 'Rol', 'admin/rol', 3, 'fa-circle-o', '2016-03-17 05:01:34', '2016-03-17 23:37:24', 1),
 (7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-19 08:15:17', 1),
 (8, NULL, 'Promociones', '', 2, 'fa fa-th', '2016-04-11 20:48:28', '2016-04-15 22:17:47', 1),
-(9, 8, 'Paquetes', 'paquete/paquete', 1, 'fa-circle-o', '2016-04-11 20:49:31', '2016-04-15 22:23:22', 1),
+(9, 8, 'Paquetes', 'admin/paquete/paquete', 2, 'fa-circle-o', '2016-04-11 20:49:31', '2016-04-24 22:28:55', 1),
 (10, NULL, 'Reportes', '', 3, 'fa fa-table', '2016-04-15 22:18:37', '2016-04-15 22:22:36', 1),
-(11, 10, 'Usuarios', 'usuario/usuario', 4, 'fa-circle-o', '2016-04-15 22:18:54', '2016-04-16 01:32:21', 1),
-(12, 10, 'Pagos', 'orden/orden', 5, 'fa-circle-o', '2016-04-15 22:19:11', '2016-04-16 01:34:03', 1),
-(13, 10, 'Operaciones', 'orden/orden', 6, 'fa-circle-o', '2016-04-15 22:20:57', '2016-04-16 01:35:08', 1),
+(11, 10, 'Usuarios', 'admin/usuario/usuario', 8, 'fa-circle-o', '2016-04-15 22:18:54', '2016-04-24 22:29:36', 1),
+(12, 10, 'Pagos', 'admin/orden/orden', 9, 'fa-circle-o', '2016-04-15 22:19:11', '2016-04-24 22:29:54', 1),
+(13, 10, 'Operaciones', 'admin/orden/orden', 7, 'fa-circle-o', '2016-04-15 22:20:57', '2016-04-24 22:29:24', 1),
 (14, NULL, 'CMS', '', 4, 'fa fa-edit', '2016-04-15 22:21:23', '2016-04-15 22:23:08', 1),
-(15, 14, 'Contenido', 'cms/contenido', 2, 'fa-circle-o', '2016-04-15 22:21:36', '2016-04-16 01:31:07', 1);
+(15, 14, 'Contenido', 'admin/cms/contenido', 3, 'fa-circle-o', '2016-04-15 22:21:36', '2016-04-24 22:29:11', 1);
+
 
 --
 -- Volcado de datos para la tabla `admin_permiso`

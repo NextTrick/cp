@@ -8,7 +8,7 @@ return array(
             'paquete' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/paquete',
+                    'route'    => '/admin/paquete',
                     'defaults' => array(
                         'controller' => 'Paquete\Controller\Index',
                         'action' => 'index',

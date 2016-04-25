@@ -8,7 +8,7 @@ return array(
             'orden' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/orden',
+                    'route'    => '/admin/orden',
                     'defaults' => array(
                         'controller' => 'Orden\Controller\Index',
                         'action' => 'index',
