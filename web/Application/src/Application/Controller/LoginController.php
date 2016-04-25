@@ -17,7 +17,6 @@ class LoginController extends SecurityWebController
         )));
         $view = new ViewModel(array('form' => $form));
         $view->setVariable('openPopapChangePassword', 0);
-        $view->setTerminal(true);
         return $view;
     }
 

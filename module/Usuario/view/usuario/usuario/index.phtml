@@ -18,43 +18,32 @@ $this->layout()->breadcrumb = array(
             <thead>
                 <tr>
                     <th>Email</th>
-                    <th>Password</th>
-                    <th>Estado</th>
-                    <th>Imagen</th>
                     <th>Nombres</th>
-                    <th>Paterno</th>
-                    <th>Materno</th>
-                    <th>Fecha_nac</th>
-                    <th>Cod_pais</th>
-                    <th>Cod_depa</th>
-                    <th>Cod_prov</th>
-                    <th>Cod_dist</th>
-                    <th>Fecha_creacion</th>
-                    <th>Fecha_edicion</th>
-                    <th style="max-width: 60px"></th>
+                    <th>A. Paterno</th>
+                    <th>A. Materno</th>
+                    <th>Tipo Doc.</th>
+                    <th>Nro. Doc.</th>
+                    <th>Pais</th>
+                    <th>Departamento</th>
+                    <th>Provincia</th>
+                    <th>Distrito</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
                 <?php foreach ($gridList as $row) : ?>
                     <tr>
                         <td><?php echo $row['email'] ?></td>
-                        <td><?php echo $row['password'] ?></td>
-                        <td><?php echo $row['estado'] ?></td>
-                        <td><?php echo $row['imagen'] ?></td>
                         <td><?php echo $row['nombres'] ?></td>
                         <td><?php echo $row['paterno'] ?></td>
                         <td><?php echo $row['materno'] ?></td>
-                        <td><?php echo $row['fecha_nac'] ?></td>
-                        <td><?php echo $row['cod_pais'] ?></td>
-                        <td><?php echo $row['cod_depa'] ?></td>
-                        <td><?php echo $row['cod_prov'] ?></td>
-                        <td><?php echo $row['cod_dist'] ?></td>
-                        <td><?php echo $row['fecha_creacion'] ?></td>
-                        <td><?php echo $row['fecha_edicion'] ?></td>
-                        <td>
-                            <a href="<?php echo BASE_URL ?>usuario/usuario/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-                            <a href="<?php echo BASE_URL ?>usuario/usuario/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
-                        </td>
+                        <td><?php echo $row['di_tipo'] ?></td>
+                        <td><?php echo $row['di_valor'] ?></td>
+                        <td><?php echo $row['nombrePais'] ?></td>
+                        <td><?php echo $row['nombreDepa'] ?></td>
+                        <td><?php echo $row['nombreProv'] ?></td>
+                        <td><?php echo $row['nombreDist'] ?></td>
+                        <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -63,15 +52,34 @@ $this->layout()->breadcrumb = array(
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#gridMain').DataTable({
+        var table = $('#gridMain').DataTable({
             "pageLength": 25,
             "paging": true,
             "lengthChange": true,
             "searching": false,
-            "ordering": false,
+            "ordering": true,
             "info": true,
-            "autoWidth": true
+            "autoWidth": true,
+            "order": [[ 2, "desc" ]] ,
+            columnDefs: [
+                 { orderable: false, targets: [0,1,3,4,5,6,7,8,9,10] }
+            ]
+
+
         });
         common.deleteRemote();
+
+        $("#cmbDepartamento").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbProvincia").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbDistrito").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
     });
 </script>

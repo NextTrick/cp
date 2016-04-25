@@ -130,7 +130,12 @@ class UsuarioForm extends Form
                 'id' => 'fecha_edicion',
                 'maxlength' => '20',
             ));
+
         $this->add($fecha_edicion);
+
+        $csrf = new Element\Csrf('token');
+
+        $this->add($csrf);
         
     }
 }

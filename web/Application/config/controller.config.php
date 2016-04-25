@@ -10,6 +10,7 @@ return array(
         'Application\Controller\Tarjeta' => 'Application\Controller\TarjetaController',
         'Application\Controller\Ubigeo' => 'Application\Controller\UbigeoController',
         'Application\Controller\MisTarjetas' => 'Application\Controller\MisTarjetasController',
-        'Application\Controller\MisRecargas' => 'Application\Controller\MisRecargasController',
+        'Application\Controller\Recargas' => 'Application\Controller\RecargasController',
+        'Application\Controller\Beneficios' => 'Application\Controller\BeneficiosController',
     ),
 );
