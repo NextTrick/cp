@@ -2,7 +2,7 @@
   composer: command=install working_dir=/opt/fcb/{{ project_name }}
 
 # Set up TrackingEngine database
-- name: Create database {{ item }}
+- name: Create database {{ database }}
   mysql_db: name={{ database }} state=present  
 
 - name: Create user and password for dbs
