@@ -21,7 +21,7 @@
                     </div>
                     <div class="right">
                         <p>Con tu correo electrónico</p>
-                        <?php $form = $this->form->prepare(); ?>
+                        <?php $form = $this->form->setAttribute('data-parsley-validate', 'data-parsley-validate')->prepare(); ?>
                         <?php echo $this->form()->openTag($form); ?>
                         <div class="form_control">
                             <?php
@@ -51,9 +51,9 @@
                                 <li class="parsley-required"><?php echo $this->formElementerrors($form->get('password')); ?></li>
                             </ul>
                         </div>
-<?php echo $this->formRow($form->get('token_csrf')); ?>
+                        <?php echo $this->formRow($form->get('token_csrf')); ?>
                         <button type="submit" class="btn btn_orange btn_login">Iniciar Sesión</button>
-<?php echo $this->form()->closeTag(); ?>
+                        <?php echo $this->form()->closeTag(); ?>
                         <div class="login_link"><a href="#modal_recovery_password" name="modal">Olvidé mi contraseña</a></div>
                         <div class="login_link"><a href="#modal_new_password" name="modal">Nueva contraseña</a></div>
                     </div>
@@ -61,7 +61,7 @@
                 <hr/>
                 <div class="login_link"><a href="<?php echo BASE_URL; ?>registrate">Aún no tengo cuenta como socio de Coney Club<span></span></a></div>
             </div>
-<?php echo $this->sectionOffersBox(); ?>
+            <?php echo $this->sectionOffersBox(); ?>
         </div>
         <div id="modal_recovery_password" class="modal_box">
             <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
