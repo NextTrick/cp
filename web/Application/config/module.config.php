@@ -106,6 +106,16 @@ return array(
                     ),
                 ),
             ),
+            'mis-tarjetas' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/mis-tarjetas[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\MisTarjetas',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'web-login' => array(
                 'type' => 'Literal',
                 'options' => array(
