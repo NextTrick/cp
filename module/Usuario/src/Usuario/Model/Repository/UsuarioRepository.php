@@ -76,7 +76,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 
             foreach ($this->crWhereLike as $key => $value) {
                 if (!empty($value) && !empty($key)) {
-                    $where->or->like($key, "%$value%") ;
+                    $where->and->like($key, "%$value%") ;
                 }
             }
 
@@ -89,7 +89,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             if (!empty($this->crLimit)) {
                 $selectMain->limit($this->crLimit);
             }
-            //echo $selectMain->getSqlString($this->getAdapter()->getPlatform());
+            //cho $selectMain->getSqlString($this->getAdapter()->getPlatform());exit;
 
             $statement = $sql->prepareStatementForSqlObject($selectMain);
             $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();
