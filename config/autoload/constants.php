@@ -17,7 +17,7 @@ define('ERROR_303', 'No tiene acceso.');
 
 define('LIMIT_BUSCAR', 100);
 define('GRID_LOGIN_PROMOCIONES', 3);
-define('GRID_BENEFICIOS_PROMOCIONES', 3);
+define('GRID_BENEFICIOS_PROMOCIONES', 4);
 define('GRID_RECARGAS_PROMOCIONES', 3);
 define('GRID_RECARGAS_RECARGAS', 3);
 

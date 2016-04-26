@@ -2135,3 +2135,14 @@ INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `emai
 INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `estado_truefi`, `numero`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `fecha_creacion`, `fecha_edicion`) VALUES
 (1, 5, NULL, '{54A0B670-9C39-464D-ABE2-79B62240043A}', 2, '000-123456-3', NULL, NULL, NULL, NULL, NULL, '2016-04-18 06:14:24');
 
+
+--
+-- Volcado de datos para la tabla `paquete_paquete`
+--
+
+INSERT INTO `paquete_paquete` (`id`, `referencia`, `titulo1`, `titulo2`, `tipo`, `imagen`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `legal`, `activo`, `destacado`, `fecha_creacion`, `fecha_edicion`) VALUES
+(6, '583f0c9af40e350c9837e8f30a73b5c9', '¡COLECCIONA DIVERSIÓN!', '¡Por recargas de S/ 30 llévate 30 en saldo y un VASO 3D!', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160414.png', 1, 1, 0, 1, 'saassa', 1, 1, '2016-04-14 23:32:53', NULL),
+(10, '28e9efd8067bb08f9a5be96d5deea073', 'Promoción 1. Ver legal', 'Recarga S/.100, obten S/.50 soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160415.png', 2, 2, 0, 2, NULL, 1, 0, '2016-04-18 06:45:01', NULL),
+(11, '2f61a7cd1e0c166edcdea52b78e69d44', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160416.png', 3, 3, 0, 3, NULL, 1, 0, '2016-04-18 06:45:01', NULL),
+(12, '2f61a7cd1e0c166edcdea52b78e69d45', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160417.png', 4, 1, 0, 2, NULL, 1, 1, '2016-04-18 06:45:01', NULL),
+(13, '2f61a7cd1e0c166edcdea52b78e69d46', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160418.png', 1, 2, 0, 2, NULL, 1, 0, '2016-04-18 06:45:01', NULL);
