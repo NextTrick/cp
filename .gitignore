@@ -13,3 +13,4 @@ nbproject
 /data/log/*
 composer.phar
 VirtualBox-*
+/config/local.php
