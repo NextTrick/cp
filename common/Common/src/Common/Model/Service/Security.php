@@ -149,7 +149,8 @@ class Security
             if (in_array($currentController, $this->_getPrivateCommonControllers())) {
                 return true;
             }
-            $slug = $module . '/' . $controller;
+
+            $slug = ($module == 'admin') ? $module . '/' . $controller : 'admin/' . $module . '/' . $controller;
             $aclString = $this->_getLoginService()->getRepository()->getAcl($identity->id, $slug);
             return $this->_checkAction($currentController, $currentAction, $aclString);
         }

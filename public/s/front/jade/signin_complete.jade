@@ -9,78 +9,96 @@ block section
 						span.icon
 						span.text Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde
 					
-					form.signin_form(action="")
+					form.signin_form(action="" data-parsley-validate)
 						h3 Tus datos de cuenta
 						.content_form
 							.form_control
 								label.left Correo
-								input.right(type="text")
+								.right
+									input(type="text" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-type="email" data-parsley-type-message="Ingrese un correo válido")
 							.form_control
 								label.left Contraseña
-								input.right(type="text")
+								.right
+									input#password(type="password" data-parsley-required data-parsley-required-message="Dato obligatorio")
 							.form_control
 								label.left Repetir contraseña
-								input.right(type="text")
+								.right
+									input(type="password" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-equalto="#password" data-parsley-equalto-message="Las contraseñas no coinciden")
 						hr
 						h3 Tus datos personales
 						.content_form
 							.form_control
 								label.left Nombre
-								input.right(type="text")
+								.right
+									input(type="text" data-parsley-required data-parsley-required-message="Dato obligatorio")
 							.form_control
 								label.left Apellido paterno
-								input.right(type="text")
+								.right
+									input(type="text" data-parsley-required data-parsley-required-message="Dato obligatorio")
 							.form_control
 								label.left Apellido materno
-								input.right(type="text")
+								.right
+									input(type="text" data-parsley-required data-parsley-required-message="Dato obligatorio")
 							.form_control
 								label.left Documento de identidad
 								.right
-									select#doc_type(name="doc_type")
-										option(value="") DNI
-										option(value="") Pasaporte
-									input(type="text" placeholder="Nro de documento") 
+									.bg_white.doc_type
+										select(name="")
+											option(value="") DNI
+											option(value="") Pasaporte
+									input.inp_right(type="text" placeholder="Nro de documento" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-type="number" data-parsley-type-message="Debe ser numérico") 
 							.form_control
 								label.left País
-								select.right(name="country")
-									option(value="") DNI
-									option(value="") Pasaporte
+								.right.bg_white
+									select(name="")
+										option(value="") Perú
+										option(value="") Colombia
 							.form_control
 								label.left Departamento
-								select.right(name="country")
-									option(value="") DNI
-									option(value="") Pasaporte
+								.right.bg_white
+									select(name="")
+										option(value="") Lima
+										option(value="") Arequipa
 							.form_control
-								select.right(name="country")
-									option(value="") DNI
-									option(value="") Pasaporte
+								label.left Distrito
+								.right.bg_white
+									select(name="")
+										option(value="") Santa Anita
+										option(value="") Breña
 							.form_control
 								label.left Fecha de nacimiento
 								.right
-									select(name="country")
-										option(value="") DNI
-										option(value="") Pasaporte
-									select(name="country")
-										option(value="") DNI
-										option(value="") Pasaporte
-									select(name="country")
-										option(value="") DNI
-										option(value="") Pasaporte
+									.day.bg_white
+										select(name="")
+											option(value="") 1
+											option(value="") 2
+									.month.bg_white
+										select(name="")
+											option(value="") Enero
+											option(value="") Febrero
+									.year.bg_white
+										select(name="")
+											option(value="") 1989
+											option(value="") 1990
 							.form_control
 								.right
 									button.btn.btn_orange.btn_save_signin(type="submit") Registrarme
+									p.term Al registrarte en Coney Club, aceptas los 
+										a(href="") términos y condiciones
+										| &nbsp y nuestra 
+										a(href="") política de privacidad
+									a(href="#modal_response_signin" name="modal") Abril modal de respuesta
 					hr
 					.login_link
 						a(href="login.html") Ya tengo una cuenta en Coney Park
 							span
 				
-			#modal_recovery_password.modal_box
+			#modal_response_signin.modal_box
 				.modal_content.modal_recovery_content
 					span.icon_logo
-					h3 Recuperar contraseña
-					p Ingresa la dirección de correo electrónico que usaste para registrarte.
-					input(type="text" placeholder="Correo electrónico")
-					a#btn_recovery.btn.btn_orange(href='#modal_recovery_response', name='modal') Recuperar contraseña
+					h3 ¡Felicidades!, estás a punto de ser parte de Coney Club
+					p Te hemos enviado un correo con las instrucciones para activar tu cuenta
+					a#btn_recovery.btn.btn_orange(href='#modal_recovery_response', name='modal') Aceptar
 			
 			#mask
 			

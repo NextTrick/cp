@@ -21,8 +21,6 @@ class LoginForm extends Form
         $this->_sl = $serviceLocator;
 
         $this->setAttribute('method', 'post');
-        $this->setAttribute('role', 'form');
-        $this->setAttribute('data-parsley-validate', 'data-parsley-validate');
         $this->_addElements();
     }
 
