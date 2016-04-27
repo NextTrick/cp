@@ -42,7 +42,7 @@ class PaqueteService
             $where->equalTo('tipo', self::TIPO_PROMOCION);
             $criteria = array(
                 'where' => $where,
-                'limit' => $cantidad,
+                'limit' => $destacado,
                 'order' => array('fecha_creacion DESC'),
             );
             $arrayDestacado = $this->_repository->findAll($criteria);
@@ -70,9 +70,9 @@ class PaqueteService
                         }
                     }
                 }
+                $arrayNormal = array_values($arrayNormal);
             }
         }
-
         return array('destacado' => $arrayDestacado, 'normal' => $arrayNormal);
     }
     

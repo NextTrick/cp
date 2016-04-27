@@ -35,8 +35,8 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
                         <td><?php echo $row['fecha_creacion'] ?></td>
                         <td>
-                            <a href="<?php echo BASE_URL ?>cms/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-                            <a href="<?php echo BASE_URL ?>cms/contenido/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                            <a href="<?php echo BASE_URL ?>admin/cms/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo BASE_URL ?>admin/cms/contenido/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

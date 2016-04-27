@@ -12,7 +12,7 @@ $this->layout()->breadcrumb = array(
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
-        <a href="<?php echo BASE_URL; ?>usuario/usuario/crear" class="btn btn-success">Excel</a>
+        <a href="javascript:exportarExcel()" class="btn btn-success">Excel</a>
         <hr class="separator">
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
@@ -52,7 +52,7 @@ $this->layout()->breadcrumb = array(
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        var table = $('#gridMain').DataTable({
+         $('#gridMain').DataTable({
             "pageLength": 25,
             "paging": true,
             "lengthChange": true,
@@ -82,4 +82,11 @@ $this->layout()->breadcrumb = array(
         });
 
     });
+
+    function exportarExcel(){
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/usuario/usuario/exportarExcel");
+        $("#formBuscar").submit();
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/usuario/usuario");
+    }
+
 </script>

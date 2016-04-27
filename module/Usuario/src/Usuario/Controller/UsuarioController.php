@@ -99,6 +99,7 @@ class UsuarioController extends SecurityAdminController
 
             $index = 2;
             foreach ($data as $key => $reg) {
+                $estado = (!empty($row['estado']))? 'Activo': 'Baja';
                 $sheet->setCellValue('A'.$index, $reg['email']);
                 $sheet->setCellValue('B'.$index, $reg['nombres']);
                 $sheet->setCellValue('C'.$index, $reg['paterno']);
@@ -109,7 +110,7 @@ class UsuarioController extends SecurityAdminController
                 $sheet->setCellValue('H'.$index, $reg['nombreDepa']);
                 $sheet->setCellValue('I'.$index, $reg['nombreProv']);
                 $sheet->setCellValue('J'.$index, $reg['nombreDist']);
-                $sheet->setCellValue('K'.$index, $reg['estado']);
+                $sheet->setCellValue('K'.$index, $estado);
                 $index ++;
             }
 
