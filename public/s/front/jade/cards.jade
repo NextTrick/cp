@@ -1,0 +1,161 @@
+extends layout/layout.jade
+block section
+	section.app_content
+		.box_center
+			.app_box
+				.menu
+					ul
+						li.first Beneficios
+						li.active Mis tarjetas
+						li.last Recargas
+				.purple_box
+					p.yellow_text.small_text Mis tarjetas asociadas
+					.cards_content
+						.col_3.my_card
+							.top_card
+								span.cp_logo
+								.card_title
+									input.input_name(type="text")
+									span.text Tarjeta de Maria Emilia
+									span.edit_icon
+								span.card_number 000 - 00000003 - 89
+							.show_more_content
+								.line
+									.left Coney Bonos
+										span ?
+									.right S/.30
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Coney Bonos Plus
+										span ?
+									.right S/.15
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Tickets
+										span ?
+									.right 12
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Gamepoints
+										span ?
+									.right 12
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+							.bottom_card
+								.price S/. 30.00
+								a.watch_more(href="javascript:;") Ver más
+								a.recharge(href="") Recargar
+						.col_3.my_card
+							.top_card
+								span.cp_logo
+								.card_title
+									input.input_name(type="text")
+									span.text Tarjeta de Rosa
+									span.edit_icon
+								span.card_number 000 - 00000003 - 89
+							.show_more_content
+								.line
+									.left Coney Bonos
+										span ?
+									.right S/.30
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Coney Bonos Plus
+										span ?
+									.right S/.15
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Tickets
+										span ?
+									.right 12
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Gamepoints
+										span ?
+									.right 12
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+							.bottom_card
+								.price S/. 30.00
+								a.watch_more(href="javascript:;") Ver más
+								a.recharge(href="") Recargar
+						.col_3.my_card
+							.top_card
+								span.cp_logo
+								.card_title
+									input.input_name(type="text")
+									span.text Tarjeta de Fernando
+									span.edit_icon
+								span.card_number 000 - 00000003 - 89
+							.show_more_content
+								.line
+									.left Coney Bonos
+										span ?
+									.right S/.30
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Coney Bonos Plus
+										span ?
+									.right S/.15
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Tickets
+										span ?
+									.right 12
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+								.line
+									.left Gamepoints
+										span ?
+									.right 12
+									.tooltip_bonus Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids
+							.bottom_card
+								.price.cero S/. 0.00
+								a.watch_more(href="javascript:;") Ver más
+								a.recharge(href="") Recargar
+						.col_3.add_card
+							.show_tooltip
+								.tooltip
+									strong Para iniciar una recarga
+									|, es importante que asocies una tarjeta. Con ella podrás recargar todas las promociones y |recargas que desees. ¡Puedes tener hasta 6 tarjetas!
+							.content_asociate_card
+								form.asociate_form(action="" data-parsley-validate="true")
+									input.card_number(type="text" placeholder="Ingresa tu número de tarjeta" data-parsley-required data-parsley-required-message="Dato obligatorio")
+									input.card_name(type="text" placeholder="¡Nombra tu tarjeta!" data-parsley-required data-parsley-required-message="Dato obligatorio")
+									button.btn.btn_orange.btn_asociate_card(type="submit") Asociar tarjeta
+								.link_orange.btn_cancel Cancelar	
+							.loading
+								img(src="../images/loading.gif", alt="")
+							.success_box
+								span.icon
+								h3 ¡Tarjeta asociada!
+								a(href="") Conocer los beneficios
+							.error_box
+								span.icon
+								p Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde
+								a(href="") Aceptar
+
+						.col_3
+						.col_3
+					hr
+					.info_box
+						span.icon
+						span.text Recuerda que también puedes acercarte a cualquiera de nuestras sedes, indicando tu cuenta de correo electrónico junto con la tarjeta que desees asociar.
+						a.how_asociate_card(href="#how_asociate_card" name="modal") ¿Cómo asociar mis tarjetas?
+			#how_asociate_card.modal_box
+				.modal_content
+					span.icon_logo
+					h3 Para asociar tus tarjetas, sigue los siguientes pasos:
+					hr
+					p 1. Encuentra el número de 
+						strong 10 dígitos 
+						| en tu tarjeta física
+					p 2. Ingresa el número (sin guíones) y asignarle el nombre que más prefieras
+					input(type="text" placeholder="Correo electrónico")
+					a#btn_recovery.btn.btn_orange(href='#modal_recovery_response', name='modal') Recuperar contraseña
+			#mask
+
+
+
+
+
+
+					
+			
