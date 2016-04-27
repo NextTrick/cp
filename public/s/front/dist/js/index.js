@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login;
+  var modal_login, open_tooltip;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -61,49 +61,10 @@ $(function() {
         return $('.modal_box').hide();
       },
       closeRecoveryModal: function() {
-        $.ajax({
-            type: "POST",
-            url: baseUrl+'recuperar-password',
-            data:{email:$('#email').val(), token:$('#token_csrf').val()},
-            dataType: 'json',
-            success: function(data){
-                $('#token_csrf').val(data.token);
-                if (data.success) {
-                    $('#error_recuperar_password').html('');
-                    $('#modal_recovery_password').hide();
-                } else {
-                    $('#error_recuperar_password').html(data.message);
-                }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            }
-        });
-        return true;
+        return $('#modal_recovery_password').hide();
       },
       closeNewPassModal: function() {
-          $.ajax({
-            type: "POST",
-            url: baseUrl+'modificar-password',
-            data:{
-                password:$('#password_new').val(),
-                password_repeat:$('#password_repeat').val(),
-                codigo_recuperacion:$('#codigo_recuperacion').val(),
-                token:$('#token_csrf').val()
-            },
-            dataType: 'json',
-            success: function(data){
-                $('#token_csrf').val(data.token);
-                if (data.success) {
-                    $('#error_new_password').html('');
-                    $('#modal_new_password').hide();
-                } else {
-                    $('#error_new_password').html(data.message);
-                }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            }
-        });
-        return true;
+        return $('#modal_new_password').hide();
       },
       closeErrorMessage: function() {
         return dom.errorMessage.addClass('hide');
@@ -120,5 +81,139 @@ $(function() {
       init: initialize
     };
   };
+  open_tooltip = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      addCard: '.add_card',
+      tooltip: '.tooltip',
+      boxTooltip: '.show_tooltip',
+      contentAsociate: '.content_asociate_card',
+      btnCancel: '.btn_cancel',
+      loading: '.loading',
+      btnAsociateCard: '.btn_asociate_card',
+      asociateForm: '.asociate_form',
+      success: '.success_box',
+      error: '.error_box',
+      watchMore: '.watch_more',
+      topCardContent: '.top_card',
+      showMoreContent: '.show_more_content',
+      tooltipBonus: '.tooltip_bonus',
+      activeTooltipBonus: '.show_more_content .line .left span',
+      editCardName: '.card_title .edit_icon',
+      nameCard: '.card_title .text',
+      inputCardName: '.card_title .input_name'
+    };
+    catchDom = function() {
+      dom.addCard = $(st.addCard);
+      dom.tooltip = $(st.tooltip);
+      dom.boxTooltip = $(st.boxTooltip);
+      dom.contentAsociate = $(st.contentAsociate);
+      dom.btnCancel = $(st.btnCancel);
+      dom.loading = $(st.loading);
+      dom.btnAsociateCard = $(st.btnAsociateCard);
+      dom.asociateForm = $(st.asociateForm);
+      dom.success = $(st.success);
+      dom.error = $(st.error);
+      dom.watchMore = $(st.watchMore);
+      dom.tooltipBonus = $(st.tooltipBonus);
+      dom.activeTooltipBonus = $(st.activeTooltipBonus);
+      dom.editCardName = $(st.editCardName);
+      dom.nameCard = $(st.nameCard);
+      dom.inputCardName = $(st.inputCardName);
+    };
+    suscribeEvents = function() {
+      dom.addCard.hover(events.openTooltip, events.closeTooltip);
+      dom.addCard.on('click', events.showAsociateCard);
+      dom.btnCancel.on('click', events.hideAsociateCard);
+      dom.btnAsociateCard.on('click', events.asociateCard);
+      dom.watchMore.on('click', events.watchMore);
+      dom.activeTooltipBonus.hover(events.showTooltipBonus, events.hideTooltipBonus);
+      dom.editCardName.on('click', events.editCardName);
+    };
+    events = {
+      openTooltip: function() {
+        return dom.tooltip.show();
+      },
+      closeTooltip: function() {
+        return dom.tooltip.hide();
+      },
+      showAsociateCard: function() {
+        dom.boxTooltip.hide();
+        return dom.contentAsociate.show();
+      },
+      hideAsociateCard: function(e) {
+        e.stopPropagation();
+        dom.boxTooltip.show();
+        return dom.contentAsociate.hide();
+      },
+      asociateCard: function(e) {
+        e.preventDefault();
+        if (dom.asociateForm.parsley().isValid()) {
+          dom.contentAsociate.hide();
+          dom.loading.show();
+          setTimeout(function() {
+            return functions.successAsociate();
+          }, 2000);
+          return false;
+        } else {
+          return dom.asociateForm.parsley().validate();
+        }
+      },
+      watchMore: function() {
+        if ($(this).hasClass('active')) {
+          $(this).parent().parent().children(st.topCardContent).show();
+          $(this).parent().parent().children(st.showMoreContent).hide();
+          $(this).text('Ver más');
+          return $(this).removeClass('active');
+        } else {
+          $(this).parent().parent().children(st.topCardContent).hide();
+          $(this).parent().parent().children(st.showMoreContent).show();
+          $(this).text('Ver menos');
+          return $(this).addClass('active');
+        }
+      },
+      showTooltipBonus: function() {
+        $(this).addClass('active');
+        return $(this).parent().parent().children(st.tooltipBonus).show();
+      },
+      hideTooltipBonus: function() {
+        $(this).removeClass('active');
+        return $(this).parent().parent().children(st.tooltipBonus).hide();
+      },
+      editCardName: function() {
+        if ($(this).hasClass('active')) {
+          $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
+          $(this).removeClass('active');
+          $(this).parent().children(st.nameCard).show();
+          return $(this).parent().children(st.inputCardName).hide();
+        } else {
+          $(this).addClass('active');
+          $(this).parent().children(st.nameCard).hide();
+          return $(this).parent().children(st.inputCardName).show();
+        }
+      }
+    };
+    functions = {
+      successAsociate: function() {
+        dom.contentAsociate.hide();
+        dom.loading.hide();
+        dom.success.show();
+      },
+      errorAsociate: function() {
+        dom.contentAsociate.hide();
+        dom.loading.hide();
+        dom.error.show();
+      }
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
+  open_tooltip().init();
   modal_login().init();
 });

@@ -27,14 +27,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -175px -92px;
+  background-position: -102px -135px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -175px -66px;
+  background-position: -114px -97px;
   width: 26px;
   height: 26px;
 }
@@ -64,37 +64,37 @@ header nav ul li a .icon span {
 }
 header nav ul li a .icon span.icon_local {
   background-image: url("../images/sprite.png");
-  background-position: -175px 0px;
+  background-position: -69px -135px;
   width: 33px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_offers {
   background-image: url("../images/sprite.png");
-  background-position: -103px 0px;
+  background-position: -158px -40px;
   width: 40px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_atraction {
   background-image: url("../images/sprite.png");
-  background-position: -143px 0px;
+  background-position: 0px -135px;
   width: 32px;
   height: 49px;
 }
 header nav ul li a .icon span.icon_sale {
   background-image: url("../images/sprite.png");
-  background-position: -40px -96px;
+  background-position: -32px -135px;
   width: 37px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -54px 0px;
+  background-position: -109px 0px;
   width: 49px;
   height: 40px;
 }
 header nav ul li a .icon span.icon_gold {
   background-image: url("../images/sprite.png");
-  background-position: -103px -40px;
+  background-position: -158px -80px;
   width: 40px;
   height: 40px;
 }
@@ -131,19 +131,19 @@ header nav ul li.logo {
 }
 .right_options ul li a span.icon_gold {
   background-image: url("../images/sprite.png");
-  background-position: 0px -96px;
+  background-position: -158px 0px;
   width: 40px;
   height: 40px;
 }
 .right_options ul li a span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: 0px -56px;
+  background-position: -109px -40px;
   width: 49px;
   height: 40px;
 }
 .right_options ul li a span.icon_birthday {
   background-image: url("../images/sprite.png");
-  background-position: -49px -56px;
+  background-position: 0px -97px;
   width: 44px;
   height: 38px;
 }
@@ -315,7 +315,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -175px -40px;
+  background-position: -82px -97px;
   width: 32px;
   height: 26px;
 }
@@ -370,11 +370,279 @@ section .purple_box .benefits_offers .offers_box_three .col_3 .image img {
 }
 section .purple_box .info_box {
   text-align: left;
-  width: 65%;
+  width: 100%;
   padding: 5px 25px;
 }
 section .purple_box .info_box span.text {
   font-size: 14px;
+  width: 65%;
+  display: inline-block;
+}
+section .purple_box .info_box a.how_asociate_card {
+  float: right;
+  color: #ff5800;
+  width: 30%;
+  text-decoration: none;
+}
+section .purple_box .cards_content {
+  width: 95%;
+  margin: 0 auto 10px;
+}
+section .purple_box .cards_content .col_3 {
+  width: 286px;
+  height: 188px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 10px;
+  background: url("../images/card_empty.png");
+  position: relative;
+  vertical-align: top;
+}
+section .purple_box .cards_content .col_3.add_card {
+  cursor: pointer;
+  background: url("../images/add_card_bg.png");
+}
+section .purple_box .cards_content .col_3.add_card .tooltip {
+  display: none;
+  position: absolute;
+  color: #808080;
+  background: #fff;
+  width: 80%;
+  padding: 10px;
+  text-align: left;
+  box-sizing: border-box;
+  left: 10%;
+  top: 160px;
+  z-index: 9;
+  border-radius: 8px;
+  font-size: 14px;
+}
+section .purple_box .cards_content .col_3.add_card .tooltip:before {
+  content: '';
+  color: #fff;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 5px solid #fff;
+  position: absolute;
+  top: -5px;
+  left: 48%;
+}
+section .purple_box .cards_content .col_3 .content_asociate_card {
+  background: #ded7de;
+  padding: 15px 10px 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: none;
+}
+section .purple_box .cards_content .col_3 .content_asociate_card input {
+  margin-bottom: 10px;
+}
+section .purple_box .cards_content .col_3 .content_asociate_card button {
+  width: 100%;
+}
+section .purple_box .cards_content .col_3 .content_asociate_card .link_orange {
+  margin-top: 8px;
+  color: #ff5800;
+}
+section .purple_box .cards_content .col_3 .loading {
+  background: #ded7de;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border-radius: 10px;
+}
+section .purple_box .cards_content .col_3 .loading img {
+  margin-top: 50px;
+}
+section .purple_box .cards_content .col_3 .success_box,
+section .purple_box .cards_content .col_3 .error_box {
+  padding: 20px 10px 10px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: none;
+  border-radius: 10px;
+}
+section .purple_box .cards_content .col_3 .success_box a,
+section .purple_box .cards_content .col_3 .error_box a {
+  color: #fff;
+}
+section .purple_box .cards_content .col_3 .success_box {
+  background: #22b273;
+}
+section .purple_box .cards_content .col_3 .success_box .icon {
+  background-image: url("../images/sprite.png");
+  background-position: -54px 0px;
+  width: 55px;
+  height: 45px;
+  display: block;
+  margin: 0 auto;
+}
+section .purple_box .cards_content .col_3 .success_box h3 {
+  font-size: 24px;
+}
+section .purple_box .cards_content .col_3 .error_box {
+  background: #f6494d;
+}
+section .purple_box .cards_content .col_3 .error_box .icon {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -56px;
+  width: 52px;
+  height: 41px;
+  display: block;
+  margin: 0 auto;
+}
+section .purple_box .cards_content .col_3 .error_box p {
+  font-size: 15px;
+}
+section .purple_box .cards_content .col_3.my_card {
+  background: #efefef;
+  border-radius: 10px;
+  color: #000;
+  padding: 15px;
+  box-sizing: border-box;
+}
+section .purple_box .cards_content .col_3.my_card .card_title {
+  width: 100%;
+  color: #1c1c1c;
+  display: block;
+  margin: 15px 0 10px;
+  font-size: 19px;
+}
+section .purple_box .cards_content .col_3.my_card .card_title .input_name {
+  display: none;
+  width: 80%;
+  background: transparent;
+  border-bottom: 1px solid #d3d3d3;
+  border-radius: 0;
+  margin: -12px 0 0;
+  text-align: left;
+}
+section .purple_box .cards_content .col_3.my_card span {
+  text-align: left;
+}
+section .purple_box .cards_content .col_3.my_card span.cp_logo {
+  display: block;
+  background-image: url("../images/sprite.png");
+  background-position: 0px 0px;
+  width: 54px;
+  height: 56px;
+}
+section .purple_box .cards_content .col_3.my_card span.edit_icon {
+  background-image: url("../images/sprite.png");
+  background-position: -151px -135px;
+  width: 23px;
+  height: 23px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+  float: none;
+  cursor: pointer;
+}
+section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
+  background-image: url("../images/sprite.png");
+  background-position: -158px -120px;
+  width: 18px;
+  height: 14px;
+}
+section .purple_box .cards_content .col_3.my_card span.card_number {
+  width: 100%;
+  color: #808080;
+}
+section .purple_box .cards_content .col_3.my_card .top_card {
+  text-align: left;
+  display: block;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content {
+  display: none;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content .line {
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: block;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content .line .left {
+  width: 70%;
+  text-align: left;
+  color: #808080;
+  font-size: 14px;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content .line .left span {
+  background: #d8d8d8;
+  width: 18px;
+  height: 18px;
+  color: #6e6e6e;
+  border-radius: 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+  margin-left: 5px;
+  padding-top: 2px;
+  box-sizing: border-box;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content .line .left span.active {
+  background: #777;
+  color: #fff;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content .line .right {
+  width: 30%;
+  text-align: right;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content .line .tooltip_bonus {
+  display: none;
+  font-size: 12px;
+  width: 200px;
+  background: #e6e6e6;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 9;
+  margin-top: 25px;
+}
+section .purple_box .cards_content .col_3.my_card .show_more_content .line .tooltip_bonus:before {
+  content: '';
+  color: #e6e6e6;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 5px solid #e6e6e6;
+  position: absolute;
+  top: -5px;
+  left: 48%;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card {
+  text-align: left;
+  margin-top: 20px;
+  position: absolute;
+  bottom: 10px;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card .price {
+  float: left;
+  width: 124px;
+  font-size: 22px;
+  font-weight: bold;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card .price.cero {
+  color: #ff5800;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card a {
+  text-decoration: none;
+  color: #ff5800;
+  margin-top: 5px;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card a.watch_more {
+  float: left;
+  font-size: 14px;
+  margin-top: 6px;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card a.recharge {
+  float: right;
+  font-size: 16px;
+  margin-left: 10px;
 }
 section input {
   width: 100%;
@@ -468,7 +736,7 @@ section .error_message span {
 }
 section .error_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -143px -49px;
+  background-position: -127px -135px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -579,6 +847,21 @@ footer ul li a {
   width: 651px;
   height: 686px;
   background: url("../images/modal_bg.png");
+}
+#how_asociate_card {
+  width: 500px;
+  height: 800px;
+  background: #eee;
+  border-radius: 10px;
+}
+#how_asociate_card .modal_content {
+  margin-top: 20px;
+}
+#how_asociate_card .modal_content h3 {
+  color: #000;
+}
+#how_asociate_card .modal_content p {
+  color: #000;
 }
 ul.parsley-errors-list {
   text-align: left;
