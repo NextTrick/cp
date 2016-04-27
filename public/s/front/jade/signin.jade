@@ -2,4 +2,39 @@ extends layout/layout.jade
 block section
 	section
 		.box_center
+			.welcome_box
+				h2 ¡Benvenido a  
+					span Coney Club  
+					|y recargas virtuales!
+				p.medium Un club creado para todos aquellos que buscan 
+					span más diversión
+					|por mucho menos!
+				p.small Ahora podrás hacer tus recargas
+					strong sin necesidad de hacer colas
+					|, además podrás gozar de 
+					strong mucho beneficios
+				.yellow_box Regístrate
+				.purple_box
+					.error_message
+						span.icon
+						span.text Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde
+					.content
+						.left
+							p Usando tus redes sociales
+							button.btn.btn_fb
+								span.icon
+								span.text Facebook
+							button.btn.btn_tw
+								span.icon
+								span.text Twitter
+						.right
+							p Registrando tu correo electrónico
+							form(action="signin_complete.html" data-parsley-validate)
+								.form_control
+									input.email(type="email" placeholder="ejemplo@micorreo.com" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-type="email" data-parsley-type-message="Ingrese un correo válido")
+								button.btn.btn_orange(type="submit") Registrarme
+					hr
+					.login_link
+						a(href="login.html") Ya tengo una cuenta en Coney Park
+							span
 			

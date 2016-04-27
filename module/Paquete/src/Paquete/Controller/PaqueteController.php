@@ -57,8 +57,11 @@ class PaqueteController extends SecurityAdminController
             }
         }
 
-        $results2 = $this->_getPaqueteService()->getRepository()->findByReferencia($referencias);
-        
+        $results2 = array();
+        if (!empty($referencias)) {
+            $results2 = $this->_getPaqueteService()->getRepository()->findByReferencia($referencias);
+        }
+
         foreach ($rows as $key => $row) {
             $referencia = $row['referencia'];
             if (isset($results2[$referencia])) {

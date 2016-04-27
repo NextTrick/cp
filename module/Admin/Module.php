@@ -69,7 +69,7 @@ class Module
         $serviceManager = $application->getServiceManager();
         $securityModeules = $serviceManager->get('security')->getModules();
 
-        $currentNamespaceController = $e->getRouteMatch()->getParam('controller');        
+        $currentNamespaceController = $e->getRouteMatch()->getParam('controller');
         $controllerPart = explode('\\', $currentNamespaceController);
         $currentModule = array_shift($controllerPart);
         $currentAction = $e->getRouteMatch()->getParam('action');

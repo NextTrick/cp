@@ -8,7 +8,7 @@ return array(
             'usuario' => array(
                 'type' => 'Literal',
                 'options' => array(
-                    'route'    => '/usuario',
+                    'route'    => '/admin/usuario',
                     'defaults' => array(
                         'controller' => 'Usuario\Controller\Index',
                         'action' => 'index',

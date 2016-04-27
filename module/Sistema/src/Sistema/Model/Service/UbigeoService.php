@@ -11,12 +11,12 @@ namespace Sistema\Model\Service;
 class UbigeoService
 {
     protected $_repository = null;
-    protected $_sl = null;
+    protected $_sl         = null;
 
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        $this->_sl         = $serviceLocator;
     }
 
     public function getPaises()
@@ -28,7 +28,7 @@ class UbigeoService
                 'cod_dist' => '00',
             ),
             'columns' => array('cod_pais', 'nombre'),
-            'order' => array('nombre ASC'),
+            'order'   => array('nombre ASC'),
         );
         return $this->getRepository()->findPairs($criteria);
     }
@@ -42,9 +42,9 @@ class UbigeoService
         $where->equalTo('cod_dist', '00');
         
         $criteria = array(
-            'where' => $where,
+            'where'   => $where,
             'columns' => array('cod_depa', 'nombre'),
-            'order' => array('nombre ASC'),
+            'order'   => array('nombre ASC'),
         );
         return $this->getRepository()->findPairs($criteria);
     }
@@ -58,9 +58,9 @@ class UbigeoService
         $where->equalTo('cod_dist', '00');
 
         $criteria = array(
-            'where' => $where,
+            'where'   => $where,
             'columns' => array('cod_prov', 'nombre'),
-            'order' => array('nombre ASC'),
+            'order'   => array('nombre ASC'),
         );
         return $this->getRepository()->findPairs($criteria);
     }
@@ -78,9 +78,9 @@ class UbigeoService
         }
         
         $criteria = array(
-            'where' => $where,
+            'where'   => $where,
             'columns' => array('cod_dist', 'nombre'),
-            'order' => array('nombre ASC'),
+            'order'   => array('nombre ASC'),
         );
         return $this->getRepository()->findPairs($criteria);
     }

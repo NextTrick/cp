@@ -56,6 +56,14 @@ class PaqueteForm extends Form
             ));
         $this->add($titulo2);
         
+        $tipos = $this->_getPaqueteService()->getTipos();
+        $tipo = new Element\Select('tipo');
+        $tipo->setAttributes(array('id' => 'tipo'));
+        $tipo->setValueOptions($tipos);
+        $tipo->setEmptyOption('- Seleccione -');
+        $tipo->setDisableInArrayValidator(true);
+        $this->add($tipo);
+        
         $importeMinimo = new Element\Text('importe_minimo');
         $importeMinimo->setAttributes(array(
                 'id' => 'importe_minimo',
@@ -124,5 +132,10 @@ class PaqueteForm extends Form
         $destacado->setUncheckedValue('0');
         $destacado->setValue('0');
         $this->add($destacado);
+    }
+    
+    protected function _getPaqueteService()
+    {
+        return $this->_sl->get('Paquete\Model\Service\PaqueteService');
     }
 }

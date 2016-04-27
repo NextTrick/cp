@@ -94,17 +94,43 @@ section
 	padding-bottom 50px
 	overflow hidden
 	color white
+	&.app_content
+		padding-top 50px
+		.menu
+			background #ECECEC
+			width 295px
+			color black
+			margin 0 auto
+			position relative
+			margin-bottom -14px
+			ul
+				margin 0
+				padding 0
+				li
+					display inline-block
+					list-style none
+					padding 5px 10px
+					cursor pointer
+					&.first
+						border-right 1px solid lightgray
+					&.last
+						border-left 1px solid lightgray
+					&.active
+						background #F7A100
 	h2
 		span
 			color #FFB000
 	.welcome_box
 		text-align center
+	.app_box
+		padding 40px 0
+		text-align center
 	.yellow_box
 		background #FFB000
-		width 200px
 		height 42px
+		display inline-block
+		padding 8px 20px
 		text-align center
-		padding-top 8px
 		box-sizing border-box
 		color #470446
 		font-size 24px
@@ -127,13 +153,27 @@ section
 			background #1B95E0
 		&.btn_orange
 			background #FF5800
+		&.btn_save_signin
+			margin-top 20px
 	.purple_box
-		background #470446
+		background #6C006C
 		border-radius 20px
 		padding 20px 0
 		p
 			margin-bottom 20px
 			font-size 20px
+			&.yellow_text
+				color #F7A100
+			&.small_text
+				font-size 18px
+			&.term
+				font-size 12px
+				a
+					color white
+			&.p_16
+				font-size 16px
+				span
+					color #F7A100
 		hr
 			border-style dashed
 			color #8C008C
@@ -151,6 +191,80 @@ section
 			text-align center
 			button
 				width 100%
+		.options
+			overflow hidden
+			.col_3
+				width 33%
+				.circle
+					width 150px
+					height 150px
+					border-radius 200px
+					background #410041
+					display block
+					margin 0 auto
+				p
+					width 85%
+					margin 10px auto 0
+		.bar_info
+			overflow hidden
+			background #310041
+			height 85px
+			padding 22px
+			box-sizing border-box
+			margin-top 20px
+			p
+				margin 10px 0 0
+			button
+				span
+					display inline-block
+					vertical-align middle
+					&.icon
+						margin -7px 0px 0px 5px
+						sprite($add_card)
+		.benefits_offers
+			width 95%
+			margin 0 auto
+			.offers_box_two
+				overflow hidden
+				.left
+					width 50%
+					height 220px
+					background #F29224
+					padding 20px
+					box-sizing border-box
+				.right
+					padding 20px
+					height 220px
+					width 50%
+					background white
+					box-sizing border-box
+					p
+						color black
+					button
+						width 300px
+			.offers_box_three
+				margin 20px 0
+				overflow hidden
+				.col_3
+					width 32%
+					.box_white
+						background white
+						border-radius 15px
+						color black
+					&:first-child
+						margin-right 2%	
+					.image
+						height 145px
+						overflow hidden
+						img
+							width 100%
+		.info_box
+			text-align left
+			width 65%
+			padding 5px 25px
+			span
+				&.text
+					font-size 14px
 	input
 		width 100%
 		border 0
@@ -159,6 +273,41 @@ section
 		border-radius 10px
 		padding 0px 10px
 		text-align center
+		&.inp_right
+			width 200px
+			float right
+	select
+		height 36px
+		line-height 36px
+		background url(../images/arrow_select.png) no-repeat right
+		padding 0px 10px
+		border 0
+		color gray
+		/*for firefox*/
+		-moz-appearance none
+		/*for chrome*/
+		-webkit-appearance none
+	select::-ms-expand
+		display none
+	.bg_white
+		background white
+		border-radius 20px
+		select
+			width 100%
+		&.doc_type
+			width 100px
+			overflow hidden
+			float left
+		&.day
+			width 80px
+			float left
+			margin-right 5px
+		&.month
+			width 137px
+			float left
+		&.year
+			width 90px
+			float right
 	.login_link
 		text-align center
 		padding 20px 0 10px
@@ -196,6 +345,22 @@ section
 				margin-top 5px
 		&.hide
 			display none
+	form
+		.form_control
+			overflow hidden
+			margin-bottom 10px
+			.left
+				width 35%
+				text-align left
+			.right
+				width 63%
+				.button
+					width 100%
+					margin-top 20px
+		&.signin_form
+			.content_form
+				width 500px
+				margin 0 auto
 footer
 	display block
 	img.bg
@@ -260,6 +425,7 @@ footer
 #modal_recovery_response
 #modal_new_password
 #modal_new_password_response
+#modal_response_signin
 	width 651px
 	height 686px
 	background url(../images/modal_bg.png)
@@ -270,7 +436,7 @@ footer
 ul.parsley-errors-list
 	text-align left
 	padding 0
-	margin 0 0 5px
+	margin -1px 0 5px
 	font-size 12px
 	li
 		list-style none

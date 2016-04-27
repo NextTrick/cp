@@ -17,13 +17,14 @@ INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `orden`, `icon
 (6, 3, 'Rol', 'admin/rol', 3, 'fa-circle-o', '2016-03-17 05:01:34', '2016-03-17 23:37:24', 1),
 (7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-19 08:15:17', 1),
 (8, NULL, 'Promociones', '', 2, 'fa fa-th', '2016-04-11 20:48:28', '2016-04-15 22:17:47', 1),
-(9, 8, 'Paquetes', 'paquete/paquete', 1, 'fa-circle-o', '2016-04-11 20:49:31', '2016-04-15 22:23:22', 1),
+(9, 8, 'Paquetes', 'admin/paquete/paquete', 2, 'fa-circle-o', '2016-04-11 20:49:31', '2016-04-24 22:28:55', 1),
 (10, NULL, 'Reportes', '', 3, 'fa fa-table', '2016-04-15 22:18:37', '2016-04-15 22:22:36', 1),
-(11, 10, 'Usuarios', 'usuario/usuario', 4, 'fa-circle-o', '2016-04-15 22:18:54', '2016-04-16 01:32:21', 1),
-(12, 10, 'Pagos', 'orden/orden', 5, 'fa-circle-o', '2016-04-15 22:19:11', '2016-04-16 01:34:03', 1),
-(13, 10, 'Operaciones', 'orden/orden', 6, 'fa-circle-o', '2016-04-15 22:20:57', '2016-04-16 01:35:08', 1),
+(11, 10, 'Usuarios', 'admin/usuario/usuario', 8, 'fa-circle-o', '2016-04-15 22:18:54', '2016-04-24 22:29:36', 1),
+(12, 10, 'Pagos', 'admin/orden/orden', 9, 'fa-circle-o', '2016-04-15 22:19:11', '2016-04-24 22:29:54', 1),
+(13, 10, 'Operaciones', 'admin/orden/orden', 7, 'fa-circle-o', '2016-04-15 22:20:57', '2016-04-24 22:29:24', 1),
 (14, NULL, 'CMS', '', 4, 'fa fa-edit', '2016-04-15 22:21:23', '2016-04-15 22:23:08', 1),
-(15, 14, 'Contenido', 'cms/contenido', 2, 'fa-circle-o', '2016-04-15 22:21:36', '2016-04-16 01:31:07', 1);
+(15, 14, 'Contenido', 'admin/cms/contenido', 3, 'fa-circle-o', '2016-04-15 22:21:36', '2016-04-24 22:29:11', 1);
+
 
 --
 -- Volcado de datos para la tabla `admin_permiso`
@@ -2120,3 +2121,28 @@ INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALU
 INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALUES ('PE', '25', '03', '03', 'CURIMANA');
 INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALUES ('PE', '25', '04', '00', 'PURUS');
 INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALUES ('PE', '25', '04', '01', 'PURUS');
+
+
+--
+-- Volcado de datos para la tabla `usuario_usuario`
+--
+
+INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `cod_pais`, `cod_depa`, `cod_prov`, `cod_dist`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
+(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', 'PE', '15', NULL, '42', NULL, NULL, NULL),
+(5, '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 0, NULL, 'Juan Carlos', 'test', 'test', 1, '2324232', '2015-03-02', 'PE', '23', NULL, '08', NULL, NULL, 'd27c393c942947426e370624076ec81c201b3b480a358895870e8e23ce4a06a5');
+
+
+INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `estado_truefi`, `numero`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `fecha_creacion`, `fecha_edicion`) VALUES
+(1, 5, NULL, '{54A0B670-9C39-464D-ABE2-79B62240043A}', 2, '000-123456-3', NULL, NULL, NULL, NULL, NULL, '2016-04-18 06:14:24');
+
+
+--
+-- Volcado de datos para la tabla `paquete_paquete`
+--
+
+INSERT INTO `paquete_paquete` (`id`, `referencia`, `titulo1`, `titulo2`, `tipo`, `imagen`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `legal`, `activo`, `destacado`, `fecha_creacion`, `fecha_edicion`) VALUES
+(6, '583f0c9af40e350c9837e8f30a73b5c9', '¡COLECCIONA DIVERSIÓN!', '¡Por recargas de S/ 30 llévate 30 en saldo y un VASO 3D!', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160414.png', 1, 1, 0, 1, 'saassa', 1, 1, '2016-04-14 23:32:53', NULL),
+(10, '28e9efd8067bb08f9a5be96d5deea073', 'Promoción 1. Ver legal', 'Recarga S/.100, obten S/.50 soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160415.png', 2, 2, 0, 2, NULL, 1, 0, '2016-04-18 06:45:01', NULL),
+(11, '2f61a7cd1e0c166edcdea52b78e69d44', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160416.png', 3, 3, 0, 3, NULL, 1, 0, '2016-04-18 06:45:01', NULL),
+(12, '2f61a7cd1e0c166edcdea52b78e69d45', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160417.png', 4, 1, 0, 2, NULL, 1, 1, '2016-04-18 06:45:01', NULL),
+(13, '2f61a7cd1e0c166edcdea52b78e69d46', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160418.png', 1, 2, 0, 2, NULL, 1, 0, '2016-04-18 06:45:01', NULL);

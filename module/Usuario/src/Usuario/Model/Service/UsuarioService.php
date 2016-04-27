@@ -8,6 +8,9 @@
 
 namespace Usuario\Model\Service;
 
+use \Common\Helpers\String;
+
+
 class UsuarioService
 {
     const DI_DNI       = 1;
@@ -134,6 +137,40 @@ class UsuarioService
     private function _getTarjetaService()
     {
         return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
+    }
+
+    public function getDataCriteria($params)
+    {
+        $criteria = array(
+            'whereLike' => null,
+            'limit'     => null,
+            'where'     => null
+        );
+
+        if (!empty($params)) {
+            $nameFilter = String::xssClean($params['cmbFiltro']);
+
+            $paramsLike = array(
+                $nameFilter => String::xssClean($params['txtBuscar']),
+            );
+
+            $paramsWhere = array(
+                'di_tipo'  => String::xssClean($params['cmbTipoDoc']),
+                'estado'   => String::xssClean($params['cmbEstado']),
+                'cod_pais' => String::xssClean($params['cmbPais']),
+                'cod_depa' => String::xssClean($params['cmbDepartamento']),
+                'cod_prov' => String::xssClean($params['cmbProvincia']),
+                'cod_dist' => String::xssClean($params['cmbDistrito']),
+            );
+
+            $criteria = array(
+                'whereLike' => $paramsLike,
+                'limit'     => LIMIT_BUSCAR,
+                'where'     => $paramsWhere
+            );
+        }
+
+        return $criteria;
     }
 
 }
