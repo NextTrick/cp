@@ -260,11 +260,222 @@ section
 							width 100%
 		.info_box
 			text-align left
-			width 65%
+			width 100%
 			padding 5px 25px
 			span
 				&.text
 					font-size 14px
+					width 65%
+					display inline-block
+			a.how_asociate_card
+				float right
+				color #ff5800
+				width 30%
+				text-decoration none
+		.cards_content
+			width 95%
+			margin 0 auto 10px
+			.col_3
+				width 286px
+				height 188px
+				display inline-block
+				margin-right 10px
+				margin-top 10px
+				background url(../images/card_empty.png)
+				position relative
+				vertical-align top
+				&.add_card
+					cursor pointer
+					background url(../images/add_card_bg.png)
+					.tooltip
+						display none
+						position absolute
+						color gray
+						background white
+						width 80%
+						padding 10px
+						text-align left
+						box-sizing border-box
+						left 10%
+						top 160px
+						z-index 9
+						border-radius 8px
+						font-size 14px
+						&:before
+							content ''
+							color white
+							width 0
+							height 0 
+							border-left 10px solid transparent
+							border-right 10px solid transparent
+							border-bottom 5px solid white
+							position absolute
+							top -5px
+							left 48%
+				.content_asociate_card
+					background #DED7DE
+					padding 15px 10px 10px
+					box-sizing border-box
+					border-radius 10px
+					input
+						margin-bottom 10px
+					button
+						width 100%
+					.link_orange
+						margin-top 8px
+						color #FF5800
+					display none
+				.loading
+					background #DED7DE
+					width 100%
+					height 100%
+					display none
+					border-radius 10px
+					img
+						margin-top 50px
+				.success_box
+				.error_box
+					padding 20px 10px 10px 
+					box-sizing border-box
+					width 100%
+					height 100%
+					display none
+					border-radius 10px
+					a
+						color white
+				.success_box
+					background #22B273
+					.icon
+						sprite($card_success)
+						display block
+						margin 0 auto
+					h3
+						font-size 24px
+				.error_box
+					background #F6494D
+					.icon
+						sprite($card_error)
+						display block
+						margin 0 auto
+					p
+						font-size 15px
+					
+				&.my_card
+					background #EFEFEF
+					border-radius 10px
+					color black
+					padding 15px
+					box-sizing border-box
+					.card_title
+						width 100%
+						color #1c1c1c
+						display block
+						margin 15px 0 10px
+						font-size 19px
+						.input_name
+							display none
+							width 80%
+							background transparent
+							border-bottom 1px solid lightgray
+							border-radius 0
+							margin -12px 0 0
+							text-align left
+					span
+						text-align left
+						&.cp_logo
+							display block
+							sprite($logo_2)
+						
+						&.edit_icon
+							sprite($edit_icon)
+							display inline-block
+							vertical-align middle
+							margin-left 5px
+							float none
+							cursor pointer
+							&.active
+								sprite($check_success)
+						&.card_number
+							width 100%
+							color gray
+					.top_card
+						text-align left
+						display block
+					.show_more_content
+						display none
+						.line
+							margin-bottom 10px
+							overflow hidden
+							display block
+							.left
+								width 70%
+								text-align left
+								color gray
+								font-size 14px
+								span
+									background #D8D8D8
+									width 18px
+									height 18px
+									color #6E6E6E
+									border-radius 10px
+									text-align center
+									display inline-block
+									font-size 12px
+									margin-left 5px
+									padding-top 2px
+									box-sizing border-box
+									&.active
+										background #777777
+										color white
+							.right
+								width 30%
+								text-align right
+							.tooltip_bonus
+								display none
+								font-size 12px
+								width 200px
+								background #E6E6E6
+								border-radius 10px
+								padding 10px
+								box-sizing border-box
+								position absolute
+								z-index 9
+								margin-top 25px
+								&:before
+									content ''
+									color #E6E6E6
+									width 0
+									height 0 
+									border-left 10px solid transparent
+									border-right 10px solid transparent
+									border-bottom 5px solid #E6E6E6
+									position absolute
+									top -5px
+									left 48%
+					.bottom_card
+						text-align left
+						margin-top 20px
+						position absolute
+						bottom 10px
+						.price
+							float left
+							width 124px
+							font-size 22px
+							font-weight bold
+							&.cero
+								color #FF5800
+						a
+							text-decoration none
+							color #FF5800
+							margin-top 5px
+							&.watch_more
+								float left
+								font-size 14px
+								margin-top 6px
+							&.recharge
+								float right
+								font-size 16px
+								margin-left 10px
 	input
 		width 100%
 		border 0
@@ -429,7 +640,17 @@ footer
 	width 651px
 	height 686px
 	background url(../images/modal_bg.png)
-	
+#how_asociate_card
+	width 500px
+	height 800px
+	background #EEEEEE
+	border-radius 10px
+	.modal_content
+		margin-top 20px
+		h3
+			color black
+		p
+			color black
 
 
 //parsley
