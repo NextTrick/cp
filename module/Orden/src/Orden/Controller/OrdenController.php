@@ -42,7 +42,7 @@ class OrdenController extends SecurityAdminController
         }
     }
 
-    public function exportarExcelAction()
+    public function exportarAction()
     {
         try {
             $view = new ViewModel();
@@ -84,32 +84,32 @@ class OrdenController extends SecurityAdminController
             );
             $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($style['cabecera']);
 
-            $sheet->setCellValue('A1', 'Email');
-            $sheet->setCellValue('B1', 'Nombre');
-            $sheet->setCellValue('C1', 'A. Paterno');
-            $sheet->setCellValue('D1', 'A. Materno');
-            $sheet->setCellValue('E1', 'Tipo Doc');
-            $sheet->setCellValue('F1', 'Nro. Doc.');
-            $sheet->setCellValue('G1', 'Pais');
-            $sheet->setCellValue('H1', 'Departamento');
-            $sheet->setCellValue('I1', 'Provincia');
-            $sheet->setCellValue('J1', 'Distrito');
-            $sheet->setCellValue('K1', 'Estado');
+            $sheet->setCellValue('A1', 'Id');
+            $sheet->setCellValue('B1', 'Correo');
+            $sheet->setCellValue('C1', 'Correo');
+            $sheet->setCellValue('D1', 'Metodo Pago');
+            $sheet->setCellValue('E1', 'Monto');
+            $sheet->setCellValue('F1', 'Fecha Confirmacion');
+            $sheet->setCellValue('G1', 'Estado Pago');
+            $sheet->setCellValue('H1', 'Tipo comprobante');
+            $sheet->setCellValue('I1', 'Nro comprobante');
+            $sheet->setCellValue('J1', 'R. Social');
+            $sheet->setCellValue('K1', 'Nombres');
 
             $index = 2;
             foreach ($data as $key => $reg) {
                 $estado = (!empty($row['estado']))? 'Activo': 'Baja';
-                $sheet->setCellValue('A'.$index, $reg['email']);
-                $sheet->setCellValue('B'.$index, $reg['nombres']);
-                $sheet->setCellValue('C'.$index, $reg['paterno']);
-                $sheet->setCellValue('D'.$index, $reg['materno']);
-                $sheet->setCellValue('E'.$index, $reg['di_tipo']);
-                $sheet->setCellValue('F'.$index, $reg['di_valor']);
-                $sheet->setCellValue('G'.$index, $reg['nombrePais']);
-                $sheet->setCellValue('H'.$index, $reg['nombreDepa']);
-                $sheet->setCellValue('I'.$index, $reg['nombreProv']);
-                $sheet->setCellValue('J'.$index, $reg['nombreDist']);
-                $sheet->setCellValue('K'.$index, $estado);
+                $sheet->setCellValue('A'.$index, $reg['id']);
+                $sheet->setCellValue('B'.$index, $reg['email']);
+                $sheet->setCellValue('C'.$index, $reg['email']);
+                $sheet->setCellValue('D'.$index, $reg['pago_tarjeta']);
+                $sheet->setCellValue('E'.$index, $reg['monto']);
+                $sheet->setCellValue('F'.$index, $reg['fecha_creacion']);
+                $sheet->setCellValue('G'.$index, $reg['pago_estado']);
+                $sheet->setCellValue('H'.$index, $reg['comprobante_tipo']);
+                $sheet->setCellValue('I'.$index, $reg['comprobante_numero']);
+                $sheet->setCellValue('J'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('K'.$index, $reg['nombres']);
                 $index ++;
             }
 

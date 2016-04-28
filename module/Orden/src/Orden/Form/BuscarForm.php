@@ -52,7 +52,7 @@ class BuscarForm extends Form
 
         $filtroTipoComp = $this->getTipoComprobante();
         $cmbTipoDoc     = new Element\Select('cmbTipoComp');
-        $cmbTipoDoc->setAttributes(array('id' => 'cmbTipoDoc'));
+        $cmbTipoDoc->setAttributes(array('id' => 'cmbTipoComp'));
         $cmbTipoDoc->setValueOptions($filtroTipoComp);
         $cmbTipoDoc->setEmptyOption('- Seleccione -');
         $cmbTipoDoc->setDisableInArrayValidator(true);
@@ -91,17 +91,21 @@ class BuscarForm extends Form
 
     private function getEstados()
     {
-        return array('1' => 'Activo', '0' => 'Baja');
+        return array(
+             OrdenService::ESTADO_PAGO_ERROR     => 'Error',
+             OrdenService::ESTADO_PAGO_PAGADO    => 'Pagado',
+             OrdenService::ESTADO_PAGO_PENDIENTE => 'Pendiente'
+        );
     }
 
     private function getTipoComprobante()
     {
-        return array( OrdenService::TIPO_COMPROBANTE_DNI => 'DNI', OrdenService::TIPO_COMPROBANTE_RUC => 'RUC');
+        return array(OrdenService::TIPO_COMPROBANTE_DNI => 'DNI', OrdenService::TIPO_COMPROBANTE_RUC => 'RUC');
     }
 
     private function getMetodoPago()
     {
-        return array( OrdenService::METODO_PAGO_VISA => 'Visa', OrdenService::METODO_PAGO_PE => 'PE');
+        return array(OrdenService::METODO_PAGO_VISA => 'Visa', OrdenService::METODO_PAGO_PE => 'PE');
     }
 
     /**
@@ -113,9 +117,9 @@ class BuscarForm extends Form
     {
         return array(
             'email'              => 'Correo',
-            'comprobante_numero' => 'Nombre',
-            'fac_razon_social'   => 'A. Paterno',
-            'nombres'            => ' nombres',
+            'comprobante_numero' => 'Nro. Comprobante',
+            'fac_razon_social'   => 'R. Social',
+            'nombres'            => 'Nombres',
         );
     }
 }

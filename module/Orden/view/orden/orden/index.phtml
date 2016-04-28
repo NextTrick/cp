@@ -12,67 +12,40 @@ $this->layout()->breadcrumb = array(
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
-        <a href="<?php echo BASE_URL; ?>orden/orden/crear" class="btn btn-success">Registrar</a>
+        <a href="javascript:exportarExcel()" class="btn btn-success">Excel</a>
         <hr class="separator">
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
-                <tr>
-                    <th>Usuario_id</th>
-                    <th>Comprobante_tipo</th>
-                    <th>Comprobante_numero</th>
-                    <th>Fac_razon_social</th>
-                    <th>Fac_ruc</th>
-                    <th>Fac_direccion_fiscal</th>
-                    <th>Fac_direccion_entrega_factura</th>
-                    <th>Nombres</th>
-                    <th>Paterno</th>
-                    <th>Materno</th>
-                    <th>Ciudadania</th>
-                    <th>Doc_identidad</th>
-                    <th>Direccion</th>
-                    <th>Pais_id</th>
-                    <th>Distrito_id</th>
-                    <th>Pago_referencia</th>
-                    <th>Pago_estado</th>
-                    <th>Pago_tarjeta</th>
-                    <th>Monto</th>
-                    <th>Estado</th>
-                    <th>Fecha_creacion</th>
-                    <th>Fecha_edicion</th>
-                    <th style="max-width: 60px"></th>
-                </tr>
+            <tr>
+                <th>Id</th>
+                <th>Cod. Pago</th>
+                <th>Correo</th>
+                <th>Metodo</th>
+                <th>Monto</th>
+                <th>F. Confirmacion</th>
+                <th>Estado</th>
+                <th>Comprobante</th>
+                <th>Nro. Comprobante</th>
+                <th>R. Social</th>
+                <th>Nombres</th>
+            </tr>
             </thead>
             <tbody>
-                <?php foreach ($gridList as $row) : ?>
-                    <tr>
-                        <td><?php echo $row['usuario_id'] ?></td>
-                        <td><?php echo $row['comprobante_tipo'] ?></td>
-                        <td><?php echo $row['comprobante_numero'] ?></td>
-                        <td><?php echo $row['fac_razon_social'] ?></td>
-                        <td><?php echo $row['fac_ruc'] ?></td>
-                        <td><?php echo $row['fac_direccion_fiscal'] ?></td>
-                        <td><?php echo $row['fac_direccion_entrega_factura'] ?></td>
-                        <td><?php echo $row['nombres'] ?></td>
-                        <td><?php echo $row['paterno'] ?></td>
-                        <td><?php echo $row['materno'] ?></td>
-                        <td><?php echo $row['ciudadania'] ?></td>
-                        <td><?php echo $row['doc_identidad'] ?></td>
-                        <td><?php echo $row['direccion'] ?></td>
-                        <td><?php echo $row['pais_id'] ?></td>
-                        <td><?php echo $row['distrito_id'] ?></td>
-                        <td><?php echo $row['pago_referencia'] ?></td>
-                        <td><?php echo $row['pago_estado'] ?></td>
-                        <td><?php echo $row['pago_tarjeta'] ?></td>
-                        <td><?php echo $row['monto'] ?></td>
-                        <td><?php echo $row['estado'] ?></td>
-                        <td><?php echo $row['fecha_creacion'] ?></td>
-                        <td><?php echo $row['fecha_edicion'] ?></td>
-                        <td>
-                            <a href="<?php echo BASE_URL ?>orden/orden/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-                            <a href="<?php echo BASE_URL ?>orden/orden/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
+            <?php foreach ($gridList as $row) : ?>
+                <tr>
+                    <td><?php echo $row['id'] ?></td>
+                    <td><?php echo $row['email'] ?></td>
+                    <td><?php echo $row['email'] ?></td>
+                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoPago($row['pago_tarjeta']); ?></td>
+                    <td><?php echo $row['monto'] ?></td>
+                    <td><?php echo $row['fecha_creacion'] ?></td>
+                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
+                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoComprobante($row['comprobante_tipo']); ?></td>
+                    <td><?php echo $row['comprobante_numero'] ?></td>
+                    <td><?php echo $row['fac_razon_social'] ?></td>
+                    <td><?php echo $row['nombres']; ?></td>
+                </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
     </div>
@@ -83,11 +56,32 @@ $this->layout()->breadcrumb = array(
             "pageLength": 25,
             "paging": true,
             "lengthChange": true,
-            "searching": true,
+            "searching": false,
             "ordering": false,
             "info": true,
-            "autoWidth": true
+            "autoWidth": true,
+            "order": [[ 2, "desc" ]]
         });
         common.deleteRemote();
+
+        $("#cmbTipoComp").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbEstado").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbMetodoPago").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
     });
+
+    function exportarExcel(){
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/orden/orden/exportarExcel");
+        $("#formBuscar").submit();
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/orden/orden");
+    }
+
 </script>
