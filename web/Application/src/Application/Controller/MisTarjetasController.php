@@ -13,14 +13,7 @@ class MisTarjetasController extends SecurityWebController
         }
         
         $usuario = $this->_getUsuarioData();
-        
-        $criteria = array(
-            'like' => array(
-                $usuario->id,
-            ),
-            'order' => 'fecha_creacion DESC',
-        );
-        $gridList = $this->_getTarjetaService()->getRepository()->findAll($criteria);
+        $gridList = $this->_getTarjetaService()->misTarjetas($usuario->id);
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
         return $view;
