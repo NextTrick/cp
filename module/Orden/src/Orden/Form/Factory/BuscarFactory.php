@@ -6,11 +6,11 @@
  * Time: 10:12 PM
  */
 
-namespace Usuario\Form\Factory;
+namespace Orden\Form\Factory;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
-use Usuario\Form\BuscarForm;
+use Orden\Form\BuscarForm;
 
 
 class BuscarFactory implements FactoryInterface
