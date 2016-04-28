@@ -4,6 +4,7 @@ namespace PaymentProcessor\Model\Gateway\Processor;
 
 use PaymentProcessor\Model\Gateway\Processor\Base\AbstractProcessor;
 use PaymentProcessor\Model\Gateway\Processor\Ws\Visa;
+use Orden\Model\Repository\OrdenRepository;
 
 class VisaProcessor extends AbstractProcessor
 {
@@ -31,15 +32,29 @@ class VisaProcessor extends AbstractProcessor
            
         try {                                              
             $paymentResponse = $this->ws->createEticket($data);     
-            
-            var_dump($paymentResponse); exit; 
-            
-            $return['data'] = array(
-                'status' => $paymentResponse->Estado,
-                'token' => $paymentResponse->Token,
-                'clientReference' => $paymentResponse->NumeroOrdenPago,
-                'reference' => $paymentResponse->CodTrans,
-            );
+                        
+            $xmlDocument = new \DOMDocument();
+            if ($xmlDocument->loadXML($paymentResponse->GeneraEticketResult)) {
+                $countMessages = $this->ws->cantidadMensajes($xmlDocument);
+                if ($countMessages == 0) {
+                    $eticket = $this->ws->recuperaEticket($xmlDocument);
+                    $html = $this->ws->htmlRedirecFormEticket($eticket);                    
+                    $return['data'] = array(
+                        'status' => OrdenRepository::PAGO_ESTADO_PENDIENTE,
+                        'token' => null,
+                        'clientReference' => null,
+                        'reference' => $eticket,
+                        'html' => $html,
+                    );                    
+                } else {
+                    $return['success'] = false;
+                    $return['error']['message'] = $this->getErrorMessage($xmlDocument, $countMessages);                    
+                }
+            } else {
+                $return['success'] = false;
+                $return['error']['message'] = 'Error loading Xml';                
+            }
+                        
         } catch (\Exception $e) {
             $return['success'] = false;
             $return['error']['message'] = $e->getMessage();
@@ -47,5 +62,15 @@ class VisaProcessor extends AbstractProcessor
         }
                 
         return $return;
+    }
+    
+    protected function getErrorMessage($xmlDocument, $countMessages)
+    {
+        $returnArray = array();
+        for ($iNumMensaje = 0; $iNumMensaje < $countMessages; $iNumMensaje++){            
+            $returnArray[] = $this->ws->recuperaMensaje($xmlDocument, $iNumMensaje + 1);                
+        }
+        
+        return implode('=', $returnArray);
     }
 }

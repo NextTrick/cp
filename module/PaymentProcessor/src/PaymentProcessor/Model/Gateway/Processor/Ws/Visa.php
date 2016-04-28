@@ -13,6 +13,8 @@ class Visa
     protected $wsdl;
     
     protected $environment;
+    
+    protected $config;
 
     public function __construct($config, $environment) 
     {
@@ -34,7 +36,124 @@ class Visa
         
         $response = $this->client->GeneraEticket($requestData);
         
-        var_dump($response);
+        return $response;        
+    }
+    
+    public function processResponse($response)
+    {
+        //Aqui carga la cadena resultado en un XMLDocument (DOMDocument)
+        $xmlDocument = new \DOMDocument();
+
+        if ($xmlDocument->loadXML($response->GeneraEticketResult)) {
+                /////////////////////////[MENSAJES]////////////////////////
+                //Ejemplo para determinar la cantidad de mensajes en el XML
+                $iCantMensajes= $this->cantidadMensajes($xmlDocument);
+                //echo 'Cantidad de Mensajes: ' . $iCantMensajes . '<br>';
+
+                //Ejemplo para mostrar los mensajes del XML 
+                for($iNumMensaje=0;$iNumMensaje < $iCantMensajes; $iNumMensaje++){
+                        echo 'Mensaje #' . ($iNumMensaje +1) . ': ';
+                        echo $this->recuperaMensaje($xmlDocument, $iNumMensaje+1);
+                        echo '<BR>';
+                        echo "Numero de pedido: " . $numPedido;
+                }
+                /////////////////////////[MENSAJES]////////////////////////
+
+                if ($iCantMensajes == 0){
+                        $Eticket= $this->recuperaEticket($xmlDocument);
+                        //echo 'Eticket: ' . $Eticket;
+
+                        $html= $this->htmlRedirecFormEticket($Eticket);
+                        echo $html;
+
+                        exit;
+                }
+
+        } else {
+                echo "Error cargando XML";
+        }
+    }
+                
+    //Funcion de ejemplo que obtiene la cantidad de mensajes
+    public function cantidadMensajes($xmlDoc)
+    {
+        $cantMensajes= 0;
+        $xpath = new DOMXPath($xmlDoc);
+        $nodeList = $xpath->query('//mensajes', $xmlDoc);
+
+        $XmlNode= $nodeList->item(0);
+
+        if ($XmlNode == null) {
+                $cantMensajes= 0;
+        } else {
+                $cantMensajes= $XmlNode->childNodes->length;
+        }
+        
+        return $cantMensajes; 
+    }
+    
+    //Funcion que recupera el valor de uno de los mensajes XML de respuesta
+    public function recuperaMensaje($xmlDoc, $iNumMensaje)
+    {
+        $strReturn = "";
+
+        $xpath = new DOMXPath($xmlDoc);
+        $nodeList = $xpath->query("//mensajes/mensaje[@id='" . $iNumMensaje . "']");
+
+        $XmlNode= $nodeList->item(0);
+
+        if ($XmlNode == null) {
+            $strReturn = "";
+        } else {
+            $strReturn = $XmlNode->nodeValue;
+        }
+
+        return $strReturn;
+    }
+        
+    /**
+     * Funcion que recupera el valor del Eticket
+     * 
+     * @param xml $xmlDoc
+     * @return string
+     */
+    public function recuperaEticket($xmlDoc)
+    {
+        $strReturn = "";
+
+        $xpath = new DOMXPath($xmlDoc);
+        $nodeList = $xpath->query("//registro/campo[@id='ETICKET']");
+
+        $XmlNode= $nodeList->item(0);
+
+        if ($XmlNode == null) {
+                $strReturn = "";
+        } else {
+                $strReturn = $XmlNode->nodeValue;
+        }
+        
+        return $strReturn;
+    }
+    
+    public function htmlRedirecFormEticket($eticket)
+    {
+        $formUrl = $this->config['baseUrl'] . $this->config['formularioPago'];
+        $html='<Html>
+        <head>
+        <title>Pagina prueba Visa</title>
+        </head>
+        <Body onload="fm.submit();">
+
+        <form name="fm" method="post" action="' . $formUrl . '">
+            <input type="hidden" name="ETICKET" value="#ETICKET#" /><BR>
+            <!--<input type="submit" name="boton" value="Pagar" /><BR>-->
+        </form>
+        </Body>
+        </Html>';
+
+        $html= str_replace("#ETICKET#", $eticket, $html);
+
+        return $html;
     }
     
     public function retrieveTicket($data)
@@ -90,5 +209,10 @@ class Visa
         $view->setVariables($data);
         
         return $renderer->render($view);
+    }
+    
+    public function getClient()
+    {
+        return $this->client;
     }
 }

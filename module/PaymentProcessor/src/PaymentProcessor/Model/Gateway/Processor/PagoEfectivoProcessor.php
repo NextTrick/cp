@@ -5,12 +5,11 @@ namespace PaymentProcessor\Model\Gateway\Processor;
 use PaymentProcessor\Model\Gateway\Processor\Ws\PagoEfectivo;
 use PaymentProcessor\Model\Gateway\Processor\Base\AbstractProcessor;
 use PaymentProcessor\Model\Gateway\Processor\Ws\PagoEfectivo\Solicitud;
+use Orden\Model\Repository\OrdenRepository;
 
 class PagoEfectivoProcessor extends AbstractProcessor
 {
-    const ALIAS = 'PE';
-    
-    public $ws;
+    const ALIAS = 'PE';    
     
     public function __construct($serviceLocator)
     {
@@ -34,13 +33,11 @@ class PagoEfectivoProcessor extends AbstractProcessor
         try {            
             //Obtención del valor del Cip                                    
             $paymentResponse = $this->ws->solicitarPago($xml);     
-            
-            var_dump($paymentResponse); exit; 
-            
+                                    
             $return['data'] = array(
                 'status' => $paymentResponse->Estado,
                 'token' => $paymentResponse->Token,
-                'clientReference' => $paymentResponse->NumeroOrdenPago,
+                'cip' => $paymentResponse->NumeroOrdenPago,
                 'reference' => $paymentResponse->CodTrans,
             );
         } catch (\Exception $e) {
@@ -53,38 +50,46 @@ class PagoEfectivoProcessor extends AbstractProcessor
     }
     
     public function processCallback($params)
-    {
+    {        
+        $return = array(
+            'success' => true,            
+        );
+        
         if (!empty($params['data']) && !empty($params['version']) 
             && $params['version'] == 2) {
             
             $data = $params['data'];
-            //desencriptar la data y darle formato
-            $solData = simplexml_load_string($this->ws->desencriptarData($data));
+            
+            try {
+                //desencriptar la data y darle formato
+                $solData = simplexml_load_string($this->ws->desencriptarData($data));
 
-            //ID Transaccion para guardarla en la BD
-            $idPayment = $solData->CodTrans;
-            //Según el estado de la solicitud  Procesar	
-            Switch ($solData->Estado) {
-                case 592: // 
-                    echo 'Estado: pendiente de pago';
-                    //o bien registrarlo en un log
-                    $pagoefectivo->addRowFileLog(__DIR__ . '/log/cip.txt', $solData->CIP->NumeroOrdenPago . ':GENERADO');
-                    break;
-
-                case 593: //Cip Pagado
-                    $pagoefectivo->addRowFileLog(__DIR__ . '/log/cip.txt', $solData->CIP->NumeroOrdenPago . ':PAGADO');
-                    echo 'Estado: Generado';
-                    break;
-
-                case 595://Cip Vencido
-                    $pagoefectivo->addRowFileLog(__DIR__ . '/log/cip.txt', $solData->CIP->NumeroOrdenPago . ':VENCIDO');
-                    echo 'Estado: Vencido';
-                    break;
-
-                default: echo 'Estado: ERROR';
-                    return;
+                $return['data']['reference'] = $solData->CodTrans;
+                //Según el estado de la solicitud  Procesar	
+                Switch ($solData->Estado) {
+                    case 592:                        
+                        $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
+                        $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                        break;
+                    case 593: //Cip Pagado
+                        $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PAGADO;
+                        $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                        break;
+                    case 595://Cip Vencido
+                        $return['data']['status'] = OrdenRepository::PAGO_ESTADO_EXPIRADO;
+                        $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                    default:
+                        $return['data']['status'] = OrdenRepository::PAGO_ESTADO_ERROR;
+                        $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                }
+            } catch (\Exception $e) {
+                $return['success'] = false;
+                $return['error']['message'] = $e->getMessage();
+                $return['error']['detail'] = $e->getTraceAsString();
             }
         }
+        
+        return $return;
     }
     
     public function getSolicitud($data)
@@ -102,7 +107,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'Codtransaccion' => $data['id'],
                     'EmailComercio' => $options['mailAdmin'],
                     'FechaAExpirar' => $expirationDate,
-                    'UsuarioId' => '001',
+                    'UsuarioId' => $data['usuario_id'],
                     'DataAdicional' => '',
                     'UsuarioNombre' => $data['perfilpago_nombres'],
                     'UsuarioApellidos' => $data['perfilpago_paterno'] . ' ' . $data['perfilpago_materno'],
