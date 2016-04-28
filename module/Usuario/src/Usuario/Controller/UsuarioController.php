@@ -332,16 +332,6 @@ class UsuarioController extends SecurityAdminController
         return $form;
     }
     
-    public function crearBuscarForm()
-    {
-        $form = $this->_getUsuarioForm();
-        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
-        'controller' => 'usuario', 'action' => 'index'
-        )));
-        $form->setAttribute('method', 'get');
-        return $form;
-    }
-    
     protected function _getUsuarioForm()
     {
         return $this->getServiceLocator()->get('Usuario\Form\UsuarioForm');

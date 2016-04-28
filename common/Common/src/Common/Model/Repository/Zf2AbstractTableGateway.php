@@ -19,12 +19,13 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
     protected $table;
     protected $cache;
     
-    protected $crWhere = array();
-    protected $crWhereLike = array();
-    protected $crColumns = array('*');
-    protected $crOrder = array();
-    protected $crLimit = array();
-    protected $crOffset = array();
+    protected $crWhere        = array();
+    protected $crWhereLike    = array();
+    protected $crWhereBetween = array();
+    protected $crColumns      = array('*');
+    protected $crOrder        = array();
+    protected $crLimit        = array();
+    protected $crOffset       = array();
 
 
     public function __construct(Adapter $adapter)
@@ -40,12 +41,13 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
     
     public function clearCriteria()
     {
-        $this->crWhere = array();
-        $this->crWhereLike = array();
-        $this->crColumns = array('*');
-        $this->crOrder = array();
-        $this->crLimit = array();
-        $this->crOffset = array();
+        $this->crWhere        = array();
+        $this->crWhereLike    = array();
+        $this->crColumns      = array('*');
+        $this->crOrder        = array();
+        $this->crLimit        = array();
+        $this->crOffset       = array();
+        $this->crWhereBetween = array();
     }
 
     public function setCriteria($criteria)
@@ -59,6 +61,11 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
         if (isset($criteria['whereLike'])) {
             if (is_array($criteria['whereLike'])) {
                 $this->crWhereLike = $criteria['whereLike'];
+            }
+        }
+        if (isset($criteria['whereBetween'])) {
+            if (is_array($criteria['whereBetween'])) {
+                $this->crWhereBetween = $criteria['whereBetween'];
             }
         }
         if (isset($criteria['columns']) && is_array($criteria['columns'])) {

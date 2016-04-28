@@ -150,11 +150,24 @@ $(function() {
       asociateCard: function(e) {
         e.preventDefault();
         if (dom.asociateForm.parsley().isValid()) {
-          dom.contentAsociate.hide();
-          dom.loading.show();
-          setTimeout(function() {
-            return functions.successAsociate();
-          }, 2000);
+            dom.contentAsociate.hide();
+            dom.loading.show();
+            $.ajax({
+                type: "POST",
+                url: $('#form_asociar_nueva_tarjeta').attr('action'),
+                data: $('#form_asociar_nueva_tarjeta').serialize(),
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        return functions.successAsociate();
+                    } else {
+                        return functions.errorAsociate();
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    return functions.errorAsociate();
+                }
+            });
           return false;
         } else {
           return dom.asociateForm.parsley().validate();
@@ -183,9 +196,23 @@ $(function() {
       },
       editCardName: function() {
         if ($(this).hasClass('active')) {
-          $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
-          $(this).removeClass('active');
-          $(this).parent().children(st.nameCard).show();
+            $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
+            $(this).removeClass('active');
+            $(this).parent().children(st.nameCard).show();
+            var sufix = $(this).data('sufix');
+            $.ajax({
+                type: "POST",
+                url: baseUrl+'mis-tarjetas/editar-nombre',
+                data: {nombre: $('#edit_nombre_'+sufix).val(), numero: $('#edit_numero_'+sufix).val()},
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                    } else {
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                }
+            });
           return $(this).parent().children(st.inputCardName).hide();
         } else {
           $(this).addClass('active');

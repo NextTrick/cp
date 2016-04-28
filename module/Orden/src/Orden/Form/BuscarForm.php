@@ -5,9 +5,9 @@
  * Descripción :
  *
  */
+namespace Orden\Form;
 
-namespace Usuario\Form;
-
+use Orden\Model\Service\OrdenService;
 use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -37,7 +37,7 @@ class BuscarForm extends Form
     {
         $txtBuscar = new Element\Text('txtBuscar');
         $txtBuscar->setAttributes(array(
-                'id' => 'txtBuscar',
+                'id'        => 'txtBuscar',
                 'maxlength' => '20',
             ));
         $this->add($txtBuscar);
@@ -50,10 +50,10 @@ class BuscarForm extends Form
         $cmbFiltro->setDisableInArrayValidator(true);
         $this->add($cmbFiltro);
 
-        $filtroTipoDoc = $this->getTiposDocumento();
-        $cmbTipoDoc    = new Element\Select('cmbTipoDoc');
-        $cmbTipoDoc->setAttributes(array('id' => 'cmbTipoDoc'));
-        $cmbTipoDoc->setValueOptions($filtroTipoDoc);
+        $filtroTipoComp = $this->getTipoComprobante();
+        $cmbTipoDoc     = new Element\Select('cmbTipoComp');
+        $cmbTipoDoc->setAttributes(array('id' => 'cmbTipoComp'));
+        $cmbTipoDoc->setValueOptions($filtroTipoComp);
         $cmbTipoDoc->setEmptyOption('- Seleccione -');
         $cmbTipoDoc->setDisableInArrayValidator(true);
         $this->add($cmbTipoDoc);
@@ -66,79 +66,46 @@ class BuscarForm extends Form
         $cmbEstado->setDisableInArrayValidator(true);
         $this->add($cmbEstado);
 
-        $filtroPaises = $this->getPaises();
-        $cmbPais      = new Element\Select('cmbPais');
-        $cmbPais->setAttributes(array('id' => 'cmbPais'));
-        $cmbPais->setValueOptions($filtroPaises);
-        $cmbPais->setDisableInArrayValidator(true);
-        $this->add($cmbPais);
+        $filtroMetodoPago = $this->getMetodoPago();
+        $cmbMetdoPago     = new Element\Select('cmbMetodoPago');
+        $cmbMetdoPago->setAttributes(array('id' => 'cmbMetodoPago'));
+        $cmbMetdoPago->setValueOptions($filtroMetodoPago);
+        $cmbMetdoPago->setDisableInArrayValidator(true);
+        $this->add($cmbMetdoPago);
 
-        $cmbDepartamento = new Element\Select('cmbDepartamento');
-        $cmbDepartamento->setAttributes(array('id' => 'cmbDepartamento'));
-        $cmbDepartamento->setValueOptions(array());
-        $cmbDepartamento->setEmptyOption('- Seleccione -');
-        $cmbDepartamento->setDisableInArrayValidator(true);
-        $this->add($cmbDepartamento);
+        $txtFechaIni = new Element\Text('txtFechaIni');
+        $txtFechaIni->setAttributes(array(
+            'id'        => 'txtFechaIni',
+            'maxlength' => '15',
+        ));
+        $this->add($txtFechaIni);
 
-        $cmbProvincia = new Element\Select('cmbProvincia');
-        $cmbProvincia->setAttributes(array('id' => 'cmbProvincia'));
-        $cmbProvincia->setValueOptions(array());
-        $cmbProvincia->setEmptyOption('- Seleccione -');
-        $cmbProvincia->setDisableInArrayValidator(true);
-        $this->add($cmbProvincia);
+        $txtFechaFin = new Element\Text('txtFechaFin');
+        $txtFechaFin->setAttributes(array(
+            'id'        => 'txtFechaFin',
+            'maxlength' => '15',
+        ));
+        $this->add($txtFechaFin);
 
-        $cmbDistrito = new Element\Select('cmbDistrito');
-        $cmbDistrito->setAttributes(array('id' => 'cmbDistrito'));
-        $cmbDistrito->setValueOptions(array());
-        $cmbDistrito->setEmptyOption('- Seleccione -');
-        $cmbDistrito->setDisableInArrayValidator(true);
-        $this->add($cmbDistrito);
-
-    }
-
-    protected function _getUbigeoService()
-    {
-        return $this->_sl->get('Sistema\Model\Service\UbigeoService');
     }
 
     private function getEstados()
     {
-        return array('1' => 'Activo', '0' => 'Baja');
+        return array(
+             OrdenService::ESTADO_PAGO_ERROR     => 'Error',
+             OrdenService::ESTADO_PAGO_PAGADO    => 'Pagado',
+             OrdenService::ESTADO_PAGO_PENDIENTE => 'Pendiente'
+        );
     }
 
-    private function getTiposDocumento()
+    private function getTipoComprobante()
     {
-        return array('1' => 'DNI', '2' => 'C. Extrangeria');
+        return array(OrdenService::TIPO_COMPROBANTE_DNI => 'DNI', OrdenService::TIPO_COMPROBANTE_RUC => 'RUC');
     }
 
-    private function getPaises()
+    private function getMetodoPago()
     {
-        return $this->_getUbigeoService()->getPaises();
-    }
-
-    /**
-     * Insertamos data en los inputs de Ubigeo
-     * @param  array $params
-     * @return array
-     * @author Diómedes Pablo A. <diomedex10@gmail.com>
-     */
-    public function setDataUbigeo($params)
-    {
-        $params['cmbPais'] = 'PE';
-        if (!empty($params['cmbPais'])) {
-            $dataDepa = $this->_getUbigeoService()->getDepartamentos($params['cmbPais']);
-            $this->get('cmbDepartamento')->setValueOptions($dataDepa);
-        }
-
-        if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento'])) {
-            $dataProv = $this->_getUbigeoService()->getProvincias($params['cmbPais'],$params['cmbDepartamento']);
-            $this->get('cmbProvincia')->setValueOptions($dataProv);
-        }
-
-        if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento']) && !empty($params['cmbProvincia'])) {
-            $dataDist = $this->_getUbigeoService()->getDistritos($params['cmbPais'], $params['cmbDepartamento'], $params['cmbProvincia']);
-            $this->get('cmbDistrito')->setValueOptions($dataDist);
-        }
+        return array(OrdenService::METODO_PAGO_VISA => 'Visa', OrdenService::METODO_PAGO_PE => 'PE');
     }
 
     /**
@@ -149,10 +116,10 @@ class BuscarForm extends Form
     public function getFiltrosBuscar()
     {
         return array(
-            'email'   => 'Correo',
-            'nombres' => 'Nombre',
-            'paterno' => 'A. Paterno',
-            'materno' => 'A. Materno',
+            'email'              => 'Correo',
+            'comprobante_numero' => 'Nro. Comprobante',
+            'fac_razon_social'   => 'R. Social',
+            'nombres'            => 'Nombres',
         );
     }
 }

@@ -116,6 +116,26 @@ return array(
                     ),
                 ),
             ),
+            'asociar-nueva-tarjeta' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/mis-tarjetas/asociar-nueva-tarjeta[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\MisTarjetas',
+                        'action'     => 'asociar-nueva-tarjeta',
+                    ),
+                ),
+            ),
+            'editar-nombre' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/mis-tarjetas/editar-nombre[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\MisTarjetas',
+                        'action'     => 'editar-nombre',
+                    ),
+                ),
+            ),
             'beneficios' => array(
                 'type' => 'Segment',
                 'options' => array(
