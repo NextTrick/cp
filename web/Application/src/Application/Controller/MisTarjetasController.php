@@ -25,11 +25,14 @@ class MisTarjetasController extends SecurityWebController
             return $this->_toUrlLogin();
         }
 
+        $result = array(
+            'success' => true,
+            'message' => 'Error, intentelo nuevamente.'
+        );
         if ($this->request->isPost()) {
             $usuario = $this->_getUsuarioData();
             $numero = $this->request->getPost('numero');
             $nombre = $this->request->getPost('nombre');
-            
             $result = array(
                 'success' => true,
                 'message' => 'Ingrese el número y nombre.'
@@ -42,15 +45,52 @@ class MisTarjetasController extends SecurityWebController
                 );
                 $result = $this->_getUsuarioService()->asociarTarjeta($data);
             }
-
-            $response = $this->getResponse();
-            $jsonModel =  new \Zend\View\Model\JsonModel($result);
-            return $response->setContent($jsonModel->serialize());
         }
         
-        $view = new ViewModel();
-        $view->setTerminal(true);
-        return $view;
+        $response = $this->getResponse();
+        $jsonModel =  new \Zend\View\Model\JsonModel($result);
+        return $response->setContent($jsonModel->serialize());
+    }
+    
+    public function editarNombreAction()
+    {
+        if ($this->_isLogin() === false) {
+            return $this->_toUrlLogin();
+        }
+
+        $result = array(
+            'success' => true,
+            'message' => 'Error, intentelo nuevamente.'
+        );
+        if ($this->request->isPost()) {
+            $usuario = $this->_getUsuarioData();
+            $numero = $this->request->getPost('numero');
+            $nombre = $this->request->getPost('nombre');
+            $result = array(
+                'success' => true,
+                'message' => 'Ingrese el nombre.'
+            );
+            if (!empty($nombre)) {
+                $criteria = array('where' => array('usuario_id' => $usuario->id, 'numero' => $numero));
+                $row = $this->_getTarjetaService()->getRepository()->findOne($criteria);
+                if (!empty($row)) {
+                    $data = array(
+                        'nombre' => $nombre,
+                    );
+                    $save = $this->_getTarjetaService()->getRepository()->save($data, $row['id']);
+                    if (!empty($save)) {
+                        $result['success'] = true;
+                        $result['message'] = null;
+                    }
+                } else {
+                    $result['message'] = 'La tarjeta no se encuentra registrada.';
+                }
+            }
+        }
+        
+        $response = $this->getResponse();
+        $jsonModel =  new \Zend\View\Model\JsonModel($result);
+        return $response->setContent($jsonModel->serialize());
     }
     
     private function _getUsuarioService()
