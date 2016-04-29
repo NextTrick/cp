@@ -72,11 +72,11 @@ class PaqueteController extends SecurityAdminController
         foreach ($rows as $row) {
             $this->_getPaqueteService()->getRepository()->save(array(
                 'referencia' => $row['referencia'],
-                'importe_minimo' => $row['value'],
-                'importe_emoney' => $row['emoney'],
-                'importe_bonus' => $row['bonus'],
-                'tickets' => $row['gamepoints'],
-                'monto_total' => (float)$row['emoney'] + (float)$row['bonus'],
+                'emoney' => $row['emoney'],
+                'bonus' => $row['bonus'],
+                'promotionbonus' => $row['value'],
+                'etickets' => isset($row['etickets']) ? $row['etickets'] : 0,
+                'gamepoints' => $row['gamepoints'],
                 'fecha_creacion' => date('Y-m-d H:i:s'),
             ));
         }
@@ -168,11 +168,11 @@ class PaqueteController extends SecurityAdminController
                 );
 
                 if ($action == AC_CREAR) {
-                    $paramsIn['monto_total'] = (float)$dataStatic['emoney'] + (float)$dataStatic['bonus'];
-                    $paramsIn['importe_minimo'] = $dataStatic['value'];
-                    $paramsIn['importe_emoney'] = $dataStatic['emoney'];
-                    $paramsIn['importe_bonus'] = $dataStatic['bonus'];
-                    $paramsIn['tickets'] = $dataStatic['gamepoints'];
+                    $paramsIn['emoney'] = $dataStatic['emoney'];
+                    $paramsIn['bonus'] = $dataStatic['bonus'];
+                    $paramsIn['promotionbonus'] = $dataStatic['promotionbonus'];
+                    $paramsIn['etickets'] = $dataStatic['etickets'];
+                    $paramsIn['gamepoints'] = $dataStatic['gamepoints'];
                     $paramsIn['referencia'] = $dataStatic['referencia'];
                     $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
                 }
