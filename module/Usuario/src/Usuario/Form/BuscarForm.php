@@ -94,6 +94,19 @@ class BuscarForm extends Form
         $cmbDistrito->setDisableInArrayValidator(true);
         $this->add($cmbDistrito);
 
+        $txtFechaIni = new Element\Text('txtFechaIni');
+        $txtFechaIni->setAttributes(array(
+            'id'        => 'txtFechaIni',
+            'maxlength' => '15',
+        ));
+        $this->add($txtFechaIni);
+
+        $txtFechaFin = new Element\Text('txtFechaFin');
+        $txtFechaFin->setAttributes(array(
+            'id'        => 'txtFechaFin',
+            'maxlength' => '15',
+        ));
+
     }
 
     protected function _getUbigeoService()
