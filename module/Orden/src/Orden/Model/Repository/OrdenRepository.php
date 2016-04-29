@@ -51,8 +51,10 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             }
 
             foreach ($this->crWhereBetween as $key => $value) {
-                if (!empty($value['min']) && !empty($value['max']) && !empty($key)) {
-                    $where->and->between($key, $value['min'], $value['max']) ;
+                if (!empty($value['min']) && !empty($key)) {
+                    $where->and->lessThanOrEqualTo($key, $value['min']) ;
+                } elseif (!empty($value['max']) && !empty($key)) {
+                    $where->and->greaterThanOrEqualTo($key, $value['max']) ;
                 }
             }
 

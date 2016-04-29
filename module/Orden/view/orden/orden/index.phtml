@@ -50,6 +50,9 @@ $this->layout()->breadcrumb = array(
         </table>
     </div>
 </div>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/datepicker.css" rel="stylesheet"></link>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/bootstrap_.css" rel="stylesheet"></link>
+<script src="/s/front/datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#gridMain').DataTable({
@@ -63,6 +66,14 @@ $this->layout()->breadcrumb = array(
             "order": [[ 2, "desc" ]]
         });
         common.deleteRemote();
+
+        $("#txtFechaIni").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
+        $("#txtFechaFin").datepicker({
+            format: 'yyyy-mm-dd'
+        });
 
         $("#cmbTipoComp").on('change', function() {
             $("#formBuscar").submit();
