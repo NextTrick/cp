@@ -9,9 +9,7 @@ use Orden\Model\Repository\OrdenRepository;
 class VisaProcessor extends AbstractProcessor
 {
     const ALIAS = 'VISA';
-    
-    public $ws;
-    
+            
     public function __construct($serviceLocator)
     {
         parent::__construct($serviceLocator);
@@ -63,6 +61,49 @@ class VisaProcessor extends AbstractProcessor
                 
         return $return;
     }
+    
+    public function processCallback($data)
+    {
+        $return = array(
+            'success' => true,            
+        );
+           
+        try {                                              
+            $paymentResponse = $this->ws->retrieveEticket($data);     
+                        
+            $xmlDocument = new \DOMDocument();
+            if ($xmlDocument->loadXML($paymentResponse->ConsultaEticketResult)) {
+                $countMessages = $this->ws->cantidadMensajes($xmlDocument);
+                if ($countMessages == 0) {
+                    $eTicket = $data['reference'];
+                    $countOperaciones = $this->ws->cantidadOperaciones($xmlDocument, $eTicket);
+                    
+                    $eticket = $this->ws->recuperaEticket($xmlDocument);
+                    $html = $this->ws->htmlRedirecFormEticket($eticket);                    
+                    $return['data'] = array(
+                        'status' => OrdenRepository::PAGO_ESTADO_PENDIENTE,
+                        'token' => null,
+                        'clientReference' => null,
+                        'reference' => $eticket,
+                        'html' => $html,
+                    );                    
+                } else {
+                    $return['success'] = false;
+                    $return['error']['message'] = $this->getErrorMessage($xmlDocument, $countMessages);                    
+                }
+            } else {
+                $return['success'] = false;
+                $return['error']['message'] = 'Error loading Xml';                
+            }
+                        
+        } catch (\Exception $e) {
+            $return['success'] = false;
+            $return['error']['message'] = $e->getMessage();
+            $return['error']['detail'] = $e->getTraceAsString();
+        }
+                
+        return $return;
+    }        
     
     protected function getErrorMessage($xmlDocument, $countMessages)
     {

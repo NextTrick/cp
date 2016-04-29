@@ -38,40 +38,40 @@ class Visa
         
         return $response;        
     }
-    
-    public function processResponse($response)
+        
+    //Funcion de ejemplo que obtiene la cantidad de operaciones
+    public function cantidadOperaciones($xmlDoc, $eTicket)
     {
-        //Aqui carga la cadena resultado en un XMLDocument (DOMDocument)
-        $xmlDocument = new \DOMDocument();
+        $cantidaOpe= 0;
+        $xpath = new \DOMXPath($xmlDoc);
+        $nodeList = $xpath->query('//pedido[@eticket="' . $eTicket . '"]', $xmlDoc);
 
-        if ($xmlDocument->loadXML($response->GeneraEticketResult)) {
-                /////////////////////////[MENSAJES]////////////////////////
-                //Ejemplo para determinar la cantidad de mensajes en el XML
-                $iCantMensajes= $this->cantidadMensajes($xmlDocument);
-                //echo 'Cantidad de Mensajes: ' . $iCantMensajes . '<br>';
+        $XmlNode = $nodeList->item(0);
 
-                //Ejemplo para mostrar los mensajes del XML 
-                for($iNumMensaje=0;$iNumMensaje < $iCantMensajes; $iNumMensaje++){
-                        echo 'Mensaje #' . ($iNumMensaje +1) . ': ';
-                        echo $this->recuperaMensaje($xmlDocument, $iNumMensaje+1);
-                        echo '<BR>';
-                        echo "Numero de pedido: " . $numPedido;
-                }
-                /////////////////////////[MENSAJES]////////////////////////
-
-                if ($iCantMensajes == 0){
-                        $Eticket= $this->recuperaEticket($xmlDocument);
-                        //echo 'Eticket: ' . $Eticket;
-
-                        $html= $this->htmlRedirecFormEticket($Eticket);
-                        echo $html;
-
-                        exit;
-                }
-
+        if ($XmlNode == null) {
+                $cantidaOpe= 0;
         } else {
-                echo "Error cargando XML";
+                $cantidaOpe= $XmlNode->childNodes->length;
         }
+        return $cantidaOpe; 
+    }
+    
+    //Funcion que recupera el valor de uno de los campos del XML de respuesta
+    public function recuperaCampos($xmlDoc, $sNumOperacion, $nomCampo)
+    {
+        $strReturn = "";
+
+        $xpath = new \DOMXPath($xmlDoc);
+        $nodeList = $xpath->query("//operacion[@id='" . $sNumOperacion . "']/campo[@id='" . $nomCampo . "']");
+
+        $XmlNode= $nodeList->item(0);
+
+        if ($XmlNode == null) {
+                $strReturn = "";
+        } else {
+                $strReturn = $XmlNode->nodeValue;
+        }
+        return $strReturn;
     }
                 
     //Funcion de ejemplo que obtiene la cantidad de mensajes
@@ -164,7 +164,8 @@ class Visa
         }        
         $this->client = new \SoapClient($this->wsdl, array('trace' => 1));
         
-        $requestData = $this->getRetrieveEticketRequestData($data);         
+        $requestData = $this->getRetrieveEticketRequestData($data); 
+        
         $response = $this->client->ConsultaEticket($requestData);
     }
     
@@ -189,10 +190,13 @@ class Visa
     protected function getRetrieveEticketRequestData($data)
     {
         $retrieveEticketRequestData = array(
-            
+            'commerceCode' => $this->config['codigoComercio'],
+            'eTicket' => $data['reference']
         );
         
-        return $retrieveEticketRequestData;
+        $retrieveEticketRequestData = $this->getViewXml('retrive-eticket.xml', $retrieveEticketRequestData);
+        
+        return array('xmlIn' => $retrieveEticketRequestData);                
     }
     
     public function getViewXml($path, $data = array())
