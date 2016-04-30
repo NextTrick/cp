@@ -42,7 +42,7 @@ class OrdenController extends SecurityAdminController
         }
     }
 
-    public function exportarAction()
+    public function exportarExcelAction()
     {
         try {
             $view = new ViewModel();

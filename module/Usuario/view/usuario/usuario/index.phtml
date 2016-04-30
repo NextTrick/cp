@@ -12,7 +12,7 @@ $this->layout()->breadcrumb = array(
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
-        <a href="javascript:exportarExcel()" class="btn btn-success">Excel</a>
+        <a href="javascript:exportarExcel()" class="btn btn-success">Exportar</a>
         <hr class="separator">
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
@@ -27,6 +27,7 @@ $this->layout()->breadcrumb = array(
                     <th>Departamento</th>
                     <th>Provincia</th>
                     <th>Distrito</th>
+                    <th>Fecha Registro</th>
                     <th>Estado</th>
                 </tr>
             </thead>
@@ -37,12 +38,13 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['nombres'] ?></td>
                         <td><?php echo $row['paterno'] ?></td>
                         <td><?php echo $row['materno'] ?></td>
-                        <td><?php echo $row['di_tipo'] ?></td>
+                        <td><?php echo \Usuario\Model\Service\UsuarioService::getNombreTipoDocumento($row['di_tipo']); ?></td>
                         <td><?php echo $row['di_valor'] ?></td>
                         <td><?php echo $row['nombrePais'] ?></td>
                         <td><?php echo $row['nombreDepa'] ?></td>
                         <td><?php echo $row['nombreProv'] ?></td>
                         <td><?php echo $row['nombreDist'] ?></td>
+                        <td><?php echo $row['fecha_creacion'] ?></td>
                         <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
                     </tr>
                 <?php endforeach; ?>
@@ -50,6 +52,9 @@ $this->layout()->breadcrumb = array(
         </table>
     </div>
 </div>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/datepicker.css" rel="stylesheet"></link>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/bootstrap_.css" rel="stylesheet"></link>
+<script src="/s/front/datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
          $('#gridMain').DataTable({
@@ -64,8 +69,6 @@ $this->layout()->breadcrumb = array(
             columnDefs: [
                  { orderable: false, targets: [0,1,3,4,5,6,7,8,9,10] }
             ]
-
-
         });
         common.deleteRemote();
 
@@ -81,12 +84,28 @@ $this->layout()->breadcrumb = array(
             $("#formBuscar").submit();
         });
 
+        $("#cmbTipoDoc").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbEstado").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#txtFechaIni").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
+        $("#txtFechaFin").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
     });
 
     function exportarExcel(){
-        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/usuario/usuario/exportarExcel");
+        $("#formBuscar").attr("action", "<?php echo BASE_URL; ?>admin/usuario/usuario/exportarExcel");
         $("#formBuscar").submit();
-        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/usuario/usuario");
+        $("#formBuscar").attr("action", "<?php echo BASE_URL; ?>admin/usuario/usuario");
     }
 
 </script>

@@ -30,7 +30,6 @@ class BuscarForm extends Form
     {
         $this->setAttribute('id', 'formBuscar');
         $this->setAttribute('method', 'post');
-
     }
 
     protected function _addElements()
@@ -42,7 +41,7 @@ class BuscarForm extends Form
             ));
         $this->add($txtBuscar);
         
-        $filtrosBuscar = $this->getFiltrosBuscar();
+        $filtrosBuscar = $this->getOrdenService()->getFiltrosBuscar();
         $cmbFiltro     = new Element\Select('cmbFiltro');
         $cmbFiltro->setAttributes(array('id' => 'cmbFiltro'));
         $cmbFiltro->setValueOptions($filtrosBuscar);
@@ -50,7 +49,7 @@ class BuscarForm extends Form
         $cmbFiltro->setDisableInArrayValidator(true);
         $this->add($cmbFiltro);
 
-        $filtroTipoComp = $this->getTipoComprobante();
+        $filtroTipoComp = $this->getOrdenService()->getTipoComprobante();
         $cmbTipoDoc     = new Element\Select('cmbTipoComp');
         $cmbTipoDoc->setAttributes(array('id' => 'cmbTipoComp'));
         $cmbTipoDoc->setValueOptions($filtroTipoComp);
@@ -58,7 +57,7 @@ class BuscarForm extends Form
         $cmbTipoDoc->setDisableInArrayValidator(true);
         $this->add($cmbTipoDoc);
 
-        $filtroEstado = $this->getEstados();
+        $filtroEstado = $this->getOrdenService()->getEstados();
         $cmbEstado    = new Element\Select('cmbEstado');
         $cmbEstado->setAttributes(array('id' => 'cmbEstado'));
         $cmbEstado->setValueOptions($filtroEstado);
@@ -66,9 +65,10 @@ class BuscarForm extends Form
         $cmbEstado->setDisableInArrayValidator(true);
         $this->add($cmbEstado);
 
-        $filtroMetodoPago = $this->getMetodoPago();
+        $filtroMetodoPago = $this->getOrdenService()->getMetodoPago();
         $cmbMetdoPago     = new Element\Select('cmbMetodoPago');
         $cmbMetdoPago->setAttributes(array('id' => 'cmbMetodoPago'));
+        $cmbMetdoPago->setEmptyOption('- Seleccione -');
         $cmbMetdoPago->setValueOptions($filtroMetodoPago);
         $cmbMetdoPago->setDisableInArrayValidator(true);
         $this->add($cmbMetdoPago);
@@ -89,37 +89,9 @@ class BuscarForm extends Form
 
     }
 
-    private function getEstados()
+    private function getOrdenService()
     {
-        return array(
-             OrdenService::ESTADO_PAGO_ERROR     => 'Error',
-             OrdenService::ESTADO_PAGO_PAGADO    => 'Pagado',
-             OrdenService::ESTADO_PAGO_PENDIENTE => 'Pendiente'
-        );
+        return $this->_sl->get('Orden\Model\Service\OrdenService');
     }
 
-    private function getTipoComprobante()
-    {
-        return array(OrdenService::TIPO_COMPROBANTE_DNI => 'DNI', OrdenService::TIPO_COMPROBANTE_RUC => 'RUC');
-    }
-
-    private function getMetodoPago()
-    {
-        return array(OrdenService::METODO_PAGO_VISA => 'Visa', OrdenService::METODO_PAGO_PE => 'PE');
-    }
-
-    /**
-     * Retorna un array que se utilizar en la busqueda de usuario
-     * @return array
-     * @author Diómedes Pablo A. <diomedex10@gmail.com>
-     */
-    public function getFiltrosBuscar()
-    {
-        return array(
-            'email'              => 'Correo',
-            'comprobante_numero' => 'Nro. Comprobante',
-            'fac_razon_social'   => 'R. Social',
-            'nombres'            => 'Nombres',
-        );
-    }
 }

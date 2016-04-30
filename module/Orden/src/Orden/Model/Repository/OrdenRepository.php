@@ -39,7 +39,7 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
-                if (!empty($value) && !empty($key)) {
+                if (!empty($value) && !empty($key) || $value === '0') {
                     $where->AND->equalTo($key, $value) ;
                 }
             }
@@ -52,9 +52,9 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 
             foreach ($this->crWhereBetween as $key => $value) {
                 if (!empty($value['min']) && !empty($key)) {
-                    $where->and->lessThanOrEqualTo($key, $value['min']) ;
+                    $where->and->greaterThanOrEqualTo($key, $value['min']) ;
                 } elseif (!empty($value['max']) && !empty($key)) {
-                    $where->and->greaterThanOrEqualTo($key, $value['max']) ;
+                    $where->and->lessThanOrEqualTo($key, $value['max']) ;
                 }
             }
 
