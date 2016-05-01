@@ -1,7 +1,7 @@
-<?php $this->layout()->title = array('Carrito', 'Listado') ?>
+<?php $this->layout()->title = array('Operaciones', 'Listado') ?>
 <?php
 $this->layout()->breadcrumb = array(
-    array('url' => null, 'name' => 'Carrito'),
+    array('url' => null, 'name' => 'Operaciones'),
     array('url' => null, 'name' => 'Listado'),
 );
 ?>
@@ -12,7 +12,7 @@ $this->layout()->breadcrumb = array(
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
-        <a href="<?php echo BASE_URL; ?>orden/carrito/crear" class="btn btn-success">Registrar</a>
+        <a href="<?php echo BASE_URL; ?>orden/carrito/crear" class="btn btn-success">Exportar</a>
         <hr class="separator">
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
@@ -49,17 +49,28 @@ $this->layout()->breadcrumb = array(
         </table>
     </div>
 </div>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/datepicker.css" rel="stylesheet"></link>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/bootstrap_.css" rel="stylesheet"></link>
+<script src="/s/front/datepicker/js/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#gridMain').DataTable({
             "pageLength": 25,
             "paging": true,
             "lengthChange": true,
-            "searching": true,
+            "searching": false,
             "ordering": false,
             "info": true,
             "autoWidth": true
         });
         common.deleteRemote();
+
+        $("#txtFechaIni").datepicker({
+            format: 'yyyy-mm-dd'
+        });
+
+        $("#txtFechaFin").datepicker({
+            format: 'yyyy-mm-dd'
+        });
     });
 </script>
