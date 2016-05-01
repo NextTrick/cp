@@ -77,7 +77,30 @@ class VisaProcessor extends AbstractProcessor
                 if ($countMessages == 0) {
                     $eTicket = $data['reference'];
                     $countOperaciones = $this->ws->cantidadOperaciones($xmlDocument, $eTicket);
-                    
+                                        
+                    for ($iNumOperacion = 0; $iNumOperacion < $countOperaciones; $iNumOperacion++) {                        
+                        $sNumOperacion = $iNumOperacion + 1;                        
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "respuesta");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "estado");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "cod_tienda");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "nordent");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "cod_accion");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "pan");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "nombre_th");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "ori_tarjeta");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "nom_emisor");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "eci");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "dsc_eci");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "cod_autoriza");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "cod_rescvv2");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "id_unico");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "imp_autorizado");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "fechayhora_tx");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "fechayhora_deposito");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "fechayhora_devolucion");
+                        $this->recuperaCampos($xmlDoc, $sNumOperacion, "dato_comercio");			
+                    }
+                                                           
                     $eticket = $this->ws->recuperaEticket($xmlDocument);
                     $html = $this->ws->htmlRedirecFormEticket($eticket);                    
                     $return['data'] = array(
