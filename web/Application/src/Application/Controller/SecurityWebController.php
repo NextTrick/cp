@@ -30,7 +30,7 @@ abstract class SecurityWebController extends AbstractActionController
     protected function _getUsuarioData()
     {
         $usuario = new \stdClass();
-        $usuario->id = 6;
+        $usuario->id = 7;
         $usuario->nombres = null;
         $usuario->email = null;
         

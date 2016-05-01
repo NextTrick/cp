@@ -18,7 +18,5 @@ return array(
         'Admin\Controller\Carrito' => 'Admin\Controller\CarritoController',
         
         'Admin\Controller\Usuario' => 'Admin\Controller\UsuarioController',
-        
-        'Admin\Controller\Test' => 'Usuario\Controller\TestController',
     ),
 );

@@ -30,7 +30,24 @@ class RegistroController extends AbstractActionController
             'action' => 'completa-tu-registro',
         )));
         $form->setData($dataIni);
-     
+        
+        $disabledEmail = false;
+        $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
+        if (!empty($dataIni['email'])) {
+            $disabledEmail = true;
+            //verificar en base de datos
+            $criteria = array('where' => array('email' => $dataIni['email']));
+            $repository = $this->_getUsuarioService()->getRepository();
+            $row = $repository->findOne($criteria);
+            if (!empty($row)) {
+                $this->flashMessenger()->addMessage(array('error' => $messageExistsEmail));
+                $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $dataIni['email']));
+                return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
+            }
+        }
+
+        $mensajeRegistro = null;
+        $openPopapConfRegistro = 0;
         $registroForm = (float)$this->request->getPost('registro_form');
         if ($this->request->isPost() && !$registroForm) {
             $codPais = $this->request->getPost('cod_pais');
@@ -64,28 +81,27 @@ class RegistroController extends AbstractActionController
                 $criteria = array('where' => array('email' => $data['email']));
                 $row = $repository->findOne($criteria);
                 if (!empty($row)) {
-                    $existsEmail = 'El correo ingresado ya fue registrado anteriormente.';
-                    $form->get('email')->setMessages(array('existsEmail' => $existsEmail));
+                    $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
+                    $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
                 } else {
                     $saveData = $this->_saveData($data);
+
+                    $openPopapConfRegistro = 1;
+                    $mensajeRegistro = 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.';
                     if ($saveData['success']) {
-                        $message = '<b>Felicidades, ya estás a punto de ser parte de Coney Club.</b> '
-                            . 'Te hemos enviado un correo con las instrucciones para activar tu cuenta';
-                        $this->flashMessenger()->addMessage(array(
-                            'success' => $message,
-                        ));
-                        return $this->redirect()->toRoute('web-notificar');
-                    } else {
-                        $this->flashMessenger()->addMessage(array(
-                            'error' => $saveData['message'],
-                        ));
-                        return $this->redirect()->toRoute('web-notificar');
+                        $mensajeRegistro = '<h3>¡Felicidades!, estás a punto de ser parte de Coney Club</h3>'
+                            . '<p>Te hemos enviado un correo con las instrucciones para activar tu cuenta.</p>';
                     }
                 }
             }
         }
         
-        return new ViewModel(array('form' => $form));
+        return new ViewModel(array(
+            'form' => $form,
+            'disabledEmail' => $disabledEmail,
+            'mensajeRegistro' => $mensajeRegistro,
+            'openPopapConfRegistro' => $openPopapConfRegistro,
+        ));
     }
     
     private function _saveData($data)
@@ -134,10 +150,10 @@ class RegistroController extends AbstractActionController
         return $result;
     }
     
-    public function notificarAction()
-    {
-        return new ViewModel();
-    }
+//    public function notificarAction()
+//    {
+//        return new ViewModel();
+//    }
     
     public function confirmarAction()
     {

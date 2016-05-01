@@ -64,16 +64,16 @@ return array(
                     ),
                 ),
             ),
-            'web-notificar' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route'    => '/notificar-registro[/]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Registro',
-                        'action'     => 'notificar',
-                    ),
-                ),
-            ),
+//            'web-notificar' => array(
+//                'type' => 'Segment',
+//                'options' => array(
+//                    'route'    => '/notificar-registro[/]',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Registro',
+//                        'action'     => 'notificar',
+//                    ),
+//                ),
+//            ),
             'web-confirmar' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -173,6 +173,18 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Login',
                                 'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    'login' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            // Change this to something specific to your module
+                            'route' => '/[:data]',
+                            'defaults' => array(
+                                'controller' => 'Application\Controller\Login',
+                                'action'     => 'index',
+                                'data' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                         ),
                     ),
