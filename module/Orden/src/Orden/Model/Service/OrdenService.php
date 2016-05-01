@@ -62,7 +62,7 @@ class OrdenService
 
             $paramsWhere = array(
                 'comprobante_tipo' => String::xssClean($params['cmbTipoComp']),
-                'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
+                //'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
                 'pago_tarjeta'     => String::xssClean($params['cmbMetodoPago']),
             );
 
