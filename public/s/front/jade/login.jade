@@ -29,7 +29,7 @@ block section
 							p Con tu correo electrónico
 							form(action="#" data-parsley-validate)
 								.form_control
-									input.email(type="text" placeholder="ejemplo@micorreo.com" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-pattern="/^[a-z0-9\_\-]+(.?[a-z0-9\_\-]+)+@\w+([\.-]?\w+)(\.[a-z]{2,10})$/i" data-parsley-pattern-message="Ingrese un correo válido")
+									input.email(type="text" placeholder="ejemplo@micorreo.com" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-email data-parsley-email-message="Ingrese un correo válido")
 								.form_control
 									input.password(type="password" placeholder="contraseña" data-parsley-required data-parsley-required-message="Dato obligatorio")
 								button.btn.btn_orange.btn_login(type="submit") Iniciar Sesión
