@@ -79,7 +79,7 @@ class Security
             ),
             self::MODULE_ORDEN => array(
                 'Orden\Controller\Orden' => array(
-                    'R' => array('index'),
+                    'R' => array('index','exportar-excel'),
                     'C' => array('crear',),
                     'U' => array('editar'),
                     'D' => array('eliminar'),

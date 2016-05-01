@@ -16,26 +16,146 @@ class CarritoController extends SecurityAdminController
 {
     public function indexAction()
     {
-        $params = array(
-            'pago_referencia' => String::xssClean($this->params()->fromQuery('pago_referencia')),
-            'pago_estado' => String::xssClean($this->params()->fromQuery('pago_estado')),
-            'pago_tarjeta' => String::xssClean($this->params()->fromQuery('pago_tarjeta')),
-            'fecha_creacion' => String::xssClean($this->params()->fromQuery('fecha_creacion')),
-            'fecha_edicion' => String::xssClean($this->params()->fromQuery('fecha_edicion')),
-        );
-        
-        $form = $this->crearBuscarForm();
-        $form->setData($params);
-        
-        $criteria = array(
-            'where' => $params,
-        );
-        $gridList = $this->_getCarritoService()->getRepository()->search($criteria);
+        try {
+            $form = $this->getServiceLocator()->get('Orden\Form\CarritoBuscarForm');
+            $form->setAttribute('action', $this->url()->fromRoute('orden/crud', array(
+                'controller' => 'carrito', 'action' => 'index'
+            )));
 
-        $view = new ViewModel();
-        $view->setVariable('gridList', $gridList);
-        $view->setVariable('form', $form);
-        return $view;
+            $form->setData($this->params()->fromPost());
+
+            $criteria = $this->_getCarritoService()->getDataCriteria($this->params()->fromPost());
+
+            $gridList  = $this->_getCarritoService()->getRepository()->search($criteria);
+            $countList = $this->_getCarritoService()->getRepository()->countTotal($criteria);
+
+            $view = new ViewModel();
+            $view->setVariable('gridList', $gridList);
+            $view->setVariable('countList', $countList);
+            $view->setVariable('form', $form);
+
+            return $view;
+        } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+        }
+    }
+
+    public function exportarExcelAction()
+    {
+        try {
+            $view = new ViewModel();
+            $view->setTerminal(true);
+            $date = new \DateTime();
+
+            $criteria = $this->_getCarritoService()->getDataCriteria($this->params()->fromPost());
+            $data     = $this->_getCarritoService()->getRepository()->search($criteria);
+
+            $objPHPExcel = new PHPExcel();
+            $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
+                ->setLastModifiedBy("Maarten Balliauw")
+                ->setTitle("Office 2007 XLSX Test Document")
+                ->setSubject("Office 2007 XLSX Test Document")
+                ->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.")
+                ->setKeywords("office 2007 openxml php")
+                ->setCategory("Test result file");
+
+            $objPHPExcel->setActiveSheetIndex(0);
+            $sheet = $objPHPExcel->getActiveSheet();
+
+            $style['cabecera'] = array(
+                'font' => array(
+                    'name'  => 'Calibri',
+                    'bold'  => true,
+                    'color' => array(
+                        'rgb' => '1F497D'
+                    )
+                ),
+                'fill' => array(
+                    'type'  => \PHPExcel_Style_Fill::FILL_SOLID,
+                    'color' => array('rgb' => 'DBE5F1')
+                ),
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('rgb' => '4F81BD')
+                    )
+                )
+            );
+
+            $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->applyFromArray($style['cabecera']);
+
+            $sheet->setCellValue('A1', 'Id');
+            $sheet->setCellValue('B1', 'Id Usuario');
+            $sheet->setCellValue('C1', 'Cód. Pago');
+            $sheet->setCellValue('D1', 'Correo');
+            $sheet->setCellValue('E1', 'Metodo Pago');
+            $sheet->setCellValue('F1', 'Monto');
+            $sheet->setCellValue('G1', 'Fecha Confirmacion');
+            $sheet->setCellValue('H1', 'Estado Pago');
+            $sheet->setCellValue('I1', 'Tipo comprobante');
+            $sheet->setCellValue('O1', 'Nombres');
+            $sheet->setCellValue('P1', 'Estado');
+
+
+            $index = 2;
+            foreach ($data as $key => $reg) {
+                $estado = (!empty($reg['estado']))? 'Activo': 'Baja';
+                $sheet->setCellValue('A'.$index, $reg['id']);
+                $sheet->setCellValue('B'.$index, $reg['usuario_id']);
+                $sheet->setCellValue('C'.$index, $reg['pago_referencia']);
+                $sheet->setCellValue('D'.$index, $reg['email']);
+                $sheet->setCellValue('E'.$index, \Orden\Model\Service\OrdenService::getNombreTipoPago($reg['pago_tarjeta']));
+                $sheet->setCellValue('F'.$index, $reg['monto']);
+                $sheet->setCellValue('G'.$index, $reg['fecha_creacion']);
+                $sheet->setCellValue('H'.$index, \Orden\Model\Service\OrdenService::getNombreEstadoPago($reg['pago_estado']));
+                $sheet->setCellValue('I'.$index, \Orden\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
+                $sheet->setCellValue('J'.$index, $reg['comprobante_numero']);
+                $sheet->setCellValue('K'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('L'.$index, $reg['fac_ruc']);
+                $sheet->setCellValue('M'.$index, $reg['fac_direccion_fiscal']);
+                $sheet->setCellValue('N'.$index, $reg['doc_identidad']);
+                $sheet->setCellValue('O'.$index, $reg['nombres']);
+                $sheet->setCellValue('P'.$index, $estado);
+
+                $index ++;
+            }
+
+            $style['body'] = array(
+                'font' => array(
+                    'name'  => 'Calibri'
+                ),
+                'borders' => array(
+                    'allborders' => array(
+                        'style' => \PHPExcel_Style_Border::BORDER_THIN,
+                        'color' => array('rgb' => '4F81BD')
+                    )
+                )
+            );
+
+            $objPHPExcel->getActiveSheet()->getStyle('A2:O'.($index-1))->applyFromArray($style['body']);
+            $nameFile = 'transacciones_'. trim($date->format('Y-m-d_His')).'.xlsx';
+
+
+            // Rename worksheet
+            $objPHPExcel->getActiveSheet()->setTitle('Lista de Transacciones');
+            // Redirect output to a client’s web browser (Excel2007)
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment;filename="'.$nameFile);
+            header('Cache-Control: max-age=0');
+            // If you're serving to IE 9, then the following may be needed
+            header('Cache-Control: max-age=1');
+            // If you're serving to IE over SSL, then the following may be needed
+            header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+            header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+            header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+            header ('Pragma: public'); // HTTP/1.0
+            $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+            $objWriter->save('php://output');
+            exit;
+
+        } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+        }
     }
 
     public function crearAction()
@@ -162,7 +282,7 @@ class CarritoController extends SecurityAdminController
 
         return $form;
     }
-    
+
     public function crearBuscarForm()
     {
         $form = $this->_getCarritoForm();
@@ -172,7 +292,7 @@ class CarritoController extends SecurityAdminController
         $form->setAttribute('method', 'get');
         return $form;
     }
-    
+
     protected function _getCarritoForm()
     {
         return $this->getServiceLocator()->get('Orden\Form\CarritoForm');
