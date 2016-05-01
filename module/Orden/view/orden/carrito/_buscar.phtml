@@ -2,39 +2,32 @@
 <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-inline isearch')); ?>
     <div class="box-body">
         <div class="form-group">
-            <label class="control-label" for="usuario_id">Usuario_id</label>
-            <?php echo $this->formElement($this->form->get('usuario_id')->setAttribute('class', 'form-control')) ?>
+            <label class="control-label" for="tipo"><strong>Buscar por</strong> </label>
+            <?php echo $this->formElement($this->form->get('cmbFiltro')->setAttribute('class', 'form-control')) ?>
         </div>
         <div class="form-group">
-            <label class="control-label" for="pago_referencia">Pago_referencia</label>
-            <?php echo $this->formElement($this->form->get('pago_referencia')->setAttribute('class', 'form-control')) ?>
+            <?php echo $this->formElement($this->form->get('txtBuscar')->setAttribute('class', 'form-control')) ?>
         </div>
         <div class="form-group">
-            <label class="control-label" for="pago_estado">Pago_estado</label>
-            <?php echo $this->formElement($this->form->get('pago_estado')->setAttribute('class', 'form-control')) ?>
+            <button id="btnBuscar" class="btn btn-primary" type="submit">Buscar</button>
+        </div>
+        <br>
+        <div class="form-group">
+            <label class="control-label" for="tipo">Buscar por : Estado. </label>
+            <?php echo $this->formElement($this->form->get('cmbEstado')->setAttribute('class', 'form-control')) ?>
         </div>
         <div class="form-group">
-            <label class="control-label" for="pago_tarjeta">Pago_tarjeta</label>
-            <?php echo $this->formElement($this->form->get('pago_tarjeta')->setAttribute('class', 'form-control')) ?>
+            <label class="control-label" for="tipo"> Desde</label>
+            <?php echo $this->formElement($this->form->get('txtFechaIni')->setAttribute('class', 'form-control')) ?>
         </div>
         <div class="form-group">
-            <label class="control-label" for="monto_total">Monto_total</label>
-            <?php echo $this->formElement($this->form->get('monto_total')->setAttribute('class', 'form-control')) ?>
+            <label class="control-label" for="tipo"> Hasta</label>
+            <!--<div class="input-append date" id="FechaFin">
+                <input class="span2" size="16" type="text" readonly="">
+                <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>-->
+            <?php echo $this->formElement($this->form->get('txtFechaFin')->setAttribute('class', 'form-control')) ?>
         </div>
-        <div class="form-group">
-            <label class="control-label" for="estado">Estado</label>
-            <?php echo $this->formElement($this->form->get('estado')->setAttribute('class', 'form-control')) ?>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="fecha_creacion">Fecha_creacion</label>
-            <?php echo $this->formElement($this->form->get('fecha_creacion')->setAttribute('class', 'form-control')) ?>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="fecha_edicion">Fecha_edicion</label>
-            <?php echo $this->formElement($this->form->get('fecha_edicion')->setAttribute('class', 'form-control')) ?>
-        </div>
-        <div class="form-group">
-            <button class="btn btn-primary" type="submit">Buscar</button>
-        </div>
+
     </div>
 <?php echo $this->form()->closeTag(); ?>

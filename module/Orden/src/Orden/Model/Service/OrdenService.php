@@ -23,7 +23,7 @@ class OrdenService
     CONST METODO_PAGO_PE          = 2;
     CONST METODO_PAGO_MASTER      = 3;
     CONST METODO_PAGO_NAME_VISA   = 'VISA';
-    CONST METODO_PAGO_NAME_PE     = 'Pago Efectivo';
+    CONST METODO_PAGO_NAME_PE     = 'PE';
     CONST METODO_PAGO_NAME_MASTER = 'Master Card';
 
     CONST ESTADO_PAGO_ERROR          = 1;
@@ -36,7 +36,7 @@ class OrdenService
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        $this->_sl         = $serviceLocator;
     }
 
     public function getRepository()
@@ -62,12 +62,12 @@ class OrdenService
 
             $paramsWhere = array(
                 'comprobante_tipo' => String::xssClean($params['cmbTipoComp']),
-                'pago_estado'      => String::xssClean($params['cmbEstado']),
+                'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
                 'pago_tarjeta'     => String::xssClean($params['cmbMetodoPago']),
             );
 
             $betwween = array(
-                'fecha_creacion' => array(
+                'o.fecha_creacion' => array(
                     'min'=> String::xssClean($params['txtFechaIni']),
                     'max'=> String::xssClean($params['txtFechaFin'])
                     )
@@ -134,6 +134,41 @@ class OrdenService
         }
 
         return $result;
+    }
+
+    public function getPagoEstados()
+    {
+        return array(
+            self::ESTADO_PAGO_ERROR     => self::ESTADO_PAGO_NAME_ERROR,
+            self::ESTADO_PAGO_PAGADO    => self::ESTADO_PAGO_NAME_PENDIENTE,
+            self::ESTADO_PAGO_PENDIENTE => self::ESTADO_PAGO_NAME_PAGADO
+        );
+    }
+
+    public function getTipoComprobante()
+    {
+        return array(self::TIPO_COMPROBANTE_DNI => 'DNI', self::TIPO_COMPROBANTE_RUC => 'RUC');
+    }
+
+    public function getMetodoPago()
+    {
+        return array(self::METODO_PAGO_VISA => 'Visa', self::METODO_PAGO_PE => 'PE');
+    }
+
+    /**
+     * Retorna un array que se utilizar en la busqueda de usuario
+     * @return array
+     * @author Diómedes Pablo A. <diomedex10@gmail.com>
+     */
+    public function getFiltrosBuscar()
+    {
+        return array(
+            'email'              => 'Correo',
+            'comprobante_numero' => 'Nro. Comprobante',
+            'fac_razon_social'   => 'R. Social',
+            'nombres'            => 'Nombres',
+            'pago_referencia'    => 'Cód. Pago',
+        );
     }
 
 }

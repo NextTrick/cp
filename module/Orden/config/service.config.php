@@ -11,6 +11,7 @@ return array(
         'Orden\Form\CarritoForm' => 'Orden\Form\Factory\CarritoFactory',
         'Orden\Form\OrdenForm' => 'Orden\Form\Factory\OrdenFactory',
         'Orden\Form\BuscarForm'  => 'Orden\Form\Factory\BuscarFactory',
+        'Orden\Form\CarritoBuscarForm'  => 'Orden\Form\Factory\CarritoBuscarFactory',
     ),
     'invokables' => array(
     ),

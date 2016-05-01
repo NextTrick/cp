@@ -54,7 +54,10 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             $selectInterno = $sql->select();
             $selectInterno->quantifier(\Zend\Db\Sql\Select::QUANTIFIER_DISTINCT);
             $selectInterno->from(array('u'=>'usuario_usuario'));
-            $selectInterno->columns(array('id', 'email', 'estado', 'nombres', 'paterno', 'materno', 'di_tipo', 'di_valor'));
+            $selectInterno->columns(array(
+                'id', 'mguid','email', 'estado', 'nombres', 'paterno', 'materno', 'di_tipo', 'di_valor', 'fecha_creacion', 'fecha_nac',
+                'codigo_activar'
+            ));
             $selectInterno->join(array('u1' => $selectPais), 'u1.cod_pais = u.cod_pais',
                 array('cod_pais', 'nombrePais'), 'left');
             $selectInterno->join(array('u2' => $selectDepa), 'u2.cod_pais = u.cod_pais and u2.cod_depa = u.cod_depa',
@@ -69,7 +72,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
-                if (!empty($value) && !empty($key)) {
+                if (!empty($value) && !empty($key) || $value === '0') {
                     $where->AND->equalTo($key, $value) ;
                 }
             }
@@ -82,9 +85,9 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 
             foreach ($this->crWhereBetween as $key => $value) {
                 if (!empty($value['min']) && !empty($key)) {
-                    $where->and->lessThanOrEqualTo($key, $value['min']) ;
+                    $where->and->greaterThanOrEqualTo($key, $value['min']) ;
                 } elseif (!empty($value['max']) && !empty($key)) {
-                    $where->and->greaterThanOrEqualTo($key, $value['max']) ;
+                    $where->and->lessThanOrEqualTo($key, $value['max']) ;
                 }
             }
             
