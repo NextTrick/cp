@@ -64,40 +64,40 @@ class PaqueteForm extends Form
         $tipo->setDisableInArrayValidator(true);
         $this->add($tipo);
         
-        $importeMinimo = new Element\Text('importe_minimo');
-        $importeMinimo->setAttributes(array(
-                'id' => 'importe_minimo',
+        $emoney = new Element\Text('emoney');
+        $emoney->setAttributes(array(
+                'id' => 'emoney',
                 'maxlength' => '10',
             ));
-        $this->add($importeMinimo);
+        $this->add($emoney);
         
-        $importeEmoney = new Element\Text('importe_emoney');
-        $importeEmoney->setAttributes(array(
-                'id' => 'importe_emoney',
+        $bonus = new Element\Text('bonus');
+        $bonus->setAttributes(array(
+                'id' => 'bonus',
                 'maxlength' => '10',
             ));
-        $this->add($importeEmoney);
+        $this->add($bonus);
         
-        $importeBonus = new Element\Text('importe_bonus');
-        $importeBonus->setAttributes(array(
-                'id' => 'importe_bonus',
+        $promotionBonus = new Element\Text('promotionbonus');
+        $promotionBonus->setAttributes(array(
+                'id' => 'promotionbonus',
                 'maxlength' => '10',
             ));
-        $this->add($importeBonus);
+        $this->add($promotionBonus);
         
-        $tickets = new Element\Text('tickets');
+        $tickets = new Element\Text('etickets');
         $tickets->setAttributes(array(
-                'id' => 'tickets',
+                'id' => 'etickets',
                 'maxlength' => '10',
             ));
         $this->add($tickets);
         
-        $montoTotal = new Element\Text('monto_total');
-        $montoTotal->setAttributes(array(
-                'id' => 'monto_total',
+        $gamepoints = new Element\Text('gamepoints');
+        $gamepoints->setAttributes(array(
+                'id' => 'tickets',
                 'maxlength' => '10',
             ));
-        $this->add($montoTotal);
+        $this->add($gamepoints);
         
         $image = new Element\File('imagen');
         $image->setAttribute('id', 'imagen');
