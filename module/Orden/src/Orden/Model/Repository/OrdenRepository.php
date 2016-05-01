@@ -39,7 +39,7 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             $select->from(array('o'=> $this->table));
             $select->columns(array('id', 'usuario_id', 'pago_tarjeta','monto', 'fecha_creacion','documento_numero', 'documento_tipo',
                 'fac_direccion_fiscal', 'pago_estado', 'comprobante_tipo', 'comprobante_numero', 'fac_razon_social',
-                'nombres', 'pago_referencia', 'estado'
+                'nombres', 'pago_referencia', 'estado', 'pago_error', 'pago_error_detalle'
             ));
             $select->join(array('u' => 'usuario_usuario'), 'u.id = o.usuario_id',
                 array('id', 'email'), 'inner');

@@ -101,6 +101,8 @@ class OrdenController extends SecurityAdminController
             $sheet->setCellValue('M1', 'Direccion Fiscal');
             $sheet->setCellValue('N1', 'Nombres');
             $sheet->setCellValue('O1', 'Estado');
+            $sheet->setCellValue('P1', 'Pago Error');
+            $sheet->setCellValue('Q1', 'Pago Detalle Error');
 
 
             $index = 2;
@@ -120,6 +122,8 @@ class OrdenController extends SecurityAdminController
                 $sheet->setCellValue('M'.$index, $reg['fac_direccion_fiscal']);
                 $sheet->setCellValue('N'.$index, $reg['nombres']);
                 $sheet->setCellValue('O'.$index, \Usuario\Model\Service\UsuarioService::getNombreEstado($reg['estado']));
+                $sheet->setCellValue('P'.$index, $reg['pago_error']);
+                $sheet->setCellValue('Q'.$index, $reg['pago_error_detalle']);
 
                 $index ++;
             }
