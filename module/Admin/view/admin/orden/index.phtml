@@ -26,6 +26,7 @@ $this->layout()->breadcrumb = array(
                 <th>Estado</th>
                 <th>Comprobante</th>
                 <th style="white-space:nowrap;">Nro. Comprobante</th>
+                <th style="white-space:nowrap;">Tipo Documento</th>
                 <th style="white-space:nowrap;">Razón Social</th>
                 <th>Nombres</th>
             </tr>
@@ -42,6 +43,7 @@ $this->layout()->breadcrumb = array(
                     <td><?php echo \Orden\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
                     <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoComprobante($row['comprobante_tipo']); ?></td>
                     <td><?php echo $row['comprobante_numero'] ?></td>
+                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoDocumento($row['documento_tipo']); ?></td>
                     <td><?php echo $row['fac_razon_social'] ?></td>
                     <td><?php echo $row['nombres']; ?></td>
                 </tr>
@@ -69,10 +71,14 @@ $this->layout()->breadcrumb = array(
 
         $("#txtFechaIni").datepicker({
             format: 'yyyy-mm-dd'
+        }).on('changeDate', function(e){
+            $("#formBuscar").submit();
         });
 
         $("#txtFechaFin").datepicker({
             format: 'yyyy-mm-dd'
+        }).on('changeDate', function(e){
+            $("#formBuscar").submit();
         });
 
         $("#cmbTipoComp").on('change', function() {

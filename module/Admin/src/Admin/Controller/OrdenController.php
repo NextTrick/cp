@@ -84,7 +84,7 @@ class OrdenController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->applyFromArray($style['cabecera']);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Id');
             $sheet->setCellValue('B1', 'Id Usuario');
@@ -95,18 +95,16 @@ class OrdenController extends SecurityAdminController
             $sheet->setCellValue('G1', 'Fecha Confirmacion');
             $sheet->setCellValue('H1', 'Estado Pago');
             $sheet->setCellValue('I1', 'Tipo comprobante');
-            $sheet->setCellValue('J1', 'Nro comprobante');
-            $sheet->setCellValue('K1', 'Razón Social');
-            $sheet->setCellValue('L1', 'Nro. RUC');
+            $sheet->setCellValue('J1', 'Razón Social');
+            $sheet->setCellValue('K1', 'Tipo Documento');
+            $sheet->setCellValue('L1', 'Nro. Documento');
             $sheet->setCellValue('M1', 'Direccion Fiscal');
-            $sheet->setCellValue('N1', 'Doc. Identidad');
-            $sheet->setCellValue('O1', 'Nombres');
-            $sheet->setCellValue('P1', 'Estado');
+            $sheet->setCellValue('N1', 'Nombres');
+            $sheet->setCellValue('O1', 'Estado');
 
 
             $index = 2;
             foreach ($data as $key => $reg) {
-                $estado = (!empty($reg['estado']))? 'Activo': 'Baja';
                 $sheet->setCellValue('A'.$index, $reg['id']);
                 $sheet->setCellValue('B'.$index, $reg['usuario_id']);
                 $sheet->setCellValue('C'.$index, $reg['pago_referencia']);
@@ -116,13 +114,12 @@ class OrdenController extends SecurityAdminController
                 $sheet->setCellValue('G'.$index, $reg['fecha_creacion']);
                 $sheet->setCellValue('H'.$index, \Orden\Model\Service\OrdenService::getNombreEstadoPago($reg['pago_estado']));
                 $sheet->setCellValue('I'.$index, \Orden\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
-                $sheet->setCellValue('J'.$index, $reg['comprobante_numero']);
-                $sheet->setCellValue('K'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('J'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('K'.$index, \Orden\Model\Service\OrdenService::getNombreTipoDocumento($reg['documento_tipo']));
                 $sheet->setCellValue('L'.$index, $reg['documento_numero']);
                 $sheet->setCellValue('M'.$index, $reg['fac_direccion_fiscal']);
-                //$sheet->setCellValue('N'.$index, $reg['doc_identidad']);
-                $sheet->setCellValue('O'.$index, $reg['nombres']);
-                $sheet->setCellValue('P'.$index, $estado);
+                $sheet->setCellValue('N'.$index, $reg['nombres']);
+                $sheet->setCellValue('O'.$index, \Usuario\Model\Service\UsuarioService::getNombreEstado($reg['estado']));
 
                 $index ++;
             }
