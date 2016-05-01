@@ -34,7 +34,7 @@ $this->layout()->breadcrumb = array(
             <tbody>
                 <?php foreach ($gridList as $row) : ?>
                     <tr>
-                        <td><?php echo $row['email'] ?></td>
+                        <td ><?php echo $row['email'] ?></td>
                         <td><?php echo $row['nombres'] ?></td>
                         <td><?php echo $row['paterno'] ?></td>
                         <td><?php echo $row['materno'] ?></td>
@@ -103,7 +103,7 @@ $this->layout()->breadcrumb = array(
     });
 
     function exportarExcel(){
-        $("#formBuscar").attr("action", "<?php echo BASE_URL; ?>admin/usuario/usuario/exportarExcel");
+        $("#formBuscar").attr("action", "<?php echo BASE_URL; ?>admin/usuario/usuario/exportar-excel");
         $("#formBuscar").submit();
         $("#formBuscar").attr("action", "<?php echo BASE_URL; ?>admin/usuario/usuario");
     }

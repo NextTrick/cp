@@ -47,6 +47,7 @@ class OrdenController extends SecurityAdminController
         try {
             $view = new ViewModel();
             $view->setTerminal(true);
+            $date = new \DateTime();
 
             $criteria = $this->_getOrdenService()->getDataCriteria($this->params()->fromPost());
             $data     = $this->_getOrdenService()->getRepository()->search($criteria);
@@ -82,34 +83,47 @@ class OrdenController extends SecurityAdminController
                     )
                 )
             );
-            $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($style['cabecera']);
+
+            $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Id');
-            $sheet->setCellValue('B1', 'Correo');
-            $sheet->setCellValue('C1', 'Correo');
-            $sheet->setCellValue('D1', 'Metodo Pago');
-            $sheet->setCellValue('E1', 'Monto');
-            $sheet->setCellValue('F1', 'Fecha Confirmacion');
-            $sheet->setCellValue('G1', 'Estado Pago');
-            $sheet->setCellValue('H1', 'Tipo comprobante');
-            $sheet->setCellValue('I1', 'Nro comprobante');
-            $sheet->setCellValue('J1', 'R. Social');
-            $sheet->setCellValue('K1', 'Nombres');
+            $sheet->setCellValue('B1', 'Id Usuario');
+            $sheet->setCellValue('C1', 'Cód. Pago');
+            $sheet->setCellValue('D1', 'Correo');
+            $sheet->setCellValue('E1', 'Metodo Pago');
+            $sheet->setCellValue('F1', 'Monto');
+            $sheet->setCellValue('G1', 'Fecha Confirmacion');
+            $sheet->setCellValue('H1', 'Estado Pago');
+            $sheet->setCellValue('I1', 'Tipo comprobante');
+            $sheet->setCellValue('J1', 'Nro comprobante');
+            $sheet->setCellValue('K1', 'Razón Social');
+            $sheet->setCellValue('L1', 'Nro. RUC');
+            $sheet->setCellValue('M1', 'Direccion Fiscal');
+            $sheet->setCellValue('N1', 'Doc. Identidad');
+            $sheet->setCellValue('O1', 'Nombres');
+            $sheet->setCellValue('P1', 'Estado');
+
 
             $index = 2;
             foreach ($data as $key => $reg) {
-                $estado = (!empty($row['estado']))? 'Activo': 'Baja';
+                $estado = (!empty($reg['estado']))? 'Activo': 'Baja';
                 $sheet->setCellValue('A'.$index, $reg['id']);
-                $sheet->setCellValue('B'.$index, $reg['email']);
-                $sheet->setCellValue('C'.$index, $reg['email']);
-                $sheet->setCellValue('D'.$index, $reg['pago_tarjeta']);
-                $sheet->setCellValue('E'.$index, $reg['monto']);
-                $sheet->setCellValue('F'.$index, $reg['fecha_creacion']);
-                $sheet->setCellValue('G'.$index, $reg['pago_estado']);
-                $sheet->setCellValue('H'.$index, $reg['comprobante_tipo']);
-                $sheet->setCellValue('I'.$index, $reg['comprobante_numero']);
-                $sheet->setCellValue('J'.$index, $reg['fac_razon_social']);
-                $sheet->setCellValue('K'.$index, $reg['nombres']);
+                $sheet->setCellValue('B'.$index, $reg['usuario_id']);
+                $sheet->setCellValue('C'.$index, $reg['pago_referencia']);
+                $sheet->setCellValue('D'.$index, $reg['email']);
+                $sheet->setCellValue('E'.$index, \Orden\Model\Service\OrdenService::getNombreTipoPago($reg['pago_tarjeta']));
+                $sheet->setCellValue('F'.$index, $reg['monto']);
+                $sheet->setCellValue('G'.$index, $reg['fecha_creacion']);
+                $sheet->setCellValue('H'.$index, \Orden\Model\Service\OrdenService::getNombreEstadoPago($reg['pago_estado']));
+                $sheet->setCellValue('I'.$index, \Orden\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
+                $sheet->setCellValue('J'.$index, $reg['comprobante_numero']);
+                $sheet->setCellValue('K'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('L'.$index, $reg['fac_ruc']);
+                $sheet->setCellValue('M'.$index, $reg['fac_direccion_fiscal']);
+                $sheet->setCellValue('N'.$index, $reg['doc_identidad']);
+                $sheet->setCellValue('O'.$index, $reg['nombres']);
+                $sheet->setCellValue('P'.$index, $estado);
+
                 $index ++;
             }
 
@@ -125,13 +139,15 @@ class OrdenController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A2:K'.($index-1))->applyFromArray($style['body']);
+            $objPHPExcel->getActiveSheet()->getStyle('A2:O'.($index-1))->applyFromArray($style['body']);
+            $nameFile = 'transacciones_'. trim($date->format('Y-m-d_His')).'.xlsx';
+
 
             // Rename worksheet
-            $objPHPExcel->getActiveSheet()->setTitle('Lista de Usuarios');
+            $objPHPExcel->getActiveSheet()->setTitle('Lista de Transacciones');
             // Redirect output to a client’s web browser (Excel2007)
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="01simple.xlsx"');
+            header('Content-Disposition: attachment;filename="'.$nameFile);
             header('Cache-Control: max-age=0');
             // If you're serving to IE 9, then the following may be needed
             header('Cache-Control: max-age=1');

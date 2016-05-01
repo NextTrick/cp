@@ -62,7 +62,7 @@ class OrdenService
 
             $paramsWhere = array(
                 'comprobante_tipo' => String::xssClean($params['cmbTipoComp']),
-                'pago_estado'      => String::xssClean($params['cmbEstado']),
+                'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
                 'pago_tarjeta'     => String::xssClean($params['cmbMetodoPago']),
             );
 
@@ -136,12 +136,12 @@ class OrdenService
         return $result;
     }
 
-    public function getEstados()
+    public function getPagoEstados()
     {
         return array(
-            self::ESTADO_PAGO_ERROR     => 'Error',
-            self::ESTADO_PAGO_PAGADO    => 'Pagado',
-            self::ESTADO_PAGO_PENDIENTE => 'Pendiente'
+            self::ESTADO_PAGO_ERROR     => self::ESTADO_PAGO_NAME_ERROR,
+            self::ESTADO_PAGO_PAGADO    => self::ESTADO_PAGO_NAME_PENDIENTE,
+            self::ESTADO_PAGO_PENDIENTE => self::ESTADO_PAGO_NAME_PAGADO
         );
     }
 
@@ -167,6 +167,7 @@ class OrdenService
             'comprobante_numero' => 'Nro. Comprobante',
             'fac_razon_social'   => 'R. Social',
             'nombres'            => 'Nombres',
+            'pago_referencia'    => 'Cód. Pago',
         );
     }
 

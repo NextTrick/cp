@@ -211,7 +211,6 @@ class UsuarioService
 
         return $result;
     }
-    
 
     /**
      * Retorna un array que se utilizar en la busqueda de usuario

@@ -12,7 +12,7 @@ use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class BuscarForm extends Form
+class CarritoBuscarForm extends Form
 {
     protected $_sl = null;
 
@@ -41,7 +41,7 @@ class BuscarForm extends Form
             ));
         $this->add($txtBuscar);
         
-        $filtrosBuscar = $this->getOrdenService()->getFiltrosBuscar();
+        $filtrosBuscar = $this->getCarritoService()->getFiltrosBuscar();
         $cmbFiltro     = new Element\Select('cmbFiltro');
         $cmbFiltro->setAttributes(array('id' => 'cmbFiltro'));
         $cmbFiltro->setValueOptions($filtrosBuscar);
@@ -49,29 +49,14 @@ class BuscarForm extends Form
         $cmbFiltro->setDisableInArrayValidator(true);
         $this->add($cmbFiltro);
 
-        $filtroTipoComp = $this->getOrdenService()->getTipoComprobante();
-        $cmbTipoDoc     = new Element\Select('cmbTipoComp');
-        $cmbTipoDoc->setAttributes(array('id' => 'cmbTipoComp'));
-        $cmbTipoDoc->setValueOptions($filtroTipoComp);
-        $cmbTipoDoc->setEmptyOption('- Seleccione -');
-        $cmbTipoDoc->setDisableInArrayValidator(true);
-        $this->add($cmbTipoDoc);
-
         $filtroEstado = $this->getOrdenService()->getPagoEstados();
         $cmbEstado    = new Element\Select('cmbEstado');
-        $cmbEstado->setAttributes(array('id' => 'cmbPagoEstado'));
+        $cmbEstado->setAttributes(array('id' => 'cmbEstado'));
         $cmbEstado->setValueOptions($filtroEstado);
         $cmbEstado->setEmptyOption('- Seleccione -');
         $cmbEstado->setDisableInArrayValidator(true);
         $this->add($cmbEstado);
 
-        $filtroMetodoPago = $this->getOrdenService()->getMetodoPago();
-        $cmbMetdoPago     = new Element\Select('cmbMetodoPago');
-        $cmbMetdoPago->setAttributes(array('id' => 'cmbMetodoPago'));
-        $cmbMetdoPago->setEmptyOption('- Seleccione -');
-        $cmbMetdoPago->setValueOptions($filtroMetodoPago);
-        $cmbMetdoPago->setDisableInArrayValidator(true);
-        $this->add($cmbMetdoPago);
 
         $txtFechaIni = new Element\Text('txtFechaIni');
         $txtFechaIni->setAttributes(array(
@@ -89,9 +74,13 @@ class BuscarForm extends Form
 
     }
 
+    private function getCarritoService()
+    {
+        return $this->_sl->get('Orden\Model\Service\CarritoService');
+    }
+
     private function getOrdenService()
     {
         return $this->_sl->get('Orden\Model\Service\OrdenService');
     }
-
 }

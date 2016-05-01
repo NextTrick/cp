@@ -48,6 +48,7 @@ class UsuarioController extends SecurityAdminController
         try {
             $view = new ViewModel();
             $view->setTerminal(true);
+            $date = new \DateTime();
 
             $criteria = $this->_getUsuarioService()->getDataCriteria($this->params()->fromPost());
             $data = $this->_getUsuarioService()->getRepository()->search($criteria);
@@ -83,34 +84,42 @@ class UsuarioController extends SecurityAdminController
                     )
                 )
             );
-            $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($style['cabecera']);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Email');
             $sheet->setCellValue('B1', 'Nombre');
             $sheet->setCellValue('C1', 'A. Paterno');
             $sheet->setCellValue('D1', 'A. Materno');
-            $sheet->setCellValue('E1', 'Tipo Doc');
-            $sheet->setCellValue('F1', 'Nro. Doc.');
+            $sheet->setCellValue('E1', 'Tipo Documento');
+            $sheet->setCellValue('F1', 'Nro. Documento');
             $sheet->setCellValue('G1', 'Pais');
             $sheet->setCellValue('H1', 'Departamento');
             $sheet->setCellValue('I1', 'Provincia');
             $sheet->setCellValue('J1', 'Distrito');
-            $sheet->setCellValue('K1', 'Estado');
+            $sheet->setCellValue('K1', 'F. Nacimiento');
+            $sheet->setCellValue('L1', 'F. Creación');
+            $sheet->setCellValue('M1', 'Código Activar');
+            $sheet->setCellValue('N1', 'mguid');
+            $sheet->setCellValue('O1', 'Estado');
 
             $index = 2;
             foreach ($data as $key => $reg) {
-                $estado = (!empty($row['estado']))? 'Activo': 'Baja';
+                $estado = (!empty($reg['estado']))? 'Activo': 'Baja';
                 $sheet->setCellValue('A'.$index, $reg['email']);
                 $sheet->setCellValue('B'.$index, $reg['nombres']);
                 $sheet->setCellValue('C'.$index, $reg['paterno']);
                 $sheet->setCellValue('D'.$index, $reg['materno']);
-                $sheet->setCellValue('E'.$index, $reg['di_tipo']);
+                $sheet->setCellValue('E'.$index, \Usuario\Model\Service\UsuarioService::getNombreTipoDocumento($reg['di_tipo']));
                 $sheet->setCellValue('F'.$index, $reg['di_valor']);
                 $sheet->setCellValue('G'.$index, $reg['nombrePais']);
                 $sheet->setCellValue('H'.$index, $reg['nombreDepa']);
                 $sheet->setCellValue('I'.$index, $reg['nombreProv']);
                 $sheet->setCellValue('J'.$index, $reg['nombreDist']);
-                $sheet->setCellValue('K'.$index, $estado);
+                $sheet->setCellValue('K'.$index, $reg['fecha_nac']);
+                $sheet->setCellValue('L'.$index, $reg['fecha_creacion']);
+                $sheet->setCellValue('M'.$index, $reg['codigo_activar']);
+                $sheet->setCellValue('N'.$index, $reg['mguid']);
+                $sheet->setCellValue('O'.$index, $estado);
                 $index ++;
             }
 
@@ -126,13 +135,14 @@ class UsuarioController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A2:K'.($index-1))->applyFromArray($style['body']);
+            $objPHPExcel->getActiveSheet()->getStyle('A2:O'.($index-1))->applyFromArray($style['body']);
+            $nameFile = 'reporteUsuario_'. trim($date->format('Y-m-d_His')).'.xlsx';
 
             // Rename worksheet
             $objPHPExcel->getActiveSheet()->setTitle('Lista de Usuarios');
             // Redirect output to a client’s web browser (Excel2007)
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment;filename="01simple.xlsx"');
+            header('Content-Disposition: attachment;filename="'.$nameFile);
             header('Cache-Control: max-age=0');
             // If you're serving to IE 9, then the following may be needed
             header('Cache-Control: max-age=1');

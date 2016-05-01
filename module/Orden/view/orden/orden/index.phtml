@@ -1,4 +1,4 @@
-<?php $this->layout()->title = array('Orden', 'Listado') ?>
+<?php $this->layout()->title = array('Trasacciones', 'Listado') ?>
 <?php
 $this->layout()->breadcrumb = array(
     array('url' => null, 'name' => 'Orden'),
@@ -18,15 +18,15 @@ $this->layout()->breadcrumb = array(
             <thead>
             <tr>
                 <th>Id</th>
-                <th>Cod. Pago</th>
+                <th>Cód. Pago</th>
                 <th>Correo</th>
-                <th>Metodo</th>
+                <th>Método Pago</th>
                 <th>Monto</th>
-                <th>F. Confirmacion</th>
+                <th>F. Confirmación</th>
                 <th>Estado</th>
                 <th>Comprobante</th>
                 <th>Nro. Comprobante</th>
-                <th>R. Social</th>
+                <th>Razón Social</th>
                 <th>Nombres</th>
             </tr>
             </thead>
@@ -34,7 +34,7 @@ $this->layout()->breadcrumb = array(
             <?php foreach ($gridList as $row) : ?>
                 <tr>
                     <td><?php echo $row['id'] ?></td>
-                    <td><?php echo $row['email'] ?></td>
+                    <td><?php echo $row['pago_referencia'] ?></td>
                     <td><?php echo $row['email'] ?></td>
                     <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoPago($row['pago_tarjeta']); ?></td>
                     <td><?php echo $row['monto'] ?></td>
@@ -79,7 +79,7 @@ $this->layout()->breadcrumb = array(
             $("#formBuscar").submit();
         });
 
-        $("#cmbEstado").on('change', function() {
+        $("#cmbPagoEstado").on('change', function() {
             $("#formBuscar").submit();
         });
 
