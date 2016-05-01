@@ -2132,10 +2132,6 @@ INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `emai
 (5, '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 0, NULL, 'Juan Carlos', 'test', 'test', 1, '2324232', '2015-03-02', 'PE', '23', NULL, '08', NULL, NULL, 'd27c393c942947426e370624076ec81c201b3b480a358895870e8e23ce4a06a5');
 
 
-INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `estado_truefi`, `numero`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `fecha_creacion`, `fecha_edicion`) VALUES
-(1, 5, NULL, '{54A0B670-9C39-464D-ABE2-79B62240043A}', 2, '000-123456-3', NULL, NULL, NULL, NULL, NULL, '2016-04-18 06:14:24');
-
-
 --
 -- Volcado de datos para la tabla `paquete_paquete`
 --
