@@ -71,7 +71,7 @@ class OrdenFilter extends Zf2InputFilter
         ));
 
         $this->add(array(
-            'name' => 'fac_ruc',
+            'name' => 'documento_numero',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -154,17 +154,6 @@ class OrdenFilter extends Zf2InputFilter
             )
         ));
 
-        $this->add(array(
-            'name' => 'doc_identidad',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Doc_identidad'),
-            )
-        ));
 
         $this->add(array(
             'name' => 'direccion',

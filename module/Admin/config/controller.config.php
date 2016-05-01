@@ -7,14 +7,18 @@ return array(
         'Admin\Controller\Error' => 'Admin\Controller\ErrorController',
         'Admin\Controller\Main' => 'Admin\Controller\MainController',
         'Admin\Controller\Rol' => 'Admin\Controller\RolController',
-        'Admin\Controller\Usuario' => 'Admin\Controller\UsuarioController',
+        'Admin\Controller\Usuarioadmin' => 'Admin\Controller\UsuarioadminController',
         'Admin\Controller\Recurso' => 'Admin\Controller\RecursoController',
         'Admin\Controller\Permiso' => 'Admin\Controller\PermisoController',
         
         'Admin\Controller\Contenido' => 'Admin\Controller\ContenidoController',
         'Admin\Controller\Paquete' => 'Admin\Controller\PaqueteController',
         
-        'Orden\Controller\Orden' => 'Orden\Controller\OrdenController',
-        'Orden\Controller\Carrito' => 'Orden\Controller\CarritoController',
+        'Admin\Controller\Orden' => 'Admin\Controller\OrdenController',
+        'Admin\Controller\Carrito' => 'Admin\Controller\CarritoController',
+        
+        'Admin\Controller\Usuario' => 'Admin\Controller\UsuarioController',
+        
+        'Admin\Controller\Test' => 'Usuario\Controller\TestController',
     ),
 );

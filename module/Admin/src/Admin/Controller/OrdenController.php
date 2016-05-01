@@ -1,7 +1,7 @@
 <?php
 /*
  * Autor       : Juan Carlos Ludeña Montesinos
- * Año         : Marzo 2016
+ * Año         : Abril 2016
  * Descripción :
  *
  */
@@ -10,27 +10,26 @@ namespace Admin\Controller;
 
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
-use \Common\Helpers\String;
 use PHPExcel;
 use \PHPExcel_IOFactory;
 
-class UsuarioController extends SecurityAdminController
+class OrdenController extends SecurityAdminController
 {
+
     public function indexAction()
     {
         try {
-            $form = $this->getServiceLocator()->get('Usuario\Form\BuscarForm');
+            $form = $this->getServiceLocator()->get('Orden\Form\BuscarForm');
             $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
-                'controller' => 'usuario', 'action' => 'index'
+                'controller' => 'orden', 'action' => 'index'
             )));
 
-            $form->setDataUbigeo($this->params()->fromPost());
             $form->setData($this->params()->fromPost());
 
-            $criteria = $this->_getUsuarioService()->getDataCriteria($this->params()->fromPost());
+            $criteria = $this->_getOrdenService()->getDataCriteria($this->params()->fromPost());
 
-            $gridList  = $this->_getUsuarioService()->getRepository()->search($criteria);
-            $countList = $this->_getUsuarioService()->getRepository()->countTotal($criteria);
+            $gridList  = $this->_getOrdenService()->getRepository()->search($criteria);
+            $countList = $this->_getOrdenService()->getRepository()->countTotal($criteria);
 
             $view = new ViewModel();
             $view->setVariable('gridList', $gridList);
@@ -50,8 +49,8 @@ class UsuarioController extends SecurityAdminController
             $view->setTerminal(true);
             $date = new \DateTime();
 
-            $criteria = $this->_getUsuarioService()->getDataCriteria($this->params()->fromPost());
-            $data = $this->_getUsuarioService()->getRepository()->search($criteria);
+            $criteria = $this->_getOrdenService()->getDataCriteria($this->params()->fromPost());
+            $data     = $this->_getOrdenService()->getRepository()->search($criteria);
 
             $objPHPExcel = new PHPExcel();
             $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
@@ -84,42 +83,47 @@ class UsuarioController extends SecurityAdminController
                     )
                 )
             );
-            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($style['cabecera']);
 
-            $sheet->setCellValue('A1', 'Email');
-            $sheet->setCellValue('B1', 'Nombre');
-            $sheet->setCellValue('C1', 'A. Paterno');
-            $sheet->setCellValue('D1', 'A. Materno');
-            $sheet->setCellValue('E1', 'Tipo Documento');
-            $sheet->setCellValue('F1', 'Nro. Documento');
-            $sheet->setCellValue('G1', 'Pais');
-            $sheet->setCellValue('H1', 'Departamento');
-            $sheet->setCellValue('I1', 'Provincia');
-            $sheet->setCellValue('J1', 'Distrito');
-            $sheet->setCellValue('K1', 'F. Nacimiento');
-            $sheet->setCellValue('L1', 'F. Creación');
-            $sheet->setCellValue('M1', 'Código Activar');
-            $sheet->setCellValue('N1', 'mguid');
-            $sheet->setCellValue('O1', 'Estado');
+            $objPHPExcel->getActiveSheet()->getStyle('A1:P1')->applyFromArray($style['cabecera']);
+
+            $sheet->setCellValue('A1', 'Id');
+            $sheet->setCellValue('B1', 'Id Usuario');
+            $sheet->setCellValue('C1', 'Cód. Pago');
+            $sheet->setCellValue('D1', 'Correo');
+            $sheet->setCellValue('E1', 'Metodo Pago');
+            $sheet->setCellValue('F1', 'Monto');
+            $sheet->setCellValue('G1', 'Fecha Confirmacion');
+            $sheet->setCellValue('H1', 'Estado Pago');
+            $sheet->setCellValue('I1', 'Tipo comprobante');
+            $sheet->setCellValue('J1', 'Nro comprobante');
+            $sheet->setCellValue('K1', 'Razón Social');
+            $sheet->setCellValue('L1', 'Nro. RUC');
+            $sheet->setCellValue('M1', 'Direccion Fiscal');
+            $sheet->setCellValue('N1', 'Doc. Identidad');
+            $sheet->setCellValue('O1', 'Nombres');
+            $sheet->setCellValue('P1', 'Estado');
+
 
             $index = 2;
             foreach ($data as $key => $reg) {
                 $estado = (!empty($reg['estado']))? 'Activo': 'Baja';
-                $sheet->setCellValue('A'.$index, $reg['email']);
-                $sheet->setCellValue('B'.$index, $reg['nombres']);
-                $sheet->setCellValue('C'.$index, $reg['paterno']);
-                $sheet->setCellValue('D'.$index, $reg['materno']);
-                $sheet->setCellValue('E'.$index, \Usuario\Model\Service\UsuarioService::getNombreTipoDocumento($reg['di_tipo']));
-                $sheet->setCellValue('F'.$index, $reg['di_valor']);
-                $sheet->setCellValue('G'.$index, $reg['nombrePais']);
-                $sheet->setCellValue('H'.$index, $reg['nombreDepa']);
-                $sheet->setCellValue('I'.$index, $reg['nombreProv']);
-                $sheet->setCellValue('J'.$index, $reg['nombreDist']);
-                $sheet->setCellValue('K'.$index, $reg['fecha_nac']);
-                $sheet->setCellValue('L'.$index, $reg['fecha_creacion']);
-                $sheet->setCellValue('M'.$index, $reg['codigo_activar']);
-                $sheet->setCellValue('N'.$index, $reg['mguid']);
-                $sheet->setCellValue('O'.$index, $estado);
+                $sheet->setCellValue('A'.$index, $reg['id']);
+                $sheet->setCellValue('B'.$index, $reg['usuario_id']);
+                $sheet->setCellValue('C'.$index, $reg['pago_referencia']);
+                $sheet->setCellValue('D'.$index, $reg['email']);
+                $sheet->setCellValue('E'.$index, \Orden\Model\Service\OrdenService::getNombreTipoPago($reg['pago_tarjeta']));
+                $sheet->setCellValue('F'.$index, $reg['monto']);
+                $sheet->setCellValue('G'.$index, $reg['fecha_creacion']);
+                $sheet->setCellValue('H'.$index, \Orden\Model\Service\OrdenService::getNombreEstadoPago($reg['pago_estado']));
+                $sheet->setCellValue('I'.$index, \Orden\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
+                $sheet->setCellValue('J'.$index, $reg['comprobante_numero']);
+                $sheet->setCellValue('K'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('L'.$index, $reg['documento_numero']);
+                $sheet->setCellValue('M'.$index, $reg['fac_direccion_fiscal']);
+                //$sheet->setCellValue('N'.$index, $reg['doc_identidad']);
+                $sheet->setCellValue('O'.$index, $reg['nombres']);
+                $sheet->setCellValue('P'.$index, $estado);
+
                 $index ++;
             }
 
@@ -136,10 +140,11 @@ class UsuarioController extends SecurityAdminController
             );
 
             $objPHPExcel->getActiveSheet()->getStyle('A2:O'.($index-1))->applyFromArray($style['body']);
-            $nameFile = 'reporteUsuario_'. trim($date->format('Y-m-d_His')).'.xlsx';
+            $nameFile = 'transacciones_'. trim($date->format('Y-m-d_His')).'.xlsx';
+
 
             // Rename worksheet
-            $objPHPExcel->getActiveSheet()->setTitle('Lista de Usuarios');
+            $objPHPExcel->getActiveSheet()->setTitle('Lista de Transacciones');
             // Redirect output to a client’s web browser (Excel2007)
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment;filename="'.$nameFile);
@@ -157,54 +162,6 @@ class UsuarioController extends SecurityAdminController
 
         } catch (\Exception $e) {
             echo $e->getMessage();exit;
-        }
-    }
-
-    public function getDistritosAction()
-    {
-        try {
-            $codPais        = String::xssClean($this->params()->fromPost('cmbPais'));
-            $codDepa        = String::xssClean($this->params()->fromPost('cmbDepartamento'));
-            $codProv        = String::xssClean($this->params()->fromPost('cmbProvincia'));
-            $ubigeoService  = $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
-            $result['data'] = $ubigeoService->getDistritos($codPais, $codDepa, $codProv);
-
-            return json_encode($result);
-
-        } catch (\Exception $e) {
-            $result['data'] = array();
-            return $result['data'];
-        }
-    }
-
-    public function getProvinciasAction()
-    {
-        try {
-            $codPais        = String::xssClean($this->params()->fromPost('cmbPais'));
-            $codDepa        = String::xssClean($this->params()->fromPost('cmbDepa'));
-            $ubigeoService  = $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
-            $result['data'] = $ubigeoService->getProvincias($codPais, $codDepa);
-
-            return json_encode($result);
-
-        } catch (\Exception $e) {
-            $result['data'] = array();
-            return $result['data'];
-        }
-    }
-
-    public function getDepartamentosAction()
-    {
-        try {
-            $codPais        = String::xssClean($this->params()->fromPost('cmbPais'));
-            $ubigeoService  = $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
-            $result['data'] = $ubigeoService->getDepartamentos($codPais);
-
-            return json_encode($result);
-
-        } catch (\Exception $e) {
-            $result['data'] = array();
-            return $result['data'];
         }
     }
 
@@ -235,7 +192,7 @@ class UsuarioController extends SecurityAdminController
                 'id' => $id
             ),
         );
-        $row = $this->_getUsuarioService()->getRepository()->findOne($criteria);
+        $row = $this->_getOrdenService()->getRepository()->findOne($criteria);
         if (empty($row)) {
             throw new \Exception(NO_DATA);
         }
@@ -259,7 +216,7 @@ class UsuarioController extends SecurityAdminController
         if ($request->isPost()) {
             $id = $this->params('id', null);
             if (!empty($id)) {
-                $this->_getUsuarioService()->getRepository()
+                $this->_getOrdenService()->getRepository()
                         ->save(array('estado' => 0), $id);
                 $results = array('success' => true, 'msg' => OK_ELIMINAR);
             }
@@ -278,32 +235,38 @@ class UsuarioController extends SecurityAdminController
         $request = $this->getRequest();
         $data = $request->getPost()->toArray();
 
-        $form->setInputFilter(new \Usuario\Filter\UsuarioFilter());
+        $form->setInputFilter(new \Orden\Filter\OrdenFilter());
         $form->setData($data);
         if ($form->isValid()) {
             $data = $form->getData();
 
             try {
                 $paramsIn = array(
-                    'email' => $data['email'],
-                    'password' => $data['password'],
-                    'token' => $data['token'],
-                    'red' => $data['red'],
-                    'estado' => $data['estado'],
-                    'imagen' => $data['imagen'],
+                    'usuario_id' => $data['usuario_id'],
+                    'comprobante_tipo' => $data['comprobante_tipo'],
+                    'comprobante_numero' => $data['comprobante_numero'],
+                    'fac_razon_social' => $data['fac_razon_social'],
+                    'documento_numero' => $data['documento_numero'],
+                    'fac_direccion_fiscal' => $data['fac_direccion_fiscal'],
+                    'fac_direccion_entrega_factura' => $data['fac_direccion_entrega_factura'],
                     'nombres' => $data['nombres'],
                     'paterno' => $data['paterno'],
                     'materno' => $data['materno'],
-                    'fecha_nac' => $data['fecha_nac'],
-                    'cod_pais' => $data['cod_pais'],
-                    'cod_depa' => $data['cod_depa'],
-                    'cod_prov' => $data['cod_prov'],
-                    'cod_dist' => $data['cod_dist'],
+                    'ciudadania' => $data['ciudadania'],
+                    //'doc_identidad' => $data['doc_identidad'],
+                    'direccion' => $data['direccion'],
+                    'pais_id' => $data['pais_id'],
+                    'distrito_id' => $data['distrito_id'],
+                    'pago_referencia' => $data['pago_referencia'],
+                    'pago_estado' => $data['pago_estado'],
+                    'pago_tarjeta' => $data['pago_tarjeta'],
+                    'monto' => $data['monto'],
+                    'estado' => $data['estado'],
                     'fecha_creacion' => $data['fecha_creacion'],
                     'fecha_edicion' => $data['fecha_edicion'],
                 );
 
-                $repository = $this->_getUsuarioService()->getRepository();
+                $repository = $this->_getOrdenService()->getRepository();
                 if (!empty($id)) {
                     $repository->save($paramsIn, $id);
                 } else {
@@ -320,7 +283,7 @@ class UsuarioController extends SecurityAdminController
             }
 
             $this->redirect()->toRoute('admin/crud', array(
-                'controller' => 'usuario', 'action' => 'index'
+                'controller' => 'orden', 'action' => 'index'
             ));
         }
     }
@@ -328,7 +291,7 @@ class UsuarioController extends SecurityAdminController
     public function crearCrudForm($action, $id = null)
     {
         $options = array(
-        'controller' => 'usuario',
+        'controller' => 'orden',
             'action' => $action,
         );
         
@@ -336,19 +299,19 @@ class UsuarioController extends SecurityAdminController
             $options['id'] = $id;
         }
         
-        $form = $this->_getUsuarioForm();
+        $form = $this->_getOrdenForm();
         $form->setAttribute('action', $this->url()->fromRoute('admin/crud', $options));
 
         return $form;
     }
     
-    protected function _getUsuarioForm()
+    protected function _getOrdenForm()
     {
-        return $this->getServiceLocator()->get('Usuario\Form\UsuarioForm');
+        return $this->getServiceLocator()->get('Orden\Form\OrdenForm');
     }
 
-    protected function _getUsuarioService()
+    protected function _getOrdenService()
     {
-        return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
+        return $this->getServiceLocator()->get('Orden\Model\Service\OrdenService');
     }
 }

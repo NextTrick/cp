@@ -62,12 +62,12 @@ class OrdenForm extends Form
             ));
         $this->add($fac_razon_social);
         
-        $fac_ruc = new Element\Text('fac_ruc');
-        $fac_ruc->setAttributes(array(
-                'id' => 'fac_ruc',
+        $documento_numero = new Element\Text('documento_numero');
+        $documento_numero->setAttributes(array(
+                'id' => 'documento_numero',
                 'maxlength' => '20',
             ));
-        $this->add($fac_ruc);
+        $this->add($documento_numero);
         
         $fac_direccion_fiscal = new Element\Text('fac_direccion_fiscal');
         $fac_direccion_fiscal->setAttributes(array(
@@ -110,13 +110,6 @@ class OrdenForm extends Form
                 'maxlength' => '20',
             ));
         $this->add($ciudadania);
-        
-        $doc_identidad = new Element\Text('doc_identidad');
-        $doc_identidad->setAttributes(array(
-                'id' => 'doc_identidad',
-                'maxlength' => '20',
-            ));
-        $this->add($doc_identidad);
         
         $direccion = new Element\Text('direccion');
         $direccion->setAttributes(array(

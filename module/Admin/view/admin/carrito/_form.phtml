@@ -1,0 +1,70 @@
+<?php $this->form->prepare(); ?>
+<div class="box">
+    <div class="box-header with-border">
+        <label>Carrito</label>
+    </div>
+    <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-horizontal')); ?>
+    <div class="box-body">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="usuario_id">Usuario_id</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('usuario_id')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('usuario_id')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="pago_referencia">Pago_referencia</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('pago_referencia')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('pago_referencia')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="pago_estado">Pago_estado</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('pago_estado')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('pago_estado')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="pago_tarjeta">Pago_tarjeta</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('pago_tarjeta')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('pago_tarjeta')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="monto_total">Monto_total</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('monto_total')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('monto_total')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="estado">Estado</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('estado')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('estado')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="fecha_creacion">Fecha_creacion</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('fecha_creacion')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('fecha_creacion')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="fecha_edicion">Fecha_edicion</label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('fecha_edicion')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('fecha_edicion')); ?></span>
+            </div>
+        </div>
+        <div class="box-footer">
+            <a class="btn btn-default" href="<?php echo BASE_URL; ?>admin/carrito/index">Regresar</a>
+            <button class="btn btn-success" type="submit">Aceptar</button>
+        </div>
+    </div>
+    <?php echo $this->form()->closeTag(); ?>
+</div>
