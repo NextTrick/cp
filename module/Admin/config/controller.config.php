@@ -10,5 +10,11 @@ return array(
         'Admin\Controller\Usuario' => 'Admin\Controller\UsuarioController',
         'Admin\Controller\Recurso' => 'Admin\Controller\RecursoController',
         'Admin\Controller\Permiso' => 'Admin\Controller\PermisoController',
+        
+        'Admin\Controller\Contenido' => 'Admin\Controller\ContenidoController',
+        'Admin\Controller\Paquete' => 'Admin\Controller\PaqueteController',
+        
+        'Orden\Controller\Orden' => 'Orden\Controller\OrdenController',
+        'Orden\Controller\Carrito' => 'Orden\Controller\CarritoController',
     ),
 );

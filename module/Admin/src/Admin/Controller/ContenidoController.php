@@ -6,7 +6,7 @@
  *
  */
 
-namespace Cms\Controller;
+namespace Admin\Controller;
 
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
@@ -23,7 +23,7 @@ class ContenidoController extends SecurityAdminController
             );
 
             $form = $this->getServiceLocator()->get('Cms\Form\BuscarForm');
-            $form->setAttribute('action', $this->url()->fromRoute('cms/crud', array(
+            $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
                 'controller' => 'contenido', 'action' => 'index'
             )));
 
@@ -152,7 +152,7 @@ class ContenidoController extends SecurityAdminController
                 ));
             }
 
-            $this->redirect()->toRoute('cms/crud', array(
+            $this->redirect()->toRoute('admin/crud', array(
                 'controller' => 'contenido', 'action' => 'index'
             ));
         }
@@ -170,7 +170,7 @@ class ContenidoController extends SecurityAdminController
         }
         
         $form = $this->_getContenidoForm();
-        $form->setAttribute('action', $this->url()->fromRoute('cms/crud', $options));
+        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', $options));
 
         return $form;
     }
@@ -178,7 +178,7 @@ class ContenidoController extends SecurityAdminController
     public function crearBuscarForm()
     {
         $form = $this->_getContenidoForm();
-        $form->setAttribute('action', $this->url()->fromRoute('cms/crud', array(
+        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
         'controller' => 'contenido', 'action' => 'index'
         )));
         $form->setAttribute('method', 'post');

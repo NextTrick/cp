@@ -68,6 +68,12 @@ class Security
                     'U' => array('editar'),
                     'D' => array('eliminar'),
                 ),
+                'Admin\Controller\Contenido' => array(
+                    'R' => array('index'),
+                    'C' => array('crear',),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
             ),
             self::MODULE_PAQUETE => array(
                 'Paquete\Controller\Paquete' => array(

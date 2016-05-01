@@ -7,7 +7,7 @@ $this->layout()->breadcrumb = array(
 
 <div class="box">
     <div class="box-header with-border">
-        <?php echo $this->partial('cms/contenido/_buscar.phtml', array('form' => $form)); ?>
+        <?php echo $this->partial('admin/contenido/_buscar.phtml', array('form' => $form)); ?>
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
@@ -35,8 +35,8 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
                         <td><?php echo $row['fecha_creacion'] ?></td>
                         <td>
-                            <a href="<?php echo BASE_URL ?>admin/cms/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
-                            <a href="<?php echo BASE_URL ?>admin/cms/contenido/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                            <a href="<?php echo BASE_URL ?>admin/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo BASE_URL ?>admin/contenido/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
