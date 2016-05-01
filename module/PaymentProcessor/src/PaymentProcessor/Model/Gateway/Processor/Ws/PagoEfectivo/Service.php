@@ -13,6 +13,8 @@ abstract class Service
     );
     
     protected static $_instance;
+    
+    public $client;
         
     public function __construct($config = null) 
     {
@@ -45,10 +47,9 @@ abstract class Service
         }
 
         try {
-            $soap = new \SoapClient($url, array('ssl' => array('peer_verify' => false, 'verify_peer_name' => false)));
+            $this->client = new \SoapClient($url, array('ssl' => array('peer_verify' => false, 'verify_peer_name' => false)));
 //var_dump($data); echo '<br><br>';
-            $info = $soap->$service($data);
-            var_dump($info); exit;
+            $info = $this->client->$service($data);            
             return $info;
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
@@ -87,5 +88,10 @@ abstract class Service
     public function getOptions() 
     {
         return $this->_options;
+    }
+    
+    public function getClient()
+    {
+        return $this->client;
     }
 }

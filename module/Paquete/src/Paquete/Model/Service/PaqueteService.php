@@ -43,7 +43,7 @@ class PaqueteService
             $criteria = array(
                 'where' => $where,
                 'limit' => $destacado,
-                'order' => array('fecha_creacion DESC'),
+                'order' => array('orden ASC'),
             );
             $arrayDestacado = $this->_repository->findAll($criteria);
             $subTotal = count($arrayDestacado);
@@ -57,7 +57,7 @@ class PaqueteService
             $criteria = array(
                 'where' => $where,
                 'limit' => $cantidad,
-                'order' => array('fecha_creacion DESC'),
+                'order' => array('orden ASC'),
             );
             $arrayNormal = $this->_repository->findAll($criteria);
             
@@ -84,7 +84,7 @@ class PaqueteService
         $criteria = array(
             'where' => $where,
             'limit' => $cantidad,
-            'order' => array('fecha_creacion DESC'),
+            'order' => array('orden ASC'),
         );
         return $this->_repository->findAll($criteria);
     }

@@ -19,7 +19,7 @@ abstract class SecurityWebController extends AbstractActionController
     
     protected function _toUrlMain()
     {
-        return $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'inicio'));
+        return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
     }
 
     protected function _isLogin()
@@ -30,7 +30,7 @@ abstract class SecurityWebController extends AbstractActionController
     protected function _getUsuarioData()
     {
         $usuario = new \stdClass();
-        $usuario->id = 5;
+        $usuario->id = 6;
         $usuario->nombres = null;
         $usuario->email = null;
         
