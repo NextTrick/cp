@@ -625,6 +625,10 @@ section
 		&.inp_right
 			width 200px
 			float right
+		&.disabled-email
+			background #b02a98
+			color lightgray
+			pointer-events none
 	select
 		height 36px
 		line-height 36px
@@ -714,6 +718,8 @@ section
 		.form_control
 			overflow hidden
 			margin-bottom 10px
+			label
+				margin-top 10px
 			.left
 				width 35%
 				text-align left
@@ -728,6 +734,8 @@ section
 			.content_form
 				width 500px
 				margin 30px auto
+				input
+					height 36px
 footer
 	display block
 	img.bg

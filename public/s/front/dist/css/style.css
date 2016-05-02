@@ -828,6 +828,11 @@ section input.inp_right {
   width: 200px;
   float: right;
 }
+section input.disabled-email {
+  background: #b02a98;
+  color: #d3d3d3;
+  pointer-events: none;
+}
 section select {
   height: 36px;
   line-height: 36px;
@@ -941,6 +946,9 @@ section form .form_control {
   overflow: hidden;
   margin-bottom: 10px;
 }
+section form .form_control label {
+  margin-top: 10px;
+}
 section form .form_control .left {
   width: 35%;
   text-align: left;
@@ -957,6 +965,9 @@ section form .form_control .right .button {
 section form.signin_form .content_form {
   width: 500px;
   margin: 30px auto;
+}
+section form.signin_form .content_form input {
+  height: 36px;
 }
 footer {
   display: block;
