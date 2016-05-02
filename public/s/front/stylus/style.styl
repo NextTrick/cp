@@ -390,15 +390,20 @@ section
 			width 100%
 			padding 5px 25px
 			span
+				display inline-block
+				vertical-align middle
 				&.text
 					font-size 14px
-					width 65%
-					display inline-block
+					width 60%
+				&.icon
+					sprite($store)
+					margin-right 10px
 			a.how_asociate_card
 				float right
 				color #ff5800
 				width 30%
 				text-decoration none
+				margin-top 20px
 		.cards_content
 			width 95%
 			margin 0 auto 10px
@@ -693,6 +698,8 @@ section
 				margin-top 5px
 		&.hide
 			display none
+	.form_control
+		margin-bottom 10px
 	form
 		h3
 			color #FEB100
