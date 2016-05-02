@@ -17,7 +17,7 @@ class ContenidoFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $adapter = $serviceLocator->get('dbAdapter');
+        $adapter    = $serviceLocator->get('dbAdapter');
         $repository = new ContenidoRepository($adapter);
 
         return new ContenidoService($repository, $serviceLocator);

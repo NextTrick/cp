@@ -6,18 +6,20 @@
  *
  */
 
-namespace Cms\Filter;
+namespace Admin\Filter;
 use Common\Filter\Zf2InputFilter;
 
 class ContenidoFilter extends Zf2InputFilter
 {
-    protected $_values = array();
+    protected $_values         = array();
+    protected $_serviceLocator = null;
 
-    public function __construct($values = array())
+    public function __construct($serviceLocator, $values = array())
     {
-        $this->_values = $values;
-        
+        $this->_values         = $values;
+        $this->_serviceLocator = $serviceLocator;
         $this->_addElements();
+
     }
 
     protected function _addElements()
@@ -36,8 +38,8 @@ class ContenidoFilter extends Zf2InputFilter
                     'options' => array(
                         'table'     => 'cms_contenido',
                         'field'     => 'codigo',
-                        'adapter'   => $this->aaa,
-                        'message'   => 'Test message',
+                        'adapter'   => $this->_serviceLocator->get('dbAdapter'),
+                        'message'   => 'Este código ya se encuentra registrado',
                     ),
                 ),
             )

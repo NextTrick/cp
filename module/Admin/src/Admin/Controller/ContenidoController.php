@@ -12,6 +12,7 @@ use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
 use \Common\Helpers\String;
 use Cms\Model\Service\ContenidoService;
+use Admin\Filter\ContenidoFilter;
 
 class ContenidoController extends SecurityAdminController
 {
@@ -68,9 +69,9 @@ class ContenidoController extends SecurityAdminController
     
     public function editarAction()
     {
-        $id = $this->params('id', null);
+        $id      = $this->params('id', null);
         $request = $this->getRequest();
-        $form = $this->crearCrudForm(AC_EDITAR, $id);
+        $form    = $this->crearCrudForm(AC_EDITAR, $id);
 
         $criteria = array(
             'where' => array(
@@ -118,9 +119,9 @@ class ContenidoController extends SecurityAdminController
     protected function _prepareSave($action, $form, $id = null)
     {
         $request = $this->getRequest();
-        $data = $request->getPost()->toArray();
+        $data    = $request->getPost()->toArray();
 
-        $form->setInputFilter(new \Cms\Filter\ContenidoFilter());
+
         $form->setData($data);
         if ($form->isValid()) {
             $data = $form->getData();
@@ -168,8 +169,9 @@ class ContenidoController extends SecurityAdminController
         if (!empty($id)) {
             $options['id'] = $id;
         }
-        
+        $filter = new ContenidoFilter($this->getServiceLocator(), array());
         $form = $this->_getContenidoForm();
+        $form->setInputFilter($filter);
         $form->setAttribute('action', $this->url()->fromRoute('admin/crud', $options));
 
         return $form;
