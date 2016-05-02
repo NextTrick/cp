@@ -77,4 +77,6 @@ class ContenidoForm extends Form
     {
         return $this->_sl->get('Cms\Model\Service\ContenidoService');
     }
+
+//$adapter = $this->_sl->get('dbAdapter');
 }

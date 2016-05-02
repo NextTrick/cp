@@ -74,7 +74,7 @@ class LoginController extends SecurityWebController
             $opcion = $this->params('opcion');
             $data = $this->_getLoginGatewayService()->setGateway($opcion)->callback();
             if (!empty($data) && $data['registrado'] === true) {
-                $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'inicio'));
+                $this->redirect()->toRoute('beneficios', array('controller' => 'inicio'));
             } else {
                 $this->redirect()->toRoute('web-completa-tu-registro');
             }

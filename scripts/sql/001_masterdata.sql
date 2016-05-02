@@ -12,19 +12,18 @@ INSERT INTO `admin_rol` (`id`, `nombre`, `fecha_creacion`, `fecha_edicion`, `est
 
 INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `orden`, `icono`, `fecha_creacion`, `fecha_edicion`, `estado`) VALUES
 (3, NULL, 'Seguridad', '', 1, 'fa-dashboard', '2016-03-16 06:13:49', '2016-03-17 23:32:23', 1),
-(4, 3, 'Usuarios', 'admin/usuario', 1, 'fa-circle-o', '2016-03-16 06:16:29', '2016-04-04 22:29:09', 1),
+(4, 3, 'Usuarios', 'admin/usuarioadmin', 6, 'fa-circle-o', '2016-03-16 06:16:29', '2016-05-01 08:20:24', 1),
 (5, 3, 'Recurso', 'admin/recurso', 2, 'fa-circle-o', '2016-03-17 05:00:59', '2016-03-17 22:52:37', 1),
 (6, 3, 'Rol', 'admin/rol', 3, 'fa-circle-o', '2016-03-17 05:01:34', '2016-03-17 23:37:24', 1),
 (7, 3, 'Permiso', 'admin/permiso', 4, 'fa-circle-o', '2016-03-17 05:02:22', '2016-03-19 08:15:17', 1),
 (8, NULL, 'Promociones', '', 2, 'fa fa-th', '2016-04-11 20:48:28', '2016-04-15 22:17:47', 1),
-(9, 8, 'Paquetes', 'admin/paquete/paquete', 2, 'fa-circle-o', '2016-04-11 20:49:31', '2016-04-24 22:28:55', 1),
+(9, 8, 'Paquetes', 'admin/paquete', 3, 'fa-circle-o', '2016-04-11 20:49:31', '2016-05-01 07:40:50', 1),
 (10, NULL, 'Reportes', '', 3, 'fa fa-table', '2016-04-15 22:18:37', '2016-04-15 22:22:36', 1),
-(11, 10, 'Usuarios', 'admin/usuario/usuario', 8, 'fa-circle-o', '2016-04-15 22:18:54', '2016-04-24 22:29:36', 1),
-(12, 10, 'Pagos', 'admin/orden/orden', 9, 'fa-circle-o', '2016-04-15 22:19:11', '2016-04-24 22:29:54', 1),
-(13, 10, 'Operaciones', 'admin/orden/orden', 7, 'fa-circle-o', '2016-04-15 22:20:57', '2016-04-24 22:29:24', 1),
+(11, 10, 'Usuarios', 'admin/usuario', 10, 'fa-circle-o', '2016-04-15 22:18:54', '2016-05-01 07:54:29', 1),
+(12, 10, 'Pagos', 'admin/orden', 12, 'fa-circle-o', '2016-04-15 22:19:11', '2016-05-01 08:54:11', 1),
+(13, 10, 'Operaciones', 'admin/orden', 11, 'fa-circle-o', '2016-04-15 22:20:57', '2016-05-01 08:53:40', 1),
 (14, NULL, 'CMS', '', 4, 'fa fa-edit', '2016-04-15 22:21:23', '2016-04-15 22:23:08', 1),
-(15, 14, 'Contenido', 'admin/cms/contenido', 3, 'fa-circle-o', '2016-04-15 22:21:36', '2016-04-24 22:29:11', 1);
-
+(15, 14, 'Contenido', 'admin/contenido', 4, 'fa-circle-o', '2016-04-15 22:21:36', '2016-05-01 07:26:02', 1);
 
 --
 -- Volcado de datos para la tabla `admin_permiso`
@@ -2132,17 +2131,13 @@ INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `emai
 (5, '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 0, NULL, 'Juan Carlos', 'test', 'test', 1, '2324232', '2015-03-02', 'PE', '23', NULL, '08', NULL, NULL, 'd27c393c942947426e370624076ec81c201b3b480a358895870e8e23ce4a06a5');
 
 
-INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `estado_truefi`, `numero`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `fecha_creacion`, `fecha_edicion`) VALUES
-(1, 5, NULL, '{54A0B670-9C39-464D-ABE2-79B62240043A}', 2, '000-123456-3', NULL, NULL, NULL, NULL, NULL, '2016-04-18 06:14:24');
-
-
 --
 -- Volcado de datos para la tabla `paquete_paquete`
 --
 
-INSERT INTO `paquete_paquete` (`id`, `referencia`, `titulo1`, `titulo2`, `tipo`, `imagen`, `importe_minimo`, `importe_emoney`, `importe_bonus`, `tickets`, `legal`, `activo`, `destacado`, `fecha_creacion`, `fecha_edicion`) VALUES
-(6, '583f0c9af40e350c9837e8f30a73b5c9', '¡COLECCIONA DIVERSIÓN!', '¡Por recargas de S/ 30 llévate 30 en saldo y un VASO 3D!', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160414.png', 1, 1, 0, 1, 'saassa', 1, 1, '2016-04-14 23:32:53', NULL),
-(10, '28e9efd8067bb08f9a5be96d5deea073', 'Promoción 1. Ver legal', 'Recarga S/.100, obten S/.50 soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160415.png', 2, 2, 0, 2, NULL, 1, 0, '2016-04-18 06:45:01', NULL),
-(11, '2f61a7cd1e0c166edcdea52b78e69d44', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160416.png', 3, 3, 0, 3, NULL, 1, 0, '2016-04-18 06:45:01', NULL),
-(12, '2f61a7cd1e0c166edcdea52b78e69d45', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160417.png', 4, 1, 0, 2, NULL, 1, 1, '2016-04-18 06:45:01', NULL),
-(13, '2f61a7cd1e0c166edcdea52b78e69d46', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160418.png', 1, 2, 0, 2, NULL, 1, 0, '2016-04-18 06:45:01', NULL);
+INSERT INTO `paquete_paquete` (`id`, `referencia`, `titulo1`, `titulo2`, `tipo`, `imagen`, `emoney`, `bonus`, `promotionbonus`, `etickets`, `gamepoints`, `legal`, `activo`, `destacado`, `orden`, `fecha_creacion`, `fecha_edicion`) VALUES
+(6, '583f0c9af40e350c9837e8f30a73b5c9', '¡COLECCIONA DIVERSIÓN!', '¡Por recargas de S/ 30 llévate 30 en saldo y un VASO 3D!', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160414.png', 1, 1, 0, NULL, 0, 'saassa', 1, 1, 1, '2016-04-14 23:32:53', NULL),
+(10, '28e9efd8067bb08f9a5be96d5deea073', 'Promoción 1. Ver legal', 'Recarga S/.100, obten S/.50 soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160415.png', 2, 2, 0, NULL, 0, NULL, 1, 0, 2, '2016-04-18 06:45:01', NULL),
+(11, '2f61a7cd1e0c166edcdea52b78e69d44', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160416.png', 3, 3, 0, NULL, 0, NULL, 1, 0, 3, '2016-04-18 06:45:01', NULL),
+(12, '2f61a7cd1e0c166edcdea52b78e69d45', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160417.png', 4, 1, 0, NULL, 0, NULL, 1, 1, 4, '2016-04-18 06:45:01', NULL),
+(13, '2f61a7cd1e0c166edcdea52b78e69d46', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160418.png', 1, 2, 0, NULL, 0, NULL, 1, 0, 5, '2016-04-18 06:45:01', NULL);

@@ -1,0 +1,9 @@
+<?php $this->layout()->title = array('Contenido', 'Crear') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Contenido'),
+    array('url' => null, 'name' => 'Crear'),
+);
+?>
+
+<?php echo $this->partial('admin/contenido/_form.phtml', array('form' => $form, 'nameButton' => 'Crear')); ?>
