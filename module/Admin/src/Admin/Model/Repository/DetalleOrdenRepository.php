@@ -12,7 +12,7 @@ use Zend\Db\Adapter\Adapter;
 use Zend\Db\Sql\Sql;
 use Zend\Db\Sql\Select;
 
-class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
+class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableGateway
 {
     protected $table = 'orden_detalle_orden';
     protected $cache;
@@ -29,7 +29,7 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
             $sql= new Sql($this->getAdapter());
 
             $selectInterno = $sql->select();
-            $selectInterno->from(array('od'=> $this->table));
+            $selectInterno->from(array('od'=> 'orden_detalle_orden'));
             $selectInterno->columns(array('id', 'monto', 'fecha_creacion', 'emoney', 'bonus', 'promotionbonus', 'etickets', 'gamepoints'
             ));
             $selectInterno->join(array('p' => 'paquete_paquete'), 'p.id = od.paquete_id',
@@ -41,8 +41,10 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
             $selectInterno->join(array('t' => 'tarjeta_tarjeta'), 't.id = od.tarjeta_id',
                 array('numero'), 'inner');
 
-            $select = $sql->select();
-            $select->from(array('r' => $selectInterno));
+            $select1 = $sql->select();
+            $select1->from(array('r' => $selectInterno));
+            $select1->columns(array('pago_estado', 'id', 'monto', 'fecha_creacion', 'emoney', 'bonus',
+                'promotionbonus', 'etickets', 'gamepoints', 'titulo1', 'email', 'numero'));
 
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
@@ -65,18 +67,18 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
                 }
             }
 
-            $select->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);
+            $select1->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);
 
             if (!empty($this->crOrder)) {
-                $select->order($this->crOrder);
+                $select1->order($this->crOrder);
             }
 
             if (!empty($this->crLimit)) {
-                $select->limit($this->crLimit);
+                $select1->limit($this->crLimit);
             }
             //echo $select->getSqlString($this->getAdapter()->getPlatform());exit;
 
-            $statement = $sql->prepareStatementForSqlObject($select);
+            $statement = $sql->prepareStatementForSqlObject($select1);
             $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();
 
             return $rows;
