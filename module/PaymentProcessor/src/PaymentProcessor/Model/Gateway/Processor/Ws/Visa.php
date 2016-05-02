@@ -156,7 +156,7 @@ class Visa
         return $html;
     }
     
-    public function retrieveTicket($data)
+    public function retrieveEticket($data)
     {
         $this->wsdl = __DIR__ . '/Visa/Wsdl/WSConsultaEticketQAS.wsdl';
         if ($this->environment == 'production') {

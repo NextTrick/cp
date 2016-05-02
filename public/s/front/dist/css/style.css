@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'icomoon';
+  src: url("../font/icomoon.eot?fz5o96");
+  src: url("../font/icomoon.eot?fz5o96#iefix") format('embedded-opentype'), url("../font/icomoon.ttf?fz5o96") format('truetype'), url("../font/icomoon.woff?fz5o96") format('woff'), url("../font/icomoon.svg?fz5o96#icomoon") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   background: url("../images/bg.jpg") repeat;
 }
@@ -27,14 +34,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -102px -135px;
+  background-position: -122px -101px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -114px -97px;
+  background-position: -96px -101px;
   width: 26px;
   height: 26px;
 }
@@ -51,59 +58,66 @@ header nav ul li {
 }
 header nav ul li a {
   text-decoration: none;
-  color: #cb91c1;
+  color: #972482;
   font-size: 10px;
+  font-weight: bold;
   position: relative;
 }
 header nav ul li a .icon {
   height: 54px;
+}
+header nav ul li a .icon i {
+  font-size: 36px;
 }
 header nav ul li a .icon span {
   display: block;
   margin: 0 auto 5px;
 }
 header nav ul li a .icon span.icon_local {
-  background-image: url("../images/sprite.png");
-  background-position: -69px -135px;
-  width: 33px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_offers {
-  background-image: url("../images/sprite.png");
-  background-position: -158px -40px;
-  width: 40px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_atraction {
-  background-image: url("../images/sprite.png");
-  background-position: 0px -135px;
-  width: 32px;
-  height: 49px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_sale {
-  background-image: url("../images/sprite.png");
-  background-position: -32px -135px;
-  width: 37px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_card {
-  background-image: url("../images/sprite.png");
-  background-position: -109px 0px;
-  width: 49px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_gold {
-  background-image: url("../images/sprite.png");
-  background-position: -158px -80px;
-  width: 40px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li.logo {
-  width: 230px;
-  margin-top: -10px;
+  width: 200px;
+  margin: -10px 20px 0;
+}
+header nav ul li.logo img {
+  width: 200px;
 }
 .right_options {
-  position: absolute;
+  position: fixed;
   right: 20px;
   top: 190px;
   width: 90px;
@@ -128,24 +142,29 @@ header nav ul li.logo {
 .right_options ul li a span.icon {
   display: block;
   margin: 0 auto 5px;
+  font-size: 36px;
+  color: #646473;
+}
+.right_options ul li a span.icon:hover {
+  color: #972482;
 }
 .right_options ul li a span.icon_gold {
-  background-image: url("../images/sprite.png");
-  background-position: -158px 0px;
-  width: 40px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 .right_options ul li a span.icon_card {
-  background-image: url("../images/sprite.png");
-  background-position: -109px -40px;
-  width: 49px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 .right_options ul li a span.icon_birthday {
-  background-image: url("../images/sprite.png");
-  background-position: 0px -97px;
-  width: 44px;
-  height: 38px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 section {
   padding-top: 120px;
@@ -158,7 +177,7 @@ section.app_content {
 }
 section.app_content .menu {
   background: #ececec;
-  width: 295px;
+  display: inline-block;
   color: #000;
   margin: 0 auto;
   position: relative;
@@ -176,18 +195,75 @@ section.app_content .menu ul li {
 }
 section.app_content .menu ul li.first {
   border-right: 1px solid #d3d3d3;
+  margin-right: -5px;
+  margin-left: -1px;
 }
 section.app_content .menu ul li.last {
   border-left: 1px solid #d3d3d3;
+  margin-left: -5px;
+  margin-right: -1px;
 }
 section.app_content .menu ul li.active {
   background: #f7a100;
+}
+section.app_content .menu ul li a {
+  text-decoration: none;
+  color: #000;
+}
+section.app_content .menu:before {
+  content: '';
+  color: #ececec;
+  width: 0;
+  height: 0;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-right: 14px solid #ececec;
+  position: absolute;
+  left: -14px;
+  top: 0;
+}
+section.app_content .menu:after {
+  content: '';
+  color: #ececec;
+  width: 0;
+  height: 0;
+  border-top: 14px solid transparent;
+  border-bottom: 14px solid transparent;
+  border-left: 14px solid #ececec;
+  position: absolute;
+  right: -14px;
+  top: 0;
+}
+section.app_content .menu.left_active:before {
+  color: #f7a100;
+  border-right: 14px solid #f7a100;
+}
+section.app_content .menu.right_active:after {
+  color: #f7a100;
+  border-left: 14px solid #f7a100;
+}
+section h2 {
+  font-size: 32px;
 }
 section h2 span {
   color: #ffb000;
 }
 section .welcome_box {
   text-align: center;
+}
+section .welcome_box p.subtitle {
+  font-size: 20px;
+  line-height: 32px;
+}
+section .welcome_box p.medium {
+  font-size: 20px;
+}
+section .welcome_box p.medium span {
+  color: #ffb000;
+  font-size: 22px;
+}
+section .welcome_box p.small {
+  font-size: 18px;
 }
 section .app_box {
   padding: 40px 0;
@@ -203,16 +279,39 @@ section .yellow_box {
   color: #470446;
   font-size: 24px;
   font-weight: bold;
-  border-radius: 20px;
   margin: 0 auto;
   margin-bottom: -20px;
   z-index: 999;
   position: relative;
-  margin-top: 60px;
+  margin-top: 20px;
+}
+section .yellow_box:before {
+  content: '';
+  color: #ffb000;
+  width: 0;
+  height: 0;
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  border-right: 21px solid #ffb000;
+  position: absolute;
+  left: -21px;
+  top: 0;
+}
+section .yellow_box:after {
+  content: '';
+  color: #ffb000;
+  width: 0;
+  height: 0;
+  border-top: 21px solid transparent;
+  border-bottom: 21px solid transparent;
+  border-left: 21px solid #ffb000;
+  position: absolute;
+  right: -21px;
+  top: 0;
 }
 section .btn {
   border: 0;
-  padding: 10px;
+  height: 42px;
   box-sizing: border-box;
   border-radius: 10px;
   color: #fff;
@@ -220,8 +319,28 @@ section .btn {
 section .btn.btn_fb {
   background: #3b5998;
 }
+section .btn.btn_fb span {
+  display: inline-block;
+  vertical-align: middle;
+}
+section .btn.btn_fb span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -32px -101px;
+  width: 32px;
+  height: 32px;
+}
 section .btn.btn_tw {
   background: #1b95e0;
+}
+section .btn.btn_tw span {
+  display: inline-block;
+  vertical-align: middle;
+}
+section .btn.btn_tw span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -101px;
+  width: 32px;
+  height: 32px;
 }
 section .btn.btn_orange {
   background: #ff5800;
@@ -242,7 +361,7 @@ section .purple_box p.yellow_text {
   color: #f7a100;
 }
 section .purple_box p.small_text {
-  font-size: 18px;
+  font-size: 20px;
 }
 section .purple_box p.term {
   font-size: 12px;
@@ -264,8 +383,13 @@ section .purple_box .content {
   overflow: hidden;
   padding: 20px 20px 0;
 }
+section .purple_box .content .left,
+section .purple_box .content .right {
+  padding: 0 40px 0;
+}
 section .purple_box .left {
   width: 45%;
+  box-sizing: border-box;
   text-align: center;
 }
 section .purple_box .left button {
@@ -274,6 +398,7 @@ section .purple_box .left button {
 }
 section .purple_box .right {
   width: 45%;
+  box-sizing: border-box;
   text-align: center;
 }
 section .purple_box .right button {
@@ -284,6 +409,10 @@ section .purple_box .options {
 }
 section .purple_box .options .col_3 {
   width: 33%;
+}
+section .purple_box .options .col_3.left,
+section .purple_box .options .col_3.right {
+  padding: 0;
 }
 section .purple_box .options .col_3 .circle {
   width: 150px;
@@ -315,7 +444,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -82px -97px;
+  background-position: -64px -101px;
   width: 32px;
   height: 26px;
 }
@@ -343,6 +472,15 @@ section .purple_box .benefits_offers .offers_box_two .right {
 section .purple_box .benefits_offers .offers_box_two .right p {
   color: #000;
 }
+section .purple_box .benefits_offers .offers_box_two .right p.breadcrumb {
+  text-align: left;
+  color: #f00;
+  font-size: 16px;
+}
+section .purple_box .benefits_offers .offers_box_two .right p.breadcrumb span {
+  color: #aaa;
+  font-size: 14px;
+}
 section .purple_box .benefits_offers .offers_box_two .right button {
   width: 300px;
 }
@@ -357,6 +495,24 @@ section .purple_box .benefits_offers .offers_box_three .col_3 .box_white {
   background: #fff;
   border-radius: 15px;
   color: #000;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p {
+  padding: 8px;
+  text-align: left;
+  font-size: 18px;
+  margin: 0;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p.breadcrumb {
+  text-align: left;
+  color: #f00;
+  font-size: 16px;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p.breadcrumb span {
+  color: #aaa;
+  font-size: 14px;
+}
+section .purple_box .benefits_offers .offers_box_three .col_3 button {
+  margin-top: 10px;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3:first-child {
   margin-right: 2%;
@@ -373,16 +529,27 @@ section .purple_box .info_box {
   width: 100%;
   padding: 5px 25px;
 }
+section .purple_box .info_box span {
+  display: inline-block;
+  vertical-align: middle;
+}
 section .purple_box .info_box span.text {
   font-size: 14px;
-  width: 65%;
-  display: inline-block;
+  width: 60%;
+}
+section .purple_box .info_box span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -54px 0px;
+  width: 52px;
+  height: 52px;
+  margin-right: 10px;
 }
 section .purple_box .info_box a.how_asociate_card {
   float: right;
   color: #ff5800;
   width: 30%;
   text-decoration: none;
+  margin-top: 20px;
 }
 section .purple_box .cards_content {
   width: 95%;
@@ -397,6 +564,10 @@ section .purple_box .cards_content .col_3 {
   background: url("../images/card_empty.png");
   position: relative;
   vertical-align: top;
+}
+section .purple_box .cards_content .col_3 input,
+section .purple_box .cards_content .col_3 button {
+  height: 36px;
 }
 section .purple_box .cards_content .col_3.add_card {
   cursor: pointer;
@@ -474,7 +645,7 @@ section .purple_box .cards_content .col_3 .success_box {
 }
 section .purple_box .cards_content .col_3 .success_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -54px 0px;
+  background-position: 0px -56px;
   width: 55px;
   height: 45px;
   display: block;
@@ -488,7 +659,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: 0px -56px;
+  background-position: -106px 0px;
   width: 52px;
   height: 41px;
   display: block;
@@ -532,7 +703,7 @@ section .purple_box .cards_content .col_3.my_card span.cp_logo {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon {
   background-image: url("../images/sprite.png");
-  background-position: -151px -135px;
+  background-position: -24px -133px;
   width: 23px;
   height: 23px;
   display: inline-block;
@@ -543,7 +714,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -158px -120px;
+  background-position: -106px -82px;
   width: 18px;
   height: 14px;
 }
@@ -647,8 +818,8 @@ section .purple_box .cards_content .col_3.my_card .bottom_card a.recharge {
 section input {
   width: 100%;
   border: 0;
-  margin-bottom: 8px;
-  height: 36px;
+  margin-bottom: 0px;
+  height: 42px;
   border-radius: 10px;
   padding: 0px 10px;
   text-align: center;
@@ -656,6 +827,11 @@ section input {
 section input.inp_right {
   width: 200px;
   float: right;
+}
+section input.disabled-email {
+  background: #b02a98;
+  color: #d3d3d3;
+  pointer-events: none;
 }
 section select {
   height: 36px;
@@ -706,6 +882,16 @@ section .login_link a {
   text-decoration: none;
   font-size: 18px;
 }
+section .login_link a span {
+  display: inline-block;
+  color: #ff5800;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #ff5800;
+  margin-left: 10px;
+}
 section .left {
   float: left;
 }
@@ -736,7 +922,7 @@ section .error_message span {
 }
 section .error_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -127px -135px;
+  background-position: 0px -133px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -748,16 +934,29 @@ section .error_message span.text {
 section .error_message.hide {
   display: none;
 }
+section .form_control {
+  margin-bottom: 10px;
+}
+section form h3 {
+  color: #feb100;
+  margin: 30px 0;
+  font-size: 22px;
+}
 section form .form_control {
   overflow: hidden;
   margin-bottom: 10px;
 }
+section form .form_control label {
+  margin-top: 10px;
+}
 section form .form_control .left {
   width: 35%;
   text-align: left;
+  padding: 0;
 }
 section form .form_control .right {
   width: 63%;
+  padding: 0;
 }
 section form .form_control .right .button {
   width: 100%;
@@ -765,7 +964,10 @@ section form .form_control .right .button {
 }
 section form.signin_form .content_form {
   width: 500px;
-  margin: 0 auto;
+  margin: 30px auto;
+}
+section form.signin_form .content_form input {
+  height: 36px;
 }
 footer {
   display: block;
@@ -850,26 +1052,119 @@ footer ul li a {
 }
 #how_asociate_card {
   width: 500px;
-  height: 800px;
+  height: 685px;
   background: #eee;
   border-radius: 10px;
 }
 #how_asociate_card .modal_content {
+  text-align: center;
   margin-top: 20px;
+}
+#how_asociate_card .modal_content .icon_logo {
+  position: absolute;
+  top: -28px;
+  left: 46%;
 }
 #how_asociate_card .modal_content h3 {
   color: #000;
+  font-weight: normal;
+  font-size: 24px;
 }
 #how_asociate_card .modal_content p {
-  color: #000;
+  color: #808080;
+  text-align: left;
+}
+#how_asociate_card .modal_content img {
+  margin: 0 auto;
 }
 ul.parsley-errors-list {
   text-align: left;
   padding: 0;
-  margin: -1px 0 5px;
+  margin: 2px 0 5px;
   font-size: 12px;
 }
 ul.parsley-errors-list li {
   list-style: none;
   color: #f00;
+}
+i[class^="icon-"],
+i[class*=" icon-"] {
+/* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  display: inline-block;
+/* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-email5:before {
+  content: "\e909";
+}
+.icon-telefono:before {
+  content: "\e908";
+}
+.icon-gorrita:before {
+  content: "\e907";
+}
+.icon-consola:before {
+  content: "\e900";
+}
+.icon-pastel:before {
+  content: "\e906";
+}
+.icon-gold:before {
+  content: "\e901";
+}
+.icon-conexxion:before {
+  content: "\e902";
+}
+.icon-corporativa:before {
+  content: "\e903";
+}
+.icon-promociones:before {
+  content: "\e904";
+}
+.icon-locales:before {
+  content: "\e905";
+}
+.icon-close:before {
+  content: "\e600";
+}
+.icon-share-android:before {
+  content: "\e605";
+}
+.icon-arrow_down:before {
+  content: "\e607";
+}
+.icon-arrow_up:before {
+  content: "\e608";
+}
+.icon-arrow_left:before {
+  content: "\e60a";
+}
+.icon-arrow_right:before {
+  content: "\e60b";
+}
+.icon-menu:before {
+  content: "\e61f";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-facebook:before {
+  content: "\ea8c";
+}
+.icon-instagram:before {
+  content: "\ea90";
+}
+.icon-twitter:before {
+  content: "\ea91";
 }

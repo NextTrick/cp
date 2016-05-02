@@ -29,8 +29,8 @@
                                         'placeholder' => 'ejemplo@micorreo.com',
                                         'data-parsley-required' => 'data-parsley-required',
                                         'data-parsley-required-message' => 'Dato obligatorio',
-                                        'data-parsley-pattern' => '/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/i',
-                                        'data-parsley-pattern-message' => 'Ingrese un correo válido',
+                                        'data-parsley-type' => 'email',
+                                        'data-parsley-type' => 'Ingrese un correo válido',
                                         'class' => 'email',
                             )));
                             ?>
@@ -71,7 +71,7 @@
                 <ul class="parsley-errors-list filled">
                     <li id="error_recuperar_password" class="parsley-required"></li>
                 </ul>
-                <a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Recuperar contraseña</a>
+                <button id="btn_recovery" class="btn btn_orange">Recuperar contraseña</button>
             </div>
         </div>
         <div id="modal_recovery_response" class="modal_box">
@@ -86,13 +86,18 @@
             <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
                 <h3>Nueva contraseña</h3>
                 <p>Ingresa una nueva contraseña</p>
-                <input id="password_new" name="password_new" type="text" placeholder="Ingresa tu nueva contraseña"/>
-                <input id="password_repeat" name="password_repeat" type="text" placeholder="Repite tu nueva contraseña"/>
+                <div class="form_control">
+                    <input id="password_new" name="password_new" type="text" placeholder="Ingresa tu nueva contraseña"/>
+                </div>
+                <div class="form_control">
+                    <input id="password_repeat" name="password_repeat" type="text" placeholder="Repite tu nueva contraseña"/>
+                </div>
+                
                 <input id="codigo_recuperacion" name="codigo_recuperacion" type="hidden" value="<?php echo isset($codigoRecuperacion) ? $codigoRecuperacion : ''; ?>"/>
                 <ul class="parsley-errors-list filled">
                     <li id="error_new_password" class="parsley-required"></li>
                 </ul>
-                <a id="btn_change_password" href="#modal_new_password_response" name="modal" class="btn btn_orange">Cambiar contraseña</a>
+                <button id="btn_change_password" class="btn btn_orange">Cambiar contraseña</button>
             </div>
         </div>
         <div id="modal_new_password_response" class="modal_box">
