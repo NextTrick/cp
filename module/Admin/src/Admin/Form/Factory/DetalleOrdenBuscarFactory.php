@@ -6,17 +6,17 @@
  * Time: 10:12 PM
  */
 
-namespace Orden\Form\Factory;
+namespace Admin\Form\Factory;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
-use Orden\Form\CarritoBuscarForm ;
+use Admin\Form\DetalleOrdenBuscarForm ;
 
 
-class CarritoBuscarFactory implements FactoryInterface
+class DetalleOrdenBuscarFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new CarritoBuscarForm($serviceLocator);
+        return new DetalleOrdenBuscarForm($serviceLocator);
     }
 }

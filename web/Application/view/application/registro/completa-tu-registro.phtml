@@ -6,28 +6,30 @@
             <div class="purple_box">
                 <div class="error_message hide"><span class="icon"></span><span class="text">Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde</span></div>
                 <?php echo $this->form()->openTag($this->form->setAttribute('class', 'signin_form')); ?>
+                <?php  $this->formElementerrors()->setMessageOpenFormat('<ul class="parsley-errors-list filled"><li class="parsley-required">')->setMessageCloseString('</li></ul>'); ?>
                     <h3>Tus datos de cuenta</h3>
                     <div class="content_form">
                         <div class="form_control">
                             <label class="left" for="email">Correo</label>
+                            <?php $disabledCss = ($disabledEmail) ? 'disabled-email' : ''; ?>
                             <?php echo $this->formElement($this->form->get('email')->setAttributes(array(
-                                'class' => 'right',
+                                'class' => 'right ' . $disabledCss,
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('email')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('email')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left" for="password">Contraseña</label>
                             <?php echo $this->formElement($this->form->get('password')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('password')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('password')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left" for="password_repeat">Repetir contraseña</label>
                             <?php echo $this->formElement($this->form->get('password_repeat')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('password_repeat')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('password_repeat')); ?>
                         </div>
                     </div>
                     <hr/>
@@ -38,21 +40,21 @@
                             <?php echo $this->formElement($this->form->get('nombres')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('nombres')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('nombres')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left" for="paterno">Apellido paterno</label>
                             <?php echo $this->formElement($this->form->get('paterno')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('paterno')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('paterno')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left" for="materno">Apellido materno</label>
                             <?php echo $this->formElement($this->form->get('materno')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('materno')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('materno')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left" for="di_valor">Documento de identidad</label>
@@ -65,7 +67,7 @@
                                     'class' => '',
                                     'placeholder' => 'Nro de documento',
                                 ))) ?>
-                                <span class="error"><?php echo $this->formElementerrors($form->get('di_valor')); ?></span>
+                                <?php echo $this->formElementerrors($form->get('di_valor')); ?>
                             </div>
                         </div>
                         <div class="form_control">
@@ -73,21 +75,21 @@
                             <?php echo $this->formElement($this->form->get('cod_pais')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('cod_pais')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('cod_pais')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left" for="cod_depa">Departamento</label>
                             <?php echo $this->formElement($this->form->get('cod_depa')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('cod_depa')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('cod_depa')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left" for="cod_dist">Distrito</label>
                             <?php echo $this->formElement($this->form->get('cod_dist')->setAttributes(array(
                                 'class' => 'right',
                             ))) ?>
-                            <span class="error"><?php echo $this->formElementerrors($form->get('cod_dist')); ?></span>
+                            <?php echo $this->formElementerrors($form->get('cod_dist')); ?>
                         </div>
                         <div class="form_control">
                             <label class="left">Fecha de nacimiento</label>
@@ -101,6 +103,7 @@
                                 <?php echo $this->formElement($this->form->get('anio')->setAttributes(array(
                                     'class' => '',
                                 ))) ?>
+                                <?php echo $this->formElementerrors($form->get('dia')); ?>
                             </div>
                         </div>
                         <div class="form_control">
@@ -112,15 +115,14 @@
                     </div>
                 <?php echo $this->form()->closeTag(); ?>
                 <hr/>
-                <div class="login_link"><a href="login.html">Ya tengo una cuenta en Coney Park<span></span></a></div>
+                <div class="login_link"><a href="<?php echo BASE_URL ?>login">Ya tengo una cuenta en Coney Park<span></span></a></div>
             </div>
         </div>
-        <div id="modal_recovery_password" class="modal_box">
-            <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
-                <h3>Recuperar contraseña</h3>
-                <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
-                <input type="text" placeholder="Correo electrónico"/><a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Recuperar contraseña</a>
-            </div>
+        <div id="modal_response_signin" class="modal_box" data-open="<?php echo $openPopapConfRegistro; ?>">
+          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <?php echo $mensajeRegistro; ?>
+            <a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Aceptar</a>
+          </div>
         </div>
         <div id="mask"></div>
     </div>

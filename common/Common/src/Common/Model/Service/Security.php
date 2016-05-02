@@ -95,6 +95,12 @@ class Security
                     'U' => array('editar'),
                     'D' => array('eliminar'),
                 ),
+                'Admin\Controller\Ordendetalle' => array(
+                    'R' => array('index','exportar-excel'),
+                    'C' => array('crear',),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
             ),
         );
     }

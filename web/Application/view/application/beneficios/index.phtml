@@ -3,9 +3,9 @@
         <div class="app_box">
             <div class="menu">
                 <ul>
-                    <li class="first active">Beneficios</li>
-                    <li>Mis tarjetas</li>
-                    <li class="last">Recargas</li>
+                    <li class="first active"><a href="<?php echo BASE_URL; ?>beneficios">Beneficios</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>mis-tarjetas">Mis tarjetas</a></li>
+                    <li class="last"><a href="<?php echo BASE_URL; ?>recargas">Recargas</a></li>
                 </ul>
             </div>
             <div class="purple_box">
@@ -30,7 +30,7 @@
                         <p class="p_16">Asocia tus tarjetas, haciendo clic en el siguiente botón: </p>
                     </div>
                     <div class="right">
-                        <button class="btn btn_orange"> <span class="text">Asociar tarjetas</span><span class="icon"></span></button>
+                        <button id="mis_tarjetas" class="btn btn_orange"> <span class="text">Asociar tarjetas</span><span class="icon"></span></button>
                     </div>
                 </div>
                 <?php echo $this->sectionGrillaPromociones(GRID_BENEFICIOS_PROMOCIONES, 1, 'beneficios');  ?>
@@ -40,3 +40,8 @@
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#mis_tarjetas').click(function(){location.href = '<?php BASE_URL ?>mis-tarjetas';});
+    });
+</script>

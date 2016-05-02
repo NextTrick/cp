@@ -63,4 +63,17 @@ class Util
         }
         return $data;
     }
+    
+    public static function checkDate($month, $day, $year)
+    {
+        if (is_numeric($month) && is_numeric($day) && !(is_numeric($year))) {
+            return false;
+        }
+        
+        if (checkdate((int)$month, (int)$day, (int)$year)) {
+            return true;
+        }
+        
+        return false;
+    }
 }

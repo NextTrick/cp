@@ -64,16 +64,16 @@ return array(
                     ),
                 ),
             ),
-            'web-notificar' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route'    => '/notificar-registro[/]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Registro',
-                        'action'     => 'notificar',
-                    ),
-                ),
-            ),
+//            'web-notificar' => array(
+//                'type' => 'Segment',
+//                'options' => array(
+//                    'route'    => '/notificar-registro[/]',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Registro',
+//                        'action'     => 'notificar',
+//                    ),
+//                ),
+//            ),
             'web-confirmar' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -142,6 +142,16 @@ return array(
                     'route'    => '/beneficios[/]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Beneficios',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-recargas' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/recargas[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Recargas',
                         'action'     => 'index',
                     ),
                 ),

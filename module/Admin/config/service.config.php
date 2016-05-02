@@ -8,6 +8,7 @@ return array(
         'Admin\Model\Service\RolService' => 'Admin\Model\Service\Factory\RolFactory',
         'Admin\Model\Service\RecursoService' => 'Admin\Model\Service\Factory\RecursoFactory',
         'Admin\Model\Service\PermisoService' => 'Admin\Model\Service\Factory\PermisoFactory',
+        'Admin\Model\Service\DetalleOrdenService' => 'Admin\Model\Service\Factory\DetalleOrdenFactory',
         
         //forms
         'Admin\Form\LoginForm' => 'Admin\Form\Factory\LoginFactory',
@@ -15,6 +16,7 @@ return array(
         'Admin\Form\RolForm' => 'Admin\Form\Factory\RolFactory',
         'Admin\Form\RecursoForm' => 'Admin\Form\Factory\RecursoFactory',
         'Admin\Form\PermisoForm' => 'Admin\Form\Factory\PermisoFactory',
+        'Admin\Form\DetalleOrdenBuscarForm' => 'Admin\Form\Factory\DetalleOrdenBuscarFactory',
     ),
     'invokables' => array(
     ),

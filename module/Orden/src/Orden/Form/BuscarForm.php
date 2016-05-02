@@ -58,12 +58,12 @@ class BuscarForm extends Form
         $this->add($cmbTipoDoc);
 
         $filtroEstado = $this->getOrdenService()->getPagoEstados();
-        $cmbEstado    = new Element\Select('cmbEstado');
-        $cmbEstado->setAttributes(array('id' => 'cmbPagoEstado'));
-        $cmbEstado->setValueOptions($filtroEstado);
-        $cmbEstado->setEmptyOption('- Seleccione -');
-        $cmbEstado->setDisableInArrayValidator(true);
-        $this->add($cmbEstado);
+        $cmbPagoEstado    = new Element\Select('cmbPagoEstado');
+        $cmbPagoEstado->setAttributes(array('id' => 'cmbPagoEstado'));
+        $cmbPagoEstado->setValueOptions($filtroEstado);
+        $cmbPagoEstado->setEmptyOption('- Seleccione -');
+        $cmbPagoEstado->setDisableInArrayValidator(true);
+        $this->add($cmbPagoEstado);
 
         $filtroMetodoPago = $this->getOrdenService()->getMetodoPago();
         $cmbMetdoPago     = new Element\Select('cmbMetodoPago');

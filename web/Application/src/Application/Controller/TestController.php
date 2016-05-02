@@ -6,7 +6,7 @@
  *
  */
 
-namespace Admin\Controller;
+namespace Application\Controller;
 
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
@@ -14,9 +14,12 @@ use \Common\Helpers\String;
 
 class TestController extends SecurityAdminController
 {
-    private $mguid = '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}';//jludena
+//    private $mguid = '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}';//jludena
+//    private $mguid = '{5C3E7CA9-6412-4CA5-9C8C-F0E0F02968DE}';//jludena2
+    private $mguid = '{C55A121E-F07E-4D15-83F6-D02EA93364D4}';//mont
 //    private $mguid = '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}';//angel
-    private $cguid = '{54A0B670-9C39-464D-ABE2-79B62240043A}';//jludena
+//    private $cguid = '{54A0B670-9C39-464D-ABE2-79B62240043A}';//jludena
+    private $cguid = '{28368642-029F-4072-85E3-EC3F601D5518}';//angel
     
     
     public function indexAction()
@@ -83,8 +86,8 @@ class TestController extends SecurityAdminController
         //{EBAB4CD7-EE8E-48DF-90C1-7C8F283EF3AE}
         $service = $this->_getTrueFiUsuarioService();
         $data = array(
-            'EMail' => 'ing.angeljara@gmail.com',
-//            'EMail' => 'jludena@idigital.pe',
+//            'EMail' => 'ing.angeljara@gmail.com',
+            'EMail' => 'jludena@idigital.pe',
         );
         $result = $service->recoverPassword($data);
         var_dump($result);
@@ -177,6 +180,17 @@ class TestController extends SecurityAdminController
         exit;
     }
     
+    public function removeCardAction()
+    {
+        $service = $this->_getTrueFiTarjetaService();
+        $data = array(
+            'Card' => $this->cguid,
+        );
+        $result = $service->removeCard($data);
+        var_dump($result);
+        exit;
+    }
+    
     public function syncTarjetasAction()
     {
         $service = $this->_getUsuarioService();
@@ -203,6 +217,30 @@ class TestController extends SecurityAdminController
         exit;
     }
     
+    
+    public function resetUsuariosAction()
+    {
+        $usuarios = $this->_getUsuarioService()->getRepository()->findAll();
+        
+        foreach ($usuarios as $row) {
+            if (!empty($row['mguid'])) {
+                $data = array(
+                    'MGUID' => $row['mguid'],
+                );
+                $result = $this->_getTrueFiUsuarioService()->deleteMember($data);
+                if ($result['success']) {
+//                    $this->_getUsuarioService()
+                }
+            }
+        }
+        
+        var_dump($usuarios);
+        exit;
+        
+        echo 333;
+        exit;
+    }
+
     private function _getTrueFiPromocionService()
     {
         return $this->getServiceLocator()->get('TrueFi\Model\Service\PromocionService');

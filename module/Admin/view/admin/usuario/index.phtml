@@ -45,7 +45,7 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['nombreProv'] ?></td>
                         <td><?php echo $row['nombreDist'] ?></td>
                         <td><?php echo $row['fecha_creacion'] ?></td>
-                        <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
+                        <td><?php echo \Usuario\Model\Service\UsuarioService::getNombreEstado($row['estado']); ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
@@ -94,10 +94,14 @@ $this->layout()->breadcrumb = array(
 
         $("#txtFechaIni").datepicker({
             format: 'yyyy-mm-dd'
+        }).on('changeDate', function(e){
+            $("#formBuscar").submit();
         });
 
         $("#txtFechaFin").datepicker({
             format: 'yyyy-mm-dd'
+        }).on('changeDate', function(e){
+            $("#formBuscar").submit();
         });
 
     });
