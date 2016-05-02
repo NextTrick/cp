@@ -86,9 +86,9 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         }
     }
 
-    public const function getErrorMessages()
+    public static function getErrorMessages()
     {
-        return array(
+       /* return array(
             101 => array(
                     'commerceMessage' => 'Operación Denegada. Tarjeta Vencida.'
                     'clientMessage' => 'Operación Denegada. Tarjeta Vencida. Verifique los datos en su tarjeta e ingréselos correctamente.'
@@ -435,7 +435,7 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
                     'commerceMessage' => 'Operación Denegada. Contactar con entidad emisora.'
                     'clientMessage' => 'Operación Denegada.'
                 );
-        );
+        );*/
     }
 
 }
