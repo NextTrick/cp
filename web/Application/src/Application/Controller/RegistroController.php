@@ -145,10 +145,29 @@ class RegistroController extends AbstractActionController
                     break;
             }
             
+            $codigoRecuperar = \Common\Helpers\Util::generateToken($resultTrueFi['mguid']);
+            $dataIn['codigo_activar'] = $codigoRecuperar;
+            
             $save = $repository->save($dataIn);
             if ($save) {
+                $serviceLocator = $this->getServiceLocator();
+                $email = new \Usuario\Model\Email\ActivarCuenta($serviceLocator);
+                $dataSend = array(
+                    'email' => $dataIn['email'],
+                    'codigo_activar' => $codigoRecuperar,
+                    'nombres_completo' => $dataIn['nombres']
+                        . ' ' . $dataIn['paterno']
+                        . ' ' . $dataIn['materno']
+                );
+                $email->sendMail($dataSend);
+                
                 $result['success'] = true;
                 $result['message'] = null;
+                
+                unset($data);
+                unset($dataIn);
+                unset($dataSend);
+                unset($dataTrueFi);
             } else {
                 $result['message'] = 'No se pudo completar el proceso';
             }
@@ -165,7 +184,7 @@ class RegistroController extends AbstractActionController
 //        return new ViewModel();
 //    }
     
-    public function confirmarAction()
+    public function activarCuentaAction()
     {
         $codigo = $this->params('codigo');
         $repository = $this->_getUsuarioService()->getRepository();

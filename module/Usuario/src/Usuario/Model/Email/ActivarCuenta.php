@@ -8,7 +8,7 @@
 
 namespace Usuario\Model\Email;
 
-class RecuperarPassword
+class ActivarCuenta
 {
     private $_sl;
     
@@ -26,9 +26,10 @@ class RecuperarPassword
         }
         
         try {
+            $data['subject'] = 'Coney Park - Activación de tu cuenta';
             $data['toEmail'] = $data['email'];
             $view = new \Zend\View\Model\ViewModel();
-            $view->setTemplate('recuperar-password');
+            $view->setTemplate('activar-cuenta');
             $view->setTerminal(true);
             $view->setVariable('data', $data);
 

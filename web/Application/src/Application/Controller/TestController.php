@@ -241,6 +241,20 @@ class TestController extends SecurityAdminController
         exit;
     }
 
+    public function mailAcAction()
+    {
+        $data = array(
+            'email' => 'montesinos2005ii@gmail.com',
+        );
+        $serviceLocator = $this->getServiceLocator();
+        $email = new \Usuario\Model\Email\ActivarCuenta($serviceLocator);
+        $data['codigo_activar'] = 'sasasffsagasfjhjyafsyfasyfsayfasf';
+        $data['nombres_completo'] = 'Juan Carlos Ludeña';
+        $result = $email->sendMail($data);
+        var_dump($result);
+        exit;
+    }
+
     private function _getTrueFiPromocionService()
     {
         return $this->getServiceLocator()->get('TrueFi\Model\Service\PromocionService');
