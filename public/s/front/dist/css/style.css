@@ -34,14 +34,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -160px -135px;
+  background-position: -122px -101px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -134px -135px;
+  background-position: -96px -101px;
   width: 26px;
   height: 26px;
 }
@@ -74,40 +74,40 @@ header nav ul li a .icon span {
   margin: 0 auto 5px;
 }
 header nav ul li a .icon span.icon_local {
-  background-image: url("../images/sprite.png");
-  background-position: -69px -135px;
-  width: 33px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_offers {
-  background-image: url("../images/sprite.png");
-  background-position: -158px -40px;
-  width: 40px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_atraction {
-  background-image: url("../images/sprite.png");
-  background-position: 0px -135px;
-  width: 32px;
-  height: 49px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_sale {
-  background-image: url("../images/sprite.png");
-  background-position: -32px -135px;
-  width: 37px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_card {
-  background-image: url("../images/sprite.png");
-  background-position: -109px 0px;
-  width: 49px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li a .icon span.icon_gold {
-  background-image: url("../images/sprite.png");
-  background-position: -158px 0px;
-  width: 40px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 header nav ul li.logo {
   width: 200px;
@@ -149,22 +149,22 @@ header nav ul li.logo img {
   color: #972482;
 }
 .right_options ul li a span.icon_gold {
-  background-image: url("../images/sprite.png");
-  background-position: -158px -80px;
-  width: 40px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 .right_options ul li a span.icon_card {
-  background-image: url("../images/sprite.png");
-  background-position: -109px -40px;
-  width: 49px;
-  height: 40px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 .right_options ul li a span.icon_birthday {
-  background-image: url("../images/sprite.png");
-  background-position: 0px -97px;
-  width: 44px;
-  height: 38px;
+  background-image: url("");
+  background-position: ;
+  width: ;
+  height: ;
 }
 section {
   padding-top: 120px;
@@ -321,7 +321,7 @@ section .btn.btn_fb span {
 }
 section .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -82px -97px;
+  background-position: -32px -101px;
   width: 32px;
   height: 32px;
 }
@@ -334,7 +334,7 @@ section .btn.btn_tw span {
 }
 section .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -114px -97px;
+  background-position: 0px -101px;
   width: 32px;
   height: 32px;
 }
@@ -440,7 +440,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -102px -135px;
+  background-position: -64px -101px;
   width: 32px;
   height: 26px;
 }
@@ -525,16 +525,27 @@ section .purple_box .info_box {
   width: 100%;
   padding: 5px 25px;
 }
+section .purple_box .info_box span {
+  display: inline-block;
+  vertical-align: middle;
+}
 section .purple_box .info_box span.text {
   font-size: 14px;
-  width: 65%;
-  display: inline-block;
+  width: 60%;
+}
+section .purple_box .info_box span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -54px 0px;
+  width: 52px;
+  height: 52px;
+  margin-right: 10px;
 }
 section .purple_box .info_box a.how_asociate_card {
   float: right;
   color: #ff5800;
   width: 30%;
   text-decoration: none;
+  margin-top: 20px;
 }
 section .purple_box .cards_content {
   width: 95%;
@@ -626,7 +637,7 @@ section .purple_box .cards_content .col_3 .success_box {
 }
 section .purple_box .cards_content .col_3 .success_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -54px 0px;
+  background-position: 0px -56px;
   width: 55px;
   height: 45px;
   display: block;
@@ -640,7 +651,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: 0px -56px;
+  background-position: -106px 0px;
   width: 52px;
   height: 41px;
   display: block;
@@ -684,7 +695,7 @@ section .purple_box .cards_content .col_3.my_card span.cp_logo {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon {
   background-image: url("../images/sprite.png");
-  background-position: -198px -24px;
+  background-position: -24px -133px;
   width: 23px;
   height: 23px;
   display: inline-block;
@@ -695,7 +706,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -198px -47px;
+  background-position: -106px -82px;
   width: 18px;
   height: 14px;
 }
@@ -898,7 +909,7 @@ section .error_message span {
 }
 section .error_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -198px 0px;
+  background-position: 0px -133px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -909,6 +920,9 @@ section .error_message span.text {
 }
 section .error_message.hide {
   display: none;
+}
+section .form_control {
+  margin-bottom: 10px;
 }
 section form h3 {
   color: #feb100;
