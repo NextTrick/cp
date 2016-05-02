@@ -1,0 +1,9 @@
+<?php $this->layout()->title = array('Orden', 'Crear') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Orden'),
+    array('url' => null, 'name' => 'Crear'),
+);
+?>
+
+<?php echo $this->partial('admin/orden/_form.phtml', array('form' => $form)); ?>

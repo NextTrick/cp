@@ -15,9 +15,6 @@ class Security
     protected $_sl = null;
     
     const MODULE_ADMIN = 'Admin';
-    const MODULE_PAQUETE = 'Paquete';
-    const MODULE_ORDEN = 'Orden';
-    const MODULE_CMS = 'Cms';
 
     public function __construct(ServiceLocatorInterface $serviceLocator)
     {
@@ -44,7 +41,7 @@ class Security
         return array(
             self::MODULE_ADMIN => array(
                 'Admin\Controller\Main' => array(),
-                'Admin\Controller\Usuario' => array(
+                'Admin\Controller\Usuarioadmin' => array(
                     'R' => array('index'),
                     'C' => array('crear'),
                     'U' => array('editar', 'editar-password'),
@@ -68,32 +65,38 @@ class Security
                     'U' => array('editar'),
                     'D' => array('eliminar'),
                 ),
-            ),
-            self::MODULE_PAQUETE => array(
-                'Paquete\Controller\Paquete' => array(
+                'Admin\Controller\Contenido' => array(
+                    'R' => array('index'),
+                    'C' => array('crear',),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
+                'Admin\Controller\Paquete' => array(
                     'R' => array('index'),
                     'C' => array('crear', 'pre-crear'),
                     'U' => array('editar'),
                     'D' => array('eliminar'),
                 ),
-            ),
-            self::MODULE_ORDEN => array(
-                'Orden\Controller\Orden' => array(
+                'Admin\Controller\Usuario' => array(
+                    'R' => array('index'),
+                    'C' => array('crear'),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
+                'Admin\Controller\Orden' => array(
+                    'R' => array('index','exportar-excel'),
+                    'C' => array('crear',),
+                    'U' => array('editar'),
+                    'D' => array('eliminar'),
+                ),
+                'Admin\Controller\Carrito' => array(
                     'R' => array('index'),
                     'C' => array('crear',),
                     'U' => array('editar'),
                     'D' => array('eliminar'),
                 ),
-                'Orden\Controller\Carrito' => array(
-                    'R' => array('index'),
-                    'C' => array('crear',),
-                    'U' => array('editar'),
-                    'D' => array('eliminar'),
-                ),
-            ),
-            self::MODULE_CMS => array(
-                'Cms\Controller\Contenido' => array(
-                    'R' => array('index'),
+                'Admin\Controller\Ordendetalle' => array(
+                    'R' => array('index','exportar-excel'),
                     'C' => array('crear',),
                     'U' => array('editar'),
                     'D' => array('eliminar'),

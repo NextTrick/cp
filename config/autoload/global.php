@@ -84,11 +84,11 @@ return array(
     'fileDir' => array(
         'usuario_usuario' => array(
             'up' => APP_PATH . '/public/s/files/usuario/usuario',
-            'down' => 'http://dev.recargas.coneypark.pe/files/usuario/usuario',
+            'down' => 'http://dev.recargas.coneypark.pe/s/files/usuario/usuario',
         ),
         'paquete_paquete' => array(
             'up' => APP_PATH . '/public/s/files/paquete/paquete',
-            'down' => 'http://dev.recargas.coneypark.pe/files/paquete/paquete',
+            'down' => 'http://dev.recargas.coneypark.pe/s/files/paquete/paquete',
         ),
     ),
     'social' => array(

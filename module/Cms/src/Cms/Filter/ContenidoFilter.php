@@ -31,6 +31,15 @@ class ContenidoFilter extends Zf2InputFilter
             ),
             'validators' => array(
                 self::validatorNotEmpty('Codigo'),
+                array(
+                    'name'    => 'Db\NoRecordExists',
+                    'options' => array(
+                        'table'     => 'cms_contenido',
+                        'field'     => 'codigo',
+                        'adapter'   => $this->aaa,
+                        'message'   => 'Test message',
+                    ),
+                ),
             )
         ));
 

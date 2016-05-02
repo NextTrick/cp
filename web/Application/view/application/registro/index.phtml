@@ -15,8 +15,28 @@
                     <div class="right">
                         <form action="<?php echo BASE_URL; ?>completa-tu-registro" method="post">
                             <p>Registrando tu correo electrónico</p>
+                            <?php $data = $this->flashMessenger()->getMessagesFromNamespace('data'); ?>
+                            <?php $email = isset($data[0]['email']) ? $data[0]['email'] : null; ?>
                             <input type="hidden" id="registro_form" name="registro_form" value="1">
-                            <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com"/>
+                            <div class="form_control">
+                                <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com" value="<?php echo $email; ?>"/>
+                                <?php if (!empty($messageExistsEmail)) : ?>
+                                    <ul class="parsley-errors-list filled">
+                                        <li class="parsley-required"><?php echo $messageExistsEmail; ?></li>
+                                    </ul>
+                                <?php endif; ?>
+                                <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
+                                <?php if (count($flashMessage) > 0) : ?>
+                                    <?php foreach ($flashMessage as $msg) : ?>
+                                        <ul class="parsley-errors-list filled">
+                                        <?php foreach ($msg as $type => $message) : ?>
+                                                <li class="parsley-required"><?php echo $message; ?></li>
+                                        <?php endforeach; ?>
+                                        </ul>
+                                    <?php endforeach; ?>                                
+                                <?php endif; ?>
+                            </div>
+                            
                             <button class="btn btn_orange">Registrarme</button>
                         </form>
                     </div>

@@ -42,7 +42,7 @@ class BuscarForm extends Form
             ));
         $this->add($txtBuscar);
         
-        $filtrosBuscar = $this->getFiltrosBuscar();
+        $filtrosBuscar = $this->getUsuarioService()->getFiltrosBuscar();
         $cmbFiltro     = new Element\Select('cmbFiltro');
         $cmbFiltro->setAttributes(array('id' => 'cmbFiltro'));
         $cmbFiltro->setValueOptions($filtrosBuscar);
@@ -50,7 +50,7 @@ class BuscarForm extends Form
         $cmbFiltro->setDisableInArrayValidator(true);
         $this->add($cmbFiltro);
 
-        $filtroTipoDoc = $this->getTiposDocumento();
+        $filtroTipoDoc = $this->getUsuarioService()->getDocumentoIdentidadTipo();
         $cmbTipoDoc    = new Element\Select('cmbTipoDoc');
         $cmbTipoDoc->setAttributes(array('id' => 'cmbTipoDoc'));
         $cmbTipoDoc->setValueOptions($filtroTipoDoc);
@@ -58,7 +58,7 @@ class BuscarForm extends Form
         $cmbTipoDoc->setDisableInArrayValidator(true);
         $this->add($cmbTipoDoc);
 
-        $filtroEstado = $this->getEstados();
+        $filtroEstado = $this->getUsuarioService()->getEstados();
         $cmbEstado    = new Element\Select('cmbEstado');
         $cmbEstado->setAttributes(array('id' => 'cmbEstado'));
         $cmbEstado->setValueOptions($filtroEstado);
@@ -66,7 +66,7 @@ class BuscarForm extends Form
         $cmbEstado->setDisableInArrayValidator(true);
         $this->add($cmbEstado);
 
-        $filtroPaises = $this->getPaises();
+        $filtroPaises = $this->getUbigeoService()->getPaises();
         $cmbPais      = new Element\Select('cmbPais');
         $cmbPais->setAttributes(array('id' => 'cmbPais'));
         $cmbPais->setValueOptions($filtroPaises);
@@ -107,26 +107,29 @@ class BuscarForm extends Form
             'maxlength' => '15',
         ));
 
+        $txtFechaIni = new Element\Text('txtFechaIni');
+        $txtFechaIni->setAttributes(array(
+            'id'        => 'txtFechaIni',
+            'maxlength' => '15',
+        ));
+        $this->add($txtFechaIni);
+
+        $txtFechaFin = new Element\Text('txtFechaFin');
+        $txtFechaFin->setAttributes(array(
+            'id'        => 'txtFechaFin',
+            'maxlength' => '15',
+        ));
+        $this->add($txtFechaFin);
     }
 
-    protected function _getUbigeoService()
+    protected function getUbigeoService()
     {
         return $this->_sl->get('Sistema\Model\Service\UbigeoService');
     }
 
-    private function getEstados()
+    protected function getUsuarioService()
     {
-        return array('1' => 'Activo', '0' => 'Baja');
-    }
-
-    private function getTiposDocumento()
-    {
-        return array('1' => 'DNI', '2' => 'C. Extrangeria');
-    }
-
-    private function getPaises()
-    {
-        return $this->_getUbigeoService()->getPaises();
+        return $this->_sl->get('Usuario\Model\Service\UsuarioService');
     }
 
     /**
@@ -139,33 +142,19 @@ class BuscarForm extends Form
     {
         $params['cmbPais'] = 'PE';
         if (!empty($params['cmbPais'])) {
-            $dataDepa = $this->_getUbigeoService()->getDepartamentos($params['cmbPais']);
+            $dataDepa = $this->getUbigeoService()->getDepartamentos($params['cmbPais']);
             $this->get('cmbDepartamento')->setValueOptions($dataDepa);
         }
 
         if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento'])) {
-            $dataProv = $this->_getUbigeoService()->getProvincias($params['cmbPais'],$params['cmbDepartamento']);
+            $dataProv = $this->getUbigeoService()->getProvincias($params['cmbPais'],$params['cmbDepartamento']);
             $this->get('cmbProvincia')->setValueOptions($dataProv);
         }
 
         if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento']) && !empty($params['cmbProvincia'])) {
-            $dataDist = $this->_getUbigeoService()->getDistritos($params['cmbPais'], $params['cmbDepartamento'], $params['cmbProvincia']);
+            $dataDist = $this->getUbigeoService()->getDistritos($params['cmbPais'], $params['cmbDepartamento'], $params['cmbProvincia']);
             $this->get('cmbDistrito')->setValueOptions($dataDist);
         }
     }
 
-    /**
-     * Retorna un array que se utilizar en la busqueda de usuario
-     * @return array
-     * @author Diómedes Pablo A. <diomedex10@gmail.com>
-     */
-    public function getFiltrosBuscar()
-    {
-        return array(
-            'email'   => 'Correo',
-            'nombres' => 'Nombre',
-            'paterno' => 'A. Paterno',
-            'materno' => 'A. Materno',
-        );
-    }
 }

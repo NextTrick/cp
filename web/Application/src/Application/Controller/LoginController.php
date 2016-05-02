@@ -19,7 +19,7 @@ class LoginController extends SecurityWebController
         $view->setVariable('openPopapChangePassword', 0);
         return $view;
     }
-
+       
     public function validateSocialAction()
     {
         //Return in callback
@@ -74,18 +74,19 @@ class LoginController extends SecurityWebController
             $opcion = $this->params('opcion');
             $data = $this->_getLoginGatewayService()->setGateway($opcion)->callback();
             if (!empty($data) && $data['registrado'] === true) {
-                $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'inicio'));
+                return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
             } else {
-                $this->redirect()->toRoute('web-completa-tu-registro');
+                return $this->redirect()->toRoute('web-completa-tu-registro');
             }
         } catch (\Exception $e) {
-            $this->redirect()->toRoute('web-login/modalidad', array('controller' => 'login'));
+            return $this->redirect()->toRoute('web-login/modalidad', array('controller' => 'login'));
         }
     }
     
     public function logoutAction()
     {
         $this->_getLoginGatewayService()->logout();
+        return $this->redirect()->toRoute('web-login', array('controller' => 'login'));
     }
     
     private function _getLoginForm()

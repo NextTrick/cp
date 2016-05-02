@@ -20,6 +20,7 @@ class TarjetaService
     const METHOD_ADD_CARD = 'AddCard';
     const METHOD_CREDIT_PURCHESE = 'CreditPurchase';
     const METHOD_DENOUNCE_CARD = 'DenounceCard';
+    const METHOD_REMOVE_CARD = 'RemoveCard';
 
     public function __construct($serviceLocator)
     {
@@ -40,6 +41,7 @@ class TarjetaService
             self::METHOD_ADD_CARD => $this->_config->url . self::METHOD_ADD_CARD . '.php',
             self::METHOD_CREDIT_PURCHESE => $this->_config->url . self::METHOD_CREDIT_PURCHESE . '.php',
             self::METHOD_DENOUNCE_CARD => $this->_config->url . self::METHOD_DENOUNCE_CARD . '.php',
+            self::METHOD_REMOVE_CARD => $this->_config->url . self::METHOD_REMOVE_CARD . '.php',
         );
         
         return isset($urls[$tipo]) ? $urls[$tipo] : null;
@@ -61,6 +63,9 @@ class TarjetaService
             ),
             self::METHOD_DENOUNCE_CARD => array(
                 'CGUID',
+            ),
+            self::METHOD_REMOVE_CARD => array(
+                'Card',
             ),
         );
         
@@ -150,6 +155,34 @@ class TarjetaService
             $url = $this->getUrl(self::METHOD_DENOUNCE_CARD);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
+                if ($curlData['data']['code'] == 0) {
+                    $result['success'] = true;
+                } else {
+                    $result['success'] = false;
+                    $result['message'] = $curlData['data']['message'];
+                }
+            } else {
+                $result['success'] = false;
+                $result['message'] = $curlData['message'];
+            }
+        }
+        
+        unset($result['data']);
+        return $result;
+    }
+    
+    /*
+     *No funciona aun, ultima prueba 2016-05-01
+     */
+    public function removeCard($data)
+    {
+        $result = Request::validate($data, $this->getRules(self::METHOD_REMOVE_CARD));
+        if ($result['success']) {
+            $jsonData = json_encode($result['data']);
+            $url = $this->getUrl(self::METHOD_REMOVE_CARD);
+            $curlData = Response::curl($url, $this->_config, $jsonData);
+            if ($curlData['success']) {
+                var_dump($curlData);exit;
                 if ($curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {

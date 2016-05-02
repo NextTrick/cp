@@ -19,8 +19,8 @@ class RecuperarPassword
     public function sendMail($data)
     {
         $config = $this->_sl->get('config');
-        if (isset($config['mails']['recuperarPassword'])) {
-            $config = $config['mails']['recuperarPassword'];
+        if (isset($config['mail'])) {
+            $config = $config['mail'];
         } else {
             throw new \Exception('No existe configuración');
         }

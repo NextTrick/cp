@@ -22,7 +22,7 @@ class TarjetaService
     public function misTarjetas($usuarioId)
     {
         $criteria = array(
-            'like' => array(
+            'where' => array(
                 'usuario_id' => $usuarioId,
             ),
             'order' => 'fecha_creacion DESC',

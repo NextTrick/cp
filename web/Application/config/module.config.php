@@ -64,23 +64,23 @@ return array(
                     ),
                 ),
             ),
-            'web-notificar' => array(
+//            'web-notificar' => array(
+//                'type' => 'Segment',
+//                'options' => array(
+//                    'route'    => '/notificar-registro[/]',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Registro',
+//                        'action'     => 'notificar',
+//                    ),
+//                ),
+//            ),
+            'web-activar-cuenta' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/notificar-registro[/]',
+                    'route'    => '/activar-cuenta[/:codigo]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
-                        'action'     => 'notificar',
-                    ),
-                ),
-            ),
-            'web-confirmar' => array(
-                'type' => 'Segment',
-                'options' => array(
-                    'route'    => '/confirmar-registro[/:codigo]',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Registro',
-                        'action'     => 'confirmar',
+                        'action'     => 'activar-cuenta',
                         'codigo' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                 ),
@@ -106,7 +106,7 @@ return array(
                     ),
                 ),
             ),
-            'mis-tarjetas' => array(
+            'web-mis-tarjetas' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/mis-tarjetas[/]',
@@ -116,7 +116,7 @@ return array(
                     ),
                 ),
             ),
-            'asociar-nueva-tarjeta' => array(
+            'web-asociar-nueva-tarjeta' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/mis-tarjetas/asociar-nueva-tarjeta[/]',
@@ -126,7 +126,7 @@ return array(
                     ),
                 ),
             ),
-            'editar-nombre' => array(
+            'web-editar-nombre' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/mis-tarjetas/editar-nombre[/]',
@@ -136,12 +136,22 @@ return array(
                     ),
                 ),
             ),
-            'beneficios' => array(
+            'web-beneficios' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/beneficios[/]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Beneficios',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-recargas' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/recargas[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Recargas',
                         'action'     => 'index',
                     ),
                 ),
@@ -178,38 +188,38 @@ return array(
                     ),
                 )
             ),
-            'web-panel' => array(
-                'type' => 'Literal',
-                'options' => array(
-                    'route'    => '/inbox',
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Tarjeta',
-                        'action'     => 'index',
-                    ),
-                ),
-                'may_terminate' => true,
-                'child_routes' => array(
-                    'inbox' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            // Change this to something specific to your module
-                            'route' => '/[:controller[/:action[/:code]]]',
-                            'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                            ),
-                            'defaults' => array(
-                                // Change this value to reflect the namespace in which
-                                // the controllers for your module are found
-                                '__NAMESPACE__' => 'Application\Controller',
-                                'controller'    => 'Tarjeta',
-                                'action'        => 'index',
-                            ),
-                        ),
-                    ),
-                )
-            ),
+//            'web-panel' => array(
+//                'type' => 'Literal',
+//                'options' => array(
+//                    'route'    => '/inbox',
+//                    'defaults' => array(
+//                        'controller' => 'Application\Controller\Tarjeta',
+//                        'action'     => 'index',
+//                    ),
+//                ),
+//                'may_terminate' => true,
+//                'child_routes' => array(
+//                    'inbox' => array(
+//                        'type'    => 'Segment',
+//                        'options' => array(
+//                            // Change this to something specific to your module
+//                            'route' => '/[:controller[/:action[/:code]]]',
+//                            'constraints' => array(
+//                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                                'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                            ),
+//                            'defaults' => array(
+//                                // Change this value to reflect the namespace in which
+//                                // the controllers for your module are found
+//                                '__NAMESPACE__' => 'Application\Controller',
+//                                'controller'    => 'Tarjeta',
+//                                'action'        => 'index',
+//                            ),
+//                        ),
+//                    ),
+//                )
+//            ),
         ),
     ),
     'service_manager' => array(

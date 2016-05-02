@@ -1,0 +1,6 @@
+<consulta_eticket>
+    <parametros>
+        <parametro id="CODTIENDA"><?php echo $commerceCode; ?></parametro>
+        <parametro id="ETICKET"><?php echo $eTicket; ?></parametro>
+    </parametros>
+</consulta_eticket>

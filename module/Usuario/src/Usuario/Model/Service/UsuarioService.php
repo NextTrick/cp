@@ -13,8 +13,15 @@ use \Common\Helpers\String;
 
 class UsuarioService
 {
-    const DI_DNI       = 1;
-    const DI_PASAPORTE = 2;
+    const DI_DNI            = 1;
+    const DI_PASAPORTE      = 2;
+    const DI_NAME_DNI       = 'DNI';
+    const DI_NAME_PASAPORTE = 'Pasaporte';
+
+    const ESTADO_BAJA        = 0;
+    const ESTADO_ACTIVO      = 1;
+    const ESTADO_NAME_BAJA   = 'Inactivo';
+    const ESTADO_NAME_ACTIVO = 'Activo';
     
     protected $_repository = null;
     protected $_sl         = null;
@@ -23,14 +30,6 @@ class UsuarioService
     {
         $this->_repository = $repository;
         $this->_sl         = $serviceLocator;
-    }
-
-    public function getDocumentoIdentidadTipo()
-    {
-        return array(
-            self::DI_DNI       => 'DNI',
-            self::DI_PASAPORTE => 'Pasaporte',
-        );
     }
 
     public function registrarEnTrueFi($data)
@@ -149,7 +148,6 @@ class UsuarioService
 
         if (!empty($params)) {
             $nameFilter = String::xssClean($params['cmbFiltro']);
-
             $paramsLike = array(
                 $nameFilter => String::xssClean($params['txtBuscar']),
             );
@@ -163,14 +161,87 @@ class UsuarioService
                 'cod_dist' => String::xssClean($params['cmbDistrito']),
             );
 
-            $criteria = array(
-                'whereLike' => $paramsLike,
-                'limit'     => LIMIT_BUSCAR,
-                'where'     => $paramsWhere
+            $betwween = array(
+                'fecha_creacion' => array(
+                    'min'=> String::xssClean($params['txtFechaIni']),
+                    'max'=> String::xssClean($params['txtFechaFin'])
+                )
             );
+
+            $criteria = array(
+                'whereLike'    => $paramsLike,
+                'limit'        => LIMIT_BUSCAR,
+                'where'        => $paramsWhere,
+                'whereBetween' => $betwween
+            );
+
         }
 
         return $criteria;
     }
 
+    public function getEstados()
+    {
+        return array(
+            self::ESTADO_BAJA   => self::ESTADO_NAME_BAJA,
+            self::ESTADO_ACTIVO => self::ESTADO_NAME_ACTIVO,
+        );
+    }
+
+    public function getDocumentoIdentidadTipo()
+    {
+        return array(
+            self::DI_DNI       => self::DI_NAME_DNI,
+            self::DI_PASAPORTE => self::DI_NAME_PASAPORTE,
+        );
+    }
+
+    public static function getNombreTipoDocumento($tipoDocumento)
+    {
+        $result = null;
+        if (empty($tipoDocumento)) {
+            return $result;
+        }
+
+        if (self::DI_DNI == $tipoDocumento) {
+            $result = self::DI_NAME_DNI;
+        } elseif (self::DI_PASAPORTE == $tipoDocumento) {
+            $result = self::DI_NAME_PASAPORTE;
+        }
+
+        return $result;
+    }
+
+
+    public static function getNombreEstado($estado)
+    {
+        $result = null;
+        if (!isset($estado)) {
+            return $result;
+        }
+
+        if (self::ESTADO_ACTIVO == $estado) {
+            $result = self::ESTADO_NAME_ACTIVO;
+        } elseif (self::ESTADO_BAJA == $estado) {
+            $result = self::ESTADO_NAME_BAJA;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Retorna un array que se utilizar en la busqueda de usuario
+     * @return array
+     * @author Diómedes Pablo A. <diomedex10@gmail.com>
+     */
+    public function getFiltrosBuscar()
+    {
+        return array(
+            'di_valor' => 'Nro. Documento',
+            'email'    => 'Correo',
+            'nombres'  => 'Nombre',
+            'paterno'  => 'A. Paterno',
+            'materno'  => 'A. Materno',
+        );
+    }
 }

@@ -80,6 +80,23 @@ class LoginGatewayService
 
         return false;
     }
+    
+    public function getData()
+    {
+        if ($this->_getLoginService(self::LOGIN_FORM)->isLoggedIn()) {
+            return $this->_getLoginService(self::LOGIN_FORM)->getData();
+        }
+        
+        if ($this->_getLoginService(self::LOGIN_FACEBOOK)->isLoggedIn()) {
+            return $this->_getLoginService(self::LOGIN_FACEBOOK)->getData();
+        }
+        
+        if ($this->_getLoginService(self::LOGIN_TWITTER)->isLoggedIn()) {
+            return $this->_getLoginService(self::LOGIN_TWITTER)->getData();
+        }
+
+        return array();
+    }
 
     protected function _getLoginService($gateway)
     {

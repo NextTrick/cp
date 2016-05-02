@@ -1,6 +1,6 @@
 <?php
 
-define('VERSION', '1.2');
+define('VERSION_STATICO', '1.2');
 
 define('OK_CREAR', 'El registro se creó correctamente');
 define('OK_EDITAR', 'El registro se editó correctamente');

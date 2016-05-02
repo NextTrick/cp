@@ -9,6 +9,8 @@
 namespace Orden\Model\Repository;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Select;
 
 class CarritoRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 {
@@ -19,4 +21,5 @@ class CarritoRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     {
         parent::__construct($adapter);
     }
+
 }

@@ -1,0 +1,86 @@
+<?php $this->layout()->title = array('Operaciones', 'Listado') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Operaciones'),
+    array('url' => null, 'name' => 'Listado'),
+);
+?>
+
+<div class="box">
+    <div class="box-header with-border">
+        <?php echo $this->partial('admin/ordendetalle/_buscar.phtml', array('form' => $form)); ?>
+    </div>
+    <div class="box-body">
+        <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
+        <a href="javascript:exportarExcel()" class="btn btn-success">Exportar</a>
+        <hr class="separator">
+        <table id="gridMain" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Correo</th>
+                <th>Recarga</th>
+                <th>Monto</th>
+                <th style="white-space:nowrap;">Fecha</th>
+                <th style="white-space:nowrap;">Nro. Tarjeta</th>
+                <th>Estado Pago</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($gridList as $row) : ?>
+                <tr>
+                    <td><?php echo $row['id'] ?></td>
+                    <td><?php echo $row['email'] ?></td>
+                    <td><?php echo $row['titulo1'] ?></td>
+                    <td><?php echo $row['monto'] ?></td>
+                    <td><?php echo $row['fecha_creacion'] ?></td>
+                    <td><?php echo $row['numero'] ?></td>
+                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/datepicker.css" rel="stylesheet"></link>
+<link  href="http://dev.recargas.coneypark.pe/s/front/datepicker/css/bootstrap_.css" rel="stylesheet"></link>
+<script src="/s/front/datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#gridMain').DataTable({
+            "pageLength": 25,
+            "paging": true,
+            "lengthChange": true,
+            "searching": false,
+            "ordering": false,
+            "info": true,
+            "autoWidth": true
+            //"order": [[ 2, "desc" ]]
+        });
+        common.deleteRemote();
+
+        $("#txtFechaIni").datepicker({
+            format: 'yyyy-mm-dd'
+        }).on('changeDate', function(e){
+            $("#formBuscar").submit();
+        });
+
+        $("#txtFechaFin").datepicker({
+            format: 'yyyy-mm-dd'
+        }).on('changeDate', function(e){
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbPagoEstado").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+    });
+
+    function exportarExcel(){
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/ordendetalle/exportar-excel");
+        $("#formBuscar").submit();
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/ordendetalle");
+    }
+
+</script>

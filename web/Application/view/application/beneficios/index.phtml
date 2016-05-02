@@ -1,11 +1,11 @@
 <section class="app_content">
     <div class="box_center">
         <div class="app_box">
-            <div class="menu">
+            <div class="menu left_active">
                 <ul>
-                    <li class="first active">Beneficios</li>
-                    <li>Mis tarjetas</li>
-                    <li class="last">Recargas</li>
+                    <li class="first active"><a href="<?php echo BASE_URL; ?>beneficios">Beneficios</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>mis-tarjetas">Mis tarjetas</a></li>
+                    <li class="last"><a href="<?php echo BASE_URL; ?>recargas">Recargas</a></li>
                 </ul>
             </div>
             <div class="purple_box">
@@ -13,15 +13,21 @@
                 <p class="small_text">Por ser <strong>miembro del Coney Club </strong>cuentas con las siguientes grandes beneficios</p>
                 <div class="options">
                     <div class="col_3 left">
-                        <div class="circle"></div>
+                        <div class="circle">
+                            <img src="" alt="">
+                        </div>
                         <p class="p_16">Hasta <span> <strong>20% de descuento en todos los juegos. </strong></span>Según el tipo de local</p>
                     </div>
                     <div class="col_3 left">
-                        <div class="circle"></div>
+                        <div class="circle">
+                            <img src="" alt="">
+                        </div>
                         <p class="p_16"><span><strong>20 Coney Bonos gratis </strong></span>el día de tu cumpleaños (Presentando su DNI)</p>
                     </div>
                     <div class="col_3 right">
-                        <div class="circle"></div>
+                        <div class="circle">
+                            <img src="" alt="">
+                        </div>
                         <p class="p_16"><span><strong>Descuentos exclusivos </strong></span>por recargas en fechas especiales (Día de los enamorados, día de la madre y padre, halloween, etc.)</p>
                     </div>
                 </div>
@@ -30,13 +36,18 @@
                         <p class="p_16">Asocia tus tarjetas, haciendo clic en el siguiente botón: </p>
                     </div>
                     <div class="right">
-                        <button class="btn btn_orange"> <span class="text">Asociar tarjetas</span><span class="icon"></span></button>
+                        <button id="mis_tarjetas" class="btn btn_orange"> <span class="text">Asociar tarjetas</span><span class="icon"></span></button>
                     </div>
                 </div>
                 <?php echo $this->sectionGrillaPromociones(GRID_BENEFICIOS_PROMOCIONES, 1, 'beneficios');  ?>
                 <hr/>
-                <div class="info_box"><span class="icon"></span><span class="text">También puedes acercarte a cualquiera de nuestras sedes, indicando tu cuenta de correo electrónico junto con la tarjeta que desees recargar.</span></div>
+                <!--div class="info_box"><span class="icon"></span><span class="text">También puedes acercarte a cualquiera de nuestras sedes, indicando tu cuenta de correo electrónico junto con la tarjeta que desees recargar.</span></div-->
             </div>
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#mis_tarjetas').click(function(){location.href = '<?php BASE_URL ?>mis-tarjetas';});
+    });
+</script>

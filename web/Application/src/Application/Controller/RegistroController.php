@@ -30,9 +30,27 @@ class RegistroController extends AbstractActionController
             'action' => 'completa-tu-registro',
         )));
         $form->setData($dataIni);
-     
+        
+        $disabledEmail = false;
+        $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
+        if (!empty($dataIni['email'])) {
+            $disabledEmail = true;
+            //verificar en base de datos
+            $criteria = array('where' => array('email' => $dataIni['email']));
+            $repository = $this->_getUsuarioService()->getRepository();
+            $row = $repository->findOne($criteria);
+            if (!empty($row)) {
+                $this->flashMessenger()->addMessage(array('error' => $messageExistsEmail));
+                $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $dataIni['email']));
+                return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
+            }
+        }
+
+        $mensajeRegistro = null;
+        $openPopapConfRegistro = 0;
         $registroForm = (float)$this->request->getPost('registro_form');
         if ($this->request->isPost() && !$registroForm) {
+            //=========== Llenar los combos ===========
             $codPais = $this->request->getPost('cod_pais');
             $codDep = $this->request->getPost('cod_depa');
             $departamentos = $this->_getUbigeoService()->getDepartamentos($codPais);
@@ -40,52 +58,51 @@ class RegistroController extends AbstractActionController
             $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDep);
             $form->get('cod_dist')->setValueOptions($distritos);
             
+            //=========== Aplicar filter ===========
             $form->setInputFilter(new \Application\Filter\RegistroFilter());
             $data = $this->request->getPost();
+            
             $form->setData($data);
-            if ($form->isValid()) {
+            
+            //=========== Validar fecha ===========
+            $fechaValida = false;
+            $fechaNac = null;
+            if (\Common\Helpers\Util::checkDate($data['mes'], $data['dia'], $data['anio'])) {
+                $fechaValida = true;
+                $fechaNac = $data['anio'] . '-' . $data['mes'] . '-' . $data['dia'];
+            } else {
+                $form->get('dia')->setMessages(array('noValido' => 'El campo fecha no es válido.'));
+            }
+
+            if ($form->isValid() && $fechaValida) {
                 $data = $form->getData();
-                $gateway = $this->_getDataRegistroTemp('gateway');
-                
-                $redSocial = false;
-                switch ($gateway) {
-                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
-                        $data['facebook_id'] = $this->_getDataRegistroTemp('id');
-                        $redSocial = true;
-                        break;
-                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
-                        $data['twitter_id'] = $this->_getDataRegistroTemp('id');
-                        $redSocial = true;
-                        break;
-                }
+                $data['fecha_nac'] = $fechaNac;
 
                 $repository = $this->_getUsuarioService()->getRepository();
                 //verificar en base de datos
                 $criteria = array('where' => array('email' => $data['email']));
                 $row = $repository->findOne($criteria);
                 if (!empty($row)) {
-                    $existsEmail = 'El correo ingresado ya fue registrado anteriormente.';
-                    $form->get('email')->setMessages(array('existsEmail' => $existsEmail));
+                    $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
                 } else {
                     $saveData = $this->_saveData($data);
+
+                    $openPopapConfRegistro = 1;
+                    $mensajeRegistro = 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.';
                     if ($saveData['success']) {
-                        $message = '<b>Felicidades, ya estás a punto de ser parte de Coney Club.</b> '
-                            . 'Te hemos enviado un correo con las instrucciones para activar tu cuenta';
-                        $this->flashMessenger()->addMessage(array(
-                            'success' => $message,
-                        ));
-                        return $this->redirect()->toRoute('web-notificar');
-                    } else {
-                        $this->flashMessenger()->addMessage(array(
-                            'error' => $saveData['message'],
-                        ));
-                        return $this->redirect()->toRoute('web-notificar');
+                        $mensajeRegistro = '<h3>¡Felicidades!, estás a punto de ser parte de Coney Club</h3>'
+                            . '<p>Te hemos enviado un correo con las instrucciones para activar tu cuenta.</p>';
                     }
                 }
             }
         }
         
-        return new ViewModel(array('form' => $form));
+        return new ViewModel(array(
+            'form' => $form,
+            'disabledEmail' => $disabledEmail,
+            'mensajeRegistro' => $mensajeRegistro,
+            'openPopapConfRegistro' => $openPopapConfRegistro,
+        ));
     }
     
     private function _saveData($data)
@@ -116,30 +133,59 @@ class RegistroController extends AbstractActionController
                 'cod_depa' => $data['cod_depa'],
                 'cod_dist' => $data['cod_dist'],
                 'fecha_nac' => $data['fecha_nac'],
+                'estado' => 0,
             );
+
+            $gateway = $this->_getDataRegistroTemp('gateway');   
+            switch ($gateway) {
+                case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
+                    $dataIn['facebook_id'] = $this->_getDataRegistroTemp('id');
+                    break;
+                case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
+                    $dataIn['twitter_id'] = $this->_getDataRegistroTemp('id');
+                    break;
+            }
+            
+            $codigoRecuperar = \Common\Helpers\Util::generateToken($resultTrueFi['mguid']);
+            $dataIn['codigo_activar'] = $codigoRecuperar;
+            
             $save = $repository->save($dataIn);
             if ($save) {
+                $serviceLocator = $this->getServiceLocator();
+                $email = new \Usuario\Model\Email\ActivarCuenta($serviceLocator);
+                $dataSend = array(
+                    'email' => $dataIn['email'],
+                    'codigo_activar' => $codigoRecuperar,
+                    'nombres_completo' => $dataIn['nombres']
+                        . ' ' . $dataIn['paterno']
+                        . ' ' . $dataIn['materno']
+                );
+                $email->sendMail($dataSend);
+                
                 $result['success'] = true;
                 $result['message'] = null;
-                $this->_removeDataRegistroTemp();
+                
+                unset($data);
+                unset($dataIn);
+                unset($dataSend);
+                unset($dataTrueFi);
             } else {
-                $result['message'] = 'Lo sentimos, no se pudo completar el '
-                    . 'proceso, por favor inténtalo más tarde.';
+                $result['message'] = 'No se pudo completar el proceso';
             }
         } else {
-            $result['message'] = 'Lo sentimos, no se pudo completar el '
-                    . 'proceso, por favor inténtalo más tarde.';
+            $result['message'] = 'No se pudo completar el proceso';
         }
         
+        $this->_removeDataRegistroTemp();
         return $result;
     }
     
-    public function notificarAction()
-    {
-        return new ViewModel();
-    }
+//    public function notificarAction()
+//    {
+//        return new ViewModel();
+//    }
     
-    public function confirmarAction()
+    public function activarCuentaAction()
     {
         $codigo = $this->params('codigo');
         $repository = $this->_getUsuarioService()->getRepository();

@@ -19,7 +19,7 @@ abstract class SecurityWebController extends AbstractActionController
     
     protected function _toUrlMain()
     {
-        return $this->redirect()->toRoute('web-panel/inbox', array('controller' => 'inicio'));
+        return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
     }
 
     protected function _isLogin()
@@ -29,11 +29,19 @@ abstract class SecurityWebController extends AbstractActionController
     
     protected function _getUsuarioData()
     {
-        $usuario = new \stdClass();
-        $usuario->id = 5;
-        $usuario->nombres = null;
-        $usuario->email = null;
+        $data = $this->_getLoginGatewayService()->getData();
+        if (empty($data)) {
+            throw new \Exception('Su session expiro.');
+        }
         
+        $usuario = new \stdClass();
+        $usuario->id = $data['id'];
+        $usuario->email = $data['email'];
+        $usuario->mguid = $data['mguid'];
+        $usuario->nombres = $data['nombres'];
+        $usuario->paterno = $data['paterno'];
+        $usuario->materno = $data['materno'];
+
         return $usuario;
     }
     

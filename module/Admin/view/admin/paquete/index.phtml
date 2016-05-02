@@ -1,0 +1,71 @@
+<?php $this->layout()->title = array('Paquete', 'Listado') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Paquete'),
+    array('url' => null, 'name' => 'Listado'),
+);
+?>
+
+<div class="box">
+    <div class="box-header with-border">
+        <?php echo $this->partial('admin/paquete/_buscar.phtml', array('form' => $form)); ?>
+    </div>
+    <div class="box-body">
+        <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
+        <hr class="separator">
+        <table id="gridMain" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Titulo 1</th>
+                    <th>Titulo 2</th>
+                    <th>Dinero</th>
+                    <th>Coney Bonos</th>
+                    <th>Coney Bonos Plus</th>
+                    <th>Tickets</th>
+                    <th>Game Points</th>
+                    <th>Fecha</th>
+                    <th>Activo</th>
+                    <th>Destacado</th>
+                    <th style="max-width: 60px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($gridList as $row) : ?>
+                    <tr>
+                        <td><?php echo $row['titulo1'] ?></td>
+                        <td><?php echo $row['titulo2'] ?></td>
+                        <td><?php echo $row['emoney'] ?></td>
+                        <td><?php echo $row['bonus'] ?></td>
+                        <td><?php echo $row['promotionbonus'] ?></td>
+                        <td><?php echo $row['etickets'] ?></td>
+                        <td><?php echo $row['gamepoints'] ?></td>
+                        <td><?php echo $row['fecha_creacion'] ?></td>
+                        <td><?php echo $row['activo'] ?></td>
+                        <td><?php echo $row['destacado'] ?></td>
+                        <td>
+                            <a href="<?php echo BASE_URL ?>admin/paquete/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
+                            <a href="<?php echo BASE_URL ?>admin/paquete/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('#gridMain').DataTable({
+            "pageLength": 25,
+            "paging": true,
+            "lengthChange": true,
+            "searching": false,
+            "ordering": false,
+            "language": {
+                "info": "Registros de _START_ al _END_, de un total de <?php echo $countList; ?>"
+            },
+            "autoWidth": true
+        });
+        common.deleteRemote();
+    });
+</script>

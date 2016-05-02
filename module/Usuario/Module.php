@@ -19,18 +19,8 @@ class Module
         );
     }
     
-    public function getControllerConfig()
-    {        
-        return include __DIR__ . '/config/controller.config.php';
-    }
-    
     public function getServiceConfig()
     {
         return include __DIR__ . '/config/service.config.php';
-    }
-    
-    public function getViewHelperConfig()
-    {
-        return include __DIR__ . '/config/viewhelper.config.php';
     }
 }

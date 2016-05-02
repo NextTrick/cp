@@ -1,0 +1,9 @@
+<?php $this->layout()->title = array('Usuario', 'Modificar') ?>
+<?php
+$this->layout()->breadcrumb = array(
+    array('url' => null, 'name' => 'Usuario'),
+    array('url' => null, 'name' => 'Modificar'),
+);
+?>
+
+<?php echo $this->partial('admin/usuarioadmin/_form.phtml', array('form' => $form, 'id' => $id, 'repeat' => false)); ?>
