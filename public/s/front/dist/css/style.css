@@ -206,6 +206,9 @@ section.app_content .menu ul li.last {
 section.app_content .menu ul li.active {
   background: #f7a100;
 }
+section.app_content .menu ul li a {
+  text-decoration: none;
+}
 section.app_content .menu:before {
   content: '';
   color: #ececec;
