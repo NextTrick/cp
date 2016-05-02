@@ -20,7 +20,7 @@ class UsuarioService
 
     const ESTADO_BAJA        = 0;
     const ESTADO_ACTIVO      = 1;
-    const ESTADO_NAME_BAJA   = 'Baja';
+    const ESTADO_NAME_BAJA   = 'Inactivo';
     const ESTADO_NAME_ACTIVO = 'Activo';
     
     protected $_repository = null;
@@ -212,6 +212,23 @@ class UsuarioService
         return $result;
     }
 
+
+    public static function getNombreEstado($estado)
+    {
+        $result = null;
+        if (!isset($estado)) {
+            return $result;
+        }
+
+        if (self::ESTADO_ACTIVO == $estado) {
+            $result = self::ESTADO_NAME_ACTIVO;
+        } elseif (self::ESTADO_BAJA == $estado) {
+            $result = self::ESTADO_NAME_BAJA;
+        }
+
+        return $result;
+    }
+
     /**
      * Retorna un array que se utilizar en la busqueda de usuario
      * @return array
@@ -220,10 +237,11 @@ class UsuarioService
     public function getFiltrosBuscar()
     {
         return array(
-            'email'   => 'Correo',
-            'nombres' => 'Nombre',
-            'paterno' => 'A. Paterno',
-            'materno' => 'A. Materno',
+            'di_valor' => 'Nro. Documento',
+            'email'    => 'Correo',
+            'nombres'  => 'Nombre',
+            'paterno'  => 'A. Paterno',
+            'materno'  => 'A. Materno',
         );
     }
 }

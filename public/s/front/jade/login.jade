@@ -6,7 +6,7 @@ block section
 				h2 ¡Ahora 
 					span recárgate de diversión 
 					|con un click!
-				p Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, 
+				p.subtitle Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, 
 					strong sin necesidad de hacer colas
 					|, además, tendrás 
 					strong promociones exclusivas 
@@ -29,7 +29,7 @@ block section
 							p Con tu correo electrónico
 							form(action="#" data-parsley-validate)
 								.form_control
-									input.email(type="text" placeholder="ejemplo@micorreo.com" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-pattern="/^[a-z0-9\_\-]+(.?[a-z0-9\_\-]+)+@\w+([\.-]?\w+)(\.[a-z]{2,10})$/i" data-parsley-pattern-message="Ingrese un correo válido")
+									input.email(type="text" placeholder="ejemplo@micorreo.com" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-email data-parsley-email-message="Ingrese un correo válido")
 								.form_control
 									input.password(type="password" placeholder="contraseña" data-parsley-required data-parsley-required-message="Dato obligatorio")
 								button.btn.btn_orange.btn_login(type="submit") Iniciar Sesión
@@ -46,8 +46,8 @@ block section
 						img(src="../images/promo1.png", alt="")
 						p Por lanzamiento, recarga 
 							strong S/.100 
-							| y obten
-							strong S/.50
+							| y obten 
+							strong S/.50 
 							|soles adicionales 
 							strong + S/.30 
 							|en Coney Bonos
@@ -55,8 +55,8 @@ block section
 						img(src="../images/promo2.png", alt="")
 						p Por lanzamiento, recarga 
 							strong S/.100 
-							| y obten
-							strong S/.50
+							| y obten 
+							strong S/.50 
 							|soles adicionales 
 							strong + S/.30 
 							|en Coney Bonos
@@ -64,8 +64,8 @@ block section
 						img(src="../images/promo3.png", alt="")
 						p Por lanzamiento, recarga 
 							strong S/.100 
-							| y obten
-							strong S/.50
+							| y obten 
+							strong S/.50 
 							|soles adicionales 
 							strong + S/.30 
 							|en Coney Bonos

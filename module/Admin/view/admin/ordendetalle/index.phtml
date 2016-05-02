@@ -1,14 +1,14 @@
-<?php $this->layout()->title = array('Trasacciones', 'Listado') ?>
+<?php $this->layout()->title = array('Operaciones', 'Listado') ?>
 <?php
 $this->layout()->breadcrumb = array(
-    array('url' => null, 'name' => 'Orden'),
+    array('url' => null, 'name' => 'Operaciones'),
     array('url' => null, 'name' => 'Listado'),
 );
 ?>
 
 <div class="box">
     <div class="box-header with-border">
-        <?php echo $this->partial('admin/orden/_buscar.phtml', array('form' => $form)); ?>
+        <?php echo $this->partial('admin/ordendetalle/_buscar.phtml', array('form' => $form)); ?>
     </div>
     <div class="box-body">
         <?php echo $this->showMessenger($this->flashMessenger()->getMessages()); ?>
@@ -18,34 +18,24 @@ $this->layout()->breadcrumb = array(
             <thead>
             <tr>
                 <th>Id</th>
-                <th style="white-space:nowrap;">Cód. Pago</th>
                 <th>Correo</th>
-                <th style="white-space:nowrap;">Método Pago</th>
+                <th>Recarga</th>
                 <th>Monto</th>
-                <th style="white-space:nowrap;">F. Confirmación</th>
-                <th>Estado</th>
-                <th>Comprobante</th>
-                <th style="white-space:nowrap;">Nro. Comprobante</th>
-                <th style="white-space:nowrap;">Tipo Documento</th>
-                <th style="white-space:nowrap;">Razón Social</th>
-                <th>Nombres</th>
+                <th style="white-space:nowrap;">Fecha</th>
+                <th style="white-space:nowrap;">Nro. Tarjeta</th>
+                <th>Estado Pago</th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($gridList as $row) : ?>
                 <tr>
                     <td><?php echo $row['id'] ?></td>
-                    <td><?php echo $row['pago_referencia'] ?></td>
                     <td><?php echo $row['email'] ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoPago($row['pago_tarjeta']); ?></td>
+                    <td><?php echo $row['titulo1'] ?></td>
                     <td><?php echo $row['monto'] ?></td>
                     <td><?php echo $row['fecha_creacion'] ?></td>
+                    <td><?php echo $row['numero'] ?></td>
                     <td><?php echo \Orden\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoComprobante($row['comprobante_tipo']); ?></td>
-                    <td><?php echo $row['comprobante_numero'] ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoDocumento($row['documento_tipo']); ?></td>
-                    <td><?php echo $row['fac_razon_social'] ?></td>
-                    <td><?php echo $row['nombres']; ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>
@@ -64,8 +54,8 @@ $this->layout()->breadcrumb = array(
             "searching": false,
             "ordering": false,
             "info": true,
-            "autoWidth": true,
-            "order": [[ 2, "desc" ]]
+            "autoWidth": true
+            //"order": [[ 2, "desc" ]]
         });
         common.deleteRemote();
 
@@ -81,24 +71,16 @@ $this->layout()->breadcrumb = array(
             $("#formBuscar").submit();
         });
 
-        $("#cmbTipoComp").on('change', function() {
-            $("#formBuscar").submit();
-        });
-
         $("#cmbPagoEstado").on('change', function() {
-            $("#formBuscar").submit();
-        });
-
-        $("#cmbMetodoPago").on('change', function() {
             $("#formBuscar").submit();
         });
 
     });
 
     function exportarExcel(){
-        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/orden/exportar-excel");
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/ordendetalle/exportar-excel");
         $("#formBuscar").submit();
-        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/orden");
+        $("#formBuscar").attr("action","<?php echo BASE_URL; ?>admin/ordendetalle");
     }
 
 </script>

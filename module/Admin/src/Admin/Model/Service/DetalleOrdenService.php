@@ -8,6 +8,8 @@
 
 namespace Admin\Model\Service;
 
+use \Common\Helpers\String;
+
 class DetalleOrdenService
 {
     protected $_repository = null;
@@ -41,12 +43,11 @@ class DetalleOrdenService
             );
 
             $paramsWhere = array(
-                'comprobante_tipo' => String::xssClean($params['cmbTipoComp']),
-                'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
+                'pago_estado' => String::xssClean($params['cmbPagoEstado'])
             );
 
             $betwween = array(
-                'o.fecha_creacion' => array(
+                'u.fecha_creacion' => array(
                     'min'=> String::xssClean($params['txtFechaIni']),
                     'max'=> String::xssClean($params['txtFechaFin'])
                 )

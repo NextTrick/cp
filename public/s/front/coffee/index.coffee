@@ -156,6 +156,8 @@ $ ->
 						# Active error response
 						#functions.errorAsociate()
 					, 2000
+					# agregar un settimeout para que se oculte el success u error
+					# luego de eso recargar
 					return false
 				else
 					dom.asociateForm.parsley().validate()

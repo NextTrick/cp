@@ -84,7 +84,7 @@ class UsuarioController extends SecurityAdminController
                     )
                 )
             );
-            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($style['cabecera']);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Email');
             $sheet->setCellValue('B1', 'Nombre');
@@ -98,13 +98,11 @@ class UsuarioController extends SecurityAdminController
             $sheet->setCellValue('J1', 'Distrito');
             $sheet->setCellValue('K1', 'F. Nacimiento');
             $sheet->setCellValue('L1', 'F. Creación');
-            $sheet->setCellValue('M1', 'Código Activar');
-            $sheet->setCellValue('N1', 'mguid');
-            $sheet->setCellValue('O1', 'Estado');
+            $sheet->setCellValue('M1', 'mguid');
+            $sheet->setCellValue('N1', 'Estado');
 
             $index = 2;
             foreach ($data as $key => $reg) {
-                $estado = (!empty($reg['estado']))? 'Activo': 'Baja';
                 $sheet->setCellValue('A'.$index, $reg['email']);
                 $sheet->setCellValue('B'.$index, $reg['nombres']);
                 $sheet->setCellValue('C'.$index, $reg['paterno']);
@@ -117,9 +115,8 @@ class UsuarioController extends SecurityAdminController
                 $sheet->setCellValue('J'.$index, $reg['nombreDist']);
                 $sheet->setCellValue('K'.$index, $reg['fecha_nac']);
                 $sheet->setCellValue('L'.$index, $reg['fecha_creacion']);
-                $sheet->setCellValue('M'.$index, $reg['codigo_activar']);
-                $sheet->setCellValue('N'.$index, $reg['mguid']);
-                $sheet->setCellValue('O'.$index, $estado);
+                $sheet->setCellValue('M'.$index, $reg['mguid']);
+                $sheet->setCellValue('N'.$index, \Usuario\Model\Service\UsuarioService::getNombreEstado($reg['estado']));
                 $index ++;
             }
 
@@ -135,7 +132,7 @@ class UsuarioController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A2:O'.($index-1))->applyFromArray($style['body']);
+            $objPHPExcel->getActiveSheet()->getStyle('A2:N'.($index-1))->applyFromArray($style['body']);
             $nameFile = 'reporteUsuario_'. trim($date->format('Y-m-d_His')).'.xlsx';
 
             // Rename worksheet

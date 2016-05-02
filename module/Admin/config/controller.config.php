@@ -16,6 +16,7 @@ return array(
         
         'Admin\Controller\Orden' => 'Admin\Controller\OrdenController',
         'Admin\Controller\Carrito' => 'Admin\Controller\CarritoController',
+        'Admin\Controller\Ordendetalle' => 'Admin\Controller\OrdendetalleController',
         
         'Admin\Controller\Usuario' => 'Admin\Controller\UsuarioController',
     ),
