@@ -6,9 +6,11 @@
  *
  */
 
-namespace Orden\Model\Repository;
+namespace Admin\Model\Repository;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Select;
 
 class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 {
@@ -26,14 +28,21 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
         try {
             $sql= new Sql($this->getAdapter());
 
-            $select = $sql->select();
-            $select->quantifier(\Zend\Db\Sql\Select::QUANTIFIER_DISTINCT);
-            $select->from(array('o'=> $this->table));
-            $select->columns(array('id', 'usuario_id', 'pago_referencia','pago_estado', 'pago_tarjeta','monto_total', 'estado',
-                'fecha_creacion'
+            $selectInterno = $sql->select();
+            $selectInterno->from(array('od'=> $this->table));
+            $selectInterno->columns(array('id', 'monto', 'fecha_creacion', 'emoney', 'bonus', 'promotionbonus', 'etickets', 'gamepoints'
             ));
-            $select->join(array('u' => 'usuario_usuario'), 'u.id = o.usuario_id',
-                array('id', 'email'), 'inner');
+            $selectInterno->join(array('p' => 'paquete_paquete'), 'p.id = od.paquete_id',
+                array('titulo1'), 'inner');
+            $selectInterno->join(array('o' => 'orden_orden'), 'o.id = od.orden_id',
+                array('pago_estado'), 'inner');
+            $selectInterno->join(array('u' => 'usuario_usuario'), 'u.id = o.usuario_id',
+                array('email'), 'inner');
+            $selectInterno->join(array('t' => 'tarjeta_tarjeta'), 't.id = od.tarjeta_id',
+                array('numero'), 'inner');
+
+            $select = $sql->select();
+            $select->from(array('r' => $selectInterno));
 
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
@@ -73,6 +82,7 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
             return $rows;
 
         } catch (\Exception $e) {
+            echo 'ERROR='.$e->getMessage();exit;
             throw new \Exception($e->getMessage());
         }
     }

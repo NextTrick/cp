@@ -5,14 +5,14 @@
  * Descripción :
  *
  */
-namespace Orden\Form;
+namespace Admin\Form;
 
-use Orden\Model\Service\OrdenService;
+use Admin\Model\Service\DetalleOrdenService;
 use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class CarritoBuscarForm extends Form
+class DetalleOrdenBuscarForm extends Form
 {
     protected $_sl = null;
 
@@ -50,12 +50,12 @@ class CarritoBuscarForm extends Form
         $this->add($cmbFiltro);
 
         $filtroEstado = $this->getOrdenService()->getPagoEstados();
-        $cmbEstado    = new Element\Select('cmbEstado');
-        $cmbEstado->setAttributes(array('id' => 'cmbEstado'));
-        $cmbEstado->setValueOptions($filtroEstado);
-        $cmbEstado->setEmptyOption('- Seleccione -');
-        $cmbEstado->setDisableInArrayValidator(true);
-        $this->add($cmbEstado);
+        $cmbPagoEstado    = new Element\Select('cmbPagoEstado');
+        $cmbPagoEstado->setAttributes(array('id' => 'cmbPagoEstado'));
+        $cmbPagoEstado->setValueOptions($filtroEstado);
+        $cmbPagoEstado->setEmptyOption('- Seleccione -');
+        $cmbPagoEstado->setDisableInArrayValidator(true);
+        $this->add($cmbPagoEstado);
 
 
         $txtFechaIni = new Element\Text('txtFechaIni');
@@ -76,7 +76,7 @@ class CarritoBuscarForm extends Form
 
     private function getCarritoService()
     {
-        return $this->_sl->get('Orden\Model\Service\CarritoService');
+        return $this->_sl->get('Admin\Model\Service\DetalleOrdenService');
     }
 
     private function getOrdenService()
