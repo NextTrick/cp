@@ -50,6 +50,7 @@ class RegistroController extends AbstractActionController
         $openPopapConfRegistro = 0;
         $registroForm = (float)$this->request->getPost('registro_form');
         if ($this->request->isPost() && !$registroForm) {
+            //=========== Llenar los combos ===========
             $codPais = $this->request->getPost('cod_pais');
             $codDep = $this->request->getPost('cod_depa');
             $departamentos = $this->_getUbigeoService()->getDepartamentos($codPais);
@@ -57,31 +58,31 @@ class RegistroController extends AbstractActionController
             $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDep);
             $form->get('cod_dist')->setValueOptions($distritos);
             
+            //=========== Aplicar filter ===========
             $form->setInputFilter(new \Application\Filter\RegistroFilter());
             $data = $this->request->getPost();
+            
             $form->setData($data);
-            if ($form->isValid()) {
+            
+            //=========== Validar fecha ===========
+            $fechaValida = false;
+            $fechaNac = null;
+            if (\Common\Helpers\Util::checkDate($data['mes'], $data['dia'], $data['anio'])) {
+                $fechaValida = true;
+                $fechaNac = $data['anio'] . '-' . $data['mes'] . '-' . $data['dia'];
+            } else {
+                $form->get('dia')->setMessages(array('noValido' => 'El campo fecha no es válido.'));
+            }
+
+            if ($form->isValid() && $fechaValida) {
                 $data = $form->getData();
-                $gateway = $this->_getDataRegistroTemp('gateway');
-                
-                $redSocial = false;
-                switch ($gateway) {
-                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
-                        $data['facebook_id'] = $this->_getDataRegistroTemp('id');
-                        $redSocial = true;
-                        break;
-                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
-                        $data['twitter_id'] = $this->_getDataRegistroTemp('id');
-                        $redSocial = true;
-                        break;
-                }
+                $data['fecha_nac'] = $fechaNac;
 
                 $repository = $this->_getUsuarioService()->getRepository();
                 //verificar en base de datos
                 $criteria = array('where' => array('email' => $data['email']));
                 $row = $repository->findOne($criteria);
                 if (!empty($row)) {
-                    $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
                     $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
                 } else {
                     $saveData = $this->_saveData($data);
@@ -133,20 +134,29 @@ class RegistroController extends AbstractActionController
                 'cod_dist' => $data['cod_dist'],
                 'fecha_nac' => $data['fecha_nac'],
             );
+
+            $gateway = $this->_getDataRegistroTemp('gateway');   
+            switch ($gateway) {
+                case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
+                    $dataIn['facebook_id'] = $this->_getDataRegistroTemp('id');
+                    break;
+                case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
+                    $dataIn['twitter_id'] = $this->_getDataRegistroTemp('id');
+                    break;
+            }
+            
             $save = $repository->save($dataIn);
             if ($save) {
                 $result['success'] = true;
                 $result['message'] = null;
-                $this->_removeDataRegistroTemp();
             } else {
-                $result['message'] = 'Lo sentimos, no se pudo completar el '
-                    . 'proceso, por favor inténtalo más tarde.';
+                $result['message'] = 'No se pudo completar el proceso';
             }
         } else {
-            $result['message'] = 'Lo sentimos, no se pudo completar el '
-                    . 'proceso, por favor inténtalo más tarde.';
+            $result['message'] = 'No se pudo completar el proceso';
         }
         
+        $this->_removeDataRegistroTemp();
         return $result;
     }
     

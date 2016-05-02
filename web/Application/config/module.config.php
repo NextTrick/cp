@@ -146,6 +146,16 @@ return array(
                     ),
                 ),
             ),
+            'web-recargas' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/recargas[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Recargas',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'web-login' => array(
                 'type' => 'Literal',
                 'options' => array(
@@ -173,18 +183,6 @@ return array(
                                 '__NAMESPACE__' => 'Application\Controller',
                                 'controller'    => 'Login',
                                 'action'        => 'index',
-                            ),
-                        ),
-                    ),
-                    'login' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            // Change this to something specific to your module
-                            'route' => '/[:data]',
-                            'defaults' => array(
-                                'controller' => 'Application\Controller\Login',
-                                'action'     => 'index',
-                                'data' => '[a-zA-Z][a-zA-Z0-9_-]*',
                             ),
                         ),
                     ),

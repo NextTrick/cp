@@ -103,6 +103,7 @@
                                 <?php echo $this->formElement($this->form->get('anio')->setAttributes(array(
                                     'class' => '',
                                 ))) ?>
+                                <?php echo $this->formElementerrors($form->get('dia')); ?>
                             </div>
                         </div>
                         <div class="form_control">
@@ -114,7 +115,7 @@
                     </div>
                 <?php echo $this->form()->closeTag(); ?>
                 <hr/>
-                <div class="login_link"><a href="login.html">Ya tengo una cuenta en Coney Park<span></span></a></div>
+                <div class="login_link"><a href="<?php echo BASE_URL ?>login">Ya tengo una cuenta en Coney Park<span></span></a></div>
             </div>
         </div>
         <div id="modal_response_signin" class="modal_box" data-open="<?php echo $openPopapConfRegistro; ?>">

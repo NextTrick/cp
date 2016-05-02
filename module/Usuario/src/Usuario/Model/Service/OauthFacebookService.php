@@ -41,11 +41,11 @@ class OauthFacebookService
 
         $helper = $fb->getRedirectLoginHelper();
 
-        $accessToken = $this->_container->offsetGet('access_token');
+        $accessToken = $this->_container->offsetGet('access_token_fb');
         if (empty($accessToken)) {
             try {
                 $accessToken = $helper->getAccessToken();
-                $this->_container->offsetSet('access_token', $accessToken);
+                $this->_container->offsetSet('access_token_fb', $accessToken);
             } catch(\Facebook\Exceptions\FacebookResponseException $e) {
                 throw new \Exception($e->getMessage(), $e->getCode());
             } catch(\Facebook\Exceptions\FacebookSDKException $e) {
@@ -72,7 +72,7 @@ class OauthFacebookService
             // Exchanges a short-lived access token for a long-lived one
             try {
               $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-              $this->_container->offsetSet('access_token', $accessToken);
+              $this->_container->offsetSet('access_token_fb', $accessToken);
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
                 throw new \Exception($e->getMessage(), $e->getCode());
             } catch (\Exception $e) {
@@ -86,7 +86,8 @@ class OauthFacebookService
             $data = $response->getGraphUser();
             if (!empty($data['id'])) {
                 $criteria = array('where' => array('facebook_id' => $data['id']));
-                $registrado = $this->getRepository()->findExists($criteria);
+                $row = $this->getRepository()->findOne($criteria);
+                $registrado = empty($row) ? false : true;
                 $data = array(
                     'id' => $data['id'],
                     'email' => $data['email'],
@@ -95,6 +96,10 @@ class OauthFacebookService
                 );
                 if ($registrado == false) {
                     $this->_container->offsetSet('temp_registro', $data);
+                } else {
+                    //===============  Data Login ==============
+                    $session = $this->getRepository()->getUsuarioByEmail($row['email']);
+                    $this->_container->offsetSet('usuario', $session);
                 }
                 return $data;
             } else {
@@ -132,7 +137,7 @@ class OauthFacebookService
     
     public function isLoggedIn()
     {
-        if ($this->_container->offsetExists('access_token')) {
+        if ($this->_container->offsetExists('access_token_fb')) {
             return true;
         }
         return false;
@@ -143,6 +148,14 @@ class OauthFacebookService
         $this->_container->getManager()->getStorage()->clear();
     }
 
+    public function getData()
+    {
+        if ($this->_container->offsetExists('usuario')) {
+            return $this->_container->offsetGet('usuario');
+        }
+        return array();
+    }
+    
     public function getRepository()
     {
         return $this->_repository;
