@@ -133,6 +133,7 @@ class RegistroController extends AbstractActionController
                 'cod_depa' => $data['cod_depa'],
                 'cod_dist' => $data['cod_dist'],
                 'fecha_nac' => $data['fecha_nac'],
+                'estado' => 0,
             );
 
             $gateway = $this->_getDataRegistroTemp('gateway');   
