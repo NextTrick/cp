@@ -140,6 +140,9 @@ section
 						margin-right -1px
 					&.active
 						background #F7A100
+					a
+						text-decoration none
+						color black
 			&:before
 				content ''
 				color #ececec
@@ -416,6 +419,9 @@ section
 				background url(../images/card_empty.png)
 				position relative
 				vertical-align top
+				input
+				button
+					height 36px
 				&.add_card
 					cursor pointer
 					background url(../images/add_card_bg.png)
@@ -792,15 +798,25 @@ footer
 	background url(../images/modal_bg.png)
 #how_asociate_card
 	width 500px
-	height 800px
+	height 685px
 	background #EEEEEE
 	border-radius 10px
 	.modal_content
+		text-align center
 		margin-top 20px
+		.icon_logo
+			position absolute
+			top -28px
+			left 46%
 		h3
 			color black
+			font-weight normal
+			font-size 24px
 		p
-			color black
+			color gray
+			text-align left
+		img
+			margin 0 auto
 
 
 //parsley
