@@ -27,6 +27,7 @@ class MisTarjetasController extends SecurityWebController
 
         $result = array(
             'success' => true,
+            'type' => 'validacion',
             'message' => 'Error, intentelo nuevamente.'
         );
         
@@ -39,6 +40,7 @@ class MisTarjetasController extends SecurityWebController
             if (empty($nombre) || empty($numero)) {
                 $result = array(
                     'success' => false,
+                    'type' => 'validacion',
                     'message' => 'Ingrese el nombre y el número.'
                 );
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -49,6 +51,7 @@ class MisTarjetasController extends SecurityWebController
             if ($existe) {
                 $result = array(
                     'success' => false,
+                    'type' => 'validacion',
                     'message' => 'Ya existe el nombre.'
                 );
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -61,6 +64,7 @@ class MisTarjetasController extends SecurityWebController
                 'nombre' => $nombre,
             );
             $result = $this->_getUsuarioService()->asociarTarjeta($data);
+            $result['type'] = 'proceso';
         }
         
         $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -75,6 +79,7 @@ class MisTarjetasController extends SecurityWebController
 
         $result = array(
             'success' => false,
+            'type' => 'validacion',
             'message' => 'Error, intentelo nuevamente.'
         );
         
@@ -87,6 +92,7 @@ class MisTarjetasController extends SecurityWebController
             if (empty($nombre)) {
                 $result = array(
                     'success' => false,
+                    'type' => 'validacion',
                     'message' => 'Asigne un nombre a la tarjeta.'
                 );
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -96,6 +102,7 @@ class MisTarjetasController extends SecurityWebController
             if ($existe) {
                 $result = array(
                     'success' => false,
+                    'type' => 'validacion',
                     'message' => 'Ya existe el nombre.'
                 );
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -111,9 +118,11 @@ class MisTarjetasController extends SecurityWebController
                 $save = $this->_getTarjetaService()->getRepository()->save($data, $row['id']);
                 if (!empty($save)) {
                     $result['success'] = true;
+                    $result['type'] = 'proceso';
                     $result['message'] = null;
                 }
             } else {
+                $result['type'] = 'proceso';
                 $result['message'] = 'La tarjeta no se encuentra registrada.';
             }
         }
