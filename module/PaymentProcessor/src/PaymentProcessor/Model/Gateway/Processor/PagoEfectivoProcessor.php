@@ -54,6 +54,8 @@ class PagoEfectivoProcessor extends AbstractProcessor
         $return = array(
             'success' => true,            
         );
+
+        $cDate - date('Y-m-d H:i:s');
         
         if (!empty($params['data']) && !empty($params['version']) 
             && $params['version'] == 2) {
@@ -82,6 +84,8 @@ class PagoEfectivoProcessor extends AbstractProcessor
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_ERROR;
                         $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
                 }
+                $return['data']['confirmationDate'] = $cDate;
+                
             } catch (\Exception $e) {
                 $return['success'] = false;
                 $return['error']['message'] = $e->getMessage();
