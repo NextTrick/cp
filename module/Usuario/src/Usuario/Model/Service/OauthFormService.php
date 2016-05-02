@@ -72,6 +72,8 @@ class OauthFormService
                     break;
                 case Result::SUCCESS:
                     if ($result->isValid()) {
+                        $data = $this->getRepository()->getUsuarioByEmail($email);
+                        $this->_auth->getStorage()->write($data);
                         $this->_resultLogin->error = false;
                         $this->_resultLogin->mesagge = null;
                     }
@@ -104,6 +106,15 @@ class OauthFormService
     public function isLoggedIn()
     {
         return $this->_auth->hasIdentity();
+    }
+
+    public function getData()
+    {
+        if ($this->_auth->hasIdentity()) {
+            return $this->_auth->getStorage()->read();
+        }
+        
+        return array();
     }
 
     public function setMessage($messageString, $messageKey = null)

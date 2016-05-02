@@ -19,7 +19,7 @@ class LoginController extends SecurityWebController
         $view->setVariable('openPopapChangePassword', 0);
         return $view;
     }
-
+       
     public function validateSocialAction()
     {
         //Return in callback
@@ -86,6 +86,7 @@ class LoginController extends SecurityWebController
     public function logoutAction()
     {
         $this->_getLoginGatewayService()->logout();
+        return $this->redirect()->toRoute('web-login', array('controller' => 'login'));
     }
     
     private function _getLoginForm()

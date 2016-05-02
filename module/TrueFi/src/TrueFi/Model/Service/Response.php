@@ -35,7 +35,7 @@ class Response
         try {
             $responseHttp = $client->send();
             if ($responseHttp->isSuccess()) {
-                $data = json_decode($responseHttp->getBody(), true);
+                $data = (array)json_decode($responseHttp->getBody(), true);
                 $data = \Common\Helpers\Util::arrayChangeKeyCaseRecursive($data, CASE_LOWER);
                 $responseData['success'] = true;
                 $responseData['data'] = $data;

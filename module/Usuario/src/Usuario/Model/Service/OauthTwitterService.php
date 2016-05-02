@@ -49,7 +49,7 @@ class OauthTwitterService
         $oauthVerifier = $this->get('oauth_verifier');
         $accessToken = $connection->getAccessToken($oauthVerifier);
         
-        $this->_container->offsetSet('access_token', $accessToken);
+        $this->_container->offsetSet('access_token_tw', $accessToken);
         
         $this->_container->offsetUnset('temp_oauth_token');
         $this->_container->offsetUnset('temp_oauth_token_secret');
@@ -62,8 +62,9 @@ class OauthTwitterService
                 
             $data = $connection->get($url. $getfield);
             if (!empty($data->id)) {
-                $criteria = array('where' => array('facebook_id' => $data->id));
-                $registrado = $this->getRepository()->findExists($criteria);
+                $criteria = array('where' => array('twitter_id' => $data->id));
+                $row = $this->getRepository()->findOne($criteria);
+                $registrado = empty($row) ? false : true;
                 $data = array(
                     'id' => $data->id,
                     'email' => null,
@@ -72,6 +73,10 @@ class OauthTwitterService
                 );
                 if ($registrado == false) {
                     $this->_container->offsetSet('temp_registro', $data);
+                } else {
+                    //===============  Data Login ==============
+                    $session = $this->getRepository()->getUsuarioByEmail($row['email']);
+                    $this->_container->offsetSet('usuario', $session);
                 }
                 return $data;
             } else {
@@ -111,7 +116,7 @@ class OauthTwitterService
 
     public function isLoggedIn()
     {
-        if ($this->_container->offsetExists('access_token')) {
+        if ($this->_container->offsetExists('access_token_tw')) {
             return true;
         }
         return false;
@@ -120,6 +125,14 @@ class OauthTwitterService
     public function logout()
     {
         $this->_container->getManager()->getStorage()->clear();
+    }
+    
+    public function getData()
+    {
+        if ($this->_container->offsetExists('usuario')) {
+            return $this->_container->offsetGet('usuario');
+        }
+        return array();
     }
     
     private function get($name)

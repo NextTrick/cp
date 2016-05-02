@@ -19,7 +19,5 @@ return array(
         'Admin\Controller\Ordendetalle' => 'Admin\Controller\OrdendetalleController',
         
         'Admin\Controller\Usuario' => 'Admin\Controller\UsuarioController',
-        
-        'Admin\Controller\Test' => 'Usuario\Controller\TestController',
     ),
 );
