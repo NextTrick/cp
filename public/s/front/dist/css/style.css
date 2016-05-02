@@ -208,6 +208,7 @@ section.app_content .menu ul li.active {
 }
 section.app_content .menu ul li a {
   text-decoration: none;
+  color: #000;
 }
 section.app_content .menu:before {
   content: '';
@@ -563,6 +564,10 @@ section .purple_box .cards_content .col_3 {
   background: url("../images/card_empty.png");
   position: relative;
   vertical-align: top;
+}
+section .purple_box .cards_content .col_3 input,
+section .purple_box .cards_content .col_3 button {
+  height: 36px;
 }
 section .purple_box .cards_content .col_3.add_card {
   cursor: pointer;
@@ -1036,18 +1041,30 @@ footer ul li a {
 }
 #how_asociate_card {
   width: 500px;
-  height: 800px;
+  height: 685px;
   background: #eee;
   border-radius: 10px;
 }
 #how_asociate_card .modal_content {
+  text-align: center;
   margin-top: 20px;
+}
+#how_asociate_card .modal_content .icon_logo {
+  position: absolute;
+  top: -28px;
+  left: 46%;
 }
 #how_asociate_card .modal_content h3 {
   color: #000;
+  font-weight: normal;
+  font-size: 24px;
 }
 #how_asociate_card .modal_content p {
-  color: #000;
+  color: #808080;
+  text-align: left;
+}
+#how_asociate_card .modal_content img {
+  margin: 0 auto;
 }
 ul.parsley-errors-list {
   text-align: left;
