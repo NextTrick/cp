@@ -74,13 +74,13 @@ return array(
 //                    ),
 //                ),
 //            ),
-            'web-confirmar' => array(
+            'web-activar-cuenta' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/confirmar-registro[/:codigo]',
+                    'route'    => '/activar-cuenta[/:codigo]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
-                        'action'     => 'confirmar',
+                        'action'     => 'activar-cuenta',
                         'codigo' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                 ),
