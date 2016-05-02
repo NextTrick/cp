@@ -26,25 +26,26 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
     {
         $this->setCriteria($criteria);
         try {
-            $sql= new Sql($this->getAdapter());
+            $sql = new Sql($this->getAdapter());
 
             $selectInterno = $sql->select();
-            $selectInterno->from(array('od'=> 'orden_detalle_orden'));
+            $selectInterno->from(array("od"=> "orden_detalle_orden"));
             $selectInterno->columns(array('id', 'monto', 'fecha_creacion', 'emoney', 'bonus', 'promotionbonus', 'etickets', 'gamepoints'
             ));
-            $selectInterno->join(array('p' => 'paquete_paquete'), 'p.id = od.paquete_id',
-                array('titulo1'), 'inner');
-            $selectInterno->join(array('o' => 'orden_orden'), 'o.id = od.orden_id',
-                array('pago_estado'), 'inner');
-            $selectInterno->join(array('u' => 'usuario_usuario'), 'u.id = o.usuario_id',
-                array('email'), 'inner');
-            $selectInterno->join(array('t' => 'tarjeta_tarjeta'), 't.id = od.tarjeta_id',
-                array('numero'), 'inner');
+            $selectInterno->join(array("p" => "paquete_paquete"), "p.id = od.paquete_id",
+                array("titulo1"), 'inner');
+            $selectInterno->join(array("o" => "orden_orden"), "o.id = od.orden_id",
+                array("pago_estado"), 'inner');
+            $selectInterno->join(array("u" => "usuario_usuario"), "u.id = o.usuario_id",
+                array("email"), 'inner');
+            $selectInterno->join(array("t" => "tarjeta_tarjeta"), "t.id = od.tarjeta_id",
+                array("numero"), 'inner');
 
+            $sql     = new Sql($this->getAdapter());
             $select1 = $sql->select();
-            $select1->from(array('r' => $selectInterno));
-            $select1->columns(array('pago_estado', 'id', 'monto', 'fecha_creacion', 'emoney', 'bonus',
-                'promotionbonus', 'etickets', 'gamepoints', 'titulo1', 'email', 'numero'));
+            $select1->from(array("r" => $selectInterno));
+            $select1->columns(array("pago_estado", 'id', 'monto', 'fecha_creacion', 'emoney', 'bonus',
+                'promotionbonus', 'etickets', 'gamepoints', 'titulo1', "email", 'numero'));
 
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
@@ -76,7 +77,7 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
             if (!empty($this->crLimit)) {
                 $select1->limit($this->crLimit);
             }
-            //echo $select->getSqlString($this->getAdapter()->getPlatform());exit;
+            //echo $select1->getSqlString($this->getAdapter()->getPlatform());exit;
 
             $statement = $sql->prepareStatementForSqlObject($select1);
             $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();

@@ -29,10 +29,10 @@ class DetalleOrdenService
     public function getDataCriteria($params)
     {
         $criteria = array(
-            'whereLike'    => null,
-            'limit'        => null,
-            'where'        => null,
-            'whereBetween' => null
+            "whereLike"    => null,
+            "limit"        => null,
+            "where"        => null,
+            "whereBetween" => null
         );
 
         if (!empty($params)) {
@@ -43,21 +43,21 @@ class DetalleOrdenService
             );
 
             $paramsWhere = array(
-                'pago_estado' => String::xssClean($params['cmbPagoEstado'])
+                "pago_estado" => String::xssClean($params['cmbPagoEstado'])
             );
 
             $betwween = array(
-                'fecha_creacion' => array(
-                    'min'=> String::xssClean($params['txtFechaIni']),
-                    'max'=> String::xssClean($params['txtFechaFin'])
+                "fecha_creacion" => array(
+                    "min"=> String::xssClean($params['txtFechaIni']),
+                    "max"=> String::xssClean($params['txtFechaFin'])
                 )
             );
 
             $criteria = array(
-                'whereLike'    => $paramsLike,
-                'limit'        => LIMIT_BUSCAR,
-                'where'        => $paramsWhere,
-                'whereBetween' => $betwween
+                "whereLike"    => $paramsLike,
+                //"limit"        => LIMIT_BUSCAR,
+                "where"        => $paramsWhere,
+                "whereBetween" => $betwween
             );
         }
 
