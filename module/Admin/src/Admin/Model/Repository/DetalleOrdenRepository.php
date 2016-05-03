@@ -41,10 +41,9 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
             $selectInterno->join(array("t" => "tarjeta_tarjeta"), "t.id = od.tarjeta_id",
                 array("numero"), 'inner');
 
-            $sql     = new Sql($this->getAdapter());
-            $select1 = $sql->select();
-            $select1->from(array("r" => $selectInterno));
-            $select1->columns(array("pago_estado", 'id', 'monto', 'fecha_creacion', 'emoney', 'bonus',
+            $select = $sql->select();
+            $select->from(array("r" => $selectInterno));
+            $select->columns(array("pago_estado", 'id', 'monto', 'fecha_creacion', 'emoney', 'bonus',
                 'promotionbonus', 'etickets', 'gamepoints', 'titulo1', "email", 'numero'));
 
             $where = new \Zend\Db\Sql\Where();
@@ -68,20 +67,24 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
                 }
             }
 
-            $select1->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);
+            $select->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);
 
             if (!empty($this->crOrder)) {
-                $select1->order($this->crOrder);
+                $select->order($this->crOrder);
             }
 
             if (!empty($this->crLimit)) {
-                $select1->limit($this->crLimit);
+                $select->limit($this->crLimit);
             }
-            //echo $select1->getSqlString($this->getAdapter()->getPlatform());exit;
+            //echo $select->getSqlString($this->getAdapter()->getPlatform());
 
-            $statement = $sql->prepareStatementForSqlObject($select1);
+            $statement = $sql->prepareStatementForSqlObject($select);
             $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();
 
+            //$adapter      = $this->getAdapter();
+            //$selectString = $sql->buildSqlString($selectInterno);
+            //$rows         = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+            //print_r($rows);exit;
             return $rows;
 
         } catch (\Exception $e) {

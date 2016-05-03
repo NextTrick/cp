@@ -72,8 +72,8 @@ class DetalleOrdenService
     public function getFiltrosBuscar()
     {
         return array(
-            'email'              => 'Correo',
-            'comprobante_numero' => 'Tarjeta'
+            'email'  => 'Correo',
+            'numero' => 'Tarjeta'
         );
     }
 

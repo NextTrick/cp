@@ -165,8 +165,8 @@ class OrdenService
     {
         return array(
             self::ESTADO_PAGO_ERROR     => self::ESTADO_PAGO_NAME_ERROR,
-            self::ESTADO_PAGO_PAGADO    => self::ESTADO_PAGO_NAME_PENDIENTE,
-            self::ESTADO_PAGO_PENDIENTE => self::ESTADO_PAGO_NAME_PAGADO,
+            self::ESTADO_PAGO_PAGADO    => self::ESTADO_PAGO_NAME_PAGADO,
+            self::ESTADO_PAGO_PENDIENTE => self::ESTADO_PAGO_NAME_PENDIENTE,
             self::ESTADO_PAGO_EXPIRADO => self::ESTADO_PAGO_NAME_EXPIRADO
         );
     }
