@@ -19,17 +19,16 @@ class OrdenController extends SecurityAdminController
     public function indexAction()
     {
         try {
-            $form = $this->getServiceLocator()->get('Orden\Form\BuscarForm');
+            $form = $this->getServiceLocator()->get('Admin\Form\OrdenBuscarForm');
             $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
                 'controller' => 'orden', 'action' => 'index'
             )));
 
             $form->setData($this->params()->fromPost());
 
-            $criteria = $this->_getOrdenService()->getDataCriteria($this->params()->fromPost());
-
+            $criteria  = $this->_getOrdenService()->getDataCriteria($this->params()->fromPost());
             $gridList  = $this->_getOrdenService()->getRepository()->search($criteria);
-            $countList = $this->_getOrdenService()->getRepository()->countTotal($criteria);
+            $countList = !empty($gridList)? count($gridList): 0;
 
             $view = new ViewModel();
             $view->setVariable('gridList', $gridList);
@@ -308,11 +307,11 @@ class OrdenController extends SecurityAdminController
     
     protected function _getOrdenForm()
     {
-        return $this->getServiceLocator()->get('Orden\Form\OrdenForm');
+        return $this->getServiceLocator()->get('Admin\Form\OrdenForm');
     }
 
     protected function _getOrdenService()
     {
-        return $this->getServiceLocator()->get('Orden\Model\Service\OrdenService');
+        return $this->getServiceLocator()->get('Admin\Model\Service\OrdenService');
     }
 }

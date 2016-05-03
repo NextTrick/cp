@@ -32,11 +32,11 @@ class ContenidoController extends SecurityAdminController
 
             $criteria = array(
                 'whereLike' => $params,
-                'limit' => LIMIT_BUSCAR,
+                'limit'     => LIMIT_BUSCAR,
             );
 
             $gridList       = $this->_getContenidoService()->getRepository()->search($criteria);
-            $countList      = $this->_getContenidoService()->getRepository()->countTotal($criteria);
+            $countList      = !empty($gridList)? count($gridList): 0;
             $dataTipoPagina = ContenidoService::getAllTipos();
 
             $view = new ViewModel();
