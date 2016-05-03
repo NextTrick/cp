@@ -20,7 +20,7 @@ INSERT INTO `admin_recurso` (`id`, `recurso_id`, `nombre`, `url`, `orden`, `icon
 (9, 8, 'Paquetes', 'admin/paquete', 3, 'fa-circle-o', '2016-04-11 20:49:31', '2016-05-01 07:40:50', 1),
 (10, NULL, 'Reportes', '', 3, 'fa fa-table', '2016-04-15 22:18:37', '2016-04-15 22:22:36', 1),
 (11, 10, 'Usuarios', 'admin/usuario', 10, 'fa-circle-o', '2016-04-15 22:18:54', '2016-05-01 07:54:29', 1),
-(12, 10, 'Pagos', 'admin/orden', 12, 'fa-circle-o', '2016-04-15 22:19:11', '2016-05-01 08:54:11', 1),
+(12, 10, 'Transacciones', 'admin/orden', 12, 'fa-circle-o', '2016-04-15 22:19:11', '2016-05-01 08:54:11', 1),
 (13, 10, 'Operaciones', 'admin/ordendetalle', 11, 'fa-circle-o', '2016-04-15 22:20:57', '2016-05-01 08:53:40', 1),
 (14, NULL, 'CMS', '', 4, 'fa fa-edit', '2016-04-15 22:21:23', '2016-04-15 22:23:08', 1),
 (15, 14, 'Contenido', 'admin/contenido', 4, 'fa-circle-o', '2016-04-15 22:21:36', '2016-05-01 07:26:02', 1);
