@@ -21,5 +21,6 @@ define('GRID_BENEFICIOS_PROMOCIONES', 4);
 define('GRID_RECARGAS_PROMOCIONES', 3);
 define('GRID_RECARGAS_RECARGAS', 3);
 define('LIMIT_USUARIO_TARJETAS', 5);
+define('VERSION', 1000);
 
 return array();
