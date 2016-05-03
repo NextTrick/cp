@@ -477,9 +477,10 @@ section .purple_box .benefits_offers .offers_box_two .right p.breadcrumb {
   color: #f00;
   font-size: 16px;
 }
-section .purple_box .benefits_offers .offers_box_two .right p.breadcrumb span {
+section .purple_box .benefits_offers .offers_box_two .right p.breadcrumb a {
   color: #aaa;
   font-size: 14px;
+  text-decoration: none;
 }
 section .purple_box .benefits_offers .offers_box_two .right button {
   width: 300px;
@@ -507,9 +508,10 @@ section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p.bread
   color: #f00;
   font-size: 16px;
 }
-section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p.breadcrumb span {
+section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p.breadcrumb a {
   color: #aaa;
   font-size: 14px;
+  text-decoration: none;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3 button {
   margin-top: 10px;
@@ -1045,10 +1047,28 @@ footer ul li a {
 #modal_recovery_response,
 #modal_new_password,
 #modal_new_password_response,
-#modal_response_signin {
+#modal_response_signin,
+#modal_watch_legal {
   width: 651px;
   height: 686px;
   background: url("../images/modal_bg.png");
+}
+#modal_watch_legal .modal_content {
+  border-radius: 8px;
+  width: 600px;
+  height: 200px;
+  background: #d3d3d3;
+  color: #000;
+  font-size: 12px;
+}
+#modal_watch_legal .modal_content h3 {
+  color: #000;
+  font-size: 16px;
+  margin: 0;
+}
+#modal_watch_legal .modal_content .text_box {
+  overflow-y: scroll;
+  height: 180px;
 }
 #how_asociate_card {
   width: 500px;

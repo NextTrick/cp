@@ -10,7 +10,8 @@ $(function() {
       btnRecovery: '#btn_recovery',
       btnChangePass: '#btn_change_password',
       errorMessage: '.error_message',
-      closeErrorMessage: '.error_message .icon'
+      closeErrorMessage: '.error_message .icon',
+      watchLegal: '.watch_legal'
     };
     catchDom = function() {
       dom.btn = $(st.btn);
@@ -20,6 +21,7 @@ $(function() {
       dom.btnChangePass = $(st.btnChangePass);
       dom.errorMessage = $(st.errorMessage);
       dom.closeErrorMessage = $(st.closeErrorMessage);
+      dom.watchLegal = $(st.watchLegal);
     };
     suscribeEvents = function() {
       dom.btn.on('click', events.openModal);
@@ -28,6 +30,7 @@ $(function() {
       dom.btnRecovery.on('click', events.closeRecoveryModal);
       dom.btnChangePass.on('click', events.closeNewPassModal);
       dom.closeErrorMessage.on('click', events.closeErrorMessage);
+      dom.watchLegal.on('click', events.openModal);
     };
     events = {
       openModal: function(e) {
@@ -150,24 +153,11 @@ $(function() {
       asociateCard: function(e) {
         e.preventDefault();
         if (dom.asociateForm.parsley().isValid()) {
-            dom.contentAsociate.hide();
-            dom.loading.show();
-            $.ajax({
-                type: "POST",
-                url: $('#form_asociar_nueva_tarjeta').attr('action'),
-                data: $('#form_asociar_nueva_tarjeta').serialize(),
-                dataType: 'json',
-                success: function(data) {
-                    if (data.success) {
-                        return functions.successAsociate();
-                    } else {
-                        return functions.errorAsociate();
-                    }
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    return functions.errorAsociate();
-                }
-            });
+          dom.contentAsociate.hide();
+          dom.loading.show();
+          setTimeout(function() {
+            return functions.successAsociate();
+          }, 2000);
           return false;
         } else {
           return dom.asociateForm.parsley().validate();
@@ -196,23 +186,9 @@ $(function() {
       },
       editCardName: function() {
         if ($(this).hasClass('active')) {
-            $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
-            $(this).removeClass('active');
-            $(this).parent().children(st.nameCard).show();
-            var sufix = $(this).data('sufix');
-            $.ajax({
-                type: "POST",
-                url: baseUrl+'mis-tarjetas/editar-nombre',
-                data: {nombre: $('#edit_nombre_'+sufix).val(), numero: $('#edit_numero_'+sufix).val()},
-                dataType: 'json',
-                success: function(data) {
-                    if (data.success) {
-                    } else {
-                    }
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                }
-            });
+          $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
+          $(this).removeClass('active');
+          $(this).parent().children(st.nameCard).show();
           return $(this).parent().children(st.inputCardName).hide();
         } else {
           $(this).addClass('active');

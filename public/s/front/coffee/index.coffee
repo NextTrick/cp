@@ -9,6 +9,7 @@ $ ->
 			btnChangePass : '#btn_change_password'
 			errorMessage : '.error_message'
 			closeErrorMessage : '.error_message .icon'
+			watchLegal : '.watch_legal'
 
 		catchDom = ->
 			dom.btn = $(st.btn)
@@ -18,6 +19,7 @@ $ ->
 			dom.btnChangePass = $(st.btnChangePass)
 			dom.errorMessage = $(st.errorMessage)
 			dom.closeErrorMessage = $(st.closeErrorMessage)
+			dom.watchLegal = $(st.watchLegal)
 			return
 		suscribeEvents = () ->
 			dom.btn.on 'click', events.openModal
@@ -26,6 +28,7 @@ $ ->
 			dom.btnRecovery.on 'click', events.closeRecoveryModal
 			dom.btnChangePass.on 'click', events.closeNewPassModal
 			dom.closeErrorMessage.on 'click', events.closeErrorMessage
+			dom.watchLegal.on 'click', events.openModal
 			return
 		events =
 			openModal : (e) ->
@@ -207,6 +210,7 @@ $ ->
 			return
 
 		return init: initialize 
+
 
 	open_tooltip().init()
 	modal_login().init()
