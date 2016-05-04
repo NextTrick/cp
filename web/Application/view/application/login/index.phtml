@@ -28,9 +28,9 @@
                             echo $this->formInput($form->get('email')->setAttributes(array(
                                         'placeholder' => 'ejemplo@micorreo.com',
                                         'data-parsley-required' => 'data-parsley-required',
-                                        'data-parsley-required-message' => 'Dato obligatorio',
+                                        'data-parsley-required-message' => 'El campo es requerido y no puede estar vacío.',
                                         'data-parsley-type' => 'email',
-                                        'data-parsley-type' => 'Ingrese un correo válido',
+                                        'data-parsley-type-message' => 'El correo ingresado no tiene formato válido.',
                                         'class' => 'email',
                             )));
                             ?>
@@ -43,7 +43,7 @@
                             echo $this->formInput($form->get('password')->setAttributes(array(
                                         'placeholder' => 'contraseña',
                                         'data-parsley-required' => 'data-parsley-required',
-                                        'data-parsley-required-message' => 'Dato obligatorio',
+                                        'data-parsley-required-message' => 'El campo es requerido y no puede estar vacío.',
                                         'class' => 'password',
                             )));
                             ?>
