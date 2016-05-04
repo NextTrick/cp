@@ -61,7 +61,23 @@ $(function() {
         return $('.modal_box').hide();
       },
       closeRecoveryModal: function() {
-        return $('#modal_recovery_password').hide();
+        $.ajax({
+            type: "POST",
+            url: baseUrl+'recuperar-password',
+            data:{email:$('#email_recuperar').val(), token:$('#token_csrf').val()},
+            dataType: 'json',
+            success: function(data){
+                $('#token_csrf').val(data.token);
+                if (data.success) {
+                    $('#error_recuperar_password').html('');
+                    $('#modal_recovery_password').hide();
+                } else {
+                    $('#error_recuperar_password').html(data.message);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            }
+        });
       },
       closeNewPassModal: function() {
         return $('#modal_new_password').hide();
