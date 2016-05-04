@@ -211,7 +211,39 @@ $ ->
 
 		return init: initialize 
 
+	user_account = () ->
+		dom = {}
+		st =
+			userAccount : '.user_account'
+			logout : '.logout'
 
+		catchDom = ->
+			dom.userAccount = $(st.userAccount)
+			dom.logout = $(st.logout)
+			return
+		suscribeEvents = () ->
+			dom.userAccount.on 'click', events.openLogoutOption
+			return
+		events =
+			openLogoutOption : (e) ->
+				e.preventDefault()
+				if dom.logout.hasClass 'active'
+					dom.logout.removeClass 'active'
+				else
+					dom.logout.addClass 'active'
+
+		functions = 
+			successAsociate: ->
+				return
+
+		initialize = ->
+			catchDom()
+			suscribeEvents()
+			return
+
+		return init: initialize 
+
+	user_account().init()
 	open_tooltip().init()
 	modal_login().init()
 	return
