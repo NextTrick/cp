@@ -223,6 +223,7 @@ $(function() {
               } else {
                 if (data.success) {
                   functions.successAsociate();
+                  setTimeout(function(){location.reload();}, 4000);
                 } else {
                   functions.errorAsociate();
                 }
