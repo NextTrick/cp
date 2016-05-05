@@ -743,6 +743,8 @@ section .purple_box .cards_content .col_3 .loading {
   height: 100%;
   display: none;
   border-radius: 10px;
+  position: absolute;
+  top: 0;
 }
 section .purple_box .cards_content .col_3 .loading img {
   margin-top: 50px;
@@ -756,6 +758,8 @@ section .purple_box .cards_content .col_3 .duplicate_box {
   height: 100%;
   display: none;
   border-radius: 10px;
+  position: absolute;
+  top: 0;
 }
 section .purple_box .cards_content .col_3 .success_box a,
 section .purple_box .cards_content .col_3 .error_box a,
