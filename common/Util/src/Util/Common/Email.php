@@ -198,16 +198,14 @@ class Email
             }
 
             $this->smtp->setOptions(new SmtpOptions($smptOptions));
-        } else {
+        } else {            
             $options = $this->config['transport']['options'];
             $smptOptions['host'] = $options['host'];
             $smptOptions['port'] = $options['port'];
+                        
+            $smptOptions['connection_class'] = $options['connection_class'];
+            $smptOptions['connection_config'] = $options['connection_config'];
             
-            if (isset($options['use_smtp']) && $options['use_smtp']) {
-                $smptOptions['connection_class'] = $options['connection_class'];
-                $smptOptions['connection_config'] = $options['connection_config'];
-            }
-
             $this->smtp->setOptions(new SmtpOptions($smptOptions));
         }
     }

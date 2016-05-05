@@ -18,7 +18,13 @@ class IndexController extends AbstractActionController
     public function testEmailAction()
     {
         try {
-            Email::reportDebug(array(1,2,3));
+            $body = 'cuerpo del mensaje';
+            $to = 'ing.angeljara@gmail.com';
+            $subject = 'Confirmar de cuenta';
+            
+            Email::send($subject, $body, $to, $html = false, $bcc = null, $fromName = null, $fromEmail = null);
+
+            //Email::reportDebug(array(1,2,3));
         } catch (\Exception $e) {
             var_dump($e->getTraceAsString()); exit;
         }

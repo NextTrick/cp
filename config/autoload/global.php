@@ -113,8 +113,8 @@ return array(
         'fromEmail' => 'contacto@coneypark.com',
         'fromName' => 'ConeyPark',
         'subject' => 'ConeyPark'
-    ),    
-                
+    ), 
+         
     //Emails
     'emails' => array(
         'admin' => 'ing.angeljara@gmail.com', // email del administrador
