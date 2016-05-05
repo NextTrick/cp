@@ -133,7 +133,8 @@ $ ->
 			btnAsociateCard : '.btn_asociate_card'
 			asociateForm : '.asociate_form'
 			success : '.success_box'
-			error: '.error_box'
+			error : '.error_box'
+			duplicate : '.duplicate_box'
 			watchMore : '.watch_more'
 			topCardContent : '.top_card'
 			showMoreContent : '.show_more_content'
@@ -142,6 +143,10 @@ $ ->
 			editCardName : '.card_title .edit_icon'
 			nameCard : '.card_title .text'
 			inputCardName : '.card_title .input_name'
+			loadingTemplate : '#loading_template'
+			successTemplate : '#success_template'
+			errorTemplate : '#error_template'
+			duplicateTemplate : '#duplicate_template'
 
 		catchDom = ->
 			dom.addCard = $(st.addCard)
@@ -160,6 +165,10 @@ $ ->
 			dom.editCardName = $(st.editCardName)
 			dom.nameCard = $(st.nameCard)
 			dom.inputCardName = $(st.inputCardName)
+			dom.loadingTemplate = $(st.loadingTemplate)
+			dom.successTemplate = $(st.successTemplate)
+			dom.errorTemplate = $(st.errorTemplate)
+			dom.duplicateTemplate = $(st.duplicateTemplate)
 
 			return
 		suscribeEvents = () ->
@@ -188,7 +197,24 @@ $ ->
 				if dom.asociateForm.parsley().isValid()
 					dom.contentAsociate.hide()
 					dom.loading.show()
-					setTimeout ->
+					$.ajax
+						type : "POST"
+						url : $('#form_asociar_nueva_tarjeta').attr('action')
+						data : $('#form_asociar_nueva_tarjeta').serialize()
+						dataType : 'json'
+						success : (data) ->
+							if data.success == false && data.type == 'existe_nombre'
+								$('.duplicate_box').show()
+							else 
+								if data.success
+									functions.successAsociate()
+								else
+									functions.errorAsociate()
+							return
+						error: (XMLHttpRequest, textStatus, errorThrown) ->
+							functions.errorAsociate()
+							return
+					###setTimeout ->
 						# Active success response
 						functions.successAsociate()
 						# Active error response
@@ -196,9 +222,10 @@ $ ->
 					, 2000
 					# agregar un settimeout para que se oculte el success u error
 					# luego de eso recargar
-					return false
+					return false ###
 				else
 					dom.asociateForm.parsley().validate()
+				return
 			watchMore : () ->
 				if $(this).hasClass 'active'
 					$(this).parent().parent().children(st.topCardContent).show()
@@ -222,6 +249,22 @@ $ ->
 					$(this).removeClass 'active'
 					$(this).parent().children(st.nameCard).show()
 					$(this).parent().children(st.inputCardName).hide()
+					sufix = $(this).data('sufix');
+					$.ajax
+						type: "POST"
+						url: baseUrl+'mis-tarjetas/editar-nombre'
+						data: 
+							nombre: $('#edit_nombre_'+sufix).val() 
+							numero: $('#edit_numero_'+sufix).val()
+						dataType: 'json'
+						success : (data) ->
+							if data.success
+								#...
+							else
+								#...
+							return
+						error : (XMLHttpRequest, textStatus, errorThrown) ->
+							return
 				else
 					$(this).addClass 'active'
 					$(this).parent().children(st.nameCard).hide()

@@ -3,7 +3,7 @@
 define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
 define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
-define('VERSION_STATICO', '1.2');
+define('VERSION_STATICO', '1.4');
 
 define('OK_CREAR', 'El registro se creó correctamente');
 define('OK_EDITAR', 'El registro se editó correctamente');

@@ -132,6 +132,7 @@ $(function() {
       asociateForm: '.asociate_form',
       success: '.success_box',
       error: '.error_box',
+      duplicate: '.duplicate_box',
       watchMore: '.watch_more',
       topCardContent: '.top_card',
       showMoreContent: '.show_more_content',
@@ -139,7 +140,11 @@ $(function() {
       activeTooltipBonus: '.show_more_content .line .left span',
       editCardName: '.card_title .edit_icon',
       nameCard: '.card_title .text',
-      inputCardName: '.card_title .input_name'
+      inputCardName: '.card_title .input_name',
+      loadingTemplate: '#loading_template',
+      successTemplate: '#success_template',
+      errorTemplate: '#error_template',
+      duplicateTemplate: '#duplicate_template'
     };
     catchDom = function() {
       dom.addCard = $(st.addCard);
@@ -158,6 +163,10 @@ $(function() {
       dom.editCardName = $(st.editCardName);
       dom.nameCard = $(st.nameCard);
       dom.inputCardName = $(st.inputCardName);
+      dom.loadingTemplate = $(st.loadingTemplate);
+      dom.successTemplate = $(st.successTemplate);
+      dom.errorTemplate = $(st.errorTemplate);
+      dom.duplicateTemplate = $(st.duplicateTemplate);
     };
     suscribeEvents = function() {
       dom.addCard.hover(events.openTooltip, events.closeTooltip);
@@ -189,12 +198,39 @@ $(function() {
         if (dom.asociateForm.parsley().isValid()) {
           dom.contentAsociate.hide();
           dom.loading.show();
-          setTimeout(function() {
-            return functions.successAsociate();
-          }, 2000);
-          return false;
+          $.ajax({
+            type: "POST",
+            url: $('#form_asociar_nueva_tarjeta').attr('action'),
+            data: $('#form_asociar_nueva_tarjeta').serialize(),
+            dataType: 'json',
+            success: function(data) {
+              if (data.success === false && data.type === 'existe_nombre') {
+                $('.duplicate_box').show();
+              } else {
+                if (data.success) {
+                  functions.successAsociate();
+                } else {
+                  functions.errorAsociate();
+                }
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              functions.errorAsociate();
+            }
+          });
+
+          /*setTimeout ->
+          						 * Active success response
+          						functions.successAsociate()
+          						 * Active error response
+          						#functions.errorAsociate()
+          					, 2000
+          					 * agregar un settimeout para que se oculte el success u error
+          					 * luego de eso recargar
+          					return false
+           */
         } else {
-          return dom.asociateForm.parsley().validate();
+          dom.asociateForm.parsley().validate();
         }
       },
       watchMore: function() {
@@ -219,11 +255,30 @@ $(function() {
         return $(this).parent().parent().children(st.tooltipBonus).hide();
       },
       editCardName: function() {
+        var sufix;
         if ($(this).hasClass('active')) {
           $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
           $(this).removeClass('active');
           $(this).parent().children(st.nameCard).show();
-          return $(this).parent().children(st.inputCardName).hide();
+          $(this).parent().children(st.inputCardName).hide();
+          sufix = $(this).data('sufix');
+          return $.ajax({
+            type: "POST",
+            url: baseUrl + 'mis-tarjetas/editar-nombre',
+            data: {
+              nombre: $('#edit_nombre_' + sufix).val(),
+              numero: $('#edit_numero_' + sufix).val()
+            },
+            dataType: 'json',
+            success: function(data) {
+              if (data.success) {
+
+              } else {
+
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {}
+          });
         } else {
           $(this).addClass('active');
           $(this).parent().children(st.nameCard).hide();

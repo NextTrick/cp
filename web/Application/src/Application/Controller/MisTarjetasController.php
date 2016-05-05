@@ -27,7 +27,7 @@ class MisTarjetasController extends SecurityWebController
 
         $result = array(
             'success' => true,
-            'type' => 'validacion',
+            'type' => 'general',
             'message' => 'Error, intentelo nuevamente.'
         );
         
@@ -40,7 +40,7 @@ class MisTarjetasController extends SecurityWebController
             if (empty($nombre) || empty($numero)) {
                 $result = array(
                     'success' => false,
-                    'type' => 'validacion',
+                    'type' => 'campos_vacios',
                     'message' => 'Ingrese el nombre y el número.'
                 );
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -51,7 +51,7 @@ class MisTarjetasController extends SecurityWebController
             if ($existe) {
                 $result = array(
                     'success' => false,
-                    'type' => 'validacion',
+                    'type' => 'existe_nombre',
                     'message' => 'Ya existe el nombre.'
                 );
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
