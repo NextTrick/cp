@@ -310,6 +310,7 @@ section.app_content .menu ul li {
   font-size: 12px;
   height: 16px;
   padding-top: 7px;
+  width: 100px;
 }
 section.app_content .menu ul li.first {
   border-right: 1px solid #d3d3d3;
