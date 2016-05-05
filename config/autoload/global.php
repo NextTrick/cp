@@ -67,20 +67,50 @@ return array(
             'serializer'
         )
     ),
-    'mail' => array(
-        'transport' => array(
-            'options' => array(
-                'host' => '204.232.198.40',
-                'port' => 587,
-                'connection_class'  => 'login',
+
+    'view_manager' => array(
+        'base_path' => BASE_URL,
+        'display_not_found_reason' => true,
+        'display_exceptions' => true,
+        'charset' => 'UTF-8',
+        'doctype' => 'HTML5',
+        'title' => 'Videl',
+        'strategies' => array(
+           'ViewJsonStrategy',
+        ),
+    ),
+//    'mail' => array(
+//        'transport' => array(
+//            'options' => array(
+//                'host' => '204.232.198.40',
+//                'port' => 587,
+//                'connection_class'  => 'login',
 //                'connection_config' => array(
 //                    'username' => 'AKIAJSU2S4UPKXV4LUTA',
 //                    'password' => 'Aq/U/Mx/COu9VZpqAPASSkhjG958LHnBP9NeIujEF/qN',
 //                    'ssl' => 'tls',
 //                ),
+//            ),
+//        ),
+//        'fromEmail' => 'contacto@coneypark.com',
+//        'fromName' => 'ConeyPark',
+//        'subject' => 'ConeyPark'
+//    ),
+
+    'mail' => array(
+        'transport' => array(
+            'options' => array(
+                'host' => 'smtp.gmail.com',
+                'port' => 587,
+                'connection_class'  => 'login',
+                'connection_config' => array(
+                    'username' => 'autopasioncompany@gmail.com',
+                    'password' => 'Cistensure2',
+                    'ssl' => 'tls',
+                ),
             ),
         ),
-        'fromEmail' => 'contacto@coneypark.co',
+        'fromEmail' => 'contacto@coneypark.com',
         'fromName' => 'ConeyPark',
         'subject' => 'ConeyPark'
     ),    
@@ -98,6 +128,33 @@ return array(
             'password' => 'Admin123.',
         ),
     ),
+    
+    'fileDir' => array(
+        'usuario_usuario' => array(
+            'up' => APP_PATH . '/public/s/files/usuario/usuario',
+            'down' => URL_RESOURCES . 'files/usuario/usuario',
+        ),
+        'paquete_paquete' => array(
+            'up' => APP_PATH . '/public/s/files/paquete/paquete',
+            'down' => URL_RESOURCES . 'files/paquete/paquete',
+        ),
+    ),
+    'social' => array(
+        'facebook' => array(
+            'app_id' => '1676429382610359',
+            'api_secret' => 'c29480e4a45c99ce0040cb4b0801d6ee',
+            'default_scope' => 'email,user_friends,user_location',
+            'redirect_callback' => BASE_URL . 'login/callback/facebook',
+        ),
+        'twitter' => array(
+            'oauth_access_token' => '382920909-7o6d7IzogwJTc8PtKDMpC8oUm5TaXXEA50NHDm62',
+            'oauth_access_token_secret' => '4VfBvFULklW59WTPsJa5gS0zrPCILltVHcxJFcdEC9ovi',
+            'consumer_key' => 'KAkyvbsAq5GvegoIuhdMLuBo0',
+            'consumer_secret' => 'FC9HkFAi8B0yY4wn2NxObQDqRJcx0BcD6vtYNVlWxT0JDh71J4',
+            'redirect_callback' => BASE_URL . 'login/callback/twitter',
+        ),
+    ),
+
     //Application config params 
     'app' => array(
         'environment' => 'development',

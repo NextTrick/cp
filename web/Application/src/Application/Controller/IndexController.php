@@ -5,6 +5,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use PaymentProcessor\Model\PaymentProcessor;
 use Zend\View\Model\ViewModel;
+use Util\Common\Email;
 
 class IndexController extends AbstractActionController
 {
@@ -13,9 +14,20 @@ class IndexController extends AbstractActionController
         $view = new ViewModel();
         return $view;
     }
+
+    public function testEmailAction()
+    {
+        try {
+            Email::reportDebug(array(1,2,3));
+        } catch (\Exception $e) {
+            var_dump($e->getTraceAsString()); exit;
+        }
+
+        echo 'enviado ok'; exit;
+    }
     
     public function testPeAction()
-    {
+    {        
         $data = array(
             'id' => 1,
             'perfilpago_nombres' => 'Angel',
