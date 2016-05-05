@@ -810,6 +810,7 @@ section .purple_box .cards_content .col_3 .duplicate_box .icon {
 }
 section .purple_box .cards_content .col_3 .duplicate_box p {
   font-size: 15px;
+  color: #fff;
 }
 section .purple_box .cards_content .col_3.my_card {
   background: #efefef;
