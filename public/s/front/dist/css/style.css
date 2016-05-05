@@ -1303,3 +1303,91 @@ i[class*=" icon-"] {
 .icon-twitter:before {
   content: "\ea91";
 }
+@media screen and (max-width: 667px) {
+  .box_center {
+    width: 100%;
+  }
+  header {
+    background: #fff;
+    height: 120px;
+    margin-top: -10px;
+    padding-top: 12px;
+  }
+  header nav ul li {
+    display: none;
+  }
+  header nav ul li.logo {
+    display: block;
+    margin: 0 auto;
+  }
+  header .user_option,
+  header .social_icons,
+  header .bg {
+    display: none;
+  }
+  .right_options {
+    display: none;
+  }
+  section {
+    padding-top: 20px;
+    padding: 8px;
+  }
+  section .welcome_box h2,
+  section .welcome_box .subtitle,
+  section .welcome_box .medium,
+  section .welcome_box .small {
+    display: none;
+  }
+  section .welcome_box .yellow_box {
+    background: none;
+    color: #fff;
+  }
+  section .welcome_box .yellow_box:before,
+  section .welcome_box .yellow_box:after {
+    display: none;
+  }
+  section .welcome_box .error_message {
+    width: 95%;
+    left: 2%;
+    padding: 0;
+  }
+  section .welcome_box .purple_box {
+    background: none;
+  }
+  section .welcome_box .purple_box .content {
+    padding: 0;
+  }
+  section .welcome_box .purple_box .content .left,
+  section .welcome_box .purple_box .content .right {
+    float: none;
+    width: 100%;
+    display: block;
+  }
+  section .welcome_box .purple_box .login_link a {
+    color: #fff;
+  }
+  section .welcome_box .purple_box .login_link a span {
+    display: none;
+  }
+  section .offers_box .col_3 {
+    width: 100%;
+  }
+  section .offers_box .col_3 img {
+    width: 100%;
+  }
+  footer {
+    background: #fff;
+    height: 120px;
+    margin-top: 50px;
+  }
+  footer img.bg {
+    display: none;
+  }
+  footer ul {
+    padding-top: 20px;
+  }
+  footer ul li {
+    margin-top: 10px;
+    display: block;
+  }
+}

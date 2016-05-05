@@ -180,11 +180,6 @@ class RegistroController extends AbstractActionController
         return $result;
     }
     
-//    public function notificarAction()
-//    {
-//        return new ViewModel();
-//    }
-    
     public function activarCuentaAction()
     {
         $codigo = $this->params('codigo');
@@ -222,10 +217,10 @@ class RegistroController extends AbstractActionController
         }
             
         if ($this->request->isPost()) {
-            $email = $this->request->getPost('mail');
+            $email = $this->request->getPost('email');
             $validator2 = new \Zend\Validator\EmailAddress();
             if (!$validator2->isValid($email)) {
-                $result['message'] = 'Ingrese un email correcto.';
+                $result['message'] = 'El campo es requerido y no puede estar vacío.';
                 $jsonModel->setVariables($result);
                 return $response->setContent($jsonModel->serialize());
             }
@@ -242,7 +237,7 @@ class RegistroController extends AbstractActionController
                 $existe = empty($usuarioTrueFi) ? false : true;
             }
             
-            $noExistsEmail = 'El correo electrónico no se ecuentra registrado.';
+            $noExistsEmail = 'El correo ingresado no esta registrado.';
             if ($existe === false) {
                 $result['message'] = $noExistsEmail;
                 $jsonModel->setVariables($result);
@@ -262,9 +257,13 @@ class RegistroController extends AbstractActionController
                     ), $usuario['id']);
                     
                     $serviceLocator = $this->getServiceLocator();
-                    $email = new \Usuario\Model\Email\RecuperarPassword($serviceLocator);
-                    $data['codigo_activar'] = $codigoRecuperar;
-                    $ok = $email->sendMail($data);
+                    $modelEmail = new \Usuario\Model\Email\RecuperarPassword($serviceLocator);
+                    $dataSend = array(
+                        'nombres_completo' => $usuario['nombres'] . ' ' . $usuario['paterno'] . ' ' . $usuario['materno'],
+                        'email' => $email,
+                        'codigo_activar' => $codigoRecuperar,
+                    );
+                    $ok = $modelEmail->sendMail($dataSend);
                     if ($ok) {
                         $result['success'] = true;
                         $result['message'] = null;
