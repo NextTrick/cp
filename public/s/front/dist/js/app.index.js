@@ -70,8 +70,23 @@ $(function() {
         });
       },
       closeNewPassModal: function() {
-        $('#modal_new_password').hide();
-        functions.openModalById('#modal_new_password_response');
+          $.ajax({
+            type: "POST",
+            url: baseUrl+'modificar-password',
+            data:{password:$('#password_new').val(), password_repeat:$('#password_repeat').val(), codigo_recuperacion:$('#codigo_recuperacion').val(),  token:$('#token_csrf').val()},
+            dataType: 'json',
+            success: function(data){
+                $('#token_csrf').val(data.token);
+                if (data.success) {
+                    $('#modal_new_password').hide();
+                    functions.openModalById('#modal_new_password_response');
+                } else {
+                    $('#error_new_password').html(data.message);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            }
+        });
       },
       closeErrorMessage: function() {
         dom.errorMessage.addClass('hide');
