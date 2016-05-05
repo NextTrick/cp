@@ -177,8 +177,10 @@ $(function() {
         dom.tooltip.hide();
       },
       showAsociateCard: function() {
+
         dom.boxTooltip.hide();
-        dom.contentAsociate.show();
+        $(this).children('.content_asociate_card').show()
+        //dom.contentAsociate.show();
       },
       hideAsociateCard: function(e) {
         e.stopPropagation();
@@ -188,10 +190,11 @@ $(function() {
       asociateCard: function(e) {
         var duplicate_box;
         e.preventDefault();
-        duplicate_box = $(this).parent().parent().children('.duplicate_box');
+        duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
+        //alert(duplicate_box.html())
         if (dom.asociateForm.parsley().isValid()) {
-          dom.contentAsociate.hide();
-          dom.loading.show();
+          $(this).parent().parent().html('');
+          $(this).parent().parent().parent().children('.loading').show();
           $.ajax({
             type: "POST",
             url: $('#form_asociar_nueva_tarjeta').attr('action'),
@@ -199,8 +202,9 @@ $(function() {
             dataType: 'json',
             success: function(data) {
               if (data.success === false && data.type === 'existe_nombre') {
+                //alert('el nombre ya esta en uso' + duplicate_box.html());
                 duplicate_box.show();
-                dom.contentAsociate.hide();
+                dom.loading.hide();
               } else {
                 if (data.success) {
                   functions.successAsociate();
