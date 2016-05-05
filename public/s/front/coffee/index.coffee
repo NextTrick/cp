@@ -201,6 +201,7 @@ $ ->
 						dataType : 'json'
 						success : (data) ->
 							if data.success == false && data.type == 'existe_nombre'
+								alert 'el nombre ya esta en uso'
 								duplicate_box.show()
 								dom.contentAsociate.hide()
 							else 

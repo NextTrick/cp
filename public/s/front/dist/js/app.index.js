@@ -70,8 +70,23 @@ $(function() {
         });
       },
       closeNewPassModal: function() {
-        $('#modal_new_password').hide();
-        functions.openModalById('#modal_new_password_response');
+          $.ajax({
+            type: "POST",
+            url: baseUrl+'modificar-password',
+            data:{password:$('#password_new').val(), password_repeat:$('#password_repeat').val(), codigo_recuperacion:$('#codigo_recuperacion').val(),  token:$('#token_csrf').val()},
+            dataType: 'json',
+            success: function(data){
+                $('#token_csrf').val(data.token);
+                if (data.success) {
+                    $('#modal_new_password').hide();
+                    functions.openModalById('#modal_new_password_response');
+                } else {
+                    $('#error_new_password').html(data.message);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            }
+        });
       },
       closeErrorMessage: function() {
         dom.errorMessage.addClass('hide');
@@ -177,8 +192,10 @@ $(function() {
         dom.tooltip.hide();
       },
       showAsociateCard: function() {
+
         dom.boxTooltip.hide();
-        dom.contentAsociate.show();
+        $(this).children('.content_asociate_card').show()
+        //dom.contentAsociate.show();
       },
       hideAsociateCard: function(e) {
         e.stopPropagation();
@@ -188,10 +205,11 @@ $(function() {
       asociateCard: function(e) {
         var duplicate_box;
         e.preventDefault();
-        duplicate_box = $(this).parent().parent().children('.duplicate_box');
+        duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
+        //alert(duplicate_box.html())
         if (dom.asociateForm.parsley().isValid()) {
-          dom.contentAsociate.hide();
-          dom.loading.show();
+          $(this).parent().parent().hide();
+          $(this).parent().parent().parent().children('.loading').show();
           $.ajax({
             type: "POST",
             url: $('#form_asociar_nueva_tarjeta').attr('action'),
@@ -199,8 +217,9 @@ $(function() {
             dataType: 'json',
             success: function(data) {
               if (data.success === false && data.type === 'existe_nombre') {
+                //alert('el nombre ya esta en uso' + duplicate_box.html());
                 duplicate_box.show();
-                dom.contentAsociate.hide();
+                dom.loading.hide();
               } else {
                 if (data.success) {
                   functions.successAsociate();
@@ -213,17 +232,6 @@ $(function() {
               functions.errorAsociate();
             }
           });
-
-          /*setTimeout ->
-                       * Active success response
-                      functions.successAsociate()
-                       * Active error response
-                      #functions.errorAsociate()
-                    , 2000
-                     * agregar un settimeout para que se oculte el success u error
-                     * luego de eso recargar
-                    return false
-           */
         } else {
           dom.asociateForm.parsley().validate();
         }
