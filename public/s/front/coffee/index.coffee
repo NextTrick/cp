@@ -35,6 +35,48 @@ $ ->
 				e.preventDefault()
 				#Get the A tag 
 				id = $(this).attr('href') 
+				functions.openModalById(id)
+				return
+			closeModal : (e) ->
+				#Cancel the link behavior  
+				e.preventDefault()
+				$('#mask, .window').hide()
+				$('.modal_box').hide()
+				return
+			closeClickOutside : () ->
+				$(this).hide()
+				$('.modal_box').hide()
+				return
+			closeRecoveryModal : () ->
+				$.ajax
+					type : "POST"
+					url : baseUrl + 'recuperar-password'
+					data : 
+						email : $('#email_recuperar').val() 
+						token : $('#token_csrf').val()
+					dataType : 'json'
+					success : (data) ->
+						$('#token_csrf').val(data.token)
+						if data.success
+							#$('#error_recuperar_password').html('')
+							functions.openModalById('#modal_recovery_response')
+							$('#modal_recovery_password').hide()
+						else
+							$('#error_recuperar_password').html(data.message)
+						return
+					error: (XMLHttpRequest, textStatus, errorThrown) ->
+						return
+				return
+				#$('#modal_recovery_password').hide()
+			closeNewPassModal : () ->
+				$('#modal_new_password').hide()
+				functions.openModalById('#modal_new_password_response')
+				return
+			closeErrorMessage : () ->
+				dom.errorMessage.addClass 'hide'
+				return
+		functions = 
+			openModalById: (id)->
 				#Get the screen height and width  
 				maskHeight = $(document).height()
 				maskWidth = $(window).width()
@@ -59,28 +101,21 @@ $ ->
 				
 				#transition effect  
 				$(id).fadeIn(1000)
-			closeModal : (e) ->
-				#Cancel the link behavior  
-				e.preventDefault()
-				$('#mask, .window').hide()
-				$('.modal_box').hide()
-			closeClickOutside : () ->
-				$(this).hide()
-				$('.modal_box').hide()
-			closeRecoveryModal : () ->
-				$('#modal_recovery_password').hide()
-			closeNewPassModal : () ->
-				$('#modal_new_password').hide()
-			closeErrorMessage : () ->
-				dom.errorMessage.addClass 'hide'
-		functions = 
-			validateData: ->
-
+				return
+			openModalNewPassword : () ->
+				if $('#modal_new_password').data('open') == 1
+					functions.openModalById('#modal_new_password')
+				return
+			openModalSigninResponse : () ->
+				if $('#modal_response_signin').data('open') == 1
+					functions.openModalById('#modal_response_signin')
 				return
 
 		initialize = ->
 			catchDom()
 			suscribeEvents()
+			functions.openModalNewPassword()
+			functions.openModalSigninResponse()
 			return
 
 		return init: initialize 

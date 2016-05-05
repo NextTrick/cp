@@ -34,9 +34,52 @@ $(function() {
     };
     events = {
       openModal: function(e) {
-        var id, maskHeight, maskWidth, winH, winW;
+        var id;
         e.preventDefault();
         id = $(this).attr('href');
+        functions.openModalById(id);
+      },
+      closeModal: function(e) {
+        e.preventDefault();
+        $('#mask, .window').hide();
+        $('.modal_box').hide();
+      },
+      closeClickOutside: function() {
+        $(this).hide();
+        $('.modal_box').hide();
+      },
+      closeRecoveryModal: function() {
+        $.ajax({
+          type: "POST",
+          url: baseUrl + 'recuperar-password',
+          data: {
+            email: $('#email_recuperar').val(),
+            token: $('#token_csrf').val()
+          },
+          dataType: 'json',
+          success: function(data) {
+            $('#token_csrf').val(data.token);
+            if (data.success) {
+              functions.openModalById('#modal_recovery_response');
+              $('#modal_recovery_password').hide();
+            } else {
+              $('#error_recuperar_password').html(data.message);
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {}
+        });
+      },
+      closeNewPassModal: function() {
+        $('#modal_new_password').hide();
+        functions.openModalById('#modal_new_password_response');
+      },
+      closeErrorMessage: function() {
+        dom.errorMessage.addClass('hide');
+      }
+    };
+    functions = {
+      openModalById: function(id) {
+        var maskHeight, maskWidth, winH, winW;
         maskHeight = $(document).height();
         maskWidth = $(window).width();
         $('#mask').css({
@@ -52,33 +95,24 @@ $(function() {
         winW = $(window).width();
         $(id).css('top', 20);
         $(id).css('left', winW / 2 - $(id).width() / 2);
-        return $(id).fadeIn(1000);
+        $(id).fadeIn(1000);
       },
-      closeModal: function(e) {
-        e.preventDefault();
-        $('#mask, .window').hide();
-        return $('.modal_box').hide();
+      openModalNewPassword: function() {
+        if ($('#modal_new_password').data('open') === 1) {
+          functions.openModalById('#modal_new_password');
+        }
       },
-      closeClickOutside: function() {
-        $(this).hide();
-        return $('.modal_box').hide();
-      },
-      closeRecoveryModal: function() {
-        return $('#modal_recovery_password').hide();
-      },
-      closeNewPassModal: function() {
-        return $('#modal_new_password').hide();
-      },
-      closeErrorMessage: function() {
-        return dom.errorMessage.addClass('hide');
+      openModalSigninResponse: function() {
+        if ($('#modal_response_signin').data('open') === 1) {
+          functions.openModalById('#modal_response_signin');
+        }
       }
-    };
-    functions = {
-      validateData: function() {}
     };
     initialize = function() {
       catchDom();
       suscribeEvents();
+      functions.openModalNewPassword();
+      functions.openModalSigninResponse();
     };
     return {
       init: initialize
