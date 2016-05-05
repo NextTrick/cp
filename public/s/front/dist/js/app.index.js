@@ -210,7 +210,7 @@ $(function() {
         if (dom.asociateForm.parsley().isValid()) {
           $(this).parent().parent().hide();
           var nombre = $(this).parent().parent().children('form').children('#nombre').val();
-          alert(nombre)
+          //alert(nombre)
           $(this).parent().parent().parent().children('.loading').show();
           $.ajax({
             type: "POST",
