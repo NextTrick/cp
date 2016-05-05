@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login, open_tooltip;
+  var modal_login, open_tooltip, user_account;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -37,19 +37,19 @@ $(function() {
         var id;
         e.preventDefault();
         id = $(this).attr('href');
-        return functions.openModalById(id);
+        functions.openModalById(id);
       },
       closeModal: function(e) {
         e.preventDefault();
         $('#mask, .window').hide();
-        return $('.modal_box').hide();
+        $('.modal_box').hide();
       },
       closeClickOutside: function() {
         $(this).hide();
-        return $('.modal_box').hide();
+        $('.modal_box').hide();
       },
       closeRecoveryModal: function() {
-        return $.ajax({
+        $.ajax({
           type: "POST",
           url: baseUrl + 'recuperar-password',
           data: {
@@ -74,7 +74,7 @@ $(function() {
         functions.openModalById('#modal_new_password_response');
       },
       closeErrorMessage: function() {
-        return dom.errorMessage.addClass('hide');
+        dom.errorMessage.addClass('hide');
       }
     };
     functions = {
@@ -132,6 +132,7 @@ $(function() {
       asociateForm: '.asociate_form',
       success: '.success_box',
       error: '.error_box',
+      duplicate: '.duplicate_box',
       watchMore: '.watch_more',
       topCardContent: '.top_card',
       showMoreContent: '.show_more_content',
@@ -170,45 +171,61 @@ $(function() {
     };
     events = {
       openTooltip: function() {
-        return dom.tooltip.show();
+        dom.tooltip.show();
       },
       closeTooltip: function() {
-        return dom.tooltip.hide();
+        dom.tooltip.hide();
       },
       showAsociateCard: function() {
         dom.boxTooltip.hide();
-        return dom.contentAsociate.show();
+        dom.contentAsociate.show();
       },
       hideAsociateCard: function(e) {
         e.stopPropagation();
         dom.boxTooltip.show();
-        return dom.contentAsociate.hide();
+        dom.contentAsociate.hide();
       },
       asociateCard: function(e) {
+        var duplicate_box;
         e.preventDefault();
+        duplicate_box = $(this).parent().parent().children('.duplicate_box');
         if (dom.asociateForm.parsley().isValid()) {
-            dom.contentAsociate.hide();
-            dom.loading.show();
-            $.ajax({
-                type: "POST",
-                url: $('#form_asociar_nueva_tarjeta').attr('action'),
-                data: $('#form_asociar_nueva_tarjeta').serialize(),
-                dataType: 'json',
-                success: function(data) {
-                    if (data.success == false && data.type == 'existe_nombre') {
-                        //tarjeta ploma
-                    } else if (data.success) {
-                        return functions.successAsociate();
-                    } else {
-                        return functions.errorAsociate();
-                    }
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    return functions.errorAsociate();
+          dom.contentAsociate.hide();
+          dom.loading.show();
+          $.ajax({
+            type: "POST",
+            url: $('#form_asociar_nueva_tarjeta').attr('action'),
+            data: $('#form_asociar_nueva_tarjeta').serialize(),
+            dataType: 'json',
+            success: function(data) {
+              if (data.success === false && data.type === 'existe_nombre') {
+                duplicate_box.show();
+                dom.contentAsociate.hide();
+              } else {
+                if (data.success) {
+                  functions.successAsociate();
+                } else {
+                  functions.errorAsociate();
                 }
-            });
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              functions.errorAsociate();
+            }
+          });
+
+          /*setTimeout ->
+                       * Active success response
+                      functions.successAsociate()
+                       * Active error response
+                      #functions.errorAsociate()
+                    , 2000
+                     * agregar un settimeout para que se oculte el success u error
+                     * luego de eso recargar
+                    return false
+           */
         } else {
-          return dom.asociateForm.parsley().validate();
+          dom.asociateForm.parsley().validate();
         }
       },
       watchMore: function() {
@@ -216,46 +233,52 @@ $(function() {
           $(this).parent().parent().children(st.topCardContent).show();
           $(this).parent().parent().children(st.showMoreContent).hide();
           $(this).text('Ver más');
-          return $(this).removeClass('active');
+          $(this).removeClass('active');
         } else {
           $(this).parent().parent().children(st.topCardContent).hide();
           $(this).parent().parent().children(st.showMoreContent).show();
           $(this).text('Ver menos');
-          return $(this).addClass('active');
+          $(this).addClass('active');
         }
       },
       showTooltipBonus: function() {
         $(this).addClass('active');
-        return $(this).parent().parent().children(st.tooltipBonus).show();
+        $(this).parent().parent().children(st.tooltipBonus).show();
       },
       hideTooltipBonus: function() {
         $(this).removeClass('active');
-        return $(this).parent().parent().children(st.tooltipBonus).hide();
+        $(this).parent().parent().children(st.tooltipBonus).hide();
       },
       editCardName: function() {
+        var duplicate_box, sufix;
+        duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
         if ($(this).hasClass('active')) {
-            $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
-            $(this).removeClass('active');
-            $(this).parent().children(st.nameCard).show();
-            var sufix = $(this).data('sufix');
-            $.ajax({
-                type: "POST",
-                url: baseUrl+'mis-tarjetas/editar-nombre',
-                data: {nombre: $('#edit_nombre_'+sufix).val(), numero: $('#edit_numero_'+sufix).val()},
-                dataType: 'json',
-                success: function(data) {
-                    if (data.success) {
-                    } else {
-                    }
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                }
-            });
-          return $(this).parent().children(st.inputCardName).hide();
+          $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
+          $(this).removeClass('active');
+          $(this).parent().children(st.nameCard).show();
+          $(this).parent().children(st.inputCardName).hide();
+          sufix = $(this).data('sufix');
+          $.ajax({
+            type: "POST",
+            url: baseUrl + 'mis-tarjetas/editar-nombre',
+            data: {
+              nombre: $('#edit_nombre_' + sufix).val(),
+              numero: $('#edit_numero_' + sufix).val()
+            },
+            dataType: 'json',
+            success: function(data) {
+              if (data.success) {
+
+              } else {
+                duplicate_box.show();
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {}
+          });
         } else {
           $(this).addClass('active');
           $(this).parent().children(st.nameCard).hide();
-          return $(this).parent().children(st.inputCardName).show();
+          $(this).parent().children(st.inputCardName).show();
         }
       }
     };
@@ -279,6 +302,42 @@ $(function() {
       init: initialize
     };
   };
+  user_account = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      userAccount: '.user_account',
+      logout: '.logout'
+    };
+    catchDom = function() {
+      dom.userAccount = $(st.userAccount);
+      dom.logout = $(st.logout);
+    };
+    suscribeEvents = function() {
+      dom.userAccount.on('click', events.openLogoutOption);
+    };
+    events = {
+      openLogoutOption: function(e) {
+        e.preventDefault();
+        if (dom.logout.hasClass('active')) {
+          dom.logout.removeClass('active');
+        } else {
+          dom.logout.addClass('active');
+        }
+      }
+    };
+    functions = {
+      successAsociate: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
+  user_account().init();
   open_tooltip().init();
   modal_login().init();
 });
