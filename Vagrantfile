@@ -8,8 +8,8 @@ Vagrant.configure(2) do |config|
     config.vm.boot_timeout = 120
 
     config.vm.network "private_network", ip: "192.168.56.21"
-    #config.vm.synced_folder "D:\\xampp\\htdocs\\cp", "/opt/fcb/cp" #Change local project path
-    config.vm.synced_folder "/Users/luis/Projects/cp", "/opt/fcb/cp" 
+    config.vm.synced_folder "D:\\xampp\\htdocs\\cp", "/opt/fcb/cp" #Change local project path
+    #config.vm.synced_folder "/Users/luis/Projects/cp", "/opt/fcb/cp" 
     #config.vm.synced_folder "./", "/opt/fcb", type: "nfs"
 
     config.vm.provider "virtualbox" do |vb|

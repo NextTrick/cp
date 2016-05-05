@@ -174,7 +174,9 @@ $(function() {
                 data: $('#form_asociar_nueva_tarjeta').serialize(),
                 dataType: 'json',
                 success: function(data) {
-                    if (data.success) {
+                    if (data.success == false && data.type == 'existe_nombre') {
+                        //tarjeta ploma
+                    } else if (data.success) {
                         return functions.successAsociate();
                     } else {
                         return functions.errorAsociate();
@@ -184,7 +186,6 @@ $(function() {
                     return functions.errorAsociate();
                 }
             });
-          return false;
         } else {
           return dom.asociateForm.parsley().validate();
         }
