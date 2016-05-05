@@ -209,6 +209,8 @@ $(function() {
         //alert(duplicate_box.html())
         if (dom.asociateForm.parsley().isValid()) {
           $(this).parent().parent().hide();
+          var nombre = $(this).parent().parent().children('form').children('#nombre').val();
+          alert(nombre)
           $(this).parent().parent().parent().children('.loading').show();
           $.ajax({
             type: "POST",
@@ -218,6 +220,8 @@ $(function() {
             success: function(data) {
               if (data.success === false && data.type === 'existe_nombre') {
                 //alert('el nombre ya esta en uso' + duplicate_box.html());
+                duplicate_box.children('p').children('strong').text('"' + nombre + '" ');
+                
                 duplicate_box.show();
                 dom.loading.hide();
               } else {
@@ -260,6 +264,10 @@ $(function() {
       editCardName: function() {
         var duplicate_box, sufix;
         duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
+        var nombre = $(this).parent().children('.input_name').val();
+        //alert(duplicate_box.children('p').text())
+        duplicate_box.children('p').children('strong').text('"' + nombre + '" ');
+        //alert(duplicate_box.html())
         if ($(this).hasClass('active')) {
           $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
           $(this).removeClass('active');
