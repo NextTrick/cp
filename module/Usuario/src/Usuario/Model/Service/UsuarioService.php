@@ -60,6 +60,15 @@ class UsuarioService
             'message' => 'Error al asociar la tarjeta.',
         );
         if (!empty($usuario)) {
+            $tarjeta = $this->_getTarjetaService()->getRepository()
+                    ->findOne(array('where' => array('numero' => $data['numero'])));
+            if (!empty($tarjeta)) {
+                return array(
+                    'success' => false,
+                    'message' => 'La tarjeta pertenece a otro cliente',
+                );
+            }
+            
             $cardsx = array(
                 '000-102079-1' => '{584FA19C-9D70-45FD-8A89-6B6F64E3118C}',
                 '003-034796-5' => '{584FA19C-9D72-45TY-8A89-6B6F6GS5129C}',
