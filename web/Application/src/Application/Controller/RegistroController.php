@@ -194,9 +194,14 @@ class RegistroController extends AbstractActionController
                 'estado' => 1,
                 'codigo_activar' => null,
             ), $row['id']);
+
+            $ok = $this->_getLoginGatewayService()->loginOffline($row['email']);
+            if ($ok) {
+                return $this->redirect()->toRoute('web-mis-tarjetas', array('controller' => 'mis-tarjetas'));
+            }
         }
 
-        return new ViewModel();
+        return $this->redirect()->toRoute('web-login', array('controller' => 'login'));
     }
 
     public function recuperarPasswordAction()
@@ -397,5 +402,10 @@ class RegistroController extends AbstractActionController
     protected function _getUbigeoService()
     {
         return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
+    }
+    
+    protected function _getLoginGatewayService()
+    {
+        return $this->getServiceLocator()->get('Usuario\Model\Service\LoginGatewayService');
     }
 }

@@ -110,6 +110,12 @@ block section
 								.price.cero S/. 0.00
 								a.watch_more(href="javascript:;") Ver más
 								a.recharge(href="") Recargar
+							.duplicate_box
+								span.icon
+								p El nombre 
+									strong "Ahijado-tarjeta" 
+									| ya se encuentra en tu lista de tarjetas
+								a(href="") Aceptar
 						.col_3.add_card
 							.show_tooltip
 								.tooltip
@@ -145,26 +151,7 @@ block section
 						span.icon
 						span.text Recuerda que también puedes acercarte a cualquiera de nuestras sedes, indicando tu cuenta de correo electrónico junto con la tarjeta que desees asociar.
 						a.how_asociate_card(href="#how_asociate_card" name="modal") ¿Cómo asociar mis tarjetas?
-		#loading_template
-			.loading
-				img(src="../images/loading.gif", alt="")
-		#success_template
-			.success_box
-				span.icon
-				h3 ¡Tarjeta asociada!
-				a(href="") Conocer los beneficios
-		#error_template
-			.error_box
-				span.icon
-				p Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde
-				a(href="") Aceptar
-		#duplicate_template
-			.duplicate_box
-				span.icon
-				p El nombre 
-					strong "Ahijado-tarjeta" 
-					| ya se encuentra en tu lista de tarjetas
-				a(href="") Aceptar
+
 		#how_asociate_card.modal_box
 			.modal_content
 				span.icon_logo

@@ -140,11 +140,7 @@ $(function() {
       activeTooltipBonus: '.show_more_content .line .left span',
       editCardName: '.card_title .edit_icon',
       nameCard: '.card_title .text',
-      inputCardName: '.card_title .input_name',
-      loadingTemplate: '#loading_template',
-      successTemplate: '#success_template',
-      errorTemplate: '#error_template',
-      duplicateTemplate: '#duplicate_template'
+      inputCardName: '.card_title .input_name'
     };
     catchDom = function() {
       dom.addCard = $(st.addCard);
@@ -163,10 +159,6 @@ $(function() {
       dom.editCardName = $(st.editCardName);
       dom.nameCard = $(st.nameCard);
       dom.inputCardName = $(st.inputCardName);
-      dom.loadingTemplate = $(st.loadingTemplate);
-      dom.successTemplate = $(st.successTemplate);
-      dom.errorTemplate = $(st.errorTemplate);
-      dom.duplicateTemplate = $(st.duplicateTemplate);
     };
     suscribeEvents = function() {
       dom.addCard.hover(events.openTooltip, events.closeTooltip);
@@ -179,22 +171,24 @@ $(function() {
     };
     events = {
       openTooltip: function() {
-        return dom.tooltip.show();
+        dom.tooltip.show();
       },
       closeTooltip: function() {
-        return dom.tooltip.hide();
+        dom.tooltip.hide();
       },
       showAsociateCard: function() {
         dom.boxTooltip.hide();
-        return dom.contentAsociate.show();
+        dom.contentAsociate.show();
       },
       hideAsociateCard: function(e) {
         e.stopPropagation();
         dom.boxTooltip.show();
-        return dom.contentAsociate.hide();
+        dom.contentAsociate.hide();
       },
       asociateCard: function(e) {
+        var duplicate_box;
         e.preventDefault();
+        duplicate_box = $(this).parent().parent().children('.duplicate_box');
         if (dom.asociateForm.parsley().isValid()) {
           dom.contentAsociate.hide();
           dom.loading.show();
@@ -205,7 +199,8 @@ $(function() {
             dataType: 'json',
             success: function(data) {
               if (data.success === false && data.type === 'existe_nombre') {
-                $('.duplicate_box').show();
+                duplicate_box.show();
+                dom.contentAsociate.hide();
               } else {
                 if (data.success) {
                   functions.successAsociate();
@@ -238,31 +233,32 @@ $(function() {
           $(this).parent().parent().children(st.topCardContent).show();
           $(this).parent().parent().children(st.showMoreContent).hide();
           $(this).text('Ver más');
-          return $(this).removeClass('active');
+          $(this).removeClass('active');
         } else {
           $(this).parent().parent().children(st.topCardContent).hide();
           $(this).parent().parent().children(st.showMoreContent).show();
           $(this).text('Ver menos');
-          return $(this).addClass('active');
+          $(this).addClass('active');
         }
       },
       showTooltipBonus: function() {
         $(this).addClass('active');
-        return $(this).parent().parent().children(st.tooltipBonus).show();
+        $(this).parent().parent().children(st.tooltipBonus).show();
       },
       hideTooltipBonus: function() {
         $(this).removeClass('active');
-        return $(this).parent().parent().children(st.tooltipBonus).hide();
+        $(this).parent().parent().children(st.tooltipBonus).hide();
       },
       editCardName: function() {
-        var sufix;
+        var duplicate_box, sufix;
+        duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
         if ($(this).hasClass('active')) {
           $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
           $(this).removeClass('active');
           $(this).parent().children(st.nameCard).show();
           $(this).parent().children(st.inputCardName).hide();
           sufix = $(this).data('sufix');
-          return $.ajax({
+          $.ajax({
             type: "POST",
             url: baseUrl + 'mis-tarjetas/editar-nombre',
             data: {
@@ -274,7 +270,7 @@ $(function() {
               if (data.success) {
 
               } else {
-
+                duplicate_box.show();
               }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {}
@@ -282,7 +278,7 @@ $(function() {
         } else {
           $(this).addClass('active');
           $(this).parent().children(st.nameCard).hide();
-          return $(this).parent().children(st.inputCardName).show();
+          $(this).parent().children(st.inputCardName).show();
         }
       }
     };
@@ -324,9 +320,9 @@ $(function() {
       openLogoutOption: function(e) {
         e.preventDefault();
         if (dom.logout.hasClass('active')) {
-          return dom.logout.removeClass('active');
+          dom.logout.removeClass('active');
         } else {
-          return dom.logout.addClass('active');
+          dom.logout.addClass('active');
         }
       }
     };

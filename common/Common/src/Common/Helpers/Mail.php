@@ -12,9 +12,9 @@ class Mail
 
     public function __construct($config)
     {
-        if (isset($config['options'])) {
-            $this->_options = $config['options'];
-            unset($config['options']);
+        if (isset($config['transport']['options'])) {
+            $this->_options = $config['transport']['options'];
+            unset($config['transport']);
         }
         
         $this->_config = $config;
