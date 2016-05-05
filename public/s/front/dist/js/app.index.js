@@ -193,7 +193,7 @@ $(function() {
         duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
         //alert(duplicate_box.html())
         if (dom.asociateForm.parsley().isValid()) {
-          $(this).parent().parent().html('');
+          $(this).parent().parent().hide();
           $(this).parent().parent().parent().children('.loading').show();
           $.ajax({
             type: "POST",
@@ -217,17 +217,6 @@ $(function() {
               functions.errorAsociate();
             }
           });
-
-          /*setTimeout ->
-                       * Active success response
-                      functions.successAsociate()
-                       * Active error response
-                      #functions.errorAsociate()
-                    , 2000
-                     * agregar un settimeout para que se oculte el success u error
-                     * luego de eso recargar
-                    return false
-           */
         } else {
           dom.asociateForm.parsley().validate();
         }
