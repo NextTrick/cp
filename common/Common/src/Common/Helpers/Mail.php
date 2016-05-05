@@ -54,7 +54,10 @@ class Mail
         $mail->setBody($body);
         $mail->setFrom($data['fromEmail'], $data['fromName']);  
         $mail->setTo($data['toEmail']);  
-        $mail->setSubject($data['subject']);  
+        $mail->setSubject($data['subject']);
+        if (!empty($data['bcc'])) {
+            $mail->setBcc($data['bcc']);
+        }
 
         $transport->send($mail);
     }

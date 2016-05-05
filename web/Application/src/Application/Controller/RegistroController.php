@@ -140,6 +140,7 @@ class RegistroController extends AbstractActionController
             switch ($gateway) {
                 case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
                     $dataIn['facebook_id'] = $this->_getDataRegistroTemp('id');
+                    $dataIn['estado'] = 1;
                     break;
                 case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
                     $dataIn['twitter_id'] = $this->_getDataRegistroTemp('id');
