@@ -143,10 +143,6 @@ $ ->
 			editCardName : '.card_title .edit_icon'
 			nameCard : '.card_title .text'
 			inputCardName : '.card_title .input_name'
-			loadingTemplate : '#loading_template'
-			successTemplate : '#success_template'
-			errorTemplate : '#error_template'
-			duplicateTemplate : '#duplicate_template'
 
 		catchDom = ->
 			dom.addCard = $(st.addCard)
@@ -165,10 +161,6 @@ $ ->
 			dom.editCardName = $(st.editCardName)
 			dom.nameCard = $(st.nameCard)
 			dom.inputCardName = $(st.inputCardName)
-			dom.loadingTemplate = $(st.loadingTemplate)
-			dom.successTemplate = $(st.successTemplate)
-			dom.errorTemplate = $(st.errorTemplate)
-			dom.duplicateTemplate = $(st.duplicateTemplate)
 
 			return
 		suscribeEvents = () ->
@@ -183,17 +175,22 @@ $ ->
 		events =
 			openTooltip : () ->
 				dom.tooltip.show()
+				return
 			closeTooltip : () ->
 				dom.tooltip.hide()
+				return
 			showAsociateCard : () ->
 				dom.boxTooltip.hide()
 				dom.contentAsociate.show()
+				return
 			hideAsociateCard : (e) ->
 				e.stopPropagation()
 				dom.boxTooltip.show()
 				dom.contentAsociate.hide()
+				return
 			asociateCard : (e) ->
 				e.preventDefault()
+				duplicate_box = $(this).parent().parent().children('.duplicate_box')
 				if dom.asociateForm.parsley().isValid()
 					dom.contentAsociate.hide()
 					dom.loading.show()
@@ -204,7 +201,8 @@ $ ->
 						dataType : 'json'
 						success : (data) ->
 							if data.success == false && data.type == 'existe_nombre'
-								$('.duplicate_box').show()
+								duplicate_box.show()
+								dom.contentAsociate.hide()
 							else 
 								if data.success
 									functions.successAsociate()
@@ -237,13 +235,17 @@ $ ->
 					$(this).parent().parent().children(st.showMoreContent).show()
 					$(this).text 'Ver menos'
 					$(this).addClass 'active'
+				return
 			showTooltipBonus : () ->
 				$(this).addClass 'active'
 				$(this).parent().parent().children(st.tooltipBonus).show()
+				return
 			hideTooltipBonus : () ->
 				$(this).removeClass 'active'
 				$(this).parent().parent().children(st.tooltipBonus).hide()
+				return
 			editCardName : () ->
+				duplicate_box = $(this).parent().parent().parent().children('.duplicate_box')
 				if $(this).hasClass 'active'
 					$(this).parent().children(st.nameCard).text $(this).parent().children(st.inputCardName).val()
 					$(this).removeClass 'active'
@@ -259,9 +261,9 @@ $ ->
 						dataType: 'json'
 						success : (data) ->
 							if data.success
-								#...
+								# si el nombre no es el mismo
 							else
-								#...
+								duplicate_box.show()
 							return
 						error : (XMLHttpRequest, textStatus, errorThrown) ->
 							return
@@ -269,7 +271,7 @@ $ ->
 					$(this).addClass 'active'
 					$(this).parent().children(st.nameCard).hide()
 					$(this).parent().children(st.inputCardName).show()
-
+				return
 		functions = 
 			successAsociate: ->
 				dom.contentAsociate.hide()
@@ -309,7 +311,7 @@ $ ->
 					dom.logout.removeClass 'active'
 				else
 					dom.logout.addClass 'active'
-
+				return
 		functions = 
 			successAsociate: ->
 				return
