@@ -19,6 +19,11 @@ class ActivarCuenta
     public function sendMail($data)
     {
         $config = $this->_sl->get('config');
+        $developers = null;
+        if (isset($config['emails']['developers'])) {
+            $developers = $config['emails']['developers'];
+        }
+        
         if (isset($config['mail'])) {
             $config = $config['mail'];
         } else {
@@ -28,6 +33,7 @@ class ActivarCuenta
         try {
             $data['subject'] = 'Coney Park - Activación de tu cuenta';
             $data['toEmail'] = $data['email'];
+            $data['bcc'] = $developers;
             $view = new \Zend\View\Model\ViewModel();
             $view->setTemplate('activar-cuenta');
             $view->setTerminal(true);
