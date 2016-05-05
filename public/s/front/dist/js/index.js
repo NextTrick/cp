@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login, open_tooltip;
+  var modal_login, open_tooltip, user_account;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -217,6 +217,42 @@ $(function() {
       init: initialize
     };
   };
+  user_account = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      userAccount: '.user_account',
+      logout: '.logout'
+    };
+    catchDom = function() {
+      dom.userAccount = $(st.userAccount);
+      dom.logout = $(st.logout);
+    };
+    suscribeEvents = function() {
+      dom.userAccount.on('click', events.openLogoutOption);
+    };
+    events = {
+      openLogoutOption: function(e) {
+        e.preventDefault();
+        if (dom.logout.hasClass('active')) {
+          return dom.logout.removeClass('active');
+        } else {
+          return dom.logout.addClass('active');
+        }
+      }
+    };
+    functions = {
+      successAsociate: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
+  user_account().init();
   open_tooltip().init();
   modal_login().init();
 });
