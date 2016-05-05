@@ -3,15 +3,30 @@
     <div class="box_center">
         <div class="social_icons"><a href=""><span class="fb"></span></a><a href=""><span class="in"></span></a></div>
         <div class="user_option">
-            <!-- esto debe mostrarse en antes que el usuario ingrese -->
-            <div class="user_outside"><a href=""> <span class="text">Inicia Sesión</span><span class="icon"></span></a></div>
-            <!-- esto debe mostrarse despues que el usuario ingrese -->
-            <div class="user_inside">
-                <ul>
-                    <li><a href=""><span class="icon_cart"></span><span class="icon_counter">3</span></a></li>
-                    <li><a href="" class="user_account"> <span class="text">Andrea </span><span class="user_image"><img src="" alt=""/></span><span class="arrow_bottom"></span></a><a href="" class="logout">Salir</a></li>
-                </ul>
-            </div>
+            <?php if (empty($data)) : ?>
+                <div class="user_outside">
+                    <a href="<?php echo BASE_URL ?>login"><span class="text">Inicia Sesión</span><span class="icon"></span></a>
+                </div>
+            <?php else : ?>
+                <div class="user_inside">
+                    <ul>
+                        <li><a href=""><span class="icon_cart"></span><span class="icon_counter">3</span></a></li>
+                        <li>
+                            <a href="#" class="user_account">
+                                <span class="text"><?php echo $data['nombres'] ?></span>
+                                <?php if (!empty($data['imagen'])) : ?>
+                                <span class="user_image"><img src="" alt=""/></span>
+                                <?php else: ?>
+                                <span class="icon"></span>
+                                <?php endif; ?>
+                                
+                                <span class="arrow_bottom"></span>
+                            </a>
+                            <a href="<?php echo BASE_URL ?>login/logout" class="logout">Salir</a>
+                        </li>
+                    </ul>
+                </div>
+            <?php endif; ?>
         </div>
         <nav>
             <ul>
