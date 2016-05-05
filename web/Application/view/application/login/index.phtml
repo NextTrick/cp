@@ -2,7 +2,7 @@
     <div class="box_center">
         <div class="welcome_box">
             <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
-            <p>Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>
+            <p class="subtitle">Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>
             <div class="yellow_box">Inicia sesión</div>
             <div class="purple_box">
                 <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
@@ -63,52 +63,55 @@
             </div>
             <?php echo $this->sectionGrillaPromociones(GRID_LOGIN_PROMOCIONES, 0, 'login');  ?>
         </div>
-        <div id="modal_recovery_password" class="modal_box">
-            <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
-                <h3>Recuperar contraseña</h3>
-                <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
-                <input id="email_recuperar" name="email_recuperar" type="text" placeholder="Correo electrónico"/>
-                <ul class="parsley-errors-list filled">
-                    <li id="error_recuperar_password" class="parsley-required"></li>
-                </ul>
-                <button id="btn_recovery" class="btn btn_orange">Recuperar contraseña</button>
-            </div>
-        </div>
-        <div id="modal_recovery_response" class="modal_box">
-            <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
-                <h3>Recuperar contraseña</h3>
-                <p>Felicidades, ya estás a punto de ser parte de Coney Club. 
-                    Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.</p>
-                <button class="close btn btn_orange">Aceptar</button>
-            </div>
-        </div>
-        <div id="modal_new_password" class="modal_box" data-open="<?php echo $openPopapChangePassword; ?>">
-            <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
-                <h3>Nueva contraseña</h3>
-                <p>Ingresa una nueva contraseña</p>
-                <div class="form_control">
-                    <input id="password_new" name="password_new" type="text" placeholder="Ingresa tu nueva contraseña"/>
-                </div>
-                <div class="form_control">
-                    <input id="password_repeat" name="password_repeat" type="text" placeholder="Repite tu nueva contraseña"/>
-                </div>
-                
-                <input id="codigo_recuperacion" name="codigo_recuperacion" type="hidden" value="<?php echo isset($codigoRecuperacion) ? $codigoRecuperacion : ''; ?>"/>
-                <ul class="parsley-errors-list filled">
-                    <li id="error_new_password" class="parsley-required"></li>
-                </ul>
-                <button id="btn_change_password" class="btn btn_orange">Cambiar contraseña</button>
-            </div>
-        </div>
-        <div id="modal_new_password_response" class="modal_box">
-            <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
-                <h3>Nueva contraseña</h3>
-                <p>Felicidades, tu contraseña se actualizó correctamente</p>
-                <button class="close btn btn_orange">Aceptar</button>
-            </div>
-        </div>
-        <div id="mask"></div>
+        
     </div>
+
+    <div id="modal_recovery_password" class="modal_box">
+        <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Recuperar contraseña</h3>
+            <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
+            <input id="email_recuperar" name="email_recuperar" type="text" placeholder="Correo electrónico"/>
+            <ul class="parsley-errors-list filled">
+                <li id="error_recuperar_password" class="parsley-required"></li>
+            </ul>
+            <button id="btn_recovery" class="btn btn_orange">Recuperar contraseña</button>
+        </div>
+    </div>
+    <div id="modal_recovery_response" class="modal_box">
+        <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Recuperar contraseña</h3>
+            <p>Felicidades, ya estás a punto de ser parte de Coney Club. 
+                Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.</p>
+            <button class="close btn btn_orange">Aceptar</button>
+        </div>
+    </div>
+    <div id="modal_new_password" class="modal_box" data-open="<?php echo $openPopapChangePassword; ?>">
+        <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Nueva contraseña</h3>
+            <p>Ingresa una nueva contraseña</p>
+            <div class="form_control">
+                <input id="password_new" name="password_new" type="text" placeholder="Ingresa tu nueva contraseña"/>
+            </div>
+            <div class="form_control">
+                <input id="password_repeat" name="password_repeat" type="text" placeholder="Repite tu nueva contraseña"/>
+            </div>
+            
+            <input id="codigo_recuperacion" name="codigo_recuperacion" type="hidden" value="<?php echo isset($codigoRecuperacion) ? $codigoRecuperacion : ''; ?>"/>
+            <ul class="parsley-errors-list filled">
+                <li id="error_new_password" class="parsley-required"></li>
+            </ul>
+            <button id="btn_change_password" class="btn btn_orange">Cambiar contraseña</button>
+        </div>
+    </div>
+    <div id="modal_new_password_response" class="modal_box">
+        <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            <h3>Nueva contraseña</h3>
+            <p>Felicidades, tu contraseña se actualizó correctamente</p>
+            <button class="close btn btn_orange">Aceptar</button>
+        </div>
+    </div>
+    <div id="mask"></div>
+
 </section>
 <script type="text/javascript">
     $(document).ready(function(){

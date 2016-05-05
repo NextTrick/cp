@@ -1,6 +1,4 @@
 <?php
-define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
-define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
 return array(
     'php' => array(

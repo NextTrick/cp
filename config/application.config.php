@@ -11,7 +11,7 @@ return array(
         'Common',
         'Cms',
         'TrueFi',
-        //'Util', No usar en todo caso crear la clase en common/Common/src/Common/Helpers/
+        'Util', // No usar en todo caso crear la clase en common/Common/src/Common/Helpers/
         'Application',
         'Usuario',
         'Orden',
