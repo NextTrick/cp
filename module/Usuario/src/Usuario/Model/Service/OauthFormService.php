@@ -83,7 +83,7 @@ class OauthFormService
         
         return $this;
     }
-
+    
     public function getResultLogin()
     {
         return $this->_resultLogin;
