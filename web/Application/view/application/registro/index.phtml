@@ -13,13 +13,13 @@
                         <button class="btn btn_tw" data-href="<?php echo BASE_URL; ?>login/validate-social/twitter"><span class="icon"></span><span class="text">Twitter</span></button>
                     </div>
                     <div class="right">
-                        <form action="<?php echo BASE_URL; ?>completa-tu-registro" method="post">
+                        <form action="<?php echo BASE_URL; ?>completa-tu-registro" method="post" data-parsley-validate="data-parsley-validate">
                             <p>Registrando tu correo electrónico</p>
                             <?php $data = $this->flashMessenger()->getMessagesFromNamespace('data'); ?>
                             <?php $email = isset($data[0]['email']) ? $data[0]['email'] : null; ?>
                             <input type="hidden" id="registro_form" name="registro_form" value="1">
                             <div class="form_control">
-                                <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com" value="<?php echo $email; ?>"/>
+                                <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com" value="<?php echo $email; ?>" data-parsley-type="email" data-parsley-type-message="El correo ingresado no tiene formato válido."/>
                                 <?php if (!empty($messageExistsEmail)) : ?>
                                     <ul class="parsley-errors-list filled">
                                         <li class="parsley-required"><?php echo $messageExistsEmail; ?></li>

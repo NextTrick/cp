@@ -27,10 +27,10 @@ class OauthFormService
     const DISABLED_USER = 'disabledUser';
 
     protected $mesagges = array(
-        self::NOT_IDENTITY => 'Usuario y/o Password es incorrecto.',
-        self::INVALID_CREDENTIAL => 'Usuario y/o Password es incorrecto.',
-        self::INVALID_USER => 'Usuario y/o Password es incorrecto.',
-        self::INVALID_LOGIN => 'Usuario y/o Password es incorrecto.',
+        self::NOT_IDENTITY => 'Los datos ingresados son incorrectos.',
+        self::INVALID_CREDENTIAL => 'Los datos ingresados son incorrectos.',
+        self::INVALID_USER => 'Los datos ingresados son incorrectos.',
+        self::INVALID_LOGIN => 'Los datos ingresados son incorrectos.',
         self::DISABLED_USER => 'El usuario esta deshabilitado.',
     );
     
