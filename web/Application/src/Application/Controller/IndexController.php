@@ -18,11 +18,12 @@ class IndexController extends AbstractActionController
     public function testEmailAction()
     {
         try {
-            $body = 'cuerpo del mensaje';
+            $body = 'cuerpo del mensaje 2';
             $to = 'ing.angeljara@gmail.com';
             $subject = 'Confirmar de cuenta';
-            
-            Email::send($subject, $body, $to, $html = false, $bcc = null, $fromName = null, $fromEmail = null);
+            $bcc = 'montesinos2005ii@gmail.com, jludena@idigital.pe'; // esto debe ser email del admin que esta en archivo config
+
+            Email::send($subject, $body, $to, $html = false, $bcc);
 
             //Email::reportDebug(array(1,2,3));
         } catch (\Exception $e) {
