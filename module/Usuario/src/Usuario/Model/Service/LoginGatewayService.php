@@ -98,6 +98,24 @@ class LoginGatewayService
         return array();
     }
 
+    public function loginOffline($email)
+    {
+        $service = $this->_sl->get("Usuario\Model\Service\UsuarioService");
+        $criteria = array('where' => array('email' => $email, 'estado' => 1));
+        $usuario = $service->getRepository()->findOne($criteria);
+        if (!empty($usuario)) {
+            $password = \Common\Helpers\Crypto::decrypt($usuario['password'], $usuario['email']);
+            
+            $oauth = $this->_getLoginService(self::LOGIN_FORM);
+            $result = $oauth->login($usuario['email'], $password)->getResultLogin();
+            if ($result->error === false) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+
     protected function _getLoginService($gateway)
     {
         if (in_array($gateway, $this->getGateways())) {

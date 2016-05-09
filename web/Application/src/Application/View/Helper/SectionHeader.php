@@ -15,8 +15,10 @@ class SectionHeader extends AbstractHelper implements ServiceLocatorAwareInterfa
 {
     public function __invoke()
     {
-        //$sl = $this->getServiceLocator()->getServiceLocator();
-        return $this->getView()->render('helper/section-header.phtml');
+        $sl = $this->getServiceLocator()->getServiceLocator();
+        $data = $sl->get('Usuario\Model\Service\LoginGatewayService')->getData();
+        
+        return $this->getView()->render('helper/section-header.phtml', array('data' => $data));
     }
 
     public function getServiceLocator() {

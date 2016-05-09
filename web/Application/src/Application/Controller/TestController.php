@@ -16,11 +16,14 @@ class TestController extends SecurityAdminController
 {
 //    private $mguid = '{C47F7E4F-461C-4472-9BDB-5D1FF9D9F9A1}';//jludena
 //    private $mguid = '{5C3E7CA9-6412-4CA5-9C8C-F0E0F02968DE}';//jludena2
-    private $mguid = '{C55A121E-F07E-4D15-83F6-D02EA93364D4}';//mont
+//    private $mguid = '{C55A121E-F07E-4D15-83F6-D02EA93364D4}';//mont
+    private $mguid = '{787B713D-A621-4152-A7D3-464815875DAA}';//mont
 //    private $mguid = '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}';//angel
 //    private $cguid = '{54A0B670-9C39-464D-ABE2-79B62240043A}';//jludena
-    private $cguid = '{28368642-029F-4072-85E3-EC3F601D5518}';//angel
+//    private $cguid = '{28368642-029F-4072-85E3-EC3F601D5518}';//angel
+    private $cguid = '{584FA19C-9D70-45FD-8A89-6B6F64E6167C}';//montes 2
     
+    //{84199A8A-4D44-4378-976F-C2055C7EA3AF}
     
     public function indexAction()
     {

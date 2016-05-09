@@ -14,6 +14,7 @@ body
 .box_center
 	width 960px
 	margin 0 auto
+	position relative
 .bold
 	font-weight bold
 *:focus
@@ -21,7 +22,7 @@ body
 header
 	img.bg
 		width 100%
-		min-height 190px
+		min-height 200px
 		position absolute
 		top 0
 		left 0
@@ -35,11 +36,100 @@ header
 				margin-right 5px
 			&.in
 				sprite($in)
+	.user_option
+		position absolute
+		right 0
+		top 0px
+		.user_outside
+			display block
+			a
+				text-decoration none
+				font-size 12px
+				color #972482
+				span
+					vertical-align middle
+					display inline-block
+					&.icon
+						sprite($user)
+						margin-left 6px
+		.user_inside
+			display block
+			ul
+				margin 0
+				padding 0
+				li
+					display inline-block
+					&:first-child
+						border-right 1px solid lightgray
+						padding-right 12px
+						vertical-align top
+					&:last-child
+						padding-left 8px
+					a
+						text-decoration none
+						font-size 14px
+						color black
+						span
+							vertical-align middle
+							display inline-block
+							&.icon_cart
+								sprite($cart)
+							&.icon_counter
+								width 20px
+								height 20px
+								border-radius 12px
+								text-align center
+								color #972482
+								background #FFBD0F
+								font-size 12px
+								padding-top 3px
+								box-sizing border-box
+								margin-left 5px
+							&.user_image
+								margin 0 5px
+								width 22px
+								height 22px
+								border-radius 16px
+								overflow hidden
+								border 1px solid lightgray
+								img
+									width 100%
+									height 100%
+							&.arrow_bottom
+								width 12px
+								height 0px
+								background black
+								position relative
+								&:after
+									content ''
+									position absolute
+									display inline-block
+									top 0
+									left 0
+									width 0
+									height 0
+									border-top solid 6px black
+									border-left solid 6px transparent
+									border-right solid 6px transparent
+							
+						&.logout
+							display none
+							z-index 99
+							background lightgray
+							color black
+							font-size 12px
+							padding 5px
+							box-sizing border-box
+							position relative
+							&.active
+								display block
 	nav
 		ul
 			margin 10px 0 0
+			padding 0
+			text-align center
 			li
-				width 100px
+				width 110px
 				height 80px
 				list-style none
 				display inline-block
@@ -52,7 +142,7 @@ header
 					font-weight bold
 					position relative
 					.icon
-						height 54px
+						height 40px
 						i
 							font-size 36px
 						span
@@ -130,6 +220,10 @@ section
 					list-style none
 					padding 5px 10px
 					cursor pointer
+					font-size 12px
+					height 16px
+					padding-top 7px
+					width 100px
 					&.first
 						border-right 1px solid lightgray
 						margin-right -5px
@@ -471,16 +565,23 @@ section
 					height 100%
 					display none
 					border-radius 10px
+					position absolute
+					top 0
+					left 0
 					img
 						margin-top 50px
 				.success_box
 				.error_box
+				.duplicate_box
 					padding 20px 10px 10px 
 					box-sizing border-box
 					width 100%
 					height 100%
 					display none
 					border-radius 10px
+					position absolute
+					top 0
+					left 0
 					a
 						color white
 				.success_box
@@ -499,6 +600,15 @@ section
 						margin 0 auto
 					p
 						font-size 15px
+				.duplicate_box
+					background #757575
+					.icon
+						sprite($card_duplicate)
+						display block
+						margin 0 auto
+					p
+						font-size 15px
+						color white
 					
 				&.my_card
 					background #EFEFEF
@@ -920,8 +1030,78 @@ i[class*=" icon-"]
 	content "\ea91"
 
 
-
-
+//media query
+@media screen and (max-width: 667px)
+	.box_center
+		width 100%
+	header
+		background white
+		height 120px
+		margin-top -10px
+		padding-top 12px
+		nav
+			ul
+				li
+					display none
+					&.logo
+						display block
+						margin 0 auto
+		.user_option
+		.social_icons
+		.bg
+			display none
+	.right_options
+		display none
+	section
+		padding-top 20px
+		padding 8px
+		.welcome_box
+			h2
+			.subtitle
+			.medium
+			.small
+				display none
+			.yellow_box
+				background none
+				color white
+				&:before
+				&:after
+					display none
+			.error_message
+				width 95%
+				left 2%
+				padding 0
+			.purple_box
+				background none
+				.content
+					padding 0
+					.left
+					.right
+						float none
+						width 100%
+						display block
+				.login_link
+					a
+						color white
+						span
+							display none
+		.offers_box
+			.col_3
+				width 100%
+				img
+					width 100%
+	footer
+		background white
+		height 120px
+		margin-top 50px
+		img
+			&.bg
+				display none
+		ul
+			padding-top 20px
+			li
+				margin-top 10px
+				display block
 
 
 

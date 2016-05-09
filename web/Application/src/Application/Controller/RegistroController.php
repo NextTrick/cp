@@ -140,6 +140,7 @@ class RegistroController extends AbstractActionController
             switch ($gateway) {
                 case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
                     $dataIn['facebook_id'] = $this->_getDataRegistroTemp('id');
+                    $dataIn['estado'] = 1;
                     break;
                 case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
                     $dataIn['twitter_id'] = $this->_getDataRegistroTemp('id');
@@ -193,9 +194,14 @@ class RegistroController extends AbstractActionController
                 'estado' => 1,
                 'codigo_activar' => null,
             ), $row['id']);
+
+            $ok = $this->_getLoginGatewayService()->loginOffline($row['email']);
+            if ($ok) {
+                return $this->redirect()->toRoute('web-mis-tarjetas', array('controller' => 'mis-tarjetas'));
+            }
         }
 
-        return new ViewModel();
+        return $this->redirect()->toRoute('web-login', array('controller' => 'login'));
     }
 
     public function recuperarPasswordAction()
@@ -396,5 +402,10 @@ class RegistroController extends AbstractActionController
     protected function _getUbigeoService()
     {
         return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
+    }
+    
+    protected function _getLoginGatewayService()
+    {
+        return $this->getServiceLocator()->get('Usuario\Model\Service\LoginGatewayService');
     }
 }

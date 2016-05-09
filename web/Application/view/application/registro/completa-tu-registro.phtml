@@ -15,6 +15,8 @@
                                 <?php $disabledCss = ($disabledEmail) ? 'disabled-email' : ''; ?>
                                 <?php echo $this->formElement($this->form->get('email')->setAttributes(array(
                                     'class' => $disabledCss,
+                                    'data-parsley-required' => 'true',
+                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('email')); ?>
                             </div>
@@ -25,6 +27,8 @@
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('password')->setAttributes(array(
                                     'class' => '',
+                                    'data-parsley-required' => 'true',
+                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('password')); ?>
                             </div>
@@ -35,6 +39,8 @@
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('password_repeat')->setAttributes(array(
                                     'class' => '',
+                                    'data-parsley-required' => 'true',
+                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('password_repeat')); ?>
                             </div>
@@ -49,6 +55,8 @@
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('nombres')->setAttributes(array(
                                     'class' => '',
+                                    'data-parsley-required' => 'true',
+                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('nombres')); ?>
                             </div>
@@ -59,6 +67,8 @@
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('paterno')->setAttributes(array(
                                     'class' => '',
+                                    'data-parsley-required' => 'true',
+                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('paterno')); ?>
                             </div>
@@ -69,6 +79,8 @@
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('materno')->setAttributes(array(
                                     'class' => '',
+                                    'data-parsley-required' => 'true',
+                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('materno')); ?>
                             </div>
@@ -85,6 +97,8 @@
                                 <?php echo $this->formElement($this->form->get('di_valor')->setAttributes(array(
                                         'class' => 'inp_right',
                                         'placeholder' => 'Nro de documento',
+                                        'data-parsley-required' => 'true',
+                                        'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                     ))) ?>
                             </div>
                             <div class="right">
@@ -152,7 +166,7 @@
                             <div class="right">
                                 <?php echo $this->formRow($form->get('token_csrf')); ?>
                                 <button type="submit" class="btn btn_orange btn_save_signin">Registrarme</button>
-                                <p class="term">Al registrarte en Coney Club, aceptas los <a href="">términos y condiciones</a>&nbsp y nuestra <a href="">política de privacidad</a></p><a href="#modal_response_signin" name="modal">Abrir modal de respuesta</a>
+                                <p class="term">Al registrarte en Coney Club, aceptas los <a href="<?php echo BASE_URL ?>beneficios">términos y condiciones</a>&nbsp y nuestra <a href="">política de privacidad</a></p>
                             </div>
                         </div>
                     </div>
@@ -161,14 +175,15 @@
                 <div class="login_link"><a href="<?php echo BASE_URL ?>login">Ya tengo una cuenta en Coney Park<span></span></a></div>
             </div>
         </div>
-        <div id="modal_response_signin" class="modal_box" data-open="<?php echo $openPopapConfRegistro; ?>">
-          <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
-            <?php echo $mensajeRegistro; ?>
-            <a id="btn_recovery" href="#modal_recovery_response" name="modal" class="btn btn_orange">Aceptar</a>
-          </div>
-        </div>
-        <div id="mask"></div>
+        
     </div>
+    <div id="modal_response_signin" class="modal_box" data-open="<?php echo $openPopapConfRegistro; ?>">
+      <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+        <?php echo $mensajeRegistro; ?>
+          <button onclick="location.href='<?php echo BASE_URL ?>login';" class="close btn btn_orange">Aceptar</button>
+      </div>
+    </div>
+    <div id="mask"></div>
 </section>
 <script type="text/javascript">
     var ubigeo = {

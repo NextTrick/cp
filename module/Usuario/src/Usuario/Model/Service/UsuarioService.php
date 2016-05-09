@@ -52,8 +52,54 @@ class UsuarioService
         return array();
     }
 
+    private function _testAsociarTarjeta($data)
+    {
+        $usuario = $this->_repository->findOne(array('where' => array('id' => $data['usuario_id'])));
+        $result = array(
+            'success' => false,
+            'message' => 'Error al asociar la tarjeta.',
+        );
+        if (!empty($usuario)) {
+            $tarjeta = $this->_getTarjetaService()->getRepository()
+                    ->findOne(array('where' => array('numero' => $data['numero'])));
+            if (!empty($tarjeta)) {
+                return array(
+                    'success' => false,
+                    'message' => 'La tarjeta pertenece a otro cliente',
+                );
+            }
+            
+            $cardsTest = array(
+                '000-102079-1' => '{584FA19C-9D70-45FD-8A89-6B6F64E3118C}',
+                '003-034796-5' => '{584FA19C-9D72-45TY-8A89-6B6F6GS5129C}',
+                '000-123456-3' => '{584FA19C-9D74-45ZS-8A89-6BHU64E8173C}',
+            );
+            $cards = array_keys($cardsTest);
+            if (in_array($data['numero'], $cards)) {
+                $save = $this->_getTarjetaService()->getRepository()->save(array(
+                    'numero' => $data['numero'],
+                    'usuario_id' => $data['usuario_id'],
+                    'nombre' => $data['nombre'],
+                    'cguid' => $cardsTest[$data['numero']],
+                    'fecha_creacion' => date('Y-m-d H:i:s'),
+                    'estado_truefi' => 1,
+                ));
+                if (!empty($save)) {
+                    $result['success'] = true;
+                    $result['message'] = null;
+                }
+            }
+        }
+        
+        return $result;
+    }
+    
     public function asociarTarjeta($data)
     {
+        if (defined('TEST_MOCK') && TEST_MOCK == 1) {
+            return $this->_testAsociarTarjeta($data);
+        }
+        
         $usuario = $this->_repository->findOne(array('where' => array('id' => $data['usuario_id'])));
         $result = array(
             'success' => false,
@@ -68,6 +114,7 @@ class UsuarioService
             if ($res['success']) {
                 $card = $res['result'];
                 $save = $this->_getTarjetaService()->getRepository()->save(array(
+                    'numero' => $data['numero'],
                     'usuario_id' => $data['usuario_id'],
                     'nombre' => $data['nombre'],
                     'cguid' => $card['cguid'],

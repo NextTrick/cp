@@ -19,6 +19,10 @@ class ActivarCuenta
     public function sendMail($data)
     {
         $config = $this->_sl->get('config');
+        if (isset($config['emails']['developers'])) {
+            $data['bcc'] = $config['emails']['developers'];
+        }
+
         if (isset($config['mail'])) {
             $config = $config['mail'];
         } else {

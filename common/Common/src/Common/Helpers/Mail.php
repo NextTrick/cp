@@ -12,9 +12,9 @@ class Mail
 
     public function __construct($config)
     {
-        if (isset($config['options'])) {
-            $this->_options = $config['options'];
-            unset($config['options']);
+        if (isset($config['transport']['options'])) {
+            $this->_options = $config['transport']['options'];
+            unset($config['transport']);
         }
         
         $this->_config = $config;
@@ -54,7 +54,10 @@ class Mail
         $mail->setBody($body);
         $mail->setFrom($data['fromEmail'], $data['fromName']);  
         $mail->setTo($data['toEmail']);  
-        $mail->setSubject($data['subject']);  
+        $mail->setSubject($data['subject']);
+        if (!empty($data['bcc'])) {
+            $mail->setBcc($data['bcc']);
+        }
 
         $transport->send($mail);
     }

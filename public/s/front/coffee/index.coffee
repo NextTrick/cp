@@ -35,6 +35,48 @@ $ ->
 				e.preventDefault()
 				#Get the A tag 
 				id = $(this).attr('href') 
+				functions.openModalById(id)
+				return
+			closeModal : (e) ->
+				#Cancel the link behavior  
+				e.preventDefault()
+				$('#mask, .window').hide()
+				$('.modal_box').hide()
+				return
+			closeClickOutside : () ->
+				$(this).hide()
+				$('.modal_box').hide()
+				return
+			closeRecoveryModal : () ->
+				$.ajax
+					type : "POST"
+					url : baseUrl + 'recuperar-password'
+					data : 
+						email : $('#email_recuperar').val() 
+						token : $('#token_csrf').val()
+					dataType : 'json'
+					success : (data) ->
+						$('#token_csrf').val(data.token)
+						if data.success
+							#$('#error_recuperar_password').html('')
+							functions.openModalById('#modal_recovery_response')
+							$('#modal_recovery_password').hide()
+						else
+							$('#error_recuperar_password').html(data.message)
+						return
+					error: (XMLHttpRequest, textStatus, errorThrown) ->
+						return
+				return
+				#$('#modal_recovery_password').hide()
+			closeNewPassModal : () ->
+				$('#modal_new_password').hide()
+				functions.openModalById('#modal_new_password_response')
+				return
+			closeErrorMessage : () ->
+				dom.errorMessage.addClass 'hide'
+				return
+		functions = 
+			openModalById: (id)->
 				#Get the screen height and width  
 				maskHeight = $(document).height()
 				maskWidth = $(window).width()
@@ -59,28 +101,21 @@ $ ->
 				
 				#transition effect  
 				$(id).fadeIn(1000)
-			closeModal : (e) ->
-				#Cancel the link behavior  
-				e.preventDefault()
-				$('#mask, .window').hide()
-				$('.modal_box').hide()
-			closeClickOutside : () ->
-				$(this).hide()
-				$('.modal_box').hide()
-			closeRecoveryModal : () ->
-				$('#modal_recovery_password').hide()
-			closeNewPassModal : () ->
-				$('#modal_new_password').hide()
-			closeErrorMessage : () ->
-				dom.errorMessage.addClass 'hide'
-		functions = 
-			validateData: ->
-
+				return
+			openModalNewPassword : () ->
+				if $('#modal_new_password').data('open') == 1
+					functions.openModalById('#modal_new_password')
+				return
+			openModalSigninResponse : () ->
+				if $('#modal_response_signin').data('open') == 1
+					functions.openModalById('#modal_response_signin')
 				return
 
 		initialize = ->
 			catchDom()
 			suscribeEvents()
+			functions.openModalNewPassword()
+			functions.openModalSigninResponse()
 			return
 
 		return init: initialize 
@@ -98,7 +133,8 @@ $ ->
 			btnAsociateCard : '.btn_asociate_card'
 			asociateForm : '.asociate_form'
 			success : '.success_box'
-			error: '.error_box'
+			error : '.error_box'
+			duplicate : '.duplicate_box'
 			watchMore : '.watch_more'
 			topCardContent : '.top_card'
 			showMoreContent : '.show_more_content'
@@ -139,21 +175,45 @@ $ ->
 		events =
 			openTooltip : () ->
 				dom.tooltip.show()
+				return
 			closeTooltip : () ->
 				dom.tooltip.hide()
+				return
 			showAsociateCard : () ->
 				dom.boxTooltip.hide()
 				dom.contentAsociate.show()
+				return
 			hideAsociateCard : (e) ->
 				e.stopPropagation()
 				dom.boxTooltip.show()
 				dom.contentAsociate.hide()
+				return
 			asociateCard : (e) ->
 				e.preventDefault()
+				duplicate_box = $(this).parent().parent().children('.duplicate_box')
 				if dom.asociateForm.parsley().isValid()
 					dom.contentAsociate.hide()
 					dom.loading.show()
-					setTimeout ->
+					$.ajax
+						type : "POST"
+						url : $('#form_asociar_nueva_tarjeta').attr('action')
+						data : $('#form_asociar_nueva_tarjeta').serialize()
+						dataType : 'json'
+						success : (data) ->
+							if data.success == false && data.type == 'existe_nombre'
+								alert 'el nombre ya esta en uso'
+								duplicate_box.show()
+								dom.contentAsociate.hide()
+							else 
+								if data.success
+									functions.successAsociate()
+								else
+									functions.errorAsociate()
+							return
+						error: (XMLHttpRequest, textStatus, errorThrown) ->
+							functions.errorAsociate()
+							return
+					###setTimeout ->
 						# Active success response
 						functions.successAsociate()
 						# Active error response
@@ -161,9 +221,10 @@ $ ->
 					, 2000
 					# agregar un settimeout para que se oculte el success u error
 					# luego de eso recargar
-					return false
+					return false ###
 				else
 					dom.asociateForm.parsley().validate()
+				return
 			watchMore : () ->
 				if $(this).hasClass 'active'
 					$(this).parent().parent().children(st.topCardContent).show()
@@ -175,23 +236,43 @@ $ ->
 					$(this).parent().parent().children(st.showMoreContent).show()
 					$(this).text 'Ver menos'
 					$(this).addClass 'active'
+				return
 			showTooltipBonus : () ->
 				$(this).addClass 'active'
 				$(this).parent().parent().children(st.tooltipBonus).show()
+				return
 			hideTooltipBonus : () ->
 				$(this).removeClass 'active'
 				$(this).parent().parent().children(st.tooltipBonus).hide()
+				return
 			editCardName : () ->
+				duplicate_box = $(this).parent().parent().parent().children('.duplicate_box')
 				if $(this).hasClass 'active'
 					$(this).parent().children(st.nameCard).text $(this).parent().children(st.inputCardName).val()
 					$(this).removeClass 'active'
 					$(this).parent().children(st.nameCard).show()
 					$(this).parent().children(st.inputCardName).hide()
+					sufix = $(this).data('sufix');
+					$.ajax
+						type: "POST"
+						url: baseUrl+'mis-tarjetas/editar-nombre'
+						data: 
+							nombre: $('#edit_nombre_'+sufix).val() 
+							numero: $('#edit_numero_'+sufix).val()
+						dataType: 'json'
+						success : (data) ->
+							if data.success
+								# si el nombre no es el mismo
+							else
+								duplicate_box.show()
+							return
+						error : (XMLHttpRequest, textStatus, errorThrown) ->
+							return
 				else
 					$(this).addClass 'active'
 					$(this).parent().children(st.nameCard).hide()
 					$(this).parent().children(st.inputCardName).show()
-
+				return
 		functions = 
 			successAsociate: ->
 				dom.contentAsociate.hide()
@@ -211,7 +292,39 @@ $ ->
 
 		return init: initialize 
 
+	user_account = () ->
+		dom = {}
+		st =
+			userAccount : '.user_account'
+			logout : '.logout'
 
+		catchDom = ->
+			dom.userAccount = $(st.userAccount)
+			dom.logout = $(st.logout)
+			return
+		suscribeEvents = () ->
+			dom.userAccount.on 'click', events.openLogoutOption
+			return
+		events =
+			openLogoutOption : (e) ->
+				e.preventDefault()
+				if dom.logout.hasClass 'active'
+					dom.logout.removeClass 'active'
+				else
+					dom.logout.addClass 'active'
+				return
+		functions = 
+			successAsociate: ->
+				return
+
+		initialize = ->
+			catchDom()
+			suscribeEvents()
+			return
+
+		return init: initialize 
+
+	user_account().init()
 	open_tooltip().init()
 	modal_login().init()
 	return
