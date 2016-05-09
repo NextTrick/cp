@@ -10,23 +10,33 @@ namespace Paquete\Model\Service;
 
 class PaqueteService
 {
-    const TIPO_RECARGA = 1;
-    const TIPO_PROMOCION = 2;
+    const TIPO_RECARGA        = 1;
+    const TIPO_PROMOCION      = 2;
+    const TIPO_NAME_RECARGA   = 'Recarga';
+    const TIPO_NAME_PROMOCION = 'Promoción';
+
+    const CANT_ACTIVO_TIPO_PROMOCION = 4;
+    const CANT_ACTIVO_TIPO_RECARGA   = 3;
+
+    const ESTADO_BAJA        = 0;
+    const ESTADO_ACTIVO      = 1;
+    const ESTADO_NAME_BAJA   = 'Inactivo';
+    const ESTADO_NAME_ACTIVO = 'Activo';
 
     protected $_repository = null;
-    protected $_sl = null;
+    protected $_sl         = null;
 
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
-        $this->_sl = $serviceLocator;
+        $this->_sl         = $serviceLocator;
     }
 
     public function getTipos()
     {
         return array(
-            self::TIPO_RECARGA => 'Recarga',
-            self::TIPO_PROMOCION => 'Promoción',
+            self::TIPO_RECARGA   => self::TIPO_NAME_RECARGA,
+            self::TIPO_PROMOCION => self::TIPO_NAME_PROMOCION,
         );
     }
 
@@ -103,4 +113,91 @@ class PaqueteService
     {
         return $this->_sl->get('TrueFi\Model\Service\PromocionService');
     }
+
+    public function updateOrdenPaquete($tipo, $orden, $id)
+    {
+        $paquetes       = $this->_repository->getPaquetesByTipo($tipo);
+        $paquetesUodate = array();
+        $cont           = 1;
+        $countUpdate    = 0;
+        $band           = false;
+        $cantTipoMax    = (self::TIPO_PROMOCION == $tipo)? self::CANT_ACTIVO_TIPO_PROMOCION: self::CANT_ACTIVO_TIPO_RECARGA;
+        $ordenTemp      = null;
+
+        foreach ($paquetes as $key => $reg) {
+
+            if (!empty($reg['orden']) && $reg['orden'] == $orden) {
+                $paquetesUodate[] = array(
+                    'id'     => $id,
+                    'orden'  => $orden,
+                    'activo' => 1
+                );
+
+                $ordenTemp = $orden;
+                $band      = true;
+            }
+
+            if ($band) {
+                $ordenTemp ++;
+                $paquetesUodate[] = array(
+                    'id'     => $reg['id'],
+                    'orden'  => $ordenTemp,
+                    'activo' => ($cantTipoMax >= $cont)? 1: 0,
+                );
+
+                $cont ++;
+                continue;
+            }
+
+            $paquetesUodate[] = array(
+                'id'     => $reg['id'],
+                'orden'  => $reg['orden'],
+                'activo' => ($cantTipoMax >= $cont)? 1: 0,
+            );
+
+            $cont ++;
+        }
+
+        foreach ($paquetesUodate as $key => $reg) {
+            $id = $reg['id'];
+            unset($reg['id']);
+            $this->_repository->save($reg, $id);
+            $countUpdate ++;
+        }
+
+        return $countUpdate;
+    }
+
+    public static function getNombreTipo($tipo)
+    {
+        $result = null;
+        if (empty($tipo)) {
+            return $result;
+        }
+
+        if (self::TIPO_RECARGA == $tipo) {
+            $result = self::TIPO_NAME_RECARGA;
+        } elseif (self::TIPO_PROMOCION == $tipo) {
+            $result = self::TIPO_NAME_PROMOCION;
+        }
+
+        return $result;
+    }
+
+    public static function getNombreEstado($estado)
+    {
+        $result = null;
+        if (!isset($estado)) {
+            return $result;
+        }
+
+        if (self::ESTADO_ACTIVO == $estado) {
+            $result = self::ESTADO_NAME_ACTIVO;
+        } elseif (self::ESTADO_BAJA == $estado) {
+            $result = self::ESTADO_NAME_BAJA;
+        }
+
+        return $result;
+    }
+
 }

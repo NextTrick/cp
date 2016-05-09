@@ -132,6 +132,13 @@ class PaqueteForm extends Form
         $destacado->setUncheckedValue('0');
         $destacado->setValue('0');
         $this->add($destacado);
+
+        $orden = new Element\Text('orden');
+        $orden->setAttributes(array(
+            'id' => 'orden',
+            'maxlength' => '2',
+        ));
+        $this->add($orden);
     }
     
     protected function _getPaqueteService()
