@@ -57,8 +57,8 @@
       //CKFinder.setupCKEditor( editor );
 
       CKEDITOR.replace( 'contenido', {
-          filebrowserBrowseUrl: 'b/adminlte/plugins/ckfinder/ckfinder.html',
-          filebrowserUploadUrl: 'b/adminlte/plugins/ckfinder/core/connector/php/vendor/connector.php?command=QuickUpload&type=Files'
+          filebrowserBrowseUrl: '<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckfinder/ckfinder.html',
+          filebrowserUploadUrl: '<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
       } );
 
   });
