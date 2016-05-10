@@ -18,7 +18,7 @@
                                     <div class="card_title">
                                         <input type="hidden" id="edit_numero_<?php echo $key; ?>" name="edit_numero_<?php echo $key; ?>" value="<?php echo $row['numero'] ?>"/>
                                         <input type="text" id="edit_nombre_<?php echo $key; ?>" name="edit_nombre_<?php echo $key; ?>" class="input_name"/>
-                                        <span class="text"><?php echo $row['nombre'] ?></span>
+                                        <span class="text" id="org_nombre_<?php echo $key; ?>"><?php echo $row['nombre'] ?></span>
                                         <span class="edit_icon" data-sufix="<?php echo $key; ?>"></span>
                                     </div>
                                     <span class="card_number"><?php echo $row['numero'] ?></span>

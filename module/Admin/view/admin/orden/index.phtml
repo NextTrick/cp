@@ -37,13 +37,13 @@ $this->layout()->breadcrumb = array(
                     <td><?php echo $row['id'] ?></td>
                     <td><?php echo $row['pago_referencia'] ?></td>
                     <td><?php echo $row['email'] ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoPago($row['pago_tarjeta']); ?></td>
+                    <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoPago($row['pago_tarjeta']); ?></td>
                     <td><?php echo $row['monto'] ?></td>
                     <td><?php echo $row['fecha_creacion'] ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoComprobante($row['comprobante_tipo']); ?></td>
+                    <td><?php echo \Admin\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
+                    <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoComprobante($row['comprobante_tipo']); ?></td>
                     <td><?php echo $row['comprobante_numero'] ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreTipoDocumento($row['documento_tipo']); ?></td>
+                    <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoDocumento($row['documento_tipo']); ?></td>
                     <td><?php echo $row['fac_razon_social'] ?></td>
                     <td><?php echo $row['nombres']; ?></td>
                 </tr>

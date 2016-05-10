@@ -29,7 +29,7 @@ class OrdendetalleController extends SecurityAdminController
 
             $form->setData($this->params()->fromPost());
 
-            $criteria = $this->_getDetalleOrdenService()->getDataCriteria($this->params()->fromPost());
+            $criteria  = $this->_getDetalleOrdenService()->getDataCriteria($this->params()->fromPost());
             $gridList  = $this->_getDetalleOrdenService()->getRepository()->search($criteria);
             $countList = !empty($gridList)? count($gridList): 0;
 

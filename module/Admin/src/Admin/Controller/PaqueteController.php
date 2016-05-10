@@ -33,7 +33,9 @@ class PaqueteController extends SecurityAdminController
         $this->_syncPaquetes();
         
         $gridList = $this->_getPaqueteService()->getRepository()->search($criteria);
-        $countList = $this->_getPaqueteService()->getRepository()->countTotal($criteria);
+        $countList = count($gridList);
+        //$countList = $this->_getPaqueteService()->getRepository()->countTotal($criteria);
+
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
         $view->setVariable('countList', $countList);
@@ -155,25 +157,28 @@ class PaqueteController extends SecurityAdminController
             'uploadDir' => $config['fileDir']['paquete_paquete']['up'],
         )));
         $form->setData($data);
+
         if ($form->isValid()) {
             $data = $form->getData();
             try {
                 $paramsIn = array(
-                    'titulo1' => $data['titulo1'],
-                    'titulo2' => $data['titulo2'],
-                    'legal' => $data['legal'],
-                    'activo' => $data['activo'],
+                    'titulo1'   => $data['titulo1'],
+                    'titulo2'   => $data['titulo2'],
+                    'legal'     => $data['legal'],
+                    'activo'    => $data['activo'],
                     'destacado' => $data['destacado'],
-                    'imagen' => $newFileName,
+                    'orden'     => $data['orden'],
+                    'tipo'      => $data['tipo'],
+                    'imagen'    => $newFileName,
                 );
 
                 if ($action == AC_CREAR) {
-                    $paramsIn['emoney'] = $dataStatic['emoney'];
-                    $paramsIn['bonus'] = $dataStatic['bonus'];
+                    $paramsIn['emoney']         = $dataStatic['emoney'];
+                    $paramsIn['bonus']          = $dataStatic['bonus'];
                     $paramsIn['promotionbonus'] = $dataStatic['promotionbonus'];
-                    $paramsIn['etickets'] = $dataStatic['etickets'];
-                    $paramsIn['gamepoints'] = $dataStatic['gamepoints'];
-                    $paramsIn['referencia'] = $dataStatic['referencia'];
+                    $paramsIn['etickets']       = $dataStatic['etickets'];
+                    $paramsIn['gamepoints']     = $dataStatic['gamepoints'];
+                    $paramsIn['referencia']     = $dataStatic['referencia'];
                     $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
                 }
                 
@@ -183,13 +188,18 @@ class PaqueteController extends SecurityAdminController
                 } else {
                     $repository->save($paramsIn);
                 }
+
+                $this->_getPaqueteService()->updateOrdenPaquete($paramsIn['tipo'], $paramsIn['orden'], $id);
                 
                 $this->flashMessenger()->addMessage(array(
                     'success' => ($action == AC_CREAR) ? OK_CREAR : OK_EDITAR,
                 ));
             } catch (\Exception $e) {
-                $this->flashMessenger()->addMessage(array(
+                /*$this->flashMessenger()->addMessage(array(
                     'error' => ($action == AC_CREAR) ? ER_CREAR : ER_EDITAR,
+                ));*/
+                $this->flashMessenger()->addMessage(array(
+                    'error' => $e->getMessage(),
                 ));
             }
 
@@ -240,4 +250,5 @@ class PaqueteController extends SecurityAdminController
     {
         return $this->getServiceLocator()->get('Paquete\Model\Service\PaqueteService');
     }
+
 }
