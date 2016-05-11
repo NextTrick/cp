@@ -31,9 +31,9 @@ return array(
     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
-        'database' => 'projectuser',
-        'username' => 'projectpass',
-        'password' => '',
+        'database' => 'pasarelaconeydev',
+        'username' => 'idigital',
+        'password' => '1D1g1t4L',
         'port' => '3306',        
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
