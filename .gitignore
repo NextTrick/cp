@@ -9,8 +9,8 @@ nbproject
 .project
 .settings
 /vendor
-/data/cache/*
-/data/log/*
+;/data/cache/*
+;/data/log/*
 composer.phar
 VirtualBox-*
 config/autoload/local.php
