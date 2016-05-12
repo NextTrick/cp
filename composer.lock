@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4f9d0cde5ebf2264cc0118c650d43dd9",
-    "content-hash": "7482dcd6c4804c5ad9882a1124a8607e",
+    "hash": "43b9b81df92adc127c4988b67d9c086f",
+    "content-hash": "504d3fb8bf8484390d87ea796f7bac37",
     "packages": [
         {
             "name": "facebook/php-sdk-v4",
@@ -155,6 +155,62 @@
             "time": "2015-05-01 07:00:55"
         },
         {
+            "name": "zendcart/zendcart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vikey89/ZendCart.git",
+                "reference": "3b41ee9560d9b3d168febfe3bef85fcc4af041c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vikey89/ZendCart/zipball/3b41ee9560d9b3d168febfe3bef85fcc4af041c1",
+                "reference": "3b41ee9560d9b3d168febfe3bef85fcc4af041c1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "zendframework/zendframework": "2.*"
+            },
+            "type": "zf2-module",
+            "autoload": {
+                "psr-0": {
+                    "ZendCart": "src"
+                },
+                "classmap": [
+                    "./Module.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vincenzo Provenza",
+                    "email": "info@ilovecode.it",
+                    "homepage": "http://ilovecode.it/",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Concetto Vecchio",
+                    "email": "info@cvsolutions.it",
+                    "homepage": "http://cvsolutions.it/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Cart in ZF2",
+            "homepage": "https://github.com/vikey89/ZendCart",
+            "keywords": [
+                "carrello zf2",
+                "cart",
+                "e-commerce",
+                "zend cart",
+                "zf2 module"
+            ],
+            "time": "2014-09-06 14:46:28"
+        },
+        {
             "name": "zendframework/zenddiagnostics",
             "version": "v1.0.9",
             "source": {
@@ -219,21 +275,21 @@
         },
         {
             "name": "zendframework/zendframework",
-            "version": "2.4.9",
+            "version": "2.3.9",
             "source": {
                 "type": "git",
-                "url": "https://github.com/zendframework/zf2.git",
-                "reference": "4d096d15d01d46b03a69fff00576b31789246364"
+                "url": "https://github.com/zendframework/zendframework.git",
+                "reference": "32858f883fffb5eef9f610b538ed026f6033b6de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zf2/zipball/4d096d15d01d46b03a69fff00576b31789246364",
-                "reference": "4d096d15d01d46b03a69fff00576b31789246364",
+                "url": "https://api.github.com/repos/zendframework/zendframework/zipball/32858f883fffb5eef9f610b538ed026f6033b6de",
+                "reference": "32858f883fffb5eef9f610b538ed026f6033b6de",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.23",
-                "zendframework/zendxml": "^1.0.1"
+                "zendframework/zendxml": "~1.0-dev"
             },
             "replace": {
                 "zendframework/zend-authentication": "self.version",
@@ -289,13 +345,14 @@
                 "zendframework/zend-xmlrpc": "self.version"
             },
             "require-dev": {
-                "doctrine/annotations": "~1.0",
-                "fabpot/php-cs-fixer": "~1.0",
-                "ircmaxell/random-lib": "~1.1",
-                "mikey179/vfsstream": "~1.2",
-                "phpunit/phpcov": "~2.0",
-                "phpunit/phpunit": "~4.6",
-                "satooshi/php-coveralls": "dev-master"
+                "doctrine/annotations": ">=1.0",
+                "fabpot/php-cs-fixer": "1.*",
+                "ircmaxell/random-lib": "dev-master",
+                "ircmaxell/security-lib": "dev-master",
+                "mikey179/vfsstream": "1.2.*",
+                "phpunit/phpunit": "3.7.*",
+                "satooshi/php-coveralls": "dev-master",
+                "sebastianbergmann/phpcov": "1.1.0"
             },
             "suggest": {
                 "doctrine/annotations": "Doctrine Annotations >=1.0 for annotation features",
@@ -313,13 +370,13 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev",
-                    "dev-develop": "2.5-dev"
+                    "dev-master": "2.3-dev",
+                    "dev-develop": "2.4-dev"
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Zend\\": "library/Zend/"
+                "psr-0": {
+                    "Zend\\": "library/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -332,7 +389,7 @@
                 "framework",
                 "zf2"
             ],
-            "time": "2015-11-23 17:34:23"
+            "time": "2015-05-11 16:03:51"
         },
         {
             "name": "zendframework/zendxml",
@@ -444,7 +501,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "zendframework/zftool": 20
+        "zendframework/zftool": 20,
+        "zendcart/zendcart": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

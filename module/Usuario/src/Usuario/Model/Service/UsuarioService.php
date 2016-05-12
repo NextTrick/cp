@@ -169,21 +169,6 @@ class UsuarioService
     {
         return $this->_repository;
     }
-    
-    private function _getTrueFiUsuarioService()
-    {
-        return $this->_sl->get('TrueFi\Model\Service\UsuarioService');
-    }
-    
-    private function _getTrueFiTarjetaService()
-    {
-        return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
-    }
-    
-    private function _getTarjetaService()
-    {
-        return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
-    }
 
     public function getDataCriteria($params)
     {
@@ -290,5 +275,20 @@ class UsuarioService
             'paterno'  => 'A. Paterno',
             'materno'  => 'A. Materno',
         );
+    }
+    
+    private function _getTrueFiUsuarioService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\UsuarioService');
+    }
+    
+    private function _getTrueFiTarjetaService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
+    }
+    
+    private function _getTarjetaService()
+    {
+        return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
     }
 }
