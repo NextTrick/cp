@@ -16,13 +16,14 @@ $this->layout()->breadcrumb = array(
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Titulo 1</th>
-                    <th>Titulo 2</th>
+                    <th style="white-space:nowrap;">Titulo 1</th>
+                    <th style="white-space:nowrap;">Titulo 2</th>
                     <th>Dinero</th>
-                    <th>Coney Bonos</th>
-                    <th>Coney Bonos Plus</th>
+                    <th style="white-space:nowrap;">Coney Bonos</th>
+                    <th style="white-space:nowrap;">Coney Bonos Plus</th>
                     <th>Tickets</th>
-                    <th>Game Points</th>
+                    <th>Tipo</th>
+                    <th style="white-space:nowrap;">Game Points</th>
                     <th>Fecha</th>
                     <th>Activo</th>
                     <th>Destacado</th>
@@ -38,11 +39,12 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['bonus'] ?></td>
                         <td><?php echo $row['promotionbonus'] ?></td>
                         <td><?php echo $row['etickets'] ?></td>
+                        <td><?php echo \Paquete\Model\Service\PaqueteService::getNombreTipo($row['tipo']); ?></td>
                         <td><?php echo $row['gamepoints'] ?></td>
                         <td><?php echo $row['fecha_creacion'] ?></td>
-                        <td><?php echo $row['activo'] ?></td>
+                        <td><?php echo \Paquete\Model\Service\PaqueteService::getNombreEstado($row['activo']); ?></td>
                         <td><?php echo $row['destacado'] ?></td>
-                        <td>
+                        <td style="white-space:nowrap;">
                             <a href="<?php echo BASE_URL ?>admin/paquete/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                             <a href="<?php echo BASE_URL ?>admin/paquete/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
                         </td>

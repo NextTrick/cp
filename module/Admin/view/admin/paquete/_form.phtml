@@ -27,6 +27,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label" for="emoney">Orden <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('orden')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('orden')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label" for="emoney">Dinero <span>*</span></label>
             <div class="col-sm-8">
                 <label><?php echo $this->form->get('emoney')->getValue(); ?></label>

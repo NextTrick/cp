@@ -269,12 +269,14 @@ $(function() {
         //alert(duplicate_box.children('p').text())
         duplicate_box.children('p').children('strong').text('"' + nombre + '" ');
         //alert(duplicate_box.html())
+        sufix = $(this).data('sufix');
+        $('#edit_nombre_' + sufix).val($.trim($('#org_nombre_'+sufix).html()));
         if ($(this).hasClass('active')) {
           $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
           $(this).removeClass('active');
           $(this).parent().children(st.nameCard).show();
           $(this).parent().children(st.inputCardName).hide();
-          sufix = $(this).data('sufix');
+          
           $.ajax({
             type: "POST",
             url: baseUrl + 'mis-tarjetas/editar-nombre',

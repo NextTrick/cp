@@ -52,7 +52,7 @@ class UsuarioService
         return array();
     }
 
-    public function asociarTarjeta($data)
+    private function _testAsociarTarjeta($data)
     {
         $usuario = $this->_repository->findOne(array('where' => array('id' => $data['usuario_id'])));
         $result = array(
@@ -69,18 +69,18 @@ class UsuarioService
                 );
             }
             
-            $cardsx = array(
+            $cardsTest = array(
                 '000-102079-1' => '{584FA19C-9D70-45FD-8A89-6B6F64E3118C}',
                 '003-034796-5' => '{584FA19C-9D72-45TY-8A89-6B6F6GS5129C}',
                 '000-123456-3' => '{584FA19C-9D74-45ZS-8A89-6BHU64E8173C}',
             );
-            $cards = array_keys($cardsx);
+            $cards = array_keys($cardsTest);
             if (in_array($data['numero'], $cards)) {
                 $save = $this->_getTarjetaService()->getRepository()->save(array(
                     'numero' => $data['numero'],
                     'usuario_id' => $data['usuario_id'],
                     'nombre' => $data['nombre'],
-                    'cguid' => $cardsx[$data['numero']],
+                    'cguid' => $cardsTest[$data['numero']],
                     'fecha_creacion' => date('Y-m-d H:i:s'),
                     'estado_truefi' => 1,
                 ));
@@ -90,11 +90,16 @@ class UsuarioService
                 }
             }
         }
+        
         return $result;
     }
     
-    public function asociarTarjeta_org($data)
+    public function asociarTarjeta($data)
     {
+        if (defined('TEST_MOCK') && TEST_MOCK == 1) {
+            return $this->_testAsociarTarjeta($data);
+        }
+        
         $usuario = $this->_repository->findOne(array('where' => array('id' => $data['usuario_id'])));
         $result = array(
             'success' => false,
@@ -163,21 +168,6 @@ class UsuarioService
     public function getRepository()
     {
         return $this->_repository;
-    }
-    
-    private function _getTrueFiUsuarioService()
-    {
-        return $this->_sl->get('TrueFi\Model\Service\UsuarioService');
-    }
-    
-    private function _getTrueFiTarjetaService()
-    {
-        return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
-    }
-    
-    private function _getTarjetaService()
-    {
-        return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
     }
 
     public function getDataCriteria($params)
@@ -285,5 +275,20 @@ class UsuarioService
             'paterno'  => 'A. Paterno',
             'materno'  => 'A. Materno',
         );
+    }
+    
+    private function _getTrueFiUsuarioService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\UsuarioService');
+    }
+    
+    private function _getTrueFiTarjetaService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
+    }
+    
+    private function _getTarjetaService()
+    {
+        return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
     }
 }
