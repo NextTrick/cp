@@ -40,14 +40,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -160px -116px;
+  background-position: -240px -116px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -160px -90px;
+  background-position: -240px -90px;
   width: 26px;
   height: 26px;
 }
@@ -70,7 +70,7 @@ header .user_option .user_outside a span {
 }
 header .user_option .user_outside a span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -93px -56px;
+  background-position: -226px -79px;
   width: 12px;
   height: 14px;
   margin-left: 6px;
@@ -104,7 +104,7 @@ header .user_option .user_inside ul li a span {
 }
 header .user_option .user_inside ul li a span.icon_cart {
   background-image: url("../images/sprite.png");
-  background-position: 0px -142px;
+  background-position: -240px -189px;
   width: 24px;
   height: 22px;
 }
@@ -275,10 +275,10 @@ header nav ul li.logo img {
   height: ;
 }
 .right_options ul li a span.icon_card {
-  background-image: url("");
-  background-position: ;
-  width: ;
-  height: ;
+  background-image: url("../images/sprite.png");
+  background-position: 0px 0px;
+  width: 120px;
+  height: 66px;
 }
 .right_options ul li a span.icon_birthday {
   background-image: url("");
@@ -302,7 +302,7 @@ header nav ul li.logo img {
 }
 .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -160px -32px;
+  background-position: -240px -32px;
   width: 32px;
   height: 32px;
 }
@@ -315,7 +315,7 @@ header nav ul li.logo img {
 }
 .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -160px 0px;
+  background-position: -240px 0px;
   width: 32px;
   height: 32px;
 }
@@ -572,7 +572,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -160px -64px;
+  background-position: -240px -64px;
   width: 32px;
   height: 26px;
 }
@@ -669,7 +669,7 @@ section .purple_box .info_box span.text {
 }
 section .purple_box .info_box span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -54px 0px;
+  background-position: -174px -66px;
   width: 52px;
   height: 52px;
   margin-right: 10px;
@@ -722,7 +722,7 @@ section .purple_box .cart_box .cart {
 }
 section .purple_box .cart_box .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -24px -142px;
+  background-position: -213px -132px;
   width: 23px;
   height: 20px;
   display: inline-block;
@@ -834,7 +834,7 @@ section .purple_box .cards_content .col_3 .success_box {
 }
 section .purple_box .cards_content .col_3 .success_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: 0px -56px;
+  background-position: 0px -132px;
   width: 55px;
   height: 45px;
   display: block;
@@ -848,7 +848,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -106px -44px;
+  background-position: -109px -132px;
   width: 52px;
   height: 41px;
   display: block;
@@ -862,7 +862,7 @@ section .purple_box .cards_content .col_3 .duplicate_box {
 }
 section .purple_box .cards_content .col_3 .duplicate_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -106px 0px;
+  background-position: -55px -132px;
   width: 54px;
   height: 44px;
   display: block;
@@ -901,13 +901,13 @@ section .purple_box .cards_content .col_3.my_card span {
 section .purple_box .cards_content .col_3.my_card span.cp_logo {
   display: block;
   background-image: url("../images/sprite.png");
-  background-position: 0px 0px;
+  background-position: -120px -66px;
   width: 54px;
   height: 56px;
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon {
   background-image: url("../images/sprite.png");
-  background-position: -118px -101px;
+  background-position: -240px -166px;
   width: 23px;
   height: 23px;
   display: inline-block;
@@ -918,7 +918,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -106px -85px;
+  background-position: -213px -152px;
   width: 18px;
   height: 14px;
 }
@@ -1061,7 +1061,7 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb a {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span {
   background-image: url("../images/sprite.png");
-  background-position: -124px -85px;
+  background-position: -226px -66px;
   width: 13px;
   height: 13px;
   display: block;
@@ -1098,6 +1098,92 @@ section .purple_box .recargas_content .offers .col_3 .cant_box input.cant {
   background: #fff;
   width: 60px;
   color: #000;
+}
+section .purple_box .pay_box_white {
+  background: #fff;
+  color: #000;
+  overflow: hidden;
+  padding: 0px 15px;
+  margin-top: 20px;
+}
+section .purple_box .pay_box_white >.left {
+  width: 300px;
+  text-align: left;
+  border-right: 1px dashed #d3d3d3;
+  padding-right: 15px;
+}
+section .purple_box .pay_box_white >.left p {
+  font-size: 14px;
+}
+section .purple_box .pay_box_white >.left .voucher {
+  padding: 5px 0 15px;
+}
+section .purple_box .pay_box_white >.left .voucher input {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+  vertical-align: top;
+}
+section .purple_box .pay_box_white >.left .voucher input:last-child {
+  margin-left: 30px;
+}
+section .purple_box .pay_box_white >.left .content_factura,
+section .purple_box .pay_box_white >.left .content_boleta {
+  padding: 0px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control,
+section .purple_box .pay_box_white >.left .content_boleta .form_control {
+  margin-bottom: 15px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control label,
+section .purple_box .pay_box_white >.left .content_boleta .form_control label {
+  display: block;
+  margin-bottom: 5px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control input,
+section .purple_box .pay_box_white >.left .content_boleta .form_control input {
+  border: 1px solid #d3d3d3;
+  height: 36px;
+  border-radius: 16px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control input[type="checkbox"],
+section .purple_box .pay_box_white >.left .content_boleta .form_control input[type="checkbox"] {
+  width: auto;
+  height: 15px;
+  margin-right: 10px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control select,
+section .purple_box .pay_box_white >.left .content_boleta .form_control select {
+  width: 100%;
+  border: 1px solid #d3d3d3;
+  border-radius: 16px;
+}
+section .purple_box .pay_box_white >.right {
+  width: 630px;
+  text-align: left;
+  padding-left: 15px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card {
+  display: inline-block;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -66px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.visa {
+  background-image: url("../images/sprite.png");
+  background-position: -120px 0px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .left {
+  width: 100px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right {
+  width: 450px;
+  text-align: left;
 }
 section input {
   width: 100%;
@@ -1206,7 +1292,7 @@ section .error_message span {
 }
 section .error_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -94px -101px;
+  background-position: -240px -142px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -1270,7 +1356,7 @@ section form.signin_form .content_form input {
 }
 .bottom_bar .select span {
   background-image: url("../images/sprite.png");
-  background-position: -52px -101px;
+  background-position: -38px -177px;
   width: 42px;
   height: 28px;
   display: block;
@@ -1362,7 +1448,7 @@ footer ul li a {
 }
 .modal_box .modal_content span.icon_logo {
   background-image: url("../images/sprite.png");
-  background-position: 0px 0px;
+  background-position: -120px -66px;
   width: 54px;
   height: 56px;
   display: block;
