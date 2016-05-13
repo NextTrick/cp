@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login, open_tooltip, user_account;
+  var modal_login, open_tooltip, recargas, user_account;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -338,6 +338,47 @@ $(function() {
       init: initialize
     };
   };
+  recargas = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      less: '.cant_box .less',
+      more: '.cant_box .more'
+    };
+    catchDom = function() {
+      dom.less = $(st.less);
+      dom.more = $(st.more);
+    };
+    suscribeEvents = function() {
+      dom.less.on('click', events.substract);
+      dom.more.on('click', events.add);
+    };
+    events = {
+      substract: function(e) {
+        var actual;
+        actual = $(this).next('input');
+        if (actual.val() > 0) {
+          actual.val(parseInt(actual.val()) - 1);
+        }
+      },
+      add: function(e) {
+        var actual;
+        actual = $(this).prev('input');
+        actual.val(parseInt(actual.val()) + 1);
+      }
+    };
+    functions = {
+      example: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
+  recargas().init();
   user_account().init();
   open_tooltip().init();
   modal_login().init();

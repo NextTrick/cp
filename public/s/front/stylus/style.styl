@@ -8,7 +8,10 @@
 	    url('../font/icomoon.svg?fz5o96#icomoon') format('svg')
 	font-weight normal
 	font-style normal
-
+*
+	-moz-box-sizing border-box
+	-webkit-box-sizing border-box
+	box-sizing border-box
 body
 	background url(../images/bg.jpg) repeat
 .box_center
@@ -198,11 +201,37 @@ header
 						sprite($card_selected)
 					&.icon_birthday
 						sprite($birthday)
+.btn
+	border 0
+	height 42px
+	box-sizing border-box
+	border-radius 10px
+	color white
+	&.btn_fb
+		background #3B5998
+		span
+			display inline-block
+			vertical-align middle
+			&.icon
+				sprite($fb_icon)
+	&.btn_tw
+		background #1B95E0
+		span
+			display inline-block
+			vertical-align middle
+			&.icon
+				sprite($tw_icon)
+	&.btn_orange
+		background #FF5800
+	&.btn_save_signin
+		margin-top 20px
 section
 	padding-top 120px
 	padding-bottom 50px
 	overflow hidden
 	color white
+	&.recargas
+		padding-bottom 0
 	&.app_content
 		padding-top 50px
 		.menu
@@ -224,6 +253,7 @@ section
 					height 16px
 					padding-top 7px
 					width 100px
+					height 28px
 					&.first
 						border-right 1px solid lightgray
 						margin-right -5px
@@ -262,11 +292,11 @@ section
 			&.left_active
 				&:before
 					color #F7A100
-					border-right 14px solid #F7A100
+					border-right 13px solid #F7A100
 			&.right_active
 				&:after
 					color #F7A100
-					border-left 14px solid #F7A100
+					border-left 13px solid #F7A100
 			
 				
 	h2
@@ -326,30 +356,7 @@ section
 			position absolute
 			right -21px
 			top 0
-	.btn
-		border 0
-		height 42px
-		box-sizing border-box
-		border-radius 10px
-		color white
-		&.btn_fb
-			background #3B5998
-			span
-				display inline-block
-				vertical-align middle
-				&.icon
-					sprite($fb_icon)
-		&.btn_tw
-			background #1B95E0
-			span
-				display inline-block
-				vertical-align middle
-				&.icon
-					sprite($tw_icon)
-		&.btn_orange
-			background #FF5800
-		&.btn_save_signin
-			margin-top 20px
+	
 	.purple_box
 		background #6C006C
 		border-radius 20px
@@ -503,6 +510,48 @@ section
 				width 30%
 				text-decoration none
 				margin-top 20px
+		.steps
+			width 120px
+			margin 0 auto
+			text-align center
+			.step
+				width 36px
+				height 36px
+				border-radius 18px
+				background #400040
+				color #FFAA00
+				padding-top 10px
+				text-align center
+				display inline-block
+				margin 0 10px
+				&.active
+					background #FFAA00
+					color #400040
+		.cart_box
+			position absolute
+			right 32px
+			margin-top -40px
+			.label
+				color white
+				display inline-block
+				font-size 18px
+				margin-right 10px
+			.cart
+				display inline-block
+				background #400040
+				width 80px
+				height 42px
+				border-radius 15px
+				padding-top 8px
+				span
+					&.icon
+						sprite($cart_white)
+						display inline-block
+						margin-right 10px
+					&.number
+						color #FFAA00
+						font-size 24px
+					
 		.cards_content
 			width 95%
 			margin 0 auto 10px
@@ -726,6 +775,133 @@ section
 								float right
 								font-size 16px
 								margin-left 10px
+		.recargas_content
+			.offers
+				padding-bottom 30px
+				.col_3
+					display inline-block
+					vertical-align top
+					margin 10px 7px
+					width 286px
+					height 240px
+					background url(../images/offer_bg.png)
+					.box_white
+						border-radius 14px
+						background white
+						color black
+						text-align left
+						height 100%
+						width 100%
+						.image
+							height 143px
+							overflow hidden
+						p
+							padding 0 10px
+							font-size 16px
+							margin 8px 0px
+							line-height 22px
+							&.breadcrumb
+								text-align left
+								color #FF0000
+								font-size 16px
+								position relative
+								a
+									color #AAAAAA
+									font-size 14px
+									text-decoration none
+								span
+									sprite($arrow_top)
+									display block
+									position absolute
+									right 10px
+									top 8px
+					.cant_box
+						margin-top 7px
+						span
+							display inline-block
+							height 32px
+							padding-top 7px
+							border-radius 15px
+							margin 0px 2px
+							cursor pointer
+							&.less
+								background #FF5800
+								color white
+								width 36px
+							&.more
+								background #FF5800
+								color white
+								width 36px
+						input
+							&.cant
+								display inline-block
+								border-radius 15px
+								margin 0px 2px
+								height 32px
+								background white
+								width 60px
+								color black
+		.pay_box_white
+			background white
+			color black
+			overflow hidden
+			padding 0px 15px
+			margin-top 20px
+			>.left
+				width 300px
+				text-align left
+				border-right 1px dashed lightgray
+				padding-right 15px
+				p
+					font-size 14px
+				.voucher
+					padding 5px 0 15px
+					input
+						width auto
+						height auto
+						margin-right 10px
+						vertical-align top
+						&:last-child
+							margin-left 30px
+				.content_factura
+				.content_boleta
+					padding 0px
+					.form_control
+						margin-bottom 15px
+						label
+							display block
+							margin-bottom 5px
+						input
+							border 1px solid lightgray
+							height 36px
+							border-radius 16px
+						input[type="checkbox"]
+							width auto
+							height 15px
+							margin-right 10px
+						select
+							width 100%
+							border 1px solid lightgray
+							border-radius 16px
+			>.right
+				width 630px
+				text-align left
+				padding-left 15px
+				.credit_cards
+					.card
+						display inline-block
+						&.pagoefectivo
+							sprite($pagoefectivo)
+						&.visa
+							sprite($visa)
+				.items_cart
+					.item
+						.left
+							width 100px
+						.right
+							width 450px
+							text-align left
+					
 	input
 		width 100%
 		border 0
@@ -848,6 +1024,58 @@ section
 				margin 30px auto
 				input
 					height 36px
+.bottom_bar
+	width 1228px
+	height 58px
+	background #370135
+	margin 0 auto
+	color white
+	border-radius 25px
+	padding 10px 20px
+	position relative
+	.select
+		display inline-block
+		margin 0px 20px 0 10px
+		position relative
+		span
+			sprite($card_logo)
+			display block
+			position absolute
+			left 10px
+			top 4px
+		select
+			height 36px
+			width 325px
+			background url(../images/number_select.png) no-repeat right, white
+			border 0
+			padding 10px 10px 10px 60px
+			border-radius 18px
+			color gray
+			/*for firefox*/
+			-moz-appearance none
+			/*for chrome*/
+			-webkit-appearance none
+	span
+		&.text
+			font-size bold
+		&.bg
+			background #410041
+			height 36px
+			border-radius 18px
+			padding 10px 15px
+			margin-right 30px
+			span
+				color #A70089
+			.text
+				color white
+				margin-right 10px
+			&.total
+				color #FFBE00
+				margin-left 10px
+	button
+		width 250px
+		border-radius 20px
+		height 36px
 footer
 	display block
 	img.bg

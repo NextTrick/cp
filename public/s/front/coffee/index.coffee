@@ -324,6 +324,42 @@ $ ->
 
 		return init: initialize 
 
+	recargas = () ->
+		dom = {}
+		st =
+			less : '.cant_box .less'
+			more : '.cant_box .more'
+
+		catchDom = ->
+			dom.less = $(st.less)
+			dom.more = $(st.more)
+			return
+		suscribeEvents = () ->
+			dom.less.on 'click', events.substract
+			dom.more.on 'click', events.add
+			return
+		events =
+			substract : (e) ->
+				actual = $(this).next('input')
+				if actual.val() > 0
+					actual.val(parseInt(actual.val())-1)
+				return
+			add : (e) ->
+				actual = $(this).prev('input')
+				actual.val(parseInt(actual.val())+1)
+				return
+		functions = 
+			example: ->
+				return
+
+		initialize = ->
+			catchDom()
+			suscribeEvents()
+			return
+
+		return init: initialize 
+
+	recargas().init()
 	user_account().init()
 	open_tooltip().init()
 	modal_login().init()
