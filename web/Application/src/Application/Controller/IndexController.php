@@ -52,7 +52,8 @@ class IndexController extends AbstractActionController
             $alias = \PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor::ALIAS;        
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
 
-            $paymentProcessor->createCharge($data);
+            $response = $paymentProcessor->createCharge($data);
+            var_dump($response);
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
@@ -77,12 +78,19 @@ class IndexController extends AbstractActionController
             'monto' => '1000.10'
         );
         
+        try {            
+            $alias = \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS;        
+            $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
+                    
+            $response = $paymentProcessor->createCharge($data);
+            var_dump($response);
         
-        $alias = \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS;        
-        $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
-        
-        $paymentProcessor->createCharge($data);
-        
+        } catch (\Exception $e) {
+            var_dump($e->getMessage(), $e->getTraceAsString()); exit;
+        }
+
+        echo 'fin'; exit;
+
         exit;
     }
     
