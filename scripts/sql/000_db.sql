@@ -437,6 +437,8 @@ CREATE  TABLE IF NOT EXISTS `cms_contenido` (
   `estado` TINYINT(1) NULL DEFAULT 1 ,
   `fecha_creacion` DATETIME NULL ,
   `fecha_edicion` DATETIME NULL ,
+  `url` VARCHAR(200) NULL ,
+
   PRIMARY KEY (`id`) ,
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) )
 ENGINE = InnoDB;

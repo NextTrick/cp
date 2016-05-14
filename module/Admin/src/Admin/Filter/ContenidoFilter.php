@@ -72,13 +72,14 @@ class ContenidoFilter extends Zf2InputFilter
         $this->add(array(
             'name' => 'contenido',
             'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
             'validators' => array(
                 self::validatorNotEmpty('Contenido'),
             )
+        ));
+
+        $this->add(array(
+            'name' => 'url',
+            'required' => true
         ));
 
         $this->add(array(

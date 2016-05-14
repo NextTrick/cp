@@ -73,11 +73,17 @@ class ContenidoController extends SecurityAdminController
         $request = $this->getRequest();
         $form    = $this->crearCrudForm(AC_EDITAR, $id);
 
+        $form->get('codigo')->setAttribute('readonly','readonly');
+        $formInputFilter = $form->getInputFilter ();
+
+        $formInputFilter ->remove('codigo');
+
         $criteria = array(
             'where' => array(
                 'id' => $id
             ),
         );
+
         $row = $this->_getContenidoService()->getRepository()->findOne($criteria);
         if (empty($row)) {
             throw new \Exception(NO_DATA);
@@ -128,16 +134,18 @@ class ContenidoController extends SecurityAdminController
 
             try {
                 $paramsIn = array(
-                    'codigo' => $data['codigo'],
-                    'tipo' => $data['tipo'],
-                    'titulo' => $data['titulo'],
+                    'codigo'    => !empty($data['codigo'])?$data['codigo']: null,
+                    'tipo'      => $data['tipo'],
+                    'titulo'    => $data['titulo'],
                     'contenido' => $data['contenido'],
-                    'estado' => $data['estado'],
+                    'estado'    => $data['estado'],
+                    'url'       => $data['url']
                 );
 
                 $repository = $this->_getContenidoService()->getRepository();
                 if (!empty($id)) {
                     $paramsIn['fecha_edicion'] = date('Y-m-d H:i:s');
+                    unset($paramsIn['codigo']);
                     $repository->save($paramsIn, $id);
                 } else {
                     $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
@@ -170,6 +178,7 @@ class ContenidoController extends SecurityAdminController
             $options['id'] = $id;
         }
         $filter = new ContenidoFilter($this->getServiceLocator(), array());
+
         $form = $this->_getContenidoForm();
         $form->setInputFilter($filter);
         $form->setAttribute('action', $this->url()->fromRoute('admin/crud', $options));
