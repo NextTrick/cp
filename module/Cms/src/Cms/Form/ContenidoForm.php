@@ -36,10 +36,16 @@ class ContenidoForm extends Form
     {
         $codigo = new Element\Text('codigo');
         $codigo->setAttributes(array(
-                'id' => 'codigo',
-                'maxlength' => '20',
-            ));
+            'id' => 'codigo',
+            'maxlength' => '20',
+        ));
         $this->add($codigo);
+
+        $url = new Element\Text('url');
+        $url->setAttributes(array(
+            'id' => 'url'
+        ));
+        $this->add($url);
         
         $tipos = $this->_getContenidoService()->getTipos();
         $tipo = new Element\Select('tipo');
@@ -59,7 +65,6 @@ class ContenidoForm extends Form
         $contenido = new Element\Textarea('contenido');
         $contenido->setAttributes(array(
                 'id' => 'contenido',
-                'maxlength' => '20',
                 'rows' => 10,
                 'cols' => 80,
             ));

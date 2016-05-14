@@ -69,5 +69,14 @@ $this->layout()->breadcrumb = array(
             "autoWidth": true
         });
         common.deleteRemote();
+
+        $("#cmbActivo").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbDestacado").on('change', function() {
+            $("#formBuscar").submit();
+        });
     });
 </script>
+

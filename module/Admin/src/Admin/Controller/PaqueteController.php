@@ -16,31 +16,28 @@ class PaqueteController extends SecurityAdminController
 {   
     public function indexAction()
     {
-        $params = array(
-            'titulo1' => String::xssClean($this->params()->fromQuery('titulo1')),
-            'titulo2' => String::xssClean($this->params()->fromQuery('titulo2')),
-        );
-        
-        $form = $this->crearBuscarForm();
-        $form->setData($params);
-        
-        $criteria = array(
-            'whereLike' => $params,
-            'limit' => LIMIT_BUSCAR,
-            'order' => array('id DESC'),
-        );
-        
-        $this->_syncPaquetes();
-        
-        $gridList = $this->_getPaqueteService()->getRepository()->search($criteria);
-        $countList = count($gridList);
-        //$countList = $this->_getPaqueteService()->getRepository()->countTotal($criteria);
+        try {
+            $form = $this->getServiceLocator()->get('Admin\Form\PaqueteBuscarForm');
+            $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
+                'controller' => 'paquete', 'action' => 'index'
+            )));
 
-        $view = new ViewModel();
-        $view->setVariable('gridList', $gridList);
-        $view->setVariable('countList', $countList);
-        $view->setVariable('form', $form);
-        return $view;
+            $form->setData($this->params()->fromPost());
+
+            $this->_syncPaquetes();
+            $criteria  = $this->_getPaqueteService()->getDataCriteria($this->params()->fromPost());
+            $gridList  = $this->_getPaqueteService()->getRepository()->search($criteria);
+            $countList = !empty($gridList)? count($gridList): 0;
+
+            $view = new ViewModel();
+            $view->setVariable('gridList', $gridList);
+            $view->setVariable('countList', $countList);
+            $view->setVariable('form', $form);
+
+            return $view;
+        } catch (\Exception $e) {
+            echo $e->getMessage();exit;
+        }
     }
 
     private function _syncPaquetes()
@@ -116,20 +113,24 @@ class PaqueteController extends SecurityAdminController
     {
         $request = $this->getRequest();
         $results = array('success' => false, 'msg' => ER_ELIMINAR);
+
         if ($request->isPost()) {
             $id = $this->params('id', null);
+
             if (!empty($id)) {
                 $this->_getPaqueteService()->getRepository()
-                        ->save(array('estado' => 0), $id);
+                        ->save(array('activo' => 0), $id);
                 $results = array('success' => true, 'msg' => OK_ELIMINAR);
             }
             
             $key = ($results['success']) ? 'success' : 'error';
             $this->flashMessenger()->addMessage(array($key => $results['msg']));
         }
+
         $response = $this->getResponse();
         $response->getHeaders()->addHeaderLine( 'Content-Type', 'application/json' );
         $response->setContent(json_encode($results));
+
         return $response;
     }
     
@@ -243,12 +244,12 @@ class PaqueteController extends SecurityAdminController
     
     private function _getPaqueteForm()
     {
-        return $this->getServiceLocator()->get('Paquete\Form\PaqueteForm');
+        return $this->getServiceLocator()->get('Admin\Form\PaqueteForm');
     }
 
     private function _getPaqueteService()
     {
-        return $this->getServiceLocator()->get('Paquete\Model\Service\PaqueteService');
+        return $this->getServiceLocator()->get('Admin\Model\Service\PaqueteService');
     }
 
 }

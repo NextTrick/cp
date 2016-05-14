@@ -27,6 +27,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label" for="url">Url <span>*</span></label>
+            <div class="col-sm-8">
+                <?php echo $this->formElement($this->form->get('url')->setAttribute('class', 'form-control')) ?>
+                <span class="error"><?php echo $this->formElementerrors($form->get('url')); ?></span>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label" for="contenido">Contenido <span>*</span></label>
             <div class="col-sm-8">
                 <?php echo $this->formElement($this->form->get('contenido')->setAttribute('class', 'form-control')) ?>
@@ -48,18 +55,13 @@
     <?php echo $this->form()->closeTag(); ?>
 </div>
 <script src="<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckeditor/ckeditor.js"></script>
-<script src="<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckfinder/ckfinder.js"></script>
 <script>
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
-      //var editor = CKEDITOR.replace('contenido');
+      var editor = CKEDITOR.replace('contenido');
       //CKFinder.setupCKEditor( editor );
 
-      CKEDITOR.replace( 'contenido', {
-          filebrowserBrowseUrl: '<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckfinder/ckfinder.html',
-          filebrowserUploadUrl: '<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files'
-      } );
 
   });
 </script>
