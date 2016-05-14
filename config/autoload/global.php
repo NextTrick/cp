@@ -164,7 +164,7 @@ return array(
                 
                 'merchanId' => 'ACI',
                 //'merchanId' => 'HOK',                
-                'baseUrl' => 'https://pre.2b.pagoefectivo.pe/',
+                'baseUrl' => 'http://pre.2b.pagoefectivo.pe/',
                 'wscrypta' => 'PagoEfectivoWSCrypto/WSCrypto.asmx?WSDL', //data encrypt ws
                 'wscip2' => 'PagoEfectivoWSGeneralv2/service.asmx?WSDL', //cip generator ws 
                 'wsgenpago' => 'GenPago.aspx', //PE's CIP window
