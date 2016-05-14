@@ -12,7 +12,10 @@ class RecargasController extends SecurityWebController
             return $this->_toUrlLogin();
         }
 
+        $usuario = $this->_getUsuarioData();
+        $usuarioTarjetas = $this->_getPaqueteService()->getCards($usuario->id);
         $view = new ViewModel();
+        $view->setVariable('usuarioTarjetas', $usuarioTarjetas);
         return $view;
     }
 

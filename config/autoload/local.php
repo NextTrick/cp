@@ -15,10 +15,8 @@ return array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'coneypark',
-        //'username' => 'projectuser',
-        //'password' => 'projectpass',
-        'username' => 'homestead',
-        'password' => 'secret',
+        'username' => 'projectuser',
+        'password' => 'projectpass',
         'port' => '3306',        
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''

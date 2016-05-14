@@ -5,6 +5,11 @@
   font-weight: normal;
   font-style: normal;
 }
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 body {
   background: url("../images/bg.jpg") repeat;
 }
@@ -35,14 +40,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -160px -26px;
+  background-position: -106px -198px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -160px 0px;
+  background-position: -80px -198px;
   width: 26px;
   height: 26px;
 }
@@ -65,7 +70,7 @@ header .user_option .user_outside a span {
 }
 header .user_option .user_outside a span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -106px -85px;
+  background-position: -226px -145px;
   width: 12px;
   height: 14px;
   margin-left: 6px;
@@ -99,7 +104,7 @@ header .user_option .user_inside ul li a span {
 }
 header .user_option .user_inside ul li a span.icon_cart {
   background-image: url("../images/sprite.png");
-  background-position: -160px -99px;
+  background-position: -155px -198px;
   width: 24px;
   height: 22px;
 }
@@ -270,10 +275,10 @@ header nav ul li.logo img {
   height: ;
 }
 .right_options ul li a span.icon_card {
-  background-image: url("");
-  background-position: ;
-  width: ;
-  height: ;
+  background-image: url("../images/sprite.png");
+  background-position: 0px -132px;
+  width: 120px;
+  height: 66px;
 }
 .right_options ul li a span.icon_birthday {
   background-image: url("");
@@ -281,11 +286,53 @@ header nav ul li.logo img {
   width: ;
   height: ;
 }
+.btn {
+  border: 0;
+  height: 42px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: #fff;
+}
+.btn.btn_fb {
+  background: #3b5998;
+}
+.btn.btn_fb span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn.btn_fb span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -32px -236px;
+  width: 32px;
+  height: 32px;
+}
+.btn.btn_tw {
+  background: #1b95e0;
+}
+.btn.btn_tw span {
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn.btn_tw span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -236px;
+  width: 32px;
+  height: 32px;
+}
+.btn.btn_orange {
+  background: #ff5800;
+}
+.btn.btn_save_signin {
+  margin-top: 20px;
+}
 section {
   padding-top: 120px;
   padding-bottom: 50px;
   overflow: hidden;
   color: #fff;
+}
+section.recargas {
+  padding-bottom: 0;
 }
 section.app_content {
   padding-top: 50px;
@@ -311,6 +358,7 @@ section.app_content .menu ul li {
   height: 16px;
   padding-top: 7px;
   width: 100px;
+  height: 28px;
 }
 section.app_content .menu ul li.first {
   border-right: 1px solid #d3d3d3;
@@ -355,11 +403,11 @@ section.app_content .menu:after {
 }
 section.app_content .menu.left_active:before {
   color: #f7a100;
-  border-right: 14px solid #f7a100;
+  border-right: 13px solid #f7a100;
 }
 section.app_content .menu.right_active:after {
   color: #f7a100;
-  border-left: 14px solid #f7a100;
+  border-left: 13px solid #f7a100;
 }
 section h2 {
   font-size: 32px;
@@ -427,45 +475,6 @@ section .yellow_box:after {
   position: absolute;
   right: -21px;
   top: 0;
-}
-section .btn {
-  border: 0;
-  height: 42px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  color: #fff;
-}
-section .btn.btn_fb {
-  background: #3b5998;
-}
-section .btn.btn_fb span {
-  display: inline-block;
-  vertical-align: middle;
-}
-section .btn.btn_fb span.icon {
-  background-image: url("../images/sprite.png");
-  background-position: -84px -101px;
-  width: 32px;
-  height: 32px;
-}
-section .btn.btn_tw {
-  background: #1b95e0;
-}
-section .btn.btn_tw span {
-  display: inline-block;
-  vertical-align: middle;
-}
-section .btn.btn_tw span.icon {
-  background-image: url("../images/sprite.png");
-  background-position: -52px -101px;
-  width: 32px;
-  height: 32px;
-}
-section .btn.btn_orange {
-  background: #ff5800;
-}
-section .btn.btn_save_signin {
-  margin-top: 20px;
 }
 section .purple_box {
   background: #6c006c;
@@ -563,7 +572,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -116px -101px;
+  background-position: -240px -171px;
   width: 32px;
   height: 26px;
 }
@@ -660,7 +669,7 @@ section .purple_box .info_box span.text {
 }
 section .purple_box .info_box span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -54px 0px;
+  background-position: -174px -132px;
   width: 52px;
   height: 52px;
   margin-right: 10px;
@@ -671,6 +680,57 @@ section .purple_box .info_box a.how_asociate_card {
   width: 30%;
   text-decoration: none;
   margin-top: 20px;
+}
+section .purple_box .steps {
+  width: 120px;
+  margin: 0 auto;
+  text-align: center;
+}
+section .purple_box .steps .step {
+  width: 36px;
+  height: 36px;
+  border-radius: 18px;
+  background: #400040;
+  color: #fa0;
+  padding-top: 10px;
+  text-align: center;
+  display: inline-block;
+  margin: 0 10px;
+}
+section .purple_box .steps .step.active {
+  background: #fa0;
+  color: #400040;
+}
+section .purple_box .cart_box {
+  position: absolute;
+  right: 32px;
+  margin-top: -40px;
+}
+section .purple_box .cart_box .label {
+  color: #fff;
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 10px;
+}
+section .purple_box .cart_box .cart {
+  display: inline-block;
+  background: #400040;
+  width: 80px;
+  height: 42px;
+  border-radius: 15px;
+  padding-top: 8px;
+}
+section .purple_box .cart_box .cart span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -179px -198px;
+  width: 23px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 10px;
+}
+section .purple_box .cart_box .cart span.number {
+  color: #fa0;
+  font-size: 24px;
 }
 section .purple_box .cards_content {
   width: 95%;
@@ -774,7 +834,7 @@ section .purple_box .cards_content .col_3 .success_box {
 }
 section .purple_box .cards_content .col_3 .success_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: 0px -56px;
+  background-position: -240px 0px;
   width: 55px;
   height: 45px;
   display: block;
@@ -788,7 +848,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -106px -44px;
+  background-position: -240px -130px;
   width: 52px;
   height: 41px;
   display: block;
@@ -802,7 +862,7 @@ section .purple_box .cards_content .col_3 .duplicate_box {
 }
 section .purple_box .cards_content .col_3 .duplicate_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -106px 0px;
+  background-position: -240px -45px;
   width: 54px;
   height: 44px;
   display: block;
@@ -841,13 +901,13 @@ section .purple_box .cards_content .col_3.my_card span {
 section .purple_box .cards_content .col_3.my_card span.cp_logo {
   display: block;
   background-image: url("../images/sprite.png");
-  background-position: 0px 0px;
+  background-position: -120px -132px;
   width: 54px;
   height: 56px;
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon {
   background-image: url("../images/sprite.png");
-  background-position: -160px -76px;
+  background-position: -272px -171px;
   width: 23px;
   height: 23px;
   display: inline-block;
@@ -858,7 +918,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -160px -121px;
+  background-position: -202px -198px;
   width: 18px;
   height: 14px;
 }
@@ -958,6 +1018,339 @@ section .purple_box .cards_content .col_3.my_card .bottom_card a.recharge {
   float: right;
   font-size: 16px;
   margin-left: 10px;
+}
+section .purple_box .recargas_content .offers {
+  padding-bottom: 30px;
+}
+section .purple_box .recargas_content .offers .col_3 {
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px 7px;
+  width: 286px;
+  height: 240px;
+  background: url("../images/offer_bg.png");
+}
+section .purple_box .recargas_content .offers .col_3 .box_white {
+  border-radius: 14px;
+  background: #fff;
+  color: #000;
+  text-align: left;
+  height: 100%;
+  width: 100%;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .image {
+  height: 143px;
+  overflow: hidden;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white p {
+  padding: 0 10px;
+  font-size: 16px;
+  margin: 8px 0px;
+  line-height: 22px;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb {
+  text-align: left;
+  color: #f00;
+  font-size: 16px;
+  position: relative;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb a {
+  color: #aaa;
+  font-size: 14px;
+  text-decoration: none;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span {
+  background-image: url("../images/sprite.png");
+  background-position: -226px -132px;
+  width: 13px;
+  height: 13px;
+  display: block;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+section .purple_box .recargas_content .offers .col_3 .cant_box {
+  margin-top: 7px;
+}
+section .purple_box .recargas_content .offers .col_3 .cant_box span {
+  display: inline-block;
+  height: 32px;
+  padding-top: 7px;
+  border-radius: 15px;
+  margin: 0px 2px;
+  cursor: pointer;
+}
+section .purple_box .recargas_content .offers .col_3 .cant_box span.less {
+  background: #ff5800;
+  color: #fff;
+  width: 36px;
+}
+section .purple_box .recargas_content .offers .col_3 .cant_box span.more {
+  background: #ff5800;
+  color: #fff;
+  width: 36px;
+}
+section .purple_box .recargas_content .offers .col_3 .cant_box input.cant {
+  display: inline-block;
+  border-radius: 15px;
+  margin: 0px 2px;
+  height: 32px;
+  background: #fff;
+  width: 60px;
+  color: #000;
+}
+section .purple_box .pay_box_white {
+  background: #fff;
+  color: #000;
+  overflow: hidden;
+  padding: 0px 15px;
+  margin-top: 20px;
+}
+section .purple_box .pay_box_white >.left {
+  width: 300px;
+  text-align: left;
+  border-right: 1px dashed #d3d3d3;
+  padding-right: 15px;
+}
+section .purple_box .pay_box_white >.left p {
+  font-size: 14px;
+}
+section .purple_box .pay_box_white >.left .error_message {
+  position: static;
+  width: 100%;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+section .purple_box .pay_box_white >.left .error_message span {
+  float: left;
+}
+section .purple_box .pay_box_white >.left .error_message p {
+  float: right;
+  width: 88%;
+  text-align: left;
+  margin: 0;
+}
+section .purple_box .pay_box_white >.left .voucher {
+  padding: 5px 0 15px;
+}
+section .purple_box .pay_box_white >.left .voucher input {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+  vertical-align: top;
+}
+section .purple_box .pay_box_white >.left .voucher input:last-child {
+  margin-left: 30px;
+}
+section .purple_box .pay_box_white >.left .content_factura,
+section .purple_box .pay_box_white >.left .content_boleta {
+  padding: 0px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control,
+section .purple_box .pay_box_white >.left .content_boleta .form_control {
+  margin-bottom: 15px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control label,
+section .purple_box .pay_box_white >.left .content_boleta .form_control label {
+  display: block;
+  margin-bottom: 5px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control input,
+section .purple_box .pay_box_white >.left .content_boleta .form_control input {
+  border: 1px solid #d3d3d3;
+  height: 36px;
+  border-radius: 16px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control input[type="checkbox"],
+section .purple_box .pay_box_white >.left .content_boleta .form_control input[type="checkbox"] {
+  width: auto;
+  height: 15px;
+  margin-right: 10px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control select,
+section .purple_box .pay_box_white >.left .content_boleta .form_control select {
+  width: 100%;
+  border: 1px solid #d3d3d3;
+  border-radius: 16px;
+}
+section .purple_box .pay_box_white >.left .content_factura {
+  display: none;
+}
+section .purple_box .pay_box_white >.right {
+  width: 630px;
+  text-align: left;
+  padding-left: 15px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -66px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
+  background-image: url("../images/sprite.png");
+  background-position: -120px -66px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.visa {
+  background-image: url("../images/sprite.png");
+  background-position: -120px 0px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.visa.active {
+  background-image: url("../images/sprite.png");
+  background-position: 0px 0px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .cards_option {
+  display: none;
+}
+section .purple_box .pay_box_white >.right .items_cart .item {
+  overflow: hidden;
+  border-bottom: 1px dashed #d3d3d3;
+  padding: 10px 0 20px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .left {
+  width: 100px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right {
+  width: 450px;
+  text-align: left;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right h5 {
+  margin: 0;
+  font-size: 14px;
+  color: #808080;
+  font-weight: normal;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right h5 .legal {
+  cursor: pointer;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right h4 {
+  margin: 7px 0;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right h4 strong {
+  font-size: 20px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .card_type {
+  margin-top: 20px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .card_type span {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 14px;
+  font-weight: bold;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .card_type span.icon_card {
+  background-image: url("../images/sprite.png");
+  background-position: -38px -198px;
+  width: 42px;
+  height: 28px;
+  margin-top: -6px;
+  margin-left: 5px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .card_type span.card_name {
+  margin-left: 5px;
+  font-weight: normal;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .card_type span.cant {
+  float: right;
+  font-weight: normal;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .detail {
+  margin: 15px 0;
+  display: none;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .detail .line {
+  overflow: hidden;
+  width: 210px;
+  color: #808080;
+  font-size: 12px;
+  margin: 10px 0;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .detail .line .left {
+  width: 110px;
+  text-align: left;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .detail .line .right {
+  width: 90px;
+  text-align: right;
+  color: #000;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .total span {
+  font-size: 32px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show {
+  float: right;
+  text-align: right;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .watch_detail,
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .hidden_detail {
+  color: #ff6909;
+  font-size: 14px;
+  cursor: pointer;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .watch_detail:before,
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .hidden_detail:before {
+  margin-right: 5px;
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: -1;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: solid 5px transparent;
+  border-right: solid 5px transparent;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .watch_detail {
+  margin-top: 30px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .watch_detail:before {
+  border-top: solid 5px #ff6909;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .hidden_detail {
+  margin-top: 15px;
+  display: none;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .hidden_detail:before {
+  border-bottom: solid 5px #ff6909;
+}
+section .purple_box .pay_box_white >.right .total_box {
+  padding: 20px 0 50px;
+}
+section .purple_box .pay_box_white >.right .total_box h3 span {
+  font-weight: normal;
+}
+section .purple_box .pay_box_white >.right .total_box h3 span.medium {
+  font-size: 22px;
+  font-weight: bold;
+}
+section .purple_box .pay_box_white >.right .total_box h3 span.large {
+  font-size: 42px;
+  font-weight: bold;
+}
+section .purple_box .pay_box_white >.right .total_box button {
+  border-radius: 20px;
+}
+section .purple_box .pay_box_white >.right .total_box a {
+  color: #ff6909;
+  text-decoration: none;
+  margin-top: 10px;
+  display: block;
 }
 section input {
   width: 100%;
@@ -1066,7 +1459,7 @@ section .error_message span {
 }
 section .error_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -160px -52px;
+  background-position: -131px -198px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -1111,6 +1504,70 @@ section form.signin_form .content_form {
   margin: 30px auto;
 }
 section form.signin_form .content_form input {
+  height: 36px;
+}
+.bottom_bar {
+  width: 1228px;
+  height: 58px;
+  background: #370135;
+  margin: 0 auto;
+  color: #fff;
+  border-radius: 25px;
+  padding: 10px 20px;
+  position: relative;
+}
+.bottom_bar .select {
+  display: inline-block;
+  margin: 0px 20px 0 10px;
+  position: relative;
+}
+.bottom_bar .select span {
+  background-image: url("../images/sprite.png");
+  background-position: -38px -198px;
+  width: 42px;
+  height: 28px;
+  display: block;
+  position: absolute;
+  left: 10px;
+  top: 4px;
+}
+.bottom_bar .select select {
+  height: 36px;
+  width: 325px;
+  background: url("../images/number_select.png") no-repeat right, #fff;
+  border: 0;
+  padding: 10px 10px 10px 60px;
+  border-radius: 18px;
+  color: #808080;
+/*for firefox*/
+  -moz-appearance: none;
+/*for chrome*/
+  -webkit-appearance: none;
+}
+.bottom_bar span.text {
+  font-size: bold;
+}
+.bottom_bar span.bg {
+  background: #410041;
+  height: 36px;
+  border-radius: 18px;
+  padding: 10px 15px;
+  margin-right: 30px;
+}
+.bottom_bar span.bg span {
+  color: #a70089;
+}
+.bottom_bar span.bg .text {
+  color: #fff;
+  margin-right: 10px;
+}
+.bottom_bar span.bg.total {
+  color: #ffbe00;
+  margin-left: 10px;
+}
+.bottom_bar button {
+  width: 250px;
+  border-radius: 20px;
   height: 36px;
 }
 footer {
@@ -1158,7 +1615,7 @@ footer ul li a {
 }
 .modal_box .modal_content span.icon_logo {
   background-image: url("../images/sprite.png");
-  background-position: 0px 0px;
+  background-position: -120px -132px;
   width: 54px;
   height: 56px;
   display: block;

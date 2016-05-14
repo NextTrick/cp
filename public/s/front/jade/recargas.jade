@@ -1,0 +1,125 @@
+extends layout/layout.jade
+block section
+	section.app_content.recargas
+		.box_center
+			.app_box
+				.menu.right_active
+					ul
+						li.first Beneficios
+						li Mis tarjetas
+						li.last.active Recargas
+				.purple_box
+					p.yellow_text.small_text Recarga de mis tarjetas
+					.steps
+						.step.active 1
+						.step 2
+					.cart_box
+						span.label Items en el carrito:
+						.cart
+							span.icon
+							span.number 0
+					.recargas_content
+						p.yellow_text.small_text Promociones
+						.offers
+							.col_3
+								.box_white
+									.image
+										img(src="../images/benefit_1.png", alt="")
+									p.breadcrumb Promoción 1 
+										a.watch_legal(href="#modal_watch_legal" name="modal") Ver legal
+										span
+									p Recarga 
+										strong S/.100 
+										| y obten 
+										strong S/.50 
+										|soles adicionales 
+										strong + S/.30 
+										|en Coney Bonos
+								.cant_box
+									span.less -
+									input.cant(type="text" value="0" placeholder="0")
+									span.more +
+							.col_3
+							.col_3
+						p.yellow_text.small_text Recargas
+						.offers
+							.col_3
+								.box_white
+									.image
+										img(src="../images/benefit_2.png", alt="")
+									p.breadcrumb Recarga 1 
+										a.watch_legal(href="#modal_watch_legal" name="modal") Ver legal
+										span
+									p Recarga 
+										strong S/.100 
+										| y obten 
+										strong S/.50 
+										|soles adicionales 
+										strong + S/.30 
+										|en Coney Bonos
+								.cant_box
+									span.less -
+									input.cant(type="text" value="0" placeholder="0")
+									span.more +
+							.col_3
+								.box_white
+									.image
+										img(src="../images/benefit_3.png", alt="")
+									p.breadcrumb Recarga 1 
+										a.watch_legal(href="#modal_watch_legal" name="modal") Ver legal
+										span
+									p Recarga 
+										strong S/.100 
+										| y obten 
+										strong S/.50 
+										|soles adicionales 
+										strong + S/.30 
+										|en Coney Bonos
+								.cant_box
+									span.less -
+									input.cant(type="text" value="0" placeholder="0")
+									span.more +
+							.col_3
+								.box_white
+									.image
+										img(src="../images/benefit_1.png", alt="")
+									p.breadcrumb Recarga 1 
+										a.watch_legal(href="#modal_watch_legal" name="modal") Ver legal
+										span
+									p Recarga 
+										strong S/.100 
+										| y obten 
+										strong S/.50 
+										|soles adicionales 
+										strong + S/.30 
+										|en Coney Bonos
+								.cant_box
+									span.less -
+									input.cant(type="text" value="0" placeholder="0")
+									span.more +
+						br
+						br
+	.bottom_bar
+		span.text Estás recargando: 
+		.select
+			span
+			select(name="")
+				option(value="") Tarjeta de Maria Elena
+				option(value="") Tarjeta personal
+		span.bg 
+			span.text Recargas: 
+			|0 
+			span / 
+			|S/. 0.00
+		span.text Monto total: 
+		span.bg.total S/. 0.00
+		button.btn.btn_orange Confirmar compra 
+
+
+
+
+
+
+
+					
+			
