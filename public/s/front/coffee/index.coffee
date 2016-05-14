@@ -433,7 +433,39 @@ $ ->
 			return
 
 		return init: initialize 
+	carrito = () ->
+		dom = {}
+		st =
+			cartPageHeight : '.cart_page'
+			leftColHeight : '.cart_page > .right'
+			removeItem : '.remove_icon'
+		catchDom = ->
+			dom.cartPageHeight = $(st.cartPageHeight)
+			dom.leftColHeight = $(st.leftColHeight)
+			dom.removeItem = $(st.removeItem)
+			return
+		suscribeEvents = () ->
+			dom.removeItem.on 'click', events.removeItem
+			return
+		events =
+			removeItem : (e) ->
+				$(this).parent().parent().remove()
+				return
+			
+		functions = 
+			height : ->
+				dom.leftColHeight.height dom.cartPageHeight.height()
+				return
 
+		initialize = ->
+			catchDom()
+			suscribeEvents()
+			functions.height()
+			return
+
+		return init: initialize 
+
+	carrito().init()
 	pagos().init()
 	recargas().init()
 	user_account().init()

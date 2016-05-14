@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login, open_tooltip, pagos, recargas, user_account;
+  var carrito, modal_login, open_tooltip, pagos, recargas, user_account;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -457,6 +457,42 @@ $(function() {
       init: initialize
     };
   };
+  carrito = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      cartPageHeight: '.cart_page',
+      leftColHeight: '.cart_page > .right',
+      removeItem: '.remove_icon'
+    };
+    catchDom = function() {
+      dom.cartPageHeight = $(st.cartPageHeight);
+      dom.leftColHeight = $(st.leftColHeight);
+      dom.removeItem = $(st.removeItem);
+    };
+    suscribeEvents = function() {
+      dom.removeItem.on('click', events.removeItem);
+    };
+    events = {
+      removeItem: function(e) {
+        $(this).parent().parent().remove();
+      }
+    };
+    functions = {
+      height: function() {
+        dom.leftColHeight.height(dom.cartPageHeight.height());
+      }
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+      functions.height();
+    };
+    return {
+      init: initialize
+    };
+  };
+  carrito().init();
   pagos().init();
   recargas().init();
   user_account().init();
