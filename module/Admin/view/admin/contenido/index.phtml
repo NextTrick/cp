@@ -19,9 +19,8 @@ $this->layout()->breadcrumb = array(
                     <th>Codigo</th>
                     <th>Tipo</th>
                     <th>Titulo</th>
-                    <th>Contenido</th>
+                    <th>Url</th>
                     <th>Estado</th>
-                    <th>Fecha Creación</th>
                     <th style="max-width: 60px"></th>
                 </tr>
             </thead>
@@ -29,11 +28,10 @@ $this->layout()->breadcrumb = array(
                 <?php foreach ($gridList as $row) : ?>
                     <tr>
                         <td><?php echo $row['codigo'] ?></td>
-                        <td><?php echo (trim($row['tipo']) == $dataTipoPagina['tipoPagina'])? $dataTipoPagina['nombreTipoPagina']: $dataTipoPagina['nombreTipoSeccion']; ?></td>
+                        <td><?php echo \Cms\Model\Service\ContenidoService:: getNameTipo($row['tipo']); ?></td>
                         <td><?php echo $row['titulo'] ?></td>
-                        <td><?php echo $row['contenido'] ?></td>
+                        <td><a href="<?php echo $row['url']; ?>"><?php echo $row['url']; ?></a></td>
                         <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
-                        <td><?php echo $row['fecha_creacion'] ?></td>
                         <td>
                             <a href="<?php echo BASE_URL ?>admin/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                             <a href="<?php echo BASE_URL ?>admin/contenido/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
@@ -44,6 +42,7 @@ $this->layout()->breadcrumb = array(
         </table>
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#gridMain').DataTable({

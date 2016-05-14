@@ -359,6 +359,114 @@ $ ->
 
 		return init: initialize 
 
+	pagos = () ->
+		dom = {}
+		st =
+			optionBoleta : '.voucher .boleta'
+			optionFactura : '.voucher .factura'
+			contentBoleta : '.content_boleta'
+			contentFactura : '.content_factura'
+			watchDetail : '.watch_detail'
+			hiddenDetail : '.hidden_detail'
+			itemDetail : '.item .detail'
+			cardOption : '.card'
+			peOption: '.cards_option .pe'
+			visaOption: '.cards_option .visa'
+
+		catchDom = ->
+			dom.optionBoleta = $(st.optionBoleta)
+			dom.optionFactura = $(st.optionFactura)
+			dom.contentBoleta = $(st.contentBoleta)
+			dom.contentFactura = $(st.contentFactura)
+			dom.watchDetail = $(st.watchDetail)
+			dom.hiddenDetail = $(st.hiddenDetail)
+			dom.itemDetail = $(st.itemDetail)
+			dom.cardOption = $(st.cardOption)
+			dom.peOption = $(st.peOption)
+			dom.visaOption = $(st.visaOption)
+			return
+		suscribeEvents = () ->
+			dom.optionBoleta.on 'change', events.watchOpenBoletaForm
+			dom.optionFactura.on 'change', events.watchOpenFacturaForm
+			dom.watchDetail.on 'click', events.watchDetail
+			dom.hiddenDetail.on 'click', events.hiddenDetail
+			dom.cardOption.on 'click', events.changeCard
+			return
+		events =
+			watchOpenBoletaForm : (e) ->
+				dom.contentBoleta.show()
+				dom.contentFactura.hide()
+				return
+			watchOpenFacturaForm : (e) ->
+				dom.contentBoleta.hide()
+				dom.contentFactura.show()
+				return
+			watchDetail : ->
+				$(this).hide()
+				dom.itemDetail.show()
+				dom.hiddenDetail.show()
+				return
+			hiddenDetail : ->
+				$(this).hide()
+				dom.itemDetail.hide()
+				dom.watchDetail.show()
+				return
+			changeCard : ->
+				if $(this).hasClass 'pagoefectivo'
+					$(this).addClass 'active'
+					$(this).next().removeClass 'active'
+					dom.peOption.prop 'checked', true
+					dom.visaOption.prop 'checked', false
+				if $(this).hasClass 'visa'
+					$(this).addClass 'active'
+					$(this).prev().removeClass 'active'
+					dom.visaOption.prop 'checked', true
+					dom.peOption.prop 'checked', false
+				return
+		functions = 
+			example: ->
+				return
+
+		initialize = ->
+			catchDom()
+			suscribeEvents()
+			return
+
+		return init: initialize 
+	carrito = () ->
+		dom = {}
+		st =
+			cartPageHeight : '.cart_page'
+			leftColHeight : '.cart_page > .right'
+			removeItem : '.remove_icon'
+		catchDom = ->
+			dom.cartPageHeight = $(st.cartPageHeight)
+			dom.leftColHeight = $(st.leftColHeight)
+			dom.removeItem = $(st.removeItem)
+			return
+		suscribeEvents = () ->
+			dom.removeItem.on 'click', events.removeItem
+			return
+		events =
+			removeItem : (e) ->
+				$(this).parent().parent().remove()
+				return
+			
+		functions = 
+			height : ->
+				dom.leftColHeight.height dom.cartPageHeight.height()
+				return
+
+		initialize = ->
+			catchDom()
+			suscribeEvents()
+			functions.height()
+			return
+
+		return init: initialize 
+
+	carrito().init()
+	pagos().init()
 	recargas().init()
 	user_account().init()
 	open_tooltip().init()

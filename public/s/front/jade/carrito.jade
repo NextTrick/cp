@@ -1,0 +1,170 @@
+extends layout/layout.jade
+block section
+	section.app_content.recargas
+		.box_center
+			.app_box
+				.menu.right_active
+					ul
+						li.first Beneficios
+						li Mis tarjetas
+						li.last.active Recargas
+				.purple_box
+					p.yellow_text.small_text Recarga de mis tarjetas
+					.steps
+						.step.active 1
+						.step.active 2
+					a.cart_box(href="")
+						span.label Items en el carrito:
+						.cart
+							span.icon
+							span.number 0
+					.pay_box_white.cart_page
+						.left
+							// Carrito vacío
+							.empty_cart
+									span.icon
+									h2 ¡Tu carrito esta vacío!
+									p Puedes ver todo lo que tenemos para ti en
+									a.link_orange(href="") Promociones y recargas
+							// Carrito con items
+							.items_cart
+								.item
+									.left
+										img(src="../images/card_mini_1.png", alt="")
+									.right
+										span.remove_icon x
+										h5 Recarga 1 
+											span . 
+											span.legal Ver legal
+										h4.item_title Recarga 
+											strong S/. 100 
+											span y obten 
+											strong S/. 50 
+											span soles adicionales + 
+											strong S/. 30 
+											span en Coney Bonos
+										.card_type
+											span En:
+											.card_name
+												span
+												select
+													option(value="") Tarjeta para cumpleaños
+											select.cant(name="") 
+												option(value="") 01
+												option(value="") 02
+												option(value="") 03
+												option(value="") 04
+												option(value="") 05
+										.detail
+											.line
+												.left Coney Bonus
+												.right S/. 30
+											.line
+												.left Coney Bonus Plus
+												.right S/. 15
+											.line
+												.left Tickets
+												.right 12
+										.link_show
+											.watch_detail Ver detalle
+											.hidden_detail Ocultar detalle
+										.total S/. 
+											span 50
+											| .00
+								.item
+									.left
+										img(src="../images/card_mini_2.png", alt="")
+									.right
+										span.remove_icon x
+										h5 Recarga 1 
+											span . 
+											span.legal Ver legal
+										h4.item_title Recarga 
+											strong S/. 100 
+											span y obten 
+											strong S/. 50 
+											span soles adicionales + 
+											strong S/. 30 
+											span en Coney Bonos
+										.card_type
+											span En:
+											.card_name
+												span
+												select
+													option(value="") Tarjeta para Pamela
+											select.cant(name="") 
+												option(value="") 01
+												option(value="") 02
+												option(value="") 03
+												option(value="") 04
+												option(value="") 05
+										.detail
+											.line
+												.left Coney Bonus
+												.right S/. 30
+											.line
+												.left Coney Bonus Plus
+												.right S/. 15
+											.line
+												.left Tickets
+												.right 12
+										.link_show
+											.watch_detail Ver detalle
+											.hidden_detail Ocultar detalle
+										.total S/. 
+											span 30
+											| .00
+								.item
+									.left
+										img(src="../images/card_mini_3.png", alt="")
+									.right
+										span.remove_icon x
+										h5 Recarga 1 
+											span . 
+											span.legal Ver legal
+										h4.item_title Recarga 
+											strong S/. 100 
+											span y obten 
+											strong S/. 50 
+											span soles adicionales + 
+											strong S/. 30 
+											span en Coney Bonos
+										.card_type
+											span En:
+											.card_name
+												span
+												select
+													option(value="") Tarjeta de Maria Emilia
+											select.cant(name="") 
+												option(value="") 01
+												option(value="") 02
+												option(value="") 03
+												option(value="") 04
+												option(value="") 05
+										.detail
+											.line
+												.left Coney Bonus
+												.right S/. 30
+											.line
+												.left Coney Bonus Plus
+												.right S/. 15
+											.line
+												.left Tickets
+												.right 12
+										.link_show
+											.watch_detail Ver detalle
+											.hidden_detail Ocultar detalle
+										.total S/. 
+											span 20
+											| .00
+							
+						.right
+							h4 Pago total
+							.total_box(align="center")
+								h3
+									span.medium S/. 
+									span.large 150
+									span.medium .00
+								button.btn.btn_orange Pagar
+								a.link_orange(href="") Seguir comprando  
+							

@@ -10,7 +10,9 @@ return array(
         'Admin\Model\Service\PermisoService' => 'Admin\Model\Service\Factory\PermisoFactory',
         'Admin\Model\Service\DetalleOrdenService' => 'Admin\Model\Service\Factory\DetalleOrdenFactory',
         'Admin\Model\Service\OrdenService' => 'Admin\Model\Service\Factory\OrdenFactory',
-        
+        'Admin\Model\Service\PaqueteService' => 'Admin\Model\Service\Factory\PaqueteFactory',
+
+
         //forms
         'Admin\Form\LoginForm' => 'Admin\Form\Factory\LoginFactory',
         'Admin\Form\UsuarioForm' => 'Admin\Form\Factory\UsuarioFactory',
@@ -19,6 +21,8 @@ return array(
         'Admin\Form\PermisoForm' => 'Admin\Form\Factory\PermisoFactory',
         'Admin\Form\DetalleOrdenBuscarForm' => 'Admin\Form\Factory\DetalleOrdenBuscarFactory',
         'Admin\Form\OrdenBuscarForm' => 'Admin\Form\Factory\OrdenBuscarFactory',
+        'Admin\Form\PaqueteBuscarForm' => 'Admin\Form\Factory\PaqueteBuscarFactory',
+        'Admin\Form\PaqueteForm' => 'Admin\Form\Factory\PaqueteFactory'
     ),
     'invokables' => array(
     ),

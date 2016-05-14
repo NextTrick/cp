@@ -12,8 +12,8 @@ block section
 					p.yellow_text.small_text Recarga de mis tarjetas
 					.steps
 						.step.active 1
-						.step 2
-					.cart_box
+						.step.active 2
+					a.cart_box(href="")
 						span.label Items en el carrito:
 						.cart
 							span.icon
@@ -22,10 +22,13 @@ block section
 						.left
 							h4 1. Datos del Pago
 							p Datos solicitados para la generación del comprobante
+							.error_message
+								span.icon
+								p Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.
 							.voucher
-								input(type="radio" name="voucher_option" checked) 
+								input(type="radio" name="voucher_option" class="boleta" checked) 
 								| Boleta
-								input(type="radio" name="voucher_option") 
+								input(type="radio" name="voucher_option" class="factura") 
 								| Factura
 							.content_boleta
 								.form_control
@@ -70,8 +73,11 @@ block section
 						.right
 							h4 2. Seleccione el método de pago
 							.credit_cards
-								.card.pagoefectivo
+								.card.pagoefectivo.active
 								.card.visa
+								.cards_option
+									input(type="radio" name="metodo_pago" class="pe" checked)
+									input(type="radio" name="metodo_pago" class="visa")
 							h4 3. Confirma tu compra
 							.items_cart
 								.item
@@ -81,7 +87,7 @@ block section
 										h5 Recarga 1 
 											span . 
 											span.legal Ver legal
-										h4.item_title Recarga
+										h4.item_title Recarga 
 											strong S/. 100 
 											span y obten 
 											strong S/. 50 
@@ -103,10 +109,90 @@ block section
 											.line
 												.left Tickets
 												.right 12
-										.watch_detail Ver detalle
-										.hidden_detail Ocultar detalle
-										.total
-											span S/. 50.00
+										.link_show
+											.watch_detail Ver detalle
+											.hidden_detail Ocultar detalle
+										.total S/. 
+											span 50
+											| .00
+								.item
+									.left
+										img(src="../images/card_mini_2.png", alt="")
+									.right
+										h5 Recarga 1 
+											span . 
+											span.legal Ver legal
+										h4.item_title Recarga 
+											strong S/. 100 
+											span y obten 
+											strong S/. 50 
+											span soles adicionales + 
+											strong S/. 30 
+											span en Coney Bonos
+										.card_type
+											span En:
+											span.icon_card
+											span.card_name Tarjeta para Pamela
+											span.cant Cantidad: 01
+										.detail
+											.line
+												.left Coney Bonus
+												.right S/. 30
+											.line
+												.left Coney Bonus Plus
+												.right S/. 15
+											.line
+												.left Tickets
+												.right 12
+										.link_show
+											.watch_detail Ver detalle
+											.hidden_detail Ocultar detalle
+										.total S/. 
+											span 30
+											| .00
+								.item
+									.left
+										img(src="../images/card_mini_3.png", alt="")
+									.right
+										h5 Recarga 1 
+											span . 
+											span.legal Ver legal
+										h4.item_title Recarga 
+											strong S/. 100 
+											span y obten 
+											strong S/. 50 
+											span soles adicionales + 
+											strong S/. 30 
+											span en Coney Bonos
+										.card_type
+											span En:
+											span.icon_card
+											span.card_name Tarjeta para Giuliano
+											span.cant Cantidad: 01
+										.detail
+											.line
+												.left Coney Bonus
+												.right S/. 30
+											.line
+												.left Coney Bonus Plus
+												.right S/. 15
+											.line
+												.left Tickets
+												.right 12
+										.link_show
+											.watch_detail Ver detalle
+											.hidden_detail Ocultar detalle
+										.total S/. 
+											span 20
+											| .00
+							.total_box(align="center")
+								h3
+									span Pago total: 
+									span.medium S/. 
+									span.large 150
+									span.medium .00
+								button.btn.btn_orange Pagar
+								a.link_orange(href="") Seguir comprando  
 
 
 

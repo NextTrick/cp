@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login, open_tooltip, recargas, user_account;
+  var carrito, modal_login, open_tooltip, pagos, recargas, user_account;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -378,6 +378,122 @@ $(function() {
       init: initialize
     };
   };
+  pagos = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      optionBoleta: '.voucher .boleta',
+      optionFactura: '.voucher .factura',
+      contentBoleta: '.content_boleta',
+      contentFactura: '.content_factura',
+      watchDetail: '.watch_detail',
+      hiddenDetail: '.hidden_detail',
+      itemDetail: '.item .detail',
+      cardOption: '.card',
+      peOption: '.cards_option .pe',
+      visaOption: '.cards_option .visa'
+    };
+    catchDom = function() {
+      dom.optionBoleta = $(st.optionBoleta);
+      dom.optionFactura = $(st.optionFactura);
+      dom.contentBoleta = $(st.contentBoleta);
+      dom.contentFactura = $(st.contentFactura);
+      dom.watchDetail = $(st.watchDetail);
+      dom.hiddenDetail = $(st.hiddenDetail);
+      dom.itemDetail = $(st.itemDetail);
+      dom.cardOption = $(st.cardOption);
+      dom.peOption = $(st.peOption);
+      dom.visaOption = $(st.visaOption);
+    };
+    suscribeEvents = function() {
+      dom.optionBoleta.on('change', events.watchOpenBoletaForm);
+      dom.optionFactura.on('change', events.watchOpenFacturaForm);
+      dom.watchDetail.on('click', events.watchDetail);
+      dom.hiddenDetail.on('click', events.hiddenDetail);
+      dom.cardOption.on('click', events.changeCard);
+    };
+    events = {
+      watchOpenBoletaForm: function(e) {
+        dom.contentBoleta.show();
+        dom.contentFactura.hide();
+      },
+      watchOpenFacturaForm: function(e) {
+        dom.contentBoleta.hide();
+        dom.contentFactura.show();
+      },
+      watchDetail: function() {
+        $(this).hide();
+        dom.itemDetail.show();
+        dom.hiddenDetail.show();
+      },
+      hiddenDetail: function() {
+        $(this).hide();
+        dom.itemDetail.hide();
+        dom.watchDetail.show();
+      },
+      changeCard: function() {
+        if ($(this).hasClass('pagoefectivo')) {
+          $(this).addClass('active');
+          $(this).next().removeClass('active');
+          dom.peOption.prop('checked', true);
+          dom.visaOption.prop('checked', false);
+        }
+        if ($(this).hasClass('visa')) {
+          $(this).addClass('active');
+          $(this).prev().removeClass('active');
+          dom.visaOption.prop('checked', true);
+          dom.peOption.prop('checked', false);
+        }
+      }
+    };
+    functions = {
+      example: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
+  carrito = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      cartPageHeight: '.cart_page',
+      leftColHeight: '.cart_page > .right',
+      removeItem: '.remove_icon'
+    };
+    catchDom = function() {
+      dom.cartPageHeight = $(st.cartPageHeight);
+      dom.leftColHeight = $(st.leftColHeight);
+      dom.removeItem = $(st.removeItem);
+    };
+    suscribeEvents = function() {
+      dom.removeItem.on('click', events.removeItem);
+    };
+    events = {
+      removeItem: function(e) {
+        $(this).parent().parent().remove();
+      }
+    };
+    functions = {
+      height: function() {
+        dom.leftColHeight.height(dom.cartPageHeight.height());
+      }
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+      functions.height();
+    };
+    return {
+      init: initialize
+    };
+  };
+  carrito().init();
+  pagos().init();
   recargas().init();
   user_account().init();
   open_tooltip().init();

@@ -15,8 +15,8 @@ class PaqueteService
     const TIPO_NAME_RECARGA   = 'Recarga';
     const TIPO_NAME_PROMOCION = 'Promoción';
 
-    const CANT_ACTIVO_TIPO_PROMOCION = 4;
-    const CANT_ACTIVO_TIPO_RECARGA   = 3;
+    const CANT_ACTIVO_TIPO_PROMOCION = 100;
+    const CANT_ACTIVO_TIPO_RECARGA   = 100;
 
     const ESTADO_BAJA        = 0;
     const ESTADO_ACTIVO      = 1;
@@ -150,21 +150,21 @@ class PaqueteService
         $band           = false;
         $cantTipoMax    = (self::TIPO_PROMOCION == $tipo)? self::CANT_ACTIVO_TIPO_PROMOCION: self::CANT_ACTIVO_TIPO_RECARGA;
         $ordenTemp      = null;
-
+        echo "orden = ".$orden." Id = ".$id;
         foreach ($paquetes as $key => $reg) {
 
-            if (!empty($reg['orden']) && $reg['orden'] == $orden) {
+            if ($band == false && ($reg['orden'] == $orden || $orden == 1)) {
                 $paquetesUodate[] = array(
                     'id'     => $id,
-                    'orden'  => $orden,
+                    'orden'  => intval($orden),
                     'activo' => 1
                 );
 
-                $ordenTemp = $orden;
+                $ordenTemp = intval($orden);
                 $band      = true;
             }
 
-            if ($band) {
+            if ($band && !empty($reg['id']) && $reg['id'] != $id) {
                 $ordenTemp ++;
                 $paquetesUodate[] = array(
                     'id'     => $reg['id'],
@@ -173,6 +173,8 @@ class PaqueteService
                 );
 
                 $cont ++;
+                continue;
+            } elseif ($band && !empty($reg['id']) && $reg['id'] == $id) {
                 continue;
             }
 
@@ -184,6 +186,8 @@ class PaqueteService
 
             $cont ++;
         }
+
+        //var_dump($paquetesUodate);exit;
 
         foreach ($paquetesUodate as $key => $reg) {
             $id = $reg['id'];
