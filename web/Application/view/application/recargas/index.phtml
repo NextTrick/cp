@@ -1,13 +1,11 @@
-<?php //echo $this->sectionGrillaPromociones(GRID_PROMOCIONES_RECARGAS, 0, 'beneficios');  ?>
-<?php //echo $this->sectionGrillaRecargas(GRID_RECARGAS_RECARGAS);  ?>
 <section class="app_content recargas">
     <div class="box_center">
         <div class="app_box">
             <div class="menu right_active">
                 <ul>
-                    <li class="first">Beneficios</li>
-                    <li>Mis tarjetas</li>
-                    <li class="last active">Recargas</li>
+                    <li class="first"><a href="<?php echo BASE_URL; ?>beneficios">Beneficios</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>mis-tarjetas">Mis tarjetas</a></li>
+                    <li class="last active"><a href="<?php echo BASE_URL; ?>recargas">Recargas</a></li>
                 </ul>
             </div>
             <div class="purple_box">
@@ -20,66 +18,101 @@
                     <div class="cart"><span class="icon"></span><span class="number">0</span></div>
                 </div>
                 <div class="recargas_content">
-                    <p class="yellow_text small_text">Promociones</p>
-                    <div class="offers">
-                        <div class="col_3">
-                            <div class="box_white">
-                                <div class="image"><img src="../images/benefit_1.png" alt=""/></div>
-                                <p class="breadcrumb">Promoción 1 <a href="#modal_watch_legal" name="modal" class="watch_legal">Ver legal</a><span></span></p>
-                                <p>Recarga <strong>S/.100 </strong>y obten <strong>S/.50 </strong>soles adicionales <strong>+ S/.30 </strong>en Coney Bonos</p>
-                            </div>
-                            <div class="cant_box"><span class="less">-</span>
-                                <input type="text" value="0" placeholder="0" class="cant"/><span class="more">+</span>
-                            </div>
-                        </div>
-                        <div class="col_3"></div>
-                        <div class="col_3"></div>
-                    </div>
-                    <p class="yellow_text small_text">Recargas</p>
-                    <div class="offers">
-                        <div class="col_3">
-                            <div class="box_white">
-                                <div class="image"><img src="../images/benefit_2.png" alt=""/></div>
-                                <p class="breadcrumb">Recarga 1 <a href="#modal_watch_legal" name="modal" class="watch_legal">Ver legal</a><span></span></p>
-                                <p>Recarga <strong>S/.100 </strong>y obten <strong>S/.50 </strong>soles adicionales <strong>+ S/.30 </strong>en Coney Bonos</p>
-                            </div>
-                            <div class="cant_box"><span class="less">-</span>
-                                <input type="text" value="0" placeholder="0" class="cant"/><span class="more">+</span>
-                            </div>
-                        </div>
-                        <div class="col_3">
-                            <div class="box_white">
-                                <div class="image"><img src="../images/benefit_3.png" alt=""/></div>
-                                <p class="breadcrumb">Recarga 1 <a href="#modal_watch_legal" name="modal" class="watch_legal">Ver legal</a><span></span></p>
-                                <p>Recarga <strong>S/.100 </strong>y obten <strong>S/.50 </strong>soles adicionales <strong>+ S/.30 </strong>en Coney Bonos</p>
-                            </div>
-                            <div class="cant_box"><span class="less">-</span>
-                                <input type="text" value="0" placeholder="0" class="cant"/><span class="more">+</span>
-                            </div>
-                        </div>
-                        <div class="col_3">
-                            <div class="box_white">
-                                <div class="image"><img src="../images/benefit_1.png" alt=""/></div>
-                                <p class="breadcrumb">Recarga 1 <a href="#modal_watch_legal" name="modal" class="watch_legal">Ver legal</a><span></span></p>
-                                <p>Recarga <strong>S/.100 </strong>y obten <strong>S/.50 </strong>soles adicionales <strong>+ S/.30 </strong>en Coney Bonos</p>
-                            </div>
-                            <div class="cant_box"><span class="less">-</span>
-                                <input type="text" value="0" placeholder="0" class="cant"/><span class="more">+</span>
-                            </div>
-                        </div>
-                    </div><br/><br/>
+                    <?php echo $this->sectionRecargaPromociones();  ?>
+                    <?php echo $this->sectionRecargaRecargas();  ?>
+                    <br/><br/>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<div class="bottom_bar"><span class="text">Estás recargando: </span>
-    <div class="select"><span></span>
-        <select name="">
-            <option value="">Tarjeta de Maria Elena</option>
-            <option value="">Tarjeta personal</option>
-        </select>
-    </div>
-    <span class="bg"> <span class="text">Recargas: </span>0 <span>/ </span>S/. 0.00</span><span class="text">Monto total: </span><span class="bg total">S/. 0.00</span>
-    <button class="btn btn_orange">Confirmar compra </button>
-</div>
+<?php echo $this->sectionCart($usuarioId, $tarjetaCodigo);  ?>
+
+<script type="text/javascript" >
+    var cart = {
+        bloquear:0,
+        seleccionarTarjeta:function(codigo)
+        {
+            location.href= baseUrl+'recargas/'+codigo;
+        },
+        sendCart:function(prefix)
+        {
+            var result = false;
+            if (cart.bloquear == 1) {
+                return result;
+            }
+            
+            var id = $('#id_'+prefix).val();
+            var cantidad = $('#cantidad_'+prefix).val();
+                    
+            
+            cart.bloquear = 1;
+            $.ajax({
+                type: "POST",
+                url: '<?php echo BASE_URL; ?>cart/agregar',
+                data:{cantidad:cantidad, id:id},
+                dataType: 'json',
+                async:false,
+                success: function(data){
+                    if (data.success) {
+                        result = true;
+                    }
+                    cart.bloquear = 0;
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    cart.bloquear = 0;
+                }
+            });
+            
+            return result;
+        },
+        agregar:function(prefix){
+            var cantidad = $('#cantidad_'+prefix).val();
+            cantidad = ($.trim(cantidad).length < 1) ? 0 : parseInt(cantidad);
+            var newCantidad = cantidad >= 5 ? 5 : (cantidad + 1);
+            $('#cantidad_'+prefix).val(newCantidad);
+            if (cart.sendCart(prefix)) {
+                //ok
+            } else {
+                $('#cantidad_'+prefix).val(cantidad);
+            }
+        },
+        remover:function(prefix) {
+            var cantidad = $('#cantidad_'+prefix).val();
+            cantidad = ($.trim(cantidad).length < 1) ? 0 : parseInt(cantidad);
+            var newCantidad = cantidad < 1 ? 0 : (cantidad - 1);
+            $('#cantidad_'+prefix).val(newCantidad);
+            if (cart.sendCart(prefix)) {
+                //ok
+            } else {
+                $('#cantidad_'+prefix).val(cantidad);
+            }
+        },
+        init:function() {
+            $('.less').each(function(){
+                $(this).click(function(){
+                    var prefix = $(this).parent().data('prefix');
+                    cart.remover(prefix);
+                });
+            });
+            $('.more').each(function(){
+                $(this).click(function(){
+                    var prefix = $(this).parent().data('prefix');
+                    cart.agregar(prefix);
+                });
+            });
+            $('input.cant').each(function(){
+                $(this).change(function(){
+                    var prefix = $(this).parent().data('prefix');
+                    cart.sendCart(prefix);
+                });
+            });
+            $('#tarjeta').change(function(){
+               cart.seleccionarTarjeta($(this).val());
+            });
+        }
+    };
+    $(document).ready(function (){
+        cart.init();
+    });
+</script>

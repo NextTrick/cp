@@ -25,52 +25,33 @@ class TarjetaService
             'where' => array(
                 'usuario_id' => $usuarioId,
             ),
-            'order' => 'fecha_creacion DESC',
+            'order' => array('fecha_creacion DESC'),
             'limit' => LIMIT_USUARIO_TARJETAS,
         );
         $rows = $this->_repository->findAll($criteria);
+        $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
         
-        foreach ($rows as $key => $row) {
-            $row['show'] = 1;
-            $rows[$key] = $row;
-        }
-
-        $factor = 2;
-        $totalRows = count($rows);
-        if (!empty($rows)) {
-            $factor1 = (int)($totalRows/3);
-            if ((float)($totalRows/3) > (int)($totalRows/3)) {
-                $factor1 = (int)($totalRows/3) + 1;
-            }
-            $factor = ($factor1 > 2) ? $factor1 : $factor; 
-        }
-        $totalViews = $factor * 3; //total a mostrar en html
-        
-        $diferencia = $totalViews - $totalRows;
-        if ($diferencia > 0) {
-            $rows[] = array('show' => 2);
-            $diferencia = $diferencia - 1;
-        }
-        
-        if ($diferencia > 0) {
-            for ($i = 0; $i < $diferencia; $i++) {
-                $rows[] = array('show' => 3);
-            }
-        }
-        
-        return $rows;
+        return $results;
     }
     
-    public function getCards($usuarioId)
+    public function getTarjetas($usuarioId)
     {
         $criteria = array(
             'where' => array(
                 'usuario_id' => $usuarioId,
             ),
             'columns' => array('id', 'nombre'),
-            'order' => 'id DESC',
+            'order' => array('id DESC'),
         );
-        return $this->_repository->findAssoc($criteria);
+        
+        $results = array();
+        $rows = $this->_repository->findPairs($criteria);
+        foreach ($rows as $id => $nombre) {
+            $codigo = \Common\Helpers\Crypto::encrypt($id, \Common\Helpers\Util::VI_ENCODEID);
+            $results[$codigo] = $nombre;
+        }
+        
+        return $results;
     }
     
     public function getRepository()

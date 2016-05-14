@@ -3,6 +3,8 @@ namespace Common\Helpers;
 
 class Util
 {
+    const VI_ENCODEID = 'a1b3c5d7';
+    
     public static function getIpClient()
     {
         $ipKeys = array(
@@ -75,5 +77,70 @@ class Util
         }
         
         return false;
+    }
+    
+    public static function formatoMisTarjeas($rows)
+    {
+        foreach ($rows as $key => $row) {
+            $row['show'] = 'lleno';
+            $row['codigo'] = Crypto::encrypt($row['id'], self::VI_ENCODEID);
+            $rows[$key] = $row;
+        }
+        
+        $filas = 2;
+        $columnas = 3;
+        $totalRows = count($rows);
+        if (!empty($rows)) {
+            $filas1 = (int)($totalRows/$columnas);
+            if ((float)($totalRows/$columnas) > (int)($totalRows/$columnas)) {
+                $filas1 = (int)($totalRows/$columnas) + 1;
+            }
+            $filas = ($filas1 > $filas) ? $filas1 : $filas; 
+        }
+        $totalViews = $filas * $columnas; //total a mostrar en html
+        
+        $diferencia = $totalViews - $totalRows;
+        if ($diferencia > 0) {
+            $rows[] = array('show' => 'por_llenar');
+            $diferencia = $diferencia - 1;
+        }
+        
+        if ($diferencia > 0) {
+            for ($i = 0; $i < $diferencia; $i++) {
+                $rows[] = array('show' => 'vacio');
+            }
+        }
+        
+        return $rows;
+    }
+    
+    public static function formatoRecargas($rows)
+    {
+        foreach ($rows as $key => $row) {
+            $row['show'] = 'lleno';
+            $rows[$key] = $row;
+        }
+        
+        $filas = 1;
+        $columnas = 3;
+        $totalRows = count($rows);
+        if (!empty($rows)) {
+            $filas1 = (int)($totalRows/$columnas);
+            if ((float)($totalRows/$columnas) > (int)($totalRows/$columnas)) {
+                $filas1 = (int)($totalRows/$columnas) + 1;
+            }
+            $filas = ($filas1 > $filas) ? $filas1 : $filas;
+        }
+        $totalViews = $filas * $columnas; //total a mostrar en html
+        
+        $diferencia = $totalViews - $totalRows;
+
+        if ($diferencia > 0) {
+            for ($i = 0; $i < $diferencia; $i++) {
+                $rows[] = array('show' => 'vacio');
+            }
+        }
+        
+        return $rows;
     }
 }

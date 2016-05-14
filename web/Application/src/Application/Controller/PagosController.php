@@ -4,7 +4,7 @@ namespace Application\Controller;
 use Application\Controller\SecurityWebController;
 use Zend\View\Model\ViewModel;
 
-class RecargasController extends SecurityWebController
+class PagosController extends SecurityWebController
 {
     public function indexAction()
     {
