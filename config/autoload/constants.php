@@ -1,7 +1,7 @@
 <?php
 
-define('BASE_URL', 'http://dev.coneypark.pe/recargas/');
-define('URL_RESOURCES', 'http://dev.coneypark.pe/recargas/');
+define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
+define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
 define('VERSION_STATICO', '1.4');
 
@@ -19,9 +19,9 @@ define('NO_DATA', 'No existe data');
 define('ERROR_303', 'No tiene acceso.');
 
 define('LIMIT_BUSCAR', 100);
-define('GRID_LOGIN_PROMOCIONES', 3);
-define('GRID_BENEFICIOS_PROMOCIONES', 4);
-define('GRID_RECARGAS_PROMOCIONES', 3);
+define('GRID_PROMOCIONES_LOGIN', 3);
+define('GRID_PROMOCIONES_BENEFICIOS', 4);
+define('GRID_PROMOCIONES_RECARGAS', 3);
 define('GRID_RECARGAS_RECARGAS', 3);
 define('LIMIT_USUARIO_TARJETAS', 5);
 define('VERSION', 1000);
