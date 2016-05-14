@@ -16,8 +16,8 @@ class PaqueteService
 
     CONST DESTACADO_SI      = 1;
     CONST DESTACADO_NO      = 0;
-    CONST DESTACADO_NAME_SI = 'SI';
-    CONST DESTACADO_NAME_NO = 'NO';
+    CONST DESTACADO_NAME_SI = 'Si';
+    CONST DESTACADO_NAME_NO = 'No';
 
     const TIPO_RECARGA        = 1;
     const TIPO_PROMOCION      = 2;
@@ -76,15 +76,10 @@ class PaqueteService
 
     public static function getNombreDestacado($destacado)
     {
-        $result = null;
-        if (empty($destacado)) {
-            return $result;
-        }
+        $result = self::DESTACADO_NAME_NO;
 
         if (self::DESTACADO_SI == $destacado) {
-            $result = self::DESTACADO_NAME_SI;
-        } elseif (self::DESTACADO_NO == $destacado) {
-            $result = self::DESTACADO_NAME_NO;
+            return self::DESTACADO_NAME_SI;
         }
 
         return $result;
@@ -93,7 +88,7 @@ class PaqueteService
     public function getDestacado()
     {
         return array(
-            self::DESTACADO_SI  => self::DESTACADO_NAME_SI,
+            self::DESTACADO_SI => self::DESTACADO_NAME_SI,
             self::DESTACADO_NO => self::DESTACADO_NAME_NO
         );
     }

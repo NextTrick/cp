@@ -54,13 +54,15 @@
     </div>
     <?php echo $this->form()->closeTag(); ?>
 </div>
+
+<?php $_SESSION["URL_IMAGE_CMS"] = !empty(URL_IMAGE_CMS)? URL_IMAGE_CMS : null; ?>
+
 <script src="<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckeditor/ckeditor.js"></script>
 <script>
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
       var editor = CKEDITOR.replace('contenido');
-      //CKFinder.setupCKEditor( editor );
 
 
   });

@@ -2,6 +2,7 @@
 
 define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
 define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
+define('URL_IMAGE_CMS', rtrim(URL_RESOURCES, '/').'/files/contenido/');
 
 define('VERSION_STATICO', '1.4');
 

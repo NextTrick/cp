@@ -21,10 +21,10 @@ $_CONFIG = array(
 
 // GENERAL SETTINGS
 
-    'disabled' => false,
-    'uploadURL' => "http://dev.recargas.coneypark.pe/s/files/contenido/",
+    'disabled'  => false,
+    'uploadURL' => !empty($_SESSION["URL_IMAGE_CMS"])? $_SESSION["URL_IMAGE_CMS"]: null,
     'uploadDir' => "",
-    'theme' => "default",
+    'theme'     => "default",
 
     'types' => array(
 
@@ -102,14 +102,14 @@ $_CONFIG = array(
     'mime_magic' => "",
 
     'cookieDomain' => "",
-    'cookiePath' => "",
+    'cookiePath'   => "",
     'cookiePrefix' => 'KCFINDER_',
 
 
 // THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION SETTINGS
 
     '_normalizeFilenames' => false,
-    '_check4htaccess' => true,
+    '_check4htaccess'     => true,
     //'_tinyMCEPath' => "/tiny_mce",
 
     '_sessionVar' => "KCFINDER",

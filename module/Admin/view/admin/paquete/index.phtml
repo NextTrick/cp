@@ -39,11 +39,11 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['bonus'] ?></td>
                         <td><?php echo $row['promotionbonus'] ?></td>
                         <td><?php echo $row['etickets'] ?></td>
-                        <td><?php echo \Paquete\Model\Service\PaqueteService::getNombreTipo($row['tipo']); ?></td>
+                        <td><?php echo \Admin\Model\Service\PaqueteService::getNombreTipo($row['tipo']); ?></td>
                         <td><?php echo $row['gamepoints'] ?></td>
                         <td><?php echo $row['fecha_creacion'] ?></td>
-                        <td><?php echo \Paquete\Model\Service\PaqueteService::getNombreEstado($row['activo']); ?></td>
-                        <td><?php echo $row['destacado'] ?></td>
+                        <td><?php echo \Admin\Model\Service\PaqueteService::getNombreEstado($row['activo']); ?></td>
+                        <td><?php echo \Admin\Model\Service\PaqueteService::getNombreDestacado($row['destacado']); ?></td>
                         <td style="white-space:nowrap;">
                             <a href="<?php echo BASE_URL ?>admin/paquete/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                             <a href="<?php echo BASE_URL ?>admin/paquete/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>

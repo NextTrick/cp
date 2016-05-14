@@ -26,7 +26,7 @@ class PaqueteRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     {
         $this->setCriteria($criteria);
         try {
-            $sql= new Sql($this->getAdapter());
+            $sql = new Sql($this->getAdapter());
 
             $select = $sql->select();
             $select->quantifier(\Zend\Db\Sql\Select::QUANTIFIER_DISTINCT);
