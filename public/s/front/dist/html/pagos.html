@@ -60,18 +60,19 @@
             <p class="yellow_text small_text">Recarga de mis tarjetas</p>
             <div class="steps">
               <div class="step active">1</div>
-              <div class="step">2</div>
-            </div>
-            <div class="cart_box"><span class="label">Items en el carrito:</span>
-              <div class="cart"><span class="icon"></span><span class="number">0</span></div>
-            </div>
+              <div class="step active">2</div>
+            </div><a href="" class="cart_box"><span class="label">Items en el carrito:</span>
+              <div class="cart"><span class="icon"></span><span class="number">0</span></div></a>
             <div class="pay_box_white">
               <div class="left">
                 <h4>1. Datos del Pago</h4>
                 <p>Datos solicitados para la generación del comprobante</p>
+                <div class="error_message"><span class="icon"></span>
+                  <p>Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.</p>
+                </div>
                 <div class="voucher">
-                  <input type="radio" name="voucher_option" checked="checked"/>Boleta
-                  <input type="radio" name="voucher_option"/>Factura
+                  <input type="radio" name="voucher_option" checked="checked" class="boleta"/>Boleta
+                  <input type="radio" name="voucher_option" class="factura"/>Factura
                 </div>
                 <div class="content_boleta">
                   <div class="form_control">
@@ -131,8 +132,12 @@
               <div class="right">
                 <h4>2. Seleccione el método de pago</h4>
                 <div class="credit_cards">
-                  <div class="card pagoefectivo"></div>
+                  <div class="card pagoefectivo active"></div>
                   <div class="card visa"></div>
+                  <div class="cards_option">
+                    <input type="radio" name="metodo_pago" checked="checked" class="pe"/>
+                    <input type="radio" name="metodo_pago" class="visa"/>
+                  </div>
                 </div>
                 <h4>3. Confirma tu compra</h4>
                 <div class="items_cart">
@@ -140,7 +145,7 @@
                     <div class="left"><img src="../images/card_mini_1.png" alt=""/></div>
                     <div class="right">
                       <h5>Recarga 1 <span>. </span><span class="legal">Ver legal</span></h5>
-                      <h4 class="item_title">Recarga<strong>S/. 100 </strong><span>y obten </span><strong>S/. 50 </strong><span>soles adicionales + </span><strong>S/. 30 </strong><span>en Coney Bonos</span></h4>
+                      <h4 class="item_title">Recarga <strong>S/. 100 </strong><span>y obten </span><strong>S/. 50 </strong><span>soles adicionales + </span><strong>S/. 30 </strong><span>en Coney Bonos</span></h4>
                       <div class="card_type"><span>En:</span><span class="icon_card"></span><span class="card_name">Tarjeta para cumpleaños</span><span class="cant">Cantidad: 01</span></div>
                       <div class="detail">
                         <div class="line">
@@ -156,11 +161,71 @@
                           <div class="right">12</div>
                         </div>
                       </div>
-                      <div class="watch_detail">Ver detalle</div>
-                      <div class="hidden_detail">Ocultar detalle</div>
-                      <div class="total"><span>S/. 50.00</span></div>
+                      <div class="link_show">
+                        <div class="watch_detail">Ver detalle</div>
+                        <div class="hidden_detail">Ocultar detalle</div>
+                      </div>
+                      <div class="total">S/. <span>50</span>.00</div>
                     </div>
                   </div>
+                  <div class="item">
+                    <div class="left"><img src="../images/card_mini_2.png" alt=""/></div>
+                    <div class="right">
+                      <h5>Recarga 1 <span>. </span><span class="legal">Ver legal</span></h5>
+                      <h4 class="item_title">Recarga <strong>S/. 100 </strong><span>y obten </span><strong>S/. 50 </strong><span>soles adicionales + </span><strong>S/. 30 </strong><span>en Coney Bonos</span></h4>
+                      <div class="card_type"><span>En:</span><span class="icon_card"></span><span class="card_name">Tarjeta para Pamela</span><span class="cant">Cantidad: 01</span></div>
+                      <div class="detail">
+                        <div class="line">
+                          <div class="left">Coney Bonus</div>
+                          <div class="right">S/. 30</div>
+                        </div>
+                        <div class="line">
+                          <div class="left">Coney Bonus Plus</div>
+                          <div class="right">S/. 15</div>
+                        </div>
+                        <div class="line">
+                          <div class="left">Tickets</div>
+                          <div class="right">12</div>
+                        </div>
+                      </div>
+                      <div class="link_show">
+                        <div class="watch_detail">Ver detalle</div>
+                        <div class="hidden_detail">Ocultar detalle</div>
+                      </div>
+                      <div class="total">S/. <span>30</span>.00</div>
+                    </div>
+                  </div>
+                  <div class="item">
+                    <div class="left"><img src="../images/card_mini_3.png" alt=""/></div>
+                    <div class="right">
+                      <h5>Recarga 1 <span>. </span><span class="legal">Ver legal</span></h5>
+                      <h4 class="item_title">Recarga <strong>S/. 100 </strong><span>y obten </span><strong>S/. 50 </strong><span>soles adicionales + </span><strong>S/. 30 </strong><span>en Coney Bonos</span></h4>
+                      <div class="card_type"><span>En:</span><span class="icon_card"></span><span class="card_name">Tarjeta para Giuliano</span><span class="cant">Cantidad: 01</span></div>
+                      <div class="detail">
+                        <div class="line">
+                          <div class="left">Coney Bonus</div>
+                          <div class="right">S/. 30</div>
+                        </div>
+                        <div class="line">
+                          <div class="left">Coney Bonus Plus</div>
+                          <div class="right">S/. 15</div>
+                        </div>
+                        <div class="line">
+                          <div class="left">Tickets</div>
+                          <div class="right">12</div>
+                        </div>
+                      </div>
+                      <div class="link_show">
+                        <div class="watch_detail">Ver detalle</div>
+                        <div class="hidden_detail">Ocultar detalle</div>
+                      </div>
+                      <div class="total">S/. <span>20</span>.00</div>
+                    </div>
+                  </div>
+                </div>
+                <div align="center" class="total_box">
+                  <h3><span>Pago total: </span><span class="medium">S/. </span><span class="large">150</span><span class="medium">.00</span></h3>
+                  <button class="btn btn_orange">Pagar</button><a href="" class="link_orange">Seguir comprando  </a>
                 </div>
               </div>
             </div>
