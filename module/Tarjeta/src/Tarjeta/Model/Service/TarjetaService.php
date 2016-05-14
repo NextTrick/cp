@@ -61,6 +61,18 @@ class TarjetaService
         return $rows;
     }
     
+    public function getCards($usuarioId)
+    {
+        $criteria = array(
+            'where' => array(
+                'usuario_id' => $usuarioId,
+            ),
+            'columns' => array('id', 'nombre'),
+            'order' => 'id DESC',
+        );
+        return $this->_repository->findAssoc($criteria);
+    }
+    
     public function getRepository()
     {
         return $this->_repository;
