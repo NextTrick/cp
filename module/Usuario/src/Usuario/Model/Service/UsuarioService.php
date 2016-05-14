@@ -165,11 +165,6 @@ class UsuarioService
         return false;
     }
 
-    public function getRepository()
-    {
-        return $this->_repository;
-    }
-
     public function getDataCriteria($params)
     {
         $criteria = array(
@@ -275,6 +270,11 @@ class UsuarioService
             'paterno'  => 'A. Paterno',
             'materno'  => 'A. Materno',
         );
+    }
+    
+    public function getRepository()
+    {
+        return $this->_repository;
     }
     
     private function _getTrueFiUsuarioService()
