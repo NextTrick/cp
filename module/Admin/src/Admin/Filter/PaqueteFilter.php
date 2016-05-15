@@ -6,7 +6,7 @@
  *
  */
 
-namespace Paquete\Filter;
+namespace Admin\Filter;
 use Common\Filter\Zf2InputFilter;
 
 class PaqueteFilter extends Zf2InputFilter
@@ -16,7 +16,6 @@ class PaqueteFilter extends Zf2InputFilter
     public function __construct($values = array())
     {
         $this->_values = $values;
-        
         $this->_addElements();
     }
 
@@ -32,6 +31,11 @@ class PaqueteFilter extends Zf2InputFilter
             'validators' => array(
                 self::validatorNotEmpty('Titulo 1'),
             )
+        ));
+
+        $this->add(array(
+            'name' => 'destacado',
+            'required' => false
         ));
         
         $this->add(array(
@@ -61,7 +65,7 @@ class PaqueteFilter extends Zf2InputFilter
         $image = new \Zend\InputFilter\FileInput('imagen');
         $image->setRequired(false);
         $image->getValidatorChain()
-            ->attachByName('filesize', array('max' => 204800))
+            ->attachByName('filesize', array('max' => '4MB', 'min' => '10KB'))
             ->attachByName('fileextension',  array(
                 'jpg', 'jpeg', 'png', 'gif'
             ))

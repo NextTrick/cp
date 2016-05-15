@@ -107,3 +107,24 @@
     </div>
     <?php echo $this->form()->closeTag(); ?>
 </div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var tipoRecarga = <?php echo \Admin\Model\Service\PaqueteService::TIPO_RECARGA;?>;
+
+        $('#destacado').removeAttr('disabled');
+        if ($("#tipo").val() == tipoRecarga) {
+            $('#destacado').attr('disabled', true);
+        }
+
+        $("#tipo").on('change', function() {
+            $('#destacado').removeAttr('disabled');
+
+            if ($("#tipo").val() == tipoRecarga) {
+                $('#destacado').attr('disabled', true);
+            }
+        });
+
+    });
+</script>
