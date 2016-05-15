@@ -115,4 +115,59 @@ class PaqueteRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         }
     }
 
+    public function getDestacados()
+    {
+        try {
+            $sql = new Sql($this->getAdapter());
+
+            $select = $sql->select();
+            $select->quantifier(\Zend\Db\Sql\Select::QUANTIFIER_DISTINCT);
+            $select->from(array('p'=> $this->table));
+
+            $where = new \Zend\Db\Sql\Where();
+            $where->AND->equalTo('tipo', 2) ;
+            $where->AND->equalTo('destacado', 1) ;
+
+            $select->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);
+            $select->order('fecha_edicion DESC');
+
+            //echo $select->getSqlString($this->getAdapter()->getPlatform());exit;
+
+            $statement = $sql->prepareStatementForSqlObject($select);
+            $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();
+
+            return $rows;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+    
+    public function darBajaDestacados($idsValidos = array())
+    {
+        try {
+            $sql = new Sql($this->getAdapter());
+
+            $update = $sql->update();
+            $update->table($this->table);
+            $update->set(array('destacado' => 0));
+
+            $where = new \Zend\Db\Sql\Where();
+            $where->AND->equalTo('tipo', 2) ;
+            $where->AND->notIn('id', $idsValidos);
+
+            $update->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);
+
+            //echo $select->getSqlString($this->getAdapter()->getPlatform());exit;
+
+            $statement = $sql->prepareStatementForSqlObject($update);
+            $result    = $statement->execute();
+
+            return $result;
+
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+    }
+
 }

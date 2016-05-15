@@ -22,11 +22,12 @@ $this->layout()->breadcrumb = array(
                     <th style="white-space:nowrap;">Coney Bonos</th>
                     <th style="white-space:nowrap;">Coney Bonos Plus</th>
                     <th>Tickets</th>
-                    <th>Tipo</th>
+                    <th style="white-space:nowrap;">Orden</th>
                     <th style="white-space:nowrap;">Game Points</th>
                     <th>Fecha</th>
                     <th>Activo</th>
                     <th>Destacado</th>
+                    <th>Tipo</th>
                     <th style="max-width: 60px"></th>
                 </tr>
             </thead>
@@ -39,11 +40,12 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['bonus'] ?></td>
                         <td><?php echo $row['promotionbonus'] ?></td>
                         <td><?php echo $row['etickets'] ?></td>
-                        <td><?php echo \Admin\Model\Service\PaqueteService::getNombreTipo($row['tipo']); ?></td>
+                        <td><?php echo $row['orden'] ?></td>
                         <td><?php echo $row['gamepoints'] ?></td>
-                        <td><?php echo $row['fecha_creacion'] ?></td>
+                        <td><?php echo $row['fecha_edicion'] ?></td>
                         <td><?php echo \Admin\Model\Service\PaqueteService::getNombreEstado($row['activo']); ?></td>
                         <td><?php echo \Admin\Model\Service\PaqueteService::getNombreDestacado($row['destacado']); ?></td>
+                        <td><?php echo \Admin\Model\Service\PaqueteService::getNombreTipo($row['tipo']); ?></td>
                         <td style="white-space:nowrap;">
                             <a href="<?php echo BASE_URL ?>admin/paquete/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>
                             <a href="<?php echo BASE_URL ?>admin/paquete/eliminar/<?php echo $row['id']; ?>" class="btn btn-danger delete-remote" title="Eliminar"><i class="fa fa-trash-o"></i></a>
@@ -62,11 +64,15 @@ $this->layout()->breadcrumb = array(
             "paging": true,
             "lengthChange": true,
             "searching": false,
-            "ordering": false,
+            "ordering": true,
             "language": {
                 "info": "Registros de _START_ al _END_, de un total de <?php echo $countList; ?>"
             },
-            "autoWidth": true
+            "autoWidth": true,
+            "order": [[ 6, "desc" ]] ,
+            columnDefs: [
+                { orderable: false, targets: [0,1,2,3,4,5,7,8,9,10,11,12] }
+            ]
         });
         common.deleteRemote();
 
