@@ -127,7 +127,8 @@ class PaqueteForm extends Form
         $this->add($activo);
         
         $destacado = new Element\Checkbox('destacado');
-        $destacado->setUseHiddenElement(true);
+        $destacado->setUseHiddenElement(false);
+        $destacado->setAttribute('id', 'destacado');
         $destacado->setCheckedValue('1');
         $destacado->setUncheckedValue('0');
         $destacado->setValue('0');

@@ -70,7 +70,6 @@ class ContenidoService
         return array(
             'codigo'    => 'Código',
             'titulo'    => 'Título',
-            'contenido' => 'Contenido',
         );
     }
 }

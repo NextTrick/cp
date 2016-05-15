@@ -80,11 +80,7 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
 
             $statement = $sql->prepareStatementForSqlObject($select);
             $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();
-
-            //$adapter      = $this->getAdapter();
-            //$selectString = $sql->buildSqlString($selectInterno);
-            //$rows         = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-            //print_r($rows);exit;
+            
             return $rows;
 
         } catch (\Exception $e) {
