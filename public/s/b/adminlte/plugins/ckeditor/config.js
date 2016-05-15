@@ -34,5 +34,14 @@ CKEDITOR.editorConfig = function( config ) {
 	config.format_tags = 'p;h1;h2;h3;pre';
 
 	// Make dialogs simpler.
-	config.removeDialogTabs = 'image:advanced;link:advanced';
+	config.removeDialogTabs = 'image:advanced;image:Upload;image:Link;link:advanced';
+
+	config.image_previewText = " ";
+
+	config.filebrowserBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=files';
+	config.filebrowserImageBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=images';
+	config.filebrowserFlashBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=flash';
+	config.filebrowserUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=files';
+	config.filebrowserImageUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=images';
+	config.filebrowserFlashUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=flash';
 };

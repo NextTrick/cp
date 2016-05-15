@@ -86,14 +86,19 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
     {
         $this->setCriteria($criteria);
         try {
-            $sql = new Sql($this->getAdapter());
+            $sql    = new Sql($this->getAdapter());
             $select = $sql->select()->from(array('a' => $this->table));
+            
             if (!empty($this->crColumns)) {
                 $select->columns($this->crColumns);
             }
             
             if (!empty($this->crWhere)) {
                 $select->where($this->crWhere);
+            }
+
+            if (!empty($this->crWhereBetween)) {
+                $select->where($this->crWhereBetween);
             }
 
             if (!empty($this->crOrder)) {
@@ -138,6 +143,14 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
                 foreach ($this->crWhereLike as $key => $value) {
                     if (!empty($value) && !empty($key)) {
                         $where->or->like($key, "%$value%") ;
+                    }
+                }
+
+                foreach ($this->crWhereBetween as $key => $value) {
+                    if (!empty($value['min']) && !empty($key)) {
+                        $where->and->greaterThanOrEqualTo($key, $value['min']) ;
+                    } elseif (!empty($value['max']) && !empty($key)) {
+                        $where->and->lessThanOrEqualTo($key, $value['max']) ;
                     }
                 }
             }

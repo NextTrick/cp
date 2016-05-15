@@ -15,8 +15,8 @@ class PaqueteService
     const TIPO_NAME_RECARGA   = 'Recarga';
     const TIPO_NAME_PROMOCION = 'Promoción';
 
-    const CANT_ACTIVO_TIPO_PROMOCION = 4;
-    const CANT_ACTIVO_TIPO_RECARGA   = 3;
+    const CANT_ACTIVO_TIPO_PROMOCION = 100;
+    const CANT_ACTIVO_TIPO_RECARGA   = 100;
 
     const ESTADO_BAJA        = 0;
     const ESTADO_ACTIVO      = 1;
@@ -86,6 +86,19 @@ class PaqueteService
         return array('destacado' => $arrayDestacado, 'normal' => $arrayNormal);
     }
     
+    public function recargaPromociones()
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('activo', 1);
+        $where->equalTo('tipo', self::TIPO_PROMOCION);
+        $criteria = array(
+            'where' => $where,
+            'order' => array('orden ASC'),
+        );
+        $rows = $this->_repository->findAll($criteria);
+        return \Common\Helpers\Util::formatoRecargas($rows);
+    }
+    
     public function grillaRecargas($cantidad)
     {
         $where = new \Zend\Db\Sql\Where();
@@ -97,6 +110,20 @@ class PaqueteService
             'order' => array('orden ASC'),
         );
         return $this->_repository->findAll($criteria);
+    }
+    
+    public function recargaRecargas()
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('activo', 1);
+        $where->equalTo('tipo', self::TIPO_RECARGA);
+        $criteria = array(
+            'where' => $where,
+            'order' => array('orden ASC'),
+        );
+        
+        $rows = $this->_repository->findAll($criteria);
+        return \Common\Helpers\Util::formatoRecargas($rows);
     }
 
     public function getRepository()
@@ -123,21 +150,21 @@ class PaqueteService
         $band           = false;
         $cantTipoMax    = (self::TIPO_PROMOCION == $tipo)? self::CANT_ACTIVO_TIPO_PROMOCION: self::CANT_ACTIVO_TIPO_RECARGA;
         $ordenTemp      = null;
-
+        echo "orden = ".$orden." Id = ".$id;
         foreach ($paquetes as $key => $reg) {
 
-            if (!empty($reg['orden']) && $reg['orden'] == $orden) {
+            if ($band == false && ($reg['orden'] == $orden || $orden == 1)) {
                 $paquetesUodate[] = array(
                     'id'     => $id,
-                    'orden'  => $orden,
+                    'orden'  => intval($orden),
                     'activo' => 1
                 );
 
-                $ordenTemp = $orden;
+                $ordenTemp = intval($orden);
                 $band      = true;
             }
 
-            if ($band) {
+            if ($band && !empty($reg['id']) && $reg['id'] != $id) {
                 $ordenTemp ++;
                 $paquetesUodate[] = array(
                     'id'     => $reg['id'],
@@ -146,6 +173,8 @@ class PaqueteService
                 );
 
                 $cont ++;
+                continue;
+            } elseif ($band && !empty($reg['id']) && $reg['id'] == $id) {
                 continue;
             }
 
@@ -157,6 +186,8 @@ class PaqueteService
 
             $cont ++;
         }
+
+        //var_dump($paquetesUodate);exit;
 
         foreach ($paquetesUodate as $key => $reg) {
             $id = $reg['id'];

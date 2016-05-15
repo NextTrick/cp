@@ -15,8 +15,8 @@ class ContenidoService
     
     const TIPO_PAGINA         = 1;
     const TIPO_SECCION        = 2;
-    const NOMBRE_TIPO_PAGINA  = 'página';
-    const NOMBRE_TIPO_SECCION = 'sección';
+    const TIPO_NAME_PAGINA  = 'página';
+    const TIPO_NAME_SECCION = 'sección';
 
 
     public function __construct($repository, $serviceLocator)
@@ -38,14 +38,25 @@ class ContenidoService
         );
     }
 
+    public static function getNameTipo($tipoPagina)
+    {
+        $result = self::TIPO_NAME_SECCION;
+        
+        if (!empty($tipoPagina) && self::TIPO_PAGINA == $tipoPagina) {
+            return self::TIPO_NAME_PAGINA;
+        }
+        
+        return $result;
+    }
+
 
     public static function getAllTipos()
     {
         return array(
             'tipoPagina'        => self::TIPO_PAGINA,
             'tipoSeccion'       => self::TIPO_SECCION,
-            'nombreTipoPagina'  => ucfirst(self::NOMBRE_TIPO_PAGINA),
-            'nombreTipoSeccion' => ucfirst(self::NOMBRE_TIPO_SECCION),
+            'nombreTipoPagina'  => ucfirst(self::TIPO_NAME_PAGINA),
+            'nombreTipoSeccion' => ucfirst(self::TIPO_NAME_SECCION),
         );
     }
 

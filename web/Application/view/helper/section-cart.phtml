@@ -1,0 +1,13 @@
+<div class="bottom_bar"><span class="text">Estás recargando: </span>
+    <div class="select"><span></span>
+        <select name="tarjeta" id="tarjeta">
+            <?php foreach ($usuarioTarjetas as $codigo => $nombre) : ?>
+            <?php $select = ($codigo == $tarjetaCodigo) ? 'selected="selected"' : ''; ?>
+            <option value="<?php echo $codigo; ?>" <?php echo $select; ?>><?php echo $nombre; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <span class="bg"> <span class="text">Recargas: </span>0 <span>/ </span>S/. 0.00</span>
+    <span class="text">Monto total: </span>
+    <span class="bg total">S/. 0.00</span><button class="btn btn_orange">Confirmar compra </button>
+</div>

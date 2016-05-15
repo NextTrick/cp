@@ -78,10 +78,12 @@ return array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/activar-cuenta[/:codigo]',
+                    'constraints' => array(
+                        'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
                         'action'     => 'activar-cuenta',
-                        'codigo' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                 ),
             ),
@@ -99,10 +101,12 @@ return array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/modificar-password[/:codigo]',
+                    'constraints' => array(
+                        'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
                         'action'     => 'modificar-password',
-                        'codigo' => '[a-zA-Z][a-zA-Z0-9_-]*',
                     ),
                 ),
             ),
@@ -148,11 +152,37 @@ return array(
             ),
             'web-recargas' => array(
                 'type' => 'Segment',
+                'constraints' => array(
+                    'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                ),
                 'options' => array(
-                    'route'    => '/recargas[/]',
+                    'route'    => '/recargas[/:codigo]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Recargas',
                         'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-pagos' => array(
+                'type' => 'Segment',
+                'constraints' => array(
+                    'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                ),
+                'options' => array(
+                    'route'    => '/pagos[/:codigo]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Pagos',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-cart' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/cart[/:action]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Cart',
+                        'action'     => 'agregar',
                     ),
                 ),
             ),
