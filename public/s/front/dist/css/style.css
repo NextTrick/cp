@@ -40,14 +40,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -106px -198px;
+  background-position: -232px -202px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -80px -198px;
+  background-position: -206px -202px;
   width: 26px;
   height: 26px;
 }
@@ -70,7 +70,7 @@ header .user_option .user_outside a span {
 }
 header .user_option .user_outside a span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -226px -145px;
+  background-position: -358px -79px;
   width: 12px;
   height: 14px;
   margin-left: 6px;
@@ -104,7 +104,7 @@ header .user_option .user_inside ul li a span {
 }
 header .user_option .user_inside ul li a span.icon_cart {
   background-image: url("../images/sprite.png");
-  background-position: -155px -198px;
+  background-position: -304px -202px;
   width: 24px;
   height: 22px;
 }
@@ -276,7 +276,7 @@ header nav ul li.logo img {
 }
 .right_options ul li a span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: 0px -132px;
+  background-position: -252px 0px;
   width: 120px;
   height: 66px;
 }
@@ -302,7 +302,7 @@ header nav ul li.logo img {
 }
 .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -32px -236px;
+  background-position: -174px -202px;
   width: 32px;
   height: 32px;
 }
@@ -315,7 +315,7 @@ header nav ul li.logo img {
 }
 .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: 0px -236px;
+  background-position: -142px -202px;
   width: 32px;
   height: 32px;
 }
@@ -572,7 +572,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -240px -171px;
+  background-position: -294px -167px;
   width: 32px;
   height: 26px;
 }
@@ -669,7 +669,7 @@ section .purple_box .info_box span.text {
 }
 section .purple_box .info_box span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -174px -132px;
+  background-position: -306px -66px;
   width: 52px;
   height: 52px;
   margin-right: 10px;
@@ -722,7 +722,7 @@ section .purple_box .cart_box .cart {
 }
 section .purple_box .cart_box .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -179px -198px;
+  background-position: -328px -202px;
   width: 23px;
   height: 20px;
   display: inline-block;
@@ -834,7 +834,7 @@ section .purple_box .cards_content .col_3 .success_box {
 }
 section .purple_box .cards_content .col_3 .success_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -240px 0px;
+  background-position: -252px -122px;
   width: 55px;
   height: 45px;
   display: block;
@@ -848,7 +848,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -240px -130px;
+  background-position: -52px -202px;
   width: 52px;
   height: 41px;
   display: block;
@@ -862,7 +862,7 @@ section .purple_box .cards_content .col_3 .duplicate_box {
 }
 section .purple_box .cards_content .col_3 .duplicate_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -240px -45px;
+  background-position: -307px -122px;
   width: 54px;
   height: 44px;
   display: block;
@@ -901,13 +901,13 @@ section .purple_box .cards_content .col_3.my_card span {
 section .purple_box .cards_content .col_3.my_card span.cp_logo {
   display: block;
   background-image: url("../images/sprite.png");
-  background-position: -120px -132px;
+  background-position: -252px -66px;
   width: 54px;
   height: 56px;
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon {
   background-image: url("../images/sprite.png");
-  background-position: -272px -171px;
+  background-position: -281px -202px;
   width: 23px;
   height: 23px;
   display: inline-block;
@@ -918,7 +918,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -202px -198px;
+  background-position: -351px -202px;
   width: 18px;
   height: 14px;
 }
@@ -1061,7 +1061,7 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb a {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span {
   background-image: url("../images/sprite.png");
-  background-position: -226px -132px;
+  background-position: -358px -66px;
   width: 13px;
   height: 13px;
   display: block;
@@ -1188,25 +1188,25 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
   background-image: url("../images/sprite.png");
-  background-position: 0px -66px;
+  background-position: 0px -136px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
   background-image: url("../images/sprite.png");
-  background-position: -120px -66px;
+  background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa {
   background-image: url("../images/sprite.png");
-  background-position: -120px 0px;
+  background-position: -132px -66px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa.active {
   background-image: url("../images/sprite.png");
-  background-position: 0px 0px;
+  background-position: -132px 0px;
   width: 120px;
   height: 66px;
 }
@@ -1251,7 +1251,7 @@ section .purple_box .pay_box_white >.right .items_cart .item .right .card_type s
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right .card_type span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -38px -198px;
+  background-position: -252px -167px;
   width: 42px;
   height: 28px;
   margin-top: -6px;
@@ -1351,6 +1351,199 @@ section .purple_box .pay_box_white >.right .total_box a {
   text-decoration: none;
   margin-top: 10px;
   display: block;
+}
+section .purple_box .pay_box_white.cart_page {
+  padding: 0;
+  min-height: 696px;
+}
+section .purple_box .pay_box_white.cart_page >.left {
+  width: 660px;
+  text-align: left;
+  padding: 15px;
+  border: 0;
+}
+section .purple_box .pay_box_white.cart_page >.left .empty_cart {
+  text-align: center;
+  padding: 150px 0;
+}
+section .purple_box .pay_box_white.cart_page >.left .empty_cart .icon {
+  background-image: url("../images/sprite.png");
+  background-position: 0px 0px;
+  width: 132px;
+  height: 136px;
+  display: block;
+  margin: 0 auto;
+}
+section .purple_box .pay_box_white.cart_page >.left .empty_cart h2 {
+  color: #808080;
+  font-size: 36px;
+  font-weight: normal;
+}
+section .purple_box .pay_box_white.cart_page >.left .empty_cart p {
+  font-size: 20px;
+  color: #808080;
+  font-weight: normal;
+  margin: 0;
+}
+section .purple_box .pay_box_white.cart_page >.left .empty_cart a {
+  color: #ff6909;
+  margin-top: 10px;
+  display: block;
+  font-size: 20px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item {
+  overflow: hidden;
+  border-bottom: 1px dashed #d3d3d3;
+  padding: 15px 0 20px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item:last-child {
+  border-bottom: 0;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .left {
+  width: 100px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right {
+  width: 450px;
+  text-align: left;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .remove_icon {
+  float: right;
+  color: #808080;
+  cursor: pointer;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h5 {
+  margin: 0;
+  font-size: 14px;
+  color: #808080;
+  font-weight: normal;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h5 .legal {
+  cursor: pointer;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h4 {
+  margin: 7px 0;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h4 strong {
+  font-size: 20px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type {
+  margin-top: 20px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type span {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 14px;
+  font-weight: bold;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type .card_name {
+  margin-left: 5px;
+  font-weight: normal;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type .card_name span {
+  background-image: url("../images/sprite.png");
+  background-position: -326px -167px;
+  width: 33px;
+  height: 22px;
+  display: block;
+  position: absolute;
+  left: 13px;
+  top: 7px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type .card_name select {
+  width: 300px;
+  border: 1px solid #d3d3d3;
+  border-radius: 16px;
+  padding-left: 56px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type .cant {
+  float: right;
+  font-weight: normal;
+  width: 90px;
+  border: 1px solid #d3d3d3;
+  border-radius: 16px;
+  padding-left: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .detail {
+  margin: 15px 0;
+  display: none;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .detail .line {
+  overflow: hidden;
+  width: 210px;
+  color: #808080;
+  font-size: 12px;
+  margin: 10px 0;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .detail .line .left {
+  width: 110px;
+  text-align: left;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .detail .line .right {
+  width: 90px;
+  text-align: right;
+  color: #000;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .total {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .total span {
+  font-size: 32px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show {
+  float: right;
+  text-align: right;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .watch_detail,
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .hidden_detail {
+  color: #ff6909;
+  font-size: 14px;
+  cursor: pointer;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .watch_detail:before,
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .hidden_detail:before {
+  margin-right: 5px;
+  content: '';
+  display: inline-block;
+  position: relative;
+  top: -1;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: solid 5px transparent;
+  border-right: solid 5px transparent;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .watch_detail {
+  margin-top: 30px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .watch_detail:before {
+  border-top: solid 5px #ff6909;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .hidden_detail {
+  margin-top: 15px;
+  display: none;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .link_show .hidden_detail:before {
+  border-bottom: solid 5px #ff6909;
+}
+section .purple_box .pay_box_white.cart_page >.right {
+  width: 300px;
+  background: #eee;
+  padding: 15px;
+  text-align: center;
+}
+section .purple_box .pay_box_white.cart_page >.right h4 {
+  font-size: 16px;
+}
+section .purple_box .pay_box_white.cart_page >.right .total_box {
+  border-top: 1px dashed #ccc;
+  border-bottom: 1px dashed #ccc;
 }
 section input {
   width: 100%;
@@ -1459,7 +1652,7 @@ section .error_message span {
 }
 section .error_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -131px -198px;
+  background-position: -257px -202px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -1523,7 +1716,7 @@ section form.signin_form .content_form input {
 }
 .bottom_bar .select span {
   background-image: url("../images/sprite.png");
-  background-position: -38px -198px;
+  background-position: -252px -167px;
   width: 42px;
   height: 28px;
   display: block;
@@ -1615,7 +1808,7 @@ footer ul li a {
 }
 .modal_box .modal_content span.icon_logo {
   background-image: url("../images/sprite.png");
-  background-position: -120px -132px;
+  background-position: -252px -66px;
   width: 54px;
   height: 56px;
   display: block;
