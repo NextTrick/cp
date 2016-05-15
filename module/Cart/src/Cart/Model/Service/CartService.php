@@ -15,10 +15,12 @@ use Zend\Session\Container;
 class CartService
 {
     protected $_sl = null;
+    protected $_config = array();
 
-    public function __construct($serviceLocator)
+    public function __construct($serviceLocator, $config)
     {
         $this->_sl = $serviceLocator;
+        $this->_config = $config;
     }
     
     public function getCart()
@@ -36,32 +38,37 @@ class CartService
         return null;
     }
     
-    public function addCart($cardId, Product $product)
+    public function addCart($groupProduct, Product $product)
     {
-        $cart = new Cart();
-        $cart->setCardId($cardId);
-        $cart->setProducts($product);
-        
         $keyCart = $this->getCodeCart();
         $cache = $this->getCacheCartService();
-        $cache->setItem($keyCart, $cart);
-
         $cartModel = $cache->getItem($keyCart);
-        if ($cartModel instanceof Cart) {
-            return $cartModel;
+        
+        if (!($cartModel instanceof Cart)) {
+            $cartModel = new Cart($this->_config);
+        }
+        
+        $cartModel->setGroupProduct($groupProduct);
+        $cartModel->setProducts($product);
+        
+        $cache->setItem($keyCart, $cartModel);
+        $cartModel2 = $cache->getItem($keyCart);
+        $cartModel2->setGroupProduct($groupProduct);
+        if ($cartModel2 instanceof Cart) {
+            return $cartModel2;
         }
         
         return null;
     }
     
-    public function removeCart($cardId = null, $productId = null)
+    public function removeCart($groupProduct = null, $productId = null)
     {
         $keyCart = $this->getCodeCart();
-        if (!empty($cardId)) {
+        if (!empty($groupProduct)) {
             $cache = $this->getCacheCartService();
             $cartModel = $cache->getItem($keyCart);
             if ($cartModel instanceof Cart) {
-                $cartModel->setCardId($cardId);
+                $cartModel->setGroupProduct($groupProduct);
                 $cartModel->removeProducts($productId);
                 $cache->setItem($keyCart, $cartModel);
             }

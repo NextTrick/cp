@@ -48,7 +48,7 @@ abstract class Service
 
         try {
             $this->client = new \SoapClient($url, array('ssl' => array('peer_verify' => false, 'verify_peer_name' => false)));
-//var_dump($data); echo '<br><br>';
+            //var_dump($data); echo '<br><br>';
             $info = $this->client->$service($data);            
             return $info;
         } catch (\Exception $e) {

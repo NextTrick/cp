@@ -78,7 +78,7 @@ class Visa
     public function cantidadMensajes($xmlDoc)
     {
         $cantMensajes= 0;
-        $xpath = new DOMXPath($xmlDoc);
+        $xpath = new \DOMXPath($xmlDoc);
         $nodeList = $xpath->query('//mensajes', $xmlDoc);
 
         $XmlNode= $nodeList->item(0);
@@ -97,7 +97,7 @@ class Visa
     {
         $strReturn = "";
 
-        $xpath = new DOMXPath($xmlDoc);
+        $xpath = new \DOMXPath($xmlDoc);
         $nodeList = $xpath->query("//mensajes/mensaje[@id='" . $iNumMensaje . "']");
 
         $XmlNode= $nodeList->item(0);

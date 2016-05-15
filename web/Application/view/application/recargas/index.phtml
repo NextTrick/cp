@@ -38,10 +38,6 @@
         sendCart:function(prefix)
         {
             var result = false;
-            if (cart.bloquear == 1) {
-                return result;
-            }
-
             cart.bloquear = 1;
             $.ajax({
                 type: "POST",
@@ -69,22 +65,14 @@
             cantidad = ($.trim(cantidad).length < 1) ? 0 : parseInt(cantidad);
             var newCantidad = cantidad >= 5 ? 5 : (cantidad + 1);
             $('#cantidad_'+prefix).val(newCantidad);
-            if (cart.sendCart(prefix)) {
-                //ok
-            } else {
-                $('#cantidad_'+prefix).val(cantidad);
-            }
+            cart.sendCart(prefix);
         },
         remover:function(prefix) {
             var cantidad = $('#cantidad_'+prefix).val();
             cantidad = ($.trim(cantidad).length < 1) ? 0 : parseInt(cantidad);
             var newCantidad = cantidad < 1 ? 0 : (cantidad - 1);
             $('#cantidad_'+prefix).val(newCantidad);
-            if (cart.sendCart(prefix)) {
-                //ok
-            } else {
-                $('#cantidad_'+prefix).val(cantidad);
-            }
+            cart.sendCart(prefix);
         },
         init:function() {
             $('.less').each(function(){
