@@ -41,20 +41,18 @@
             if (cart.bloquear == 1) {
                 return result;
             }
-            
-            var id = $('#id_'+prefix).val();
-            var cantidad = $('#cantidad_'+prefix).val();
-                    
-            
+
             cart.bloquear = 1;
             $.ajax({
                 type: "POST",
-                url: '<?php echo BASE_URL; ?>cart/agregar',
-                data:{cantidad:cantidad, id:id},
+                url: '<?php echo BASE_URL; ?>cart/modificar',
+                data:{id:$('#id_'+prefix).val(), cantidad:$('#cantidad_'+prefix).val(), tarjeta:$('#tarjeta').val()},
                 dataType: 'json',
                 async:false,
                 success: function(data){
                     if (data.success) {
+                        $('#spanSubtotal').html(' <span class="text">Recargas: </span>'+data.data.cantidad+' <span>/ </span>S/. '+data.data.subtotal);
+                        $('#spanTotal').html('S/. '+data.data.total);
                         result = true;
                     }
                     cart.bloquear = 0;
@@ -91,20 +89,17 @@
         init:function() {
             $('.less').each(function(){
                 $(this).click(function(){
-                    var prefix = $(this).parent().data('prefix');
-                    cart.remover(prefix);
+                    cart.remover($(this).parent().data('prefix'));
                 });
             });
             $('.more').each(function(){
                 $(this).click(function(){
-                    var prefix = $(this).parent().data('prefix');
-                    cart.agregar(prefix);
+                    cart.agregar($(this).parent().data('prefix'));
                 });
             });
             $('input.cant').each(function(){
                 $(this).change(function(){
-                    var prefix = $(this).parent().data('prefix');
-                    cart.sendCart(prefix);
+                    cart.sendCart($(this).parent().data('prefix'));
                 });
             });
             $('#tarjeta').change(function(){

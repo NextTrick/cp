@@ -11,6 +11,7 @@ return array(
         'Common',
         'Cms',
         'TrueFi',
+        'Cart',
         'Util', // No usar en todo caso crear la clase en common/Common/src/Common/Helpers/
         'Application',
         'Usuario',

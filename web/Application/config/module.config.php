@@ -182,7 +182,7 @@ return array(
                     'route'    => '/cart[/:action]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Cart',
-                        'action'     => 'agregar',
+                        'action'     => 'modificar',
                     ),
                 ),
             ),
