@@ -16,6 +16,10 @@ class CartFactory implements FactoryInterface
 {
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new CartService($serviceLocator);
+        $configAll = $serviceLocator->get('config');
+        $config = isset($configAll['cart']) ? $configAll['cart'] : array();
+        unset($configAll['cart']);
+
+        return new CartService($serviceLocator, $config);
     }
 }

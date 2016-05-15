@@ -182,4 +182,11 @@ return array(
             ),
         ),
     ),
+    'cart' => array(
+        'amount_decimal_length' => 2,
+        'amount_decimal_separator' => '.',
+        'amount_thousands_separator' => ',',
+        'quantity_max_by_product' => 5,
+        'currency' => 'NS',
+    )
 );

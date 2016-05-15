@@ -30,12 +30,11 @@ class CartController extends SecurityWebController
                 $product->setQuantity($cantidad);
                 $product->setPrice($paquete['emoney']);
                 $cartModel = $this->_getCartService()->addCart($tarjetaId, $product);
-                if ($cartModel instanceof \Cart\Model\Entity\Cart) {
-                    $cartModel->setCardId($tarjetaId);
+                if (!empty($cartModel)) {
                     $data = array(
-                        'subtotal' => $cartModel->getTotalItem(),
-                        'total' => $cartModel->getTotalCart(),
-                        'cantidad' => $cartModel->getQuantityItem(),
+                        'subtotal' => $cartModel->getAmountGroup(true),
+                        'total' => $cartModel->getAmountCart(true),
+                        'cantidad' => $cartModel->getQuantityGroup(),
                     );
                     
                     $result = array(

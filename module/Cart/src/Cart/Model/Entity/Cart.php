@@ -10,25 +10,39 @@ namespace Cart\Model\Entity;
 
 class Cart
 {
-    const CURRENCY_DEFAULT = 'NS';
-    const PRODUCTS_NUM_MAX = 5;
-
+    private $amountDecimalLength;
+    private $amountDecimalSeparator;
+    private $amountThousandsSeparator;
+    private $quantityMaxByProduct;
     private $currency;
-    private $cardId;
+    private $groupProduct;
     private $products = array();
 
-    public function __construct()
+    public function __construct($config)
     {
-        $this->cardId = 0;
-        $this->currency = self::CURRENCY_DEFAULT;
+        $this->groupProduct = 0;
+        $defultConfig = array(
+            'amount_decimal_length' => 2,
+            'amount_decimal_separator' => '.',
+            'amount_thousands_separator' => ',',
+            'quantity_max_by_product' => 5,
+            'currency' => 'NS',
+        );
+        
+        $config = array_merge($config, $defultConfig);
+        $this->amountDecimalLength = $config['amount_decimal_length'];
+        $this->amountDecimalSeparator = $config['amount_decimal_separator'];
+        $this->amountThousandsSeparator = $config['amount_thousands_separator'];
+        $this->quantityMaxByProduct = $config['quantity_max_by_product'];
+        $this->currency = $config['currency'];
     }
 
-    public function setCardId($cardId)
+    public function setGroupProduct($cardId)
     {
-        $this->cardId = $cardId;
+        $this->groupProduct = $cardId;
     }
 
-    public function getTotalCart()
+    public function getAmountCart($format = false)
     {
         $total = 0;
         foreach ($this->products as $products) {
@@ -36,16 +50,24 @@ class Cart
                 $total = $total + $product->getSubTotal();
             }
         }
+        if ($format) {
+            $total = number_format($total, $this->amountDecimalLength, 
+                    $this->amountDecimalSeparator, $this->amountThousandsSeparator);
+        }
         return $total;
     }
     
-    public function getTotalItem()
+    public function getAmountGroup($format = false)
     {
         $total = 0;
-        if (isset($this->products[$this->cardId])) {
-            foreach ($this->products[$this->cardId] as $product) {
+        if (isset($this->products[$this->groupProduct])) {
+            foreach ($this->products[$this->groupProduct] as $product) {
                 $total = $total + $product->getSubTotal();
             }
+        }
+        if ($format) {
+            $total = number_format($total, $this->amountDecimalLength, 
+                    $this->amountDecimalSeparator, $this->amountThousandsSeparator);
         }
         return $total;
     }
@@ -61,11 +83,11 @@ class Cart
         return $total;
     }
     
-    public function getQuantityItem()
+    public function getQuantityGroup()
     {
         $total = 0;
-        if (isset($this->products[$this->cardId])) {
-            foreach ($this->products[$this->cardId] as $product) {
+        if (isset($this->products[$this->groupProduct])) {
+            foreach ($this->products[$this->groupProduct] as $product) {
                 $total = $total + $product->getQuantity();
             }
         }
@@ -77,15 +99,15 @@ class Cart
         return $this->currency;
     }
 
-    public function getAllProducts()
+    public function getProductsCart()
     {
         return $this->products;
     }
     
-    public function getProducts()
+    public function getProductsGroup()
     {
-        if (isset($this->products[$this->cardId])) {
-            return $this->products[$this->cardId];
+        if (isset($this->products[$this->groupProduct])) {
+            return $this->products[$this->groupProduct];
         }
         return array();
     }
@@ -98,25 +120,21 @@ class Cart
     public function setProducts(Product $product)
     {
         if ($product->getProductId() != null) {
-            if (isset($this->products[$this->cardId][$product->getProductId()])) {
-                $oldProduct = $this->products[$this->cardId][$product->getProductId()];
-                if (!empty($oldProduct)) {
-                    $sumQuantity = $product->getQuantity();
-                    if ($oldProduct->getQuantity() < self::PRODUCTS_NUM_MAX) {
-                        $sumQuantity = $sumQuantity + $oldProduct->getQuantity();
-                        if ($sumQuantity > self::PRODUCTS_NUM_MAX) {
-                            $sumQuantity = self::PRODUCTS_NUM_MAX;
-                        }
-                    } else {
-                        $sumQuantity = self::PRODUCTS_NUM_MAX;
-                    }
-                    $product->setQuantity($sumQuantity);
-                    $this->products[$this->cardId][$product->getProductId()] = $product;
+            $quantity = $product->getQuantity();
+            if (isset($this->products[$this->groupProduct][$product->getProductId()])) {
+                if ($quantity > $this->quantityMaxByProduct) {
+                    $quantity = $this->quantityMaxByProduct;
+                }
+                if ($quantity < 1) {
+                    unset($this->products[$this->groupProduct][$product->getProductId()]);
                 } else {
-                    $this->products[$this->cardId][$product->getProductId()] = $product;
+                    $this->products[$this->groupProduct][$product->getProductId()] = $product;
                 }
             } else {
-                $this->products[$this->cardId][$product->getProductId()] = $product;
+                if ($quantity > $this->quantityMaxByProduct) {
+                    $quantity = $this->quantityMaxByProduct;
+                }
+                $this->products[$this->groupProduct][$product->getProductId()] = $product;
             }
         }
     }
@@ -124,13 +142,13 @@ class Cart
     public function removeProducts($productId = null)
     {
         if (!empty($productId)) {
-            if (isset($this->products[$this->cardId][$productId])) {
-                unset($this->products[$this->cardId][$productId]);
+            if (isset($this->products[$this->groupProduct][$productId])) {
+                unset($this->products[$this->groupProduct][$productId]);
                 return true;
             }
         } else {
-            if (isset($this->products[$this->cardId])) {
-                unset($this->products[$this->cardId]);
+            if (isset($this->products[$this->groupProduct])) {
+                unset($this->products[$this->groupProduct]);
                 return true;
             }
         }
