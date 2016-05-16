@@ -128,6 +128,9 @@ class UsuarioService
             } else {
                 $result['message'] = $res['message'];
             }
+            
+            //sincronizar tarjetas registrados por otro sistema
+            $this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
         }
         return $result;
     }

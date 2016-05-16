@@ -29,11 +29,24 @@ class TarjetaService
             'limit' => LIMIT_USUARIO_TARJETAS,
         );
         $rows = $this->_repository->findAll($criteria);
+        foreach ($rows as $key => $row) {
+            $row[$key] = $this->getOnlineTarjeta($row['cguid']);
+        }
         $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
         
         return $results;
     }
     
+    public function getOnlineTarjeta($cguid)
+    {
+        $result = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
+        if ($result['success']) {
+            return $result['result'];
+        }
+        return array();
+    }
+
+
     public function getTarjetas($usuarioId)
     {
         $criteria = array(
@@ -57,5 +70,10 @@ class TarjetaService
     public function getRepository()
     {
         return $this->_repository;
+    }
+    
+    private function _getTrueFiTarjetaService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
     }
 }
