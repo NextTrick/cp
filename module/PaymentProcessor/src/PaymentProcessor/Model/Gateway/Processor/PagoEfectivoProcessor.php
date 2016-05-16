@@ -33,14 +33,12 @@ class PagoEfectivoProcessor extends AbstractProcessor
         try {            
             //Obtención del valor del Cip                                    
             $paymentResponse = $this->ws->solicitarPago($xml);
-
-            var_dump($paymentResponse); exit;
                                     
             $return['data'] = array(
-                'status' => $paymentResponse->Estado,
-                'token' => $paymentResponse->Token,
-                'cip' => $paymentResponse->NumeroOrdenPago,
-                'reference' => $paymentResponse->CodTrans,
+                'status' => (string) $paymentResponse->Estado,
+                'token' => (string) $paymentResponse->Token,
+                'cip' => (string) $paymentResponse->CIP->NumeroOrdenPago,
+                'reference' => (string) $paymentResponse->CodTrans,
             );
         } catch (\Exception $e) {
             $return['success'] = false;
