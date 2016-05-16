@@ -118,15 +118,15 @@
                                             <div class="detail">
                                                 <div class="line">
                                                     <div class="left">Coney Bonus</div>
-                                                    <div class="right">S/. 30</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
                                                 </div>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus Plus</div>
-                                                    <div class="right">S/. 15</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
                                                 </div>
                                                 <div class="line">
                                                     <div class="left">Tickets</div>
-                                                    <div class="right">12</div>
+                                                    <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
                                                 </div>
                                             </div>
                                             <div class="link_show">

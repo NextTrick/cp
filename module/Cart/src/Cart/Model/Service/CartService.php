@@ -38,7 +38,7 @@ class CartService
         return null;
     }
     
-    public function addCart($groupProduct, $product, $adding = false)
+    public function addCart($product, $groupProduct = 0, $adding = false)
     {
         $productModel = new Product($this->_config);
         $productModel->setProductId($product['product_id']);
@@ -49,6 +49,7 @@ class CartService
         $productModel->setPrice($product['price']);
         $productModel->setCategoryCode($product['category_code']);
         $productModel->setCategoryName($product['category_nombre']);
+        $productModel->setOptions($product['options']);
         
         $keyCart = $this->getCodeCart();
         $cache = $this->getCacheCartService();

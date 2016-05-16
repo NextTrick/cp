@@ -65,14 +65,22 @@ class CarritoController extends SecurityWebController
                     'price' => $paquete['emoney'],
                     'category_code' => $tarjetaCode,
                     'category_nombre' => $tarjeta['nombre'],
+                    'options' => array(
+                        'emoney' => $paquete['emoney'],
+                        'bonus' => $paquete['bonus'],
+                        'promotionbonus' => $paquete['promotionbonus'],
+                        'etickets' => $paquete['etickets'],
+                        'gamepoints' => $paquete['gamepoints'],
+                        'legal' => $paquete['legal'],
+                    ),
                 );
                 
                 if (empty($oldTarjetaCode)) {
                     //Reemplaza la cantidad a la tarjeta associada
-                    $cartModel = $this->_getCartService()->addCart($tarjetaCode, $producto);
+                    $cartModel = $this->_getCartService()->addCart($producto, $tarjetaCode);
                 } else {
                     //Adiciona la cantidad y remueve el producto asocciado a la tarjeta antigua
-                    $cartModel = $this->_getCartService()->addCart($tarjetaCode, $producto, true);
+                    $cartModel = $this->_getCartService()->addCart($producto, $tarjetaCode, true);
                     $this->_getCartService()->removeCart($oldTarjetaCode);
                 }
                 

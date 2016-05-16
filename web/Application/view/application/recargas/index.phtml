@@ -18,12 +18,13 @@
                     <span class="label">Items en el carrito:</span>
                     <div class="cart">
                         <span class="icon"></span>
-                        <span class="number" id="scantidadTotal"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+                        <span class="number" id="spanCantidadTotal"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
                     </div>
                 </a>
                 <div class="recargas_content">
-                    <?php echo $this->sectionRecargaPromociones();  ?>
-                    <?php echo $this->sectionRecargaRecargas();  ?>
+                    <?php $tarjetaProductos = empty($cartModel) ? array() : $cartModel->getProductsGroup(); ?>
+                    <?php echo $this->sectionRecargaPromociones($tarjetaProductos);  ?>
+                    <?php echo $this->sectionRecargaRecargas($tarjetaProductos);  ?>
                     <br/><br/>
                 </div>
             </div>
@@ -39,7 +40,9 @@
             <?php endforeach; ?>
         </select>
     </div>
-    <span class="bg" id="spanSubtotal"> <span class="text">Recargas: </span>0 <span>/ </span>S/. 0.00</span>
+    <?php $cantidad = empty($cartModel) ? '0' : $cartModel->getQuantityGroup(); ?>
+    <?php $monto = empty($cartModel) ? '0.00' : $cartModel->getAmountGroup(true); ?>
+    <span class="bg" id="spanSubtotal"> <span class="text">Recargas: </span><?php echo $cantidad; ?> <span>/ </span>S/. <?php echo $monto; ?></span>
     <span class="text">Monto total: </span>
     <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
     <span class="bg total" id="spanTotal">S/. <?php echo $montoTotal; ?></span><button id="confirmarCompra" class="btn btn_orange">Confirmar compra </button>
@@ -71,7 +74,7 @@
                     if (data.success) {
                         $('#spanSubtotal').html(' <span class="text">Recargas: </span>'+data.data.cantidad+' <span>/ </span>S/. '+data.data.subtotal);
                         $('#spanTotal').html('S/. '+data.data.total);
-                        $('#scantidadTotal').html(data.data.cantidadTotal);
+                        $('#spanCantidadTotal').html(data.data.cantidadTotal);
                         result = true;
                     }
                     cart.bloquear = 0;

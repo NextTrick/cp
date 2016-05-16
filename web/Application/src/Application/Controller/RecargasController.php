@@ -15,6 +15,7 @@ class RecargasController extends SecurityWebController
         $tarjetaCodigo = $this->params('codigo');
         $usuario = $this->_getUsuarioData();
         $cartModel = $this->_getCartService()->getCart();
+        $cartModel->setGroupProduct($tarjetaCodigo);
         $usuarioTarjetas = $this->_getTarjetaService()->getTarjetas($usuario->id);
         
         $view = new ViewModel();
