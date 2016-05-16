@@ -4,29 +4,29 @@ namespace PaymentProcessor\Model\Gateway\Processor\Ws\PagoEfectivo;
 
 use PaymentProcessor\Model\Gateway\Processor\Ws\PagoEfectivo\Crypto;
 
-abstract class Service 
+abstract class Service
 {
     protected $_options = array(
         'url2' => '',
         'url3' => '',
         'url4' => '',
     );
-    
+
     protected static $_instance;
-    
+
     public $client;
-        
-    public function __construct($config = null) 
+
+    public function __construct($config = null)
     {
         if (isset($config)) {
             $this->_options = array_merge($this->_options, $config);
-        }                
+        }
     }
     /*
      * Ejecutar el servicio
      */
-    public function _loadService($service, $data) 
-    {        
+    public function _loadService($service, $data)
+    {
         switch ($service) {
             case 'GenerarCIPMod1': $url = $this->_options['url2'];
                 break;
@@ -47,9 +47,9 @@ abstract class Service
         }
 
         try {
-            $this->client = new \SoapClient($url, array('ssl' => array('peer_verify' => false, 'verify_peer_name' => false)));
+            $this->client = new \SoapClient($url, array('ssl' => array('peer_verify' => false, 'verify_peer_name' => false), 'cache_wsdl' => WSDL_CACHE_NONE));
             //var_dump($data); echo '<br><br>';
-            $info = $this->client->$service($data);            
+            $info = $this->client->$service($data);
             return $info;
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
@@ -63,33 +63,33 @@ abstract class Service
      * @param string $securityPath Carpeta donde se almacenan public.key y private.key
      * @return PagoEfectivo retorna la instancia de la clase
      */
-    final public static function getInstance($options = null) 
+    final public static function getInstance($options = null)
     {
         $class = self::getClass();
         if (!isset(self::$_instance[$class])) {
             self::$_instance[$class] = new $class($options);
         }
-        
+
         return self::$_instance[$class];
     }
 
     /*
      * Captura el nombre de la clase
      */
-    final public static function getClass() 
+    final public static function getClass()
     {
         if (function_exists('get_called_class')) {
             return get_called_class();
         }
-        
+
         return Crypto;
     }
-    
-    public function getOptions() 
+
+    public function getOptions()
     {
         return $this->_options;
     }
-    
+
     public function getClient()
     {
         return $this->client;
