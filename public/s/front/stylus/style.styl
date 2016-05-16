@@ -39,6 +39,9 @@ header
 				margin-right 5px
 			&.in
 				sprite($in)
+	.bg_diagonal
+	.menu_icon
+		display none
 	.user_option
 		position absolute
 		right 0
@@ -1366,6 +1369,19 @@ footer
 				color #972383
 				text-decoration none
 				font-size 12px
+	span.logo_icon
+		position absolute
+		top -67px
+		left 46%
+		display block
+		sprite($logo_2)
+.bg_diagonal_footer
+	display none
+	width 0
+	height 0
+	border-bottom 60px solid white
+	border-right 600px solid transparent
+
 
 
 //modal
@@ -1533,6 +1549,8 @@ i[class*=" icon-"]
 
 //media query
 @media screen and (max-width: 667px)
+	body
+		overflow-x hidden
 	.box_center
 		width 100%
 	header
@@ -1551,50 +1569,244 @@ i[class*=" icon-"]
 		.social_icons
 		.bg
 			display none
+		.bg_diagonal
+			display block
+			width 100%
+			overflow hidden
+			height 0
+			border-top 60px solid white
+			border-right 600px solid transparent
+		.menu_icon
+			display block
+			position absolute
+			top 43px
+			left 15px
+			color #6c006c
+			cursor pointer
+			i
+				font-size 24px
 	.right_options
 		display none
+	
 	section
 		padding-top 20px
-		padding 8px
 		.welcome_box
+			padding 8px
 			h2
 			.subtitle
 			.medium
 			.small
 				display none
-			.yellow_box
-				background none
-				color white
-				&:before
-				&:after
-					display none
 			.error_message
 				width 95%
 				left 2%
 				padding 0
 			.purple_box
-				background none
 				.content
-					padding 0
 					.left
 					.right
 						float none
 						width 100%
 						display block
-				.login_link
-					a
-						color white
-						span
-							display none
+				.options
+					.col_3
+						display block
+						float none
 		.offers_box
 			.col_3
 				width 100%
 				img
 					width 100%
+		.app_box
+			.purple_box
+				border-radius 0
+				.steps
+					float left
+				.cart_box
+					float right
+					position static
+					margin-top 0
+					margin-right 15px
+					margin-bottom 20px
+					.label
+						display none
+				.pay_box_white
+					display block
+					width 100%
+					margin-top 10px
+					>.left
+					>.right
+						float none
+						display block
+						width 100%
+					>.left
+						border-right 0
+						padding-right 0
+						border-bottom 1px dashed lightgray
+					>.right
+						padding-left 0
+						.credit_cards
+							padding-bottom 15px
+							border-bottom 1px dashed lightgray
+						.items_cart
+							.item
+								position relative
+								margin-bottom 10px
+								>.right
+									float none
+									display block
+									width 100%
+									margin-top 15px
+									h5
+										position absolute
+										top 0
+								>.left
+									margin-top 15px
+									margin-right 10px
+									img
+										width 100%
+					&.cart_page
+						>.left
+							padding 15px
+							.empty_cart
+								padding 50px 0
+							.items_cart
+								width 100%
+								.item
+									position relative
+									margin-bottom 10px
+									>.right
+										float none
+										display block
+										width 100%
+										margin-top 15px
+										h5
+											position absolute
+											top 0
+										.card_type
+											>span
+												display none
+											.card_name
+												margin-left 0
+												width 70%
+												select
+													width 100%
+													padding-right 38px
+											.cant
+												width 28%
+									>.left
+										margin-top 15px
+										margin-right 10px
+										img
+											width 100%
+						>.right
+							height auto !important
+				.recargas_content
+					.offers
+						.col_3
+							margin-bottom 45px
+				.options
+					padding 10px
+					.col_3
+						width 100%
+						display block
+						float none
+						overflow hidden
+						.circle
+							float left
+							width 30%
+						.p_16
+							float right
+							width 68%
+							text-align left
+				.bar_info
+					height auto
+					.left
+					.right
+						display block
+						width 100%
+						float none
+					.left
+						margin-bottom 10px
+				.benefits_offers
+					.yellow_text
+					.offers_box_two
+						display none
+					.offers_box_three
+						.col_3
+							display block
+							float none
+							width 100%
+							margin-bottom 10px
+							.box_white
+								border-radius 18px
+				.cards_content
+					.col_3
+						&.add_card
+							.tooltip
+								top 25px
+								&:before
+									display none
+				.info_box
+					.text
+						width 80%
+					a
+						float none
+						width 100%
+						display block
+						text-align center
+		
+		form
+			&.signin_form
+				padding 10px
+				.content_form
+					width 100%
+					.form_control
+						.left
+						.right
+							display block
+							float none
+							width 100%
+						.left
+							margin-bottom 5px
+						.day
+							width 20%
+						.month
+							width 45%
+						.year
+							width 30%
+						.inp_right
+							width 65%
+						.doc_type
+							width 30%
+	.bottom_bar
+		width 100%
+		height auto
+		text-align center
+		border-radius 0
+		span
+			&.text
+				display block
+				text-align center
+				margin-bottom 10px
+			&.bg
+				display block
+				width 100%
+				height auto
+				text-align center
+				margin 10px 0
+				.text
+					float none
+					width auto
+					display inline-block
+				&.total
+					margin-left 0
+							
 	footer
 		background white
 		height 120px
-		margin-top 50px
+		margin-top 40px
+		position relative
 		img
 			&.bg
 				display none
@@ -1603,6 +1815,17 @@ i[class*=" icon-"]
 			li
 				margin-top 10px
 				display block
+		span.logo_icon
+			display block
+	.bg_diagonal_footer
+		display block
+	#how_asociate_card
+		left 0
+		top 50px !important
+		width 90%
+		.modal_content
+			width auto
+	
 
 
 
