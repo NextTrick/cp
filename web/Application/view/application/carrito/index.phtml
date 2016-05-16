@@ -1,0 +1,115 @@
+<section class="app_content recargas">
+    <div class="box_center">
+        <div class="app_box">
+            <div class="menu right_active">
+                <ul>
+                    <li class="first"><a href="<?php echo BASE_URL; ?>beneficios">Beneficios</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>mis-tarjetas">Mis tarjetas</a></li>
+                    <li class="last active"><a href="<?php echo BASE_URL; ?>recargas">Recargas</a></li>
+                </ul>
+            </div>
+            <div class="purple_box">
+                <p class="yellow_text small_text">Recarga de mis tarjetas</p>
+                <div class="steps">
+                    <div class="step active">1</div>
+                    <div class="step active">2</div>
+                </div>
+                <a href="<?php echo BASE_URL ?>carrito" class="cart_box">
+                    <span class="label">Items en el carrito:</span>
+                    <div class="cart">
+                        <span class="icon"></span>
+                        <span class="number"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+                    </div>
+                </a>
+                <div class="pay_box_white cart_page">
+                    <div class="left">
+                        <?php if (empty($cartModel)) : ?>
+                        <div class="empty_cart">
+                            <span class="icon"></span>
+                            <h2>¡Tu carrito esta vacío!</h2>
+                            <p>Puedes ver todo lo que tenemos para ti en</p>
+                            <a href="<?php echo BASE_URL; ?>recargas" class="link_orange">Promociones y recargas</a>
+                        </div>
+                        <?php else : ?>
+                        <div class="items_cart">
+                            <?php $index = 0; ?>
+                            <?php foreach ($cartModel->getProductsCart() as $productos) : ?>
+                                <?php foreach ($productos as $producto) : ?>
+                                    <?php $index++; ?>
+                                    <div class="item">
+                                        <div class="left">
+                                            <img width="140" height="71" src="<?php echo $urlImg . '/' . $producto->getProductImage(); ?>" alt="<?php echo $producto->getProductName(); ?>"/>
+                                        </div>
+                                        <div class="right" data-prefix="<?php echo $index; ?>">
+                                            <span class="remove_icon">x</span>
+                                            <h5><?php echo $producto->getProductName(); ?> <span>. </span>
+                                                <span class="legal">Ver legal</span>
+                                            </h5>
+                                            <h4 class="item_title">
+                                                <?php echo $producto->getProductName2(); ?>
+                                            </h4>
+                                            <div class="card_type">
+                                                <span>En:</span>
+                                                <div class="card_name">
+                                                    <span></span>
+                                                    <select id="tarjeta_<?php echo $index; ?>" class="change_card" data-pre="<?php echo $producto->getCategoryCode(); ?>">
+                                                        <?php foreach ($usuarioTarjetas as $codigo => $nombre) : ?>
+                                                        <?php $select = ($codigo == $producto->getCategoryCode()) ? 'selected="selected"' : ''; ?>
+                                                        <option value="<?php echo $codigo; ?>" <?php echo $select; ?>><?php echo $nombre; ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                </div>
+                                                <select id="cantidad_<?php echo $index; ?>" class="cant change_cant"> 
+                                                    <?php foreach ($cattidades as $key => $value) : ?>
+                                                    <?php $select = ($key == $producto->getQuantity()) ? 'selected="selected"' : ''; ?>
+                                                    <option value="<?php echo $key; ?>" <?php echo $select; ?>><?php echo $value; ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                                <input id="id_<?php echo $index; ?>" type="hidden" value="<?php echo $producto->getProductId(); ?>">
+                                            </div>
+                                            <div class="detail">
+                                                <div class="line">
+                                                    <div class="left">Coney Bonus</div>
+                                                    <div class="right">S/. 30</div>
+                                                </div>
+                                                <div class="line">
+                                                    <div class="left">Coney Bonus Plus</div>
+                                                    <div class="right">S/. 15</div>
+                                                </div>
+                                                <div class="line">
+                                                    <div class="left">Tickets</div>
+                                                    <div class="right">12</div>
+                                                </div>
+                                            </div>
+                                            <div class="link_show">
+                                                <div class="watch_detail">Ver detalle</div>
+                                                <div class="hidden_detail">Ocultar detalle</div>
+                                            </div>
+                                            <?php $partMonto = explode('.', $producto->getAmount(true)); ?>
+                                            <div class="total">S/. <span><?php echo $partMonto[0]; ?></span>.<?php echo $partMonto[1]; ?> </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="right">
+                        <h4>Pago total</h4>
+                        <div align="center" class="total_box">
+                            <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
+                            <?php $partMontoTotal = explode('.', $montoTotal); ?>
+                            <h3>
+                                <span class="medium">S/. </span>
+                                <span class="large"><?php echo $partMontoTotal[0]; ?></span>
+                                <span class="medium">.<?php echo $partMontoTotal[1]; ?></span>
+                            </h3>
+                            <button class="btn btn_orange" onclick="location.href='<?php echo BASE_URL; ?>carrito/pagos'">Pagar</button>
+                            <a href="<?php echo BASE_URL; ?>recargas" class="link_orange">Seguir comprando  </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

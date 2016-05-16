@@ -38,8 +38,18 @@ class CartService
         return null;
     }
     
-    public function addCart($groupProduct, Product $product)
+    public function addCart($groupProduct, $product, $adding = false)
     {
+        $productModel = new Product($this->_config);
+        $productModel->setProductId($product['product_id']);
+        $productModel->setProductName($product['product_name']);
+        $productModel->setProductName2($product['product_name2']);
+        $productModel->setProductImage($product['imagen']);
+        $productModel->setQuantity($product['quantity']);
+        $productModel->setPrice($product['price']);
+        $productModel->setCategoryCode($product['category_code']);
+        $productModel->setCategoryName($product['category_nombre']);
+        
         $keyCart = $this->getCodeCart();
         $cache = $this->getCacheCartService();
         $cartModel = $cache->getItem($keyCart);
@@ -49,7 +59,7 @@ class CartService
         }
         
         $cartModel->setGroupProduct($groupProduct);
-        $cartModel->setProducts($product);
+        $cartModel->setProducts($productModel, $adding);
         
         $cache->setItem($keyCart, $cartModel);
         $cartModel2 = $cache->getItem($keyCart);
@@ -70,13 +80,24 @@ class CartService
             if ($cartModel instanceof Cart) {
                 $cartModel->setGroupProduct($groupProduct);
                 $cartModel->removeProducts($productId);
-                $cache->setItem($keyCart, $cartModel);
+                
+                $cantidad = $cartModel->getQuantityCart();
+                if ($cantidad > 0) {
+                    $cache->setItem($keyCart, $cartModel);
+                } else {
+                    $cache->removeItem($keyCart);
+                    $this->removeCodeCart();
+                }
+                
+                return true;
             }
         } else {
             $cache = $this->getCacheCartService();
             $cache->removeItem($keyCart);
             $this->removeCodeCart();
+            return true;
         }
+        return false;
     }
     
     public function getCodeCart()

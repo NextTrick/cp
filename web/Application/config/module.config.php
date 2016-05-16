@@ -176,13 +176,13 @@ return array(
                     ),
                 ),
             ),
-            'web-cart' => array(
+            'web-carrito' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/cart[/:action]',
+                    'route'    => '/carrito[/:action]',
                     'defaults' => array(
-                        'controller' => 'Application\Controller\Cart',
-                        'action'     => 'modificar',
+                        'controller' => 'Application\Controller\Carrito',
+                        'action'     => 'index',
                     ),
                 ),
             ),

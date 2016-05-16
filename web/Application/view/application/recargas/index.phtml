@@ -14,9 +14,13 @@
                     <div class="step active">1</div>
                     <div class="step">2</div>
                 </div>
-                <div class="cart_box"><span class="label">Items en el carrito:</span>
-                    <div class="cart"><span class="icon"></span><span class="number">0</span></div>
-                </div>
+                <a href="<?php echo BASE_URL ?>carrito" class="cart_box">
+                    <span class="label">Items en el carrito:</span>
+                    <div class="cart">
+                        <span class="icon"></span>
+                        <span class="number"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+                    </div>
+                </a>
                 <div class="recargas_content">
                     <?php echo $this->sectionRecargaPromociones();  ?>
                     <?php echo $this->sectionRecargaRecargas();  ?>
@@ -35,13 +39,17 @@
         {
             location.href= baseUrl+'recargas/'+codigo;
         },
+        confirmarCompra:function()
+        {
+            location.href= baseUrl+'carrito/pagos';
+        },
         sendCart:function(prefix)
         {
             var result = false;
             cart.bloquear = 1;
             $.ajax({
                 type: "POST",
-                url: '<?php echo BASE_URL; ?>cart/modificar',
+                url: '<?php echo BASE_URL; ?>carrito/modificar',
                 data:{id:$('#id_'+prefix).val(), cantidad:$('#cantidad_'+prefix).val(), tarjeta:$('#tarjeta').val()},
                 dataType: 'json',
                 async:false,
@@ -92,6 +100,9 @@
             });
             $('#tarjeta').change(function(){
                cart.seleccionarTarjeta($(this).val());
+            });
+            $('#confirmarCompra').click(function(){
+               cart.confirmarCompra();
             });
         }
     };
