@@ -62,6 +62,7 @@ abstract class Service
 
             //var_dump($data); echo '<br><br>';
             $info = $this->client->$service($data);
+            var_dump($info); exit;
             return $info;
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
