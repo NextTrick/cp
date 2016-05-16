@@ -34,9 +34,11 @@ class IndexController extends AbstractActionController
     }
     
     public function testPeAction()
-    {        
+    {
+
+        $id = 100 + rand(1,100);
         $data = array(
-            'id' => 112,
+            'id' => $id,
             'perfilpago_nombres' => 'Angel',
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
