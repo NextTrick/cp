@@ -81,6 +81,7 @@ class CarritoController extends SecurityWebController
                         'subtotal' => $cartModel->getAmountGroup(true),
                         'total' => $cartModel->getAmountCart(true),
                         'cantidad' => $cartModel->getQuantityGroup(),
+                        'cantidadTotal' => $cartModel->getQuantityCart(),
                     );
                     
                     $result = array(

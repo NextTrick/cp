@@ -9,6 +9,5 @@ return array(
         'sectionGrillaRecargas' => 'Application\View\Helper\SectionGrillaRecargas',
         'sectionRecargaPromociones' => 'Application\View\Helper\SectionRecargaPromociones',
         'sectionRecargaRecargas' => 'Application\View\Helper\SectionRecargaRecargas',
-        'sectionCart' => 'Application\View\Helper\SectionCart',
     )
 );
