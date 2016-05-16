@@ -36,7 +36,7 @@ class IndexController extends AbstractActionController
     public function testPeAction()
     {        
         $data = array(
-            'id' => 1,
+            'id' => 111,
             'perfilpago_nombres' => 'Angel',
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
