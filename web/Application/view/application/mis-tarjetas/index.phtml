@@ -12,7 +12,7 @@
                 <p class="yellow_text small_text">Mis tarjetas asociadas</p>
                 <div class="cards_content">
                     <?php foreach ($gridList as $key => $row) : ?>
-                        <?php if ($row['show'] == 1) : ?>
+                        <?php if ($row['show'] == 'lleno') : ?>
                             <div class="col_3 my_card">
                                 <div class="top_card"><span class="cp_logo"></span>
                                     <div class="card_title">
@@ -46,13 +46,15 @@
                                     </div>
                                 </div>
                                 <div class="bottom_card">
-                                    <div class="price">S/. 30.00</div><a href="javascript:;" class="watch_more">Ver más</a><a href="" class="recharge">Recargar</a>
+                                    <div class="price">S/. 30.00</div>
+                                    <a href="javascript:;" class="watch_more">Ver más</a>
+                                    <a href="<?php echo BASE_URL ?>recargas/<?php echo $row['codigo']; ?>" class="recharge">Recargar</a>
                                 </div>
                                 <div class="duplicate_box"><span class="icon"></span>
                                   <p>El nombre <strong>"Ahijado-tarjeta" </strong>ya se encuentra en tu lista de tarjetas</p><a href="">Aceptar</a>
                                 </div>
                             </div>
-                        <?php elseif ($row['show'] == 2) : ?>
+                        <?php elseif ($row['show'] == 'por_llenar') : ?>
                             <div class="col_3 add_card">
                                 <div class="show_tooltip">
                                     <div class="tooltip"><strong>Para iniciar una recarga</strong>, es importante que asocies una tarjeta. Con ella podrás recargar todas las promociones y |recargas que desees. ¡Puedes tener hasta 6 tarjetas!</div>

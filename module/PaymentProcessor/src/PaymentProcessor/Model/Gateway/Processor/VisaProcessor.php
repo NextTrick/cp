@@ -103,7 +103,7 @@ class VisaProcessor extends AbstractProcessor
                     }
 
                     $eticket = $eTicket;
-                    $errorMessages = OrdenRepository::getErrorMessages()                   
+                    $errorMessages = OrdenRepository::getErrorMessages();                   
                                                                  
                     if ($tempDat['respuesta'] == 1) {
                         $status = OrdenRepository::PAGO_ESTADO_PAGADO;
@@ -120,7 +120,7 @@ class VisaProcessor extends AbstractProcessor
                             'reference' => $eticket, 
                             'confirmationDate' => $tempData['fechayhora_tx'],
                             'errorCode' => $tempData['cod_accion'],
-                            'errorDescription' => errorMessages[$tempData['cod_accion']],
+                            'errorDescription' => $errorMessages[$tempData['cod_accion']],
                         );                                            
                     }
 

@@ -86,6 +86,19 @@ class PaqueteService
         return array('destacado' => $arrayDestacado, 'normal' => $arrayNormal);
     }
     
+    public function recargaPromociones()
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('activo', 1);
+        $where->equalTo('tipo', self::TIPO_PROMOCION);
+        $criteria = array(
+            'where' => $where,
+            'order' => array('orden ASC'),
+        );
+        $rows = $this->_repository->findAll($criteria);
+        return \Common\Helpers\Util::formatoRecargas($rows);
+    }
+    
     public function grillaRecargas($cantidad)
     {
         $where = new \Zend\Db\Sql\Where();
@@ -97,6 +110,20 @@ class PaqueteService
             'order' => array('orden ASC'),
         );
         return $this->_repository->findAll($criteria);
+    }
+    
+    public function recargaRecargas()
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('activo', 1);
+        $where->equalTo('tipo', self::TIPO_RECARGA);
+        $criteria = array(
+            'where' => $where,
+            'order' => array('orden ASC'),
+        );
+        
+        $rows = $this->_repository->findAll($criteria);
+        return \Common\Helpers\Util::formatoRecargas($rows);
     }
 
     public function getRepository()

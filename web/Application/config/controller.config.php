@@ -12,6 +12,7 @@ return array(
         'Application\Controller\MisTarjetas' => 'Application\Controller\MisTarjetasController',
         'Application\Controller\Recargas' => 'Application\Controller\RecargasController',
         'Application\Controller\Beneficios' => 'Application\Controller\BeneficiosController',
+        'Application\Controller\Carrito' => 'Application\Controller\CarritoController',
         
         'Application\Controller\Test' => 'Application\Controller\TestController',
     ),

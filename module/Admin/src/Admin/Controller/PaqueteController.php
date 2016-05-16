@@ -83,15 +83,16 @@ class PaqueteController extends SecurityAdminController
 
     public function editarAction()
     {
-        $id = $this->params('id', null);
+        $id      = $this->params('id', null);
         $request = $this->getRequest();
-        $form = $this->crearCrudForm(AC_EDITAR, $id);
+        $form    = $this->crearCrudForm(AC_EDITAR, $id);
 
         $criteria = array(
             'where' => array(
                 'id' => $id
             ),
         );
+
         $row = $this->_getPaqueteService()->getRepository()->findOne($criteria);
         if (empty($row)) {
             throw new \Exception(NO_DATA);
@@ -154,23 +155,30 @@ class PaqueteController extends SecurityAdminController
         }
 
         $config = $this->getServiceLocator()->get('config');
-        $form->setInputFilter(new \Paquete\Filter\PaqueteFilter(array(
+        $form->setInputFilter(new \Admin\Filter\PaqueteFilter(array(
             'uploadDir' => $config['fileDir']['paquete_paquete']['up'],
         )));
         $form->setData($data);
 
         if ($form->isValid()) {
-            $data = $form->getData();
+
             try {
+                $data = $form->getData();
+
+                if (!empty($data['tipo']) && $data['tipo'] == \Admin\Model\Service\PaqueteService::TIPO_RECARGA) {
+                    $data['destacado'] = 0;
+                }
+
                 $paramsIn = array(
-                    'titulo1'   => $data['titulo1'],
-                    'titulo2'   => $data['titulo2'],
-                    'legal'     => $data['legal'],
-                    'activo'    => $data['activo'],
-                    'destacado' => $data['destacado'],
-                    'orden'     => $data['orden'],
-                    'tipo'      => $data['tipo'],
-                    'imagen'    => $newFileName,
+                    'titulo1'       => $data['titulo1'],
+                    'titulo2'       => $data['titulo2'],
+                    'legal'         => $data['legal'],
+                    'activo'        => $data['activo'],
+                    'destacado'     => $data['destacado'],
+                    'orden'         => $data['orden'],
+                    'tipo'          => $data['tipo'],
+                    'imagen'        => $newFileName,
+                    'fecha_edicion' => date('Y-m-d H:i:s')
                 );
 
                 if ($action == AC_CREAR) {
@@ -191,6 +199,7 @@ class PaqueteController extends SecurityAdminController
                 }
 
                 $this->_getPaqueteService()->updateOrdenPaquete($paramsIn['tipo'], $paramsIn['orden'], $id);
+                $this->_getPaqueteService()->updateDestacados($id, $paramsIn['destacado'], $paramsIn['tipo']);
                 
                 $this->flashMessenger()->addMessage(array(
                     'success' => ($action == AC_CREAR) ? OK_CREAR : OK_EDITAR,

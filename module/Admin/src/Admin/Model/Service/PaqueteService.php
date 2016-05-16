@@ -190,7 +190,7 @@ class PaqueteService
         $cont           = 1;
         $countUpdate    = 0;
         $band           = false;
-        $cantTipoMax    = (self::TIPO_PROMOCION == $tipo)? self::CANT_ACTIVO_TIPO_PROMOCION: self::CANT_ACTIVO_TIPO_RECARGA;
+        $cantTipoMax    = (self::TIPO_PROMOCION == $tipo)? CANT_ACTIVO_TIPO_PROMOCION: CANT_ACTIVO_TIPO_RECARGA;
         $ordenTemp      = null;
         
         foreach ($paquetes as $key => $reg) {
@@ -269,6 +269,48 @@ class PaqueteService
         }
 
         return $result;
+    }
+
+    public function updateDestacados($idPaquete, $destacado, $tipo)
+    {
+        if (empty($destacado) || (!empty($tipo) && $tipo == self::TIPO_RECARGA)) {
+            return null;
+        }
+        
+        $paquetesDestacados = $this->_repository->getDestacados();
+        $bandBaja           = null;
+        $bandAlta           = null;
+
+        $count = 0;
+        foreach ($paquetesDestacados as $key => $reg) {
+            if ($count == LIMIT_DESTACADOS) {
+                break;
+            }
+
+            $destacadoValidos[] = $reg['id'];
+            $count ++;
+        }
+
+        $idPaqueteBaja= array_shift($destacadoValidos);
+        if (!empty($destacadoBaja)) {
+            $temp['destacado'] = 0;
+            $bandBaja = $this->_repository->save($temp, $idPaqueteBaja);
+        }
+
+        if (!empty($idPaquete)) {
+            $temp['destacado'] = 1;
+            $bandAlta = $this->_repository->save($temp, $idPaquete);
+        }
+
+        $destacadoValidos[] = $idPaquete;
+
+        $cantPaquetesBaja = $this->_repository->darBajaDestacados($destacadoValidos);
+        
+        return array(
+            'IdBaja'           => !empty($bandBaja)? $destacadoBaja['id']: 0,
+            'IdAlta'           => !empty($bandAlta)? $idPaquete: 0,
+            'cantPaquetesBaja' => $cantPaquetesBaja,
+        );
     }
 
 

@@ -18,6 +18,7 @@ define('AC_EDITAR', 'editar');
 
 define('NO_DATA', 'No existe data');
 define('ERROR_303', 'No tiene acceso.');
+define('ERROR_VALIDACION', 'Error de validación.');
 
 define('LIMIT_BUSCAR', 100);
 define('GRID_PROMOCIONES_LOGIN', 3);
@@ -25,6 +26,11 @@ define('GRID_PROMOCIONES_BENEFICIOS', 4);
 define('GRID_PROMOCIONES_RECARGAS', 3);
 define('GRID_RECARGAS_RECARGAS', 3);
 define('LIMIT_USUARIO_TARJETAS', 5);
+
+define('LIMIT_DESTACADOS', 2);
+define('CANT_ACTIVO_TIPO_PROMOCION', 100);
+define('CANT_ACTIVO_TIPO_RECARGA', 100);
+
 define('VERSION', 1000);
 
 define('TEST_MOCK', 1);
