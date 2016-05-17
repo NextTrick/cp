@@ -38,7 +38,8 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 'status' => (string) $paymentResponse->Estado,
                 'token' => (string) $paymentResponse->Token,
                 'cip' => (string) $paymentResponse->CIP->NumeroOrdenPago,
-                'reference' => (string) $paymentResponse->CodTrans,
+                'reference' => (string) $paymentResponse->CIP->IdOrdenPago,
+                'clientReference' => (string) $paymentResponse->CodTrans,
             );
         } catch (\Exception $e) {
             $return['success'] = false;
