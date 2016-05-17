@@ -50,7 +50,7 @@ class IndexController extends AbstractActionController
             'comprobante_numero' => '11872911', // NRO COMPROBANTE
             'usuario_email' => 'ing.angeljara@gmail.com',  // CORREO DE USUARIO LOGUEADO
             'usuario_id' => 1, // ID DE USUARIO LOGUEADO
-            'monto' => 20.00 // MONTO EN CON 2 DECIMALES
+            'monto' => '20.00' // MONTO EN CON 2 DECIMALES
         );
                         
         try {
