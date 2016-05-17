@@ -16,6 +16,7 @@ class VisaProcessor extends AbstractProcessor
         
         $config = $this->getServiceLocator()->get('config');
         $wsConfig = $config['app']['paymentProcessor']['visa'];
+        $this->wsConfig = $wsConfig;
         
         $environment = $config['app']['environment'];
         
@@ -58,6 +59,14 @@ class VisaProcessor extends AbstractProcessor
             $return['error']['message'] = $e->getMessage();
             $return['error']['detail'] = $e->getTraceAsString();
         }
+
+        $requestHistorialData = array(
+            'ordenId' => $data['id'],
+            'method' => self::METHOD_CREATECHARGE,
+            'reference' => !empty($return['data']['reference']) ? $return['data']['reference'] : null,
+        );
+
+        $this->saveResquestHistorial($requestHistorialData);
                 
         return $return;
     }
@@ -138,6 +147,13 @@ class VisaProcessor extends AbstractProcessor
             $return['error']['message'] = $e->getMessage();
             $return['error']['detail'] = $e->getTraceAsString();
         }
+
+        $requestHistorialData = array(
+            'method' => self::METHOD_PROCESSCALLBACK,
+            'reference' => !empty($return['data']['reference']) ? $return['data']['reference'] : null,
+        );
+
+        $this->saveResquestHistorial($requestHistorialData);
                 
         return $return;
     }        

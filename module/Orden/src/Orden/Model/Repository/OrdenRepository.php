@@ -86,6 +86,19 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         }
     }
 
+    public function getIdByPagoReference($pagoReferencia)
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('pago_referencia', $pagoReferencia);
+
+        $criteria = array(
+            'where'   => $where,
+            'columns' => array('id')
+        );
+
+        return $this->findOne($criteria);
+    }
+
     public static function getErrorMessages()
     {
        return array(

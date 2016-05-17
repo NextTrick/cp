@@ -43,6 +43,9 @@ class IndexController extends AbstractActionController
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
             'perfilpago_nombres' => 'NextTrick',
+            'perfilpago_pais' => 'PERU',
+            'perfilpago_departamento' => 'LIMA',
+            'perfilpago_distrito' => 'LIMA',
             'comprobante_tipo' => 'DNI',
             'comprobante_numero' => '11872911',
             'usuario_email' => 'ing.angeljara@gmail.com',
@@ -72,10 +75,14 @@ class IndexController extends AbstractActionController
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
             'perfilpago_nombres' => 'NextTrick',
+            'perfilpago_pais' => 'PERU',
+            'perfilpago_departamento' => 'LIMA',
+            'perfilpago_distrito' => 'LIMA',
             'perfilpago_direccion' => 'Av. Carcamo',
             'comprobante_tipo' => 'DNI',
             'comprobante_numero' => '11872911',
             'usuario_email' => 'ing.angeljara@gmail.com',
+            'usuario_id' => 1,
             'monto' => '1000.10'
         );
         

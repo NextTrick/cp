@@ -173,7 +173,10 @@ return array(
                 'publickey' => 'SPE_PublicKey.1pz', //PE's public key
                 'privatekey' => 'ACI_PrivateKey.1pz', // PE's secret key                
                 'medioPago' => '1,2',
-                'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key           
+                'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key
+
+                'conceptoPago' => 'Recarga de Tarjeta ConeyPark',
+                'cipExpiracionDias' => 3
             ),
             'visa' => array(                
                 'baseUrl' => 'http://qas.multimerchantvisanet.com/',
