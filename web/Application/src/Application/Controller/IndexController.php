@@ -36,7 +36,7 @@ class IndexController extends AbstractActionController
     public function testPeAction()
     {
 
-        $id = 100 + rand(1,100);
+        $id = 100 + rand(1,1000);
         $data = array(
             'id' => $id,
             'perfilpago_nombres' => 'Angel',
@@ -66,9 +66,10 @@ class IndexController extends AbstractActionController
     }
     
     public function testVisaAction()
-    {                                
+    {
+        $id = 100 + rand(1,1000);
         $data = array(
-            'id' => 10,
+            'id' => $id,
             'perfilpago_nombres' => 'Angel',
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
