@@ -23,7 +23,7 @@ class CarritoController extends SecurityWebController
 
         $cattidades = array(1 => '01', 2 => '02', 3 => '03', 4 => '04', 5 => '05');
 
-        $usuarioTarjetas = $this->_getTarjetaService()->getTarjetas($usuario->id);
+        $usuarioTarjetas = $this->_getTarjetaService()->getDdlTarjetas($usuario->id);
         
         $view = new ViewModel();
         $view->setVariable('cartModel', $cartModel);

@@ -119,7 +119,6 @@ class UsuarioService
                     'nombre' => $data['nombre'],
                     'cguid' => $card['cguid'],
                     'fecha_creacion' => date('Y-m-d H:i:s'),
-                    'estado_truefi' => $card['status'],
                 ));
                 if (!empty($save)) {
                     $result['success'] = true;

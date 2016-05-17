@@ -30,7 +30,9 @@ class TarjetaService
         );
         $rows = $this->_repository->findAll($criteria);
         foreach ($rows as $key => $row) {
-            $row[$key] = $this->getOnlineTarjeta($row['cguid']);
+            $mRow = $this->getOnlineTarjeta($row['cguid']);
+            $row = array_merge($row, $mRow);
+            $rows[$key] = $row;
         }
         $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
         
@@ -39,15 +41,38 @@ class TarjetaService
     
     public function getOnlineTarjeta($cguid)
     {
-        $result = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
-        if ($result['success']) {
-            return $result['result'];
+        $result = array(
+            'emoney' => 'S/. 0.00',
+            'emoneyvalue' => 0,
+            'bonus' => 'S/. 0.00',
+            'bonusvalue' => 0,
+            'bonusplus' => 'S/. 0.00',
+            'bonusplusvalue' => 0,
+            'gamepoints' => 0,
+            'gamepointsvalue' => 0,
+            'etickets' => 0,
+        );
+        $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
+        if ($data['success']) {
+            $data = $data['result'];
+            if (!empty($data)) {
+                $result = array(
+                    'emoney' => $data['emoney'],
+                    'emoneyvalue' => $data['emoneyvalue'],
+                    'bonus' => $data['bonus'],
+                    'bonusvalue' => $data['bonusvalue'],
+                    'bonusplus' => $data['promotionbonus'], //se esta modificando el indice por el nombre correcto
+                    'bonusplusvalue' => $data['bonusplusvalue'],
+                    'gamepoints' => $data['gamepoints'],
+                    'gamepointsvalue' => $data['gamepointsvalue'],
+                    'etickets' => $data['etickets'],
+                );
+            }
         }
-        return array();
+        return $result;
     }
 
-
-    public function getTarjetas($usuarioId)
+    public function getDdlTarjetas($usuarioId)
     {
         $criteria = array(
             'where' => array(
