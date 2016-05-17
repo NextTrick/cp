@@ -191,6 +191,7 @@ class Visa
     
     protected function getRetrieveEticketRequestData($data)
     {
+        var_dump($data); exit;
         $retrieveEticketRequestData = array(
             'commerceCode' => $this->config['codigoComercio'],
             'eTicket' => $data['reference']
