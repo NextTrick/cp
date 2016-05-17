@@ -121,7 +121,7 @@ class Visa
     {
         $strReturn = "";
 
-        $xpath = new DOMXPath($xmlDoc);
+        $xpath = new \DOMXPath($xmlDoc);
         $nodeList = $xpath->query("//registro/campo[@id='ETICKET']");
 
         $XmlNode= $nodeList->item(0);
