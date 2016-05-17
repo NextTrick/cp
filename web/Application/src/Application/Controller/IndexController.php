@@ -83,7 +83,7 @@ class IndexController extends AbstractActionController
             'comprobante_numero' => '11872911',
             'usuario_email' => 'ing.angeljara@gmail.com',
             'usuario_id' => 1,
-            'monto' => 1000.10
+            'monto' => '100.10'
         );
         
         try {            
