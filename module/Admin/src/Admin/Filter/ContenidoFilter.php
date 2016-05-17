@@ -78,8 +78,8 @@ class ContenidoFilter extends Zf2InputFilter
         ));
 
         $this->add(array(
-            'name' => 'url',
-            'required' => true
+            'name'     => 'url',
+            'required' => false
         ));
 
         $this->add(array(

@@ -57,6 +57,15 @@ class PaqueteBuscarForm extends Form
         $cmbActivo->setDisableInArrayValidator(true);
         $this->add($cmbActivo);
 
+        $filtroTipo = $this->getPaqueteService()->getTipos();
+        $cmbTipo    = new Element\Select('cmbTipo');
+        $cmbTipo->setAttributes(array('id' => 'cmbTipo'));
+        $cmbTipo->setValueOptions($filtroTipo);
+        $cmbTipo->setEmptyOption('- Seleccione -');
+        $cmbTipo->setDisableInArrayValidator(true);
+        $this->add($cmbTipo);
+
+
         $filtroDestacado = $this->getPaqueteService()->getDestacado();
         $cmbDestacado    = new Element\Select('cmbDestacado');
         $cmbDestacado->setAttributes(array('id' => 'cmbDestacado'));

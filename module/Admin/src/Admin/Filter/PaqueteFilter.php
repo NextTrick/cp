@@ -66,10 +66,8 @@ class PaqueteFilter extends Zf2InputFilter
         $image->setRequired(false);
         $image->getValidatorChain()
             ->attachByName('filesize', array('max' => '4MB', 'min' => '10KB'))
-            ->attachByName('fileextension',  array(
-                'jpg', 'jpeg', 'png', 'gif'
-            ))
-            ->attachByName('fileimagesize', array('maxWidth' => 500, 'maxHeight' => 500));
+            ->attachByName('fileextension',  array('jpg', 'jpeg', 'png', 'gif'))
+            ->attachByName('fileimagesize', array('maxWidth' => 600, 'maxHeight' => 700));
         
         $image->getFilterChain()->attachByName(
             'filerenameupload',

@@ -42,7 +42,7 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['etickets'] ?></td>
                         <td><?php echo $row['orden'] ?></td>
                         <td><?php echo $row['gamepoints'] ?></td>
-                        <td><?php echo $row['fecha_edicion'] ?></td>
+                        <td style="white-space:nowrap;"><?php echo $row['fecha_edicion'] ?></td>
                         <td><?php echo \Admin\Model\Service\PaqueteService::getNombreEstado($row['activo']); ?></td>
                         <td><?php echo \Admin\Model\Service\PaqueteService::getNombreDestacado($row['destacado']); ?></td>
                         <td><?php echo \Admin\Model\Service\PaqueteService::getNombreTipo($row['tipo']); ?></td>
@@ -83,6 +83,11 @@ $this->layout()->breadcrumb = array(
         $("#cmbDestacado").on('change', function() {
             $("#formBuscar").submit();
         });
+
+        $("#cmbTipo").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
     });
 </script>
 
