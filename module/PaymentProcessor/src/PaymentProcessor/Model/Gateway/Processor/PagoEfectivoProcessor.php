@@ -61,7 +61,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
             'success' => true,            
         );
 
-        $cDate - date('Y-m-d H:i:s');
+        $cDate = date('Y-m-d H:i:s');
         
         if (!empty($params['data']) && !empty($params['version']) 
             && $params['version'] == 2) {
@@ -72,7 +72,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 //desencriptar la data y darle formato
                 $solData = simplexml_load_string($this->ws->desencriptarData($data));
 
-                $return['data']['reference'] = $solData->CodTrans;
+                $return['data']['clientReference'] = $solData->CodTrans;
                 //Según el estado de la solicitud  Procesar	
                 Switch ($solData->Estado) {
                     case 592:                        
@@ -97,6 +97,8 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 $return['error']['message'] = $e->getMessage();
                 $return['error']['detail'] = $e->getTraceAsString();
             }
+        } else {
+            $return['success'] = false;
         }
         
         return $return;

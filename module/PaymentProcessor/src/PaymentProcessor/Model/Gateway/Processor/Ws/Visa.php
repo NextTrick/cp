@@ -167,6 +167,8 @@ class Visa
         $requestData = $this->getRetrieveEticketRequestData($data); 
         
         $response = $this->client->ConsultaEticket($requestData);
+
+        return $response;
     }
     
     protected function getCreateEticketRequestData($data)
