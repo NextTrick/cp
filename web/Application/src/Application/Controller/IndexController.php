@@ -59,8 +59,8 @@ class IndexController extends AbstractActionController
 
             $response = $paymentProcessor->createCharge($data);
 
-            return $this->redirect()->toUrl($response['data']['redirect']); exit;
             //var_dump($response);
+            return $this->redirect()->toUrl($response['data']['redirect']); exit;
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
@@ -93,10 +93,9 @@ class IndexController extends AbstractActionController
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
                     
             $response = $paymentProcessor->createCharge($data);
-            var_dump($response);
 
+            //var_dump($response);
             echo $response['data']['html']; exit;
-        
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
