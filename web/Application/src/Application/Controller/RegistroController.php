@@ -92,6 +92,10 @@ class RegistroController extends AbstractActionController
                     if ($saveData['success']) {
                         $mensajeRegistro = '<h3>¡Felicidades!, estás a punto de ser parte de Coney Club</h3>'
                             . '<p>Te hemos enviado un correo con las instrucciones para activar tu cuenta.</p>';
+                    } elseif ($saveData['code'] == 'EXISTE_EMAIL') {
+                        $openPopapConfRegistro = 0;
+                        $mensajeRegistro = null;
+                        $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
                     }
                 }
             }
@@ -107,6 +111,10 @@ class RegistroController extends AbstractActionController
     
     private function _saveData($data)
     {
+        $result = array(
+            'success' => false,
+            'code' => 'ERROR_PROCESO',
+        );
         $dataTrueFi = array(
             'FirstName' => $data['nombres'],
             'LastName' => $data['paterno'] . ' ' . $data['materno'],
@@ -123,7 +131,7 @@ class RegistroController extends AbstractActionController
                 'email' => $data['email'],
                 'password' => \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']),
                 'mguid' => $resultTrueFi['mguid'],
-                'codigo_activar' => \Common\Helpers\Util::generateToken($resultTrueFi['mguid']),
+                //'codigo_activar' => \Common\Helpers\Util::generateToken($resultTrueFi['mguid']),
                 'nombres' => $data['nombres'],
                 'paterno' => $data['paterno'],
                 'materno' => $data['materno'],
@@ -152,29 +160,17 @@ class RegistroController extends AbstractActionController
             
             $save = $repository->save($dataIn);
             if ($save) {
-                $serviceLocator = $this->getServiceLocator();
-                $email = new \Usuario\Model\Email\ActivarCuenta($serviceLocator);
-                $dataSend = array(
-                    'email' => $dataIn['email'],
-                    'codigo_activar' => $codigoRecuperar,
-                    'nombres_completo' => $dataIn['nombres']
-                        . ' ' . $dataIn['paterno']
-                        . ' ' . $dataIn['materno']
-                );
-                $email->sendMail($dataSend);
-                
                 $result['success'] = true;
-                $result['message'] = null;
+                $result['code'] = null;
                 
                 unset($data);
                 unset($dataIn);
-                unset($dataSend);
                 unset($dataTrueFi);
             } else {
-                $result['message'] = 'No se pudo completar el proceso';
+                $result['code'] = 'ERROR_PROCESO';
             }
         } else {
-            $result['message'] = 'No se pudo completar el proceso';
+            $result['message'] = 'EXISTE_EMAIL';
         }
         
         $this->_removeDataRegistroTemp();
@@ -231,60 +227,17 @@ class RegistroController extends AbstractActionController
                 return $response->setContent($jsonModel->serialize());
             }
             
-            $criteria = array('where' => array('email' => $email));
-            $existe = $this->_getUsuarioService()->getRepository()->findExists($criteria);
-            
-            $usuarioTrueFi = array();
-            if ($existe === false) {
-                $dataTrueFi = array(
-                    'EMail' => $email,
-                );
-                $usuarioTrueFi = $this->_getUsuarioService()->usuarioEnTrueFi($dataTrueFi);
-                $existe = empty($usuarioTrueFi) ? false : true;
-            }
-            
-            $noExistsEmail = 'El correo ingresado no esta registrado.';
-            if ($existe === false) {
-                $result['message'] = $noExistsEmail;
+            $dataTrueFi = array('EMail' => $email);
+            $usuarioTrueFi = $this->_getUsuarioService()->usuarioEnTrueFi($dataTrueFi);
+            if ($usuarioTrueFi['success']) {
+                $result['success'] = true;
+                $result['message'] = null;
                 $jsonModel->setVariables($result);
                 return $response->setContent($jsonModel->serialize());
             } else {
-                if (!empty($usuarioTrueFi)) {
-                    //registrar usuario en el sistema con datos devueltos de TrueFi
-                }
-
-                $criteria = array('where' => array('email' => $email));
-                $usuario = $this->_getUsuarioService()->getRepository()->findOne($criteria);
-                if (!empty($usuario)) {
-                    //generar y guardar codigo de verificación
-                    $codigoRecuperar = \Common\Helpers\Util::generateToken($usuario['mguid']);
-                    $this->_getUsuarioService()->getRepository()->save(array(
-                        'codigo_activar' => $codigoRecuperar
-                    ), $usuario['id']);
-                    
-                    $serviceLocator = $this->getServiceLocator();
-                    $modelEmail = new \Usuario\Model\Email\RecuperarPassword($serviceLocator);
-                    $dataSend = array(
-                        'nombres_completo' => $usuario['nombres'] . ' ' . $usuario['paterno'] . ' ' . $usuario['materno'],
-                        'email' => $email,
-                        'codigo_activar' => $codigoRecuperar,
-                    );
-                    $ok = $modelEmail->sendMail($dataSend);
-                    if ($ok) {
-                        $result['success'] = true;
-                        $result['message'] = null;
-                        $jsonModel->setVariables($result);
-                        return $response->setContent($jsonModel->serialize());
-                    } else {
-                        $result['message'] = 'Error al eviar correo electrónico.';
-                        $jsonModel->setVariables($result);
-                        return $response->setContent($jsonModel->serialize());
-                    }
-                } else {
-                    $result['message'] = $noExistsEmail;
-                    $jsonModel->setVariables($result);
-                    return $response->setContent($jsonModel->serialize());
-                }
+                $result['message'] = 'Error al eviar correo electrónico.';
+                $jsonModel->setVariables($result);
+                return $response->setContent($jsonModel->serialize());
             }
         }
         
@@ -293,7 +246,7 @@ class RegistroController extends AbstractActionController
         return $response->setContent($jsonModel->serialize());
     }
     
-    public function modificarPasswordAction()
+    /*public function modificarPasswordAction()
     {
         $codigo = $this->params('codigo', null);        
         if ($this->request->isPost()) {
@@ -366,7 +319,7 @@ class RegistroController extends AbstractActionController
         $view->setVariable('openPopapChangePassword', 1);
         $view->setVariable('codigoRecuperacion', $codigo);
         return $view;
-    }
+    }*/
 
     private function _getDataRegistroTemp($campo)
     {
@@ -389,10 +342,10 @@ class RegistroController extends AbstractActionController
         return $this->getServiceLocator()->get('Application\Form\RegistroForm');
     }
     
-    private function _getLoginForm()
+    /*private function _getLoginForm()
     {
         return $this->getServiceLocator()->get('Application\Form\LoginForm');
-    }
+    }*/
     
     private function _getUsuarioService()
     {

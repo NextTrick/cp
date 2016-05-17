@@ -49,7 +49,7 @@ class UsuarioService
     
     public function usuarioEnTrueFi($data)
     {
-        return array();
+        return $this->_getTrueFiUsuarioService()->recoverPassword($data);
     }
 
     private function _testAsociarTarjeta($data)

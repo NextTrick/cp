@@ -87,7 +87,7 @@ return array(
                     ),
                 ),
             ),
-            'web-recuperar-password' => array(
+            /*'web-recuperar-password' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/recuperar-password[/]',
@@ -96,7 +96,7 @@ return array(
                         'action'     => 'recuperar-password',
                     ),
                 ),
-            ),
+            ),*/
             'web-modificar-password' => array(
                 'type' => 'Segment',
                 'options' => array(
