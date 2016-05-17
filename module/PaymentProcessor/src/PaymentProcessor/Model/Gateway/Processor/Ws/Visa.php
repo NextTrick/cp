@@ -176,7 +176,7 @@ class Visa
         $createEticketRequestData = array(
             'commerceCode' => $this->config['codigoComercio'],
             'id' => $data['id'],
-            'amount' => (string) $data['monto'],
+            'amount' => $data['monto'],
             'profileName' => $data['perfilpago_nombres'],
             'profileLastName' => $data['perfilpago_paterno'] . ' ' . $data['perfilpago_materno'],
             'city' => 'LIMA',
