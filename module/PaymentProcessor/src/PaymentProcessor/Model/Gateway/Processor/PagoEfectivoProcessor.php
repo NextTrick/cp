@@ -130,7 +130,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
         $options = $this->ws->getOptions();
         $expirationDays = $this->wsConfig['cipExpiracionDias'];
 
-        $cDate = date('d/m/Y H:i:s');
+        $cDate = date('Y-m-d H:i:s');
         $expirationDate = date('d/m/Y H:i:s', strtotime($cDate. " + $expirationDays days"));
         
         $solicitud = new Solicitud();                        
@@ -153,7 +153,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'UsuarioTipoDoc' => $data['comprobante_tipo'],
                     'UsuarioNumeroDoc' => $data['comprobante_numero'],
                     'UsuarioEmail' => $data['usuario_email'],
-                    'ConceptoPago' => $this->wsConfig['conceptoPago'],
+                    'ConceptoPago' => 'Pago',
             ));
         
         $solicitud->addDetalle(
