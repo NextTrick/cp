@@ -30,7 +30,6 @@ class PagoEfectivoProcessor extends AbstractProcessor
         
         //Creación de la solicitud        
         $xml = $this->getSolicitud($data);
-        var_dump($xml); exit;
                         
         try {            
             //Obtención del valor del Cip                                    
