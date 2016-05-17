@@ -13,7 +13,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class SectionRecargaPromociones extends AbstractHelper implements ServiceLocatorAwareInterface
 {
-    public function __invoke()
+    public function __invoke($tarjetaProductos)
     {
         $sl = $this->getServiceLocator()->getServiceLocator();
         $config = $sl->get('config');
@@ -24,6 +24,7 @@ class SectionRecargaPromociones extends AbstractHelper implements ServiceLocator
         $rows = $sl->get('Paquete\Model\Service\PaqueteService')->recargaPromociones();
         return $this->getView()->render('helper/section-recarga-promociones.phtml', array(
             'rows' => $rows,
+            'tarjetaProductos' => $tarjetaProductos,
             'urlImg' => $config['fileDir']['paquete_paquete']['down'],
         ));
     }

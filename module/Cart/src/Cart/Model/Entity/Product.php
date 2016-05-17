@@ -11,18 +11,25 @@ namespace Cart\Model\Entity;
 
 class Product
 {
-    private $price;
-    private $quantity;
+    private $amountDecimalLength;
+    private $amountDecimalSeparator;
+    private $amountThousandsSeparator;
+    
+    private $price = 0;
+    private $quantity = 0;
+    private $productId = 0;
+    private $productName = null;
+    private $productName2 = null;
+    private $productImage = null;
+    private $categoryCode = null;
+    private $categoryName = null;
+    private $options = array();
 
-    private $productId;
-    private $productName;
-    private $productImage;
-
-    public function __construct()
+    public function __construct($config)
     {
-        $this->price = 0;
-        $this->quantity = 0;
-        $this->productId = 0;
+        $this->amountDecimalLength = $config['amount_decimal_length'];
+        $this->amountDecimalSeparator = $config['amount_decimal_separator'];
+        $this->amountThousandsSeparator = $config['amount_thousands_separator'];
     }
     
     public function getPrice() {
@@ -33,8 +40,13 @@ class Product
         return $this->quantity;
     }
 
-    public function getSubTotal() {
-        return $this->quantity * $this->price;
+    public function getAmount($format = false) {
+        $amount = $this->quantity * $this->price;
+        if ($format) {
+            $amount = number_format($amount, $this->amountDecimalLength, 
+                $this->amountDecimalSeparator, $this->amountThousandsSeparator);
+        }
+        return $amount;
     }
     
     public function getProductId() {
@@ -44,9 +56,38 @@ class Product
     public function getProductName() {
         return $this->productName;
     }
+    
+    public function getProductName2() {
+        return $this->productName2;
+    }
 
     public function getProductImage() {
         return $this->productImage;
+    }
+
+    public function getCategoryCode() {
+        return $this->categoryCode;
+    }
+
+    public function getCategoryName() {
+        return $this->categoryName;
+    }
+
+    public function getOptions() {
+        return $this->options;
+    }
+    
+    public function getOption($key, $format = false) {
+        if (isset($this->options[$key])) {
+            $value = $this->options[$key];
+            if ($format) {
+                $value = number_format($value, $this->amountDecimalLength, 
+                    $this->amountDecimalSeparator, $this->amountThousandsSeparator);
+            }
+            return $value;
+        }
+
+        return null;
     }
 
     public function setPrice($price) {
@@ -64,8 +105,43 @@ class Product
     public function setProductName($productName) {
         $this->productName = $productName;
     }
+    
+    public function setProductName2($productName2) {
+        $this->productName2 = $productName2;
+    }
 
     public function setProductImage($productImage) {
         $this->productImage = $productImage;
+    }
+    
+    public function setCategoryCode($categoryCode) {
+        $this->categoryCode = $categoryCode;
+    }
+
+    public function setCategoryName($categoryName) {
+        $this->categoryName = $categoryName;
+    }
+    
+    public function setOptions($options) {
+        $this->options = $options;
+    }
+    
+    public function setOption($key, $value) {
+        $this->options[$key] = $value;
+    }
+    
+    public function toArray()
+    {
+        return get_object_vars($this);
+    }
+    
+    public function populate($data)
+    {
+        foreach ($data as $key => $value) {
+            $method = 'set' . ucfirst($key);
+            if (is_callable($method)) {
+                $this->$method($value);
+            }
+        }
     }
 }

@@ -51,6 +51,10 @@ header .social_icons span.in {
   width: 26px;
   height: 26px;
 }
+header .bg_diagonal,
+header .menu_icon {
+  display: none;
+}
 header .user_option {
   position: absolute;
   right: 0;
@@ -1785,6 +1789,23 @@ footer ul li a {
   text-decoration: none;
   font-size: 12px;
 }
+footer span.logo_icon {
+  position: absolute;
+  top: -67px;
+  left: 46%;
+  display: block;
+  background-image: url("../images/sprite.png");
+  background-position: -252px -66px;
+  width: 54px;
+  height: 56px;
+}
+.bg_diagonal_footer {
+  display: none;
+  width: 0;
+  height: 0;
+  border-bottom: 60px solid #fff;
+  border-right: 600px solid transparent;
+}
 /* Z-index of #mask must lower than #boxes .window */
 #mask {
   position: absolute;
@@ -1981,6 +2002,9 @@ i[class*=" icon-"] {
   content: "\ea91";
 }
 @media screen and (max-width: 667px) {
+  body {
+    overflow-x: hidden;
+  }
   .box_center {
     width: 100%;
   }
@@ -2002,11 +2026,32 @@ i[class*=" icon-"] {
   header .bg {
     display: none;
   }
+  header .bg_diagonal {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    height: 0;
+    border-top: 60px solid #fff;
+    border-right: 600px solid transparent;
+  }
+  header .menu_icon {
+    display: block;
+    position: absolute;
+    top: 43px;
+    left: 15px;
+    color: #6c006c;
+    cursor: pointer;
+  }
+  header .menu_icon i {
+    font-size: 24px;
+  }
   .right_options {
     display: none;
   }
   section {
     padding-top: 20px;
+  }
+  section .welcome_box {
     padding: 8px;
   }
   section .welcome_box h2,
@@ -2015,23 +2060,9 @@ i[class*=" icon-"] {
   section .welcome_box .small {
     display: none;
   }
-  section .welcome_box .yellow_box {
-    background: none;
-    color: #fff;
-  }
-  section .welcome_box .yellow_box:before,
-  section .welcome_box .yellow_box:after {
-    display: none;
-  }
   section .welcome_box .error_message {
     width: 95%;
     left: 2%;
-    padding: 0;
-  }
-  section .welcome_box .purple_box {
-    background: none;
-  }
-  section .welcome_box .purple_box .content {
     padding: 0;
   }
   section .welcome_box .purple_box .content .left,
@@ -2040,11 +2071,9 @@ i[class*=" icon-"] {
     width: 100%;
     display: block;
   }
-  section .welcome_box .purple_box .login_link a {
-    color: #fff;
-  }
-  section .welcome_box .purple_box .login_link a span {
-    display: none;
+  section .welcome_box .purple_box .options .col_3 {
+    display: block;
+    float: none;
   }
   section .offers_box .col_3 {
     width: 100%;
@@ -2052,10 +2081,235 @@ i[class*=" icon-"] {
   section .offers_box .col_3 img {
     width: 100%;
   }
+  section .app_box .purple_box {
+    border-radius: 0;
+  }
+  section .app_box .purple_box .steps {
+    float: left;
+  }
+  section .app_box .purple_box .cart_box {
+    float: right;
+    position: static;
+    margin-top: 0;
+    margin-right: 15px;
+    margin-bottom: 20px;
+  }
+  section .app_box .purple_box .cart_box .label {
+    display: none;
+  }
+  section .app_box .purple_box .pay_box_white {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+  }
+  section .app_box .purple_box .pay_box_white >.left,
+  section .app_box .purple_box .pay_box_white >.right {
+    float: none;
+    display: block;
+    width: 100%;
+  }
+  section .app_box .purple_box .pay_box_white >.left {
+    border-right: 0;
+    padding-right: 0;
+    border-bottom: 1px dashed #d3d3d3;
+  }
+  section .app_box .purple_box .pay_box_white >.right {
+    padding-left: 0;
+  }
+  section .app_box .purple_box .pay_box_white >.right .credit_cards {
+    padding-bottom: 15px;
+    border-bottom: 1px dashed #d3d3d3;
+  }
+  section .app_box .purple_box .pay_box_white >.right .items_cart .item {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  section .app_box .purple_box .pay_box_white >.right .items_cart .item >.right {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+  }
+  section .app_box .purple_box .pay_box_white >.right .items_cart .item >.right h5 {
+    position: absolute;
+    top: 0;
+  }
+  section .app_box .purple_box .pay_box_white >.right .items_cart .item >.left {
+    margin-top: 15px;
+    margin-right: 10px;
+  }
+  section .app_box .purple_box .pay_box_white >.right .items_cart .item >.left img {
+    width: 100%;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left {
+    padding: 15px;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .empty_cart {
+    padding: 50px 0;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart {
+    width: 100%;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item {
+    position: relative;
+    margin-bottom: 10px;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right h5 {
+    position: absolute;
+    top: 0;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right .card_type >span {
+    display: none;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right .card_type .card_name {
+    margin-left: 0;
+    width: 70%;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right .card_type .card_name select {
+    width: 100%;
+    padding-right: 38px;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right .card_type .cant {
+    width: 28%;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.left {
+    margin-top: 15px;
+    margin-right: 10px;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.left img {
+    width: 100%;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.right {
+    height: auto !important;
+  }
+  section .app_box .purple_box .recargas_content .offers .col_3 {
+    margin-bottom: 45px;
+  }
+  section .app_box .purple_box .options {
+    padding: 10px;
+  }
+  section .app_box .purple_box .options .col_3 {
+    width: 100%;
+    display: block;
+    float: none;
+    overflow: hidden;
+  }
+  section .app_box .purple_box .options .col_3 .circle {
+    float: left;
+    width: 30%;
+  }
+  section .app_box .purple_box .options .col_3 .p_16 {
+    float: right;
+    width: 68%;
+    text-align: left;
+  }
+  section .app_box .purple_box .bar_info {
+    height: auto;
+  }
+  section .app_box .purple_box .bar_info .left,
+  section .app_box .purple_box .bar_info .right {
+    display: block;
+    width: 100%;
+    float: none;
+  }
+  section .app_box .purple_box .bar_info .left {
+    margin-bottom: 10px;
+  }
+  section .app_box .purple_box .benefits_offers .yellow_text,
+  section .app_box .purple_box .benefits_offers .offers_box_two {
+    display: none;
+  }
+  section .app_box .purple_box .benefits_offers .offers_box_three .col_3 {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  section .app_box .purple_box .benefits_offers .offers_box_three .col_3 .box_white {
+    border-radius: 18px;
+  }
+  section .app_box .purple_box .cards_content .col_3.add_card .tooltip {
+    top: 25px;
+  }
+  section .app_box .purple_box .cards_content .col_3.add_card .tooltip:before {
+    display: none;
+  }
+  section .app_box .purple_box .info_box .text {
+    width: 80%;
+  }
+  section .app_box .purple_box .info_box a {
+    float: none;
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+  section form.signin_form {
+    padding: 10px;
+  }
+  section form.signin_form .content_form {
+    width: 100%;
+  }
+  section form.signin_form .content_form .form_control .left,
+  section form.signin_form .content_form .form_control .right {
+    display: block;
+    float: none;
+    width: 100%;
+  }
+  section form.signin_form .content_form .form_control .left {
+    margin-bottom: 5px;
+  }
+  section form.signin_form .content_form .form_control .day {
+    width: 20%;
+  }
+  section form.signin_form .content_form .form_control .month {
+    width: 45%;
+  }
+  section form.signin_form .content_form .form_control .year {
+    width: 30%;
+  }
+  section form.signin_form .content_form .form_control .inp_right {
+    width: 65%;
+  }
+  section form.signin_form .content_form .form_control .doc_type {
+    width: 30%;
+  }
+  .bottom_bar {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    border-radius: 0;
+  }
+  .bottom_bar span.text {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .bottom_bar span.bg {
+    display: block;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 10px 0;
+  }
+  .bottom_bar span.bg .text {
+    float: none;
+    width: auto;
+    display: inline-block;
+  }
+  .bottom_bar span.bg.total {
+    margin-left: 0;
+  }
   footer {
     background: #fff;
     height: 120px;
-    margin-top: 50px;
+    margin-top: 40px;
+    position: relative;
   }
   footer img.bg {
     display: none;
@@ -2066,5 +2320,19 @@ i[class*=" icon-"] {
   footer ul li {
     margin-top: 10px;
     display: block;
+  }
+  footer span.logo_icon {
+    display: block;
+  }
+  .bg_diagonal_footer {
+    display: block;
+  }
+  #how_asociate_card {
+    left: 0;
+    top: 50px !important;
+    width: 90%;
+  }
+  #how_asociate_card .modal_content {
+    width: auto;
   }
 }

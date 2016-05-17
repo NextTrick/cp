@@ -21,15 +21,7 @@ class Cart
     public function __construct($config)
     {
         $this->groupProduct = 0;
-        $defultConfig = array(
-            'amount_decimal_length' => 2,
-            'amount_decimal_separator' => '.',
-            'amount_thousands_separator' => ',',
-            'quantity_max_by_product' => 5,
-            'currency' => 'NS',
-        );
         
-        $config = array_merge($config, $defultConfig);
         $this->amountDecimalLength = $config['amount_decimal_length'];
         $this->amountDecimalSeparator = $config['amount_decimal_separator'];
         $this->amountThousandsSeparator = $config['amount_thousands_separator'];
@@ -44,43 +36,43 @@ class Cart
 
     public function getAmountCart($format = false)
     {
-        $total = 0;
+        $amount = 0;
         foreach ($this->products as $products) {
             foreach ($products as $product) {
-                $total = $total + $product->getSubTotal();
+                $amount = $amount + $product->getAmount();
             }
         }
         if ($format) {
-            $total = number_format($total, $this->amountDecimalLength, 
+            $amount = number_format($amount, $this->amountDecimalLength, 
                     $this->amountDecimalSeparator, $this->amountThousandsSeparator);
         }
-        return $total;
+        return $amount;
     }
     
     public function getAmountGroup($format = false)
     {
-        $total = 0;
+        $amount = 0;
         if (isset($this->products[$this->groupProduct])) {
             foreach ($this->products[$this->groupProduct] as $product) {
-                $total = $total + $product->getSubTotal();
+                $amount = $amount + $product->getAmount();
             }
         }
         if ($format) {
-            $total = number_format($total, $this->amountDecimalLength, 
+            $amount = number_format($amount, $this->amountDecimalLength, 
                     $this->amountDecimalSeparator, $this->amountThousandsSeparator);
         }
-        return $total;
+        return $amount;
     }
     
     public function getQuantityCart()
     {
-        $total = 0;
+        $quantity = 0;
         foreach ($this->products as $products) {
             foreach ($products as $product) {
-                $total = $total + $product->getQuantity();
+                $quantity = $quantity + $product->getQuantity();
             }
         }
-        return $total;
+        return $quantity;
     }
     
     public function getQuantityGroup()
@@ -117,17 +109,23 @@ class Cart
         $this->currency = $currency;
     }
 
-    public function setProducts(Product $product)
+    public function setProducts(Product $product, $adding = false)
     {
         if ($product->getProductId() != null) {
             $quantity = $product->getQuantity();
             if (isset($this->products[$this->groupProduct][$product->getProductId()])) {
+                if ($adding) {
+                    $xproduct = $this->products[$this->groupProduct][$product->getProductId()];
+                    $quantity = $quantity + $xproduct->getQuantity();
+                }
+                
                 if ($quantity > $this->quantityMaxByProduct) {
                     $quantity = $this->quantityMaxByProduct;
                 }
                 if ($quantity < 1) {
                     unset($this->products[$this->groupProduct][$product->getProductId()]);
                 } else {
+                    $product->setQuantity($quantity);
                     $this->products[$this->groupProduct][$product->getProductId()] = $product;
                 }
             } else {

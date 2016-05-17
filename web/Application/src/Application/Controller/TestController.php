@@ -21,7 +21,8 @@ class TestController extends SecurityAdminController
 //    private $mguid = '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}';//angel
 //    private $cguid = '{54A0B670-9C39-464D-ABE2-79B62240043A}';//jludena
 //    private $cguid = '{28368642-029F-4072-85E3-EC3F601D5518}';//angel
-    private $cguid = '{584FA19C-9D70-45FD-8A89-6B6F64E6167C}';//montes 2
+//    private $cguid = '{584FA19C-9D70-45FD-8A89-6B6F64E6167C}';//montes 2
+    private $cguid = '{344B00DA-1769-4A93-87E7-BBCF32574EAB}';//jludena2
     
     //{84199A8A-4D44-4378-976F-C2055C7EA3AF}
     

@@ -403,13 +403,13 @@ $ ->
 				return
 			watchDetail : ->
 				$(this).hide()
-				dom.itemDetail.show()
-				dom.hiddenDetail.show()
+				$(this).next().show()
+				$(this).parent().prev().show()
 				return
 			hiddenDetail : ->
 				$(this).hide()
-				dom.itemDetail.hide()
-				dom.watchDetail.show()
+				$(this).prev().show()
+				$(this).parent().prev().hide()
 				return
 			changeCard : ->
 				if $(this).hasClass 'pagoefectivo'

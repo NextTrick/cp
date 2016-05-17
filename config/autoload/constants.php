@@ -18,6 +18,7 @@ define('AC_EDITAR', 'editar');
 
 define('NO_DATA', 'No existe data');
 define('ERROR_303', 'No tiene acceso.');
+define('ERROR_VALIDACION', 'Error de validación.');
 
 define('LIMIT_BUSCAR', 100);
 define('GRID_PROMOCIONES_LOGIN', 3);
@@ -32,7 +33,7 @@ define('CANT_ACTIVO_TIPO_RECARGA', 100);
 
 define('VERSION', 1000);
 
-define('TEST_MOCK', 1);
+//define('TEST_MOCK', 1);
 
 
 return array();

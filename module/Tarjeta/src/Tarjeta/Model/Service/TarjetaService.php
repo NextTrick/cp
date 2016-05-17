@@ -29,12 +29,50 @@ class TarjetaService
             'limit' => LIMIT_USUARIO_TARJETAS,
         );
         $rows = $this->_repository->findAll($criteria);
+        foreach ($rows as $key => $row) {
+            $mRow = $this->getOnlineTarjeta($row['cguid']);
+            $row = array_merge($row, $mRow);
+            $rows[$key] = $row;
+        }
         $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
         
         return $results;
     }
     
-    public function getTarjetas($usuarioId)
+    public function getOnlineTarjeta($cguid)
+    {
+        $result = array(
+            'emoney' => 'S/. 0.00',
+            'emoneyvalue' => 0,
+            'bonus' => 'S/. 0.00',
+            'bonusvalue' => 0,
+            'bonusplus' => 'S/. 0.00',
+            'bonusplusvalue' => 0,
+            'gamepoints' => 0,
+            'gamepointsvalue' => 0,
+            'etickets' => 0,
+        );
+        $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
+        if ($data['success']) {
+            $data = $data['result'];
+            if (!empty($data)) {
+                $result = array(
+                    'emoney' => $data['emoney'],
+                    'emoneyvalue' => $data['emoneyvalue'],
+                    'bonus' => $data['bonus'],
+                    'bonusvalue' => $data['bonusvalue'],
+                    'bonusplus' => $data['promotionbonus'], //se esta modificando el indice por el nombre correcto
+                    'bonusplusvalue' => $data['bonusplusvalue'],
+                    'gamepoints' => $data['gamepoints'],
+                    'gamepointsvalue' => $data['gamepointsvalue'],
+                    'etickets' => $data['etickets'],
+                );
+            }
+        }
+        return $result;
+    }
+
+    public function getDdlTarjetas($usuarioId)
     {
         $criteria = array(
             'where' => array(
@@ -57,5 +95,10 @@ class TarjetaService
     public function getRepository()
     {
         return $this->_repository;
+    }
+    
+    private function _getTrueFiTarjetaService()
+    {
+        return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
     }
 }
