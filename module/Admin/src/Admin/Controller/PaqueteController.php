@@ -105,6 +105,7 @@ class PaqueteController extends SecurityAdminController
         }
         
         $view = new ViewModel();
+        $view->setVariable('imagen', $row['imagen']);
         $view->setVariable('form', $form);
 
         return $view;

@@ -30,7 +30,7 @@ $this->layout()->breadcrumb = array(
                         <td><?php echo $row['codigo'] ?></td>
                         <td><?php echo \Cms\Model\Service\ContenidoService:: getNameTipo($row['tipo']); ?></td>
                         <td><?php echo $row['titulo'] ?></td>
-                        <td><a href="<?php echo $row['url']; ?>"><?php echo $row['url']; ?></a></td>
+                        <td><a target="_blank" href="<?php echo $row['url']; ?>"><?php echo $row['url']; ?></a></td>
                         <td><?php echo (!empty($row['estado']))? 'Activo': 'Baja'; ?></td>
                         <td>
                             <a href="<?php echo BASE_URL ?>admin/contenido/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>

@@ -61,7 +61,8 @@ class PaqueteService
 
             $paramsWhere = array(
                 'activo'    => String::xssClean($params['cmbActivo']),
-                'destacado' => String::xssClean($params['cmbDestacado'])
+                'destacado' => String::xssClean($params['cmbDestacado']),
+                'tipo'      => String::xssClean($params['cmbTipo'])
             );
 
             $criteria = array(

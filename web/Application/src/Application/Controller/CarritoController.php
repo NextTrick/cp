@@ -141,6 +141,7 @@ class CarritoController extends SecurityWebController
             return $this->_toUrlLogin();
         }
         
+        $usuario = $this->_getUsuarioData();
         $cartModel = $this->_getCartService()->getCart();
         
         $config = $this->getServiceLocator()->get('config');
@@ -151,10 +152,61 @@ class CarritoController extends SecurityWebController
         if (empty($cartModel)) {
             return $this->redirect()->toRoute('web-carrito', array('controller' => 'index'));
         }
+        
+
+        $codPais = \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU;
+        $codDepa = \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA;
+        $codProv = \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA;
+        $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDepa, $codProv);
+
+        $criteria = array(
+            'where' => array('usuario_id' => $usuario->id),
+            'columns' => array('id', 'fac_razon_social')
+        );
+        $perfilPagos = $this->_getPerfilPagoService()->getRepository()->findPairs($criteria);
+        
+        $validator = new \Zend\Validator\Csrf();
+        $validator->setName('token_csrf');
+        $tokenCsrf = $validator->getHash(true);
+        
         $view = new ViewModel();
+        $view->setVariable('tokenCsrf', $tokenCsrf);
         $view->setVariable('cartModel', $cartModel);
+        $view->setVariable('perfilPagos', $perfilPagos);
+        $view->setVariable('distritos', $distritos);
         $view->setVariable('urlImg', $config['fileDir']['paquete_paquete']['down']);
         return $view;
+    }
+    
+    public function pagarAction()
+    {
+        $response = $this->getResponse();
+        $result = array('success' => false, 'message' => ERROR_VALIDACION);
+        
+        if ($this->_isLogin() === false) {
+            $result['message'] = ERROR_303;
+            $jsonModel =  new \Zend\View\Model\JsonModel($result);
+            return $response->setContent($jsonModel->serialize());
+        }
+        
+        if ($this->request->isPost()) {
+            $tokenCsrf = $this->request->getPost('token_csrf');
+            $data = $this->request->getPost();
+            var_dump($data);
+            exit;
+        }
+        $jsonModel =  new \Zend\View\Model\JsonModel($result);
+        return $response->setContent($jsonModel->serialize());
+    }
+
+    private function _getUbigeoService()
+    {
+        return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
+    }
+    
+    private function _getPerfilPagoService()
+    {
+        return $this->getServiceLocator()->get('Usuario\Model\Service\PerfilPagoService');
     }
     
     private function _getCartService()
