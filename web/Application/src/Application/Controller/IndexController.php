@@ -65,6 +65,7 @@ class IndexController extends AbstractActionController
 
             $url = $baseUrl . '?token=' .  $response['data']['token'];
 
+            echo $url; exit;
             return $this->redirect()->toUrl($url); exit;
             //var_dump($response);
         } catch (\Exception $e) {
