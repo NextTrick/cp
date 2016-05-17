@@ -10,6 +10,10 @@ namespace Sistema\Model\Service;
 
 class UbigeoService
 {
+    const COD_PAIS_PERU = 'PE';
+    const COD_DEPA_LIMA = '15';
+    const COD_PROV_LIMA = '01';
+    
     protected $_repository = null;
     protected $_sl         = null;
 
