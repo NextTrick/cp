@@ -3,3 +3,24 @@ Test card:
 
 003-034796-5
 000-123456-3
+
+
+Card data:
+----------
+emoney => Dinero
+bonus => Coney Bonos
+promotionbonus => Coney Bonos Plus
+etickets => Tickets
+gamepoints => Game 
+
+
+["emoney"]=>string(8) "S/. 6.94"
+["bonus"]=>string(9) "S/. 10.50"
+["gamepoints"]=>string(1) "0"
+["promotionbonus"]=>string(8) "S/. 0.00"
+["etickets"]=>string(1) "0"
+
+["emoneyvalue"]=>string(4) "6.94"
+["bonusvalue"]=>string(4) "10.5"
+["gamepointsvalue"]=>string(1) "0"
+["bonusplusvalue"]=>string(1) "0"

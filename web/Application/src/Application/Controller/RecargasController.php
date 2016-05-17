@@ -19,7 +19,7 @@ class RecargasController extends SecurityWebController
             $cartModel->setGroupProduct($tarjetaCodigo);
         }
         
-        $usuarioTarjetas = $this->_getTarjetaService()->getTarjetas($usuario->id);
+        $usuarioTarjetas = $this->_getTarjetaService()->getDdlTarjetas($usuario->id);
         
         $view = new ViewModel();
         $view->setVariable('cartModel', $cartModel);

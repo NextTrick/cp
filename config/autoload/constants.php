@@ -37,7 +37,7 @@ define('CANT_ACTIVO_TIPO_RECARGA', 100);
 
 define('VERSION', 1000);
 
-define('TEST_MOCK', 1);
+//define('TEST_MOCK', 1);
 
 
 return array();
