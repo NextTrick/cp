@@ -75,7 +75,7 @@ class VisaProcessor extends AbstractProcessor
             if ($xmlDocument->loadXML($paymentResponse->ConsultaEticketResult)) {
                 $countMessages = $this->ws->cantidadMensajes($xmlDocument);
                 if ($countMessages == 0) {
-                    $eTicket = $data['reference'];
+                    $eTicket = $data['eticket'];
                     $countOperaciones = $this->ws->cantidadOperaciones($xmlDocument, $eTicket);
                                         
                     $tempData = array();
