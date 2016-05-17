@@ -61,8 +61,6 @@ class IndexController extends AbstractActionController
         }
         
         echo 'fin'; exit;
-        
-        exit;
     }
     
     public function testVisaAction()
@@ -86,7 +84,7 @@ class IndexController extends AbstractActionController
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
                     
             $response = $paymentProcessor->createCharge($data);
-            var_dump($response);
+            //var_dump($response);
 
             echo $response['data']['html']; exit;
         
@@ -95,8 +93,6 @@ class IndexController extends AbstractActionController
         }
 
         echo 'fin'; exit;
-
-        exit;
     }
     
     public function phpinfoAction()
