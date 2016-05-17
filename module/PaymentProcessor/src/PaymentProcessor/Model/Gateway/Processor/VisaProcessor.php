@@ -36,11 +36,11 @@ class VisaProcessor extends AbstractProcessor
                 $countMessages = $this->ws->cantidadMensajes($xmlDocument);
                 if ($countMessages == 0) {
                     $eticket = $this->ws->recuperaEticket($xmlDocument);
-                    $html = $this->ws->htmlRedirecFormEticket($eticket);                    
+                    $html = $this->ws->htmlRedirecFormEticket($eticket);
                     $return['data'] = array(
                         'status' => OrdenRepository::PAGO_ESTADO_PENDIENTE,
                         'token' => null,
-                        'clientReference' => null,
+                        'clientReference' => $data['id'],
                         'reference' => $eticket,
                         'html' => $html,
                     );                    

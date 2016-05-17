@@ -87,6 +87,8 @@ class IndexController extends AbstractActionController
                     
             $response = $paymentProcessor->createCharge($data);
             var_dump($response);
+
+            echo $response['data']['html']; exit;
         
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
