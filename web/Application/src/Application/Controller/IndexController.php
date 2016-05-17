@@ -58,7 +58,15 @@ class IndexController extends AbstractActionController
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
 
             $response = $paymentProcessor->createCharge($data);
-            var_dump($response);
+
+            $config = $this->getServiceLocator()->get('config');
+            $baseUrl = $config['app']['paymentProcessor']['pagoEfectivo']['baseUrl']
+                . $config['app']['paymentProcessor']['pagoEfectivo']['wsgenpago'];
+
+            $url = $baseUrl . '?token=' .  $response['data']['token'];
+
+            return $this->redirect()->toUrl($url); exit;
+            //var_dump($response);
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
