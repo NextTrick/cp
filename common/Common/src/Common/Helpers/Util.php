@@ -143,4 +143,18 @@ class Util
         
         return $rows;
     }
+    
+    public static function formatSumaDecimal(array $data) {
+        $suma = 0;
+        foreach ($data as $value) {
+            $suma = $suma + (float)$value;
+        }
+
+        return self::formatDecimal($suma);
+    }
+    
+    public static function formatDecimal($number) 
+    {
+        return number_format($number, 2, '.', ',');
+    }
 }

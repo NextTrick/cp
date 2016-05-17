@@ -25,13 +25,18 @@
                                 </div>
                                 <div class="show_more_content">
                                     <div class="line">
+                                        <div class="left">Dinero<span>?</span></div>
+                                        <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
+                                        <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
+                                    </div>
+                                    <div class="line">
                                         <div class="left">Coney Bonos<span>?</span></div>
-                                        <div class="right"><?php echo $row['bonus']; ?></div>
+                                        <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonusvalue']); ?></div>
                                         <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
                                     </div>
                                     <div class="line">
                                         <div class="left">Coney Bonos Plus<span>?</span></div>
-                                        <div class="right"><?php echo $row['bonusplus']; ?></div>
+                                        <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonusplusvalue']); ?></div>
                                         <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
                                     </div>
                                     <div class="line">
@@ -46,7 +51,8 @@
                                     </div>
                                 </div>
                                 <div class="bottom_card">
-                                    <div class="price">S/. 30.00</div>
+                                    <?php $sumData = array($row['emoneyvalue'], $row['bonusvalue'], $row['bonusplusvalue']); ?>
+                                    <div class="price">S/. <?php echo \Common\Helpers\Util::formatSumaDecimal($sumData) ?></div>
                                     <a href="javascript:;" class="watch_more">Ver más</a>
                                     <a href="<?php echo BASE_URL ?>recargas/<?php echo $row['codigo']; ?>" class="recharge">Recargar</a>
                                 </div>
