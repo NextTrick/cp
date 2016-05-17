@@ -23,7 +23,6 @@ class CallbackController extends AbstractActionController
     
     public function VisaAction()
     {
-        echo __METHOD__; exit;
         $params = $this->getRequest()->getPost();        
         $paymentProcessor = new PaymentProcessor(VisaProcessor::ALIAS,
                 $this->getServiceLocator());
