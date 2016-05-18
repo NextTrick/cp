@@ -113,36 +113,35 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `usuario_usuario` ;
 
-CREATE TABLE IF NOT EXISTS `usuario_usuario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `mguid` VARCHAR(40) NOT NULL,
-  `facebook_id` VARCHAR(30) NULL,
-  `twitter_id` VARCHAR(30) NULL,
-  `email` VARCHAR(30) NOT NULL,
-  `password` VARCHAR(100) NOT NULL,
-  `estado` TINYINT(1) NOT NULL,
-  `imagen` VARCHAR(50) NULL,
-  `nombres` VARCHAR(30) NOT NULL,
-  `paterno` VARCHAR(30) NOT NULL,
-  `materno` VARCHAR(30) NOT NULL,
-  `di_tipo` INT NULL,
-  `di_valor` VARCHAR(11) NULL,
-  `fecha_nac` DATE NULL,
-  `cod_pais` VARCHAR(2) NOT NULL,
-  `cod_depa` VARCHAR(2) NULL,
-  `cod_prov` VARCHAR(2) NULL,
-  `cod_dist` VARCHAR(2) NULL,
-  `fecha_creacion` DATETIME NULL,
-  `fecha_edicion` DATETIME NULL,
-  `codigo_activar` VARCHAR(100) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `index_facebook_id` (`facebook_id` ASC),
-  INDEX `index_twitter_id` (`twitter_id` ASC),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-  UNIQUE INDEX `mguid_UNIQUE` (`mguid` ASC))
+CREATE  TABLE IF NOT EXISTS `usuario_usuario` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `mguid` VARCHAR(40) NOT NULL ,
+  `facebook_id` VARCHAR(30) NULL ,
+  `twitter_id` VARCHAR(30) NULL ,
+  `email` VARCHAR(30) NOT NULL ,
+  `password` VARCHAR(100) NOT NULL ,
+  `estado` TINYINT(1) NOT NULL ,
+  `imagen` VARCHAR(50) NULL ,
+  `nombres` VARCHAR(30) NOT NULL ,
+  `paterno` VARCHAR(30) NOT NULL ,
+  `materno` VARCHAR(30) NULL ,
+  `di_tipo` INT NULL ,
+  `di_valor` VARCHAR(11) NULL ,
+  `fecha_nac` DATE NULL ,
+  `cod_pais` VARCHAR(2) NULL ,
+  `cod_depa` VARCHAR(2) NULL ,
+  `cod_prov` VARCHAR(2) NULL ,
+  `cod_dist` VARCHAR(2) NULL ,
+  `fecha_creacion` DATETIME NULL ,
+  `fecha_edicion` DATETIME NULL ,
+  `codigo_activar` VARCHAR(100) NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `index_facebook_id` (`facebook_id` ASC) ,
+  INDEX `index_twitter_id` (`twitter_id` ASC) ,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
+  UNIQUE INDEX `mguid_UNIQUE` (`mguid` ASC) )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `tarjeta_tarjeta`
