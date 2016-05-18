@@ -62,6 +62,16 @@ class LoginController extends SecurityAdminController
         }
     }
 
+    public function recuperarPasswordAction()
+    {
+        
+    }
+    
+    public function modificarPasswordAction()
+    {
+        
+    }
+
     public function logoutAction()
     {
         $this->_getLoginService()->getRepository()->logout();
