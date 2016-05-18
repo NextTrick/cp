@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
 
     #config.vm.synced_folder "/Users/luis/Projects/cp", "/opt/fcb/cp"
     config.vm.synced_folder "/Users/diomedes/www/cp", "/opt/fcb/cp"
-   
+
     #config.vm.synced_folder "C:\\laboratorio\\www\\cp", "/opt/fcb/cp"
     #config.vm.synced_folder "./", "/opt/fcb", type: "nfs"
 

@@ -78,7 +78,7 @@ class Security
                     'D' => array('eliminar'),
                 ),
                 'Admin\Controller\Usuario' => array(
-                    'R' => array('index'),
+                    'R' => array('index', 'exportar-excel'),
                     'C' => array('crear'),
                     'U' => array('editar'),
                     'D' => array('eliminar'),
