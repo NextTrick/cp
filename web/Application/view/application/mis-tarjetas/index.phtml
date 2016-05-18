@@ -14,7 +14,7 @@
                     <?php foreach ($gridList as $key => $row) : ?>
                         <?php if ($row['show'] == 'lleno') : ?>
                             <div class="col_3 my_card init_card" id="init_card_<?php echo $key; ?>">
-                                <div class="meta_data" data-index="<?php echo $key; ?>" data-cguid="<?php echo $row['cguid'] ?>" data-numero="<?php echo $row['numero'] ?>" data-nombre="<?php echo $row['nombre'] ?>" style="display: none;"></div>
+                                <div class="meta_data" data-index="<?php echo $key; ?>" data-codigo="<?php echo $row['codigo'] ?>" data-cguid="<?php echo $row['cguid'] ?>" data-numero="<?php echo $row['numero'] ?>" data-nombre="<?php echo $row['nombre'] ?>" style="display: none;"></div>
                                 <div class="init_loading"><img src="<?php echo URL_RESOURCES ?>front/images/loading.gif" alt="Cargando..."/></div>
                             </div>
                         <?php elseif ($row['show'] == 'por_llenar') : ?>
@@ -69,7 +69,7 @@
             $.ajax({
                 type: "GET",
                 url: baseUrl + 'mis-tarjetas/tarjeta-unidad',
-                data: {index:$(_this).children('.meta_data').data('index'), cguid:$(_this).children('.meta_data').data('cguid'), numero:$(_this).children('.meta_data').data('numero'), nombre:$(_this).children('.meta_data').data('nombre'), destino:$(_this).attr('id')},
+                data: {index:$(_this).children('.meta_data').data('index'), codigo:$(_this).children('.meta_data').data('codigo'), cguid:$(_this).children('.meta_data').data('cguid'), numero:$(_this).children('.meta_data').data('numero'), nombre:$(_this).children('.meta_data').data('nombre'), destino:$(_this).attr('id')},
                 dataType:'json',
                 success: function(data) {
                     if (data.success) {

@@ -147,6 +147,7 @@ class MisTarjetasController extends SecurityWebController
 
         $cguid = $this->request->getQuery('cguid');
         $index = $this->request->getQuery('index');
+        $codigo = $this->request->getQuery('codigo');
         $nombre = $this->request->getQuery('nombre');
         $numero = $this->request->getQuery('numero');
         $destino = $this->request->getQuery('destino');
@@ -154,6 +155,7 @@ class MisTarjetasController extends SecurityWebController
         $row = $this->_getTarjetaService()->getOnlineTarjeta($cguid);
         $row['nombre'] = $nombre;
         $row['numero'] = $numero;
+        $row['codigo'] = $codigo;
         
         $view = new ViewModel();
         $view->setTemplate('mis-tarjetas/tarjeta-unidad');
