@@ -14,7 +14,9 @@ class CallbackController extends AbstractActionController
         $params = $this->getRequest()->getPost();        
         $paymentProcessor = new PaymentProcessor(PagoEfectivoProcessor::ALIAS,
                 $this->getServiceLocator());        
-        $paymentProcessor->processCallback($params);
+        $response = $paymentProcessor->processCallback($params);
+
+        var_dump($response);
         
         exit;
     }
@@ -23,9 +25,11 @@ class CallbackController extends AbstractActionController
     {
         $params = $this->getRequest()->getPost();        
         $paymentProcessor = new PaymentProcessor(VisaProcessor::ALIAS,
-                $this->getServiceLocator());        
-        $paymentProcessor->processCallback($params);
-        
+                $this->getServiceLocator());
+        $response = $paymentProcessor->processCallback($params);
+
+        var_dump($response);
+
         exit;
     }
 }

@@ -57,7 +57,7 @@ class LoginController extends SecurityAdminController
         if ($result->error === false) {
             return $this->_toUrlMain();
         } else {
-            $this->flashMessenger()->addMessage(array('error' => $result->mesagge));
+            $this->flashMessenger()->addMessage(array('error' => $result->message));
             return $this->_toUrlLogin();
         }
     }

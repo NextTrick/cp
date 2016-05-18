@@ -1,3 +1,4 @@
+<form id="formPago" action="#" method="post">
 <section class="app_content recargas">
     <div class="box_center">
         <div class="app_box">
@@ -25,64 +26,67 @@
                     <div class="left">
                         <h4>1. Datos del Pago</h4>
                         <p>Datos solicitados para la generación del comprobante</p>
-                        <div class="error_message"><span class="icon"></span>
+                        <div class="error_message" style="display: none;"><span class="icon"></span>
                             <p>Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.</p>
                         </div>
                         <div class="voucher">
-                            <input type="radio" name="voucher_option" checked="checked" class="boleta"/>Boleta
-                            <input type="radio" name="voucher_option" class="factura"/>Factura
+                            <input type="radio" name="comprobante_tipo" checked="checked" class="boleta" value="<?php echo \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA; ?>"/>Boleta
+                            <input type="radio" name="comprobante_tipo" class="factura" value="<?php echo \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA; ?>"/>Factura
                         </div>
                         <div class="content_boleta">
                             <div class="form_control">
-                                <label for="">Nombre</label>
-                                <input type="text" placeholder="Andrea"/>
+                                <label for="nombres">Nombre</label>
+                                <input id="nombres" name="nombres" type="text" placeholder="Andrea"/>
                             </div>
                             <div class="form_control">
-                                <label for="">Apellido paterno</label>
-                                <input type="text" placeholder="Delgado"/>
+                                <label for="paterno">Apellido paterno</label>
+                                <input id="paterno" name="paterno" type="text" placeholder="Delgado"/>
                             </div>
                             <div class="form_control">
-                                <label for="">Apellido materno</label>
-                                <input type="text" placeholder="Delgado"/>
+                                <label for="materno">Apellido materno</label>
+                                <input id="materno" name="materno" type="text" placeholder="Delgado"/>
                             </div>
                             <div class="form_control">
-                                <label for="">DNI/Pasaporte</label>
-                                <input type="text" placeholder="12345678"/>
+                                <label for="documento_identidad">DNI/Pasaporte</label>
+                                <input id="documento_numero" name="documento_numero" type="text" placeholder="12345678"/>
                             </div>
                         </div>
                         <div class="content_factura">
                             <div class="form_control">
-                                <label for="">Perfil de pago</label>
-                                <select name="">
+                                <label for="perfil_pago">Perfil de pago</label>
+                                <select id="perfil_pago" name="perfil_pago">
                                     <option value="">Seleccione</option>
-                                    <option value="">1</option>
+                                    <?php foreach ($perfilPagos as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form_control">
-                                <label for="">Razón Social</label>
-                                <input type="text"/>
+                                <label for="fac_razon_social">Razón Social</label>
+                                <input id="fac_razon_social" name="fac_razon_social" type="text"/>
                             </div>
                             <div class="form_control">
-                                <label for="">RUC</label>
-                                <input type="text"/>
+                                <label for="ruc">RUC</label>
+                                <input id="ruc" name="ruc" type="text"/>
                             </div>
                             <div class="form_control">
-                                <label for="">Dirección fiscal</label>
-                                <input type="text"/>
+                                <label for="fac_direccion_fiscal">Dirección fiscal</label>
+                                <input id="fac_direccion_fiscal" name="fac_direccion_fiscal" type="text"/>
                             </div>
                             <div class="form_control">
-                                <label for="">Dirección de entrega de factura</label>
-                                <input type="text"/>
+                                <label for="fac_direccion_entrega_factura">Dirección de entrega de factura</label>
+                                <input id="fac_direccion_entrega_factura" name="fac_direccion_entrega_factura" type="text"/>
                             </div>
                             <div class="form_control">
                                 <input type="checkbox"/>Misma dirección fiscal
                             </div>
                             <div class="form_control">
-                                <label for="">Distrito</label>
-                                <select name="">
+                                <label for="distrito">Distrito</label>
+                                <select id="distrito" name="distrito">
                                     <option value="">Seleccione</option>
-                                    <option value="">Lima</option>
-                                    <option value="">Breña</option>
+                                    <?php foreach ($distritos as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
@@ -93,8 +97,8 @@
                             <div class="card pagoefectivo active"></div>
                             <div class="card visa"></div>
                             <div class="cards_option">
-                                <input type="radio" name="metodo_pago" checked="checked" class="pe"/>
-                                <input type="radio" name="metodo_pago" class="visa"/>
+                                <input type="radio" name="metodo_pago" value="pe" checked="checked" class="pe"/>
+                                <input type="radio" name="metodo_pago" value="visa" class="visa"/>
                             </div>
                         </div>
                         <h4>3. Confirma tu compra</h4>
@@ -118,15 +122,15 @@
                                             <div class="detail">
                                                 <div class="line">
                                                     <div class="left">Coney Bonus</div>
-                                                    <div class="right">S/. 30</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
                                                 </div>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus Plus</div>
-                                                    <div class="right">S/. 15</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
                                                 </div>
                                                 <div class="line">
                                                     <div class="left">Tickets</div>
-                                                    <div class="right">12</div>
+                                                    <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
                                                 </div>
                                             </div>
                                             <div class="link_show">
@@ -149,12 +153,36 @@
                                 <span class="large"><?php echo $partMontoTotal[0]; ?></span>
                                 <span class="medium">.<?php echo $partMontoTotal[1]; ?></span>
                             </h3>
-                            <button class="btn btn_orange">Pagar</button>
+                            <input type="hidden" id="token_csrf" name="token_csrf" value="<?php echo $tokenCsrf; ?>">
+                            <button id="btnPagar" class="btn btn_orange" type="button">Pagar</button>
                             <a href="<?php echo BASE_URL ?>recargas" class="link_orange">Seguir comprando  </a>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 </section>
+</form>
+<script type="text/javascript">
+    $('#btnPagar').click(function(){
+        $.ajax({
+          type: "POST",
+          url: baseUrl + 'carrito/pagar',
+          data: $('#formPago').serialize(),
+          dataType: 'json',
+          success: function(data) {
+            $('#token_csrf').val(data.token);
+            if (data.success) {
+              $('#error_message').hide();
+            } else {
+              $('#error_message').show();
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#error_message').show();
+          }
+        });
+    });
+</script>

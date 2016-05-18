@@ -2,6 +2,10 @@
 
 define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
 define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
+
+#define('BASE_URL', 'http://dev.coneypark.pe/recargas/');
+#define('URL_RESOURCES', 'http://dev.coneypark.pe/recargas/s/');
+
 define('URL_IMAGE_CMS', rtrim(URL_RESOURCES, '/').'/files/contenido/');
 
 define('VERSION_STATICO', '1.4');
@@ -33,7 +37,7 @@ define('CANT_ACTIVO_TIPO_RECARGA', 100);
 
 define('VERSION', 1000);
 
-define('TEST_MOCK', 1);
+//define('TEST_MOCK', 1);
 
 
 return array();

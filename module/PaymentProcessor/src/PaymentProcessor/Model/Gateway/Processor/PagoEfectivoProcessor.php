@@ -17,6 +17,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
         
         $config = $this->getServiceLocator()->get('config');
         $wsConfig = $config['app']['paymentProcessor']['pagoEfectivo'];
+        $this->wsConfig = $wsConfig;
                                 
         $this->ws = new PagoEfectivo($wsConfig);
     }
@@ -32,19 +33,35 @@ class PagoEfectivoProcessor extends AbstractProcessor
                         
         try {            
             //Obtención del valor del Cip                                    
-            $paymentResponse = $this->ws->solicitarPago($xml);     
-                                    
-            $return['data'] = array(
-                'status' => $paymentResponse->Estado,
-                'token' => $paymentResponse->Token,
-                'cip' => $paymentResponse->NumeroOrdenPago,
-                'reference' => $paymentResponse->CodTrans,
-            );
+            $paymentResponse = $this->ws->solicitarPago($xml);
+            $estado = (string) $paymentResponse->Estado;
+            if ($estado == '1') {
+                $return['data'] = array(
+                    'status' => OrdenRepository::PAGO_ESTADO_PENDIENTE,
+                    'token' => (string) $paymentResponse->Token,
+                    'cip' => (string) $paymentResponse->CIP->NumeroOrdenPago,
+                    'reference' => (string) $paymentResponse->CIP->IdOrdenPago,
+                    'clientReference' => (string) $paymentResponse->CodTrans,
+                    'redirect' => $this->wsConfig['baseUrl'] . $this->wsConfig['wsgenpago'] . '?token='
+                        . (string) $paymentResponse->Token
+                );
+            } else {
+                $return['success'] = false;
+                $return['error']['message'] = (string) $paymentResponse->Mensaje;
+            }
         } catch (\Exception $e) {
             $return['success'] = false;
             $return['error']['message'] = $e->getMessage();
             $return['error']['detail'] = $e->getTraceAsString();
         }
+
+        $requestHistorialData = array(
+            'ordenId' => $data['id'],
+            'method' => self::METHOD_CREATECHARGE,
+            'reference' => !empty($return['data']['reference']) ? $return['data']['reference'] : null,
+        );
+
+        $this->saveResquestHistorial($requestHistorialData);
                 
         return $return; 
     }
@@ -55,7 +72,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
             'success' => true,            
         );
 
-        $cDate - date('Y-m-d H:i:s');
+        $cDate = date('Y-m-d H:i:s');
         
         if (!empty($params['data']) && !empty($params['version']) 
             && $params['version'] == 2) {
@@ -66,23 +83,27 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 //desencriptar la data y darle formato
                 $solData = simplexml_load_string($this->ws->desencriptarData($data));
 
-                $return['data']['reference'] = $solData->CodTrans;
+                $return['data']['clientReference'] = $solData->CodTrans;
                 //Según el estado de la solicitud  Procesar	
                 Switch ($solData->Estado) {
                     case 592:                        
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
                         $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                        $return['data']['reference'] = $solData->CIP->IdOrdenPago;
                         break;
                     case 593: //Cip Pagado
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PAGADO;
                         $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                        $return['data']['reference'] = $solData->CIP->IdOrdenPago;
                         break;
                     case 595://Cip Vencido
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_EXPIRADO;
                         $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                        $return['data']['reference'] = $solData->CIP->IdOrdenPago;
                     default:
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_ERROR;
                         $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
+                        $return['data']['reference'] = $solData->CIP->IdOrdenPago;
                 }
                 $return['data']['confirmationDate'] = $cDate;
                 
@@ -91,7 +112,16 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 $return['error']['message'] = $e->getMessage();
                 $return['error']['detail'] = $e->getTraceAsString();
             }
+        } else {
+            $return['success'] = false;
         }
+
+        $requestHistorialData = array(
+            'method' => self::METHOD_PROCESSCALLBACK,
+            'reference' => !empty($return['data']['reference']) ? $return['data']['reference'] : null,
+        );
+
+        $this->saveResquestHistorial($requestHistorialData);
         
         return $return;
     }
@@ -99,8 +129,10 @@ class PagoEfectivoProcessor extends AbstractProcessor
     public function getSolicitud($data)
     {
         $options = $this->ws->getOptions();
-        
-        $expirationDate = date('d/m/Y H:i:s');
+        $expirationDays = $this->wsConfig['cipExpiracionDias'];
+
+        $cDate = date('Y-m-d H:i:s');
+        $expirationDate = date('d/m/Y H:i:s', strtotime($cDate. " + $expirationDays days"));
         
         $solicitud = new Solicitud();                        
         $solicitud->addContenido(array(
@@ -122,14 +154,14 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'UsuarioTipoDoc' => $data['comprobante_tipo'],
                     'UsuarioNumeroDoc' => $data['comprobante_numero'],
                     'UsuarioEmail' => $data['usuario_email'],
-                    'ConceptoPago' => 'Pago'
+                    'ConceptoPago' => 'Pago',
             ));
         
         $solicitud->addDetalle(
             array(array(
                 'Cod_Origen' => 'CT',
                 'TipoOrigen' => 'TO',
-                'ConceptoPago' => 'Transaccion comision 1',
+                'ConceptoPago' => $this->wsConfig['conceptoPago'],
                 'Importe' => $data['monto'])
             ));
         

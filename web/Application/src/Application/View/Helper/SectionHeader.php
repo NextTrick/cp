@@ -17,8 +17,14 @@ class SectionHeader extends AbstractHelper implements ServiceLocatorAwareInterfa
     {
         $sl = $this->getServiceLocator()->getServiceLocator();
         $data = $sl->get('Usuario\Model\Service\LoginGatewayService')->getData();
+        $cartModel = $sl->get('Cart\Model\Service\CartService')->getCart();
         
-        return $this->getView()->render('helper/section-header.phtml', array('data' => $data));
+        $totalCarrito = empty($cartModel) ? 0 : $cartModel->getQuantityCart();
+        
+        return $this->getView()->render('helper/section-header.phtml', array(
+            'data' => $data,
+            'totalCarrito' => $totalCarrito,
+        ));
     }
 
     public function getServiceLocator() {

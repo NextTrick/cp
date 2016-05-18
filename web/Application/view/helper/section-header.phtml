@@ -10,7 +10,7 @@
             <?php else : ?>
                 <div class="user_inside">
                     <ul>
-                        <li><a href=""><span class="icon_cart"></span><span class="icon_counter">3</span></a></li>
+                        <li><a href="<?php echo BASE_URL ?>carrito"><span class="icon_cart"></span><span class="icon_counter"><?php echo $totalCarrito; ?></span></a></li>
                         <li>
                             <a href="#" class="user_account">
                                 <span class="text"><?php echo $data['nombres'] ?></span>

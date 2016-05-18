@@ -18,19 +18,36 @@
                     <span class="label">Items en el carrito:</span>
                     <div class="cart">
                         <span class="icon"></span>
-                        <span class="number"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+                        <span class="number" id="spanCantidadTotal"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
                     </div>
                 </a>
                 <div class="recargas_content">
-                    <?php echo $this->sectionRecargaPromociones();  ?>
-                    <?php echo $this->sectionRecargaRecargas();  ?>
+                    <?php $tarjetaProductos = empty($cartModel) ? array() : $cartModel->getProductsGroup(); ?>
+                    <?php echo $this->sectionRecargaPromociones($tarjetaProductos);  ?>
+                    <?php echo $this->sectionRecargaRecargas($tarjetaProductos);  ?>
                     <br/><br/>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<?php echo $this->sectionCart($usuarioId, $tarjetaCodigo);  ?>
+<div class="bottom_bar"><span class="text">Estás recargando: </span>
+    <div class="select"><span></span>
+        <select name="tarjeta" id="tarjeta">
+            <?php foreach ($usuarioTarjetas as $codigo => $nombre) : ?>
+            <?php $select = ($codigo == $tarjetaCodigo) ? 'selected="selected"' : ''; ?>
+            <option value="<?php echo $codigo; ?>" <?php echo $select; ?>><?php echo $nombre; ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <?php $cantidad = empty($cartModel) ? '0' : $cartModel->getQuantityGroup(); ?>
+    <?php $monto = empty($cartModel) ? '0.00' : $cartModel->getAmountGroup(true); ?>
+    <span class="bg" id="spanSubtotal"> <span class="text">Recargas: </span><?php echo $cantidad; ?> <span>/ </span>S/. <?php echo $monto; ?></span>
+    <span class="text">Monto total: </span>
+    <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
+    <span class="bg total" id="spanTotal">S/. <?php echo $montoTotal; ?></span><button id="confirmarCompra" class="btn btn_orange">Confirmar compra </button>
+</div>
+
 
 <script type="text/javascript" >
     var cart = {
@@ -57,6 +74,7 @@
                     if (data.success) {
                         $('#spanSubtotal').html(' <span class="text">Recargas: </span>'+data.data.cantidad+' <span>/ </span>S/. '+data.data.subtotal);
                         $('#spanTotal').html('S/. '+data.data.total);
+                        $('#spanCantidadTotal').html(data.data.cantidadTotal);
                         result = true;
                     }
                     cart.bloquear = 0;

@@ -31,10 +31,10 @@ return array(
     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
-        'database' => 'coneypark',
-        'username' => 'root',
-        'password' => '',
-        'port' => '3306',        
+        'database' => 'pasarelaconeydev',
+        'username' => 'idigital',
+        'password' => '1D1g1t4L',
+        'port' => '3306',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
@@ -164,7 +164,7 @@ return array(
                 
                 'merchanId' => 'ACI',
                 //'merchanId' => 'HOK',                
-                'baseUrl' => 'http://pre.2b.pagoefectivo.pe/',
+                'baseUrl' => 'https://pre.2b.pagoefectivo.pe/',
                 'wscrypta' => 'PagoEfectivoWSCrypto/WSCrypto.asmx?WSDL', //data encrypt ws
                 'wscip2' => 'PagoEfectivoWSGeneralv2/service.asmx?WSDL', //cip generator ws 
                 'wsgenpago' => 'GenPago.aspx', //PE's CIP window
@@ -173,7 +173,10 @@ return array(
                 'publickey' => 'SPE_PublicKey.1pz', //PE's public key
                 'privatekey' => 'ACI_PrivateKey.1pz', // PE's secret key                
                 'medioPago' => '1,2',
-                'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key           
+                'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key
+
+                'conceptoPago' => 'Recarga de Tarjeta ConeyPark',
+                'cipExpiracionDias' => 3
             ),
             'visa' => array(                
                 'baseUrl' => 'http://qas.multimerchantvisanet.com/',

@@ -34,18 +34,23 @@ class IndexController extends AbstractActionController
     }
     
     public function testPeAction()
-    {        
+    {
+
+        $id = 100 + rand(1,1000);
         $data = array(
-            'id' => 1,
-            'perfilpago_nombres' => 'Angel',
-            'perfilpago_paterno' => 'Jara',
-            'perfilpago_materno' => 'Vilca',
-            'perfilpago_nombres' => 'NextTrick',
-            'comprobante_tipo' => 'DNI',
-            'comprobante_numero' => '11872911',
-            'usuario_email' => 'ing.angeljara@gmail.com',
-            'usuario_id' => 1,
-            'monto' => 20.00
+            'id' => $id, // ID DE LA ORDEN
+            'perfilpago_nombres' => 'Angel', // NOMBRE DEL PERFIL DE PAGO
+            'perfilpago_paterno' => 'Jara', // APELLIDO PATERNO DEL PERFIL DE PAGO
+            'perfilpago_materno' => 'Vilca', // APELLIDO MATERNO DEL PERFIL DE PAGO
+            'perfilpago_alias' => 'NextTrick', // ALIAS DEL PERFIL DE PAGO (para nuestro caso, el mismo de nombres)
+            'perfilpago_pais' => 'PERU', // PAIS DEL PERFIL DE PAGO
+            'perfilpago_departamento' => 'LIMA',  // DEPARTAMENTO DEL PERFIL DE PAGO
+            'perfilpago_distrito' => 'LIMA', // DISTRITO DEL PERFIL DE PAGO
+            'comprobante_tipo' => 'DNI', // TIPO COMPROBANTE
+            'comprobante_numero' => '11872911', // NRO COMPROBANTE
+            'usuario_email' => 'ing.angeljara@gmail.com',  // CORREO DE USUARIO LOGUEADO
+            'usuario_id' => 1, // ID DE USUARIO LOGUEADO
+            'monto' => '20.00' // MONTO EN CON 2 DECIMALES
         );
                         
         try {
@@ -53,29 +58,34 @@ class IndexController extends AbstractActionController
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
 
             $response = $paymentProcessor->createCharge($data);
-            var_dump($response);
+
+            //var_dump($response);
+            return $this->redirect()->toUrl($response['data']['redirect']); exit;
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
         
         echo 'fin'; exit;
-        
-        exit;
     }
     
     public function testVisaAction()
-    {                                
+    {
+        $id = 100 + rand(1,1000);
         $data = array(
-            'id' => 10,
+            'id' => $id,
             'perfilpago_nombres' => 'Angel',
             'perfilpago_paterno' => 'Jara',
             'perfilpago_materno' => 'Vilca',
             'perfilpago_nombres' => 'NextTrick',
+            'perfilpago_pais' => 'PERU',
+            'perfilpago_departamento' => 'LIMA',
+            'perfilpago_distrito' => 'LIMA',
             'perfilpago_direccion' => 'Av. Carcamo',
             'comprobante_tipo' => 'DNI',
             'comprobante_numero' => '11872911',
             'usuario_email' => 'ing.angeljara@gmail.com',
-            'monto' => '1000.10'
+            'usuario_id' => 1,
+            'monto' => '100.10'
         );
         
         try {            
@@ -83,15 +93,14 @@ class IndexController extends AbstractActionController
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
                     
             $response = $paymentProcessor->createCharge($data);
-            var_dump($response);
-        
+
+            //var_dump($response);
+            echo $response['data']['html']; exit;
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
 
         echo 'fin'; exit;
-
-        exit;
     }
     
     public function phpinfoAction()

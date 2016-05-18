@@ -121,7 +121,7 @@ class Visa
     {
         $strReturn = "";
 
-        $xpath = new DOMXPath($xmlDoc);
+        $xpath = new \DOMXPath($xmlDoc);
         $nodeList = $xpath->query("//registro/campo[@id='ETICKET']");
 
         $XmlNode= $nodeList->item(0);
@@ -167,6 +167,8 @@ class Visa
         $requestData = $this->getRetrieveEticketRequestData($data); 
         
         $response = $this->client->ConsultaEticket($requestData);
+
+        return $response;
     }
     
     protected function getCreateEticketRequestData($data)
@@ -191,10 +193,10 @@ class Visa
     {
         $retrieveEticketRequestData = array(
             'commerceCode' => $this->config['codigoComercio'],
-            'eTicket' => $data['reference']
+            'eTicket' => $data['eticket']
         );
         
-        $retrieveEticketRequestData = $this->getViewXml('retrive-eticket.xml', $retrieveEticketRequestData);
+        $retrieveEticketRequestData = $this->getViewXml('retrieve-eticket.xml', $retrieveEticketRequestData);
         
         return array('xmlIn' => $retrieveEticketRequestData);                
     }

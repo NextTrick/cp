@@ -13,7 +13,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class SectionRecargaRecargas extends AbstractHelper implements ServiceLocatorAwareInterface
 {
-    public function __invoke()
+    public function __invoke($tarjetaProductos)
     {
         $sl = $this->getServiceLocator()->getServiceLocator();
         $config = $sl->get('config');
@@ -24,6 +24,7 @@ class SectionRecargaRecargas extends AbstractHelper implements ServiceLocatorAwa
         $rows = $sl->get('Paquete\Model\Service\PaqueteService')->recargaRecargas();
         return $this->getView()->render('helper/section-recarga-recargas.phtml', array(
             'rows' => $rows,
+            'tarjetaProductos' => $tarjetaProductos,
             'urlImg' => $config['fileDir']['paquete_paquete']['down'],
         ));
     }
