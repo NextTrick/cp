@@ -31,7 +31,7 @@ class OauthFormService
         self::INVALID_CREDENTIAL => 'Los datos ingresados son incorrectos.',
         self::INVALID_USER => 'Los datos ingresados son incorrectos.',
         self::INVALID_LOGIN => 'Los datos ingresados son incorrectos.',
-        self::DISABLED_USER => 'El usuario esta deshabilitado.',
+        self::DISABLED_USER => 'El usuario no esta activado.',
     );
     
     protected $_repository = null;
@@ -73,9 +73,15 @@ class OauthFormService
                 case Result::SUCCESS:
                     if ($result->isValid()) {
                         $data = $this->getRepository()->getUsuarioByEmail($email);
-                        $this->_auth->getStorage()->write($data);
-                        $this->_resultLogin->error = false;
-                        $this->_resultLogin->message = null;
+                        if (!empty($data)) {
+                            $this->_auth->getStorage()->write($data);
+                            $this->_resultLogin->error = false;
+                            $this->_resultLogin->message = null;
+                        } else {
+                            $this->logout();
+                            $this->_resultLogin->error = true;
+                            $this->_resultLogin->message = $this->messages[self::DISABLED_USER];
+                        }
                     }
                     break;
             }

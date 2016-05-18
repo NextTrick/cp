@@ -141,6 +141,16 @@ header
 				display inline-block
 				vertical-align top
 				text-align center
+				@keyframes changewidth
+					from
+						margin 0
+					to
+						margin -10px 0 0
+				&:hover
+					animation-duration 0.15s
+					animation-name changewidth
+					animation-iteration-count 3
+					animation-direction alternate
 				a
 					text-decoration none
 					color #972482
@@ -169,6 +179,8 @@ header
 				&.logo
 					width 200px
 					margin -10px 20px 0
+					&:hover
+						animation none
 					img
 						width 200px
 .right_options
@@ -228,6 +240,10 @@ header
 		background #FF5800
 	&.btn_save_signin
 		margin-top 20px
+.bg_purple_dark
+	background #370135
+	height 42px
+	width 100%
 section
 	padding-top 120px
 	padding-bottom 50px
@@ -517,6 +533,15 @@ section
 			width 120px
 			margin 0 auto
 			text-align center
+			span
+				width 20px
+				height 4px
+				background #400040
+				display inline-block
+				margin 0 -4px
+				margin-bottom 3px
+				&.yellow
+					background #FFAA00
 			.step
 				width 36px
 				height 36px
@@ -526,7 +551,6 @@ section
 				padding-top 10px
 				text-align center
 				display inline-block
-				margin 0 10px
 				&.active
 					background #FFAA00
 					color #400040
@@ -603,12 +627,15 @@ section
 					padding 15px 10px 10px
 					box-sizing border-box
 					border-radius 10px
+					height 188px
 					input
 						margin-bottom 10px
 					button
 						width 100%
+					.parsley-errors-list
+						margin-top -10px
 					.link_orange
-						margin-top 8px
+						margin-top -10px
 						color #FF5800
 					display none
 				.loading
@@ -784,7 +811,7 @@ section
 				.col_3
 					display inline-block
 					vertical-align top
-					margin 10px 7px
+					margin 10px 7px 50px
 					width 286px
 					height 240px
 					background url(../images/offer_bg.png)
@@ -800,9 +827,9 @@ section
 							overflow hidden
 						p
 							padding 0 10px
-							font-size 16px
+							font-size 15px
 							margin 8px 0px
-							line-height 22px
+							line-height 20px
 							&.breadcrumb
 								text-align left
 								color #FF0000
@@ -936,6 +963,8 @@ section
 								font-weight normal
 								.legal
 									cursor pointer
+									text-decoration none
+									color #808080
 							h4
 								margin 7px 0
 								strong
@@ -1078,6 +1107,8 @@ section
 									font-weight normal
 									.legal
 										cursor pointer
+										color #808080
+										text-decoration none
 								h4
 									margin 7px 0
 									strong
@@ -1309,6 +1340,7 @@ section
 	border-radius 25px
 	padding 10px 20px
 	position relative
+	bottom -24px
 	.select
 		display inline-block
 		margin 0px 20px 0 10px
@@ -1448,7 +1480,7 @@ footer
 			margin 0
 		.text_box
 			overflow-y scroll
-			height 180px
+			height 138px
 #how_asociate_card
 	width 500px
 	height 685px
@@ -1660,6 +1692,9 @@ i[class*=" icon-"]
 									h5
 										position absolute
 										top 0
+									h4
+										margin-left 110px
+										min-height 66px
 								>.left
 									margin-top 15px
 									margin-right 10px
@@ -1683,6 +1718,8 @@ i[class*=" icon-"]
 										h5
 											position absolute
 											top 0
+										h4
+											min-height 66px
 										.card_type
 											>span
 												display none
@@ -1703,6 +1740,7 @@ i[class*=" icon-"]
 							height auto !important
 				.recargas_content
 					.offers
+						margin-top 45px
 						.col_3
 							margin-bottom 45px
 				.options
@@ -1803,7 +1841,7 @@ i[class*=" icon-"]
 					margin-left 0
 							
 	footer
-		background white
+		background white !important
 		height 120px
 		margin-top 40px
 		position relative

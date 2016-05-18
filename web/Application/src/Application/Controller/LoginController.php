@@ -56,9 +56,9 @@ class LoginController extends SecurityWebController
         $password = $values['password'];
 
         $usuarioBd = $this->_getUsuarioService()->getRepository()->findOne(array(
-            'email' => $email,
+            'where' => array('email' => $email),
         ));
-        
+
         $result = new \stdClass();
         $result->error = true;
         $result->message = 'La cuenta no se encuentra registrado.';
@@ -75,18 +75,23 @@ class LoginController extends SecurityWebController
                 'EMail' => $email,
                 'Password' => $password,
             ));
+
             if ($usuarioWs['success']) {
                 $mguid = $usuarioWs['mguid'];
                 $success = $this->_getUsuarioService()
                     ->registrarUsuarioDeTrueFi($mguid, $password);
-                
                 if ($success) {
-                    $success = $this->_getLoginGatewayService()->loginOffline($email);
-                }
-                
-                if ($success) {
-                    $result->error = false;
-                    $result->message = null;
+                    //activar en True-Fi
+                    $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $mguid));
+                    
+                    $data = $this->_getLoginGatewayService()->loginOffline($email);
+                    if ($data['success']) {
+                        $result->error = false;
+                        $result->message = null;
+                    } else {
+                        $result->error = true;
+                        $result->message = $data['message'];
+                    }
                 } else {
                     $result->error = true;
                     $result->message = 'Los datos ingresados son incorrectos.';

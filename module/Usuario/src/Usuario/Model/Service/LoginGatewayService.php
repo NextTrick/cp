@@ -103,17 +103,19 @@ class LoginGatewayService
         $service = $this->_sl->get("Usuario\Model\Service\UsuarioService");
         $criteria = array('where' => array('email' => $email, 'estado' => 1));
         $usuario = $service->getRepository()->findOne($criteria);
+        $result = array('success' => false, 'message' => 'El usuario no esta activado.');
         if (!empty($usuario)) {
             $password = \Common\Helpers\Crypto::decrypt($usuario['password'], $usuario['email']);
             
             $oauth = $this->_getLoginService(self::LOGIN_FORM);
-            $result = $oauth->login($usuario['email'], $password)->getResultLogin();
-            if ($result->error === false) {
-                return true;
+            $data = $oauth->login($usuario['email'], $password)->getResultLogin();
+            if ($data->error === false) {
+                $result['success'] = true;
+                $result['message'] = $data->message;
             }
         }
         
-        return false;
+        return $result;
     }
 
     protected function _getLoginService($gateway)

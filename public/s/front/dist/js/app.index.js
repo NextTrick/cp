@@ -401,13 +401,13 @@ $(function() {
       },
       watchDetail: function() {
         $(this).hide();
-        dom.itemDetail.show();
-        dom.hiddenDetail.show();
+        $(this).next().show();
+        $(this).parent().prev().show();
       },
       hiddenDetail: function() {
         $(this).hide();
-        dom.itemDetail.hide();
-        dom.watchDetail.show();
+        $(this).prev().show();
+        $(this).parent().prev().hide();
       },
       changeCard: function() {
         if ($(this).hasClass('pagoefectivo')) {

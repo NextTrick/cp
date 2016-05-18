@@ -79,6 +79,7 @@ class UsuarioService
                 $this->_repository->save($data);
                 return true;
             } catch (\Exception $e) {
+                \Common\Helpers\Error::initialize()->logException($e);
             }
         }
         return false;

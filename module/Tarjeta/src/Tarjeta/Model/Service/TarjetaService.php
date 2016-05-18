@@ -29,11 +29,6 @@ class TarjetaService
             'limit' => LIMIT_USUARIO_TARJETAS,
         );
         $rows = $this->_repository->findAll($criteria);
-        foreach ($rows as $key => $row) {
-            $mRow = $this->getOnlineTarjeta($row['cguid']);
-            $row = array_merge($row, $mRow);
-            $rows[$key] = $row;
-        }
         $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
         
         return $results;

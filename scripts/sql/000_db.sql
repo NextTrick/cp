@@ -288,30 +288,31 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `usuario_perfil_pago` ;
 
-CREATE TABLE IF NOT EXISTS `usuario_perfil_pago` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `usuario_id` INT NOT NULL,
-  `comprobante_tipo` TINYINT(1) NOT NULL,
-  `comprobante_numero` VARCHAR(10) NULL,
-  `fac_razon_social` VARCHAR(150) NULL,
-  `fac_ruc` VARCHAR(11) NULL,
-  `fac_direccion_fiscal` VARCHAR(150) NULL,
-  `fac_direccion_entrega_factura` VARCHAR(150) NULL,
-  `nombres` VARCHAR(30) NULL,
-  `paterno` VARCHAR(30) NULL,
-  `materno` VARCHAR(30) NULL,
-  `ciudadania` TINYINT(1) NULL,
-  `doc_identidad` VARCHAR(10) NULL,
-  `direccion` VARCHAR(150) NULL,
-  `pais_id` INT NULL,
-  `distrito_id` INT NULL,
-  `fecha_creacion` DATETIME NULL,
-  `fecha_edicion` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_usuario_perfil_pago_usuario_usuario1_idx` (`usuario_id` ASC),
+CREATE  TABLE IF NOT EXISTS `usuario_perfil_pago` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `usuario_id` INT NOT NULL ,
+  `comprobante_tipo` TINYINT(1) NOT NULL ,
+  `comprobante_numero` VARCHAR(10) NULL ,
+  `fac_razon_social` VARCHAR(150) NULL ,
+  `fac_ruc` VARCHAR(11) NULL ,
+  `fac_direccion_fiscal` VARCHAR(150) NULL ,
+  `fac_direccion_entrega_factura` VARCHAR(150) NULL ,
+  `nombres` VARCHAR(30) NULL ,
+  `paterno` VARCHAR(30) NULL ,
+  `materno` VARCHAR(30) NULL ,
+  `ciudadania` TINYINT(1) NULL ,
+  `documento_tipo` INT NULL ,
+  `documento_numero` VARCHAR(11) NULL ,
+  `direccion` VARCHAR(150) NULL ,
+  `pais_id` INT NULL ,
+  `distrito_id` INT NULL ,
+  `fecha_creacion` DATETIME NULL ,
+  `fecha_edicion` DATETIME NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_usuario_perfil_pago_usuario_usuario1_idx` (`usuario_id` ASC) ,
   CONSTRAINT `fk_usuario_perfil_pago_usuario_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `usuario_usuario` (`id`)
+    FOREIGN KEY (`usuario_id` )
+    REFERENCES `usuario_usuario` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

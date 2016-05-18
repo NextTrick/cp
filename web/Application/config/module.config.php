@@ -87,7 +87,7 @@ return array(
                     ),
                 ),
             ),
-            /*'web-recuperar-password' => array(
+            'web-recuperar-password' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/recuperar-password[/]',
@@ -96,8 +96,8 @@ return array(
                         'action'     => 'recuperar-password',
                     ),
                 ),
-            ),*/
-            'web-modificar-password' => array(
+            ),
+            /*'web-modificar-password' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/modificar-password[/:codigo]',
@@ -109,7 +109,7 @@ return array(
                         'action'     => 'modificar-password',
                     ),
                 ),
-            ),
+            ),*/
             'web-mis-tarjetas' => array(
                 'type' => 'Segment',
                 'options' => array(
@@ -117,6 +117,16 @@ return array(
                     'defaults' => array(
                         'controller' => 'Application\Controller\MisTarjetas',
                         'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-tarjeta-unidad' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/mis-tarjetas/tarjeta-unidad',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\MisTarjetas',
+                        'action'     => 'tarjeta-unidad',
                     ),
                 ),
             ),

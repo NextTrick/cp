@@ -178,7 +178,7 @@ class CarritoController extends SecurityWebController
         return $view;
     }
     
-    public function pagarAction()
+    public function perfilPagoAction()
     {
         $response = $this->getResponse();
         $result = array('success' => false, 'message' => ERROR_VALIDACION);
@@ -190,15 +190,191 @@ class CarritoController extends SecurityWebController
         }
         
         if ($this->request->isPost()) {
+            $usuario = $this->_getUsuarioData();
             $tokenCsrf = $this->request->getPost('token_csrf');
-            $data = $this->request->getPost();
-            var_dump($data);
-            exit;
+            $validator1 = new \Zend\Validator\Csrf();
+            $validator1->setName('token_csrf');
+            $isValidToken = $validator1->isValid($tokenCsrf);
+            $result['token'] = $validator1->getHash(true);
+            if (!$isValidToken) {
+                $result['message'] = ERROR_TOKEN;
+                $jsonModel =  new \Zend\View\Model\JsonModel($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+            $perfilPagoId = $this->request->getPost('perfil_pago');
+            $criteria = array(
+                'where' => array('id' => $perfilPagoId, 'usuario_id' => $usuario->id),
+                'columns' => array(
+                    'fac_razon_social',
+                    'fac_direccion_fiscal',
+                    'fac_direccion_entrega_factura',
+                    'documento_numero',
+                    'distrito_id',
+                ),
+            );
+            $row = $this->_getPerfilPagoService()->getRepository()->findOne($criteria);
+            if (!empty($row)) {
+                $ubigeo = array();
+                if (!empty($row['distrito_id'])) {
+                    $criteria = array('where' => array('id' => $row['distrito_id']));
+                    $ubigeo = $this->_getUbigeoService()->getRepository()->findOne($criteria);
+                }
+
+                $row['cod_dist'] = empty($ubigeo['cod_dist']) ? null : $ubigeo['cod_dist'];
+                unset($row['distrito_id']);
+
+                $result['success'] = true;
+                $result['message'] = null;
+                $result['data'] = $row;
+            }
+        }
+        $jsonModel =  new \Zend\View\Model\JsonModel($result);
+        return $response->setContent($jsonModel->serialize());
+    }
+    
+    public function pagarAction()
+    {
+        $response = $this->getResponse();
+        $result = array('success' => false, 'message' => ERROR_VALIDACION, 'paramsInvalid' => array());
+        
+        if ($this->_isLogin() === false) {
+            $result['message'] = ERROR_303;
+            $jsonModel =  new \Zend\View\Model\JsonModel($result);
+            return $response->setContent($jsonModel->serialize());
+        }
+        
+        if ($this->request->isPost()) {
+            $usuario = $this->_getUsuarioData();
+            $tokenCsrf = $this->request->getPost('token_csrf');
+            $validator1 = new \Zend\Validator\Csrf();
+            $validator1->setName('token_csrf');
+            $isValidToken = $validator1->isValid($tokenCsrf);
+            $result['token'] = $validator1->getHash(true);
+            if (!$isValidToken) {
+                $result['message'] = ERROR_TOKEN;
+                $jsonModel =  new \Zend\View\Model\JsonModel($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+            
+            $perfilPagoId = $this->request->getPost('perfil_pago');
+            $comprobanteTipo = $this->request->getPost('comprobante_tipo');
+            $metodoPago = $this->request->getPost('metodo_pago');
+            $params = $this->request->getPost();
+
+            switch ($comprobanteTipo) {
+                case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA:
+                    $data = array(
+                        'usuario_id' => $usuario->id,
+                        'comprobante_tipo' => $comprobanteTipo,
+                        'nombres' => $params['nombres'],
+                        'paterno' => $params['paterno'],
+                        'materno' => $params['materno'],
+                        'documento_tipo' => \Orden\Model\Service\OrdenService::TIPO_DOCUMENTO_DNI,
+                        'documento_numero' => $params['documento_numero'],
+                    );
+                    break;
+                case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA:
+                    $criteria = array('where' => array(
+                        'cod_pais' => \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU,
+                        'cod_depa' => \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA,
+                        'cod_prov' => \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA,
+                        'cod_dist' => $params['cod_dist'],
+                    ));
+                    $row = $this->_getUbigeoService()->getRepository()->findOne($criteria);
+                    $distritoId = empty($row) ? null : $row['id'];
+                    $data = array(
+                        'usuario_id' => $usuario->id,
+                        'comprobante_tipo' => $comprobanteTipo,
+                        'fac_razon_social' => $params['fac_razon_social'],
+                        'fac_direccion_fiscal' => $params['fac_direccion_fiscal'],
+                        'fac_direccion_entrega_factura' => $params['fac_direccion_entrega_factura'],
+                        'documento_tipo' => \Orden\Model\Service\OrdenService::TIPO_DOCUMENTO_RUC,
+                        'documento_numero' => $params['ruc'],
+                        'distrito_id' => $distritoId,
+                    );
+                    break;
+            }
+            
+            $paramsInvalid = array();
+            foreach ($data as $key => $value) {
+                $filter = new \Zend\Filter\StripTags();
+                $value = $filter->filter($value);
+                $valid = new \Zend\Validator\NotEmpty();
+                $data[$key] = $value;
+                if ($valid->isValid($value) == false) {
+                    $paramsInvalid[] = $key;
+                }
+            }
+            
+            if (empty($data) || !empty($paramsInvalid)) {
+                $result['paramsInvalid'] = $paramsInvalid;
+                $jsonModel =  new \Zend\View\Model\JsonModel($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+            
+            if (!empty($data)) {
+                $success = $this->_pagar($metodoPago, $data);
+                if ($success) {
+                    $success = $this->_savePerfilPago($comprobanteTipo, $perfilPagoId, $usuario, $data);
+                    $result['success'] = true;
+                    $result['message'] = null;
+                } else {
+                    $result['message'] = 'No se pudo realizar la transacción.';
+                }
+            }
         }
         $jsonModel =  new \Zend\View\Model\JsonModel($result);
         return $response->setContent($jsonModel->serialize());
     }
 
+    private function _pagar($metodoPago, $data)
+    {
+        $ordenId = $this->_getOrdenService()->getRepository()->save($data);
+        
+        $cartModel = $this->_getCartService()->getCart();
+        if (!empty($cartModel)) {
+            foreach ($cartModel->getProductsCart() as $productos) {
+                foreach ($productos as $producto) {
+                    //llamar 
+                }
+            }
+        }
+
+        $procesor = false;
+        switch ($metodoPago) {
+            case 'pe':
+                //codigo
+                $procesor = true;
+                break;
+            case 'visa':
+                //codigo
+                $procesor = true;
+                break;
+        }
+
+        return $procesor;
+    }
+    
+    private function _savePerfilPago($comprobanteTipo, $perfilPagoId, $usuario, $data)
+    {
+        if ($comprobanteTipo == \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA) {
+            $criteria = array('where' => array('id' => $perfilPagoId, 'usuario_id' => $usuario->id));
+            $row = $this->_getPerfilPagoService()->getRepository()->findOne($criteria);
+            if (!empty($row)) {
+                $data['fecha_edicion'] = date('Y-m-d H:i:s');
+                $this->_getPerfilPagoService()->getRepository()->save($data, $row['id']);
+            } else {
+                $data['fecha_creacion'] = date('Y-m-d H:i:s');
+                $this->_getPerfilPagoService()->getRepository()->save($data);
+            }
+        }
+    }
+
+    private function _getOrdenService()
+    {
+        return $this->getServiceLocator()->get('Orden\Model\Service\OrdenService');
+    }
+    
     private function _getUbigeoService()
     {
         return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');

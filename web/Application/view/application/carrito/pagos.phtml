@@ -13,6 +13,7 @@
                 <p class="yellow_text small_text">Recarga de mis tarjetas</p>
                 <div class="steps">
                     <div class="step active">1</div>
+                    <span class="yellow"></span>
                     <div class="step active">2</div>
                 </div>
                 <a href="<?php echo BASE_URL ?>carrito" class="cart_box">
@@ -27,7 +28,7 @@
                         <h4>1. Datos del Pago</h4>
                         <p>Datos solicitados para la generación del comprobante</p>
                         <div class="error_message" style="display: none;"><span class="icon"></span>
-                            <p>Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.</p>
+                            <p id="messageError">Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.</p>
                         </div>
                         <div class="voucher">
                             <input type="radio" name="comprobante_tipo" checked="checked" class="boleta" value="<?php echo \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA; ?>"/>Boleta
@@ -52,6 +53,7 @@
                             </div>
                         </div>
                         <div class="content_factura">
+                            <?php if (!empty($perfilPagos)) : ?>
                             <div class="form_control">
                                 <label for="perfil_pago">Perfil de pago</label>
                                 <select id="perfil_pago" name="perfil_pago">
@@ -61,6 +63,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                            <?php endif; ?>
                             <div class="form_control">
                                 <label for="fac_razon_social">Razón Social</label>
                                 <input id="fac_razon_social" name="fac_razon_social" type="text"/>
@@ -81,8 +84,8 @@
                                 <input type="checkbox"/>Misma dirección fiscal
                             </div>
                             <div class="form_control">
-                                <label for="distrito">Distrito</label>
-                                <select id="distrito" name="distrito">
+                                <label for="cod_dist">Distrito</label>
+                                <select id="cod_dist" name="cod_dist">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($distritos as $key => $value) : ?>
                                         <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
@@ -111,7 +114,7 @@
                                         </div>
                                         <div class="right">
                                             <h5><?php echo $producto->getProductName(); ?><span>. </span>
-                                                <span class="legal">Ver legal</span>
+                                                <a href="#modal_watch_legal" name="modal" class="legal">Ver legal</a>
                                             </h5>
                                             <h4 class="item_title"><?php echo $producto->getProductName2(); ?></h4>
                                             <div class="card_type">
@@ -162,7 +165,20 @@
                 </div>
             </div>
         </div>
+        
     </div>
+    <div id="modal_watch_legal" class="modal_box">
+          <div class="modal_content">
+            <h3>Importante:</h3>
+            <hr/>
+            <div class="text_box">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt leo erat. Maecenas dapibus, diam quis dapibus elementum, risus diam congue risus, vitae tristique magna orci et sem. Aliquam congue ut tellus eu ultricies. Vestibulum tristique sapien sit amet accumsan feugiat. Integer congue suscipit dictum. Ut a nisl tempus, ornare erat at, ultrices lectus. Suspendisse pulvinar eros vel finibus ultricies. Maecenas lacinia, tellus ac egestas tincidunt, turpis ipsum pulvinar arcu, et blandit purus lectus vitae odio. Phasellus lobortis, orci non efficitur consectetur, mauris urna ornare nisl, non sodales lectus sapien ac diam. Morbi ligula lorem, tristique in cursus et, vulputate quis lorem. Suspendisse ut erat turpis. </p>
+              <p>Sed sed tellus pulvinar, lobortis est sit amet, mollis lectus. Suspendisse semper vestibulum erat at lacinia. Mauris eget quam sit amet magna rutrum maximus in sed ipsum. Etiam libero justo, dictum non malesuada ut, ullamcorper at leo. Vestibulum accumsan condimentum lectus, et faucibus justo sodales non. Aliquam dictum ipsum sit amet nisl elementum commodo ut ut ligula. Aliquam sagittis fermentum gravida. Vestibulum eu neque eget neque placerat ullamcorper at sit amet mauris. Morbi tellus odio, lacinia a libero sed, congue cursus urna. </p>
+              <p>Suspendisse potenti. Quisque ipsum ante, luctus quis leo sit amet, mattis convallis enim. Donec feugiat vehicula felis. In lacinia quis est eget tempus. Pellentesque vulputate augue vel nibh sagittis sollicitudin. Etiam eu laoreet tellus. Sed id fermentum lorem. Fusce feugiat, libero nec finibus egestas, tellus risus dignissim dui, ultricies condimentum lectus erat et leo. Integer semper erat sit amet ex tempor, sed eleifend libero venenatis. Proin a arcu quis arcu dapibus tristique. Fusce vehicula diam vitae diam faucibus rutrum quis et leo. Nullam ex metus, mollis eget dignissim quis, bibendum et mauris. Integer bibendum, lacus sit amet tincidunt aliquam, sapien arcu tempor nisi, eget egestas massa felis ut purus. Nulla a purus a nisl tincidunt scelerisque. Proin tempor arcu et tortor lacinia, ac pellentesque eros consectetur. Aenean eget eros in lectus auctor finibus ac nec ex.</p>
+            </div>
+          </div>
+        </div>
+        <div id="mask"></div>
 </section>
 </form>
 <script type="text/javascript">
@@ -175,13 +191,41 @@
           success: function(data) {
             $('#token_csrf').val(data.token);
             if (data.success) {
-              $('#error_message').hide();
+              $('.error_message').hide();
             } else {
-              $('#error_message').show();
+              $('#messageError').html(data.message);
+              $('.error_message').show();
             }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
-              $('#error_message').show();
+              $('#messageError').html('Error desconocido, vuelva a intentarlo por favor.');
+              $('.error_message').show();
+          }
+        });
+    });
+
+    $('#perfil_pago').change(function(){
+        $.ajax({
+          type: "POST",
+          url: baseUrl + 'carrito/perfil-pago',
+          data: {perfil_pago:$('#perfil_pago').val(), token_csrf:$('#token_csrf').val()},
+          dataType: 'json',
+          success: function(data) {
+            $('#token_csrf').val(data.token);
+            $('#fac_razon_social').val('');
+            $('#fac_direccion_fiscal').val('');
+            $('#fac_direccion_entrega_factura').val('');
+            $('#ruc').val('');
+            $('#cod_dist').val('');
+            if (data.success) {
+                $('#fac_razon_social').val(data.data.fac_razon_social);
+                $('#fac_direccion_fiscal').val(data.data.fac_direccion_fiscal);
+                $('#fac_direccion_entrega_factura').val(data.data.fac_direccion_entrega_factura);
+                $('#ruc').val(data.data.documento_numero);
+                $('#cod_dist').val(data.data.cod_dist);
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
           }
         });
     });
