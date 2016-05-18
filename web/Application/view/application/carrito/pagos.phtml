@@ -28,7 +28,7 @@
                         <h4>1. Datos del Pago</h4>
                         <p>Datos solicitados para la generación del comprobante</p>
                         <div class="error_message" style="display: none;"><span class="icon"></span>
-                            <p>Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.</p>
+                            <p id="messageError">Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.</p>
                         </div>
                         <div class="voucher">
                             <input type="radio" name="comprobante_tipo" checked="checked" class="boleta" value="<?php echo \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA; ?>"/>Boleta
@@ -53,6 +53,7 @@
                             </div>
                         </div>
                         <div class="content_factura">
+                            <?php if (!empty($perfilPagos)) : ?>
                             <div class="form_control">
                                 <label for="perfil_pago">Perfil de pago</label>
                                 <select id="perfil_pago" name="perfil_pago">
@@ -62,6 +63,7 @@
                                     <?php endforeach; ?>
                                 </select>
                             </div>
+                            <?php endif; ?>
                             <div class="form_control">
                                 <label for="fac_razon_social">Razón Social</label>
                                 <input id="fac_razon_social" name="fac_razon_social" type="text"/>
@@ -82,8 +84,8 @@
                                 <input type="checkbox"/>Misma dirección fiscal
                             </div>
                             <div class="form_control">
-                                <label for="distrito">Distrito</label>
-                                <select id="distrito" name="distrito">
+                                <label for="cod_dist">Distrito</label>
+                                <select id="cod_dist" name="cod_dist">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($distritos as $key => $value) : ?>
                                         <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
@@ -189,13 +191,41 @@
           success: function(data) {
             $('#token_csrf').val(data.token);
             if (data.success) {
-              $('#error_message').hide();
+              $('.error_message').hide();
             } else {
-              $('#error_message').show();
+              $('#messageError').html(data.message);
+              $('.error_message').show();
             }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
-              $('#error_message').show();
+              $('#messageError').html('Error desconocido, vuelva a intentarlo por favor.');
+              $('.error_message').show();
+          }
+        });
+    });
+
+    $('#perfil_pago').change(function(){
+        $.ajax({
+          type: "POST",
+          url: baseUrl + 'carrito/perfil-pago',
+          data: {perfil_pago:$('#perfil_pago').val(), token_csrf:$('#token_csrf').val()},
+          dataType: 'json',
+          success: function(data) {
+            $('#token_csrf').val(data.token);
+            $('#fac_razon_social').val('');
+            $('#fac_direccion_fiscal').val('');
+            $('#fac_direccion_entrega_factura').val('');
+            $('#ruc').val('');
+            $('#cod_dist').val('');
+            if (data.success) {
+                $('#fac_razon_social').val(data.data.fac_razon_social);
+                $('#fac_direccion_fiscal').val(data.data.fac_direccion_fiscal);
+                $('#fac_direccion_entrega_factura').val(data.data.fac_direccion_entrega_factura);
+                $('#ruc').val(data.data.documento_numero);
+                $('#cod_dist').val(data.data.cod_dist);
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
           }
         });
     });
