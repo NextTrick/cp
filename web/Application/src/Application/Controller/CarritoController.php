@@ -191,12 +191,40 @@ class CarritoController extends SecurityWebController
         
         if ($this->request->isPost()) {
             $tokenCsrf = $this->request->getPost('token_csrf');
-            $data = $this->request->getPost();
+            $comprobanteTipo = $this->request->getPost('comprobante_tipo');
+            $params = $this->request->getPost();
+            var_dump($params);exit;
+   
+            switch ($comprobanteTipo) {
+                case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA:
+                    $data = array(
+                        'nombres' => $params['nombres'],
+                        'paterno' => $params['paterno'],
+                        'materno' => $params['materno'],
+                        'documento_numero' => $params['documento_numero'],
+                    );
+
+                    break;
+                case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA:
+                    $data = array(
+                        
+                    );
+                    
+                    break;
+            }
+            
+            
             var_dump($data);
             exit;
         }
         $jsonModel =  new \Zend\View\Model\JsonModel($result);
         return $response->setContent($jsonModel->serialize());
+    }
+
+    private function _paymentProcesor($metodoPago, $data)
+    {
+        
+        return true;
     }
 
     private function _getUbigeoService()

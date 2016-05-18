@@ -2131,10 +2131,10 @@ INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `emai
 (7, '{5C3E7CA9-6412-4CA5-9C8C-F0E0F02968DE}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 1, NULL, 'Juan Carlos', 'test', 'test', 1, '55477433', NULL, 'PE', '10', NULL, '11', NULL, NULL, 'a4609eb6ba1f8814e24f4006de8aa6e62a8cdb88b83e51c76b46abcbd9faa325');
 
 INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `numero`, `estado_truefi`, `fecha_creacion`, `fecha_edicion`) VALUES
-(11, 7, 'Mis Primos2', '{0BEB1DE9-582F-4995-A2FE-8C6ADD526109}', '004-243217-5', 0, '2016-05-16 21:14:30', '2016-05-16 21:36:51'),
-(12, 7, 'Tios', '{344B00DA-1769-4A93-87E7-BBCF32574EAB}', '004-243218-6', 0, '2016-05-16 21:34:59', '2016-05-16 21:36:51'),
-(13, 7, 'Amigos de la promo', '{BA4C4BDF-46FC-43CF-8A01-2626EFF6F02C}', '004-243219-7', 0, '2016-05-16 21:36:50', '2016-05-16 21:36:51');
-
+(11, 7, 'Mis Primos2', '{0BEB1DE9-582F-4995-A2FE-8C6ADD526109}', '004-243217-5', 0, '2016-05-16 21:14:30', '2016-05-17 22:31:17'),
+(12, 7, 'Tios', '{344B00DA-1769-4A93-87E7-BBCF32574EAB}', '004-243218-6', 0, '2016-05-16 21:34:59', '2016-05-17 22:31:18'),
+(13, 7, 'Amigos de la promo', '{BA4C4BDF-46FC-43CF-8A01-2626EFF6F02C}', '004-243219-7', 0, '2016-05-16 21:36:50', '2016-05-17 22:31:18'),
+(14, 7, 'mis tios', '{53CD9800-C515-4B59-81F2-BF6E9812AD29}', '004-243220-8', 0, '2016-05-17 22:31:18', NULL);
 --
 -- Volcado de datos para la tabla `paquete_paquete`
 --
