@@ -42,6 +42,8 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'cip' => (string) $paymentResponse->CIP->NumeroOrdenPago,
                     'reference' => (string) $paymentResponse->CIP->IdOrdenPago,
                     'clientReference' => (string) $paymentResponse->CodTrans,
+                    'redirect' => $this->wsConfig['baseUrl'] . $this->wsConfig['wsgenpago'] . '?token='
+                        . (string) $paymentResponse->Token
                 );
             } else {
                 $return['success'] = false;

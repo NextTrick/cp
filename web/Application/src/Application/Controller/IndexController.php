@@ -50,7 +50,7 @@ class IndexController extends AbstractActionController
             'comprobante_numero' => '11872911', // NRO COMPROBANTE
             'usuario_email' => 'ing.angeljara@gmail.com',  // CORREO DE USUARIO LOGUEADO
             'usuario_id' => 1, // ID DE USUARIO LOGUEADO
-            'monto' => 20.00 // MONTO EN CON 2 DECIMALES
+            'monto' => '20.00' // MONTO EN CON 2 DECIMALES
         );
                         
         try {
@@ -58,7 +58,9 @@ class IndexController extends AbstractActionController
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
 
             $response = $paymentProcessor->createCharge($data);
-            var_dump($response);
+
+            //var_dump($response);
+            return $this->redirect()->toUrl($response['data']['redirect']); exit;
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
@@ -83,7 +85,7 @@ class IndexController extends AbstractActionController
             'comprobante_numero' => '11872911',
             'usuario_email' => 'ing.angeljara@gmail.com',
             'usuario_id' => 1,
-            'monto' => 1000.10
+            'monto' => '100.10'
         );
         
         try {            
@@ -91,10 +93,9 @@ class IndexController extends AbstractActionController
             $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
                     
             $response = $paymentProcessor->createCharge($data);
-            var_dump($response);
 
+            //var_dump($response);
             echo $response['data']['html']; exit;
-        
         } catch (\Exception $e) {
             var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
