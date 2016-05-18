@@ -56,7 +56,7 @@
 </div>
 
 <?php $_SESSION["URL_IMAGE_CMS"] = !empty(URL_IMAGE_CMS)? URL_IMAGE_CMS : null; ?>
-
+<?php echo "session=".$_SESSION["URL_IMAGE_CMS"];?>
 <script src="<?php echo URL_RESOURCES; ?>b/adminlte/plugins/ckeditor/ckeditor.js"></script>
 <script>
   $(function () {
