@@ -120,6 +120,16 @@ return array(
                     ),
                 ),
             ),
+            'web-tarjeta-unidad' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/mis-tarjetas/tarjeta-unidad',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\MisTarjetas',
+                        'action'     => 'tarjeta-unidad',
+                    ),
+                ),
+            ),
             'web-asociar-nueva-tarjeta' => array(
                 'type' => 'Segment',
                 'options' => array(
