@@ -271,6 +271,15 @@ class CarritoController extends SecurityWebController
 
     private function _pagar($metodoPago, $data)
     {
+        $ordenId = $this->_getOrdenService()->getRepository()->save($data);
+        
+        $cartModel = $this->_getCartService()->getCart();
+        foreach ($cartModel->getProductsCart() as $productos) {
+            foreach ($productos as $producto) {
+                //llamar 
+            }
+        }
+        
         $procesor = false;
         switch ($metodoPago) {
             case 'pe':
@@ -282,14 +291,8 @@ class CarritoController extends SecurityWebController
                 $procesor = true;
                 break;
         }
-        
-        $success = false;
-        if ($procesor) {
-            $id = $this->_getOrdenService()->getRepository()->save($data);
-            $success = ($id > 0 ) ? true : false;
-        }
 
-        return $success;
+        return $procesor;
     }
 
     private function _getOrdenService()
