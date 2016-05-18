@@ -180,6 +180,12 @@ header nav ul li {
   vertical-align: top;
   text-align: center;
 }
+header nav ul li:hover {
+  animation-duration: 0.15s;
+  animation-name: changewidth;
+  animation-iteration-count: 3;
+  animation-direction: alternate;
+}
 header nav ul li a {
   text-decoration: none;
   color: #972482;
@@ -237,8 +243,43 @@ header nav ul li.logo {
   width: 200px;
   margin: -10px 20px 0;
 }
+header nav ul li.logo:hover {
+  animation: none;
+}
 header nav ul li.logo img {
   width: 200px;
+}
+@-moz-keyframes changewidth {
+  from {
+    margin: 0;
+  }
+  to {
+    margin: -10px 0 0;
+  }
+}
+@-webkit-keyframes changewidth {
+  from {
+    margin: 0;
+  }
+  to {
+    margin: -10px 0 0;
+  }
+}
+@-o-keyframes changewidth {
+  from {
+    margin: 0;
+  }
+  to {
+    margin: -10px 0 0;
+  }
+}
+@keyframes changewidth {
+  from {
+    margin: 0;
+  }
+  to {
+    margin: -10px 0 0;
+  }
 }
 .right_options {
   position: fixed;
@@ -695,6 +736,17 @@ section .purple_box .steps {
   margin: 0 auto;
   text-align: center;
 }
+section .purple_box .steps span {
+  width: 20px;
+  height: 4px;
+  background: #400040;
+  display: inline-block;
+  margin: 0 -4px;
+  margin-bottom: 3px;
+}
+section .purple_box .steps span.yellow {
+  background: #fa0;
+}
 section .purple_box .steps .step {
   width: 36px;
   height: 36px;
@@ -704,7 +756,6 @@ section .purple_box .steps .step {
   padding-top: 10px;
   text-align: center;
   display: inline-block;
-  margin: 0 10px;
 }
 section .purple_box .steps .step.active {
   background: #fa0;
@@ -795,6 +846,7 @@ section .purple_box .cards_content .col_3 .content_asociate_card {
   padding: 15px 10px 10px;
   box-sizing: border-box;
   border-radius: 10px;
+  height: 188px;
   display: none;
 }
 section .purple_box .cards_content .col_3 .content_asociate_card input {
@@ -803,8 +855,11 @@ section .purple_box .cards_content .col_3 .content_asociate_card input {
 section .purple_box .cards_content .col_3 .content_asociate_card button {
   width: 100%;
 }
+section .purple_box .cards_content .col_3 .content_asociate_card .parsley-errors-list {
+  margin-top: -10px;
+}
 section .purple_box .cards_content .col_3 .content_asociate_card .link_orange {
-  margin-top: 8px;
+  margin-top: -10px;
   color: #ff5800;
 }
 section .purple_box .cards_content .col_3 .loading {
@@ -1242,6 +1297,8 @@ section .purple_box .pay_box_white >.right .items_cart .item .right h5 {
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right h5 .legal {
   cursor: pointer;
+  text-decoration: none;
+  color: #808080;
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right h4 {
   margin: 7px 0;
@@ -1428,6 +1485,8 @@ section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h5 
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h5 .legal {
   cursor: pointer;
+  color: #808080;
+  text-decoration: none;
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h4 {
   margin: 7px 0;
@@ -1775,7 +1834,6 @@ section form.signin_form .content_form input {
 }
 footer {
   display: block;
-  background: #fff !important;
 }
 footer img.bg {
   width: 100%;
@@ -1888,7 +1946,7 @@ footer span.logo_icon {
 }
 #modal_watch_legal .modal_content .text_box {
   overflow-y: scroll;
-  height: 180px;
+  height: 138px;
 }
 #how_asociate_card {
   width: 500px;
@@ -2141,6 +2199,10 @@ i[class*=" icon-"] {
     position: absolute;
     top: 0;
   }
+  section .app_box .purple_box .pay_box_white >.right .items_cart .item >.right h4 {
+    margin-left: 110px;
+    min-height: 66px;
+  }
   section .app_box .purple_box .pay_box_white >.right .items_cart .item >.left {
     margin-top: 15px;
     margin-right: 10px;
@@ -2170,6 +2232,9 @@ i[class*=" icon-"] {
   section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right h5 {
     position: absolute;
     top: 0;
+  }
+  section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right h4 {
+    min-height: 66px;
   }
   section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.right .card_type >span {
     display: none;
@@ -2316,7 +2381,7 @@ i[class*=" icon-"] {
     margin-left: 0;
   }
   footer {
-    background: #fff;
+    background: #fff !important;
     height: 120px;
     margin-top: 40px;
     position: relative;
