@@ -181,7 +181,7 @@ class CarritoController extends SecurityWebController
     public function pagarAction()
     {
         $response = $this->getResponse();
-        $result = array('success' => false, 'message' => ERROR_VALIDACION);
+        $result = array('success' => false, 'message' => ERROR_VALIDACION, 'paramsInvalid' => array());
         
         if ($this->_isLogin() === false) {
             $result['message'] = ERROR_303;
@@ -190,43 +190,113 @@ class CarritoController extends SecurityWebController
         }
         
         if ($this->request->isPost()) {
+            $usuario = $this->_getUsuarioData();
             $tokenCsrf = $this->request->getPost('token_csrf');
+            $validator1 = new \Zend\Validator\Csrf();
+            $validator1->setName('token_csrf');
+            $isValidToken = $validator1->isValid($tokenCsrf);
+            $result['token'] = $validator1->getHash(true);
+            if (!$isValidToken) {
+                $result['message'] = ERROR_TOKEN;
+                $jsonModel =  new \Zend\View\Model\JsonModel($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+            
             $comprobanteTipo = $this->request->getPost('comprobante_tipo');
+            $metodoPago = $this->request->getPost('metodo_pago');
             $params = $this->request->getPost();
-            var_dump($params);exit;
-   
+
             switch ($comprobanteTipo) {
                 case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA:
                     $data = array(
+                        'usuario_id' => $usuario->id,
                         'nombres' => $params['nombres'],
                         'paterno' => $params['paterno'],
                         'materno' => $params['materno'],
+                        'documento_tipo' => \Orden\Model\Service\OrdenService::TIPO_DOCUMENTO_DNI,
                         'documento_numero' => $params['documento_numero'],
                     );
-
                     break;
                 case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA:
+                    $criteria = array('where' => array(
+                        'cod_pais' => \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU,
+                        'cod_depa' => \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA,
+                        'cod_prov' => \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA,
+                        'cod_dist' => $params['distrito'],
+                    ));
+                    $row = $this->_getUbigeoService()->getRepository()->findOne($criteria);
+                    $distritoId = empty($row) ? null : $row['id'];
                     $data = array(
-                        
+                        'usuario_id' => $usuario->id,
+                        'fac_razon_social' => $params['fac_razon_social'],
+                        'fac_direccion_fiscal' => $params['fac_direccion_fiscal'],
+                        'fac_direccion_entrega_factura' => $params['fac_direccion_entrega_factura'],
+                        'documento_tipo' => \Orden\Model\Service\OrdenService::TIPO_DOCUMENTO_RUC,
+                        'documento_numero' => $params['ruc'],
+                        'distrito_id' => $distritoId,
                     );
-                    
                     break;
             }
             
+            $paramsInvalid = array();
+            foreach ($data as $key => $value) {
+                $filter = new \Zend\Filter\StripTags();
+                $value = $filter->filter($value);
+                $valid = new \Zend\Validator\NotEmpty();
+                $data[$key] = $value;
+                if ($valid->isValid($value) == false) {
+                    $paramsInvalid[] = $key;
+                }
+            }
             
-            var_dump($data);
-            exit;
+            if (empty($data) || !empty($paramsInvalid)) {
+                $result['paramsInvalid'] = $paramsInvalid;
+                $jsonModel =  new \Zend\View\Model\JsonModel($result);
+                return $response->setContent($jsonModel->serialize());
+            }
+            
+            if (!empty($data)) {
+                $success = $this->_pagar($metodoPago, $data);
+                if ($success) {
+                    $result['success'] = true;
+                    $result['message'] = null;
+                } else {
+                    $result['message'] = 'No se pudo realizar la transacción.';
+                }
+            }
         }
         $jsonModel =  new \Zend\View\Model\JsonModel($result);
         return $response->setContent($jsonModel->serialize());
     }
 
-    private function _paymentProcesor($metodoPago, $data)
+    private function _pagar($metodoPago, $data)
     {
+        $procesor = false;
+        switch ($metodoPago) {
+            case 'pe':
+                //codigo
+                $procesor = true;
+                break;
+            case 'visa':
+                //codigo
+                $procesor = true;
+                break;
+        }
         
-        return true;
+        $success = false;
+        if ($procesor) {
+            $id = $this->_getOrdenService()->getRepository()->save($data);
+            $success = ($id > 0 ) ? true : false;
+        }
+
+        return $success;
     }
 
+    private function _getOrdenService()
+    {
+        return $this->getServiceLocator()->get('Orden\Model\Service\OrdenService');
+    }
+    
     private function _getUbigeoService()
     {
         return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
