@@ -77,15 +77,14 @@ class LoginController extends SecurityWebController
             ));
             if ($usuarioWs['success']) {
                 $mguid = $usuarioWs['mguid'];
-                $regUsuario = $this->_getUsuarioService()
-                    ->registrarUsuarioDeTrueFi($mguid, $email, $password);
+                $success = $this->_getUsuarioService()
+                    ->registrarUsuarioDeTrueFi($mguid, $password);
                 
-                $ok = false;
-                if ($regUsuario['success']) {
-                    $ok = $this->_getLoginGatewayService()->loginOffline($email);
+                if ($success) {
+                    $success = $this->_getLoginGatewayService()->loginOffline($email);
                 }
                 
-                if ($ok) {
+                if ($success) {
                     $result->error = false;
                     $result->message = null;
                 } else {
