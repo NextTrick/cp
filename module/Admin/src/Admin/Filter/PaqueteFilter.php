@@ -61,14 +61,21 @@ class PaqueteFilter extends Zf2InputFilter
                 self::validatorDigits('Tipo'),
             )
         ));
-        
+
+        $valExtension = new \Zend\Validator\File\Extension(array('jpg', 'jpeg', 'png', 'messages' => 'sasadsasa'));
+
         $image = new \Zend\InputFilter\FileInput('imagen');
+        /*
         $image->setRequired(false);
         $image->getValidatorChain()
-            ->attachByName('filesize', array('max' => '4MB', 'min' => '10KB'))
-            ->attachByName('fileextension',  array('jpg', 'jpeg', 'png', 'gif'))
-            ->attachByName('fileimagesize', array('maxWidth' => 600, 'maxHeight' => 700));
-        
+            ->attachByName('filesize', array('max' => '2MB', 'min' => '10KB'))
+            ->attachByName('fileextension',  array('jpg', 'jpeg', 'png'));
+*/
+        $image->setRequired(false);
+        $image->getValidatorChain()
+            ->attach($valExtension)
+            ->attachByName('fileextension',  array('jpg', 'jpeg', 'png'));
+
         $image->getFilterChain()->attachByName(
             'filerenameupload',
             array(

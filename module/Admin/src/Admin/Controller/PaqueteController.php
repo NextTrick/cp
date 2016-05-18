@@ -191,7 +191,11 @@ class PaqueteController extends SecurityAdminController
                     $paramsIn['referencia']     = $dataStatic['referencia'];
                     $paramsIn['fecha_creacion'] = date('Y-m-d H:i:s');
                 }
-                
+
+                if (empty($paramsIn['imagen'])) {
+                    unset($paramsIn['imagen']);
+                }
+
                 $repository = $this->_getPaqueteService()->getRepository();
                 if (!empty($id)) {
                     $repository->save($paramsIn, $id);
