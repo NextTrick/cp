@@ -1297,6 +1297,8 @@ section .purple_box .pay_box_white >.right .items_cart .item .right h5 {
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right h5 .legal {
   cursor: pointer;
+  text-decoration: none;
+  color: #808080;
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right h4 {
   margin: 7px 0;
@@ -1483,6 +1485,8 @@ section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h5 
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h5 .legal {
   cursor: pointer;
+  color: #808080;
+  text-decoration: none;
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right h4 {
   margin: 7px 0;
@@ -1942,7 +1946,7 @@ footer span.logo_icon {
 }
 #modal_watch_legal .modal_content .text_box {
   overflow-y: scroll;
-  height: 180px;
+  height: 138px;
 }
 #how_asociate_card {
   width: 500px;
