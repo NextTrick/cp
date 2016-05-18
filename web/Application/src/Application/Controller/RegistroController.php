@@ -218,7 +218,7 @@ class RegistroController extends AbstractActionController
         $result['token'] = $validator1->getHash(true);
         
         if (!$isValidToken) {
-            $result['message'] = 'Token invalido.';
+            $result['message'] = ERROR_TOKEN;
             $jsonModel->setVariables($result);
             return $response->setContent($jsonModel->serialize());
         }
@@ -266,7 +266,7 @@ class RegistroController extends AbstractActionController
             $isValidToken = $validator1->isValid($token);
             $result['token'] = $validator1->getHash(true);
             if (!$isValidToken) {
-                $result['message'] = 'Token invalido.';
+                $result['message'] = ERROR_TOKEN;
                 $jsonModel->setVariables($result);
                 return $response->setContent($jsonModel->serialize());
             }
