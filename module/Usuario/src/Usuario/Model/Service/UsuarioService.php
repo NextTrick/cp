@@ -57,13 +57,31 @@ class UsuarioService
         return $this->_getTrueFiUsuarioService()->logon($data);
     }
     
-    public function registrarUsuarioDeTrueFi($mguid, $email, $password)
+    public function registrarUsuarioDeTrueFi($mguid, $password)
     {
         $result = $this->_getTrueFiUsuarioService()->getMember(array('MGUID' => $mguid));
         if ($result['success']) {
+            $result = $result['result'];
             
+            $password = \Common\Helpers\Util::passwordEncrypt($password, $result['email']);
+            $lastName = explode(' ', $result['lastname']);
+            $data = array(
+                'mguid' => $mguid,
+                'nombres' => $result['firstname'],
+                'paterno' => isset($lastName[0]) ? $lastName[0] : $result['lastname'],
+                'materno' => isset($lastName[1]) ? $lastName[1] : null,
+                'email' => $result['email'],
+                'password' => $password,
+                'estado' => (int)$result['active'],
+            );
+
+            try {
+                $this->_repository->save($data);
+                return true;
+            } catch (\Exception $e) {
+            }
         }
-        return null;
+        return false;
     }
 
     private function _testAsociarTarjeta($data)
@@ -96,7 +114,6 @@ class UsuarioService
                     'nombre' => $data['nombre'],
                     'cguid' => $cardsTest[$data['numero']],
                     'fecha_creacion' => date('Y-m-d H:i:s'),
-                    'estado_truefi' => 1,
                 ));
                 if (!empty($save)) {
                     $result['success'] = true;

@@ -160,6 +160,11 @@ class RegistroController extends AbstractActionController
             
             $save = $repository->save($dataIn);
             if ($save) {
+                //si es facebook activar cuenta en TrueFi
+                if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
+                    $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $resultTrueFi['mguid']));
+                }
+                                
                 $result['success'] = true;
                 $result['code'] = null;
                 
@@ -179,13 +184,13 @@ class RegistroController extends AbstractActionController
     
     public function activarCuentaAction()
     {
-        $codigo = $this->params('codigo');
+        $mguid = $this->params('codigo');
         $repository = $this->_getUsuarioService()->getRepository();
-        $criteria = array('where' => array('codigo_activar' => $codigo));
+        $criteria = array('where' => array('mguid' => $mguid));
         $row = $repository->findOne($criteria);
         if (!empty($row)) {
             //activar en True-Fi
-            $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $codigo));
+            $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $mguid));
             $this->_getUsuarioService()->getRepository()->save(array(
                 'estado' => 1,
                 'codigo_activar' => null,
