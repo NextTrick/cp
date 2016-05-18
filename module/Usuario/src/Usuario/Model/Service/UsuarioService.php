@@ -47,9 +47,23 @@ class UsuarioService
         return $this->_getTrueFiUsuarioService()->activateMember($data);
     }
     
-    public function usuarioEnTrueFi($data)
+    public function recoverPasswordEnTrueFi($data)
     {
         return $this->_getTrueFiUsuarioService()->recoverPassword($data);
+    }
+    
+    public function logonEnTrueFi($data)
+    {
+        return $this->_getTrueFiUsuarioService()->logon($data);
+    }
+    
+    public function registrarUsuarioDeTrueFi($mguid, $email, $password)
+    {
+        $result = $this->_getTrueFiUsuarioService()->getMember(array('MGUID' => $mguid));
+        if ($result['success']) {
+            
+        }
+        return null;
     }
 
     private function _testAsociarTarjeta($data)

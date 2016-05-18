@@ -26,7 +26,7 @@ class OauthFormService
     const INVALID_LOGIN = 'invalidLogin';
     const DISABLED_USER = 'disabledUser';
 
-    protected $mesagges = array(
+    protected $messages = array(
         self::NOT_IDENTITY => 'Los datos ingresados son incorrectos.',
         self::INVALID_CREDENTIAL => 'Los datos ingresados son incorrectos.',
         self::INVALID_USER => 'Los datos ingresados son incorrectos.',
@@ -53,7 +53,7 @@ class OauthFormService
     {
         $this->_resultLogin = new \stdClass();
         $this->_resultLogin->error = true;
-        $this->_resultLogin->mesagge = $this->mesagges[self::INVALID_LOGIN];
+        $this->_resultLogin->message = $this->messages[self::INVALID_LOGIN];
 
         if (!empty($email) && !empty($password)) {
             $password = \Common\Helpers\Util::passwordEncrypt($password, $email);
@@ -64,18 +64,18 @@ class OauthFormService
             switch ($result->getCode()) {
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
                     $this->_resultLogin->error = true;
-                    $this->_resultLogin->mesagge = $this->mesagges[self::NOT_IDENTITY];
+                    $this->_resultLogin->message = $this->messages[self::NOT_IDENTITY];
                     break;
                 case Result::FAILURE_CREDENTIAL_INVALID:
                     $this->_resultLogin->error = true;
-                    $this->_resultLogin->mesagge = $this->mesagges[self::INVALID_CREDENTIAL];
+                    $this->_resultLogin->message = $this->messages[self::INVALID_CREDENTIAL];
                     break;
                 case Result::SUCCESS:
                     if ($result->isValid()) {
                         $data = $this->getRepository()->getUsuarioByEmail($email);
                         $this->_auth->getStorage()->write($data);
                         $this->_resultLogin->error = false;
-                        $this->_resultLogin->mesagge = null;
+                        $this->_resultLogin->message = null;
                     }
                     break;
             }
@@ -120,15 +120,15 @@ class OauthFormService
     public function setMessage($messageString, $messageKey = null)
     {
         if ($messageKey === null) {
-            $keys = array_keys($this->mesagges);
+            $keys = array_keys($this->messages);
             $messageKey = current($keys);
         }
 
-        if (!isset($this->mesagges[$messageKey])) {
+        if (!isset($this->messages[$messageKey])) {
             throw new \Exception('No message exits for key ' . $messageKey);
         }
         
-        $this->mesagges[$messageKey] = $messageString;
+        $this->messages[$messageKey] = $messageString;
         return $this;
     }
 

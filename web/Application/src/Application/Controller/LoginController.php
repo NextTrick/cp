@@ -55,15 +55,53 @@ class LoginController extends SecurityWebController
         $email = $values['email'];
         $password = $values['password'];
 
-        $result = $this->_getLoginGatewayService()
+        $usuarioBd = $this->_getUsuarioService()->getRepository()->findOne(array(
+            'email' => $email,
+        ));
+        
+        $result = new \stdClass();
+        $result->error = true;
+        $result->message = 'La cuenta no se encuentra registrado.';
+        if (!empty($usuarioBd)) {
+            $data = $this->_getLoginGatewayService()
                 ->setGateway($opcion)
                 ->setCredential($email, $password)
                 ->login();
+            $result->error = $data->error;
+            $result->message = $data->message;
+        } else {
+            //validar en TrueFi y registrar cuenta
+            $usuarioWs = $this->_getUsuarioService()->logonEnTrueFi(array(
+                'EMail' => $email,
+                'Password' => $password,
+            ));
+            if ($usuarioWs['success']) {
+                $mguid = $usuarioWs['mguid'];
+                $regUsuario = $this->_getUsuarioService()
+                    ->registrarUsuarioDeTrueFi($mguid, $email, $password);
+                
+                $ok = false;
+                if ($regUsuario['success']) {
+                    $ok = $this->_getLoginGatewayService()->loginOffline($email);
+                }
+                
+                if ($ok) {
+                    $result->error = false;
+                    $result->message = null;
+                } else {
+                    $result->error = true;
+                    $result->message = 'Los datos ingresados son incorrectos.';
+                }
+            } else {
+                $result->error = true;
+                $result->message = $usuarioWs['message'];
+            }
+        }
 
         if ($result->error === false) {
             return $this->_toUrlMain();
         } else {
-            $this->flashMessenger()->addMessage(array('error' => $result->mesagge));
+            $this->flashMessenger()->addMessage(array('error' => $result->message));
             return $this->_toUrlLogin();
         }
     }
@@ -92,5 +130,10 @@ class LoginController extends SecurityWebController
     private function _getLoginForm()
     {
         return $this->getServiceLocator()->get('Application\Form\LoginForm');
+    }
+    
+    private function _getUsuarioService()
+    {
+        return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
     }
 }
