@@ -115,7 +115,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     public function getUsuarioByEmail($email)
     {
         $criteria = array(
-            'where' => array('email' => $email),
+            'where' => array('email' => $email, 'estado' => 1),
             'columns' => array('id', 'email', 'mguid', 'nombres', 'paterno', 'materno')
         );
         return $this->findOne($criteria);

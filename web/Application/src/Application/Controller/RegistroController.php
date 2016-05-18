@@ -196,8 +196,8 @@ class RegistroController extends AbstractActionController
                 'codigo_activar' => null,
             ), $row['id']);
 
-            $ok = $this->_getLoginGatewayService()->loginOffline($row['email']);
-            if ($ok) {
+            $result = $this->_getLoginGatewayService()->loginOffline($row['email']);
+            if ($result['success']) {
                 return $this->redirect()->toRoute('web-mis-tarjetas', array('controller' => 'mis-tarjetas'));
             }
         }
