@@ -47,7 +47,12 @@
     <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
     <span class="bg total" id="spanTotal">S/. <?php echo $montoTotal; ?></span><button id="confirmarCompra" class="btn btn_orange">Confirmar compra </button>
 </div>
-
+<div class="bg_purple_dark"></div>
+<style>
+    footer{
+        background: #370135;
+    }
+</style>
 
 <script type="text/javascript" >
     var cart = {
