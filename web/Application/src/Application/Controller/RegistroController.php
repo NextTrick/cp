@@ -228,7 +228,7 @@ class RegistroController extends AbstractActionController
             }
             
             $dataTrueFi = array('EMail' => $email);
-            $usuarioTrueFi = $this->_getUsuarioService()->usuarioEnTrueFi($dataTrueFi);
+            $usuarioTrueFi = $this->_getUsuarioService()->recoverPasswordEnTrueFi($dataTrueFi);
             if ($usuarioTrueFi['success']) {
                 $result['success'] = true;
                 $result['message'] = null;
