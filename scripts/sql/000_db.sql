@@ -87,21 +87,22 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `admin_usuario` ;
 
-CREATE TABLE IF NOT EXISTS `admin_usuario` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `rol_id` INT(11) NOT NULL,
-  `email` VARCHAR(30) NOT NULL,
-  `password` VARCHAR(100) NOT NULL,
-  `estado` TINYINT(1) NOT NULL DEFAULT 0,
-  `imagen` VARCHAR(50) NULL DEFAULT NULL,
-  `fecha_creacion` DATETIME NULL,
-  `fecha_edicion` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-  INDEX `fk_admin_usuario_admin_rol1_idx` (`rol_id` ASC),
+CREATE  TABLE IF NOT EXISTS `admin_usuario` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `rol_id` INT(11) NOT NULL ,
+  `email` VARCHAR(30) NOT NULL ,
+  `password` VARCHAR(100) NOT NULL ,
+  `estado` TINYINT(1) NOT NULL DEFAULT 0 ,
+  `codigo_activar` VARCHAR(100) NULL ,
+  `imagen` VARCHAR(50) NULL DEFAULT NULL ,
+  `fecha_creacion` DATETIME NULL ,
+  `fecha_edicion` DATETIME NULL ,
+  PRIMARY KEY (`id`) ,
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC) ,
+  INDEX `fk_admin_usuario_admin_rol1_idx` (`rol_id` ASC) ,
   CONSTRAINT `fk_admin_usuario_admin_rol1`
-    FOREIGN KEY (`rol_id`)
-    REFERENCES `admin_rol` (`id`)
+    FOREIGN KEY (`rol_id` )
+    REFERENCES `admin_rol` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
