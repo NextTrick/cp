@@ -11,6 +11,9 @@ class ErrorService
     const ERROR_FILE = 'error';
     public $path = '';
 
+    const GENERAL_MESSAGE = 'Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde';
+    const GENERAL_CODE = '501';
+
     private $_logger;
 
     public function __construct() 
