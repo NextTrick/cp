@@ -87,7 +87,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 $solData = simplexml_load_string($this->ws->desencriptarData($data));
 
                 $return['data']['clientReference'] = $solData->CodTrans;
-                //Según el estado de la solicitud  Procesar	
+                //Según el estado de la solicitud  Procesar
                 Switch ($solData->Estado) {
                     case 592:                        
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
@@ -118,7 +118,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
             }
         } else {
             $return['success'] = false;
-            $return['error']['code'] = 500;
+            $return['error']['code'] = ErrorService::GENERAL_CODE;
             $return['error']['message'] = ErrorService::GENERAL_MESSAGE;
         }
 

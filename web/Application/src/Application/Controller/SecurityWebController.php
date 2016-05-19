@@ -22,6 +22,11 @@ abstract class SecurityWebController extends AbstractActionController
         return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
     }
 
+    protected function _toUrlRecargas()
+    {
+        return $this->redirect()->toRoute('web-recargas', array('controller' => 'recargas'));
+    }
+
     protected function _isLogin()
     {
         return $this->_getLoginGatewayService()->isLoggedIn();

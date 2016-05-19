@@ -44,7 +44,8 @@ class VisaProcessor extends AbstractProcessor
                         'token' => null,
                         'clientReference' => $data['id'],
                         'reference' => $eticket,
-                        'redirect' => BASE_URL . 'payment-processor/callback/visa-redirect/eticket/' . $eticket,
+                        'redirect' => BASE_URL . 'payment-processor/callback/visa-redirect/eticket/'
+                            . base64_encode($eticket),
                     );                    
                 } else {
                     $return['success'] = false;
@@ -82,15 +83,16 @@ class VisaProcessor extends AbstractProcessor
         );
            
         try {                                              
-            $paymentResponse = $this->ws->retrieveEticket($data);     
-                        
+            $paymentResponse = $this->ws->retrieveEticket($data);
+            $eticket = !empty($data['eticket']) ? $data['eticket'] : null;
+
             $xmlDocument = new \DOMDocument();
             if ($xmlDocument->loadXML($paymentResponse->ConsultaEticketResult)) {
                 $countMessages = $this->ws->cantidadMensajes($xmlDocument);
                 if ($countMessages == 0) {
-                    $eTicket = $data['eticket'];
-                    $countOperaciones = $this->ws->cantidadOperaciones($xmlDocument, $eTicket);
-                                        
+
+                    $countOperaciones = $this->ws->cantidadOperaciones($xmlDocument, $eticket);
+
                     $tempData = array();
                     for ($iNumOperacion = 0; $iNumOperacion < $countOperaciones; $iNumOperacion++) {                        
                         $sNumOperacion = $iNumOperacion + 1;                        
@@ -115,44 +117,69 @@ class VisaProcessor extends AbstractProcessor
                         $tempData['dato_comercio'] = $this->ws->recuperaCampos($xmlDocument, $sNumOperacion, "dato_comercio");
                     }
 
-                    $eticket = $eTicket;
                     $errorMessages = OrdenRepository::getErrorMessages();                   
                                                                  
                     if ($tempData['respuesta'] == 1) {
                         $status = OrdenRepository::PAGO_ESTADO_PAGADO;
                         $return['data'] = array(
                             'status' => $status,                                                        
-                            'reference' => $eticket, 
-                            'confirmationDate' => $tempData['fechayhora_tx'],                            
+                            'reference' => $eticket,
+                            'clientReference' => $tempData['nordent'],
+                            'confirmationDate' => $tempData['fechayhora_tx'],
+                            'errorCode' => null,
+                            'errorDescription' => null
                         );
-
-                    } else {                    
-                        $status = OrdenRepository::PAGO_ESTADO_ERROR;                        
+                    } else {
+                        $status = OrdenRepository::PAGO_ESTADO_ERROR;
                         $return['data'] = array(
-                            'status' => $status,                                                        
-                            'reference' => $eticket, 
+                            'status' => $status,
+                            'reference' => $eticket,
+                            'clientReference' => $tempData['nordent'],
                             'confirmationDate' => $tempData['fechayhora_tx'],
                             'errorCode' => $tempData['cod_accion'],
-                            'errorDescription' => $errorMessages[$tempData['cod_accion']],
-                        );                                            
+                            'errorDescription' => !empty ($errorMessages[$tempData['cod_accion']])
+                                ? $errorMessages[$tempData['cod_accion']] : 'No se encontró mensaje de error para el código'
+                        );
                     }
 
                 } else {
-                    $return['success'] = false;
-                    $return['error']['code'] = 900;
-                    $return['error']['message'] = $this->getErrorMessage($xmlDocument, $countMessages);                    
+                    if (!empty($eticket)) {
+                        $status = OrdenRepository::PAGO_ESTADO_ERROR;
+                        $return['success'] = true;
+                        $return['data']['errorCode'] = 900;
+                        $return['data']['errorDescription'] = $this->getErrorMessage($xmlDocument, $countMessages);
+                        $return['data']['reference'] = $eticket;
+                        $return['data']['status'] = $status;
+                    } else {
+                        $return['success'] = false;
+                        $return['error']['code'] = 900;
+                        $return['error']['message'] = $this->getErrorMessage($xmlDocument, $countMessages);
+                    }
                 }
             } else {
-                $return['success'] = false;
-                $return['error']['code'] = 901;
-                $return['error']['message'] = ErrorService::GENERAL_MESSAGE;//'Error loading XML';
+                if (!empty($eticket)) {
+                    $return['success'] = true;
+                    $return['data']['errorCode'] = 901;
+                    $return['data']['errorDescription'] = ErrorService::GENERAL_MESSAGE;//'Error loading XML';
+                    $return['data']['reference'] = $eticket;
+                } else {
+                    $return['success'] = false;
+                    $return['error']['code'] = 901;
+                    $return['error']['message'] = ErrorService::GENERAL_MESSAGE;//'Error loading XML';
+                }
             }
-                        
         } catch (\Exception $e) {
-            $return['success'] = false;
-            $return['error']['code'] = ErrorService::GENERAL_CODE;
-            $return['error']['message'] = $e->getMessage();
-            $return['error']['detail'] = $e->getTraceAsString();
+            if (!empty($eticket)) {
+                $return['success'] = true;
+                $return['data']['errorCode'] = ErrorService::GENERAL_CODE;
+                $return['data']['errorDescription'] = $e->getMessage();
+                $return['data']['reference'] = $eticket;
+            } else {
+                $return['success'] = false;
+                $return['error']['code'] = ErrorService::GENERAL_CODE;
+                $return['error']['message'] = $e->getMessage();
+                $return['error']['detail'] = $e->getTraceAsString();
+            }
         }
 
         $requestHistorialData = array(
