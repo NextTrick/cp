@@ -380,6 +380,24 @@ section
 		background #6C006C
 		border-radius 20px
 		padding 20px 0
+		&:before
+		&:after
+			z-index -1
+			position absolute
+			content ""
+			bottom 0px
+			left 10px
+			width 45%
+			height 50px
+			top 90%
+			opacity 0.7
+			//background #410041
+			box-shadow 0 52px 63px #410041
+			transform rotate(3deg)
+		&:after
+			transform rotate(-3deg)
+			right 10px
+			left auto
 		p
 			margin-bottom 20px
 			font-size 20px
