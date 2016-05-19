@@ -343,15 +343,19 @@ $(function() {
     dom = {};
     st = {
       less: '.cant_box .less',
-      more: '.cant_box .more'
+      more: '.cant_box .more',
+      detailContent: '.offers .col_3 .box_white .detail',
+      openDetail: '.offers .col_3 .box_white .breadcrumb .detail'
     };
     catchDom = function() {
       dom.less = $(st.less);
       dom.more = $(st.more);
+      dom.openDetail = $(st.openDetail);
     };
     suscribeEvents = function() {
       dom.less.on('click', events.substract);
       dom.more.on('click', events.add);
+      dom.openDetail.on('click', events.openDetail);
     };
     events = {
       substract: function(e) {
@@ -365,6 +369,15 @@ $(function() {
         var actual;
         actual = $(this).prev('input');
         actual.val(parseInt(actual.val()) + 1);
+      },
+      openDetail: function(e) {
+        if ($(this).hasClass('active')) {
+          $(this).removeClass('active');
+          $(this).parent().parent().children('.detail').hide();
+        } else {
+          $(this).addClass('active');
+          $(this).parent().parent().children('.detail').show();
+        }
       }
     };
     functions = {
@@ -391,7 +404,8 @@ $(function() {
       itemDetail: '.item .detail',
       cardOption: '.card',
       peOption: '.cards_option .pe',
-      visaOption: '.cards_option .visa'
+      visaOption: '.cards_option .visa',
+      equalAddress: '.equal_address'
     };
     catchDom = function() {
       dom.optionBoleta = $(st.optionBoleta);
@@ -404,6 +418,7 @@ $(function() {
       dom.cardOption = $(st.cardOption);
       dom.peOption = $(st.peOption);
       dom.visaOption = $(st.visaOption);
+      dom.equalAddress = $(st.equalAddress);
     };
     suscribeEvents = function() {
       dom.optionBoleta.on('change', events.watchOpenBoletaForm);
@@ -411,6 +426,7 @@ $(function() {
       dom.watchDetail.on('click', events.watchDetail);
       dom.hiddenDetail.on('click', events.hiddenDetail);
       dom.cardOption.on('click', events.changeCard);
+      dom.equalAddress.on('change', events.copy);
     };
     events = {
       watchOpenBoletaForm: function(e) {
@@ -444,6 +460,9 @@ $(function() {
           dom.visaOption.prop('checked', true);
           dom.peOption.prop('checked', false);
         }
+      },
+      copy: function() {
+        $('.factura_address').val($('.fiscal_address').val());
       }
     };
     functions = {

@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login, open_tooltip, user_account;
+  var modal_login, open_tooltip, user_account, recargas;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -371,7 +371,8 @@ $(function() {
       itemDetail: '.item .detail',
       cardOption: '.card',
       peOption: '.cards_option .pe',
-      visaOption: '.cards_option .visa'
+      visaOption: '.cards_option .visa',
+      equalAddress: '.equal_address'
     };
     catchDom = function() {
       dom.optionBoleta = $(st.optionBoleta);
@@ -384,6 +385,7 @@ $(function() {
       dom.cardOption = $(st.cardOption);
       dom.peOption = $(st.peOption);
       dom.visaOption = $(st.visaOption);
+      dom.equalAddress = $(st.equalAddress);
     };
     suscribeEvents = function() {
       dom.optionBoleta.on('change', events.watchOpenBoletaForm);
@@ -391,6 +393,7 @@ $(function() {
       dom.watchDetail.on('click', events.watchDetail);
       dom.hiddenDetail.on('click', events.hiddenDetail);
       dom.cardOption.on('click', events.changeCard);
+      dom.equalAddress.on('change', events.copy);
     };
     events = {
       watchOpenBoletaForm: function(e) {
@@ -424,6 +427,9 @@ $(function() {
           dom.visaOption.prop('checked', true);
           dom.peOption.prop('checked', false);
         }
+      },
+      copy: function() {
+        $('.factura_address').val($('.fiscal_address').val());
       }
     };
     functions = {
@@ -558,10 +564,47 @@ $(function() {
       init: initialize
     };
   };
+  recargas = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      openDetail: '.offers .col_3 .box_white .breadcrumb span'
+    };
+    catchDom = function() {
+      dom.openDetail = $(st.openDetail);
+    };
+    suscribeEvents = function() {
+      dom.openDetail.on('click', events.openDetail);
+    };
+    events = {
+      openDetail: function(e) {
+        if ($(this).hasClass('active')) {
+          $(this).removeClass('active');
+          $(this).parent().parent().children('.detail').hide();
+          $(this).parent().parent().parent().removeClass('auto');
+        } else {
+          $(this).addClass('active');
+          $(this).parent().parent().children('.detail').show();
+          $(this).parent().parent().parent().addClass('auto');
+        }
+      }
+    };
+    functions = {
+      example: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
   mis_datos().init();
   user_account().init();
   open_tooltip().init();
   modal_login().init();
   pagos().init();
   carrito().init();
+  recargas().init();
 });
