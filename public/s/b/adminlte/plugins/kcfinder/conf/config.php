@@ -21,7 +21,7 @@ $_CONFIG = array(
 
 // GENERAL SETTINGS
 
-    'disabled' => true,
+    'disabled' => false,
     'uploadURL' => "http://dev.recargas.coneypark.pe/s/files/contenido/",
     'uploadDir' => "",
     'theme' => "default",
