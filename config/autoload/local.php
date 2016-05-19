@@ -24,7 +24,7 @@ return array(
     ),*/
     'db' => array(
         'driver' => 'pdo_mysql',
-        'hostname' => '54.165.150.186',
+        'hostname' => 'localhost',
         'database' => 'pasarelaconeydev',
         'username' => 'idigital',
         'password' => '1D1g1t4L',
