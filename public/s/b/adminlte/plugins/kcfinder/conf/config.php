@@ -12,6 +12,8 @@
   *      @link http://kcfinder.sunhater.com
   */
 
+require('../../../../../../config/autoload/constants.php');
+
 /* IMPORTANT!!! Do not comment or remove uncommented settings in this file
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
@@ -23,7 +25,7 @@ $_CONFIG = array(
 
     'disabled' => false,
     //'uploadURL' => "http://dev.recargas.coneypark.pe/s/files/contenido/",
-    'uploadURL' => !empty($_SESSION["URL_IMAGE_CMS"])?$_SESSION["URL_IMAGE_CMS"]:"",
+    'uploadURL' => URL_IMAGE_CMS,
     'uploadDir' => "",
     'theme' => "default",
 
@@ -115,7 +117,7 @@ $_CONFIG = array(
 
     '_sessionVar' => "KCFINDER",
     //'_sessionLifetime' => 30,
-    //'_sessionDir' => "/full/directory/path",
+    //'_sessionDir' => "/var/lib/php/session",
     //'_sessionDomain' => ".mysite.com",
     //'_sessionPath' => "/my/path",
 
