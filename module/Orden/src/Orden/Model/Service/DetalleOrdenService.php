@@ -6,7 +6,7 @@
  *
  */
 
-namespace Admin\Model\Service;
+namespace Orden\Model\Service;
 
 class DetalleOrdenService
 {

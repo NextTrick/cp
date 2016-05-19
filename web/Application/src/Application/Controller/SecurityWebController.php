@@ -30,6 +30,7 @@ abstract class SecurityWebController extends AbstractActionController
     protected function _getUsuarioData()
     {
         $data = $this->_getLoginGatewayService()->getData();
+        
         if (empty($data)) {
             throw new \Exception('Su session expiro.');
         }

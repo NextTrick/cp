@@ -22,7 +22,10 @@ class CartService
         $this->_sl = $serviceLocator;
         $this->_config = $config;
     }
-    
+
+    /**
+     * @return Cart
+     */
     public function getCart()
     {
         $keyCart = $this->getCodeCart();
