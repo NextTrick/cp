@@ -559,11 +559,16 @@ section
 			right 32px
 			margin-top -40px
 			&.active
+				margin-top -10px
 				.cart
 					background #FFAA00
 					span
+						&.icon
+							sprite($cart)
+							position relative
+							top 2px
 						&.number
-							color white
+							color black
 			.label
 				color white
 				display inline-block
@@ -925,6 +930,9 @@ section
 							border 1px solid lightgray
 							height 36px
 							border-radius 16px
+							&.disabled
+								background #EEEEEE
+								color gray
 						input[type="checkbox"]
 							width auto
 							height 15px

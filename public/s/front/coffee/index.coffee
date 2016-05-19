@@ -372,6 +372,7 @@ $ ->
 			cardOption : '.card'
 			peOption: '.cards_option .pe'
 			visaOption: '.cards_option .visa'
+			equalAddress: '.equal_address'
 
 		catchDom = ->
 			dom.optionBoleta = $(st.optionBoleta)
@@ -384,6 +385,7 @@ $ ->
 			dom.cardOption = $(st.cardOption)
 			dom.peOption = $(st.peOption)
 			dom.visaOption = $(st.visaOption)
+			dom.equalAddress = $(st.equalAddress)
 			return
 		suscribeEvents = () ->
 			dom.optionBoleta.on 'change', events.watchOpenBoletaForm
@@ -391,6 +393,7 @@ $ ->
 			dom.watchDetail.on 'click', events.watchDetail
 			dom.hiddenDetail.on 'click', events.hiddenDetail
 			dom.cardOption.on 'click', events.changeCard
+			dom.equalAddress.on 'change', events.copy
 			return
 		events =
 			watchOpenBoletaForm : (e) ->
@@ -422,6 +425,9 @@ $ ->
 					$(this).prev().removeClass 'active'
 					dom.visaOption.prop 'checked', true
 					dom.peOption.prop 'checked', false
+				return
+			copy : ->
+				$('.factura_address').val $('.fiscal_address').val()
 				return
 		functions = 
 			example: ->
