@@ -37,19 +37,19 @@
                         <div class="content_boleta">
                             <div class="form_control">
                                 <label for="nombres">Nombre</label>
-                                <input id="nombres" name="nombres" type="text" value="<?php echo $usuarioData['nombres']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="disabled"/>
+                                <input id="nombres" name="nombres" type="text" value="<?php echo $usuarioData['nombres']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." disabled="disabled" class="disabled"/>
                             </div>
                             <div class="form_control">
                                 <label for="paterno">Apellido paterno</label>
-                                <input id="paterno" name="paterno" type="text" value="<?php echo $usuarioData['paterno']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="disabled"/>
+                                <input id="paterno" name="paterno" type="text" value="<?php echo $usuarioData['paterno']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." disabled="disabled" class="disabled"/>
                             </div>
                             <div class="form_control">
                                 <label for="materno">Apellido materno</label>
-                                <input id="materno" name="materno" type="text" value="<?php echo $usuarioData['materno']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="disabled"/>
+                                <input id="materno" name="materno" type="text" value="<?php echo $usuarioData['materno']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." disabled="disabled" class="disabled"/>
                             </div>
                             <div class="form_control">
                                 <label for="documento_identidad">DNI/Pasaporte</label>
-                                <input id="documento_numero" name="documento_numero" type="text" value="<?php echo $usuarioData['di_valor']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="disabled"/>
+                                <input id="documento_numero" name="documento_numero" type="text" value="<?php echo $usuarioData['di_valor']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." disabled="disabled" class="disabled"/>
                             </div>
                         </div>
                         <div class="content_factura">
@@ -123,18 +123,24 @@
                                                 <span class="cant">Cantidad: <?php echo $producto->getQuantity(); ?></span>
                                             </div>
                                             <div class="detail">
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('bonus'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus</div>
                                                     <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('promotionbonus'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus Plus</div>
                                                     <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('etickets'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Tickets</div>
                                                     <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
                                                 </div>
+                                                <?php endif; ?>
                                             </div>
                                             <div class="link_show">
                                                 <div class="watch_detail">Ver detalle</div>
@@ -183,7 +189,6 @@
 </form>
 <script type="text/javascript">
     $('#btnPagar').click(function(){
-        console.log($('#formPago').serialize());
         $.ajax({
           type: "POST",
           url: baseUrl + 'carrito/pagar',

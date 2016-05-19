@@ -120,6 +120,16 @@ return array(
                     ),
                 ),
             ),
+            'web-mis-datos' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/mis-datos[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\MisDatos',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
             'web-tarjeta-unidad' => array(
                 'type' => 'Segment',
                 'options' => array(
