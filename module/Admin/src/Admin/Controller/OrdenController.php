@@ -51,7 +51,7 @@ class OrdenController extends SecurityAdminController
             $criteria = $this->_getOrdenService()->getDataCriteria($this->params()->fromPost());
             $data     = $this->_getOrdenService()->getRepository()->search($criteria);
 
-            $objPHPExcel = new PHPExcel();
+            $objPHPExcel = new \PHPExcel();
             $objPHPExcel->getProperties()->setCreator("Maarten Balliauw")
                 ->setLastModifiedBy("Maarten Balliauw")
                 ->setTitle("Office 2007 XLSX Test Document")
