@@ -229,7 +229,7 @@ class OrdenService
         $ordenId = $this->getRepository()->save($data);
 
         $this->_saveDetalleOrden($ordenId, $cDate);
-        
+
         $paymentProcessordata = array(
             'id' => $ordenId, // ID DE LA ORDEN
             'perfilpago_nombres' => $usuarioData['nombres'], // NOMBRE DEL PERFIL DE PAGO
@@ -284,7 +284,7 @@ class OrdenService
             }
         }
 
-        $ordenUpdateData['pago_confirmacion_fecha'] = date('Y-m-d H:i:s');
+        $ordenUpdateData['pago_fecha_confirmacion'] = date('Y-m-d H:i:s');
 
         $this->getRepository()->save($ordenUpdateData, $ordenId);
 
