@@ -1,1 +1,49 @@
-EXITO
+<section class="app_content recargas">
+    <div class="box_center">
+        <div class="app_box">
+            <div class="menu right_active">
+                <ul>
+                    <li class="first">Beneficios</li>
+                    <li>Mis tarjetas</li>
+                    <li class="last active">Recargas</li>
+                </ul>
+            </div>
+            <div class="purple_box final_page">
+                <p class="yellow_text small_text">Recargas de mis tarjetas</p>
+                <div class="steps">
+                    <div class="step active">1</div><span class="yellow"></span>
+                    <div class="step active">2</div>
+                </div>
+                <div class="pay_box_white confirmation_box">
+                    <h2>¡FELICITACIONES!</h2>
+                    <P><?php echo $this->ordenData['nombres']; ?>, ¡tu recarga fue realizada con éxito!</P>
+                    <h5>Número de recarga: <?php echo $this->ordenData['id']; ?></h5>
+                    <div class="resume">
+                        <div class="head">
+                            <ul>
+                                <li>Promoción</li>
+                                <li>Tarjeta</li>
+                                <li>Cantidad</li>
+                                <li>Precio</li>
+                            </ul>
+                        </div>
+                        <div class="body">
+                            <?php foreach ($this->ordenDetalleData as $ordenDetalle) :?>
+                                <ul>
+                                    <li><?php echo $ordenDetalle['paquete_titulo1']; ?></li>
+                                    <li><span class="name"><?php echo $ordenDetalle['tarjeta_nombre']; ?></span><span class="number"><?php echo $ordenDetalle['tarjeta_numero']; ?></span></li>
+                                    <li>1</li>
+                                    <li>S/. <?php echo $ordenDetalle['emoney']; ?></li>
+                                </ul>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="total">TOTAL: S/. <?php echo $this->ordenData['monto']; ?></div>
+                    </div>
+                    <div class="info">
+                        <p>Para activar tu tarjeta recuerda que primero debes pasarla por el punto de verificación del local en el que deseas jugar y recuerda hacerlo cada vez que cambies de local. <br/>Te hemos enviado un correo con el detalle de tu compra.</p><a href="<?php echo BASE_URL . 'recargas'?>">Seguir comprando</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
