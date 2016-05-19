@@ -72,7 +72,7 @@ class LoginRepository
                             $this->_resultLogin->error = false;
                             $this->_resultLogin->message = null;
                         } else {
-                            $this->_auth->clearIdentity();
+                            $this->logout();
                             $this->_resultLogin->error = true;
                             $this->_resultLogin->message = $this->messages[self::DISABLED_USER];
                         }
