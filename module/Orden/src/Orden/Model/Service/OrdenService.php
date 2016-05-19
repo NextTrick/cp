@@ -239,6 +239,7 @@ class OrdenService
             'perfilpago_pais' => 'PERU', // PAIS DEL PERFIL DE PAGO
             'perfilpago_departamento' => 'LIMA',  // DEPARTAMENTO DEL PERFIL DE PAGO
             'perfilpago_distrito' => 'LIMA', // DISTRITO DEL PERFIL DE PAGO
+            'perfilpago_direccion' => $data['fac_direccion_entrega_factura'],
             'documento_tipo' => $usuarioData['di_tipo'], // TIPO COMPROBANTE
             'documento_numero' => $usuarioData['di_valor'], // NRO COMPROBANTE
             'usuario_email' => $usuarioData['email'],  // CORREO DE USUARIO LOGUEADO
