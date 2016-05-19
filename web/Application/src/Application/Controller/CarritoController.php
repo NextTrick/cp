@@ -397,6 +397,8 @@ class CarritoController extends SecurityWebController
             } else {
                 $return['message'] = $response['error']['message'];
             }
+
+            $return['data']['redirect'] = BASE_URL . '';
         }
 
         $this->_getOrdenService()->getRepository()->save($ordenUpdateData, $ordenId);
