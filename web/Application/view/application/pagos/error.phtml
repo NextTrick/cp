@@ -1,0 +1,233 @@
+<form id="formPago" action="#" method="post">
+<section class="app_content recargas">
+    <div class="box_center">
+        <div class="app_box">
+            <div class="menu right_active">
+                <ul>
+                    <li class="first"><a href="<?php echo BASE_URL; ?>beneficios">Beneficios</a></li>
+                    <li><a href="<?php echo BASE_URL; ?>mis-tarjetas">Mis tarjetas</a></li>
+                    <li class="last active"><a href="<?php echo BASE_URL; ?>recargas">Recargas</a></li>
+                </ul>
+            </div>
+            <div class="purple_box">
+                <p class="yellow_text small_text">Recarga de mis tarjetas</p>
+                <div class="steps">
+                    <div class="step active">1</div>
+                    <span class="yellow"></span>
+                    <div class="step active">2</div>
+                </div>
+                <a href="<?php echo BASE_URL ?>carrito" class="cart_box">
+                    <span class="label">Items en el carrito:</span>
+                    <div class="cart">
+                        <span class="icon"></span>
+                        <span class="number"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+                    </div>
+                </a>
+                <div class="pay_box_white">
+                    <div class="left">
+                        <h4>1. Datos del Pago</h4>
+                        <p>Datos solicitados para la generación del comprobante</p>
+                        <div class="error_message" style="display: none;"><span class="icon"></span>
+                            <p id="messageError">Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.</p>
+                        </div>
+                        <div class="voucher">
+                            <input type="radio" name="comprobante_tipo" checked="checked" class="boleta" value="<?php echo \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA; ?>"/>Boleta
+                            <input type="radio" name="comprobante_tipo" class="factura" value="<?php echo \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA; ?>"/>Factura
+                        </div>
+                        <div class="content_boleta">
+                            <div class="form_control">
+                                <label for="nombres">Nombre</label>
+                                <input id="nombres" name="nombres" type="text" placeholder="Andrea"/>
+                            </div>
+                            <div class="form_control">
+                                <label for="paterno">Apellido paterno</label>
+                                <input id="paterno" name="paterno" type="text" placeholder="Delgado"/>
+                            </div>
+                            <div class="form_control">
+                                <label for="materno">Apellido materno</label>
+                                <input id="materno" name="materno" type="text" placeholder="Delgado"/>
+                            </div>
+                            <div class="form_control">
+                                <label for="documento_identidad">DNI/Pasaporte</label>
+                                <input id="documento_numero" name="documento_numero" type="text" placeholder="12345678"/>
+                            </div>
+                        </div>
+                        <div class="content_factura">
+                            <?php if (!empty($perfilPagos)) : ?>
+                            <div class="form_control">
+                                <label for="perfil_pago">Perfil de pago</label>
+                                <select id="perfil_pago" name="perfil_pago">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($perfilPagos as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <?php endif; ?>
+                            <div class="form_control">
+                                <label for="fac_razon_social">Razón Social</label>
+                                <input id="fac_razon_social" name="fac_razon_social" type="text"/>
+                            </div>
+                            <div class="form_control">
+                                <label for="ruc">RUC</label>
+                                <input id="ruc" name="ruc" type="text"/>
+                            </div>
+                            <div class="form_control">
+                                <label for="fac_direccion_fiscal">Dirección fiscal</label>
+                                <input id="fac_direccion_fiscal" name="fac_direccion_fiscal" type="text"/>
+                            </div>
+                            <div class="form_control">
+                                <label for="fac_direccion_entrega_factura">Dirección de entrega de factura</label>
+                                <input id="fac_direccion_entrega_factura" name="fac_direccion_entrega_factura" type="text"/>
+                            </div>
+                            <div class="form_control">
+                                <input type="checkbox"/>Misma dirección fiscal
+                            </div>
+                            <div class="form_control">
+                                <label for="cod_dist">Distrito</label>
+                                <select id="cod_dist" name="cod_dist">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($distritos as $key => $value) : ?>
+                                        <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h4>2. Seleccione el método de pago</h4>
+                        <div class="credit_cards">
+                            <div class="card pagoefectivo active"></div>
+                            <div class="card visa"></div>
+                            <div class="cards_option">
+                                <input type="radio" name="metodo_pago" value="pe" checked="checked" class="pe"/>
+                                <input type="radio" name="metodo_pago" value="visa" class="visa"/>
+                            </div>
+                        </div>
+                        <h4>3. Confirma tu compra</h4>
+                        <div class="items_cart">
+                            <?php foreach ($cartModel->getProductsCart() as $productos) : ?>
+                                <?php foreach ($productos as $producto) : ?>
+                                    <div class="item">
+                                        <div class="left">
+                                            <img width="140" height="71" src="<?php echo $urlImg . '/' . $producto->getProductImage(); ?>" alt="<?php echo $producto->getProductName(); ?>"/>
+                                        </div>
+                                        <div class="right">
+                                            <h5><?php echo $producto->getProductName(); ?><span>. </span>
+                                                <a href="#modal_watch_legal" name="modal" class="legal">Ver legal</a>
+                                            </h5>
+                                            <h4 class="item_title"><?php echo $producto->getProductName2(); ?></h4>
+                                            <div class="card_type">
+                                                <span>En:</span><span class="icon_card"></span>
+                                                <span class="card_name"><?php echo $producto->getCategoryName(); ?></span>
+                                                <span class="cant">Cantidad: <?php echo $producto->getQuantity(); ?></span>
+                                            </div>
+                                            <div class="detail">
+                                                <div class="line">
+                                                    <div class="left">Coney Bonus</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
+                                                </div>
+                                                <div class="line">
+                                                    <div class="left">Coney Bonus Plus</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
+                                                </div>
+                                                <div class="line">
+                                                    <div class="left">Tickets</div>
+                                                    <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
+                                                </div>
+                                            </div>
+                                            <div class="link_show">
+                                                <div class="watch_detail">Ver detalle</div>
+                                                <div class="hidden_detail">Ocultar detalle</div>
+                                            </div>
+                                            <?php $partMonto = explode('.', $producto->getAmount(true)); ?>
+                                            <div class="total">S/. <span><?php echo $partMonto[0]; ?></span>.<?php echo $partMonto[1]; ?> </div>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </div>
+                        <div align="center" class="total_box">
+                            <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
+                            <?php $partMontoTotal = explode('.', $montoTotal); ?>
+                            <h3>
+                                <span>Pago total: </span>
+                                <span class="medium">S/. </span>
+                                <span class="large"><?php echo $partMontoTotal[0]; ?></span>
+                                <span class="medium">.<?php echo $partMontoTotal[1]; ?></span>
+                            </h3>
+                            <input type="hidden" id="token_csrf" name="token_csrf" value="<?php echo $tokenCsrf; ?>">
+                            <button id="btnPagar" class="btn btn_orange" type="button">Pagar</button>
+                            <a href="<?php echo BASE_URL ?>recargas" class="link_orange">Seguir comprando  </a>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div id="modal_watch_legal" class="modal_box">
+          <div class="modal_content">
+            <h3>Importante:</h3>
+            <hr/>
+            <div class="text_box">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt leo erat. Maecenas dapibus, diam quis dapibus elementum, risus diam congue risus, vitae tristique magna orci et sem. Aliquam congue ut tellus eu ultricies. Vestibulum tristique sapien sit amet accumsan feugiat. Integer congue suscipit dictum. Ut a nisl tempus, ornare erat at, ultrices lectus. Suspendisse pulvinar eros vel finibus ultricies. Maecenas lacinia, tellus ac egestas tincidunt, turpis ipsum pulvinar arcu, et blandit purus lectus vitae odio. Phasellus lobortis, orci non efficitur consectetur, mauris urna ornare nisl, non sodales lectus sapien ac diam. Morbi ligula lorem, tristique in cursus et, vulputate quis lorem. Suspendisse ut erat turpis. </p>
+              <p>Sed sed tellus pulvinar, lobortis est sit amet, mollis lectus. Suspendisse semper vestibulum erat at lacinia. Mauris eget quam sit amet magna rutrum maximus in sed ipsum. Etiam libero justo, dictum non malesuada ut, ullamcorper at leo. Vestibulum accumsan condimentum lectus, et faucibus justo sodales non. Aliquam dictum ipsum sit amet nisl elementum commodo ut ut ligula. Aliquam sagittis fermentum gravida. Vestibulum eu neque eget neque placerat ullamcorper at sit amet mauris. Morbi tellus odio, lacinia a libero sed, congue cursus urna. </p>
+              <p>Suspendisse potenti. Quisque ipsum ante, luctus quis leo sit amet, mattis convallis enim. Donec feugiat vehicula felis. In lacinia quis est eget tempus. Pellentesque vulputate augue vel nibh sagittis sollicitudin. Etiam eu laoreet tellus. Sed id fermentum lorem. Fusce feugiat, libero nec finibus egestas, tellus risus dignissim dui, ultricies condimentum lectus erat et leo. Integer semper erat sit amet ex tempor, sed eleifend libero venenatis. Proin a arcu quis arcu dapibus tristique. Fusce vehicula diam vitae diam faucibus rutrum quis et leo. Nullam ex metus, mollis eget dignissim quis, bibendum et mauris. Integer bibendum, lacus sit amet tincidunt aliquam, sapien arcu tempor nisi, eget egestas massa felis ut purus. Nulla a purus a nisl tincidunt scelerisque. Proin tempor arcu et tortor lacinia, ac pellentesque eros consectetur. Aenean eget eros in lectus auctor finibus ac nec ex.</p>
+            </div>
+          </div>
+        </div>
+        <div id="mask"></div>
+</section>
+</form>
+<script type="text/javascript">
+    $('#btnPagar').click(function(){
+        $.ajax({
+          type: "POST",
+          url: baseUrl + 'carrito/pagar',
+          data: $('#formPago').serialize(),
+          dataType: 'json',
+          success: function(response) {
+            $('#token_csrf').val(response.token);
+            if (response.success) {
+                $('.error_message').hide();
+                window.location.href = response.data.redirect;
+            } else {
+              $('#messageError').html(response.message);
+              $('.error_message').show();
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+              $('#messageError').html('Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde');
+              $('.error_message').show();
+          }
+        });
+    });
+
+    $('#perfil_pago').change(function(){
+        $.ajax({
+          type: "POST",
+          url: baseUrl + 'carrito/perfil-pago',
+          data: {perfil_pago:$('#perfil_pago').val(), token_csrf:$('#token_csrf').val()},
+          dataType: 'json',
+          success: function(data) {
+            $('#token_csrf').val(data.token);
+            $('#fac_razon_social').val('');
+            $('#fac_direccion_fiscal').val('');
+            $('#fac_direccion_entrega_factura').val('');
+            $('#ruc').val('');
+            $('#cod_dist').val('');
+            if (data.success) {
+                $('#fac_razon_social').val(data.data.fac_razon_social);
+                $('#fac_direccion_fiscal').val(data.data.fac_direccion_fiscal);
+                $('#fac_direccion_entrega_factura').val(data.data.fac_direccion_entrega_factura);
+                $('#ruc').val(data.data.documento_numero);
+                $('#cod_dist').val(data.data.cod_dist);
+            }
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+          }
+        });
+    });
+</script>
