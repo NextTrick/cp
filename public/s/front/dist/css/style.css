@@ -766,11 +766,22 @@ section .purple_box .cart_box {
   right: 32px;
   margin-top: -40px;
 }
+section .purple_box .cart_box.active {
+  margin-top: -10px;
+}
 section .purple_box .cart_box.active .cart {
   background: #fa0;
 }
+section .purple_box .cart_box.active .cart span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -304px -202px;
+  width: 24px;
+  height: 22px;
+  position: relative;
+  top: 2px;
+}
 section .purple_box .cart_box.active .cart span.number {
-  color: #fff;
+  color: #000;
 }
 section .purple_box .cart_box .label {
   color: #fff;
@@ -1233,6 +1244,11 @@ section .purple_box .pay_box_white >.left .content_boleta .form_control input {
   border: 1px solid #d3d3d3;
   height: 36px;
   border-radius: 16px;
+}
+section .purple_box .pay_box_white >.left .content_factura .form_control input.disabled,
+section .purple_box .pay_box_white >.left .content_boleta .form_control input.disabled {
+  background: #eee;
+  color: #808080;
 }
 section .purple_box .pay_box_white >.left .content_factura .form_control input[type="checkbox"],
 section .purple_box .pay_box_white >.left .content_boleta .form_control input[type="checkbox"] {

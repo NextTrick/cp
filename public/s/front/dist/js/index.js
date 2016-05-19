@@ -391,7 +391,8 @@ $(function() {
       itemDetail: '.item .detail',
       cardOption: '.card',
       peOption: '.cards_option .pe',
-      visaOption: '.cards_option .visa'
+      visaOption: '.cards_option .visa',
+      equalAddress: '.equal_address'
     };
     catchDom = function() {
       dom.optionBoleta = $(st.optionBoleta);
@@ -404,6 +405,7 @@ $(function() {
       dom.cardOption = $(st.cardOption);
       dom.peOption = $(st.peOption);
       dom.visaOption = $(st.visaOption);
+      dom.equalAddress = $(st.equalAddress);
     };
     suscribeEvents = function() {
       dom.optionBoleta.on('change', events.watchOpenBoletaForm);
@@ -411,6 +413,7 @@ $(function() {
       dom.watchDetail.on('click', events.watchDetail);
       dom.hiddenDetail.on('click', events.hiddenDetail);
       dom.cardOption.on('click', events.changeCard);
+      dom.equalAddress.on('change', events.copy);
     };
     events = {
       watchOpenBoletaForm: function(e) {
@@ -444,6 +447,9 @@ $(function() {
           dom.visaOption.prop('checked', true);
           dom.peOption.prop('checked', false);
         }
+      },
+      copy: function() {
+        $('.factura_address').val($('.fiscal_address').val());
       }
     };
     functions = {
