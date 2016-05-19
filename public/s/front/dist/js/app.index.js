@@ -1,5 +1,5 @@
 $(function() {
-  var modal_login, open_tooltip, user_account;
+  var modal_login, open_tooltip, user_account, recargas;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -564,10 +564,47 @@ $(function() {
       init: initialize
     };
   };
+  recargas = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      openDetail: '.offers .col_3 .box_white .breadcrumb span'
+    };
+    catchDom = function() {
+      dom.openDetail = $(st.openDetail);
+    };
+    suscribeEvents = function() {
+      dom.openDetail.on('click', events.openDetail);
+    };
+    events = {
+      openDetail: function(e) {
+        if ($(this).hasClass('active')) {
+          $(this).removeClass('active');
+          $(this).parent().parent().children('.detail').hide();
+          $(this).parent().parent().parent().removeClass('auto');
+        } else {
+          $(this).addClass('active');
+          $(this).parent().parent().children('.detail').show();
+          $(this).parent().parent().parent().addClass('auto');
+        }
+      }
+    };
+    functions = {
+      example: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
   mis_datos().init();
   user_account().init();
   open_tooltip().init();
   modal_login().init();
   pagos().init();
   carrito().init();
+  recargas().init();
 });

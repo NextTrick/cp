@@ -343,15 +343,19 @@ $(function() {
     dom = {};
     st = {
       less: '.cant_box .less',
-      more: '.cant_box .more'
+      more: '.cant_box .more',
+      detailContent: '.offers .col_3 .box_white .detail',
+      openDetail: '.offers .col_3 .box_white .breadcrumb .detail'
     };
     catchDom = function() {
       dom.less = $(st.less);
       dom.more = $(st.more);
+      dom.openDetail = $(st.openDetail);
     };
     suscribeEvents = function() {
       dom.less.on('click', events.substract);
       dom.more.on('click', events.add);
+      dom.openDetail.on('click', events.openDetail);
     };
     events = {
       substract: function(e) {
@@ -365,6 +369,15 @@ $(function() {
         var actual;
         actual = $(this).prev('input');
         actual.val(parseInt(actual.val()) + 1);
+      },
+      openDetail: function(e) {
+        if ($(this).hasClass('active')) {
+          $(this).removeClass('active');
+          $(this).parent().parent().children('.detail').hide();
+        } else {
+          $(this).addClass('active');
+          $(this).parent().parent().children('.detail').show();
+        }
       }
     };
     functions = {

@@ -74,7 +74,7 @@ header .user_option .user_outside a span {
 }
 header .user_option .user_outside a span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -358px -79px;
+  background-position: -358px -92px;
   width: 12px;
   height: 14px;
   margin-left: 6px;
@@ -347,7 +347,7 @@ header nav ul li.logo img {
 }
 .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -174px -202px;
+  background-position: -142px -202px;
   width: 32px;
   height: 32px;
 }
@@ -360,7 +360,7 @@ header nav ul li.logo img {
 }
 .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -142px -202px;
+  background-position: -174px -202px;
   width: 32px;
   height: 32px;
 }
@@ -1114,6 +1114,14 @@ section .purple_box .recargas_content .offers .col_3 {
   height: 240px;
   background: url("../images/offer_bg.png");
 }
+section .purple_box .recargas_content .offers .col_3.auto {
+  height: auto;
+  background: none;
+}
+section .purple_box .recargas_content .offers .col_3.auto .box_white {
+  height: auto;
+  padding-bottom: 5px;
+}
 section .purple_box .recargas_content .offers .col_3 .box_white {
   border-radius: 14px;
   background: #fff;
@@ -1121,6 +1129,24 @@ section .purple_box .recargas_content .offers .col_3 .box_white {
   text-align: left;
   height: 100%;
   width: 100%;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail {
+  display: none;
+  padding: 0 10px;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail .line {
+  font-size: 14px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail .line .left {
+  width: 60%;
+  text-align: left;
+  color: #808080;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail .line .right {
+  width: 38%;
+  text-align: right;
 }
 section .purple_box .recargas_content .offers .col_3 .box_white .image {
   height: 143px;
@@ -1145,13 +1171,20 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb a {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span {
   background-image: url("../images/sprite.png");
-  background-position: -358px -66px;
+  background-position: -358px -79px;
   width: 13px;
   height: 13px;
+  cursor: pointer;
   display: block;
   position: absolute;
   right: 10px;
   top: 8px;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span.active {
+  background-image: url("../images/sprite.png");
+  background-position: -358px -66px;
+  width: 13px;
+  height: 13px;
 }
 section .purple_box .recargas_content .offers .col_3 .cant_box {
   margin-top: 7px;
@@ -1277,19 +1310,19 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
   background-image: url("../images/sprite.png");
-  background-position: 0px -136px;
+  background-position: -132px -66px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
   background-image: url("../images/sprite.png");
-  background-position: -120px -136px;
+  background-position: 0px -136px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa {
   background-image: url("../images/sprite.png");
-  background-position: -132px -66px;
+  background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }

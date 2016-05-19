@@ -329,14 +329,18 @@ $ ->
 		st =
 			less : '.cant_box .less'
 			more : '.cant_box .more'
+			detailContent : '.offers .col_3 .box_white .detail'
+			openDetail : '.offers .col_3 .box_white .breadcrumb .detail'
 
 		catchDom = ->
 			dom.less = $(st.less)
 			dom.more = $(st.more)
+			dom.openDetail = $(st.openDetail)
 			return
 		suscribeEvents = () ->
 			dom.less.on 'click', events.substract
 			dom.more.on 'click', events.add
+			dom.openDetail.on 'click', events.openDetail
 			return
 		events =
 			substract : (e) ->
@@ -347,6 +351,14 @@ $ ->
 			add : (e) ->
 				actual = $(this).prev('input')
 				actual.val(parseInt(actual.val())+1)
+				return
+			openDetail : (e) ->
+				if $(this).hasClass 'active'
+					$(this).removeClass 'active'
+					$(this).parent().parent().children('.detail').hide()
+				else
+					$(this).addClass 'active'
+					$(this).parent().parent().children('.detail').show()
 				return
 		functions = 
 			example: ->
