@@ -806,6 +806,9 @@ section .purple_box .cards_content .col_3 {
   position: relative;
   vertical-align: top;
 }
+section .purple_box .cards_content .col_3 .init_loading {
+  padding-top: 50px;
+}
 section .purple_box .cards_content .col_3 input,
 section .purple_box .cards_content .col_3 button {
   height: 36px;
