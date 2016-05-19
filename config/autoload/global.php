@@ -28,12 +28,23 @@ return array(
         'send_mail' => true,
         'local_log' => true,        
     ),
-    'db' => array(
+    /*'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'coneypark',
         'username' => 'root',
         'password' => '',
+        'port' => '3306',
+        'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
+        )
+    ),*/
+    'db' => array(
+        'driver' => 'pdo_mysql',
+        'hostname' => '54.165.150.186',
+        'database' => 'pasarelaconeydev',
+        'username' => 'idigital',
+        'password' => '1D1g1t4L',
         'port' => '3306',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
