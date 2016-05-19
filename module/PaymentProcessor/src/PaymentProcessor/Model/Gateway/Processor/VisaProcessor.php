@@ -5,6 +5,7 @@ namespace PaymentProcessor\Model\Gateway\Processor;
 use PaymentProcessor\Model\Gateway\Processor\Base\AbstractProcessor;
 use PaymentProcessor\Model\Gateway\Processor\Ws\Visa;
 use Orden\Model\Repository\OrdenRepository;
+use Util\Model\Service\ErrorService;
 
 class VisaProcessor extends AbstractProcessor
 {
@@ -43,19 +44,22 @@ class VisaProcessor extends AbstractProcessor
                         'token' => null,
                         'clientReference' => $data['id'],
                         'reference' => $eticket,
-                        'html' => $html,
+                        'redirect' => BASE_URL . 'payment-processor/callback/visa-redirect/eticket/' . $eticket,
                     );                    
                 } else {
                     $return['success'] = false;
+                    $return['error']['code'] = 900;
                     $return['error']['message'] = $this->getErrorMessage($xmlDocument, $countMessages);                    
                 }
             } else {
                 $return['success'] = false;
-                $return['error']['message'] = 'Error loading Xml';                
+                $return['error']['code'] = 901;
+                $return['error']['message'] = ErrorService::GENERAL_MESSAGE; //'Error loading Xml';
             }
                         
         } catch (\Exception $e) {
             $return['success'] = false;
+            $return['error']['code'] = ErrorService::GENERAL_CODE;
             $return['error']['message'] = $e->getMessage();
             $return['error']['detail'] = $e->getTraceAsString();
         }
@@ -135,15 +139,18 @@ class VisaProcessor extends AbstractProcessor
 
                 } else {
                     $return['success'] = false;
+                    $return['error']['code'] = 900;
                     $return['error']['message'] = $this->getErrorMessage($xmlDocument, $countMessages);                    
                 }
             } else {
                 $return['success'] = false;
-                $return['error']['message'] = 'Error loading Xml';                
+                $return['error']['code'] = 901;
+                $return['error']['message'] = ErrorService::GENERAL_MESSAGE;//'Error loading XML';
             }
                         
         } catch (\Exception $e) {
             $return['success'] = false;
+            $return['error']['code'] = ErrorService::GENERAL_CODE;
             $return['error']['message'] = $e->getMessage();
             $return['error']['detail'] = $e->getTraceAsString();
         }

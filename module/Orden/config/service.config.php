@@ -5,6 +5,7 @@ return array(
         //services
         'Orden\Model\Service\CarritoService' => 'Orden\Model\Service\Factory\CarritoFactory',
         'Orden\Model\Service\OrdenService' => 'Orden\Model\Service\Factory\OrdenFactory',
+        'Orden\Model\Service\DetalleOrdenService' => 'Orden\Model\Service\Factory\DetalleOrdenFactory',
         'Orden\Model\Service\RequestHistorialService' => 'Orden\Model\Service\Factory\RequestHistorialFactory',
         
         //forms

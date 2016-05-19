@@ -188,17 +188,18 @@
           url: baseUrl + 'carrito/pagar',
           data: $('#formPago').serialize(),
           dataType: 'json',
-          success: function(data) {
-            $('#token_csrf').val(data.token);
-            if (data.success) {
-              $('.error_message').hide();
+          success: function(response) {
+            $('#token_csrf').val(response.token);
+            if (response.success) {
+                $('.error_message').hide();
+                window.location.href = response.data.redirect;
             } else {
-              $('#messageError').html(data.message);
+              $('#messageError').html(response.message);
               $('.error_message').show();
             }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
-              $('#messageError').html('Error desconocido, vuelva a intentarlo por favor.');
+              $('#messageError').html('Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde');
               $('.error_message').show();
           }
         });
