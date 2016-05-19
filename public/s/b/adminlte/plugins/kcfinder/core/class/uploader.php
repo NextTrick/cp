@@ -107,8 +107,12 @@ class uploader {
         if (count($_FILES))
             $this->file = &$_FILES[key($_FILES)];
 
+        // LOAD DEFAULT CONFIGURATION
+        require "conf/config.php";
+
         // SETTING UP SESSION
         if (!session_id()) {
+
             if (isset($_CONFIG['_sessionLifetime']))
                 ini_set('session.gc_maxlifetime', $_CONFIG['_sessionLifetime'] * 60);
             if (isset($_CONFIG['_sessionDir']))
@@ -116,12 +120,10 @@ class uploader {
             if (isset($_CONFIG['_sessionDomain']))
                 ini_set('session.cookie_domain', $_CONFIG['_sessionDomain']);
 
-            session_start();
+           //session_start();
         }
-
-        // LOAD DEFAULT CONFIGURATION
-        require "conf/config.php";
-
+        
+        
         // LOAD SESSION CONFIGURATION IF EXISTS
         $this->config = $_CONFIG;
         $sessVar = "_sessionVar";
@@ -158,7 +160,7 @@ class uploader {
             $this->session['stamp'] = $stamp;
         elseif (!is_array($this->session['stamp']) || ($this->session['stamp'] !== $stamp)) {
             if ($this->session['stamp']['ip'] === $stamp['ip'])
-                session_destroy();
+                //session_destroy();
             die;
         }
 
