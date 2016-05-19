@@ -177,11 +177,15 @@ class CarritoController extends SecurityWebController
         $validator->setName('token_csrf');
         $tokenCsrf = $validator->getHash(true);
         
+        $criteria2 = array('where' => array('id' => $usuario->id));
+        $usuarioData = $this->_getUsuarioService()->getRepository()->findOne($criteria2);
+        
         $view = new ViewModel();
         $view->setVariable('tokenCsrf', $tokenCsrf);
         $view->setVariable('cartModel', $cartModel);
         $view->setVariable('perfilPagos', $perfilPagos);
         $view->setVariable('distritos', $distritos);
+        $view->setVariable('usuarioData', $usuarioData);
         $view->setVariable('urlImg', $config['fileDir']['paquete_paquete']['down']);
         return $view;
     }
