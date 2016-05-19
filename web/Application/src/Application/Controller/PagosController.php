@@ -19,13 +19,13 @@ class PagosController extends SecurityWebController
 
         if (!empty($ordenData)) {
             $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
-            var_dump($ordenData, $ordenDetalleData); exit;
-            if ($ordenData['estado'] == OrdenRepository::PAGO_ESTADO_PAGADO) {
+            //var_dump($ordenData, $ordenDetalleData); exit;
+            if ($ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_PAGADO) {
                 $template = 'application/pagos/exito.phtml';
                 $view->ordenData = $ordenData;
                 $view->ordenDetalleData = $ordenDetalleData;
-            } else if ($ordenData['estado'] == OrdenRepository::PAGO_ESTADO_ERROR
-                || $ordenData['estado'] == OrdenRepository::PAGO_ESTADO_EXPIRADO) {
+            } else if ($ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_ERROR
+                || $ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_EXPIRADO) {
                 $template = 'application/pagos/error.phtml';
                 $view->ordenData = $ordenData;
             } else {
