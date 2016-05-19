@@ -180,9 +180,11 @@ $(function() {
       dom.addCard.on('click', events.showAsociateCard);
       dom.btnCancel.on('click', events.hideAsociateCard);
       dom.btnAsociateCard.on('click', events.asociateCard);
-      dom.watchMore.on('click', events.watchMore);
-      dom.activeTooltipBonus.hover(events.showTooltipBonus, events.hideTooltipBonus);
-      dom.editCardName.on('click', events.editCardName);
+      $('body').on('click', st.watchMore, events.watchMore);
+      //dom.activeTooltipBonus.hover(events.showTooltipBonus, events.hideTooltipBonus);
+      $('body').on('mouseenter', st.activeTooltipBonus, events.showTooltipBonus);
+      $('body').on('mouseleave', st.activeTooltipBonus, events.hideTooltipBonus);
+      $('body').on('click', st.editCardName, events.editCardName);
     };
     events = {
       openTooltip: function() {
@@ -528,6 +530,35 @@ $(function() {
       init: initialize
     };
   };
+  mis_datos = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      btnChangeImage: '.change_user_image'
+    };
+    catchDom = function() {
+      dom.btnChangeImage = $(st.btnChangeImage);
+    };
+    suscribeEvents = function() {
+      dom.btnChangeImage.on('click', events.changeImage);
+    };
+    events = {
+      changeImage: function(e) {
+        $('.image_file').click();
+      }
+    };
+    functions = {
+      example: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
+  mis_datos().init();
   user_account().init();
   open_tooltip().init();
   modal_login().init();

@@ -766,6 +766,12 @@ section .purple_box .cart_box {
   right: 32px;
   margin-top: -40px;
 }
+section .purple_box .cart_box.active .cart {
+  background: #fa0;
+}
+section .purple_box .cart_box.active .cart span.number {
+  color: #fff;
+}
 section .purple_box .cart_box .label {
   color: #fff;
   display: inline-block;
