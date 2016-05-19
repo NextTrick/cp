@@ -73,8 +73,8 @@ class PaqueteController extends SecurityAdminController
                 'referencia' => $row['referencia'],
                 'emoney' => $row['emoney'],
                 'bonus' => $row['bonus'],
-                'promotionbonus' => $row['value'],
-                'etickets' => isset($row['etickets']) ? $row['etickets'] : 0,
+                'promotionbonus' => isset($row['promotionbonus']) ? $row['promotionbonus'] :  null,
+                'etickets' => isset($row['etickets']) ? $row['etickets'] : null,
                 'gamepoints' => $row['gamepoints'],
                 'fecha_creacion' => date('Y-m-d H:i:s'),
             ));

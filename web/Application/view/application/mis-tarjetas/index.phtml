@@ -63,22 +63,28 @@
         <div id="mask"></div>
 </section>
 <script type="text/javascript">
+    function getCard(_this)
+    {
+        $.ajax({
+            type: "GET",
+            url: baseUrl + 'mis-tarjetas/tarjeta-unidad',
+            data: {index:$(_this).children('.meta_data').data('index'), codigo:$(_this).children('.meta_data').data('codigo'), cguid:$(_this).children('.meta_data').data('cguid'), numero:$(_this).children('.meta_data').data('numero'), nombre:$(_this).children('.meta_data').data('nombre'), destino:$(_this).attr('id')},
+            dataType:'json',
+            success: function(data) {
+                if (data.success) {
+                    $('#'+data.data.destino).html(data.data.html);
+                }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            }
+        });
+    }
     $(document).ready(function(){
+        var factor = 0;
         $('.init_card').each(function(){
             var _this = this;
-            $.ajax({
-                type: "GET",
-                url: baseUrl + 'mis-tarjetas/tarjeta-unidad',
-                data: {index:$(_this).children('.meta_data').data('index'), codigo:$(_this).children('.meta_data').data('codigo'), cguid:$(_this).children('.meta_data').data('cguid'), numero:$(_this).children('.meta_data').data('numero'), nombre:$(_this).children('.meta_data').data('nombre'), destino:$(_this).attr('id')},
-                dataType:'json',
-                success: function(data) {
-                    if (data.success) {
-                        $('#'+data.data.destino).html(data.data.html);
-                    }
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                }
-            });
+            setTimeout(function(){getCard(_this);}, factor*20000);
+            factor = factor+1;
         });
     });
 </script>
