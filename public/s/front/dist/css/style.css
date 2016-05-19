@@ -1616,6 +1616,80 @@ section .purple_box .pay_box_white.cart_page >.right .total_box {
   border-top: 1px dashed #ccc;
   border-bottom: 1px dashed #ccc;
 }
+section .purple_box .pay_box_white.confirmation_box h2 {
+  color: #5218b6;
+}
+section .purple_box .pay_box_white.confirmation_box p {
+  color: #666;
+  margin-bottom: 40px;
+}
+section .purple_box .pay_box_white.confirmation_box h5 {
+  font-size: 14px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume {
+  width: 620px;
+  margin: 0 auto;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px dashed #999;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li {
+  width: 20%;
+  padding: 12px 10px;
+  list-style: none;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li:nth-child(2),
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(2) {
+  width: 32%;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li:nth-child(3),
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(3) {
+  text-align: center;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li span.name,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.name,
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li span.number,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+  display: block;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li span.number,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+  margin-top: 8px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li {
+  color: #999;
+  font-size: 14px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+  color: #999;
+  font-size: 14px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .total {
+  float: right;
+  text-align: right;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+section .purple_box .pay_box_white.confirmation_box .info {
+  width: 620px;
+  margin: 50px auto 50px;
+}
+section .purple_box .pay_box_white.confirmation_box .info p {
+  font-size: 16px;
+  text-align: center;
+}
+section .purple_box .pay_box_white.confirmation_box .info a {
+  color: #ff771d;
+  text-decoration: none;
+}
 section input {
   width: 100%;
   border: 0;
@@ -2201,6 +2275,14 @@ i[class*=" icon-"] {
   section .app_box .purple_box {
     border-radius: 0;
   }
+  section .app_box .purple_box.final_page .steps {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  section .app_box .purple_box.final_page .steps .yellow {
+    width: 32px;
+    margin: 0px -6px 3px;
+  }
   section .app_box .purple_box .steps {
     float: left;
   }
@@ -2311,6 +2393,45 @@ i[class*=" icon-"] {
   }
   section .app_box .purple_box .pay_box_white.cart_page >.right {
     height: auto !important;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume {
+    width: 100%;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li,
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li {
+    padding: 12px 0px;
+    font-size: 14px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li:nth-child(1),
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(1) {
+    margin-right: 10px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li {
+    color: #999;
+    font-size: 12px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+    color: #999;
+    font-size: 12px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .total {
+    float: right;
+    text-align: right;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .info {
+    width: 100%;
+    margin: 50px auto 50px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .info p {
+    font-size: 16px;
+    text-align: center;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .info a {
+    color: #ff771d;
+    text-decoration: none;
   }
   section .app_box .purple_box .recargas_content .offers {
     margin-top: 45px;
