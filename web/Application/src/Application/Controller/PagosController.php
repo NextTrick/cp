@@ -16,6 +16,7 @@ class PagosController extends SecurityWebController
         $ordenId = base64_decode($orden);
 
         $ordenData = $this->_getOrdenService()->getRepository()->getById($ordenId);
+        var_dump($ordenData); exit;
 
         if (!empty($ordenData)) {
             $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
