@@ -45,6 +45,7 @@ class ModificarPasswordForm extends Form
         $password->setAttributes(array(
                 'id' => 'password',
                 'autocomplete' => 'off',
+                'placeholder' => 'Password',
                 'maxlength' => '100',
                 'class' => 'form-control',
             ));
@@ -55,6 +56,7 @@ class ModificarPasswordForm extends Form
                 'id' => 'password_repeat',
                 'autocomplete' => 'off',
                 'maxlength' => '100',
+                'placeholder' => 'Repetir password',
                 'class' => 'form-control',
             ));
         $this->add($passwordRep);

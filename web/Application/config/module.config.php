@@ -175,14 +175,19 @@ return array(
             ),
             'web-pagos' => array(
                 'type' => 'Segment',
-                'constraints' => array(
-                    'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                ),
                 'options' => array(
-                    'route'    => '/pagos[/:codigo]',
+                    'route'    => '/pagos[/:action]',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Pagos',
                         'action'     => 'index',
+                    ),
+                ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'default' => array(
+                        'type' => 'Wildcard',
+                        'options' => array(
+                        ),
                     ),
                 ),
             ),

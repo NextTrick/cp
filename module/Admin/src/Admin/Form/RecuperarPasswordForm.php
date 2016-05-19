@@ -40,6 +40,7 @@ class RecuperarPasswordForm extends Form
                 'autocomplete' => 'off',
                 'maxlength' => '30',
                 'class' => 'form-control',
+                'placeholder' => 'Email',
             ));
         $this->add($email);
         
