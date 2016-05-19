@@ -1,4 +1,7 @@
 label span {color: red;}
+span.error {color: red;}
+span.success {color: green;}
 .error ul li {color: red;}
+.success ul li {color: green;}
 .separator{margin-bottom: 8px; margin-top: 5px;}
 .isearch div.form-group{padding: 5px;}
