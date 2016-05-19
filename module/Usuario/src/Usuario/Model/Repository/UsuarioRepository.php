@@ -120,4 +120,13 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         );
         return $this->findOne($criteria);
     }
+
+    public function getById($id)
+    {
+        $criteria = array(
+            'where' => array('id' => $id, 'estado' => 1),
+        );
+        
+        return $this->findOne($criteria);
+    }
 }

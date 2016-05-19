@@ -6,6 +6,7 @@ use PaymentProcessor\Model\Gateway\Processor\Ws\PagoEfectivo;
 use PaymentProcessor\Model\Gateway\Processor\Base\AbstractProcessor;
 use PaymentProcessor\Model\Gateway\Processor\Ws\PagoEfectivo\Solicitud;
 use Orden\Model\Repository\OrdenRepository;
+use Util\Model\Service\ErrorService;
 
 class PagoEfectivoProcessor extends AbstractProcessor
 {
@@ -47,10 +48,12 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 );
             } else {
                 $return['success'] = false;
+                $return['error']['code'] = 900;
                 $return['error']['message'] = (string) $paymentResponse->Mensaje;
             }
         } catch (\Exception $e) {
             $return['success'] = false;
+            $return['error']['code'] = ErrorService::GENERAL_CODE;
             $return['error']['message'] = $e->getMessage();
             $return['error']['detail'] = $e->getTraceAsString();
         }
@@ -109,11 +112,14 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 
             } catch (\Exception $e) {
                 $return['success'] = false;
+                $return['error']['code'] = ErrorService::GENERAL_CODE;
                 $return['error']['message'] = $e->getMessage();
                 $return['error']['detail'] = $e->getTraceAsString();
             }
         } else {
             $return['success'] = false;
+            $return['error']['code'] = 500;
+            $return['error']['message'] = ErrorService::GENERAL_MESSAGE;
         }
 
         $requestHistorialData = array(
@@ -151,8 +157,8 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'UsuarioProvincia' => 'LIMA',
                     'UsuarioPais' => 'PERU',
                     'UsuarioAlias' => $data['perfilpago_nombres'],
-                    'UsuarioTipoDoc' => $data['comprobante_tipo'],
-                    'UsuarioNumeroDoc' => $data['comprobante_numero'],
+                    'UsuarioTipoDoc' => $data['documento_tipo'],
+                    'UsuarioNumeroDoc' => $data['documento_numero'],
                     'UsuarioEmail' => $data['usuario_email'],
                     'ConceptoPago' => 'Pago',
             ));
