@@ -28,7 +28,14 @@ class CallbackController extends AbstractActionController
                 $this->getServiceLocator());
         $response = $paymentProcessor->processCallback($params);
 
-        return $this->_getOrdenService()->procesarPaymentProcessorCallbackReponse($response);
+        return $this->_procesarReponse($response);
+    }
+
+    public function _procesarReponse($response)
+    {
+        $ordenId = $this->_getOrdenService()->procesarPaymentProcessorCallbackReponse($response);
+
+        return $this->redirect()->toUrl(BASE_URL . 'pagos/cofirmacion/orden/' . base64_encode($ordenId));
     }
 
     public function visaRedirectAction()

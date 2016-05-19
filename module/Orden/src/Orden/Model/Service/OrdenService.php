@@ -391,7 +391,7 @@ class OrdenService
             }
         }
 
-        return $this->redirect()->toUrl(BASE_URL . 'pagos/cofirmacion/orden/' . base64_encode($ordenId));
+        return $ordenId;
     }
 
     public function setCreditPurchase($ordenId)
