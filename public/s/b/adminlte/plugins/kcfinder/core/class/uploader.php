@@ -107,9 +107,6 @@ class uploader {
         if (count($_FILES))
             $this->file = &$_FILES[key($_FILES)];
 
-        // LOAD DEFAULT CONFIGURATION
-        require "conf/config.php";
-
         // SETTING UP SESSION
         if (!session_id()) {
             if (isset($_CONFIG['_sessionLifetime']))
@@ -118,8 +115,12 @@ class uploader {
                 ini_set('session.save_path', $_CONFIG['_sessionDir']);
             if (isset($_CONFIG['_sessionDomain']))
                 ini_set('session.cookie_domain', $_CONFIG['_sessionDomain']);
+
             session_start();
         }
+
+        // LOAD DEFAULT CONFIGURATION
+        require "conf/config.php";
 
         // LOAD SESSION CONFIGURATION IF EXISTS
         $this->config = $_CONFIG;

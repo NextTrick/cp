@@ -22,7 +22,8 @@ $_CONFIG = array(
 // GENERAL SETTINGS
 
     'disabled' => false,
-    'uploadURL' => "http://dev.recargas.coneypark.pe/s/files/contenido/",
+    //'uploadURL' => "http://dev.recargas.coneypark.pe/s/files/contenido/",
+    'uploadURL' => !empty($_SESSION["URL_IMAGE_CMS"])?$_SESSION["URL_IMAGE_CMS"]:"",
     'uploadDir' => "",
     'theme' => "default",
 
