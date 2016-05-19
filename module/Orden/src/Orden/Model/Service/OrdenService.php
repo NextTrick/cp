@@ -246,7 +246,7 @@ class OrdenService
             'monto' => (string) $monto, // MONTO EN CON 2 DECIMALES
         );
 
-        $paymentProcessor = new PaymentProcessor($metodoPago, $this->sl);
+        $paymentProcessor = new PaymentProcessor($metodoPago, $this->_sl);
         $response = $paymentProcessor->createCharge($paymentProcessordata);
 
         if (!empty($response['success'])) {
@@ -435,7 +435,7 @@ class OrdenService
      */
     private function _getUsuarioService()
     {
-        return $this->sl->get('Usuario\Model\Service\UsuarioService');
+        return $this->_sl->get('Usuario\Model\Service\UsuarioService');
     }
 
     /**
@@ -443,7 +443,7 @@ class OrdenService
      */
     private function _getPerfilPagoService()
     {
-        return $this->sl->get('Usuario\Model\Service\PerfilPagoService');
+        return $this->_sl->get('Usuario\Model\Service\PerfilPagoService');
     }
 
     /**
@@ -451,7 +451,7 @@ class OrdenService
      */
     private function _getCartService()
     {
-        return $this->sl->get('Cart\Model\Service\CartService');
+        return $this->_sl->get('Cart\Model\Service\CartService');
     }
 
     /**
@@ -459,7 +459,7 @@ class OrdenService
      */
     private function _getDetalleOrdenService()
     {
-        return $this->sl->get('Orden\Model\Service\DetalleOrdenService');
+        return $this->_sl->get('Orden\Model\Service\DetalleOrdenService');
     }
 
 

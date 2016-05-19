@@ -244,7 +244,7 @@ class CarritoController extends SecurityWebController
     {
         $response = $this->getResponse();
         $result = array('success' => false, 'message' => ERROR_VALIDACION, 'paramsInvalid' => array());
-        
+
         if ($this->_isLogin() === false) {
             $result['message'] = ERROR_303;
             $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -268,7 +268,6 @@ class CarritoController extends SecurityWebController
             $comprobanteTipo = $this->request->getPost('comprobante_tipo');
             $metodoPago = $this->request->getPost('metodo_pago');
             $params = $this->request->getPost();
-
             switch ($comprobanteTipo) {
                 case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_BOLETA:
                     $perfilPagoData = array(
@@ -319,13 +318,15 @@ class CarritoController extends SecurityWebController
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
                 return $response->setContent($jsonModel->serialize());
             }
-            
+
             if (!empty($data)) {
                 $return = $this->_getOrdenService()->procesarPago($comprobanteTipo, $metodoPago, $usuario, $data);
 
                 $result = $return;
             }
         }
+
+
 
         $jsonModel =  new \Zend\View\Model\JsonModel($result);
         return $response->setContent($jsonModel->serialize());
