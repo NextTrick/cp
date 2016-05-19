@@ -122,7 +122,7 @@ class LoginController extends SecurityAdminController
 
     public function modificarPasswordAction()
     {
-        $codigo = $this->params('codigo', null);
+        $codigo = $this->request->getQuery('codigo', null);
         $form = $this->_getModificarPasswordForm();
         $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
             'controller' => 'login',
@@ -149,7 +149,7 @@ class LoginController extends SecurityAdminController
                     $this->flashMessenger()->addMessage(array(
                         'success' => 'Su password fué actualizada correctamente.',
                     ));
-                    return $this->redirect()->toRoute('admin/login', array(
+                    return $this->redirect()->toRoute('admin/crud', array(
                         'controller' => 'login',
                     ));
                 } else {
