@@ -105,7 +105,7 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
         $select = $sql->select();
         $select->from(array('a' => $this->table));
         $select->columns(array('emoney'));
-        $select->join(array('b' => 'tarjeta_tarjeta'), 'a.tarjeta_id = c.id',
+        $select->join(array('b' => 'tarjeta_tarjeta'), 'a.tarjeta_id = b.id',
             array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre', 'tarjeta_cguid' => 'cguid'));
 
         $select->where->equalTo('a.id', $ordenId);
