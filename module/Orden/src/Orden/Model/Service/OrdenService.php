@@ -79,7 +79,7 @@ class OrdenService
 
             $paramsWhere = array(
                 'comprobante_tipo' => String::xssClean($params['cmbTipoComp']),
-                'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
+                'estado'      => String::xssClean($params['cmbPagoEstado']),
                 'pago_tarjeta'     => String::xssClean($params['cmbMetodoPago']),
             );
 
@@ -224,7 +224,7 @@ class OrdenService
         $usuarioData = $this->_getUsuarioService()->getRepository()->getById($usuario->id);
         $cartModel = $this->_getCartService()->getCart();
         $monto = $cartModel->getAmountCart(true);
-        $data['pago_estado'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
+        $data['estado'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
         $data['fecha_creacion'] = $cDate = date('Y-m-d H:i:s');
         $data['monto'] = $monto;
         $ordenId = $this->getRepository()->save($data);
@@ -257,7 +257,7 @@ class OrdenService
                 case PagoEfectivoProcessor::ALIAS :
                     $ordenUpdateData = array(
                         'pago_referencia' => $response['data']['reference'],
-                        'pago_estado' => $response['data']['status'],
+                        'estado' => $response['data']['status'],
                         'pago_cip' => $response['data']['cip'],
                         'pago_token' => $response['data']['token'],
                         'pago_metodo' => self::METODO_PAGO_NAME_PE,
@@ -266,7 +266,7 @@ class OrdenService
                 case VisaProcessor::ALIAS :
                     $ordenUpdateData = array(
                         'pago_referencia' => $response['data']['reference'],
-                        'pago_estado' => $response['data']['status'],
+                        'estado' => $response['data']['status'],
                         'pago_metodo' => self::METODO_PAGO_NAME_VISA,
                     );
                     break;
@@ -275,7 +275,7 @@ class OrdenService
         } else {
             $return['success'] = false;
             $ordenUpdateData = array(
-                'pago_estado' => OrdenRepository::PAGO_ESTADO_ERROR,
+                'estado' => OrdenRepository::PAGO_ESTADO_ERROR,
                 'pago_error' => $response['error']['code'],
                 'pago_error_detalle' => $response['error']['message'],
             );
@@ -375,7 +375,7 @@ class OrdenService
                     );
 
                     if (!empty($response['data']['status'])) {
-                        $ordenUpdateData['pago_estado'] =  $response['data']['status'];
+                        $ordenUpdateData['estado'] =  $response['data']['status'];
                     }
 
                     if (!empty($response['data']['confirmationDate'])) {
