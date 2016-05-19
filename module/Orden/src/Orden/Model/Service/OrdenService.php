@@ -226,6 +226,7 @@ class OrdenService
         $monto = $cartModel->getAmountCart(true);
         $data['pago_estado'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
         $data['fecha_creacion'] = $cDate = date('Y-m-d H:i:s');
+        $data['monto'] = $monto;
         $ordenId = $this->getRepository()->save($data);
 
         $this->_saveDetalleOrden($ordenId, $cDate);
