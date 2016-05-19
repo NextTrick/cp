@@ -12,26 +12,26 @@ class PagosController extends SecurityWebController
     public function confirmacionAction()
     {
         $view = new ViewModel();
-        $orden = $this->params()->fromRoute('orden');
+        $orden = $this->params()->fromRoute('orden', base64_decode('XXXXXX'));
         $ordenId = base64_decode($orden);
 
         $ordenData = $this->_getOrdenService()->getRepository()->getById($ordenId);
 
-        if (empty($ordenData)) {
-            $this->_toUrlRecargas();
-        }
-        
-        $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
-        if ($ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_PAGADO) {
-            $template = 'exito.html';
-            $view->ordenData = $ordenData;
-            $view->ordenDetalleData = $ordenDetalleData;
-        } else if ($ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_ERROR
-            || $ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_EXPIRADO) {
-            $template = 'error.html';
-            $view->ordenData = $ordenData;
+        if (!empty($ordenData)) {
+            $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
+            if ($ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_PAGADO) {
+                $template = 'application/pagos/exito.phtml';
+                $view->ordenData = $ordenData;
+                $view->ordenDetalleData = $ordenDetalleData;
+            } else if ($ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_ERROR
+                || $ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_EXPIRADO) {
+                $template = 'application/pagos/error.phtml';
+                $view->ordenData = $ordenData;
+            } else {
+                $this->_toUrlRecargas();
+            }
         } else {
-            $this->_toUrlRecargas();
+            $template = 'application/pagos/error.phtml';
         }
 
         $view->setTemplate($template);
