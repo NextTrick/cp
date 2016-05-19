@@ -66,18 +66,24 @@
                                                 <input id="id_<?php echo $index; ?>" type="hidden" value="<?php echo $producto->getProductId(); ?>">
                                             </div>
                                             <div class="detail">
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('bonus'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus</div>
                                                     <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('promotionbonus'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus Plus</div>
                                                     <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('etickets'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Tickets</div>
                                                     <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
                                                 </div>
+                                                <?php endif; ?>
                                             </div>
                                             <div class="link_show">
                                                 <div class="watch_detail">Ver detalle</div>

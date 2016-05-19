@@ -21,8 +21,7 @@ class PagosController extends SecurityWebController
             $this->_toUrlRecargas();
         }
         
-        $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getByOrderId($ordenId);
-
+        $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
         if ($ordenData['pago_estado'] == OrdenRepository::PAGO_ESTADO_PAGADO) {
             $template = 'exito.html';
             $view->ordenData = $ordenData;

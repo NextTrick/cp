@@ -99,6 +99,18 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         return $this->findOne($criteria);
     }
 
+    public function getById($ordenId)
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('id', $ordenId);
+
+        $criteria = array(
+            'where'   => $where,
+        );
+
+        return $this->findOne($criteria);
+    }
+
     public static function getErrorMessages()
     {
        return array(

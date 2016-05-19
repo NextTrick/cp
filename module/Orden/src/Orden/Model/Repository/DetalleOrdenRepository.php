@@ -9,6 +9,7 @@
 namespace Orden\Model\Repository;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 {
@@ -75,5 +76,43 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    public function getConfirmacionDatosByOrderId($ordenId)
+    {
+        $sql= new Sql($this->getAdapter());
+
+        $select = $sql->select();
+        $select->from(array('a' => $this->table));
+        $select->columns(array('emoney', 'cantidad'));
+        $select->join(array('b' => 'paquete_paquete'), 'a.paquete_id = b.id',
+            array('paquete_id' => 'id', 'paquete_titulo1' => 'titulo1', 'paquete_titulo2' => 'titulo2'));
+        $select->join(array('c' => 'tarjeta_tarjeta'), 'a.tarjeta_id = c.id',
+            array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre'));
+
+        $select->where->equalTo('a.id', $ordenId);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
+
+        return $data;
+    }
+
+    public function getTarjetasByOrderId($ordenId)
+    {
+        $sql= new Sql($this->getAdapter());
+
+        $select = $sql->select();
+        $select->from(array('a' => $this->table));
+        $select->columns(array('emoney'));
+        $select->join(array('b' => 'tarjeta_tarjeta'), 'a.tarjeta_id = c.id',
+            array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre', 'tarjeta_cguid' => 'cguid'));
+
+        $select->where->equalTo('a.id', $ordenId);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
+
+        return $data;
     }
 }
