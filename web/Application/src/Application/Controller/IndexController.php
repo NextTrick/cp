@@ -11,8 +11,11 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $view = new ViewModel();
-        return $view;
+        if ($this->_getLoginGatewayService()->isLoggedIn()) {
+            return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
+        } else {
+            return $this->redirect()->toRoute('web-login/modalidad', array('controller' => 'login'));
+        }
     }
 
     public function testEmailAction()
@@ -106,5 +109,10 @@ class IndexController extends AbstractActionController
     public function phpinfoAction()
     {
         echo phpinfo(); exit;
+    }
+    
+    protected function _getLoginGatewayService()
+    {
+        return $this->getServiceLocator()->get('Usuario\Model\Service\LoginGatewayService');
     }
 }
