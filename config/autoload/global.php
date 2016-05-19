@@ -28,7 +28,7 @@ return array(
         'send_mail' => true,
         'local_log' => true,        
     ),
-    /*'db' => array(
+    'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'coneypark',
@@ -38,10 +38,10 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),*/
-    'db' => array(
+    ),
+    /*'db' => array(
         'driver' => 'pdo_mysql',
-        'hostname' => '54.165.150.186',
+        'hostname' => 'localhost',
         'database' => 'pasarelaconeydev',
         'username' => 'idigital',
         'password' => '1D1g1t4L',
@@ -49,7 +49,7 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),
+    ),*/
     'cacheCart' => array(
         'adapter' => 'filesystem',
         'options' => array(

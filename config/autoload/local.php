@@ -11,7 +11,7 @@ return array(
             'post_max_size' => '804857600',            
         )
     ),
-    /*'db' => array(
+    'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'coneypark',
@@ -21,8 +21,8 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),*/
-    'db' => array(
+    ),
+    /*'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'pasarelaconeydev',
@@ -32,5 +32,5 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),
+    ),*/
 );
