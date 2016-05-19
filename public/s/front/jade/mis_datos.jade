@@ -1,0 +1,99 @@
+extends layout/layout.jade
+block section
+	section
+		.box_center
+			.welcome_box.signin_complete
+				.yellow_box Mis datos
+				.purple_box
+					.error_message.hide
+						span.icon
+						span.text Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde
+					
+					form.signin_form.form_mis_datos(action="" data-parsley-validate)
+						h3 Tus datos de cuenta
+						.content_form
+							.form_control
+								label.left Imagen de perfil
+								.right
+									.left.user_image_left
+										.image
+											img(src="../images/user_image.png", alt="")
+									.right.user_image_right
+										input(type="file" name="image" class="image_file")
+										span.btn.change_user_image Actualizar imagen
+										p.image_info La imagen debe pesar como máximo 1000 KB. Formatos permitidos: JPG, PNG 
+							.form_control
+								label.left Correo
+								.right
+									input(type="text" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-type="email" data-parsley-type-message="Ingrese un correo válido")
+							.form_control
+								label.left Contraseña
+								.right
+									input#password(type="password" data-parsley-required data-parsley-required-message="Dato obligatorio")
+							.form_control
+								label.left Repetir contraseña
+								.right
+									input(type="password" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-equalto="#password" data-parsley-equalto-message="Las contraseñas no coinciden")
+						.bg_purple_change_email
+							p En caso haya cambiado su cuenta de correo electrónico, 
+								a(href="") Click aquí
+						h3 Tus datos personales
+						.content_form
+							.form_control
+								label.left Nombre
+								.right
+									input(type="text" class="disabled" data-parsley-required data-parsley-required-message="Dato obligatorio")
+							.form_control
+								label.left Apellido paterno
+								.right
+									input(type="text"  class="disabled" data-parsley-required data-parsley-required-message="Dato obligatorio")
+							.form_control
+								label.left Apellido materno
+								.right
+									input(type="text" class="disabled" data-parsley-required data-parsley-required-message="Dato obligatorio")
+							.form_control
+								label.left Documento de identidad
+								.right
+									.bg_white.doc_type
+										select(name="" class="disabled")
+											option(value="") DNI
+											option(value="") Pasaporte
+									input.inp_right(type="text"  class="disabled" placeholder="Nro de documento" data-parsley-required data-parsley-required-message="Dato obligatorio" data-parsley-type="number" data-parsley-type-message="Debe ser numérico") 
+							.form_control
+								label.left País
+								.right.bg_white
+									select(name="")
+										option(value="") Perú
+										option(value="") Colombia
+							.form_control
+								label.left Departamento
+								.right.bg_white
+									select(name="")
+										option(value="") Lima
+										option(value="") Arequipa
+							.form_control
+								label.left Distrito
+								.right.bg_white
+									select(name="")
+										option(value="") Santa Anita
+										option(value="") Breña
+							.form_control
+								label.left Fecha de nacimiento
+								.right
+									.day.bg_white
+										select(name="")
+											option(value="") 1
+											option(value="") 2
+									.month.bg_white
+										select(name="")
+											option(value="") Enero
+											option(value="") Febrero
+									.year.bg_white
+										select(name="")
+											option(value="") 1989
+											option(value="") 1990
+							.form_control
+								.right
+									button.btn.btn_orange.btn_save_signin(type="submit") Actualizar mis datos
+
+			

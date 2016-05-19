@@ -13,7 +13,7 @@ return array(
         'Application\Controller\Recargas' => 'Application\Controller\RecargasController',
         'Application\Controller\Beneficios' => 'Application\Controller\BeneficiosController',
         'Application\Controller\Carrito' => 'Application\Controller\CarritoController',
-        
+        'Application\Controller\Pagos' => 'Application\Controller\PagosController',
         'Application\Controller\Test' => 'Application\Controller\TestController',
     ),
 );

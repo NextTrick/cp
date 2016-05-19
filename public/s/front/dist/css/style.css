@@ -1616,6 +1616,80 @@ section .purple_box .pay_box_white.cart_page >.right .total_box {
   border-top: 1px dashed #ccc;
   border-bottom: 1px dashed #ccc;
 }
+section .purple_box .pay_box_white.confirmation_box h2 {
+  color: #5218b6;
+}
+section .purple_box .pay_box_white.confirmation_box p {
+  color: #666;
+  margin-bottom: 40px;
+}
+section .purple_box .pay_box_white.confirmation_box h5 {
+  font-size: 14px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume {
+  width: 620px;
+  margin: 0 auto;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px dashed #999;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li {
+  width: 20%;
+  padding: 12px 10px;
+  list-style: none;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li:nth-child(2),
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(2) {
+  width: 32%;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li:nth-child(3),
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(3) {
+  text-align: center;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li span.name,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.name,
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li span.number,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+  display: block;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li span.number,
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+  margin-top: 8px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .head ul li {
+  color: #999;
+  font-size: 14px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+  color: #999;
+  font-size: 14px;
+}
+section .purple_box .pay_box_white.confirmation_box .resume .total {
+  float: right;
+  text-align: right;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+section .purple_box .pay_box_white.confirmation_box .info {
+  width: 620px;
+  margin: 50px auto 50px;
+}
+section .purple_box .pay_box_white.confirmation_box .info p {
+  font-size: 16px;
+  text-align: center;
+}
+section .purple_box .pay_box_white.confirmation_box .info a {
+  color: #ff771d;
+  text-decoration: none;
+}
 section input {
   width: 100%;
   border: 0;
@@ -1626,7 +1700,7 @@ section input {
   text-align: center;
 }
 section input.inp_right {
-  width: 200px;
+  width: 256px;
   float: right;
 }
 section input.disabled-email {
@@ -1657,21 +1731,21 @@ section .bg_white select {
   width: 100%;
 }
 section .bg_white.doc_type {
-  width: 100px;
+  width: 120px;
   overflow: hidden;
   float: left;
 }
 section .bg_white.day {
-  width: 80px;
+  width: 90px;
   float: left;
   margin-right: 5px;
 }
 section .bg_white.month {
-  width: 137px;
+  width: 170px;
   float: left;
 }
 section .bg_white.year {
-  width: 90px;
+  width: 115px;
   float: right;
 }
 section .login_link {
@@ -1764,11 +1838,60 @@ section form .form_control .right .button {
   margin-top: 20px;
 }
 section form.signin_form .content_form {
-  width: 500px;
+  width: 620px;
   margin: 30px auto;
 }
 section form.signin_form .content_form input {
   height: 36px;
+}
+section form.form_mis_datos .bg_purple_change_email {
+  background: #310041;
+  padding: 20px 10px;
+}
+section form.form_mis_datos .bg_purple_change_email p {
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+}
+section form.form_mis_datos .bg_purple_change_email p a {
+  color: #f63a00;
+  text-decoration: none;
+}
+section form.form_mis_datos .content_form .form_control .left.user_image_left {
+  width: 30%;
+}
+section form.form_mis_datos .content_form .form_control .left.user_image_left .image {
+  background: #990090;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  text-align: center;
+  padding-top: 6px;
+}
+section form.form_mis_datos .content_form .form_control .right.user_image_right {
+  width: 68%;
+}
+section form.form_mis_datos .content_form .form_control .right.user_image_right .image_info {
+  font-size: 14px;
+  text-align: left;
+  margin-top: -20px;
+}
+section form.form_mis_datos .content_form .form_control .right.user_image_right span.btn {
+  height: 36px;
+  display: block;
+  padding: 10px 0;
+  color: #000;
+  font-weight: bold;
+  background: #eee;
+  cursor: pointer;
+  position: relative;
+  top: -35px;
+}
+section form.form_mis_datos .disabled {
+  disabled: true;
+  pointer-events: none;
+  background: #800079;
+  color: #d3d3d3;
 }
 .bottom_bar {
   width: 1228px;
@@ -2152,6 +2275,14 @@ i[class*=" icon-"] {
   section .app_box .purple_box {
     border-radius: 0;
   }
+  section .app_box .purple_box.final_page .steps {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  section .app_box .purple_box.final_page .steps .yellow {
+    width: 32px;
+    margin: 0px -6px 3px;
+  }
   section .app_box .purple_box .steps {
     float: left;
   }
@@ -2263,6 +2394,45 @@ i[class*=" icon-"] {
   section .app_box .purple_box .pay_box_white.cart_page >.right {
     height: auto !important;
   }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume {
+    width: 100%;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li,
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li {
+    padding: 12px 0px;
+    font-size: 14px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li:nth-child(1),
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(1) {
+    margin-right: 10px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li {
+    color: #999;
+    font-size: 12px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
+    color: #999;
+    font-size: 12px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .total {
+    float: right;
+    text-align: right;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .info {
+    width: 100%;
+    margin: 50px auto 50px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .info p {
+    font-size: 16px;
+    text-align: center;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .info a {
+    color: #ff771d;
+    text-decoration: none;
+  }
   section .app_box .purple_box .recargas_content .offers {
     margin-top: 45px;
   }
@@ -2327,10 +2497,8 @@ i[class*=" icon-"] {
     display: block;
     text-align: center;
   }
-  section form.signin_form {
-    padding: 10px;
-  }
   section form.signin_form .content_form {
+    padding: 10px;
     width: 100%;
   }
   section form.signin_form .content_form .form_control .left,
@@ -2356,6 +2524,13 @@ i[class*=" icon-"] {
   }
   section form.signin_form .content_form .form_control .doc_type {
     width: 30%;
+  }
+  section form.form_mis_datos .content_form .form_control .left.user_image_left {
+    float: left;
+  }
+  section form.form_mis_datos .content_form .form_control .right.user_image_right {
+    float: right;
+    width: 65%;
   }
   .bottom_bar {
     width: 100%;

@@ -465,6 +465,34 @@ $ ->
 
 		return init: initialize 
 
+	mis_datos = () ->
+		dom = {}
+		st =
+			btnChangeImage : '.change_user_image'
+		catchDom = ->
+			dom.btnChangeImage = $(st.btnChangeImage)
+			return
+		suscribeEvents = () ->
+			dom.btnChangeImage.on 'click', events.changeImage
+			return
+		events =
+			changeImage : (e) ->
+				$('.image_file').click()
+				return
+			
+		functions = 
+			example : ->
+				
+				return
+
+		initialize = ->
+			catchDom()
+			suscribeEvents()
+			return
+
+		return init: initialize 
+
+	mis_datos().init()
 	carrito().init()
 	pagos().init()
 	recargas().init()

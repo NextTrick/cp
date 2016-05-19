@@ -1,5 +1,5 @@
 $(function() {
-  var carrito, modal_login, open_tooltip, pagos, recargas, user_account;
+  var carrito, mis_datos, modal_login, open_tooltip, pagos, recargas, user_account;
   modal_login = function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
@@ -492,6 +492,35 @@ $(function() {
       init: initialize
     };
   };
+  mis_datos = function() {
+    var catchDom, dom, events, functions, initialize, st, suscribeEvents;
+    dom = {};
+    st = {
+      btnChangeImage: '.change_user_image'
+    };
+    catchDom = function() {
+      dom.btnChangeImage = $(st.btnChangeImage);
+    };
+    suscribeEvents = function() {
+      dom.btnChangeImage.on('click', events.changeImage);
+    };
+    events = {
+      changeImage: function(e) {
+        $('.image_file').click();
+      }
+    };
+    functions = {
+      example: function() {}
+    };
+    initialize = function() {
+      catchDom();
+      suscribeEvents();
+    };
+    return {
+      init: initialize
+    };
+  };
+  mis_datos().init();
   carrito().init();
   pagos().init();
   recargas().init();
