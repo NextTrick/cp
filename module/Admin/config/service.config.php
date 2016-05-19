@@ -22,7 +22,9 @@ return array(
         'Admin\Form\DetalleOrdenBuscarForm' => 'Admin\Form\Factory\DetalleOrdenBuscarFactory',
         'Admin\Form\OrdenBuscarForm' => 'Admin\Form\Factory\OrdenBuscarFactory',
         'Admin\Form\PaqueteBuscarForm' => 'Admin\Form\Factory\PaqueteBuscarFactory',
-        'Admin\Form\PaqueteForm' => 'Admin\Form\Factory\PaqueteFactory'
+        'Admin\Form\PaqueteForm' => 'Admin\Form\Factory\PaqueteFactory',
+        'Admin\Form\ModificarPasswordForm' => 'Admin\Form\Factory\ModificarPasswordFactory',
+        'Admin\Form\RecuperarPasswordForm' => 'Admin\Form\Factory\RecuperarPasswordFactory',
     ),
     'invokables' => array(
     ),

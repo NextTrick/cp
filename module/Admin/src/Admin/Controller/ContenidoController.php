@@ -18,6 +18,8 @@ class ContenidoController extends SecurityAdminController
 {
     public function indexAction()
     {
+        $_SESSION["URL_IMAGE_CMS"] = !empty(URL_IMAGE_CMS)? URL_IMAGE_CMS : null;
+        
         try {
             $params = array(
                 String::xssClean($this->params()->fromPost('cmbFiltro')) => String::xssClean($this->params()->fromPost('txtBuscar')),
