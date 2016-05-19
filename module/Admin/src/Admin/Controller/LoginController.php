@@ -71,7 +71,7 @@ class LoginController extends SecurityAdminController
         )));
         
         if ($this->request->isPost()) {
-            $form->setInputFilter(new \Application\Filter\RecuperarPasswordFilter());
+            $form->setInputFilter(new \Admin\Filter\RecuperarPasswordFilter());
             $data = $this->request->getPost()->toArray();
             $form->setData($data);
             
@@ -89,19 +89,28 @@ class LoginController extends SecurityAdminController
                 ), $usuario['id']);
 
                 $serviceLocator = $this->getServiceLocator();
-                $email = new \Usuario\Model\Email\RecuperarPassword($serviceLocator);
-                $data['codigo_activar'] = $codigoRecuperar;
-                $ok = $email->sendMail($data);
+                $email = new \Admin\Model\Email\RecuperarPassword($serviceLocator);
+                $dataEmail = array(
+                    'email' => $usuario['email'],
+                    'nombres_completo' => $usuario['email'],
+                    'codigo_activar' => $codigoRecuperar,
+                );
+                $ok = $email->sendMail($dataEmail);
                 if ($ok) {
                     $message = 'Te hemos enviado un correo con las instrucciones para actualizar tu cuenta';
                     $this->flashMessenger()->addMessage(array(
                         'success' => $message,
                     ));
-                    return $this->redirect()->toRoute('admin/recuperar-password');
                 } else {
                     $errorSend = 'Error al eviar correo electrónico.';
-                    $form->get('email')->setMessages(array('errorSend' => $errorSend));
+                    $this->flashMessenger()->addMessage(array(
+                        'error' => $errorSend,
+                    ));
                 }
+                return $this->redirect()->toRoute('admin/crud', array(
+                    'controller' => 'login',
+                    'action' => 'recuperar-password',
+                ));
             }
         }
         
@@ -115,7 +124,7 @@ class LoginController extends SecurityAdminController
     {
         $codigo = $this->params('codigo', null);
         $form = $this->_getModificarPasswordForm();
-        $form->setAttribute('action', $this->url()->fromRoute('admin/modificar-password', array(
+        $form->setAttribute('action', $this->url()->fromRoute('admin/crud', array(
             'controller' => 'login',
             'action' => 'modificar-password',
             'codigo' => $codigo,
@@ -123,7 +132,7 @@ class LoginController extends SecurityAdminController
         $form->get('codigo')->setValue($codigo);
         
         if ($this->request->isPost()) {
-            $form->setInputFilter(new \Application\Filter\ModificarPasswordFilter());
+            $form->setInputFilter(new \Admin\Filter\ModificarPasswordFilter());
             $data = $this->request->getPost()->toArray();
             $form->setData($data);
             if ($form->isValid()) {
@@ -140,10 +149,17 @@ class LoginController extends SecurityAdminController
                     $this->flashMessenger()->addMessage(array(
                         'success' => 'Su password fué actualizada correctamente.',
                     ));
-                    return $this->redirect()->toRoute('admin/login');
+                    return $this->redirect()->toRoute('admin/login', array(
+                        'controller' => 'login',
+                    ));
                 } else {
                     $this->flashMessenger()->addMessage(array(
                         'error' => 'Error al actualizar su password.',
+                    ));
+                    return $this->redirect()->toRoute('admin-modificar-password', array(
+                        'controller' => 'login',
+                        'action' => 'modificar-password',
+                        'codigo' => $codigo,
                     ));
                 }
             }
