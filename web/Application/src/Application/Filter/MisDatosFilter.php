@@ -175,7 +175,7 @@ class MisDatosFilter extends Zf2InputFilter
         $image = new FileInput('imagen');
         $image->setRequired(false);
         $image->getValidatorChain()
-            ->attachByName('filesize', array('max' => 1000000))
+            ->attachByName('filesize', array('max' => 2000000))
             ->attachByName('fileextension',  array(
                 'jpg', 'jpeg', 'png'
             ))
