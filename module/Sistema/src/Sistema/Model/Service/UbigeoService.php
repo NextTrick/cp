@@ -66,16 +66,16 @@ class UbigeoService
 
         $criteria = array(
             'where'   => $where,
-            'columns' => array('cod_prov', 'nombre'),
+            'columns' => array('id', 'nombre'),
             'order'   => array('nombre ASC'),
         );
         return $this->getRepository()->findPairs($criteria);
     }
     
-    public function getDistritos($codPais, $codDepartamento, $provinciaId = null)
+    public function getDistritos($paisId, $departamentoId, $provinciaId = null)
     {
-        $codPais = $this->getCodPais($codPais);
-        $codDepartamento = $this->getCodDepartamento($codDepartamento);
+        $codPais = $this->getCodPais($paisId);
+        $codDepartamento = $this->getCodDepartamento($departamentoId);
         
         $where = new \Zend\Db\Sql\Where();
         $where->equalTo('cod_pais', $codPais);
@@ -90,7 +90,27 @@ class UbigeoService
         
         $criteria = array(
             'where'   => $where,
-            'columns' => array('cod_dist', 'nombre'),
+            'columns' => array('id', 'nombre'),
+            'order'   => array('nombre ASC'),
+        );
+        return $this->getRepository()->findPairs($criteria);
+    }
+    
+    public function getSoloDistritos($codPais, $codDepartamento, $codProvincia = null)
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('cod_pais', $codPais);
+        $where->equalTo('cod_depa', $codDepartamento);
+        
+        if (!empty($codProvincia)) {
+            $where->equalTo('cod_prov', $codProvincia);
+        } else {
+            $where->notEqualTo('cod_prov', '00');
+        }
+        
+        $criteria = array(
+            'where'   => $where,
+            'columns' => array('id', 'nombre'),
             'order'   => array('nombre ASC'),
         );
         return $this->getRepository()->findPairs($criteria);

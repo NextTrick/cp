@@ -49,7 +49,7 @@
                             </div>
                             <div class="form_control">
                                 <label for="documento_identidad">DNI/Pasaporte</label>
-                                <input id="documento_numero" name="documento_numero" type="text" value="<?php echo $usuarioData['di_valor']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío."  class="disabled"/>
+                                <input id="documento_numero" maxlength="8" name="documento_numero" type="text" value="<?php echo $usuarioData['di_valor']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío."  class="disabled"/>
                             </div>
                         </div>
                         <div class="content_factura">
@@ -70,7 +70,7 @@
                             </div>
                             <div class="form_control">
                                 <label for="ruc">RUC</label>
-                                <input id="ruc" name="ruc" type="number" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." data-parsley-minlength="11" data-parsley-minlength-message="El RUC no es válido" data-parsley-maxlength="11" data-parsley-maxlength-message="El RUC no es válido" data-parsley-type="integer"/>
+                                <input id="ruc" name="ruc" maxlength="11" type="number" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." data-parsley-minlength="11" data-parsley-minlength-message="El RUC no es válido" data-parsley-maxlength="11" data-parsley-maxlength-message="El RUC no es válido" data-parsley-type="integer"/>
                             </div>
                             <div class="form_control">
                                 <label for="fac_direccion_fiscal">Dirección fiscal</label>

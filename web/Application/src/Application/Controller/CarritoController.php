@@ -25,13 +25,13 @@ class CarritoController extends SecurityWebController
             throw new \Exception('No existe url configurada.');
         }
 
-        $cattidades = array(1 => '01', 2 => '02', 3 => '03', 4 => '04', 5 => '05');
+        $catidades = array(1 => '01', 2 => '02', 3 => '03', 4 => '04', 5 => '05');
 
         $usuarioTarjetas = $this->_getTarjetaService()->getDdlTarjetas($usuario->id);
         
         $view = new ViewModel();
         $view->setVariable('cartModel', $cartModel);
-        $view->setVariable('cattidades', $cattidades);
+        $view->setVariable('catidades', $catidades);
         $view->setVariable('usuarioTarjetas', $usuarioTarjetas);
         $view->setVariable('urlImg', $config['fileDir']['paquete_paquete']['down']);
         return $view;
@@ -157,11 +157,10 @@ class CarritoController extends SecurityWebController
             return $this->redirect()->toRoute('web-carrito', array('controller' => 'index'));
         }
         
-
         $codPais = \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU;
         $codDepa = \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA;
         $codProv = \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA;
-        $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDepa, $codProv);
+        $distritos = $this->_getUbigeoService()->getSoloDistritos($codPais, $codDepa, $codProv);
 
         $criteria = array(
             'where' => array('usuario_id' => $usuario->id),
@@ -222,15 +221,6 @@ class CarritoController extends SecurityWebController
             );
             $row = $this->_getPerfilPagoService()->getRepository()->findOne($criteria);
             if (!empty($row)) {
-                $ubigeo = array();
-                if (!empty($row['distrito_id'])) {
-                    $criteria = array('where' => array('id' => $row['distrito_id']));
-                    $ubigeo = $this->_getUbigeoService()->getRepository()->findOne($criteria);
-                }
-
-                $row['distrito_id'] = empty($ubigeo['distrito_id']) ? null : $ubigeo['distrito_id'];
-                unset($row['distrito_id']);
-
                 $result['success'] = true;
                 $result['message'] = null;
                 $result['data'] = $row;
@@ -282,14 +272,6 @@ class CarritoController extends SecurityWebController
                     );
                     break;
                 case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA:
-                    $criteria = array('where' => array(
-//                        'cod_pais' => \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU,
-                        'cod_depa' => \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA,
-                        'cod_prov' => \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA,
-                        'distrito_id' => $params['distrito_id'],
-                    ));
-                    $row = $this->_getUbigeoService()->getRepository()->findOne($criteria);
-                    $distritoId = empty($row) ? null : $row['id'];
                     $perfilPagoData = array(
                         'usuario_id' => $usuario->id,
                         'comprobante_tipo' => $comprobanteTipo,
@@ -298,7 +280,7 @@ class CarritoController extends SecurityWebController
                         'fac_direccion_entrega_factura' => $params['fac_direccion_entrega_factura'],
                         'documento_tipo' => \Orden\Model\Service\OrdenService::TIPO_DOCUMENTO_RUC,
                         'documento_numero' => $params['ruc'],
-                        'distrito_id' => $distritoId,
+                        'distrito_id' => $params['distrito_id'],
                     );
                     break;
             }
