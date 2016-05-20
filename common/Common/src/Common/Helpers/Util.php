@@ -157,4 +157,13 @@ class Util
     {
         return number_format($number, 2, '.', ',');
     }
+    
+    public static function noEmptyDecimal($number) 
+    {
+        $number = (float)$number;
+        if (!empty($number)) {
+            return true;
+        }
+        return false;
+    }
 }

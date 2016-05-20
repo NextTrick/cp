@@ -2,8 +2,7 @@
 
 namespace PaymentProcessor\Controller;
 
-use Admin\Model\Repository\OrdenRepository;
-use Admin\Model\Service\OrdenService;
+use Orden\Model\Service\OrdenService;
 use Zend\Mvc\Controller\AbstractActionController;
 use PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor;
 use PaymentProcessor\Model\Gateway\Processor\VisaProcessor;
@@ -32,33 +31,11 @@ class CallbackController extends AbstractActionController
         return $this->_procesarReponse($response);
     }
 
-    private function _procesarReponse($response)
+    public function _procesarReponse($response)
     {
-        $ordenId = 'XXXXX';
-        if (!empty($response['data']['reference'])) {
-            $reference = $response['data']['reference'];
-            $ordenData = $this->_getOrdenService()->getRepository()->getOrderIdByReference($reference);
-            if (!empty($ordenData)) {
-                $ordenId = $ordenData['id'];
-                if ($response['success']) {
-                    $ordenUpdateData = array(
-                        'pago_error' => $response['data']['errorCode'],
-                        'pago_error_detalle' => $response['data']['errorDescription'],
-                    );
+        $ordenId = $this->_getOrdenService()->procesarPaymentProcessorCallbackReponse($response);
 
-                    if (!empty($response['data']['status'])) {
-                        $ordenUpdateData['pago_estado'] =  $response['data']['status'];
-                    }
-
-                    if (!empty($response['data']['confirmationDate'])) {
-                        $ordenUpdateData['pago_fecha_confirmacion'] =  $response['data']['confirmationDate'];
-                    }
-                }
-                $this->_getOrdenService()->getRepository()->save($ordenUpdateData, $ordenId);
-            }
-        }
-
-        return $this->redirect()->toUrl(BASE_URL . 'pagos/cofirmation/orden/' . base64_encode($ordenId));
+        return $this->redirect()->toUrl(BASE_URL . 'pagos/confirmacion/orden/' . base64_encode($ordenId));
     }
 
     public function visaRedirectAction()

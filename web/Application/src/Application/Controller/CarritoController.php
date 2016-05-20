@@ -3,10 +3,6 @@ namespace Application\Controller;
 
 use Application\Controller\SecurityWebController;
 use Cart\Model\Service\CartService;
-use Orden\Model\Repository\OrdenRepository;
-use PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor;
-use PaymentProcessor\Model\Gateway\Processor\VisaProcessor;
-use PaymentProcessor\Model\PaymentProcessor;
 use TrueFi\Model\Service\UsuarioService;
 use Util\Model\Service\ErrorService;
 use Zend\View\Model\ViewModel;
@@ -248,7 +244,7 @@ class CarritoController extends SecurityWebController
     {
         $response = $this->getResponse();
         $result = array('success' => false, 'message' => ERROR_VALIDACION, 'paramsInvalid' => array());
-        
+
         if ($this->_isLogin() === false) {
             $result['message'] = ERROR_303;
             $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -317,16 +313,15 @@ class CarritoController extends SecurityWebController
                     $paramsInvalid[] = $key;
                 }
             }
-            
+
             if (empty($data) || !empty($paramsInvalid)) {
                 $result['paramsInvalid'] = $paramsInvalid;
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
                 return $response->setContent($jsonModel->serialize());
             }
-            
+
             if (!empty($data)) {
-                $this->_savePerfilPago($comprobanteTipo, $usuario, $data);
-                $return = $this->_pagar($metodoPago, $data);
+                $return = $this->_getOrdenService()->procesarPago($comprobanteTipo, $metodoPago, $usuario, $data);
                 $result = $return;
             }
         }
@@ -335,178 +330,9 @@ class CarritoController extends SecurityWebController
         return $response->setContent($jsonModel->serialize());
     }
 
-    private function _pagar($metodoPago, $data)
-    {
-        $return = array('success' => true);
-
-        $metodoPago = strtoupper($metodoPago);
-        $usuario = $this->_getUsuarioData();
-        $usuarioData = $this->_getUsuarioService()->getRepository()->getById($usuario->id);
-        $cartModel = $this->_getCartService()->getCart();
-        $monto = $cartModel->getAmountCart(true);
-        $data['pago_estado'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
-        $ordenId = $this->_getOrdenService()->getRepository()->save($data);
-
-        $this->_saveDetalleOrden($ordenId);
-
-        $paymentProcessordata = array(
-            'id' => $ordenId, // ID DE LA ORDEN
-            'perfilpago_nombres' => $usuarioData['nombres'], // NOMBRE DEL PERFIL DE PAGO
-            'perfilpago_paterno' => $usuarioData['paterno'], // APELLIDO PATERNO DEL PERFIL DE PAGO
-            'perfilpago_materno' => $usuarioData['materno'], // APELLIDO MATERNO DEL PERFIL DE PAGO
-            'perfilpago_alias' => $usuarioData['nombres'], // ALIAS DEL PERFIL DE PAGO (para nuestro caso, el mismo de nombres)
-            'perfilpago_pais' => 'PERU', // PAIS DEL PERFIL DE PAGO
-            'perfilpago_departamento' => 'LIMA',  // DEPARTAMENTO DEL PERFIL DE PAGO
-            'perfilpago_distrito' => 'LIMA', // DISTRITO DEL PERFIL DE PAGO
-            'documento_tipo' => $usuarioData['di_tipo'], // TIPO COMPROBANTE
-            'documento_numero' => $usuarioData['di_valor'], // NRO COMPROBANTE
-            'usuario_email' => $usuarioData['email'],  // CORREO DE USUARIO LOGUEADO
-            'usuario_id' => $usuarioData['id'], // ID DE USUARIO LOGUEADO
-            'monto' => (string) $monto, // MONTO EN CON 2 DECIMALES
-        );
-
-        $paymentProcessor = new PaymentProcessor($metodoPago, $this->getServiceLocator());
-        $response = $paymentProcessor->createCharge($paymentProcessordata);
-
-        if (!empty($response['success'])) {
-            switch ($metodoPago) {
-                case PagoEfectivoProcessor::ALIAS :
-                    $ordenUpdateData = array(
-                        'pago_referencia' => $response['data']['reference'],
-                        'pago_estado' => $response['data']['status'],
-                        'pago_cip' => $response['data']['cip'],
-                        'pago_token' => $response['data']['token'],
-                        'pago_metodo' => OrdenService::METODO_PAGO_NAME_PE,
-                    );
-                    break;
-                case VisaProcessor::ALIAS :
-                    $ordenUpdateData = array(
-                        'pago_referencia' => $response['data']['reference'],
-                        'pago_estado' => $response['data']['status'],
-                        'pago_metodo' => OrdenService::METODO_PAGO_NAME_VISA,
-                    );
-                    break;
-            }
-            $return['data']['redirect'] = $response['data']['redirect'];
-        } else {
-            $return['success'] = false;
-            $ordenUpdateData = array(
-                'pago_estado' => OrdenRepository::PAGO_ESTADO_ERROR,
-                'pago_error' => $response['error']['code'],
-                'pago_error_detalle' => $response['error']['message'],
-            );
-
-            if ($response['error']['code'] == ErrorService::GENERAL_CODE) {
-                $return['message'] = ErrorService::GENERAL_MESSAGE;
-            } else {
-                $return['message'] = $response['error']['message'];
-            }
-
-            $return['data']['redirect'] = BASE_URL . '';
-        }
-
-        $this->_getOrdenService()->getRepository()->save($ordenUpdateData, $ordenId);
-
-        return $return;
-    }
-
-    private function _procesarPago($metodoPago, $ordenId, $data)
-    {
-        $data = array(
-            'id' => $ordenId, // ID DE LA ORDEN
-            'perfilpago_nombres' => $data['nombes'], // NOMBRE DEL PERFIL DE PAGO
-            'perfilpago_paterno' => 'Jara', // APELLIDO PATERNO DEL PERFIL DE PAGO
-            'perfilpago_materno' => 'Vilca', // APELLIDO MATERNO DEL PERFIL DE PAGO
-            'perfilpago_alias' => 'NextTrick', // ALIAS DEL PERFIL DE PAGO (para nuestro caso, el mismo de nombres)
-            'perfilpago_pais' => 'PERU', // PAIS DEL PERFIL DE PAGO
-            'perfilpago_departamento' => 'LIMA',  // DEPARTAMENTO DEL PERFIL DE PAGO
-            'perfilpago_distrito' => 'LIMA', // DISTRITO DEL PERFIL DE PAGO
-            'comprobante_tipo' => 'DNI', // TIPO COMPROBANTE
-            'comprobante_numero' => '11872911', // NRO COMPROBANTE
-            'usuario_email' => 'ing.angeljara@gmail.com',  // CORREO DE USUARIO LOGUEADO
-            'usuario_id' => 1, // ID DE USUARIO LOGUEADO
-            'monto' => '20.00' // MONTO EN CON 2 DECIMALES
-        );
-
-        try {
-            $alias = \PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor::ALIAS;
-            $paymentProcessor = new PaymentProcessor($alias, $this->getServiceLocator());
-
-            $response = $paymentProcessor->createCharge($data);
-
-            //var_dump($response);
-            return $this->redirect()->toUrl($response['data']['redirect']); exit;
-        } catch (\Exception $e) {
-            var_dump($e->getMessage(), $e->getTraceAsString()); exit;
-        }
-
-        echo 'fin'; exit;
-    }
-
-    private function _saveDetalleOrden($ordenId)
-    {
-        $cartModel = $this->_getCartService()->getCart();
-
-        if (!empty($cartModel)) {
-            foreach ($cartModel->getProductsCart() as $productos) {
-                foreach ($productos as $producto) {
-                    $ordenDetalleData = array(
-                        'orden_id' => $ordenId,
-                    );
-                    $options = $this->_getValidOptions($producto);
-                    $ordenDetalleData = $ordenDetalleData + $options;
-
-                    $categoryCode = $producto->getCategoryCode();
-                    $tarjetaId = Crypto::decrypt($categoryCode, Util::VI_ENCODEID);
-
-                    $ordenDetalleData['paquete_id'] = $producto->getProductId();
-                    $ordenDetalleData['tarjeta_id'] = $tarjetaId;
-                    $ordenDetalleData['monto'] = $producto->getPrice(true);
-
-                    $ordenDetalleId = $this->_getDetalleOrdenService()->getRepository()->save($ordenDetalleData);
-                }
-            }
-        }
-
-    }
-
-    private function _getValidOptions($producto)
-    {
-        $options['emoney'] = $producto->getOption('emoney', true);
-        $options['bonus'] = $producto->getOption('bonus', true);
-        $options['promotionbonus'] = $producto->getOption('promotionbonus', true);
-        $options['etickets'] = $producto->getOption('etickets', true);
-        $options['gamepoints'] = $producto->getOption('gamepoints', true);
-
-        foreach ($options as $key => $value) {
-            $value = (float) $value;
-            if (empty($value)) {
-                unset($options[$key]);
-            }
-        }
-
-        return $options;
-    }
-
-    private function _savePerfilPago($comprobanteTipo, $usuario, $data)
-    {
-        if ($comprobanteTipo == \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA) {
-            $criteria = array('where' => array(
-                'documento_tipo' => \Orden\Model\Service\OrdenService::TIPO_DOCUMENTO_RUC,
-                'documento_numero' => $data['documento_numero'],
-                'usuario_id' => $usuario->id));
-
-            $row = $this->_getPerfilPagoService()->getRepository()->findOne($criteria);
-            if (!empty($row)) {
-                $data['fecha_edicion'] = date('Y-m-d H:i:s');
-                $this->_getPerfilPagoService()->getRepository()->save($data, $row['id']);
-            } else {
-                $data['fecha_creacion'] = date('Y-m-d H:i:s');
-                $this->_getPerfilPagoService()->getRepository()->save($data);
-            }
-        }
-    }
-
+    /**
+     * @return OrdenService;
+     */
     private function _getOrdenService()
     {
         return $this->getServiceLocator()->get('Orden\Model\Service\OrdenService');

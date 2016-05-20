@@ -74,7 +74,7 @@ header .user_option .user_outside a span {
 }
 header .user_option .user_outside a span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -358px -79px;
+  background-position: -358px -92px;
   width: 12px;
   height: 14px;
   margin-left: 6px;
@@ -347,7 +347,7 @@ header nav ul li.logo img {
 }
 .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -174px -202px;
+  background-position: -142px -202px;
   width: 32px;
   height: 32px;
 }
@@ -360,7 +360,7 @@ header nav ul li.logo img {
 }
 .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -142px -202px;
+  background-position: -174px -202px;
   width: 32px;
   height: 32px;
 }
@@ -530,6 +530,25 @@ section .purple_box {
   background: #6c006c;
   border-radius: 20px;
   padding: 20px 0;
+}
+section .purple_box:before,
+section .purple_box:after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 0px;
+  left: 10px;
+  width: 45%;
+  height: 50px;
+  top: 90%;
+  opacity: 0.7;
+  box-shadow: 0 52px 63px #410041;
+  transform: rotate(3deg);
+}
+section .purple_box:after {
+  transform: rotate(-3deg);
+  right: 10px;
+  left: auto;
 }
 section .purple_box p {
   margin-bottom: 20px;
@@ -766,11 +785,22 @@ section .purple_box .cart_box {
   right: 32px;
   margin-top: -40px;
 }
+section .purple_box .cart_box.active {
+  margin-top: -10px;
+}
 section .purple_box .cart_box.active .cart {
   background: #fa0;
 }
+section .purple_box .cart_box.active .cart span.icon {
+  background-image: url("../images/sprite.png");
+  background-position: -304px -202px;
+  width: 24px;
+  height: 22px;
+  position: relative;
+  top: 2px;
+}
 section .purple_box .cart_box.active .cart span.number {
-  color: #fff;
+  color: #000;
 }
 section .purple_box .cart_box .label {
   color: #fff;
@@ -1103,6 +1133,14 @@ section .purple_box .recargas_content .offers .col_3 {
   height: 240px;
   background: url("../images/offer_bg.png");
 }
+section .purple_box .recargas_content .offers .col_3.auto {
+  height: auto;
+  background: none;
+}
+section .purple_box .recargas_content .offers .col_3.auto .box_white {
+  height: auto;
+  padding-bottom: 5px;
+}
 section .purple_box .recargas_content .offers .col_3 .box_white {
   border-radius: 14px;
   background: #fff;
@@ -1110,6 +1148,24 @@ section .purple_box .recargas_content .offers .col_3 .box_white {
   text-align: left;
   height: 100%;
   width: 100%;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail {
+  display: none;
+  padding: 0 10px;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail .line {
+  font-size: 14px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail .line .left {
+  width: 60%;
+  text-align: left;
+  color: #808080;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white .detail .line .right {
+  width: 38%;
+  text-align: right;
 }
 section .purple_box .recargas_content .offers .col_3 .box_white .image {
   height: 143px;
@@ -1134,13 +1190,20 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb a {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span {
   background-image: url("../images/sprite.png");
-  background-position: -358px -66px;
+  background-position: -358px -79px;
   width: 13px;
   height: 13px;
+  cursor: pointer;
   display: block;
   position: absolute;
   right: 10px;
   top: 8px;
+}
+section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span.active {
+  background-image: url("../images/sprite.png");
+  background-position: -358px -66px;
+  width: 13px;
+  height: 13px;
 }
 section .purple_box .recargas_content .offers .col_3 .cant_box {
   margin-top: 7px;
@@ -1234,6 +1297,11 @@ section .purple_box .pay_box_white >.left .content_boleta .form_control input {
   height: 36px;
   border-radius: 16px;
 }
+section .purple_box .pay_box_white >.left .content_factura .form_control input.disabled,
+section .purple_box .pay_box_white >.left .content_boleta .form_control input.disabled {
+  background: #eee;
+  color: #808080;
+}
 section .purple_box .pay_box_white >.left .content_factura .form_control input[type="checkbox"],
 section .purple_box .pay_box_white >.left .content_boleta .form_control input[type="checkbox"] {
   width: auto;
@@ -1261,19 +1329,19 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
   background-image: url("../images/sprite.png");
-  background-position: 0px -136px;
+  background-position: -132px -66px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
   background-image: url("../images/sprite.png");
-  background-position: -120px -136px;
+  background-position: 0px -136px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa {
   background-image: url("../images/sprite.png");
-  background-position: -132px -66px;
+  background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }

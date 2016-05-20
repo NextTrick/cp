@@ -1,4 +1,4 @@
-<form id="formPago" action="#" method="post">
+<form id="formPago" action="#" method="post" data-parsley-validate="true">
 <section class="app_content recargas">
     <div class="box_center">
         <div class="app_box">
@@ -37,19 +37,19 @@
                         <div class="content_boleta">
                             <div class="form_control">
                                 <label for="nombres">Nombre</label>
-                                <input id="nombres" name="nombres" type="text" value="<?php echo $usuarioData['nombres']; ?>"/>
+                                <input id="nombres" name="nombres" type="text" value="<?php echo $usuarioData['nombres']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="disabled"/>
                             </div>
                             <div class="form_control">
                                 <label for="paterno">Apellido paterno</label>
-                                <input id="paterno" name="paterno" type="text" value="<?php echo $usuarioData['paterno']; ?>"/>
+                                <input id="paterno" name="paterno" type="text" value="<?php echo $usuarioData['paterno']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="disabled"/>
                             </div>
                             <div class="form_control">
                                 <label for="materno">Apellido materno</label>
-                                <input id="materno" name="materno" type="text" value="<?php echo $usuarioData['materno']; ?>"/>
+                                <input id="materno" name="materno" type="text" value="<?php echo $usuarioData['materno']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="disabled"/>
                             </div>
                             <div class="form_control">
                                 <label for="documento_identidad">DNI/Pasaporte</label>
-                                <input id="documento_numero" name="documento_numero" type="text" value="<?php echo $usuarioData['di_valor']; ?>"/>
+                                <input id="documento_numero" name="documento_numero" type="text" value="<?php echo $usuarioData['di_valor']; ?>" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío."  class="disabled"/>
                             </div>
                         </div>
                         <div class="content_factura">
@@ -66,22 +66,22 @@
                             <?php endif; ?>
                             <div class="form_control">
                                 <label for="fac_razon_social">Razón Social</label>
-                                <input id="fac_razon_social" name="fac_razon_social" type="text"/>
+                                <input id="fac_razon_social" name="fac_razon_social" type="text" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío."/>
                             </div>
                             <div class="form_control">
                                 <label for="ruc">RUC</label>
-                                <input id="ruc" name="ruc" type="text"/>
+                                <input id="ruc" name="ruc" type="number" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." data-parsley-minlength="11" data-parsley-minlength-message="El RUC no es válido" data-parsley-maxlength="11" data-parsley-maxlength-message="El RUC no es válido" data-parsley-type="integer"/>
                             </div>
                             <div class="form_control">
                                 <label for="fac_direccion_fiscal">Dirección fiscal</label>
-                                <input id="fac_direccion_fiscal" name="fac_direccion_fiscal" type="text"/>
+                                <input id="fac_direccion_fiscal" name="fac_direccion_fiscal" type="text" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="fiscal_address"/>
                             </div>
                             <div class="form_control">
                                 <label for="fac_direccion_entrega_factura">Dirección de entrega de factura</label>
-                                <input id="fac_direccion_entrega_factura" name="fac_direccion_entrega_factura" type="text"/>
+                                <input id="fac_direccion_entrega_factura" name="fac_direccion_entrega_factura" type="text" data-parsley-required="true" data-parsley-required-message="El campo es requerido y no puede estar vacío." class="factura_address"/>
                             </div>
                             <div class="form_control">
-                                <input type="checkbox"/>Misma dirección fiscal
+                                <input type="checkbox" class="equal_address"/>Misma dirección fiscal
                             </div>
                             <div class="form_control">
                                 <label for="cod_dist">Distrito</label>
@@ -123,18 +123,30 @@
                                                 <span class="cant">Cantidad: <?php echo $producto->getQuantity(); ?></span>
                                             </div>
                                             <div class="detail">
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('emoney'))) : ?>
+                                                <div class="line">
+                                                    <div class="left">Dinero</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('emoney', true); ?></div>
+                                                </div>
+                                                <?php endif; ?>
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('bonus'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus</div>
                                                     <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('promotionbonus'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus Plus</div>
                                                     <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
                                                 </div>
+                                                <?php endif; ?>
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('etickets'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Tickets</div>
                                                     <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
                                                 </div>
+                                                <?php endif; ?>
                                             </div>
                                             <div class="link_show">
                                                 <div class="watch_detail">Ver detalle</div>
@@ -157,7 +169,7 @@
                                 <span class="medium">.<?php echo $partMontoTotal[1]; ?></span>
                             </h3>
                             <input type="hidden" id="token_csrf" name="token_csrf" value="<?php echo $tokenCsrf; ?>">
-                            <button id="btnPagar" class="btn btn_orange" type="button">Pagar</button>
+                            <button id="btnPagar" class="btn btn_orange" type="submit">Pagar</button>
                             <a href="<?php echo BASE_URL ?>recargas" class="link_orange">Seguir comprando  </a>
                         </div>
                     </div>
