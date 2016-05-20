@@ -2149,7 +2149,8 @@ footer span.logo_icon {
   height: 686px;
   background: url("../images/modal_bg.png");
 }
-#modal_watch_legal .modal_content {
+#modal_watch_legal .modal_content,
+.modal_watch_legal .modal_content {
   border-radius: 8px;
   width: 600px;
   height: 200px;
@@ -2157,13 +2158,15 @@ footer span.logo_icon {
   color: #000;
   font-size: 12px;
 }
-#modal_watch_legal .modal_content h3 {
+#modal_watch_legal .modal_content h3,
+.modal_watch_legal .modal_content h3 {
   color: #000;
   font-size: 16px;
   margin: 0;
   position: relative;
 }
-#modal_watch_legal .modal_content h3 span {
+#modal_watch_legal .modal_content h3 span,
+.modal_watch_legal .modal_content h3 span {
   background-image: url("../images/sprite.png");
   background-position: -351px -202px;
   width: 19px;
@@ -2173,7 +2176,8 @@ footer span.logo_icon {
   top: -10px;
   cursor: pointer;
 }
-#modal_watch_legal .modal_content .text_box {
+#modal_watch_legal .modal_content .text_box,
+.modal_watch_legal .modal_content .text_box {
   overflow-y: scroll;
   height: 138px;
 }
