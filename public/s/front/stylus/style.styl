@@ -199,6 +199,12 @@ header
 			text-align center
 			width 70px
 			margin 35px auto 20px
+			&.active
+				a
+					color #972482
+					span
+						&.icon
+							color #972482
 			a
 				font-size 10px
 				text-decoration none
@@ -220,7 +226,7 @@ header
 	border 0
 	height 42px
 	box-sizing border-box
-	border-radius 10px
+	border-radius 15px
 	color white
 	&.btn_fb
 		background #3B5998
@@ -1336,7 +1342,7 @@ section
 		border 0
 		margin-bottom 0px
 		height 42px
-		border-radius 10px
+		border-radius 15px
 		padding 0px 10px
 		text-align center
 		&.inp_right
@@ -1402,7 +1408,11 @@ section
 	.offers_box
 		margin-top 40px
 		.col_3
-			width 33%
+			width 32%
+			img
+				width 100%
+			&.left
+				margin-right 2%
 	.error_message
 		background #F1222D
 		opacity 0.8
@@ -1413,7 +1423,7 @@ section
 		margin 0 auto
 		border-radius 10px
 		position absolute
-		left 23.5%
+		left 17%
 		span
 			display inline-block
 			vertical-align top
@@ -1629,6 +1639,7 @@ footer
 #modal_new_password_response
 #modal_response_signin
 #modal_watch_legal
+.modal_box_legal
 	width 651px
 	height 686px
 	background url(../images/modal_bg.png)
@@ -1798,7 +1809,10 @@ i[class*=" icon-"]
 		.welcome_box
 			padding 8px
 			h2
+				font-size 24px
 			.subtitle
+				font-size 18px !important
+				line-height 18px
 			.medium
 			.small
 				display none
@@ -1808,6 +1822,7 @@ i[class*=" icon-"]
 				padding 0
 			.purple_box
 				.content
+					padding 0
 					.left
 					.right
 						float none
