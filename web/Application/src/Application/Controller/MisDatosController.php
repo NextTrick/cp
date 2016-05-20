@@ -12,11 +12,33 @@ class MisDatosController extends SecurityWebController
             return $this->_toUrlLogin();
         }
         
+        $usuario = $this->_getUsuarioData();
+        $criteria = array('where' => array('id' => $usuario->id));
+        $usuarioData = $this->_getUsuarioService()->getRepository()->findOne($criteria);
+
+        $config = $this->getServiceLocator()->get('config');
+        $urlImg = isset($config['fileDir']['usuario_usuario']['down']) ? $config['fileDir']['usuario_usuario']['down'] : null;
+
+        $imagen = null;
         $form = $this->_getMisDatosForm();
+        if (!empty($usuarioData)) {
+            unset($usuarioData['password']);
+            $codPais = $usuarioData['cod_pais'];
+            $codDep = $usuarioData['cod_depa'];
+            $departamentos = $this->_getUbigeoService()->getDepartamentos($codPais);
+            $form->get('cod_depa')->setValueOptions($departamentos);
+            $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDep);
+            $form->get('cod_dist')->setValueOptions($distritos);
+            
+            $form->setData($usuarioData);
+            $imagen = empty($usuarioData['imagen']) ? null : $urlImg . '/' . $usuarioData['imagen'];
+        }
+        
         $form->setAttribute('action', $this->url()->fromRoute('web-mis-datos', array(
             'controller' => 'mis-datos',
         )));
         
+        $request = $this->getRequest();
         $mensajeRegistro = null;
         if ($this->request->isPost()) {
             //=========== Llenar los combos ===========
@@ -28,9 +50,25 @@ class MisDatosController extends SecurityWebController
             $form->get('cod_dist')->setValueOptions($distritos);
             
             //=========== Aplicar filter ===========
-            $form->setInputFilter(new \Application\Filter\RegistroFilter());
-            $data = $this->request->getPost();
-            
+            $data = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+
+            $newFileName = null;
+            if (!empty($data['imagen']['name'])) {
+                $ext = strtolower(pathinfo($data['imagen']['name'], PATHINFO_EXTENSION));   
+                $newFileName = date('Ymd') . '-' . $usuario->id . '.' . $ext;
+
+                $data['imagen']['name'] = $newFileName;
+            }
+
+            $changePassword = (!empty($data['password']) || !empty($data['password_repeat'])) ? true : false;
+            $config = $this->getServiceLocator()->get('config');
+            $form->setInputFilter(new \Application\Filter\MisDatosFilter(array(
+                'uploadDir' => $config['fileDir']['usuario_usuario']['up'],
+                'changePassword' => $changePassword,
+            )));
             $form->setData($data);
             
             //=========== Validar fecha ===========
@@ -43,34 +81,39 @@ class MisDatosController extends SecurityWebController
                 $form->get('dia')->setMessages(array('noValido' => 'El campo fecha no es válido.'));
             }
 
-            if ($form->isValid() && $fechaValida) {
+            if ($fechaValida && $form->isValid()) {
                 $data = $form->getData();
-                $data['fecha_nac'] = $fechaNac;
+                $dataIn = array(
+                    'email' => $data['email'],
+                    'nombres' => $data['nombres'],
+                    'paterno' => $data['paterno'],
+                    'materno' => $data['materno'],
+                    'cod_pais' => $data['cod_pais'],
+                    'cod_depa' => $data['cod_depa'],
+                    'cod_dist' => $data['cod_dist'],
+                    'di_tipo' => $data['di_tipo'],
+                    'di_valor' => $data['di_valor'],
+                    'fecha_nac' => $fechaNac,
+                );
+                
+                if (!empty($newFileName)) {
+                    $dataIn['imagen'] = $newFileName;
+                }
+                if (!empty($data['password'])) {
+                    $dataIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']);
+                }
 
-                $repository = $this->_getUsuarioService()->getRepository();
-                //verificar en base de datos
-                $criteria = array('where' => array('email' => $data['email']));
-                $row = $repository->findOne($criteria);
-                if (!empty($row)) {
-                    $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
-                } else {
-                    $saveData = $this->_saveData($data);
-
-                    $openPopapConfRegistro = 1;
-                    $mensajeRegistro = 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.';
-                    if ($saveData['success']) {
-                        $mensajeRegistro = '<h3>¡Felicidades!, estás a punto de ser parte de Coney Club</h3>'
-                            . '<p>Te hemos enviado un correo con las instrucciones para activar tu cuenta.</p>';
-                    } elseif ($saveData['code'] == 'EXISTE_EMAIL') {
-                        $openPopapConfRegistro = 0;
-                        $mensajeRegistro = null;
-                        $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
-                    }
+                $id = $this->_getUsuarioService()->getRepository()->save($dataIn, $usuario->id);
+                $mensajeRegistro = 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.';
+                if (!empty($id)) {
+                    $mensajeRegistro = '<h3>¡Felicidades!, tu cuenta fué actualizada correctamente.</h3>';
+                    return $this->redirect()->toRoute('web-mis-datos', array('controller' => 'mis-datos'));
                 }
             }
         }
         
         return new ViewModel(array(
+            'imagen' => $imagen,
             'form' => $form,
             'mensajeRegistro' => $mensajeRegistro,
         ));
@@ -85,5 +128,10 @@ class MisDatosController extends SecurityWebController
     private function _getMisDatosForm()
     {
         return $this->getServiceLocator()->get('Application\Form\MisDatosForm');
+    }
+    
+    protected function _getUbigeoService()
+    {
+        return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
     }
 }

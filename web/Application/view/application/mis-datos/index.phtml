@@ -12,10 +12,11 @@
                             <label class="left">Imagen de perfil</label>
                             <div class="right">
                                 <div class="left user_image_left">
-                                    <div class="image"><img src="../images/user_image.png" alt=""/></div>
+                                    <div class="image"><img id="img_imagen" width="88" height="88" src="<?php echo $imagen; ?>" alt="Mi foto"/></div>
                                 </div>
                                 <div class="right user_image_right">
-                                    <input type="file" name="image" class="image_file"/><span class="btn change_user_image">Actualizar imagen</span>
+                                    <?php echo $this->formElement($this->form->get('imagen')->setAttributes(array('class' => 'image_file'))); ?><span class="btn change_user_image">Actualizar imagen</span>
+                                    <?php echo $this->formElementerrors($form->get('imagen')); ?>
                                     <p class="image_info">La imagen debe pesar como máximo 1000 KB. Formatos permitidos: JPG, PNG </p>
                                 </div>
                             </div>
@@ -24,7 +25,7 @@
                             <label class="left" for="email">Correo</label>
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('email')->setAttributes(array(
-                                    'class' => '',
+                                    'class' => 'disabled',
                                     'data-parsley-required' => 'true',
                                     'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
@@ -36,8 +37,8 @@
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('password')->setAttributes(array(
                                     'class' => '',
-                                    'data-parsley-required' => 'true',
-                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
+                                    //'data-parsley-required' => 'true',
+                                    //'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('password')); ?>
                             </div>
@@ -47,8 +48,8 @@
                             <div class="right">
                                 <?php echo $this->formElement($this->form->get('password_repeat')->setAttributes(array(
                                     'class' => '',
-                                    'data-parsley-required' => 'true',
-                                    'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
+                                    //'data-parsley-required' => 'true',
+                                    //'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
                                 <?php echo $this->formElementerrors($form->get('password_repeat')); ?>
                             </div>
@@ -180,3 +181,34 @@
         </div>
     </div>
 </section>
+<script type="text/javascript">
+    function previewImage() {
+        var _validFileExtensions = [".jpg", ".jpeg", ".png"];
+        var sValue = document.getElementById("imagen").value;
+        if (sValue.length > 0) {
+            var blnValid = false; 
+            for (var j = 0; j < _validFileExtensions.length; j++) {
+                var sCurExtension = _validFileExtensions[j];
+                if (sValue.substr(sValue.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                    blnValid = true;
+                    break;
+                }
+            }
+            if (!blnValid) {
+                alert("Sólo se permiten archivos con extensión " + _validFileExtensions.join(", "));
+                return false;
+            }
+        }
+        
+        
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("imagen").files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("img_imagen").src = oFREvent.target.result;
+        };
+    }
+    $(document).ready(function(){
+        $('#imagen').change(function(){previewImage();});
+    });
+</script>
