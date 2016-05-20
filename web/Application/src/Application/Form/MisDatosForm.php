@@ -96,22 +96,22 @@ class MisDatosForm extends Form
         $this->add($diValor);
 
         $pais = $this->_getUbigeoService()->getPaises();
-        $codPais = new Element\Select('cod_pais');
-        $codPais->setAttributes(array('id' => 'cod_pais'));
+        $codPais = new Element\Select('pais_id');
+        $codPais->setAttributes(array('id' => 'pais_id'));
         $codPais->setValueOptions($pais);
         $codPais->setEmptyOption('- Seleccione -');
         $codPais->setDisableInArrayValidator(true);
         $this->add($codPais);
         
-        $codDepa = new Element\Select('cod_depa');
-        $codDepa->setAttributes(array('id' => 'cod_depa'));
+        $codDepa = new Element\Select('departamento_id');
+        $codDepa->setAttributes(array('id' => 'departamento_id'));
         $codDepa->setValueOptions(array());
         $codDepa->setEmptyOption('- Seleccione -');
         $codDepa->setDisableInArrayValidator(true);
         $this->add($codDepa);
         
-        $codDist = new Element\Select('cod_dist');
-        $codDist->setAttributes(array('id' => 'cod_dist'));
+        $codDist = new Element\Select('distrito_id');
+        $codDist->setAttributes(array('id' => 'distrito_id'));
         $codDist->setValueOptions(array());
         $codDist->setEmptyOption('- Seleccione -');
         $codDist->setDisableInArrayValidator(true);

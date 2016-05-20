@@ -116,7 +116,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     {
         $criteria = array(
             'where' => array('email' => $email, 'estado' => 1),
-            'columns' => array('id', 'email', 'mguid', 'nombres', 'paterno', 'materno')
+            'columns' => array('id', 'email', 'mguid', 'nombres', 'paterno', 'materno', 'imagen')
         );
         return $this->findOne($criteria);
     }

@@ -228,7 +228,7 @@ class CarritoController extends SecurityWebController
                     $ubigeo = $this->_getUbigeoService()->getRepository()->findOne($criteria);
                 }
 
-                $row['cod_dist'] = empty($ubigeo['cod_dist']) ? null : $ubigeo['cod_dist'];
+                $row['distrito_id'] = empty($ubigeo['distrito_id']) ? null : $ubigeo['distrito_id'];
                 unset($row['distrito_id']);
 
                 $result['success'] = true;
@@ -283,10 +283,10 @@ class CarritoController extends SecurityWebController
                     break;
                 case \Orden\Model\Service\OrdenService::TIPO_COMPROBANTE_FACTURA:
                     $criteria = array('where' => array(
-                        'cod_pais' => \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU,
+//                        'cod_pais' => \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU,
                         'cod_depa' => \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA,
                         'cod_prov' => \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA,
-                        'cod_dist' => $params['cod_dist'],
+                        'distrito_id' => $params['distrito_id'],
                     ));
                     $row = $this->_getUbigeoService()->getRepository()->findOne($criteria);
                     $distritoId = empty($row) ? null : $row['id'];

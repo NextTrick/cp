@@ -9,6 +9,10 @@ class LoginController extends SecurityWebController
 {
     public function indexAction()
     {
+        if ($this->_getLoginGatewayService()->isLoggedIn()) {
+            return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
+        }
+        
         $form = $this->_getLoginForm();
         $form->setAttribute('action', $this->url()->fromRoute('web-login/modalidad', array(
             'controller' => 'login',

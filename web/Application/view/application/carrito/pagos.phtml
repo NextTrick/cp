@@ -84,8 +84,8 @@
                                 <input type="checkbox" class="equal_address"/>Misma dirección fiscal
                             </div>
                             <div class="form_control">
-                                <label for="cod_dist">Distrito</label>
-                                <select id="cod_dist" name="cod_dist">
+                                <label for="distrito_id">Distrito</label>
+                                <select id="distrito_id" name="distrito_id">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($distritos as $key => $value) : ?>
                                         <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
@@ -229,13 +229,13 @@
             $('#fac_direccion_fiscal').val('');
             $('#fac_direccion_entrega_factura').val('');
             $('#ruc').val('');
-            $('#cod_dist').val('');
+            $('#distrito_id').val('');
             if (data.success) {
                 $('#fac_razon_social').val(data.data.fac_razon_social);
                 $('#fac_direccion_fiscal').val(data.data.fac_direccion_fiscal);
                 $('#fac_direccion_entrega_factura').val(data.data.fac_direccion_entrega_factura);
                 $('#ruc').val(data.data.documento_numero);
-                $('#cod_dist').val(data.data.cod_dist);
+                $('#distrito_id').val(data.data.distrito_id);
             }
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
