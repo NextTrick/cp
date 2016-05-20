@@ -2480,9 +2480,16 @@ i[class*=" icon-"] {
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(1) {
     margin-right: 10px;
   }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head {
+    display: none;
+  }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li {
     color: #999;
     font-size: 12px;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li {
+    display: block;
+    width: 100%;
   }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
     color: #999;
