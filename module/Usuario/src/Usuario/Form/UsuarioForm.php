@@ -90,48 +90,34 @@ class UsuarioForm extends Form
             ));
         $this->add($fecha_nac);
         
-        $cod_pais = new Element\Text('cod_pais');
-        $cod_pais->setAttributes(array(
-                'id' => 'cod_pais',
+        $paisId = new Element\Text('pais_id');
+        $paisId->setAttributes(array(
+                'id' => 'pais_id',
                 'maxlength' => '20',
             ));
-        $this->add($cod_pais);
+        $this->add($paisId);
         
-        $cod_depa = new Element\Text('cod_depa');
-        $cod_depa->setAttributes(array(
-                'id' => 'cod_depa',
+        $departamentoId = new Element\Text('departamento_id');
+        $departamentoId->setAttributes(array(
+                'id' => 'departamento_id',
                 'maxlength' => '20',
             ));
-        $this->add($cod_depa);
+        $this->add($departamentoId);
         
-        $cod_prov = new Element\Text('cod_prov');
-        $cod_prov->setAttributes(array(
-                'id' => 'cod_prov',
+        $provinciaId = new Element\Text('provincia_id');
+        $provinciaId->setAttributes(array(
+                'id' => 'provincia_id',
                 'maxlength' => '20',
             ));
-        $this->add($cod_prov);
+        $this->add($provinciaId);
         
-        $cod_dist = new Element\Text('cod_dist');
-        $cod_dist->setAttributes(array(
-                'id' => 'cod_dist',
+        $distritoId = new Element\Text('distrito_id');
+        $distritoId->setAttributes(array(
+                'id' => 'distrito_id',
                 'maxlength' => '20',
             ));
-        $this->add($cod_dist);
+        $this->add($distritoId);
         
-        $fecha_creacion = new Element\Text('fecha_creacion');
-        $fecha_creacion->setAttributes(array(
-                'id' => 'fecha_creacion',
-                'maxlength' => '20',
-            ));
-        $this->add($fecha_creacion);
-        
-        $fecha_edicion = new Element\Text('fecha_edicion');
-        $fecha_edicion->setAttributes(array(
-                'id' => 'fecha_edicion',
-                'maxlength' => '20',
-            ));
-
-        $this->add($fecha_edicion);
 
         $csrf = new Element\Csrf('token');
 
