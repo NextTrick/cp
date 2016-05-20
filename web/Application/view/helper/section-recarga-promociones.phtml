@@ -12,18 +12,36 @@
                     </p>
                     <p><?php echo $row['titulo2']; ?></p>
                     <div class="detail">
+                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['emoney'])) : ?>
+                        <div class="line">
+                            <div class="left">Dinero</div>
+                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoney']); ?></div>
+                        </div>
+                        <?php endif; ?>
+                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['bonus'])) : ?>
                         <div class="line">
                             <div class="left">Coney Bonus</div>
-                            <div class="right">S/. 30</div>
+                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonus']); ?></div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['promotionbonus'])) : ?>
                         <div class="line">
                             <div class="left">Coney Bonus Plus</div>
-                            <div class="right">S/. 15</div>
+                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['promotionbonus']); ?></div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['etickets'])) : ?>
                         <div class="line">
                             <div class="left">Tickets</div>
-                            <div class="right">12</div>
+                            <div class="right"><?php echo $row['etickets']; ?></div>
                         </div>
+                        <?php endif; ?>
+                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['gamepoints'])) : ?>
+                        <div class="line">
+                            <div class="left">Gamepoints</div>
+                            <div class="right"><?php echo $row['gamepoints']; ?></div>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <?php $prefix = 'r' . $key; ?>

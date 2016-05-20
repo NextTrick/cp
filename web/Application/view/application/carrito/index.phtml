@@ -66,6 +66,12 @@
                                                 <input id="id_<?php echo $index; ?>" type="hidden" value="<?php echo $producto->getProductId(); ?>">
                                             </div>
                                             <div class="detail">
+                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('emoney'))) : ?>
+                                                <div class="line">
+                                                    <div class="left">Dinero</div>
+                                                    <div class="right">S/. <?php echo $producto->getOption('emoney', true); ?></div>
+                                                </div>
+                                                <?php endif; ?>
                                                 <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('bonus'))) : ?>
                                                 <div class="line">
                                                     <div class="left">Coney Bonus</div>
