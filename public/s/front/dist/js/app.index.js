@@ -52,25 +52,32 @@ $(function() {
         $('.modal_box').hide();
       },
       closeRecoveryModal: function() {
-        $.ajax({
-          type: "POST",
-          url: baseUrl + 'recuperar-password',
-          data: {
-            email: $('#email_recuperar').val(),
-            token: $('#token_csrf').val()
-          },
-          dataType: 'json',
-          success: function(data) {
-            $('#token_csrf').val(data.token);
-            if (data.success) {
-              functions.openModalById('#modal_recovery_response');
-              $('#modal_recovery_password').hide();
-            } else {
-              $('#error_recuperar_password').html(data.message);
-            }
-          },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {}
-        });
+        
+        if ($("#email_recuperar").parsley().isValid()) {
+          $.ajax({
+            type: "POST",
+            url: baseUrl + 'recuperar-password',
+            data: {
+              email: $('#email_recuperar').val(),
+              token: $('#token_csrf').val()
+            },
+            dataType: 'json',
+            success: function(data) {
+              $('#token_csrf').val(data.token);
+              if (data.success) {
+                functions.openModalById('#modal_recovery_response');
+                $('#modal_recovery_password').hide();
+              } else {
+                $('#error_recuperar_password').html(data.message);
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {}
+          });
+        }
+        else{
+          $("#email_recuperar").parsley().validate();
+        }
+        
       },
       closeNewPassModal: function() {
           $.ajax({
