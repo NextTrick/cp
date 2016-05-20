@@ -199,6 +199,12 @@ header
 			text-align center
 			width 70px
 			margin 35px auto 20px
+			&.active
+				a
+					color #972482
+					span
+						&.icon
+							color #972482
 			a
 				font-size 10px
 				text-decoration none
@@ -220,7 +226,7 @@ header
 	border 0
 	height 42px
 	box-sizing border-box
-	border-radius 10px
+	border-radius 15px
 	color white
 	&.btn_fb
 		background #3B5998
@@ -259,6 +265,7 @@ section
 			color black
 			margin 0 auto
 			position relative
+			z-index 9
 			margin-bottom -14px
 			ul
 				margin 0
@@ -336,7 +343,7 @@ section
 			&.small
 				font-size 18px
 	.app_box
-		padding 40px 0
+		padding 40px 0 50px
 		text-align center
 	.yellow_box
 		background #FFB000
@@ -380,6 +387,7 @@ section
 		background #6C006C
 		border-radius 20px
 		padding 20px 0
+		position relative
 		&:before
 		&:after
 			z-index -1
@@ -389,7 +397,7 @@ section
 			left 10px
 			width 45%
 			height 50px
-			top 90%
+			bottom 45px
 			opacity 0.7
 			//background #410041
 			box-shadow 0 52px 63px #410041
@@ -1311,6 +1319,8 @@ section
 									&.number
 										color #999999
 										font-size 14px
+									&.label
+										display none
 					.total
 						float right
 						text-align right
@@ -1332,7 +1342,7 @@ section
 		border 0
 		margin-bottom 0px
 		height 42px
-		border-radius 10px
+		border-radius 15px
 		padding 0px 10px
 		text-align center
 		&.inp_right
@@ -1398,7 +1408,11 @@ section
 	.offers_box
 		margin-top 40px
 		.col_3
-			width 33%
+			width 32%
+			img
+				width 100%
+			&.left
+				margin-right 2%
 	.error_message
 		background #F1222D
 		opacity 0.8
@@ -1409,7 +1423,7 @@ section
 		margin 0 auto
 		border-radius 10px
 		position absolute
-		left 23.5%
+		left 17%
 		span
 			display inline-block
 			vertical-align top
@@ -1625,21 +1639,30 @@ footer
 #modal_new_password_response
 #modal_response_signin
 #modal_watch_legal
+.modal_box_legal
 	width 651px
 	height 686px
 	background url(../images/modal_bg.png)
 #modal_watch_legal
+.modal_watch_legal
 	.modal_content
 		border-radius 8px
 		width 600px
 		height 200px
-		background lightgray
+		background #EEEEEE
 		color black
 		font-size 12px
 		h3
 			color black
 			font-size 16px
 			margin 0
+			position relative
+			span
+				sprite($close_modal)
+				position absolute
+				right -11px
+				top -10px
+				cursor pointer
 		.text_box
 			overflow-y scroll
 			height 138px
@@ -1787,7 +1810,10 @@ i[class*=" icon-"]
 		.welcome_box
 			padding 8px
 			h2
+				font-size 24px
 			.subtitle
+				font-size 18px !important
+				line-height 18px
 			.medium
 			.small
 				display none
@@ -1797,6 +1823,7 @@ i[class*=" icon-"]
 				padding 0
 			.purple_box
 				.content
+					padding 0
 					.left
 					.right
 						float none
@@ -1919,17 +1946,35 @@ i[class*=" icon-"]
 										&:nth-child(1)
 											margin-right 10px
 							.head
+								display none
 								ul
 									li
 										color #999999
 										font-size 12px
 							.body
 								ul
+									overflow hidden
+									padding 10px 0
 									li
+										display block
+										width 100%
+										padding 4px 0
+										&.cantidad
+											width 49%
+											float left
+											text-align left
+										&.precio
+											width 49%
+											float right
+											text-align right
 										span
 											&.number
 												color #999999
 												font-size 12px
+												margin-top 0
+											&.label
+												color #999999
+												display block
 							.total
 								float right
 								text-align right

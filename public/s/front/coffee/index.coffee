@@ -10,6 +10,7 @@ $ ->
 			errorMessage : '.error_message'
 			closeErrorMessage : '.error_message .icon'
 			watchLegal : '.watch_legal'
+			closeLegalModal : '#modal_watch_legal .modal_content h3 span'
 
 		catchDom = ->
 			dom.btn = $(st.btn)
@@ -20,10 +21,12 @@ $ ->
 			dom.errorMessage = $(st.errorMessage)
 			dom.closeErrorMessage = $(st.closeErrorMessage)
 			dom.watchLegal = $(st.watchLegal)
+			dom.closeLegalModal = $(st.closeLegalModal)
 			return
 		suscribeEvents = () ->
 			dom.btn.on 'click', events.openModal
 			dom.btnClose.on 'click', events.closeModal
+			dom.closeLegalModal.on 'click', events.closeModal
 			dom.modalOutside.on 'click', events.closeClickOutside
 			dom.btnRecovery.on 'click', events.closeRecoveryModal
 			dom.btnChangePass.on 'click', events.closeNewPassModal

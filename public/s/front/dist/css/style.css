@@ -300,6 +300,12 @@ header nav ul li.logo img {
   width: 70px;
   margin: 35px auto 20px;
 }
+.right_options ul li.active a {
+  color: #972482;
+}
+.right_options ul li.active a span.icon {
+  color: #972482;
+}
 .right_options ul li a {
   font-size: 10px;
   text-decoration: none;
@@ -335,7 +341,7 @@ header nav ul li.logo img {
   border: 0;
   height: 42px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 15px;
   color: #fff;
 }
 .btn.btn_fb {
@@ -393,6 +399,7 @@ section.app_content .menu {
   color: #000;
   margin: 0 auto;
   position: relative;
+  z-index: 9;
   margin-bottom: -14px;
 }
 section.app_content .menu ul {
@@ -483,7 +490,7 @@ section .welcome_box p.small {
   font-size: 18px;
 }
 section .app_box {
-  padding: 40px 0;
+  padding: 40px 0 50px;
   text-align: center;
 }
 section .yellow_box {
@@ -530,6 +537,7 @@ section .purple_box {
   background: #6c006c;
   border-radius: 20px;
   padding: 20px 0;
+  position: relative;
 }
 section .purple_box:before,
 section .purple_box:after {
@@ -540,7 +548,7 @@ section .purple_box:after {
   left: 10px;
   width: 45%;
   height: 50px;
-  top: 90%;
+  bottom: 45px;
   opacity: 0.7;
   box-shadow: 0 52px 63px #410041;
   transform: rotate(3deg);
@@ -1021,7 +1029,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -351px -202px;
+  background-position: 0px -243px;
   width: 18px;
   height: 14px;
 }
@@ -1745,6 +1753,9 @@ section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.num
   color: #999;
   font-size: 14px;
 }
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.label {
+  display: none;
+}
 section .purple_box .pay_box_white.confirmation_box .resume .total {
   float: right;
   text-align: right;
@@ -1769,7 +1780,7 @@ section input {
   border: 0;
   margin-bottom: 0px;
   height: 42px;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 0px 10px;
   text-align: center;
 }
@@ -1851,7 +1862,13 @@ section .offers_box {
   margin-top: 40px;
 }
 section .offers_box .col_3 {
-  width: 33%;
+  width: 32%;
+}
+section .offers_box .col_3 img {
+  width: 100%;
+}
+section .offers_box .col_3.left {
+  margin-right: 2%;
 }
 section .error_message {
   background: #f1222d;
@@ -1863,7 +1880,7 @@ section .error_message {
   margin: 0 auto;
   border-radius: 10px;
   position: absolute;
-  left: 23.5%;
+  left: 17%;
 }
 section .error_message span {
   display: inline-block;
@@ -2126,25 +2143,41 @@ footer span.logo_icon {
 #modal_new_password,
 #modal_new_password_response,
 #modal_response_signin,
-#modal_watch_legal {
+#modal_watch_legal,
+.modal_box_legal {
   width: 651px;
   height: 686px;
   background: url("../images/modal_bg.png");
 }
-#modal_watch_legal .modal_content {
+#modal_watch_legal .modal_content,
+.modal_watch_legal .modal_content {
   border-radius: 8px;
   width: 600px;
   height: 200px;
-  background: #d3d3d3;
+  background: #eee;
   color: #000;
   font-size: 12px;
 }
-#modal_watch_legal .modal_content h3 {
+#modal_watch_legal .modal_content h3,
+.modal_watch_legal .modal_content h3 {
   color: #000;
   font-size: 16px;
   margin: 0;
+  position: relative;
 }
-#modal_watch_legal .modal_content .text_box {
+#modal_watch_legal .modal_content h3 span,
+.modal_watch_legal .modal_content h3 span {
+  background-image: url("../images/sprite.png");
+  background-position: -351px -202px;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  right: -11px;
+  top: -10px;
+  cursor: pointer;
+}
+#modal_watch_legal .modal_content .text_box,
+.modal_watch_legal .modal_content .text_box {
   overflow-y: scroll;
   height: 138px;
 }
@@ -2319,8 +2352,13 @@ i[class*=" icon-"] {
   section .welcome_box {
     padding: 8px;
   }
-  section .welcome_box h2,
-  section .welcome_box .subtitle,
+  section .welcome_box h2 {
+    font-size: 24px;
+  }
+  section .welcome_box .subtitle {
+    font-size: 18px !important;
+    line-height: 18px;
+  }
   section .welcome_box .medium,
   section .welcome_box .small {
     display: none;
@@ -2328,6 +2366,9 @@ i[class*=" icon-"] {
   section .welcome_box .error_message {
     width: 95%;
     left: 2%;
+    padding: 0;
+  }
+  section .welcome_box .purple_box .content {
     padding: 0;
   }
   section .welcome_box .purple_box .content .left,
@@ -2480,13 +2521,40 @@ i[class*=" icon-"] {
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(1) {
     margin-right: 10px;
   }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head {
+    display: none;
+  }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li {
     color: #999;
     font-size: 12px;
   }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul {
+    overflow: hidden;
+    padding: 10px 0;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li.cantidad {
+    width: 49%;
+    float: left;
+    text-align: left;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li.precio {
+    width: 49%;
+    float: right;
+    text-align: right;
+  }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
     color: #999;
     font-size: 12px;
+    margin-top: 0;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li span.label {
+    color: #999;
+    display: block;
   }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .total {
     float: right;
