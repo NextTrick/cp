@@ -88,7 +88,7 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
         $select->join(array('b' => 'paquete_paquete'), 'a.paquete_id = b.id',
             array('paquete_id' => 'id', 'paquete_titulo1' => 'titulo1', 'paquete_titulo2' => 'titulo2'));
         $select->join(array('c' => 'tarjeta_tarjeta'), 'a.tarjeta_id = c.id',
-            array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre'));
+            array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre', 'tarjeta_numero' => 'numero'));
 
         $select->where->equalTo('a.id', $ordenId);
 
@@ -104,8 +104,8 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
 
         $select = $sql->select();
         $select->from(array('a' => $this->table));
-        $select->columns(array('emoney'));
-        $select->join(array('b' => 'tarjeta_tarjeta'), 'a.tarjeta_id = c.id',
+        $select->columns(array('id', 'emoney', 'cantidad'));
+        $select->join(array('b' => 'tarjeta_tarjeta'), 'a.tarjeta_id = b.id',
             array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre', 'tarjeta_cguid' => 'cguid'));
 
         $select->where->equalTo('a.id', $ordenId);

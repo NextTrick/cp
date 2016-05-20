@@ -226,10 +226,11 @@ class OrdenService
         $monto = $cartModel->getAmountCart(true);
         $data['pago_estado'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
         $data['fecha_creacion'] = $cDate = date('Y-m-d H:i:s');
+        $data['monto'] = $monto;
         $ordenId = $this->getRepository()->save($data);
 
         $this->_saveDetalleOrden($ordenId, $cDate);
-        
+
         $paymentProcessordata = array(
             'id' => $ordenId, // ID DE LA ORDEN
             'perfilpago_nombres' => $usuarioData['nombres'], // NOMBRE DEL PERFIL DE PAGO
@@ -239,6 +240,8 @@ class OrdenService
             'perfilpago_pais' => 'PERU', // PAIS DEL PERFIL DE PAGO
             'perfilpago_departamento' => 'LIMA',  // DEPARTAMENTO DEL PERFIL DE PAGO
             'perfilpago_distrito' => 'LIMA', // DISTRITO DEL PERFIL DE PAGO
+            'perfilpago_direccion' => !empty($data['fac_direccion_entrega_factura'])
+                ? empty($data['fac_direccion_entrega_factura']) : '',
             'documento_tipo' => $usuarioData['di_tipo'], // TIPO COMPROBANTE
             'documento_numero' => $usuarioData['di_valor'], // NRO COMPROBANTE
             'usuario_email' => $usuarioData['email'],  // CORREO DE USUARIO LOGUEADO
@@ -284,7 +287,7 @@ class OrdenService
             }
         }
 
-        $ordenUpdateData['pago_confirmacion_fecha'] = date('Y-m-d H:i:s');
+        $ordenUpdateData['pago_fecha_confirmacion'] = date('Y-m-d H:i:s');
 
         $this->getRepository()->save($ordenUpdateData, $ordenId);
 
@@ -389,7 +392,7 @@ class OrdenService
             }
         }
 
-        return $this->redirect()->toUrl(BASE_URL . 'pagos/cofirmacion/orden/' . base64_encode($ordenId));
+        return $ordenId;
     }
 
     public function setCreditPurchase($ordenId)

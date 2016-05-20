@@ -180,7 +180,7 @@ class Visa
             'profileName' => $data['perfilpago_nombres'],
             'profileLastName' => $data['perfilpago_paterno'] . ' ' . $data['perfilpago_materno'],
             'city' => 'LIMA',
-            'address' => $data['perfilpago_direccion'],
+            'address' => !empty($data['perfilpago_direccion']) ? empty($data['perfilpago_direccion']) : '',
             'userEmail' => $data['usuario_email'],            
         );
                         
