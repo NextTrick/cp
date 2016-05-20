@@ -30,17 +30,11 @@ class MisDatosForm extends Form
     {
         $this->setAttribute('id', 'formUsuario');
         $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype', 'multipart/form-data');
     }
 
     protected function _addElements()
     {
-        $gateway = new Element\Hidden('gateway');
-        $gateway->setAttributes(array(
-                'id' => 'gateway',
-                'maxlength' => '20',
-            ));
-        $this->add($gateway);
-        
         $email = new Element\Text('email');
         $email->setAttributes(array(
                 'id' => 'email',
@@ -150,6 +144,10 @@ class MisDatosForm extends Form
                 )
             )
         ));
+        
+        $image = new Element\File('imagen');
+        $image->setAttribute('id', 'imagen');
+        $this->add($image);
     }
     
     private function _getMeses()
