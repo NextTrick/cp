@@ -6,7 +6,8 @@ return array(
         'sectionRightOption' => 'Application\View\Helper\SectionRightOption',
         'sectionFooter' => 'Application\View\Helper\SectionFooter',
         'sectionGrillaPromociones' => 'Application\View\Helper\SectionGrillaPromociones',
-        'sectionRecargaPromociones' => 'Application\View\Helper\SectionRecargaPromociones',
-        'sectionRecargaRecargas' => 'Application\View\Helper\SectionRecargaRecargas',
+//        'sectionRecargaPromociones' => 'Application\View\Helper\SectionRecargaPromociones',
+//        'sectionRecargaRecargas' => 'Application\View\Helper\SectionRecargaRecargas',
+        'sectionPromocionesYRecargas' => 'Application\View\Helper\SectionPromocionesYRecargas',
     )
 );
