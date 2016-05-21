@@ -12,7 +12,8 @@ $(function() {
       errorMessage: '.error_message',
       closeErrorMessage: '.error_message .icon',
       watchLegal: '.watch_legal',
-      closeLegalModal: '.modal_box_legal .modal_content h3 span'
+      closeLegalModal: '.modal_box_legal .modal_content h3 span',
+      closeAsociateCardModal: '#how_asociate_card .modal_content h3 span'
     };
     catchDom = function() {
       dom.btn = $(st.btn);
@@ -24,11 +25,13 @@ $(function() {
       dom.closeErrorMessage = $(st.closeErrorMessage);
       dom.watchLegal = $(st.watchLegal);
       dom.closeLegalModal = $(st.closeLegalModal);
+      dom.closeAsociateCardModal = $(st.closeAsociateCardModal);
     };
     suscribeEvents = function() {
       dom.btn.on('click', events.openModal);
       dom.btnClose.on('click', events.closeModal);
       dom.closeLegalModal.on('click', events.closeModal);
+      dom.closeAsociateCardModal.on('click', events.closeModal);
       dom.modalOutside.on('click', events.closeClickOutside);
       dom.btnRecovery.on('click', events.closeRecoveryModal);
       dom.btnChangePass.on('click', events.closeNewPassModal);

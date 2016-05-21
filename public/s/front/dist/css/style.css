@@ -733,6 +733,10 @@ section .purple_box .benefits_offers .offers_box_two .left {
   padding: 20px;
   box-sizing: border-box;
 }
+section .purple_box .benefits_offers .offers_box_two .left .image img {
+  width: 100%;
+  height: 100%;
+}
 section .purple_box .benefits_offers .offers_box_two .right {
   padding: 20px;
   height: 220px;
@@ -2268,6 +2272,16 @@ footer span.logo_icon {
   color: #000;
   font-weight: normal;
   font-size: 24px;
+}
+#how_asociate_card .modal_content h3 span {
+  background-image: url("../images/sprite.png");
+  background-position: -352px -202px;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
 }
 #how_asociate_card .modal_content p {
   color: #808080;
