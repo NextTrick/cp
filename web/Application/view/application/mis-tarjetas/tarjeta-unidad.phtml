@@ -8,41 +8,31 @@
     <span class="card_number"><?php echo $row['numero'] ?></span>
 </div>
 <div class="show_more_content">
-    <?php if (\Common\Helpers\Util::noEmptyDecimal($row['emoneyvalue'])) : ?>
     <div class="line">
         <div class="left">Dinero<span>?</span></div>
         <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
         <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
     </div>
-    <?php endif; ?>
-    <?php if (\Common\Helpers\Util::noEmptyDecimal($row['bonusvalue'])) : ?>
     <div class="line">
         <div class="left">Coney Bonos<span>?</span></div>
         <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonusvalue']); ?></div>
         <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
     </div>
-    <?php endif; ?>
-    <?php if (\Common\Helpers\Util::noEmptyDecimal($row['bonusplusvalue'])) : ?>
     <div class="line">
         <div class="left">Coney Bonos Plus<span>?</span></div>
         <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonusplusvalue']); ?></div>
         <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
     </div>
-    <?php endif; ?>
-    <?php if (!empty($row['etickets'])) : ?>
     <div class="line">
         <div class="left">Tickets<span>?</span></div>
         <div class="right"><?php echo $row['etickets']; ?></div>
         <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
     </div>
-    <?php endif; ?>
-    <?php if (!empty($row['gamepoints'])) : ?>
     <div class="line">
         <div class="left">Gamepoints<span>?</span></div>
         <div class="right"><?php echo $row['gamepoints']; ?></div>
         <div class="tooltip_bonus">Son regalos que entregamos a nuestros clientes por montos determinados de recargas. Válido para todos los juegos, excepto los que emiten tickets / Cine 6D / Caritas pintadas Yukids</div>
     </div>
-    <?php endif; ?>
 </div>
 <div class="bottom_card">
     <div class="price">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>

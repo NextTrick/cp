@@ -63,9 +63,11 @@ class LoginController extends SecurityWebController
             'where' => array('email' => $email),
         ));
 
+        $messageError = 'Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde';
+        
         $result = new \stdClass();
         $result->error = true;
-        $result->message = 'La cuenta no se encuentra registrado.';
+        $result->message = $messageError;
         if (!empty($usuarioBd)) {
             $data = $this->_getLoginGatewayService()
                 ->setGateway($opcion)
@@ -101,8 +103,11 @@ class LoginController extends SecurityWebController
                     $result->message = 'Los datos ingresados son incorrectos.';
                 }
             } else {
+                $noRegistrado = (strpos($usuarioWs['message'], 'registrado') !== false 
+                        && strpos($usuarioWs['message'], 'incorrecta') !== false);
+
                 $result->error = true;
-                $result->message = $usuarioWs['message'];
+                $result->message = $noRegistrado ? 'Los datos ingresados son incorrectos.' : $messageError;
             }
         }
 

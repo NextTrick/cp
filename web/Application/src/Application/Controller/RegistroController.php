@@ -223,7 +223,8 @@ class RegistroController extends AbstractActionController
             $jsonModel->setVariables($result);
             return $response->setContent($jsonModel->serialize());
         }
-            
+        
+        $messageError = 'Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde';
         if ($this->request->isPost()) {
             $email = $this->request->getPost('email');
             $validator2 = new \Zend\Validator\EmailAddress();
@@ -241,13 +242,16 @@ class RegistroController extends AbstractActionController
                 $jsonModel->setVariables($result);
                 return $response->setContent($jsonModel->serialize());
             } else {
-                $result['message'] = 'Error al eviar correo electrónico.';
+                $noRegistrado = (strpos($usuarioTrueFi['message'], 'encuentra') !== false 
+                        && strpos($usuarioTrueFi['message'], 'registrado ') !== false);
+                
+                $result['message'] = $noRegistrado ? 'El correo ingresado no está registrado.' : $messageError;
                 $jsonModel->setVariables($result);
                 return $response->setContent($jsonModel->serialize());
             }
         }
         
-        $result['message'] = 'Ocurrio un error, por favor intentelo nuevamente.';
+        $result['message'] = $messageError;
         $jsonModel->setVariables($result);
         return $response->setContent($jsonModel->serialize());
     }

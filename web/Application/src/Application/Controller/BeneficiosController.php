@@ -11,7 +11,17 @@ class BeneficiosController extends SecurityWebController
         if ($this->_isLogin() === false) {
             return $this->_toUrlLogin();
         }
+        
+        $config = $this->getServiceLocator()->get('config');
+        if (!isset($config['fileDir']['paquete_paquete']['down'])) {
+            throw new \Exception('No existe url configurada.');
+        }
+        
+        $rows = $this->_getPaqueteService()->grillaPromociones(GRID_PROMOCIONES_BENEFICIOS, 1);
+        
         $view = new ViewModel();
+        $view->setVariable('rows', $rows);
+        $view->setVariable('urlImg', $config['fileDir']['paquete_paquete']['down']);
         return $view;
     }
 

@@ -31,7 +31,9 @@
                                     <div class="image"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></div>
                                     <p class="breadcrumb">
                                         <?php echo $row['titulo1']; ?>
+                                        <?php if (!empty($row['legal'])) : ?>
                                         <a href="#modal_watch_legal_pro_<?php echo $key; ?>" name="modal" class="watch_legal">Ver legal</a>
+                                        <?php endif; ?>
                                         <span></span>
                                     </p>
                                     <p><?php echo $row['titulo2']; ?></p>
@@ -91,7 +93,9 @@
                                     <div class="image"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></div>
                                     <p class="breadcrumb">
                                         <?php echo $row['titulo1']; ?>
+                                        <?php if (!empty($row['legal'])) : ?>
                                         <a href="#modal_watch_legal_rec_<?php echo $key; ?>" name="modal" class="watch_legal">Ver legal</a>
+                                        <?php endif; ?>
                                         <span></span>
                                     </p>
                                     <p><?php echo $row['titulo2']; ?></p>
