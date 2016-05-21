@@ -12,7 +12,7 @@ $(function() {
       errorMessage: '.error_message',
       closeErrorMessage: '.error_message .icon',
       watchLegal: '.watch_legal',
-      closeLegalModal: '#modal_watch_legal .modal_content h3 span'
+      closeLegalModal: '.modal_box_legal .modal_content h3 span'
     };
     catchDom = function() {
       dom.btn = $(st.btn);

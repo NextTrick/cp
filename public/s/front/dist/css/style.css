@@ -2804,4 +2804,12 @@ i[class*=" icon-"] {
   #how_asociate_card .modal_content {
     width: auto;
   }
+  .modal_box_legal {
+    top: 0px !important;
+  }
+  .modal_box_legal .modal_content {
+    margin-top: 150px !important;
+    width: 52%;
+    height: 450px;
+  }
 }
