@@ -300,13 +300,17 @@ $ ->
 		st =
 			userAccount : '.user_account'
 			menuOptions : '.menu_options'
-
+			userAccountMobile : '.user_option_mobile ul li .user_icon'
+			menuAccountMobile : '.user_option_mobile ul li .menu_options'
 		catchDom = ->
 			dom.userAccount = $(st.userAccount)
 			dom.menuOptions = $(st.menuOptions)
+			dom.userAccountMobile = $(st.userAccountMobile)
+			dom.menuAccountMobile = $(st.menuAccountMobile)
 			return
 		suscribeEvents = () ->
 			dom.userAccount.on 'click', events.openLogoutOption
+			dom.userAccountMobile.on 'click', events.openMenu
 			return
 		events =
 			openLogoutOption : (e) ->
@@ -317,6 +321,12 @@ $ ->
 				else
 					dom.userAccount.addClass 'active'
 					dom.menuOptions.show()
+				return
+			openMenu : ->
+				if dom.menuAccountMobile.hasClass 'active'
+					dom.menuAccountMobile.removeClass 'active'
+				else
+					dom.menuAccountMobile.addClass 'active'
 				return
 		functions = 
 			successAsociate: ->

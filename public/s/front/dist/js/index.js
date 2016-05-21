@@ -311,14 +311,19 @@ $(function() {
     dom = {};
     st = {
       userAccount: '.user_account',
-      menuOptions: '.menu_options'
+      menuOptions: '.menu_options',
+      userAccountMobile: '.user_option_mobile ul li .user_icon',
+      menuAccountMobile: '.user_option_mobile ul li .menu_options'
     };
     catchDom = function() {
       dom.userAccount = $(st.userAccount);
       dom.menuOptions = $(st.menuOptions);
+      dom.userAccountMobile = $(st.userAccountMobile);
+      dom.menuAccountMobile = $(st.menuAccountMobile);
     };
     suscribeEvents = function() {
       dom.userAccount.on('click', events.openLogoutOption);
+      dom.userAccountMobile.on('click', events.openMenu);
     };
     events = {
       openLogoutOption: function(e) {
@@ -329,6 +334,13 @@ $(function() {
         } else {
           dom.userAccount.addClass('active');
           dom.menuOptions.show();
+        }
+      },
+      openMenu: function() {
+        if (dom.menuAccountMobile.hasClass('active')) {
+          dom.menuAccountMobile.removeClass('active');
+        } else {
+          dom.menuAccountMobile.addClass('active');
         }
       }
     };
