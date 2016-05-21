@@ -96,6 +96,7 @@ header .user_option .user_inside ul li:first-child {
 }
 header .user_option .user_inside ul li:last-child {
   padding-left: 8px;
+  position: relative;
 }
 header .user_option .user_inside ul li a {
   text-decoration: none;
@@ -155,17 +156,26 @@ header .user_option .user_inside ul li a span.arrow_bottom:after {
   border-right: solid 6px transparent;
 }
 header .user_option .user_inside ul li a.logout {
-  display: none;
+  display: block;
   z-index: 99;
-  background: #d3d3d3;
   color: #000;
-  font-size: 12px;
-  padding: 5px;
-  box-sizing: border-box;
+  font-size: 14px;
+  padding: 8px 5px;
   position: relative;
 }
-header .user_option .user_inside ul li a.logout.active {
-  display: block;
+header .user_option .user_inside ul li a.logout:first-child {
+  border-bottom: 1px solid #eaeaea;
+}
+header .user_option .user_inside ul li .menu_options {
+  display: none;
+  position: absolute;
+  background: #fff;
+  z-index: 99;
+  box-shadow: 0px 0px 10px #d3d3d3;
+  width: 140px;
+  right: 0;
+  top: 27px;
+  padding: 5px;
 }
 header nav ul {
   margin: 10px 0 0;

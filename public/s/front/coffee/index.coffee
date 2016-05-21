@@ -299,11 +299,11 @@ $ ->
 		dom = {}
 		st =
 			userAccount : '.user_account'
-			logout : '.logout'
+			menuOptions : '.menu_options'
 
 		catchDom = ->
 			dom.userAccount = $(st.userAccount)
-			dom.logout = $(st.logout)
+			dom.menuOptions = $(st.menuOptions)
 			return
 		suscribeEvents = () ->
 			dom.userAccount.on 'click', events.openLogoutOption
@@ -311,10 +311,12 @@ $ ->
 		events =
 			openLogoutOption : (e) ->
 				e.preventDefault()
-				if dom.logout.hasClass 'active'
-					dom.logout.removeClass 'active'
+				if dom.userAccount.hasClass 'active'
+					dom.userAccount.removeClass 'active'
+					dom.menuOptions.hide()
 				else
-					dom.logout.addClass 'active'
+					dom.userAccount.addClass 'active'
+					dom.menuOptions.show()
 				return
 		functions = 
 			successAsociate: ->
