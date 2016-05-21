@@ -1,8 +1,9 @@
 <section>
     <div class="box_center">
         <div class="welcome_box">
-            <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
-            <p class="subtitle">Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>
+            <?php echo $this->sectionContenido(Cms\Model\Service\ContenidoService::SECCION_LOGIN_INICIO_SESION); ?>
+<!--            <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
+            <p class="subtitle">Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>-->
             <div class="yellow_box">Inicia sesión</div>
             <div class="purple_box">
                 <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>

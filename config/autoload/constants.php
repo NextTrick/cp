@@ -27,6 +27,7 @@ define('ERROR_TOKEN', 'Token invalido.');
 
 define('LIMIT_BUSCAR', 100);
 define('GRID_PROMOCIONES_LOGIN', 3);
+define('GRID_PROMOCIONES_CARRITO', 3);
 define('GRID_PROMOCIONES_BENEFICIOS', 4);
 define('GRID_PROMOCIONES_RECARGAS', 3);
 define('GRID_RECARGAS_RECARGAS', 3);

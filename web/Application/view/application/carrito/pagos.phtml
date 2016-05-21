@@ -106,15 +106,19 @@
                         </div>
                         <h4>3. Confirma tu compra</h4>
                         <div class="items_cart">
+                            <?php $index = 0; ?>
                             <?php foreach ($cartModel->getProductsCart() as $productos) : ?>
                                 <?php foreach ($productos as $producto) : ?>
+                                    <?php $index++; ?>
                                     <div class="item">
                                         <div class="left">
                                             <img width="140" height="71" src="<?php echo $urlImg . '/' . $producto->getProductImage(); ?>" alt="<?php echo $producto->getProductName(); ?>"/>
                                         </div>
                                         <div class="right">
                                             <h5><?php echo $producto->getProductName(); ?><span>. </span>
-                                                <a href="#modal_watch_legal" name="modal" class="legal">Ver legal</a>
+                                                <?php if ($producto->getOption('legal') != '') : ?>
+                                                <a href="#modal_watch_legal_<?php echo $index; ?>" name="modal" class="legal">Ver legal</a>
+                                                <?php endif; ?>
                                             </h5>
                                             <h4 class="item_title"><?php echo $producto->getProductName2(); ?></h4>
                                             <div class="card_type">
@@ -179,18 +183,24 @@
         </div>
         
     </div>
-    <div id="modal_watch_legal" class="modal_box">
-          <div class="modal_content">
-            <h3>Importante: <span></span></h3>
-            <hr/>
-            <div class="text_box">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt leo erat. Maecenas dapibus, diam quis dapibus elementum, risus diam congue risus, vitae tristique magna orci et sem. Aliquam congue ut tellus eu ultricies. Vestibulum tristique sapien sit amet accumsan feugiat. Integer congue suscipit dictum. Ut a nisl tempus, ornare erat at, ultrices lectus. Suspendisse pulvinar eros vel finibus ultricies. Maecenas lacinia, tellus ac egestas tincidunt, turpis ipsum pulvinar arcu, et blandit purus lectus vitae odio. Phasellus lobortis, orci non efficitur consectetur, mauris urna ornare nisl, non sodales lectus sapien ac diam. Morbi ligula lorem, tristique in cursus et, vulputate quis lorem. Suspendisse ut erat turpis. </p>
-              <p>Sed sed tellus pulvinar, lobortis est sit amet, mollis lectus. Suspendisse semper vestibulum erat at lacinia. Mauris eget quam sit amet magna rutrum maximus in sed ipsum. Etiam libero justo, dictum non malesuada ut, ullamcorper at leo. Vestibulum accumsan condimentum lectus, et faucibus justo sodales non. Aliquam dictum ipsum sit amet nisl elementum commodo ut ut ligula. Aliquam sagittis fermentum gravida. Vestibulum eu neque eget neque placerat ullamcorper at sit amet mauris. Morbi tellus odio, lacinia a libero sed, congue cursus urna. </p>
-              <p>Suspendisse potenti. Quisque ipsum ante, luctus quis leo sit amet, mattis convallis enim. Donec feugiat vehicula felis. In lacinia quis est eget tempus. Pellentesque vulputate augue vel nibh sagittis sollicitudin. Etiam eu laoreet tellus. Sed id fermentum lorem. Fusce feugiat, libero nec finibus egestas, tellus risus dignissim dui, ultricies condimentum lectus erat et leo. Integer semper erat sit amet ex tempor, sed eleifend libero venenatis. Proin a arcu quis arcu dapibus tristique. Fusce vehicula diam vitae diam faucibus rutrum quis et leo. Nullam ex metus, mollis eget dignissim quis, bibendum et mauris. Integer bibendum, lacus sit amet tincidunt aliquam, sapien arcu tempor nisi, eget egestas massa felis ut purus. Nulla a purus a nisl tincidunt scelerisque. Proin tempor arcu et tortor lacinia, ac pellentesque eros consectetur. Aenean eget eros in lectus auctor finibus ac nec ex.</p>
+    <?php if (!empty($cartModel)) : ?>
+    <?php $index = 0; ?>
+    <?php foreach ($cartModel->getProductsCart() as $productos) : ?>
+        <?php foreach ($productos as $producto) : ?>
+            <?php $index++; ?>
+            <div id="modal_watch_legal_<?php echo $index; ?>" class="modal_box modal_box_legal">
+                  <div class="modal_content">
+                    <h3>Importante: <span></span></h3>
+                    <hr/>
+                    <div class="text_box">
+                      <p><?php echo $producto->getOption('legal'); ?></p>
+                    </div>
+                  </div>
             </div>
-          </div>
-        </div>
-        <div id="mask"></div>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+    <?php endif; ?>
+    <div id="mask"></div>
 </section>
 </form>
 <script type="text/javascript">

@@ -17,12 +17,24 @@ class ContenidoService
     const TIPO_SECCION        = 2;
     const TIPO_NAME_PAGINA  = 'página';
     const TIPO_NAME_SECCION = 'sección';
+    
+    const SECCION_LOGIN_INICIO_SESION = 'LOGIN_INICIO_SESION';
 
 
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
         $this->_sl         = $serviceLocator;
+    }
+
+    public function getContenido($codigo)
+    {
+        $criteria = array('where' => array('codigo' => $codigo));
+        $row = $this->_repository->findOne($criteria);
+        if (isset($row['contenido'])) {
+            return $row['contenido'];
+        }
+        return null;
     }
 
     public function getRepository()

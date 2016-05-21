@@ -2145,3 +2145,10 @@ INSERT INTO `paquete_paquete` (`id`, `referencia`, `titulo1`, `titulo2`, `tipo`,
 (11, '2f61a7cd1e0c166edcdea52b78e69d44', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160416.png', 3, 3, 0, NULL, 0, NULL, 1, 0, 3, '2016-04-18 06:45:01', NULL),
 (12, '2f61a7cd1e0c166edcdea52b78e69d45', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160417.png', 4, 1, 0, NULL, 0, NULL, 1, 1, 4, '2016-04-18 06:45:01', NULL),
 (13, '2f61a7cd1e0c166edcdea52b78e69d46', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59x-20160417.png', 1, 2, 0, NULL, 0, '', 1, 0, 5, '2016-04-18 06:45:01', NULL);
+
+--
+-- Volcado de datos para la tabla `cms_contenido`
+--
+
+INSERT INTO `cms_contenido` (`id`, `codigo`, `tipo`, `titulo`, `url`, `contenido`, `estado`, `fecha_creacion`, `fecha_edicion`) VALUES
+(1, 'LOGIN_INICIO_SESION', 2, '', NULL, '<h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2><p class="subtitle">Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>', 1, '2016-04-16 01:53:19', '2016-05-01 07:37:23');

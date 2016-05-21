@@ -7,5 +7,6 @@ return array(
         'sectionFooter' => 'Application\View\Helper\SectionFooter',
         'sectionGrillaPromociones' => 'Application\View\Helper\SectionGrillaPromociones',
         'sectionPromocionesYRecargas' => 'Application\View\Helper\SectionPromocionesYRecargas',
+        'sectionContenido' => 'Application\View\Helper\SectionContenido',
     )
 );

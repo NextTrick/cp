@@ -1,6 +1,6 @@
 <section class="app_content recargas">
     <?php $tarjetaProductos = empty($cartModel) ? array() : $cartModel->getProductsGroup(); ?>
-    <?php echo $this->sectionPromocionesYRecargas($tarjetaProductos);  ?>
+    <?php echo $this->sectionPromocionesYRecargas($cartModel, $tarjetaProductos);  ?>
     <div id="mask"></div>
 </section>
 <div class="bottom_bar"><span class="text">Estás recargando: </span>
