@@ -161,7 +161,7 @@ class UsuarioService
             }
             
             //sincronizar tarjetas registrados por otro sistema
-            $this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
+            //$this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
         }
         return $result;
     }
