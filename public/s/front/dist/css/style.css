@@ -2048,6 +2048,8 @@ section form.form_mis_datos .disabled {
   width: 250px;
   border-radius: 20px;
   height: 36px;
+  position: absolute;
+  right: 10px;
 }
 footer {
   display: block;
@@ -2699,6 +2701,9 @@ i[class*=" icon-"] {
   }
   .bottom_bar span.bg.total {
     margin-left: 0;
+  }
+  .bottom_bar button {
+    position: static;
   }
   footer {
     background: #fff !important;
