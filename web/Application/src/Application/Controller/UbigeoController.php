@@ -8,8 +8,8 @@ class UbigeoController extends AbstractActionController
 {
     public function departamentoAction()
     {
-        $codPais = $this->params()->fromQuery('cod_pais');
-        $results = $this->_getUbigeoService()->getDepartamentos($codPais);
+        $paisId = $this->params()->fromQuery('pais_id');
+        $results = $this->_getUbigeoService()->getDepartamentos($paisId);
         $response = $this->getResponse();
         $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
         $response->setContent(json_encode($results));
@@ -18,9 +18,9 @@ class UbigeoController extends AbstractActionController
     
     public function provinciaAction()
     {
-        $codPais = $this->params()->fromQuery('cod_pais');
-        $codDepa = $this->params()->fromQuery('cod_depa');
-        $results = $this->_getUbigeoService()->getProvincias($codPais, $codDepa);
+        $paisId = $this->params()->fromQuery('pais_id');
+        $departamentoId = $this->params()->fromQuery('departamento_id');
+        $results = $this->_getUbigeoService()->getProvincias($paisId, $departamentoId);
         $response = $this->getResponse();
         $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
         $response->setContent(json_encode($results));
@@ -29,10 +29,10 @@ class UbigeoController extends AbstractActionController
     
     public function distritoAction()
     {
-        $codPais = $this->params()->fromQuery('cod_pais');
-        $codDepa = $this->params()->fromQuery('cod_depa');
-        $codProv = $this->params()->fromQuery('cod_prov');
-        $results = $this->_getUbigeoService()->getDistritos($codPais, $codDepa, $codProv);
+        $paisId = $this->params()->fromQuery('pais_id');
+        $departamentoId = $this->params()->fromQuery('departamento_id');
+        $provinciaId = $this->params()->fromQuery('provincia_id');
+        $results = $this->_getUbigeoService()->getDistritos($paisId, $departamentoId, $provinciaId);
         $response = $this->getResponse();
         $response->getHeaders()->addHeaderLine('Content-Type', 'application/json');
         $response->setContent(json_encode($results));

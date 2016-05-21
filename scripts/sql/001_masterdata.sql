@@ -2126,9 +2126,9 @@ INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALU
 -- Volcado de datos para la tabla `usuario_usuario`
 --
 
-INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `cod_pais`, `cod_depa`, `cod_prov`, `cod_dist`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
-(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', 'PE', '15', NULL, '42', NULL, NULL, NULL),
-(7, '{5C3E7CA9-6412-4CA5-9C8C-F0E0F02968DE}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 1, NULL, 'Juan Carlos', 'test', 'test', 1, '55477433', NULL, 'PE', '10', NULL, '11', NULL, NULL, 'a4609eb6ba1f8814e24f4006de8aa6e62a8cdb88b83e51c76b46abcbd9faa325');
+INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `pais_id`, `departamento_id`, `provincia_id`, `distrito_id`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
+(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, '{5C3E7CA9-6412-4CA5-9C8C-F0E0F02968DE}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 1, NULL, 'Juan Carlos', 'test', 'test', 1, '55477433', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'a4609eb6ba1f8814e24f4006de8aa6e62a8cdb88b83e51c76b46abcbd9faa325');
 
 INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `numero`, `estado_truefi`, `fecha_creacion`, `fecha_edicion`) VALUES
 (11, 7, 'Mis Primos2', '{0BEB1DE9-582F-4995-A2FE-8C6ADD526109}', '004-243217-5', 0, '2016-05-16 21:14:30', '2016-05-17 22:31:17'),

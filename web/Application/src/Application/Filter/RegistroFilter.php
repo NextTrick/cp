@@ -108,7 +108,7 @@ class RegistroFilter extends Zf2InputFilter
         ));
 
         $this->add(array(
-            'name' => 'cod_pais',
+            'name' => 'pais_id',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -120,7 +120,7 @@ class RegistroFilter extends Zf2InputFilter
         ));
 
         $this->add(array(
-            'name' => 'cod_depa',
+            'name' => 'departamento_id',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),
@@ -132,7 +132,7 @@ class RegistroFilter extends Zf2InputFilter
         ));
 
         $this->add(array(
-            'name' => 'cod_dist',
+            'name' => 'distrito_id',
             'required' => true,
             'filters'  => array(
                 array('name' => 'StripTags'),

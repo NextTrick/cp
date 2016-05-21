@@ -51,12 +51,12 @@ class RegistroController extends AbstractActionController
         $registroForm = (float)$this->request->getPost('registro_form');
         if ($this->request->isPost() && !$registroForm) {
             //=========== Llenar los combos ===========
-            $codPais = $this->request->getPost('cod_pais');
-            $codDep = $this->request->getPost('cod_depa');
-            $departamentos = $this->_getUbigeoService()->getDepartamentos($codPais);
-            $form->get('cod_depa')->setValueOptions($departamentos);
-            $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDep);
-            $form->get('cod_dist')->setValueOptions($distritos);
+            $paisId = $this->request->getPost('pais_id');
+            $departamentoId = $this->request->getPost('departamento_id');
+            $departamentos = $this->_getUbigeoService()->getDepartamentos($paisId);
+            $form->get('departamento_id')->setValueOptions($departamentos);
+            $distritos = $this->_getUbigeoService()->getDistritos($paisId, $departamentoId);
+            $form->get('distrito_id')->setValueOptions($distritos);
             
             //=========== Aplicar filter ===========
             $form->setInputFilter(new \Application\Filter\RegistroFilter());
@@ -137,10 +137,11 @@ class RegistroController extends AbstractActionController
                 'materno' => $data['materno'],
                 'di_tipo' => $data['di_tipo'],
                 'di_valor' => $data['di_valor'],
-                'cod_pais' => $data['cod_pais'],
-                'cod_depa' => $data['cod_depa'],
-                'cod_dist' => $data['cod_dist'],
+                'pais_id' => $data['pais_id'],
+                'departamento_id' => $data['departamento_id'],
+                'distrito_id' => $data['distrito_id'],
                 'fecha_nac' => $data['fecha_nac'],
+                'fecha_creacion' => date('Y-m-d H:i:s'),
                 'estado' => 0,
             );
 
@@ -222,7 +223,8 @@ class RegistroController extends AbstractActionController
             $jsonModel->setVariables($result);
             return $response->setContent($jsonModel->serialize());
         }
-            
+        
+        $messageError = 'Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde';
         if ($this->request->isPost()) {
             $email = $this->request->getPost('email');
             $validator2 = new \Zend\Validator\EmailAddress();
@@ -240,13 +242,16 @@ class RegistroController extends AbstractActionController
                 $jsonModel->setVariables($result);
                 return $response->setContent($jsonModel->serialize());
             } else {
-                $result['message'] = 'Error al eviar correo electrónico.';
+                $noRegistrado = (strpos($usuarioTrueFi['message'], 'encuentra') !== false 
+                        && strpos($usuarioTrueFi['message'], 'registrado ') !== false);
+                
+                $result['message'] = $noRegistrado ? 'El correo ingresado no está registrado.' : $messageError;
                 $jsonModel->setVariables($result);
                 return $response->setContent($jsonModel->serialize());
             }
         }
         
-        $result['message'] = 'Ocurrio un error, por favor intentelo nuevamente.';
+        $result['message'] = $messageError;
         $jsonModel->setVariables($result);
         return $response->setContent($jsonModel->serialize());
     }

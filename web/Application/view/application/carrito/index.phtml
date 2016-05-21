@@ -58,7 +58,7 @@
                                                     </select>
                                                 </div>
                                                 <select id="cantidad_<?php echo $index; ?>" class="cant change_cant"> 
-                                                    <?php foreach ($cattidades as $key => $value) : ?>
+                                                    <?php foreach ($catidades as $key => $value) : ?>
                                                     <?php $select = ($key == $producto->getQuantity()) ? 'selected="selected"' : ''; ?>
                                                     <option value="<?php echo $key; ?>" <?php echo $select; ?>><?php echo $value; ?></option>
                                                     <?php endforeach ?>

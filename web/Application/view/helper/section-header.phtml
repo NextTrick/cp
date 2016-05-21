@@ -15,7 +15,7 @@
                             <a href="#" class="user_account">
                                 <span class="text"><?php echo $data['nombres'] ?></span>
                                 <?php if (!empty($data['imagen'])) : ?>
-                                <span class="user_image"><img src="" alt=""/></span>
+                                <span class="user_image"><img src="<?php echo $urlImg . '/' . $data['imagen']; ?>" alt=""/></span>
                                 <?php else: ?>
                                 <span class="icon"></span>
                                 <?php endif; ?>

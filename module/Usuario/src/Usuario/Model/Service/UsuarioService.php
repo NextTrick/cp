@@ -216,10 +216,10 @@ class UsuarioService
             $paramsWhere = array(
                 'di_tipo'  => String::xssClean($params['cmbTipoDoc']),
                 'estado'   => String::xssClean($params['cmbEstado']),
-                'cod_pais' => String::xssClean($params['cmbPais']),
-                'cod_depa' => String::xssClean($params['cmbDepartamento']),
-                'cod_prov' => String::xssClean($params['cmbProvincia']),
-                'cod_dist' => String::xssClean($params['cmbDistrito']),
+                'pais_id' => String::xssClean($params['cmbPais']),
+                'departamento_id' => String::xssClean($params['cmbDepartamento']),
+                'provincia_id' => String::xssClean($params['cmbProvincia']),
+                'distrito_id' => String::xssClean($params['cmbDistrito']),
             );
 
             $betwween = array(
