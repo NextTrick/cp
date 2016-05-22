@@ -2054,6 +2054,9 @@ section form.signin_form .content_form {
 section form.signin_form .content_form input {
   height: 36px;
 }
+section form.signin_form .content_form select {
+  padding-left: 10px;
+}
 section form.form_mis_datos .bg_purple_change_email {
   background: #310041;
   padding: 20px 10px;
@@ -2077,6 +2080,7 @@ section form.form_mis_datos .content_form .form_control .left.user_image_left .i
   border-radius: 50px;
   text-align: center;
   padding-top: 6px;
+  overflow: hidden;
 }
 section form.form_mis_datos .content_form .form_control .right.user_image_right {
   width: 68%;
@@ -2096,6 +2100,12 @@ section form.form_mis_datos .content_form .form_control .right.user_image_right 
   cursor: pointer;
   position: relative;
   top: -35px;
+}
+section form.form_mis_datos .content_form .form_control .pass_info {
+  margin-top: 10px;
+  font-size: 13px;
+  display: block;
+  text-align: left;
 }
 section form.form_mis_datos .disabled {
   disabled: true;
@@ -2259,11 +2269,11 @@ footer span.logo_icon {
   font-weight: bold;
 }
 .modal_box .modal_content input {
-  width: 400px;
+  width: 100%;
 }
 .modal_box .modal_content button,
 .modal_box .modal_content a {
-  width: 400px;
+  width: 100%;
   text-decoration: none;
   display: block;
 }
@@ -2497,6 +2507,12 @@ i[class*=" icon-"] {
   }
   section {
     padding-top: 20px;
+  }
+  section input {
+    text-align: left;
+  }
+  section input.center {
+    text-align: center;
   }
   section .welcome_box {
     padding: 8px;

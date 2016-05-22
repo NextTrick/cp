@@ -1559,6 +1559,8 @@ section
 				margin 30px auto
 				input
 					height 36px
+				select
+					padding-left 10px
 		&.form_mis_datos
 			.bg_purple_change_email
 				background #310041
@@ -1581,6 +1583,7 @@ section
 							border-radius 50px
 							text-align center
 							padding-top 6px
+							overflow hidden
 					.right.user_image_right
 						width 68%
 						.image_info
@@ -1597,6 +1600,11 @@ section
 							cursor pointer
 							position relative
 							top -35px
+					.pass_info
+						margin-top 10px
+						font-size 13px
+						display block
+						text-align left
 			.disabled
 				disabled true
 				pointer-events none
@@ -1727,10 +1735,10 @@ footer
 			font-size 28px
 			font-weight bold
 		input
-			width 400px
+			width 100%
 		button
 		a
-			width 400px
+			width 100%
 			text-decoration none
 			display block
 		&.modal_recovery_content
@@ -1921,6 +1929,10 @@ i[class*=" icon-"]
 	
 	section
 		padding-top 20px
+		input
+			text-align left
+			&.center
+				text-align center
 		.welcome_box
 			padding 8px
 			h2

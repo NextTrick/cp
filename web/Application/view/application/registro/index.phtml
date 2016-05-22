@@ -19,7 +19,7 @@
                             <?php $email = isset($data[0]['email']) ? $data[0]['email'] : null; ?>
                             <input type="hidden" id="registro_form" name="registro_form" value="1">
                             <div class="form_control">
-                                <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com" value="<?php echo $email; ?>" data-parsley-type="email" data-parsley-type-message="El correo ingresado no tiene formato válido."/>
+                                <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com" value="<?php echo $email; ?>" data-parsley-type="email" data-parsley-type-message="El correo ingresado no tiene formato válido." class="center"/>
                                 <?php if (!empty($messageExistsEmail)) : ?>
                                     <ul class="parsley-errors-list filled">
                                         <li class="parsley-required"><?php echo $messageExistsEmail; ?></li>
