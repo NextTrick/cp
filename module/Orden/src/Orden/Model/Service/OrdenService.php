@@ -373,6 +373,7 @@ class OrdenService
 
     public function procesarPaymentProcessorCallbackReponse($response)
     {
+        var_dump($response); exit;
         $ordenId = 'XXXXX';
         if (!empty($response['data']['reference'])) {
             $reference = $response['data']['reference'];
