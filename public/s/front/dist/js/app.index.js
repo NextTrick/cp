@@ -588,6 +588,17 @@ $(function() {
     };
     suscribeEvents = function() {
       dom.btnChangeImage.on('click', events.changeImage);
+      $(window).scroll(function (event) {
+        var scroll = $(window).scrollTop();
+        console.log(scroll);
+        if(scroll > 200){
+          $('.right_options').addClass('moveTop');
+        }
+        else{
+          $('.right_options').removeClass('moveTop');
+        }
+        // Do something
+      });
     };
     events = {
       changeImage: function(e) {

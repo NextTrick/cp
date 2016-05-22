@@ -355,6 +355,9 @@ header nav ul li.logo img {
   height: 334px;
   background: url("../images/bg_rectangle_right.png");
 }
+.right_options.moveTop {
+  top: 20px;
+}
 .right_options ul {
   margin: 0;
   padding: 0;
@@ -623,6 +626,9 @@ section .purple_box:after {
   transform: rotate(-3deg);
   right: 10px;
   left: auto;
+}
+section .purple_box .top_bar {
+  overflow: hidden;
 }
 section .purple_box p {
   margin-bottom: 20px;
@@ -1927,6 +1933,49 @@ section .left {
 section .right {
   float: right;
 }
+section .offers_box_three {
+  margin: 20px 0;
+  overflow: hidden;
+}
+section .offers_box_three .col_3 {
+  width: 32%;
+}
+section .offers_box_three .col_3 .box_white {
+  background: #fff;
+  border-radius: 15px;
+  color: #000;
+  min-height: 258px;
+}
+section .offers_box_three .col_3 .box_white p {
+  padding: 8px;
+  text-align: left;
+  font-size: 18px;
+  margin: 0;
+}
+section .offers_box_three .col_3 .box_white p.breadcrumb {
+  text-align: left;
+  color: #f00;
+  font-size: 16px;
+}
+section .offers_box_three .col_3 .box_white p.breadcrumb a {
+  color: #aaa;
+  font-size: 14px;
+  text-decoration: none;
+}
+section .offers_box_three .col_3 button {
+  margin-top: 10px;
+  width: 100%;
+}
+section .offers_box_three .col_3:first-child {
+  margin-right: 2%;
+}
+section .offers_box_three .col_3 .image {
+  height: 145px;
+  overflow: hidden;
+}
+section .offers_box_three .col_3 .image img {
+  width: 100%;
+}
 section .offers_box {
   margin-top: 40px;
 }
@@ -2486,6 +2535,18 @@ i[class*=" icon-"] {
   section .offers_box .col_3 img {
     width: 100%;
   }
+  section .offers_box_three .col_3 {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  section .offers_box_three .col_3 .box_white {
+    border-radius: 18px;
+  }
+  section .offers_box_three.carrito_offers {
+    padding: 0 15px;
+  }
   section .app_box .purple_box {
     border-radius: 0;
   }
@@ -2525,9 +2586,6 @@ i[class*=" icon-"] {
     border-right: 0;
     padding-right: 0;
     border-bottom: 1px dashed #d3d3d3;
-  }
-  section .app_box .purple_box .pay_box_white >.right {
-    padding-left: 0;
   }
   section .app_box .purple_box .pay_box_white >.right .credit_cards {
     padding-bottom: 15px;

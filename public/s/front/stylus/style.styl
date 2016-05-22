@@ -245,6 +245,8 @@ header
 	width 90px
 	height 334px
 	background url(../images/bg_rectangle_right.png)
+	&.moveTop
+		top 20px
 	ul
 		margin 0
 		padding 0
@@ -461,6 +463,8 @@ section
 			transform rotate(-3deg)
 			right 10px
 			left auto
+		.top_bar
+			overflow hidden
 		p
 			margin-bottom 20px
 			font-size 20px
@@ -1463,6 +1467,39 @@ section
 		float left
 	.right
 		float right
+	.offers_box_three
+		margin 20px 0
+		overflow hidden
+		.col_3
+			width 32%
+			.box_white
+				background white
+				border-radius 15px
+				color black
+				min-height 258px
+				p
+					padding 8px
+					text-align left
+					font-size 18px
+					margin 0
+					&.breadcrumb
+						text-align left
+						color #FF0000
+						font-size 16px
+						a
+							color #AAAAAA
+							font-size 14px
+							text-decoration none
+			button
+				margin-top 10px
+				width 100%
+			&:first-child
+				margin-right 2%	
+			.image
+				height 145px
+				overflow hidden
+				img
+					width 100%
 	.offers_box
 		margin-top 40px
 		.col_3
@@ -1914,6 +1951,16 @@ i[class*=" icon-"]
 				width 100%
 				img
 					width 100%
+		.offers_box_three
+			.col_3
+				display block
+				float none
+				width 100%
+				margin-bottom 10px
+				.box_white
+					border-radius 18px
+			&.carrito_offers
+				padding 0 15px
 		.app_box
 			.purple_box
 				border-radius 0
@@ -1948,7 +1995,6 @@ i[class*=" icon-"]
 						padding-right 0
 						border-bottom 1px dashed lightgray
 					>.right
-						padding-left 0
 						.credit_cards
 							padding-bottom 15px
 							border-bottom 1px dashed lightgray
