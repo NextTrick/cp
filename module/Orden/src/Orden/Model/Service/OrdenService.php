@@ -228,6 +228,9 @@ class OrdenService
         $data['fecha_creacion'] = $cDate = date('Y-m-d H:i:s');
         $data['monto'] = $monto;
         $ordenId = $this->getRepository()->save($data);
+        $this->setCodigo($ordenId);
+
+        $this->getRepository()->save($data);
 
         $this->_saveDetalleOrden($ordenId, $cDate);
 
@@ -292,6 +295,14 @@ class OrdenService
         $this->getRepository()->save($ordenUpdateData, $ordenId);
 
         return $return;
+    }
+
+    public function setCodigo($ordenId)
+    {
+        $tempOrdenId = $ordenId + OrdenRepository::ORDER_BASE_CODE;
+        $ordenCodigo = str_pad($tempOrdenId, 9, '0', STR_PAD_LEFT);
+
+        $this->getRepository()->save(array('codigo' => $ordenCodigo), $ordenId);
     }
 
     private function _saveDetalleOrden($ordenId, $cDate)
