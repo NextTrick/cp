@@ -44,7 +44,7 @@ abstract class AbstractProcessor
 
         if (empty($data['ordenId'])) {
             if (!empty($data['reference'])) {
-                $dataDb = $this->getOrderService()->getRepository()
+                $dataDb = $this->getOrdenService()->getRepository()
                     ->getIdByPagoReference($data['reference']);
 
                 if (!empty($dataDb)) {
