@@ -852,7 +852,7 @@ section
 									display inline-block
 									font-size 12px
 									margin-left 5px
-									padding-top 2px
+									padding-top 3px
 									box-sizing border-box
 									&.active
 										background #777777
@@ -902,10 +902,12 @@ section
 								float left
 								font-size 14px
 								margin-top 6px
+								border-right 1px solid lightgray
+								padding-right 5px
 							&.recharge
 								float right
 								font-size 16px
-								margin-left 10px
+								margin-left 5px
 		.recargas_content
 			.offers
 				padding-bottom 30px
@@ -2169,6 +2171,8 @@ i[class*=" icon-"]
 								border-radius 18px
 				.cards_content
 					.col_3
+						&.empty
+							display none
 						&.add_card
 							.tooltip
 								top 25px
@@ -2289,6 +2293,8 @@ i[class*=" icon-"]
 			margin-top 150px !important
 			width 52%
 			height 450px
+			.text_box
+				height 380px
 	
 
 

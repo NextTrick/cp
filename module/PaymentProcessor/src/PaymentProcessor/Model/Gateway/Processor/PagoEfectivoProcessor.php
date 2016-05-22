@@ -108,6 +108,8 @@ class PagoEfectivoProcessor extends AbstractProcessor
                         $return['data']['cip'] = $solData->CIP->NumeroOrdenPago;
                         $return['data']['reference'] = $solData->CIP->IdOrdenPago;
                 }
+                // 31/12/2016 17:00:00
+                // date_format(date_create_from_format("d/m/Y H:i:s",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),
                 $return['data']['confirmationDate'] = $cDate;
                 
             } catch (\Exception $e) {

@@ -413,7 +413,8 @@ $(function() {
       cardOption: '.card',
       peOption: '.cards_option .pe',
       visaOption: '.cards_option .visa',
-      equalAddress: '.equal_address'
+      equalAddress: '.equal_address',
+      rucInput : '#ruc'
     };
     catchDom = function() {
       dom.optionBoleta = $(st.optionBoleta);
@@ -427,6 +428,7 @@ $(function() {
       dom.peOption = $(st.peOption);
       dom.visaOption = $(st.visaOption);
       dom.equalAddress = $(st.equalAddress);
+      dom.rucInput = $(st.rucInput);
     };
     suscribeEvents = function() {
       dom.optionBoleta.on('change', events.watchOpenBoletaForm);
@@ -435,6 +437,9 @@ $(function() {
       dom.hiddenDetail.on('click', events.hiddenDetail);
       dom.cardOption.on('click', events.changeCard);
       dom.equalAddress.on('change', events.copy);
+      dom.rucInput.on( 'keydown' , events.ingresarRuc);
+      dom.rucInput.on( 'keyup' , events.salirRuc);
+
     };
     events = {
       watchOpenBoletaForm: function(e) {
@@ -471,7 +476,17 @@ $(function() {
       },
       copy: function() {
         $('.factura_address').val($('.fiscal_address').val());
-      }
+      },
+      ingresarRuc: function(e) {
+        if ($(this).val().length >= 11) { 
+                $(this).val($(this).val().substr(0, 11));
+            }
+      },
+      salirRuc: function(e){
+        if ($(this).val().length >= 11) { 
+                $(this).val($(this).val().substr(0, 11));
+            }
+      },
     };
     functions = {
       example: function() {}

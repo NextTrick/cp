@@ -117,15 +117,15 @@ class VisaProcessor extends AbstractProcessor
                         $tempData['dato_comercio'] = $this->ws->recuperaCampos($xmlDocument, $sNumOperacion, "dato_comercio");
                     }
 
-                    $errorMessages = OrdenRepository::getErrorMessages();                   
-                                                                 
+                    $errorMessages = OrdenRepository::getErrorMessages();
+
                     if ($tempData['respuesta'] == 1) {
                         $status = OrdenRepository::PAGO_ESTADO_PAGADO;
                         $return['data'] = array(
                             'status' => $status,                                                        
                             'reference' => $eticket,
                             'clientReference' => $tempData['nordent'],
-                            'confirmationDate' => $tempData['fechayhora_tx'],
+                            'confirmationDate' => date_format(date_create_from_format("d/m/Y h:i a",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),
                             'errorCode' => null,
                             'errorDescription' => null
                         );
@@ -135,7 +135,7 @@ class VisaProcessor extends AbstractProcessor
                             'status' => $status,
                             'reference' => $eticket,
                             'clientReference' => $tempData['nordent'],
-                            'confirmationDate' => $tempData['fechayhora_tx'],
+                            'confirmationDate' => date_format(date_create_from_format("d/m/Y h:i a",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),
                             'errorCode' => $tempData['cod_accion'],
                             'errorDescription' => !empty ($errorMessages[$tempData['cod_accion']])
                                 ? $errorMessages[$tempData['cod_accion']] : 'No se encontró mensaje de error para el código'
