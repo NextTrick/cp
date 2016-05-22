@@ -11,9 +11,9 @@ use Zend\View\Helper\AbstractHelper;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class SectionRecargaPromociones extends AbstractHelper implements ServiceLocatorAwareInterface
+class SectionPromocionesYRecargas extends AbstractHelper implements ServiceLocatorAwareInterface
 {
-    public function __invoke($tarjetaProductos)
+    public function __invoke($cartModel, $tarjetaProductos)
     {
         $sl = $this->getServiceLocator()->getServiceLocator();
         $config = $sl->get('config');
@@ -21,9 +21,12 @@ class SectionRecargaPromociones extends AbstractHelper implements ServiceLocator
             throw new \Exception('No existe url configurada.');
         }
         
-        $rows = $sl->get('Paquete\Model\Service\PaqueteService')->recargaPromociones();
-        return $this->getView()->render('helper/section-recarga-promociones.phtml', array(
-            'rows' => $rows,
+        $rowPromociones = $sl->get('Paquete\Model\Service\PaqueteService')->recargaPromociones();
+        $rowRecargas = $sl->get('Paquete\Model\Service\PaqueteService')->recargaRecargas();
+        return $this->getView()->render('helper/section-promociones-y-recargas.phtml', array(
+            'rowPromociones' => $rowPromociones,
+            'rowRecargas' => $rowRecargas,
+            'cartModel' => $cartModel,
             'tarjetaProductos' => $tarjetaProductos,
             'urlImg' => $config['fileDir']['paquete_paquete']['down'],
         ));

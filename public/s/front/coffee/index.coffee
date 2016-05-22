@@ -10,6 +10,7 @@ $ ->
 			errorMessage : '.error_message'
 			closeErrorMessage : '.error_message .icon'
 			watchLegal : '.watch_legal'
+			closeLegalModal : '#modal_watch_legal .modal_content h3 span'
 
 		catchDom = ->
 			dom.btn = $(st.btn)
@@ -20,10 +21,12 @@ $ ->
 			dom.errorMessage = $(st.errorMessage)
 			dom.closeErrorMessage = $(st.closeErrorMessage)
 			dom.watchLegal = $(st.watchLegal)
+			dom.closeLegalModal = $(st.closeLegalModal)
 			return
 		suscribeEvents = () ->
 			dom.btn.on 'click', events.openModal
 			dom.btnClose.on 'click', events.closeModal
+			dom.closeLegalModal.on 'click', events.closeModal
 			dom.modalOutside.on 'click', events.closeClickOutside
 			dom.btnRecovery.on 'click', events.closeRecoveryModal
 			dom.btnChangePass.on 'click', events.closeNewPassModal
@@ -296,22 +299,34 @@ $ ->
 		dom = {}
 		st =
 			userAccount : '.user_account'
-			logout : '.logout'
-
+			menuOptions : '.menu_options'
+			userAccountMobile : '.user_option_mobile ul li .user_icon'
+			menuAccountMobile : '.user_option_mobile ul li .menu_options'
 		catchDom = ->
 			dom.userAccount = $(st.userAccount)
-			dom.logout = $(st.logout)
+			dom.menuOptions = $(st.menuOptions)
+			dom.userAccountMobile = $(st.userAccountMobile)
+			dom.menuAccountMobile = $(st.menuAccountMobile)
 			return
 		suscribeEvents = () ->
 			dom.userAccount.on 'click', events.openLogoutOption
+			dom.userAccountMobile.on 'click', events.openMenu
 			return
 		events =
 			openLogoutOption : (e) ->
 				e.preventDefault()
-				if dom.logout.hasClass 'active'
-					dom.logout.removeClass 'active'
+				if dom.userAccount.hasClass 'active'
+					dom.userAccount.removeClass 'active'
+					dom.menuOptions.hide()
 				else
-					dom.logout.addClass 'active'
+					dom.userAccount.addClass 'active'
+					dom.menuOptions.show()
+				return
+			openMenu : ->
+				if dom.menuAccountMobile.hasClass 'active'
+					dom.menuAccountMobile.removeClass 'active'
+				else
+					dom.menuAccountMobile.addClass 'active'
 				return
 		functions = 
 			successAsociate: ->

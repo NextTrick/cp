@@ -12,7 +12,9 @@
                             <label class="left">Imagen de perfil</label>
                             <div class="right">
                                 <div class="left user_image_left">
-                                    <div class="image"><img id="img_imagen" width="88" height="88" src="<?php echo $imagen; ?>" alt="Mi foto"/></div>
+                                    <div class="image">
+                                        <img id="img_imagen" width="88" height="88" src="<?php echo $imagen; ?>" alt="Mi foto"/>
+                                    </div>
                                 </div>
                                 <div class="right user_image_right">
                                     <?php echo $this->formElement($this->form->get('imagen')->setAttributes(array('class' => 'image_file'))); ?><span class="btn change_user_image">Actualizar imagen</span>
@@ -56,7 +58,7 @@
                         </div>
                     </div>
                     <div class="bg_purple_change_email">
-                        <p>En caso haya cambiado su cuenta de correo electrónico, <a href="">Click aquí</a></p>
+                        <p>En caso haya cambiado su cuenta de correo electrónico, <a href="http://coneypark.pe/contactos">Click aquí</a></p>
                     </div>
                     <h3>Tus datos personales</h3>
                     <div class="content_form">
@@ -113,37 +115,37 @@
                             </div>
                         </div>
                         <div class="form_control">
-                            <label class="left" for="cod_pais">País</label>
+                            <label class="left" for="pais_id">País</label>
                             <div class="right bg_white">
-                                <?php echo $this->formElement($this->form->get('cod_pais')->setAttributes(array(
+                                <?php echo $this->formElement($this->form->get('pais_id')->setAttributes(array(
                                     'class' => 'right',
                                 ))) ?>
                                 
                             </div>
                             <div class="right">
-                                <?php echo $this->formElementerrors($form->get('cod_pais')); ?>
+                                <?php echo $this->formElementerrors($form->get('pais_id')); ?>
                             </div>
                         </div>
                         <div class="form_control">
-                            <label class="left" for="cod_depa">Departamento</label>
+                            <label class="left" for="departamento_id">Departamento</label>
                             <div class="right bg_white">
-                                <?php echo $this->formElement($this->form->get('cod_depa')->setAttributes(array(
+                                <?php echo $this->formElement($this->form->get('departamento_id')->setAttributes(array(
                                     'class' => 'right',
                                 ))) ?>
                             </div>
                             <div class="right">
-                                <?php echo $this->formElementerrors($form->get('cod_depa')); ?>
+                                <?php echo $this->formElementerrors($form->get('departamento_id')); ?>
                             </div>
                         </div>
                         <div class="form_control">
-                            <label class="left" for="cod_dist">Distrito</label>
+                            <label class="left" for="distrito_id">Distrito</label>
                             <div class="right bg_white">
-                                <?php echo $this->formElement($this->form->get('cod_dist')->setAttributes(array(
+                                <?php echo $this->formElement($this->form->get('distrito_id')->setAttributes(array(
                                     'class' => 'right',
                                 ))) ?>
                             </div>
                             <div class="right">
-                                <?php echo $this->formElementerrors($form->get('cod_dist')); ?>
+                                <?php echo $this->formElementerrors($form->get('distrito_id')); ?>
                             </div>
                         </div>
                         <div class="form_control">
@@ -210,5 +212,48 @@
     }
     $(document).ready(function(){
         $('#imagen').change(function(){previewImage();});
+    });
+</script>
+<script type="text/javascript">
+    var ubigeo = {
+        loadDepartameto:function(){
+            $.ajax({
+                type: "GET",
+                url: '<?php echo BASE_URL; ?>application/ubigeo/departamento',
+                data:{pais_id:$('#pais_id').val()},
+                dataType: 'json',
+                success: function(data){
+                    var htmlDdl = '<option value="">- Seleccione -</option>';
+                    for (var key in data) {
+                        htmlDdl = htmlDdl+'<option value="'+key+'">'+data[key]+'</option>';
+                    }
+                    $('#departamento_id').html(htmlDdl);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                }
+            });
+        },
+        loadDistrito:function(){
+            $.ajax({
+                type: "GET",
+                url: '<?php echo BASE_URL; ?>application/ubigeo/distrito',
+                data:{pais_id:$('#pais_id').val(), departamento_id:$('#departamento_id').val()},
+                dataType: 'json',
+                success: function(data){
+                    var htmlDdl = '<option value="">- Seleccione -</option>';
+                    for (var key in data) {
+                        htmlDdl = htmlDdl+'<option value="'+key+'">'+data[key]+'</option>';
+                    }
+                    $('#distrito_id').html(htmlDdl);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                }
+            });
+        }
+    };
+    
+    $(document).ready(function(){
+        $('#pais_id').change(function(){ubigeo.loadDepartameto();});
+        $('#departamento_id').change(function(){ubigeo.loadDistrito();});
     });
 </script>

@@ -23,15 +23,15 @@ class MisDatosController extends SecurityWebController
         $form = $this->_getMisDatosForm();
         if (!empty($usuarioData)) {
             unset($usuarioData['password']);
-            $codPais = $usuarioData['cod_pais'];
-            $codDep = $usuarioData['cod_depa'];
-            $departamentos = $this->_getUbigeoService()->getDepartamentos($codPais);
-            $form->get('cod_depa')->setValueOptions($departamentos);
-            $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDep);
-            $form->get('cod_dist')->setValueOptions($distritos);
+            $paisId = $usuarioData['pais_id'];
+            $departamentoId = $usuarioData['departamento_id'];
+            $departamentos = $this->_getUbigeoService()->getDepartamentos($paisId);
+            $form->get('departamento_id')->setValueOptions($departamentos);
+            $distritos = $this->_getUbigeoService()->getDistritos($paisId, $departamentoId);
+            $form->get('distrito_id')->setValueOptions($distritos);
             
             $form->setData($usuarioData);
-            $imagen = empty($usuarioData['imagen']) ? null : $urlImg . '/' . $usuarioData['imagen'];
+            $imagen = empty($usuarioData['imagen']) ? $urlImg . '/user-web-default.png' : $urlImg . '/' . $usuarioData['imagen'];
         }
         
         $form->setAttribute('action', $this->url()->fromRoute('web-mis-datos', array(
@@ -42,12 +42,12 @@ class MisDatosController extends SecurityWebController
         $mensajeRegistro = null;
         if ($this->request->isPost()) {
             //=========== Llenar los combos ===========
-            $codPais = $this->request->getPost('cod_pais');
-            $codDep = $this->request->getPost('cod_depa');
-            $departamentos = $this->_getUbigeoService()->getDepartamentos($codPais);
-            $form->get('cod_depa')->setValueOptions($departamentos);
-            $distritos = $this->_getUbigeoService()->getDistritos($codPais, $codDep);
-            $form->get('cod_dist')->setValueOptions($distritos);
+            $paisId = $this->request->getPost('pais_id');
+            $departamentoId = $this->request->getPost('departamento_id');
+            $departamentos = $this->_getUbigeoService()->getDepartamentos($paisId);
+            $form->get('departamento_id')->setValueOptions($departamentos);
+            $distritos = $this->_getUbigeoService()->getDistritos($paisId, $departamentoId);
+            $form->get('distrito_id')->setValueOptions($distritos);
             
             //=========== Aplicar filter ===========
             $data = array_merge_recursive(
@@ -88,12 +88,13 @@ class MisDatosController extends SecurityWebController
                     'nombres' => $data['nombres'],
                     'paterno' => $data['paterno'],
                     'materno' => $data['materno'],
-                    'cod_pais' => $data['cod_pais'],
-                    'cod_depa' => $data['cod_depa'],
-                    'cod_dist' => $data['cod_dist'],
+                    'pais_id' => $data['pais_id'],
+                    'departamento_id' => $data['departamento_id'],
+                    'distrito_id' => $data['distrito_id'],
                     'di_tipo' => $data['di_tipo'],
                     'di_valor' => $data['di_valor'],
                     'fecha_nac' => $fechaNac,
+                    'fecha_edicion' => date('Y-m-d H:i:s'),
                 );
                 
                 if (!empty($newFileName)) {

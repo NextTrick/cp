@@ -2126,9 +2126,9 @@ INSERT INTO sistema_ubigeo (cod_pais, cod_depa, cod_prov, cod_dist, nombre) VALU
 -- Volcado de datos para la tabla `usuario_usuario`
 --
 
-INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `cod_pais`, `cod_depa`, `cod_prov`, `cod_dist`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
-(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', 'PE', '15', NULL, '42', NULL, NULL, NULL),
-(7, '{5C3E7CA9-6412-4CA5-9C8C-F0E0F02968DE}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 1, NULL, 'Juan Carlos', 'test', 'test', 1, '55477433', NULL, 'PE', '10', NULL, '11', NULL, NULL, 'a4609eb6ba1f8814e24f4006de8aa6e62a8cdb88b83e51c76b46abcbd9faa325');
+INSERT INTO `usuario_usuario` (`id`, `mguid`, `facebook_id`, `twitter_id`, `email`, `password`, `estado`, `imagen`, `nombres`, `paterno`, `materno`, `di_tipo`, `di_valor`, `fecha_nac`, `pais_id`, `departamento_id`, `provincia_id`, `distrito_id`, `fecha_creacion`, `fecha_edicion`, `codigo_activar`) VALUES
+(4, '{272DFF6A-57D1-4883-A28D-FCD880AE41A7}', NULL, NULL, 'ing.angeljara@gmail.com', 'Nf7lCN0W', 1, NULL, 'Angel', 'Jara', 'test', 1, '2324232', '2015-03-02', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(7, '{5C3E7CA9-6412-4CA5-9C8C-F0E0F02968DE}', NULL, NULL, 'jludena@idigital.pe', 'AIUCfvr7', 1, NULL, 'Juan Carlos', 'test', 'test', 1, '55477433', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'a4609eb6ba1f8814e24f4006de8aa6e62a8cdb88b83e51c76b46abcbd9faa325');
 
 INSERT INTO `tarjeta_tarjeta` (`id`, `usuario_id`, `nombre`, `cguid`, `numero`, `estado_truefi`, `fecha_creacion`, `fecha_edicion`) VALUES
 (11, 7, 'Mis Primos2', '{0BEB1DE9-582F-4995-A2FE-8C6ADD526109}', '004-243217-5', 0, '2016-05-16 21:14:30', '2016-05-17 22:31:17'),
@@ -2145,3 +2145,11 @@ INSERT INTO `paquete_paquete` (`id`, `referencia`, `titulo1`, `titulo2`, `tipo`,
 (11, '2f61a7cd1e0c166edcdea52b78e69d44', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160416.png', 3, 3, 0, NULL, 0, NULL, 1, 0, 3, '2016-04-18 06:45:01', NULL),
 (12, '2f61a7cd1e0c166edcdea52b78e69d45', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59e-20160417.png', 4, 1, 0, NULL, 0, NULL, 1, 1, 4, '2016-04-18 06:45:01', NULL),
 (13, '2f61a7cd1e0c166edcdea52b78e69d46', 'Promoción 1 Ver legal', 'Por lanzamiento, recarga S/.100 y obtenS/.50soles adicionales + S/.30 en Coney Bonos', 2, 'f45731e3d39a1b2330bbf93e9b3de59x-20160417.png', 1, 2, 0, NULL, 0, '', 1, 0, 5, '2016-04-18 06:45:01', NULL);
+
+--
+-- Volcado de datos para la tabla `cms_contenido`
+--
+
+INSERT INTO `cms_contenido` (`id`, `codigo`, `tipo`, `titulo`, `url`, `contenido`, `estado`, `fecha_creacion`, `fecha_edicion`) VALUES
+(1, 'LOGIN_INICIO_SESION', 2, '1', '', '<h2>&iexcl;Ahora rec&aacute;rgate de diversi&oacute;n con un click!</h2>\r\n\r\n<p>Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera m&aacute;s r&aacute;pida, <strong>sin necesidad de hacer colas</strong>, adem&aacute;s, tendr&aacute;s <strong>promociones exclusivas </strong>que no te puedes perder.</p>\r\n', 1, '2016-04-16 01:53:19', '2016-05-21 04:15:48'),
+(2, 'HEAD_MIS_TARJETAS', 2, '1', '', '<p class="yellow_text small_text">Beneficios para ti</p>\r\n                <p class="small_text">Por ser <strong>miembro del Coney Club </strong>cuentas con las siguientes grandes beneficios</p>\r\n                <div class="options">\r\n                    <div class="col_3 left">\r\n                        <div class="circle">\r\n                            <img src="" alt="">\r\n                        </div>\r\n                        <p class="p_16">Hasta <span> <strong>20% de descuento en todos los juegos. </strong></span>Según el tipo de local</p>\r\n                    </div>\r\n                    <div class="col_3 left">\r\n                        <div class="circle">\r\n                            <img src="" alt="">\r\n                        </div>\r\n                        <p class="p_16"><span><strong>20 Coney Bonos gratis </strong></span>el día de tu cumpleaños (Presentando su DNI)</p>\r\n                    </div>\r\n                    <div class="col_3 right">\r\n                        <div class="circle">\r\n                            <img src="" alt="">\r\n                        </div>\r\n                        <p class="p_16"><span><strong>Descuentos exclusivos </strong></span>por recargas en fechas especiales (Día de los enamorados, día de la madre y padre, halloween, etc.)</p>\r\n                    </div>\r\n                </div>', 1, '2016-05-21 04:15:29', NULL);

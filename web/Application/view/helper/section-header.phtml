@@ -15,19 +15,38 @@
                             <a href="#" class="user_account">
                                 <span class="text"><?php echo $data['nombres'] ?></span>
                                 <?php if (!empty($data['imagen'])) : ?>
-                                <span class="user_image"><img src="" alt=""/></span>
+                                <span class="user_image"><img src="<?php echo $urlImg . '/' . $data['imagen']; ?>" alt=""/></span>
                                 <?php else: ?>
                                 <span class="icon"></span>
                                 <?php endif; ?>
                                 
                                 <span class="arrow_bottom"></span>
                             </a>
-                            <a href="<?php echo BASE_URL ?>mis-datos" class="logout">Mis Datos</a>
-                            <a href="<?php echo BASE_URL ?>login/logout" class="logout">Salir</a>
+                            <div class="menu_options">
+                                <a href="<?php echo BASE_URL ?>mis-datos" class="logout">Mis datos</a>
+                                <a href="<?php echo BASE_URL ?>login/logout" class="logout">Cerrar sesión</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
             <?php endif; ?>
+        </div>
+        <div class="user_option_mobile">
+            <ul>
+                <li>
+                    <span class="user_icon">
+                        <img src="<?php echo URL_RESOURCES ?>front/images/user_image.png" alt="">
+                    </span>
+                    <div class="menu_options">
+                        <a href="<?php echo BASE_URL ?>mis-datos" class="logout">Mis datos</a>
+                        <a href="<?php echo BASE_URL ?>login/logout" class="logout">Cerrar sesión</a>
+                    </div>
+                </li>
+                <li>
+                    <span class="cart_number">3</span>
+                    <span class="cart_icon"></span>
+                </li>
+            </ul>
         </div>
         <nav>
             <ul>

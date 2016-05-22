@@ -55,6 +55,62 @@ header .bg_diagonal,
 header .menu_icon {
   display: none;
 }
+header .user_option_mobile {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+header .user_option_mobile ul li {
+  list-style: none;
+  display: inline-block;
+}
+header .user_option_mobile ul li .user_icon {
+  cursor: pointer;
+}
+header .user_option_mobile ul li .user_icon img {
+  border-radius: 5px;
+  width: 24px;
+  height: 24px;
+}
+header .user_option_mobile ul li .menu_options {
+  display: none;
+  width: 140px;
+  box-shadow: 0px 0px 10px #d3d3d3;
+  position: absolute;
+  background: #fff;
+  right: 30px;
+  top: 46px;
+  z-index: 99;
+  padding: 5px;
+}
+header .user_option_mobile ul li .menu_options a {
+  display: block;
+  padding: 8px 5px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #000;
+}
+header .user_option_mobile ul li .menu_options a:first-child {
+  border-bottom: 1px solid #eaeaea;
+}
+header .user_option_mobile ul li .menu_options.active {
+  display: block;
+}
+header .user_option_mobile ul li .cart_icon {
+  background-image: url("../images/sprite.png");
+  background-position: -328px -202px;
+  width: 24px;
+  height: 21px;
+  display: block;
+  cursor: pointer;
+}
+header .user_option_mobile ul li .cart_number {
+  position: absolute;
+  right: 5px;
+  top: 13px;
+  color: #991985;
+}
 header .user_option {
   position: absolute;
   right: 0;
@@ -96,6 +152,7 @@ header .user_option .user_inside ul li:first-child {
 }
 header .user_option .user_inside ul li:last-child {
   padding-left: 8px;
+  position: relative;
 }
 header .user_option .user_inside ul li a {
   text-decoration: none;
@@ -155,17 +212,26 @@ header .user_option .user_inside ul li a span.arrow_bottom:after {
   border-right: solid 6px transparent;
 }
 header .user_option .user_inside ul li a.logout {
-  display: none;
+  display: block;
   z-index: 99;
-  background: #d3d3d3;
   color: #000;
-  font-size: 12px;
-  padding: 5px;
-  box-sizing: border-box;
+  font-size: 14px;
+  padding: 8px 5px;
   position: relative;
 }
-header .user_option .user_inside ul li a.logout.active {
-  display: block;
+header .user_option .user_inside ul li a.logout:first-child {
+  border-bottom: 1px solid #eaeaea;
+}
+header .user_option .user_inside ul li .menu_options {
+  display: none;
+  position: absolute;
+  background: #fff;
+  z-index: 99;
+  box-shadow: 0px 0px 10px #d3d3d3;
+  width: 140px;
+  right: 0;
+  top: 27px;
+  padding: 5px;
 }
 header nav ul {
   margin: 10px 0 0;
@@ -300,6 +366,12 @@ header nav ul li.logo img {
   width: 70px;
   margin: 35px auto 20px;
 }
+.right_options ul li.active a {
+  color: #972482;
+}
+.right_options ul li.active a span.icon {
+  color: #972482;
+}
 .right_options ul li a {
   font-size: 10px;
   text-decoration: none;
@@ -335,7 +407,7 @@ header nav ul li.logo img {
   border: 0;
   height: 42px;
   box-sizing: border-box;
-  border-radius: 10px;
+  border-radius: 15px;
   color: #fff;
 }
 .btn.btn_fb {
@@ -393,6 +465,7 @@ section.app_content .menu {
   color: #000;
   margin: 0 auto;
   position: relative;
+  z-index: 9;
   margin-bottom: -14px;
 }
 section.app_content .menu ul {
@@ -483,7 +556,7 @@ section .welcome_box p.small {
   font-size: 18px;
 }
 section .app_box {
-  padding: 40px 0;
+  padding: 40px 0 50px;
   text-align: center;
 }
 section .yellow_box {
@@ -530,6 +603,7 @@ section .purple_box {
   background: #6c006c;
   border-radius: 20px;
   padding: 20px 0;
+  position: relative;
 }
 section .purple_box:before,
 section .purple_box:after {
@@ -540,7 +614,7 @@ section .purple_box:after {
   left: 10px;
   width: 45%;
   height: 50px;
-  top: 90%;
+  bottom: 45px;
   opacity: 0.7;
   box-shadow: 0 52px 63px #410041;
   transform: rotate(3deg);
@@ -658,6 +732,10 @@ section .purple_box .benefits_offers .offers_box_two .left {
   background: #f29224;
   padding: 20px;
   box-sizing: border-box;
+}
+section .purple_box .benefits_offers .offers_box_two .left .image img {
+  width: 100%;
+  height: 100%;
 }
 section .purple_box .benefits_offers .offers_box_two .right {
   padding: 20px;
@@ -818,7 +896,7 @@ section .purple_box .cart_box .cart {
 }
 section .purple_box .cart_box .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -328px -202px;
+  background-position: 0px -243px;
   width: 23px;
   height: 20px;
   display: inline-block;
@@ -1021,7 +1099,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -351px -202px;
+  background-position: -23px -243px;
   width: 18px;
   height: 14px;
 }
@@ -1745,6 +1823,9 @@ section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.num
   color: #999;
   font-size: 14px;
 }
+section .purple_box .pay_box_white.confirmation_box .resume .body ul li span.label {
+  display: none;
+}
 section .purple_box .pay_box_white.confirmation_box .resume .total {
   float: right;
   text-align: right;
@@ -1769,7 +1850,7 @@ section input {
   border: 0;
   margin-bottom: 0px;
   height: 42px;
-  border-radius: 10px;
+  border-radius: 15px;
   padding: 0px 10px;
   text-align: center;
 }
@@ -1851,7 +1932,13 @@ section .offers_box {
   margin-top: 40px;
 }
 section .offers_box .col_3 {
-  width: 33%;
+  width: 32%;
+}
+section .offers_box .col_3 img {
+  width: 100%;
+}
+section .offers_box .col_3.left {
+  margin-right: 2%;
 }
 section .error_message {
   background: #f1222d;
@@ -1863,7 +1950,7 @@ section .error_message {
   margin: 0 auto;
   border-radius: 10px;
   position: absolute;
-  left: 23.5%;
+  left: 17%;
 }
 section .error_message span {
   display: inline-block;
@@ -2031,6 +2118,8 @@ section form.form_mis_datos .disabled {
   width: 250px;
   border-radius: 20px;
   height: 36px;
+  position: absolute;
+  right: 10px;
 }
 footer {
   display: block;
@@ -2126,25 +2215,41 @@ footer span.logo_icon {
 #modal_new_password,
 #modal_new_password_response,
 #modal_response_signin,
-#modal_watch_legal {
+#modal_watch_legal,
+.modal_box_legal {
   width: 651px;
   height: 686px;
   background: url("../images/modal_bg.png");
 }
-#modal_watch_legal .modal_content {
+#modal_watch_legal .modal_content,
+.modal_box_legal .modal_content {
   border-radius: 8px;
   width: 600px;
   height: 200px;
-  background: #d3d3d3;
+  background: #eee;
   color: #000;
   font-size: 12px;
 }
-#modal_watch_legal .modal_content h3 {
+#modal_watch_legal .modal_content h3,
+.modal_box_legal .modal_content h3 {
   color: #000;
   font-size: 16px;
   margin: 0;
+  position: relative;
 }
-#modal_watch_legal .modal_content .text_box {
+#modal_watch_legal .modal_content h3 span,
+.modal_box_legal .modal_content h3 span {
+  background-image: url("../images/sprite.png");
+  background-position: -352px -202px;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  right: -11px;
+  top: -10px;
+  cursor: pointer;
+}
+#modal_watch_legal .modal_content .text_box,
+.modal_box_legal .modal_content .text_box {
   overflow-y: scroll;
   height: 138px;
 }
@@ -2167,6 +2272,16 @@ footer span.logo_icon {
   color: #000;
   font-weight: normal;
   font-size: 24px;
+}
+#how_asociate_card .modal_content h3 span {
+  background-image: url("../images/sprite.png");
+  background-position: -352px -202px;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
 }
 #how_asociate_card .modal_content p {
   color: #808080;
@@ -2286,6 +2401,9 @@ i[class*=" icon-"] {
     display: block;
     margin: 0 auto;
   }
+  header .user_option_mobile {
+    display: block;
+  }
   header .user_option,
   header .social_icons,
   header .bg {
@@ -2319,8 +2437,13 @@ i[class*=" icon-"] {
   section .welcome_box {
     padding: 8px;
   }
-  section .welcome_box h2,
-  section .welcome_box .subtitle,
+  section .welcome_box h2 {
+    font-size: 24px;
+  }
+  section .welcome_box .subtitle {
+    font-size: 18px !important;
+    line-height: 18px;
+  }
   section .welcome_box .medium,
   section .welcome_box .small {
     display: none;
@@ -2328,6 +2451,9 @@ i[class*=" icon-"] {
   section .welcome_box .error_message {
     width: 95%;
     left: 2%;
+    padding: 0;
+  }
+  section .welcome_box .purple_box .content {
     padding: 0;
   }
   section .welcome_box .purple_box .content .left,
@@ -2480,13 +2606,40 @@ i[class*=" icon-"] {
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li:nth-child(1) {
     margin-right: 10px;
   }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .head {
+    display: none;
+  }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .head ul li {
     color: #999;
     font-size: 12px;
   }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul {
+    overflow: hidden;
+    padding: 10px 0;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li {
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li.cantidad {
+    width: 49%;
+    float: left;
+    text-align: left;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li.precio {
+    width: 49%;
+    float: right;
+    text-align: right;
+  }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li span.number {
     color: #999;
     font-size: 12px;
+    margin-top: 0;
+  }
+  section .app_box .purple_box .pay_box_white.confirmation_box .resume .body ul li span.label {
+    color: #999;
+    display: block;
   }
   section .app_box .purple_box .pay_box_white.confirmation_box .resume .total {
     float: right;
@@ -2632,6 +2785,9 @@ i[class*=" icon-"] {
   .bottom_bar span.bg.total {
     margin-left: 0;
   }
+  .bottom_bar button {
+    position: static;
+  }
   footer {
     background: #fff !important;
     height: 120px;
@@ -2661,5 +2817,13 @@ i[class*=" icon-"] {
   }
   #how_asociate_card .modal_content {
     width: auto;
+  }
+  .modal_box_legal {
+    top: 0px !important;
+  }
+  .modal_box_legal .modal_content {
+    margin-top: 150px !important;
+    width: 52%;
+    height: 450px;
   }
 }

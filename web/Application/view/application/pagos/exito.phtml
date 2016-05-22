@@ -30,10 +30,23 @@
                         <div class="body">
                             <?php foreach ($this->ordenDetalleData as $ordenDetalle) :?>
                                 <ul>
-                                    <li><?php echo $ordenDetalle['paquete_titulo1']; ?></li>
-                                    <li><span class="name"><?php echo $ordenDetalle['tarjeta_nombre']; ?></span><span class="number"><?php echo $ordenDetalle['tarjeta_numero']; ?></span></li>
-                                    <li>1</li>
-                                    <li>S/. <?php echo $ordenDetalle['emoney']; ?></li>
+                                    <li>
+                                        <span class="label">Promoción</span>
+                                        <span class="desc"><?php echo $ordenDetalle['paquete_titulo1']; ?></span>
+                                    </li>
+                                    <li>
+                                        <span class="label">Tarjeta</span>
+                                        <span class="name"><?php echo $ordenDetalle['tarjeta_nombre']; ?></span>
+                                        <span class="number"><?php echo $ordenDetalle['tarjeta_numero']; ?></span>
+                                    </li>
+                                    <li class="cantidad">
+                                        <span class="label">Cantidad</span>
+                                        <span class="desc">1</span>
+                                    </li>
+                                    <li class="precio">
+                                        <span class="label">Precio</span>
+                                        <span class="desc">S/. <?php echo $ordenDetalle['emoney']; ?></span>
+                                    </li>
                                 </ul>
                             <?php endforeach; ?>
                         </div>

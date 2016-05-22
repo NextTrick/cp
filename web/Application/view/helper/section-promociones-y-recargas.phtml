@@ -1,0 +1,179 @@
+<div class="box_center">
+    <div class="app_box">
+        <div class="menu right_active">
+            <ul>
+                <li class="first"><a href="<?php echo BASE_URL; ?>beneficios">Beneficios</a></li>
+                <li><a href="<?php echo BASE_URL; ?>mis-tarjetas">Mis tarjetas</a></li>
+                <li class="last active"><a href="<?php echo BASE_URL; ?>recargas">Recargas</a></li>
+            </ul>
+        </div>
+        <div class="purple_box">
+            <p class="yellow_text small_text">Recarga de mis tarjetas</p>
+            <div class="steps">
+                <div class="step active">1</div>
+                <span></span>
+                <div class="step">2</div>
+            </div>
+            <a href="<?php echo BASE_URL ?>carrito" class="cart_box">
+                <span class="label">Items en el carrito:</span>
+                <div class="cart">
+                    <span class="icon"></span>
+                    <span class="number" id="spanCantidadTotal"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+                </div>
+            </a>
+            <div class="recargas_content">
+                <p class="yellow_text small_text">Promociones</p>
+                <div class="offers">
+                    <?php foreach ($rowPromociones as $key => $row) : ?>
+                        <?php if ($row['show'] == 'lleno') : ?>
+                            <div class="col_3">
+                                <div class="box_white">
+                                    <div class="image"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></div>
+                                    <p class="breadcrumb">
+                                        <?php echo $row['titulo1']; ?>
+                                        <?php if (!empty($row['legal'])) : ?>
+                                        <a href="#modal_watch_legal_pro_<?php echo $key; ?>" name="modal" class="watch_legal">Ver legal</a>
+                                        <?php endif; ?>
+                                        <span></span>
+                                    </p>
+                                    <p><?php echo $row['titulo2']; ?></p>
+                                    <div class="detail">
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['emoney'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Dinero</div>
+                                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoney']); ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['bonus'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Coney Bonus</div>
+                                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonus']); ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['promotionbonus'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Coney Bonus Plus</div>
+                                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['promotionbonus']); ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['etickets'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Tickets</div>
+                                            <div class="right"><?php echo $row['etickets']; ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['gamepoints'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Gamepoints</div>
+                                            <div class="right"><?php echo $row['gamepoints']; ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <?php $prefix = 'r' . $key; ?>
+                                <div class="cant_box" data-prefix="<?php echo $prefix; ?>">
+                                    <span class="less">-</span>
+                                    <?php $cantidad = isset($tarjetaProductos[$row['id']]) ? $tarjetaProductos[$row['id']]->getQuantity() : null; ?>
+                                    <input id="cantidad_<?php echo $prefix; ?>" type="text" placeholder="0" class="cant" value="<?php echo $cantidad; ?>"/>
+                                    <input id="id_<?php echo $prefix; ?>" type="hidden" value="<?php echo $row['id']; ?>"/>
+                                    <span class="more">+</span>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <div class="col_3"></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <p class="yellow_text small_text">Recargas</p>
+                <div class="offers">
+                    <?php foreach ($rowRecargas as $key =>  $row) : ?>
+                        <?php if ($row['show'] == 'lleno') : ?>
+                            <div class="col_3">
+                                <div class="box_white">
+                                    <div class="image"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></div>
+                                    <p class="breadcrumb">
+                                        <?php echo $row['titulo1']; ?>
+                                        <?php if (!empty($row['legal'])) : ?>
+                                        <a href="#modal_watch_legal_rec_<?php echo $key; ?>" name="modal" class="watch_legal">Ver legal</a>
+                                        <?php endif; ?>
+                                        <span></span>
+                                    </p>
+                                    <p><?php echo $row['titulo2']; ?></p>
+                                    <div class="detail">
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['emoney'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Dinero</div>
+                                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoney']); ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['bonus'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Coney Bonus</div>
+                                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonus']); ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['promotionbonus'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Coney Bonus Plus</div>
+                                            <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['promotionbonus']); ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['etickets'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Tickets</div>
+                                            <div class="right"><?php echo $row['etickets']; ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                        <?php if (\Common\Helpers\Util::noEmptyDecimal($row['gamepoints'])) : ?>
+                                        <div class="line">
+                                            <div class="left">Gamepoints</div>
+                                            <div class="right"><?php echo $row['gamepoints']; ?></div>
+                                        </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <?php $prefix = 'p' . $key; ?>
+                                <div class="cant_box" data-prefix="<?php echo $prefix; ?>">
+                                    <span class="less">-</span>
+                                    <?php $cantidad = isset($tarjetaProductos[$row['id']]) ? $tarjetaProductos[$row['id']]->getQuantity() : null; ?>
+                                    <input id="cantidad_<?php echo $prefix; ?>" type="text" placeholder="0" class="cant" value="<?php echo $cantidad; ?>"/>
+                                    <input id="id_<?php echo $prefix; ?>" type="hidden" value="<?php echo $row['id']; ?>"/>
+                                    <span class="more">+</span>
+                                </div>
+                            </div>
+                        <?php else : ?>
+                            <div class="col_3"></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+</div>
+<?php foreach ($rowPromociones as $key => $row) : ?>
+    <?php if ($row['show'] == 'lleno') : ?>
+    <div id="modal_watch_legal_pro_<?php echo $key; ?>" class="modal_box modal_box_legal">
+        <div class="modal_content">
+          <h3>Importante:<span></span></h3>
+          <hr/>
+          <div class="text_box">
+            <p><?php echo $row['legal'] ?></p>
+          </div>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php endforeach; ?>
+<?php foreach ($rowRecargas as $key => $row) : ?>
+    <?php if ($row['show'] == 'lleno') : ?>
+    <div id="modal_watch_legal_rec_<?php echo $key; ?>" class="modal_box modal_box_legal">
+        <div class="modal_content">
+          <h3>Importante:<span></span></h3>
+          <hr/>
+          <div class="text_box">
+            <p><?php echo $row['legal'] ?></p>
+          </div>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php endforeach; ?>

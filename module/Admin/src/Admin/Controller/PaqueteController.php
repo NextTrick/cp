@@ -71,9 +71,9 @@ class PaqueteController extends SecurityAdminController
         foreach ($rows as $row) {
             $this->_getPaqueteService()->getRepository()->save(array(
                 'referencia' => $row['referencia'],
-                'emoney' => $row['emoney'],
-                'bonus' => $row['bonus'],
-                'promotionbonus' => isset($row['promotionbonus']) ? $row['promotionbonus'] :  null,
+                'emoney' => (float)$row['emoney'],
+                'bonus' => (float)$row['bonus'],
+                'promotionbonus' => isset($row['promotionbonus']) ? (float)$row['promotionbonus'] :  0,
                 'etickets' => isset($row['etickets']) ? $row['etickets'] : null,
                 'gamepoints' => $row['gamepoints'],
                 'fecha_creacion' => date('Y-m-d H:i:s'),

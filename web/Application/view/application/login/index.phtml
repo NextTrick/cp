@@ -1,8 +1,9 @@
 <section>
     <div class="box_center">
         <div class="welcome_box">
-            <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
-            <p class="subtitle">Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>
+            <?php echo $this->sectionContenido(Cms\Model\Service\ContenidoService::SECCION_LOGIN_INICIO_SESION); ?>
+<!--            <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
+            <p class="subtitle">Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>-->
             <div class="yellow_box">Inicia sesión</div>
             <div class="purple_box">
                 <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
@@ -67,13 +68,15 @@
 
     <div id="modal_recovery_password" class="modal_box">
         <div class="modal_content modal_recovery_content"><span class="icon_logo"></span>
+            
             <h3>Recuperar contraseña</h3>
             <p>Ingresa la dirección de correo electrónico que usaste para registrarte.</p>
-            <input id="email_recuperar" name="email_recuperar" type="text" placeholder="Correo electrónico"/>
+            <input id="email_recuperar" name="email_recuperar" type="text" placeholder="Correo electrónico" data-parsley-required data-parsley-required-message="El campo es requerido y no puede estar vacío." data-parsley-type="email" data-parsley-type-message="Ingrese un correo válido."/>
             <ul class="parsley-errors-list filled">
                 <li id="error_recuperar_password" class="parsley-required"></li>
             </ul>
             <button id="btn_recovery" class="btn btn_orange">Recuperar contraseña</button>
+           
         </div>
     </div>
     <div id="modal_recovery_response" class="modal_box">

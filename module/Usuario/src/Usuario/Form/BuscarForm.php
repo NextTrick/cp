@@ -140,8 +140,19 @@ class BuscarForm extends Form
      */
     public function setDataUbigeo($params)
     {
-        $params['cmbPais'] = 'PE';
         if (!empty($params['cmbPais'])) {
+            $dataDepa = $this->getUbigeoService()->getDepartamentos($params['cmbPais']);
+            $this->get('cmbDepartamento')->setValueOptions($dataDepa);
+        } else {
+            $criteria = array('where' => array(
+                'cod_pais' => \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU,
+                'cod_depa' => '00',
+                'cod_prov' => '00',
+                'cod_dist' => '00',
+            ));
+            $ubigeo = $this->getUbigeoService()->getRepository()->findOne($criteria);
+            $params['cmbPais'] = isset($ubigeo['id']) ? $ubigeo['id'] : null;
+            
             $dataDepa = $this->getUbigeoService()->getDepartamentos($params['cmbPais']);
             $this->get('cmbDepartamento')->setValueOptions($dataDepa);
         }
