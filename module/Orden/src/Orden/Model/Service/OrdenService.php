@@ -288,6 +288,13 @@ class OrdenService
                                 $this->setCreditPurchase($ordenId);
                             }
                         }
+                    } else {
+                        $ordenUpdateData = array(
+                            'pago_error' => $response['error']['code'],
+                            'pago_error_detalle' => $response['error']['message'],
+                        );
+
+                        $this->getRepository()->save($ordenUpdateData, $ordenId);
                     }
                 }
             }

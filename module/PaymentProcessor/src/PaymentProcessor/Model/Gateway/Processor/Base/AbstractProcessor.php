@@ -30,7 +30,6 @@ abstract class AbstractProcessor
     
     public function saveResquestHistorial($data)
     {
-        return;
         $client = $this->ws->getClient();
         $request = '';
         $response = null;        
