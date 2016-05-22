@@ -18,15 +18,16 @@ $this->layout()->breadcrumb = array(
             <thead>
             <tr>
                 <th>Id</th>
-                <th style="white-space:nowrap;">Cód. Pago</th>
+                <th style="white-space:nowrap;">Código</th>
+                <th style="white-space:nowrap;">Pago Referencia</th>
                 <th>Correo</th>
                 <th style="white-space:nowrap;">Método Pago</th>
                 <th>Monto</th>
                 <th style="white-space:nowrap;">F. Confirmación</th>
                 <th>Estado</th>
                 <th>Comprobante</th>
-                <th style="white-space:nowrap;">Nro. Comprobante</th>
                 <th style="white-space:nowrap;">Tipo Documento</th>
+                <th style="white-space:nowrap;">Nro. Documento</th>
                 <th style="white-space:nowrap;">Razón Social</th>
                 <th>Nombres</th>
             </tr>
@@ -34,17 +35,18 @@ $this->layout()->breadcrumb = array(
             <tbody>
             <?php foreach ($gridList as $row) : ?>
                 <tr>
-                    <td><?php echo $row['id'] ?></td>
-                    <td><?php echo $row['pago_referencia'] ?></td>
-                    <td><?php echo $row['email'] ?></td>
-                    <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoPago($row['pago_tarjeta']); ?></td>
-                    <td><?php echo $row['monto'] ?></td>
-                    <td><?php echo $row['fecha_creacion'] ?></td>
-                    <td><?php echo \Admin\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
+                    <td><?php echo $row['id']; ?></td>
+                    <td><?php echo $row['codigo']; ?></td>
+                    <td><?php echo $row['pago_referencia']; ?></td>
+                    <td><?php echo $row['email']; ?></td>
+                    <td><?php echo $row['pago_metodo']; ?></td>
+                    <td><?php echo $row['monto']; ?></td>
+                    <td><?php echo $row['pago_fecha_confirmacion']; ?></td>
+                    <td><?php echo $row['pago_estado']; ?></td>
                     <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoComprobante($row['comprobante_tipo']); ?></td>
-                    <td><?php echo $row['comprobante_numero'] ?></td>
                     <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoDocumento($row['documento_tipo']); ?></td>
-                    <td><?php echo $row['fac_razon_social'] ?></td>
+                    <td><?php echo $row['documento_numero'] ?></td>
+                    <td><?php echo $row['fac_razon_social']; ?></td>
                     <td><?php echo $row['nombres']; ?></td>
                 </tr>
             <?php endforeach; ?>

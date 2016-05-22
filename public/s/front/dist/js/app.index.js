@@ -278,41 +278,55 @@ $(function() {
         $(this).parent().parent().children(st.tooltipBonus).hide();
       },
       editCardName: function() {
-        var duplicate_box, sufix;
-        duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
-        var nombre = $(this).parent().children('.input_name').val();
-        //alert(duplicate_box.children('p').text())
-        duplicate_box.children('p').children('strong').text('"' + nombre + '" ');
-        //alert(duplicate_box.html())
-        sufix = $(this).data('sufix');
+        
         if ($(this).hasClass('active')) {
-          $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
-          $(this).removeClass('active');
-          $(this).parent().children(st.nameCard).show();
-          $(this).parent().children(st.inputCardName).hide();
-          $('#edit_nombre_' + sufix).val($.trim($('#org_nombre_'+sufix).html()));
-          
-          $.ajax({
-            type: "POST",
-            url: baseUrl + 'mis-tarjetas/editar-nombre',
-            data: {
-              nombre: $('#edit_nombre_' + sufix).val(),
-              numero: $('#edit_numero_' + sufix).val()
-            },
-            dataType: 'json',
-            success: function(data) {
-              if (data.success) {
+          var nombre = $(this).parent().children('.input_name').val();
+          if(nombre != ''){
+            var duplicate_box, sufix;
+            duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
+            
+            //alert(duplicate_box.children('p').text())
+            duplicate_box.children('p').children('strong').text('"' + nombre + '" ');
+            //alert(duplicate_box.html())
+            sufix = $(this).data('sufix');
 
-              } else {
-                duplicate_box.show();
-              }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {}
-          });
+            $(this).parent().children(st.nameCard).text($(this).parent().children(st.inputCardName).val());
+            $(this).removeClass('active');
+            $(this).parent().children(st.nameCard).show();
+            $(this).parent().children(st.inputCardName).hide();
+            $('#edit_nombre_' + sufix).val($.trim($('#org_nombre_'+sufix).html()));
+            
+            $.ajax({
+              type: "POST",
+              url: baseUrl + 'mis-tarjetas/editar-nombre',
+              data: {
+                nombre: $('#edit_nombre_' + sufix).val(),
+                numero: $('#edit_numero_' + sufix).val()
+              },
+              dataType: 'json',
+              success: function(data) {
+                if (data.success) {
+
+                } else {
+                  duplicate_box.show();
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {}
+            });
+          }
+          else{
+            $(this).removeClass('active');
+            $(this).parent().children(st.nameCard).show();
+            $(this).parent().children(st.inputCardName).hide();
+          }
+          
         } else {
-          $(this).addClass('active');
-          $(this).parent().children(st.nameCard).hide();
-          $(this).parent().children(st.inputCardName).show();
+            $(this).parent().children(st.inputCardName).val($(this).parent().children(st.nameCard).text());
+            $(this).addClass('active');
+            $(this).parent().children(st.nameCard).hide();
+            $(this).parent().children(st.inputCardName).show();
+          
+          
         }
       }
     };
@@ -574,6 +588,17 @@ $(function() {
     };
     suscribeEvents = function() {
       dom.btnChangeImage.on('click', events.changeImage);
+      $(window).scroll(function (event) {
+        var scroll = $(window).scrollTop();
+        console.log(scroll);
+        if(scroll > 200){
+          $('.right_options').addClass('moveTop');
+        }
+        else{
+          $('.right_options').removeClass('moveTop');
+        }
+        // Do something
+      });
     };
     events = {
       changeImage: function(e) {
@@ -595,13 +620,16 @@ $(function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
     st = {
-      openDetail: '.offers .col_3 .box_white .breadcrumb span'
+      openDetail: '.offers .col_3 .box_white .breadcrumb span',
+      watchDetailBar : '.icon_arrow'
     };
     catchDom = function() {
       dom.openDetail = $(st.openDetail);
+      dom.watchDetailBar = $(st.watchDetailBar);
     };
     suscribeEvents = function() {
       dom.openDetail.on('click', events.openDetail);
+      dom.watchDetailBar.on('click', events.watchDetailBar);
     };
     events = {
       openDetail: function(e) {
@@ -613,6 +641,16 @@ $(function() {
           $(this).addClass('active');
           $(this).parent().parent().children('.detail').show();
           $(this).parent().parent().parent().addClass('auto');
+        }
+      },
+      watchDetailBar : function(){
+        if(dom.watchDetailBar.hasClass('active')){
+          dom.watchDetailBar.removeClass('active');
+          $('.bottom_bar .hide').hide();
+        }
+        else{
+          dom.watchDetailBar.addClass('active');
+          $('.bottom_bar .hide').css('display', 'block');
         }
       }
     };

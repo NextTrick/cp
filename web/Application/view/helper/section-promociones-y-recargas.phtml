@@ -9,18 +9,21 @@
         </div>
         <div class="purple_box">
             <p class="yellow_text small_text">Recarga de mis tarjetas</p>
-            <div class="steps">
-                <div class="step active">1</div>
-                <span></span>
-                <div class="step">2</div>
-            </div>
-            <a href="<?php echo BASE_URL ?>carrito" class="cart_box">
-                <span class="label">Items en el carrito:</span>
-                <div class="cart">
-                    <span class="icon"></span>
-                    <span class="number" id="spanCantidadTotal"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+            <div class="top_bar">
+                <div class="steps">
+                    <div class="step active">1</div>
+                    <span></span>
+                    <div class="step">2</div>
                 </div>
-            </a>
+                <a href="<?php echo BASE_URL ?>carrito" class="cart_box">
+                    <span class="label">Items en el carrito:</span>
+                    <div class="cart">
+                        <span class="icon"></span>
+                        <span class="number" id="spanCantidadTotal"><?php echo empty($cartModel) ? 0 : $cartModel->getQuantityCart(); ?></span>
+                    </div>
+                </a>
+            </div>
+            
             <div class="recargas_content">
                 <p class="yellow_text small_text">Promociones</p>
                 <div class="offers">
@@ -80,7 +83,7 @@
                                 </div>
                             </div>
                         <?php else : ?>
-                            <div class="col_3"></div>
+                            <div class="col_3 empty"></div>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
@@ -142,7 +145,7 @@
                                 </div>
                             </div>
                         <?php else : ?>
-                            <div class="col_3"></div>
+                            <div class="col_3 empty"></div>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>

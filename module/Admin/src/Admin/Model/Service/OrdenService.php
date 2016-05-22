@@ -24,17 +24,9 @@ class OrdenService
     CONST TIPO_DOCUMENTO_NAME_RUC = 'RUC';
     CONST TIPO_DOCUMENTO_NAME_DNI = 'DNI';
 
-    CONST METODO_PAGO_VISA        = 1;
-    CONST METODO_PAGO_PE          = 2;
-    CONST METODO_PAGO_MASTER      = 3;
     CONST METODO_PAGO_NAME_VISA   = 'VISA';
     CONST METODO_PAGO_NAME_PE     = 'PE';
-    CONST METODO_PAGO_NAME_MASTER = 'Master Card';
-
-    CONST ESTADO_PAGO_ERROR          = 1;
-    CONST ESTADO_PAGO_PAGADO         = 2;
-    CONST ESTADO_PAGO_PENDIENTE      = 3;
-    CONST ESTADO_PAGO_EXPIRADO       = 4;
+    
     CONST ESTADO_PAGO_NAME_ERROR     = 'Error';
     CONST ESTADO_PAGO_NAME_PAGADO    = 'Pagado';
     CONST ESTADO_PAGO_NAME_PENDIENTE = 'Pendiente';
@@ -123,51 +115,14 @@ class OrdenService
         return $result;
     }
 
-    public static function getNombreTipoPago($tipoPago)
-    {
-        $result = null;
-        if (empty($tipoPago)) {
-            return $result;
-        }
-
-        if (self::METODO_PAGO_PE == $tipoPago) {
-            $result = self::METODO_PAGO_NAME_PE;
-        } elseif (self::METODO_PAGO_VISA == $tipoPago) {
-            $result = self::METODO_PAGO_NAME_VISA;
-        } elseif (self::METODO_PAGO_MASTER == $tipoPago) {
-            $result = self::METODO_PAGO_NAME_MASTER;
-        }
-
-        return $result;
-    }
-
-    public static function getNombreEstadoPago($estadoPago)
-    {
-        $result = null;
-        if (empty($estadoPago)) {
-            return $result;
-        }
-
-        if (self::ESTADO_PAGO_ERROR == $estadoPago) {
-            $result = self::ESTADO_PAGO_NAME_ERROR;
-        } elseif (self::ESTADO_PAGO_PENDIENTE == $estadoPago) {
-            $result = self::ESTADO_PAGO_NAME_PENDIENTE;
-        } elseif (self::ESTADO_PAGO_PAGADO == $estadoPago) {
-            $result = self::ESTADO_PAGO_NAME_PAGADO;
-        } elseif (self::ESTADO_PAGO_EXPIRADO == $estadoPago) {
-            $result = self::ESTADO_PAGO_NAME_EXPIRADO;
-        }
-
-        return $result;
-    }
-
+    
     public function getPagoEstados()
     {
         return array(
-            self::ESTADO_PAGO_ERROR     => self::ESTADO_PAGO_NAME_ERROR,
-            self::ESTADO_PAGO_PAGADO    => self::ESTADO_PAGO_NAME_PAGADO,
-            self::ESTADO_PAGO_PENDIENTE => self::ESTADO_PAGO_NAME_PENDIENTE,
-            self::ESTADO_PAGO_EXPIRADO  => self::ESTADO_PAGO_NAME_EXPIRADO
+            self::ESTADO_PAGO_NAME_ERROR     => self::ESTADO_PAGO_NAME_ERROR,
+            self::ESTADO_PAGO_NAME_PAGADO    => self::ESTADO_PAGO_NAME_PAGADO,
+            self::ESTADO_PAGO_NAME_PENDIENTE => self::ESTADO_PAGO_NAME_PENDIENTE,
+            self::ESTADO_PAGO_NAME_EXPIRADO  => self::ESTADO_PAGO_NAME_EXPIRADO
         );
     }
 
@@ -182,9 +137,8 @@ class OrdenService
     public function getMetodoPago()
     {
         return array(
-            self::METODO_PAGO_VISA   => self::METODO_PAGO_NAME_VISA,
-            self::METODO_PAGO_PE     => self::METODO_PAGO_NAME_PE,
-            self::METODO_PAGO_MASTER => self::METODO_PAGO_NAME_MASTER
+            self::METODO_PAGO_NAME_VISA   => self::METODO_PAGO_NAME_VISA,
+            self::METODO_PAGO_NAME_PE     => self::METODO_PAGO_NAME_PE,
         );
     }
 
