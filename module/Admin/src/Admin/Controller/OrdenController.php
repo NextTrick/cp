@@ -83,7 +83,7 @@ class OrdenController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A1:BB1')->applyFromArray($style['cabecera']);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:AB1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Id');
             $sheet->setCellValue('B1', 'Código');
@@ -150,7 +150,7 @@ class OrdenController extends SecurityAdminController
                 $sheet->setCellValue('Z'.$index, $reg['usu_nombres']);
 
                 $sheet->setCellValue('AA'.$index, $reg['pago_error']);
-                $sheet->setCellValue('BB'.$index, $reg['pago_error_detalle']);
+                $sheet->setCellValue('AB'.$index, $reg['pago_error_detalle']);
 
                 $index ++;
             }
@@ -167,7 +167,7 @@ class OrdenController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A2:BB'.($index-1))->applyFromArray($style['body']);
+            $objPHPExcel->getActiveSheet()->getStyle('A2:AB'.($index-1))->applyFromArray($style['body']);
             $nameFile = 'transacciones_'. trim($date->format('Y-m-d_His')).'.xlsx';
 
 

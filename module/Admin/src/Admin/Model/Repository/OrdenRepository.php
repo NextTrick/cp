@@ -38,7 +38,7 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             $select->quantifier(\Zend\Db\Sql\Select::QUANTIFIER_DISTINCT);
             $select->from(array('o'=> $this->table));
             $select->columns(array('id','codigo', 'usuario_id', 'pago_metodo','monto', 'fecha_creacion','documento_numero', 'documento_tipo',
-                'fac_direccion_fiscal', 'pago_estado', 'comprobante_tipo', 'comprobante_numero', 'fac_razon_social',
+                'fac_direccion_fiscal', 'pago_estado', 'comprobante_tipo', 'fac_razon_social',
                 'pago_referencia', 'estado', 'pago_error', 'pago_error_detalle', 'nombres', 'paterno', 'materno'
             ));
             $select->join(array('u' => 'usuario_usuario'), 'u.id = o.usuario_id',
