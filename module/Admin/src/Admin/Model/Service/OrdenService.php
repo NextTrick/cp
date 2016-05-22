@@ -26,7 +26,6 @@ class OrdenService
 
     CONST METODO_PAGO_NAME_VISA   = 'VISA';
     CONST METODO_PAGO_NAME_PE     = 'PE';
-    CONST METODO_PAGO_NAME_MASTER = 'Master Card';
     
     CONST ESTADO_PAGO_NAME_ERROR     = 'Error';
     CONST ESTADO_PAGO_NAME_PAGADO    = 'Pagado';
@@ -140,7 +139,6 @@ class OrdenService
         return array(
             self::METODO_PAGO_NAME_VISA   => self::METODO_PAGO_NAME_VISA,
             self::METODO_PAGO_NAME_PE     => self::METODO_PAGO_NAME_PE,
-            self::METODO_PAGO_NAME_MASTER => self::METODO_PAGO_NAME_MASTER
         );
     }
 
