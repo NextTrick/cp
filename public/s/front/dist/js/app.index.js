@@ -609,13 +609,16 @@ $(function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
     st = {
-      openDetail: '.offers .col_3 .box_white .breadcrumb span'
+      openDetail: '.offers .col_3 .box_white .breadcrumb span',
+      watchDetailBar : '.icon_arrow'
     };
     catchDom = function() {
       dom.openDetail = $(st.openDetail);
+      dom.watchDetailBar = $(st.watchDetailBar);
     };
     suscribeEvents = function() {
       dom.openDetail.on('click', events.openDetail);
+      dom.watchDetailBar.on('click', events.watchDetailBar);
     };
     events = {
       openDetail: function(e) {
@@ -627,6 +630,16 @@ $(function() {
           $(this).addClass('active');
           $(this).parent().parent().children('.detail').show();
           $(this).parent().parent().parent().addClass('auto');
+        }
+      },
+      watchDetailBar : function(){
+        if(dom.watchDetailBar.hasClass('active')){
+          dom.watchDetailBar.removeClass('active');
+          $('.bottom_bar .hide').hide();
+        }
+        else{
+          dom.watchDetailBar.addClass('active');
+          $('.bottom_bar .hide').css('display', 'block');
         }
       }
     };

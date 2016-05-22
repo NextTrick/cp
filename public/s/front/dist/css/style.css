@@ -1098,7 +1098,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -23px -243px;
+  background-position: -57px -243px;
   width: 18px;
   height: 14px;
 }
@@ -1406,19 +1406,19 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
   background-image: url("../images/sprite.png");
-  background-position: -132px -66px;
+  background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
   background-image: url("../images/sprite.png");
-  background-position: 0px -136px;
+  background-position: -132px -66px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa {
   background-image: url("../images/sprite.png");
-  background-position: -120px -136px;
+  background-position: 0px -136px;
   width: 120px;
   height: 66px;
 }
@@ -2064,6 +2064,21 @@ section form.form_mis_datos .disabled {
   position: relative;
   bottom: -24px;
 }
+.bottom_bar .icon_arrow {
+  cursor: pointer;
+  display: none;
+  margin: 0 auto 10px;
+  background-image: url("../images/sprite.png");
+  background-position: -40px -243px;
+  width: 17px;
+  height: 17px;
+}
+.bottom_bar .icon_arrow.active {
+  background-image: url("../images/sprite.png");
+  background-position: -23px -243px;
+  width: 17px;
+  height: 17px;
+}
 .bottom_bar .select {
   display: inline-block;
   margin: 0px 20px 0 10px;
@@ -2665,6 +2680,9 @@ i[class*=" icon-"] {
   section .app_box .purple_box .recargas_content .offers .col_3 {
     margin-bottom: 45px;
   }
+  section .app_box .purple_box .recargas_content .offers .col_3.empty {
+    display: none;
+  }
   section .app_box .purple_box .options {
     padding: 10px;
   }
@@ -2763,11 +2781,28 @@ i[class*=" icon-"] {
     height: auto;
     text-align: center;
     border-radius: 0;
+    position: fixed;
+    z-index: 99;
+    bottom: 0;
+  }
+  .bottom_bar .box_mobile {
+    position: relative;
+    top: -40px;
+    background: #370135;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 10px 0;
+  }
+  .bottom_bar .icon_arrow {
+    display: block;
   }
   .bottom_bar span.text {
     display: block;
     text-align: center;
     margin-bottom: 10px;
+  }
+  .bottom_bar span.text.hide {
+    display: none;
   }
   .bottom_bar span.bg {
     display: block;
@@ -2775,6 +2810,9 @@ i[class*=" icon-"] {
     height: auto;
     text-align: center;
     margin: 10px 0;
+  }
+  .bottom_bar span.bg.hide {
+    display: none;
   }
   .bottom_bar span.bg .text {
     float: none;
@@ -2786,6 +2824,13 @@ i[class*=" icon-"] {
   }
   .bottom_bar button {
     position: static;
+    margin: 0 auto;
+  }
+  .bottom_bar button.hide {
+    display: none;
+  }
+  .bg_purple_dark {
+    display: none;
   }
   footer {
     background: #fff !important;
