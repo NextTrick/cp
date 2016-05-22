@@ -93,7 +93,7 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
         $select->where->equalTo('a.id', $ordenId);
 
         $statement = $sql->prepareStatementForSqlObject($select);
-        echo $statement->getSql(); exit;
+        echo $sql->getSqlStringForSqlObject($select); exit;
         $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
 
         return $data;
