@@ -59,6 +59,7 @@ abstract class AbstractProcessor
                 'response' => !empty ($response) ? serialize($response) : null,
                 'orden_id' => $data['ordenId'],
                 'method' => $data['method'],
+                'fecha_creacion' => date('Y-m-d H:i:s'),
                 'pago_referencia' => !empty ($data['reference']) ? $data['reference'] : null,
             );
 
