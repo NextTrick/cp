@@ -373,7 +373,6 @@ class OrdenService
 
     public function procesarPaymentProcessorCallbackReponse($response)
     {
-        var_dump($response); exit;
         $ordenId = 'XXXXX';
         if (!empty($response['data']['reference'])) {
             $reference = $response['data']['reference'];
@@ -391,7 +390,7 @@ class OrdenService
                     }
 
                     if (!empty($response['data']['confirmationDate'])) {
-                        $ordenUpdateData['pago_fecha_confirmacion'] =  $response['data']['confirmationDate'];
+                        $ordenUpdateData['pago_fecha_confirmacion'] =  date('Y-m-d H:i:s');
                     }
                     $this->getRepository()->save($ordenUpdateData, $ordenId);
 
