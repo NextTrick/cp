@@ -1,6 +1,7 @@
 nbproject
 ._*
 .vagrant
+Vagrantfile
 .~lock.*
 .lock
 .buildpath
