@@ -83,46 +83,74 @@ class OrdenController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($style['cabecera']);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:BB1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Id');
-            $sheet->setCellValue('B1', 'Id Usuario');
-            $sheet->setCellValue('C1', 'Cód. Pago');
+            $sheet->setCellValue('B1', 'Código');
+            $sheet->setCellValue('C1', 'Pago Referencia');
             $sheet->setCellValue('D1', 'Correo');
             $sheet->setCellValue('E1', 'Metodo Pago');
             $sheet->setCellValue('F1', 'Monto');
             $sheet->setCellValue('G1', 'Fecha Confirmacion');
             $sheet->setCellValue('H1', 'Estado Pago');
-            $sheet->setCellValue('I1', 'Tipo comprobante');
-            $sheet->setCellValue('J1', 'Razón Social');
-            $sheet->setCellValue('K1', 'Tipo Documento');
-            $sheet->setCellValue('L1', 'Nro. Documento');
-            $sheet->setCellValue('M1', 'Direccion Fiscal');
-            $sheet->setCellValue('N1', 'Nombres');
-            $sheet->setCellValue('O1', 'Estado');
-            $sheet->setCellValue('P1', 'Pago Error');
-            $sheet->setCellValue('Q1', 'Pago Detalle Error');
+            $sheet->setCellValue('I1', 'Comprobante');
+            $sheet->setCellValue('J1', 'Tipo Documento');
+            $sheet->setCellValue('K1', 'Nro. Documento');
+            $sheet->setCellValue('L1', 'Razón Social');
+            $sheet->setCellValue('M1', 'Nombres');
+            $sheet->setCellValue('N1', 'Paterno');
+            $sheet->setCellValue('O1', 'Materno');
+            $sheet->setCellValue('P1', 'Dirección Fiscal');
+            $sheet->setCellValue('Q1', 'Dirección Entrega');
+
+            $sheet->setCellValue('R1', 'Usuario Nombres');
+            $sheet->setCellValue('S1', 'Usuario Paterno');
+            $sheet->setCellValue('T1', 'Usuario Materno');
+            $sheet->setCellValue('U1', 'Usuario Tipo Documento');
+            $sheet->setCellValue('V1', 'Usuario Nro Documento');
+
+            $sheet->setCellValue('W1', 'Usuario País');
+            $sheet->setCellValue('X1', 'Usuario Departamento');
+            $sheet->setCellValue('Y1', 'Usuario Provincia');
+            $sheet->setCellValue('Z1', 'Usuario Distrito');
+
+            $sheet->setCellValue('AA1', 'Pago Error');
+            $sheet->setCellValue('BB1', 'Pago Detalle Error');
 
 
             $index = 2;
             foreach ($data as $key => $reg) {
                 $sheet->setCellValue('A'.$index, $reg['id']);
-                $sheet->setCellValue('B'.$index, $reg['usuario_id']);
+                $sheet->setCellValue('B'.$index, $reg['codigo']);
                 $sheet->setCellValue('C'.$index, $reg['pago_referencia']);
                 $sheet->setCellValue('D'.$index, $reg['email']);
-                $sheet->setCellValue('E'.$index, \Orden\Model\Service\OrdenService::getNombreTipoPago($reg['pago_tarjeta']));
+                $sheet->setCellValue('E'.$index, $reg['pago_metodo']);
                 $sheet->setCellValue('F'.$index, $reg['monto']);
-                $sheet->setCellValue('G'.$index, $reg['fecha_creacion']);
-                $sheet->setCellValue('H'.$index, \Orden\Model\Service\OrdenService::getNombreEstadoPago($reg['pago_estado']));
-                $sheet->setCellValue('I'.$index, \Orden\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
-                $sheet->setCellValue('J'.$index, $reg['fac_razon_social']);
-                $sheet->setCellValue('K'.$index, \Orden\Model\Service\OrdenService::getNombreTipoDocumento($reg['documento_tipo']));
-                $sheet->setCellValue('L'.$index, $reg['documento_numero']);
-                $sheet->setCellValue('M'.$index, $reg['fac_direccion_fiscal']);
-                $sheet->setCellValue('N'.$index, $reg['nombres']);
-                $sheet->setCellValue('O'.$index, \Usuario\Model\Service\UsuarioService::getNombreEstado($reg['estado']));
-                $sheet->setCellValue('P'.$index, $reg['pago_error']);
-                $sheet->setCellValue('Q'.$index, $reg['pago_error_detalle']);
+                $sheet->setCellValue('G'.$index, $reg['pago_fecha_confirmacion']);
+                $sheet->setCellValue('H'.$index, $reg['pago_estado']);
+                $sheet->setCellValue('I'.$index, \Admin\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
+                $sheet->setCellValue('J'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['documento_tipo']));
+                $sheet->setCellValue('K'.$index, $reg['documento_numero']);
+                $sheet->setCellValue('L'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('M'.$index, $reg['nombres']);
+                $sheet->setCellValue('N'.$index, $reg['paterno']);
+                $sheet->setCellValue('O'.$index, $reg['materno']);
+                $sheet->setCellValue('P'.$index, $reg['fac_direccion_fiscal']);
+                $sheet->setCellValue('Q'.$index, $reg['fac_direccion_entrega_factura']);
+
+                $sheet->setCellValue('R'.$index, $reg['usu_nombres']);
+                $sheet->setCellValue('S'.$index, $reg['usu_paterno']);
+                $sheet->setCellValue('T'.$index, $reg['usu_materno']);
+                $sheet->setCellValue('U'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['di_tipo']));
+                $sheet->setCellValue('V'.$index, $reg['di_valor']);
+
+                $sheet->setCellValue('W'.$index, $reg['usu_nombres']);
+                $sheet->setCellValue('X'.$index, $reg['usu_nombres']);
+                $sheet->setCellValue('Y'.$index, $reg['usu_nombres']);
+                $sheet->setCellValue('Z'.$index, $reg['usu_nombres']);
+
+                $sheet->setCellValue('AA'.$index, $reg['pago_error']);
+                $sheet->setCellValue('BB'.$index, $reg['pago_error_detalle']);
 
                 $index ++;
             }
@@ -139,7 +167,7 @@ class OrdenController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A2:O'.($index-1))->applyFromArray($style['body']);
+            $objPHPExcel->getActiveSheet()->getStyle('A2:BB'.($index-1))->applyFromArray($style['body']);
             $nameFile = 'transacciones_'. trim($date->format('Y-m-d_His')).'.xlsx';
 
 
