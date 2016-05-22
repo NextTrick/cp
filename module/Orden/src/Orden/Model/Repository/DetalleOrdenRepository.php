@@ -90,10 +90,10 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
         $select->join(array('c' => 'tarjeta_tarjeta'), 'a.tarjeta_id = c.id',
             array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre', 'tarjeta_numero' => 'numero'));
 
-        $select->where->equalTo('a.id', $ordenId);
+        $select->where->equalTo('a.orden_id', $ordenId);
 
         $statement = $sql->prepareStatementForSqlObject($select);
-        echo $sql->getSqlStringForSqlObject($select); exit;
+        //echo $sql->getSqlStringForSqlObject($select); exit;
         $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
 
         return $data;
@@ -109,7 +109,7 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
         $select->join(array('b' => 'tarjeta_tarjeta'), 'a.tarjeta_id = b.id',
             array('tarjeta_id' => 'id', 'tarjeta_nombre' => 'nombre', 'tarjeta_cguid' => 'cguid'));
 
-        $select->where->equalTo('a.id', $ordenId);
+        $select->where->equalTo('a.orden_id', $ordenId);
 
         $statement = $sql->prepareStatementForSqlObject($select);
         $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
