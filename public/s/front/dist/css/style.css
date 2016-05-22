@@ -355,6 +355,9 @@ header nav ul li.logo img {
   height: 334px;
   background: url("../images/bg_rectangle_right.png");
 }
+.right_options.moveTop {
+  top: 20px;
+}
 .right_options ul {
   margin: 0;
   padding: 0;
@@ -624,6 +627,9 @@ section .purple_box:after {
   right: 10px;
   left: auto;
 }
+section .purple_box .top_bar {
+  overflow: hidden;
+}
 section .purple_box p {
   margin-bottom: 20px;
   font-size: 20px;
@@ -730,7 +736,6 @@ section .purple_box .benefits_offers .offers_box_two .left {
   width: 50%;
   height: 220px;
   background: #f29224;
-  padding: 20px;
   box-sizing: border-box;
 }
 section .purple_box .benefits_offers .offers_box_two .left .image img {
@@ -1099,7 +1104,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -23px -243px;
+  background-position: -57px -243px;
   width: 18px;
   height: 14px;
 }
@@ -1135,7 +1140,7 @@ section .purple_box .cards_content .col_3.my_card .show_more_content .line .left
   display: inline-block;
   font-size: 12px;
   margin-left: 5px;
-  padding-top: 2px;
+  padding-top: 3px;
   box-sizing: border-box;
 }
 section .purple_box .cards_content .col_3.my_card .show_more_content .line .left span.active {
@@ -1194,11 +1199,13 @@ section .purple_box .cards_content .col_3.my_card .bottom_card a.watch_more {
   float: left;
   font-size: 14px;
   margin-top: 6px;
+  border-right: 1px solid #d3d3d3;
+  padding-right: 5px;
 }
 section .purple_box .cards_content .col_3.my_card .bottom_card a.recharge {
   float: right;
   font-size: 16px;
-  margin-left: 10px;
+  margin-left: 5px;
 }
 section .purple_box .recargas_content .offers {
   padding-bottom: 30px;
@@ -1407,19 +1414,19 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
   background-image: url("../images/sprite.png");
-  background-position: -132px -66px;
+  background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
   background-image: url("../images/sprite.png");
-  background-position: 0px -136px;
+  background-position: -132px -66px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa {
   background-image: url("../images/sprite.png");
-  background-position: -120px -136px;
+  background-position: 0px -136px;
   width: 120px;
   height: 66px;
 }
@@ -1832,6 +1839,7 @@ section .purple_box .pay_box_white.confirmation_box .resume .total {
   margin-top: 10px;
   font-size: 16px;
   font-weight: bold;
+  margin-right: 10%;
 }
 section .purple_box .pay_box_white.confirmation_box .info {
   width: 620px;
@@ -1928,6 +1936,49 @@ section .left {
 section .right {
   float: right;
 }
+section .offers_box_three {
+  margin: 20px 0;
+  overflow: hidden;
+}
+section .offers_box_three .col_3 {
+  width: 32%;
+}
+section .offers_box_three .col_3 .box_white {
+  background: #fff;
+  border-radius: 15px;
+  color: #000;
+  min-height: 258px;
+}
+section .offers_box_three .col_3 .box_white p {
+  padding: 8px;
+  text-align: left;
+  font-size: 18px;
+  margin: 0;
+}
+section .offers_box_three .col_3 .box_white p.breadcrumb {
+  text-align: left;
+  color: #f00;
+  font-size: 16px;
+}
+section .offers_box_three .col_3 .box_white p.breadcrumb a {
+  color: #aaa;
+  font-size: 14px;
+  text-decoration: none;
+}
+section .offers_box_three .col_3 button {
+  margin-top: 10px;
+  width: 100%;
+}
+section .offers_box_three .col_3:first-child {
+  margin-right: 2%;
+}
+section .offers_box_three .col_3 .image {
+  height: 145px;
+  overflow: hidden;
+}
+section .offers_box_three .col_3 .image img {
+  width: 100%;
+}
 section .offers_box {
   margin-top: 40px;
 }
@@ -2005,6 +2056,9 @@ section form.signin_form .content_form {
 section form.signin_form .content_form input {
   height: 36px;
 }
+section form.signin_form .content_form select {
+  padding-left: 10px;
+}
 section form.form_mis_datos .bg_purple_change_email {
   background: #310041;
   padding: 20px 10px;
@@ -2028,6 +2082,7 @@ section form.form_mis_datos .content_form .form_control .left.user_image_left .i
   border-radius: 50px;
   text-align: center;
   padding-top: 6px;
+  overflow: hidden;
 }
 section form.form_mis_datos .content_form .form_control .right.user_image_right {
   width: 68%;
@@ -2048,6 +2103,12 @@ section form.form_mis_datos .content_form .form_control .right.user_image_right 
   position: relative;
   top: -35px;
 }
+section form.form_mis_datos .content_form .form_control .pass_info {
+  margin-top: 10px;
+  font-size: 13px;
+  display: block;
+  text-align: left;
+}
 section form.form_mis_datos .disabled {
   disabled: true;
   pointer-events: none;
@@ -2064,6 +2125,21 @@ section form.form_mis_datos .disabled {
   padding: 10px 20px;
   position: relative;
   bottom: -24px;
+}
+.bottom_bar .icon_arrow {
+  cursor: pointer;
+  display: none;
+  margin: 0 auto 10px;
+  background-image: url("../images/sprite.png");
+  background-position: -40px -243px;
+  width: 17px;
+  height: 17px;
+}
+.bottom_bar .icon_arrow.active {
+  background-image: url("../images/sprite.png");
+  background-position: -23px -243px;
+  width: 17px;
+  height: 17px;
 }
 .bottom_bar .select {
   display: inline-block;
@@ -2195,11 +2271,11 @@ footer span.logo_icon {
   font-weight: bold;
 }
 .modal_box .modal_content input {
-  width: 400px;
+  width: 100%;
 }
 .modal_box .modal_content button,
 .modal_box .modal_content a {
-  width: 400px;
+  width: 100%;
   text-decoration: none;
   display: block;
 }
@@ -2434,6 +2510,12 @@ i[class*=" icon-"] {
   section {
     padding-top: 20px;
   }
+  section input {
+    text-align: left;
+  }
+  section input.center {
+    text-align: center;
+  }
   section .welcome_box {
     padding: 8px;
   }
@@ -2471,6 +2553,18 @@ i[class*=" icon-"] {
   }
   section .offers_box .col_3 img {
     width: 100%;
+  }
+  section .offers_box_three .col_3 {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  section .offers_box_three .col_3 .box_white {
+    border-radius: 18px;
+  }
+  section .offers_box_three.carrito_offers {
+    padding: 0 15px;
   }
   section .app_box .purple_box {
     border-radius: 0;
@@ -2511,9 +2605,6 @@ i[class*=" icon-"] {
     border-right: 0;
     padding-right: 0;
     border-bottom: 1px dashed #d3d3d3;
-  }
-  section .app_box .purple_box .pay_box_white >.right {
-    padding-left: 0;
   }
   section .app_box .purple_box .pay_box_white >.right .credit_cards {
     padding-bottom: 15px;
@@ -2666,6 +2757,9 @@ i[class*=" icon-"] {
   section .app_box .purple_box .recargas_content .offers .col_3 {
     margin-bottom: 45px;
   }
+  section .app_box .purple_box .recargas_content .offers .col_3.empty {
+    display: none;
+  }
   section .app_box .purple_box .options {
     padding: 10px;
   }
@@ -2708,6 +2802,9 @@ i[class*=" icon-"] {
   }
   section .app_box .purple_box .benefits_offers .offers_box_three .col_3 .box_white {
     border-radius: 18px;
+  }
+  section .app_box .purple_box .cards_content .col_3.empty {
+    display: none;
   }
   section .app_box .purple_box .cards_content .col_3.add_card .tooltip {
     top: 25px;
@@ -2764,11 +2861,28 @@ i[class*=" icon-"] {
     height: auto;
     text-align: center;
     border-radius: 0;
+    position: fixed;
+    z-index: 99;
+    bottom: 0;
+  }
+  .bottom_bar .box_mobile {
+    position: relative;
+    top: -40px;
+    background: #370135;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    padding: 10px 0;
+  }
+  .bottom_bar .icon_arrow {
+    display: block;
   }
   .bottom_bar span.text {
     display: block;
     text-align: center;
     margin-bottom: 10px;
+  }
+  .bottom_bar span.text.hide {
+    display: none;
   }
   .bottom_bar span.bg {
     display: block;
@@ -2776,6 +2890,9 @@ i[class*=" icon-"] {
     height: auto;
     text-align: center;
     margin: 10px 0;
+  }
+  .bottom_bar span.bg.hide {
+    display: none;
   }
   .bottom_bar span.bg .text {
     float: none;
@@ -2787,6 +2904,13 @@ i[class*=" icon-"] {
   }
   .bottom_bar button {
     position: static;
+    margin: 0 auto;
+  }
+  .bottom_bar button.hide {
+    display: none;
+  }
+  .bg_purple_dark {
+    display: none;
   }
   footer {
     background: #fff !important;
@@ -2825,5 +2949,8 @@ i[class*=" icon-"] {
     margin-top: 150px !important;
     width: 52%;
     height: 450px;
+  }
+  .modal_box_legal .modal_content .text_box {
+    height: 380px;
   }
 }

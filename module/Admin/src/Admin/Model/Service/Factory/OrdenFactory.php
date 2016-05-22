@@ -10,7 +10,7 @@ namespace Admin\Model\Service\Factory;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\ServiceManager\FactoryInterface;
-use Orden\Model\Service\OrdenService;
+use Admin\Model\Service\OrdenService;
 use Admin\Model\Repository\OrdenRepository;
 
 class OrdenFactory implements FactoryInterface

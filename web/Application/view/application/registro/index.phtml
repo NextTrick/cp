@@ -2,8 +2,8 @@
     <div class="box_center">
         <div class="welcome_box">
             <h2>¡Bienvenido a <span>Coney Club </span>recargas virtuales!</h2>
-            <h3>¡Un club creadopara todos aquellos que buscan <span>más diversión </span>por mucho menos!</h3>
-            <p>Ahora podrás hacer tus recargas <strong>sin necesidad, </strong>además podrás gozar de <strong>muchos beneficios</strong></p>
+            <h3>¡Un club creado para todos aquellos que buscan <span>más diversión </span>por mucho menos!</h3>
+            <p>Ahora podrás hacer tus recargas <strong>sin necesidad de hacer colas, </strong>además podrás gozar de <strong>muchos beneficios</strong></p>
             <div class="yellow_box">Regístrate</div>
             <div class="purple_box">
                 <div class="content">
@@ -19,7 +19,7 @@
                             <?php $email = isset($data[0]['email']) ? $data[0]['email'] : null; ?>
                             <input type="hidden" id="registro_form" name="registro_form" value="1">
                             <div class="form_control">
-                                <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com" value="<?php echo $email; ?>" data-parsley-type="email" data-parsley-type-message="El correo ingresado no tiene formato válido."/>
+                                <input id="email" name="email" type="text" placeholder="ejemplo@micorreo.com" value="<?php echo $email; ?>" data-parsley-type="email" data-parsley-type-message="El correo ingresado no tiene formato válido." class="center"/>
                                 <?php if (!empty($messageExistsEmail)) : ?>
                                     <ul class="parsley-errors-list filled">
                                         <li class="parsley-required"><?php echo $messageExistsEmail; ?></li>
