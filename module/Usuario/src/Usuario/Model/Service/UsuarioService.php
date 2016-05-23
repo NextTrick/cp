@@ -153,7 +153,7 @@ class UsuarioService
                     'fecha_creacion' => date('Y-m-d H:i:s'),
                 ));
                 if (!empty($tarjetaId)) {
-                    $this->_getTarjetaService()->_cronTarjeta($tarjetaId, $card['cguid']);
+                    $this->_getTarjetaService()->cronTarjeta($tarjetaId, $card['cguid']);
                     $result['success'] = true;
                     $result['message'] = null;
                 }
