@@ -150,22 +150,32 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `tarjeta_tarjeta` ;
 
-CREATE TABLE IF NOT EXISTS `tarjeta_tarjeta` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `usuario_id` INT NOT NULL,
-  `nombre` VARCHAR(150) NULL,
-  `cguid` VARCHAR(40) NOT NULL,
-  `numero` VARCHAR(12) NOT NULL,
-  `estado_truefi` TINYINT(1) NULL,
-  `fecha_creacion` DATETIME NULL,
-  `fecha_edicion` DATETIME NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_tarjeta_tarjeta_usuario_usuario1_idx` (`usuario_id` ASC),
-  UNIQUE INDEX `cguid_UNIQUE` (`cguid` ASC),
-  INDEX `index_numero` (`numero` ASC),
+CREATE  TABLE IF NOT EXISTS `tarjeta_tarjeta` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `usuario_id` INT NOT NULL ,
+  `nombre` VARCHAR(150) NULL ,
+  `cguid` VARCHAR(40) NOT NULL ,
+  `numero` VARCHAR(12) NOT NULL ,
+  `emoney` FLOAT NULL ,
+  `emoneyvalue` FLOAT NULL ,
+  `bonus` FLOAT NULL ,
+  `bonusvalue` FLOAT NULL ,
+  `promotionbonus` FLOAT NULL ,
+  `bonusplusvalue` FLOAT NULL ,
+  `gamepoints` FLOAT NULL ,
+  `gamepointsvalue` FLOAT NULL ,
+  `etickets` FLOAT NULL ,
+  `estado_truefi` TINYINT(1) NULL ,
+  `fecha_creacion` DATETIME NULL ,
+  `fecha_edicion` DATETIME NULL ,
+  `fecha_actualizacion` DATETIME NULL ,
+  PRIMARY KEY (`id`) ,
+  INDEX `fk_tarjeta_tarjeta_usuario_usuario1_idx` (`usuario_id` ASC) ,
+  UNIQUE INDEX `cguid_UNIQUE` (`cguid` ASC) ,
+  INDEX `index_numero` (`numero` ASC) ,
   CONSTRAINT `fk_tarjeta_tarjeta_usuario_usuario1`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `usuario_usuario` (`id`)
+    FOREIGN KEY (`usuario_id` )
+    REFERENCES `usuario_usuario` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

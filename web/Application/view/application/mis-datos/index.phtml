@@ -3,8 +3,14 @@
         <div class="welcome_box signin_complete">
             <div class="yellow_box">Mis datos</div>
             <div class="purple_box">
-                <div class="error_message hide"><span class="icon"></span><span class="text">Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde</span></div>
-                <div class="success_message"><span class="icon"></span><span class="text">Se actualizaron tus datos exitósamente. <a href="<?php echo BASE_URL . 'recargas' ?>"> Ver beneficios</a> </span></div>
+                <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
+                <?php if (count($flashMessage) > 0) : ?>
+                    <?php foreach ($flashMessage as $msg) : ?>
+                        <?php foreach ($msg as $type => $message) : ?>
+                            <div class="<?php echo $type; ?>_message"><span class="icon"></span><span class="text"><?php echo $message; ?></span></div>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 <?php echo $this->form()->openTag($this->form->setAttributes(array('class' => 'signin_form form_mis_datos', 'data-parsley-validate' => 'data-parsley-validate'))); ?>
                 <?php  $this->formElementerrors()->setMessageOpenFormat('<ul class="parsley-errors-list filled"><li class="parsley-required">')->setMessageCloseString('</li></ul>'); ?>
                     <h3>Tus datos de cuenta</h3>
@@ -60,7 +66,7 @@
                         </div>
                     </div>
                     <div class="bg_purple_change_email">
-                        <p>En caso haya cambiado su cuenta de correo electrónico, <a href="http://coneypark.pe/contactos">Click aquí</a></p>
+                        <p>En caso haya cambiado su cuenta de correo electrónico o algún dato personal haga <a href="http://coneypark.pe/contactos">Click aquí</a></p>
                     </div>
                     <h3>Tus datos personales</h3>
                     <div class="content_form">
