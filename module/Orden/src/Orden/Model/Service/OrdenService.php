@@ -161,7 +161,7 @@ class OrdenService
                     break;
             }
             $return['data']['redirect'] = $response['data']['redirect'];
-            $cartModel->removeProducts();
+            $this->_getCartService()->removeCart();
         } else {
             $return['success'] = false;
             $ordenUpdateData = array(
