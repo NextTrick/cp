@@ -357,17 +357,20 @@ $(function() {
       userAccount: '.user_account',
       menuOptions: '.menu_options',
       userAccountMobile: '.user_option_mobile ul li .user_icon',
-      menuAccountMobile: '.user_option_mobile ul li .menu_options'
+      menuAccountMobile: '.user_option_mobile ul li .menu_options',
+      topPage : 'footer .top'
     };
     catchDom = function() {
       dom.userAccount = $(st.userAccount);
       dom.menuOptions = $(st.menuOptions);
       dom.userAccountMobile = $(st.userAccountMobile);
       dom.menuAccountMobile = $(st.menuAccountMobile);
+      dom.topPage = $(st.topPage);
     };
     suscribeEvents = function() {
       dom.userAccount.on('click', events.openLogoutOption);
       dom.userAccountMobile.on('click', events.openMenu);
+      dom.topPage.on('click', events.moveTop);
     };
     events = {
       openLogoutOption: function(e) {
@@ -386,6 +389,9 @@ $(function() {
         } else {
           dom.menuAccountMobile.addClass('active');
         }
+      },
+      moveTop: function(){
+        $("html, body").animate({ scrollTop: 0 }, "slow");
       }
     };
     functions = {
@@ -605,7 +611,6 @@ $(function() {
       dom.btnChangeImage.on('click', events.changeImage);
       $(window).scroll(function (event) {
         var scroll = $(window).scrollTop();
-        console.log(scroll);
         if(scroll > 200){
           $('.right_options').addClass('moveTop');
         }
