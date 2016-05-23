@@ -137,8 +137,8 @@ class VisaProcessor extends AbstractProcessor
                             'clientReference' => $tempData['nordent'],
                             'confirmationDate' => date_format(date_create_from_format("d/m/Y h:i a",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),
                             'errorCode' => $tempData['cod_accion'],
-                            'errorDescription' => !empty ($errorMessages[$tempData['cod_accion']])
-                                ? $errorMessages[$tempData['cod_accion']] : 'No se encontró mensaje de error para el código'
+                            'errorDescription' => !empty ($errorMessages[$tempData['cod_accion']]['commerceMessage'])
+                                ? $errorMessages[$tempData['cod_accion']]['commerceMessage'] : 'No se encontró mensaje de error para el código'
                         );
                     }
 
