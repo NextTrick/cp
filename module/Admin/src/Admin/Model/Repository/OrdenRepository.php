@@ -43,7 +43,16 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             ));
             $select->join(array('u' => 'usuario_usuario'), 'u.id = o.usuario_id',
                 array('email', 'usu_nombres' => 'nombres', 'usu_paterno' => 'paterno', 'usu_materno' => 'materno',
-                    'di_tipo', 'di_valor'), 'inner');
+                    'di_tipo', 'di_valor'), 'left');
+            
+            $select->join(array('u1' => 'sistema_ubigeo'), 'u1.id = u.pais_id',
+                array('pais_id' => 'id', 'nombrePais' => 'nombre'), 'left');
+            $select->join(array('u2' => 'sistema_ubigeo'), 'u2.id = u.departamento_id',
+                array('departamento_id' => 'id', 'nombreDepa' => 'nombre'), 'left');
+            $select->join(array('u3' => 'sistema_ubigeo'), 'u3.id = u.provincia_id',
+                array('provincia_id' => 'id', 'nombreProv' => 'nombre'), 'left');
+            $select->join(array('u4' => 'sistema_ubigeo'), 'u4.id = u.distrito_id',
+                array('distrito_id' => 'id', 'nombreDist' => 'nombre'), 'left');
 
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
