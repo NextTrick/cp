@@ -87,9 +87,20 @@ class TarjetaService
         return $results;
     }
     
-    public function cronMisTarjetas($usuarioId = null)
+    public function cronMisTarjetas($usuarioId = null, $cguid = null)
     {
-        if (!empty($usuarioId)) {
+        if (!empty($usuarioId) && !empty($cguid)) {
+            $criteria = array(
+                'where' => array(
+                    'usuario_id' => $usuarioId,
+                    'cguid' => $cguid,
+                ),
+            );
+            $row = $this->_repository->findOne($criteria);
+            if (!empty($row)) {
+                $this->_cronTarjeta($row['id'], $row['cguid']);
+            }
+        } elseif (!empty($usuarioId)) {
             $this->_cronMisTarjetas($usuarioId);
         } else {
             $criteria = array(
@@ -108,52 +119,57 @@ class TarjetaService
     
     private function _cronMisTarjetas($usuarioId)
     {
-        $criteria1 = array(
+        $criteria = array(
             'where' => array(
                 'usuario_id' => $usuarioId,
             ),
             'order' => array('fecha_creacion DESC')
         );
-        $rows = $this->_repository->findAll($criteria1);
+        $rows = $this->_repository->findAll($criteria);
         foreach ($rows as $row) {
             if (empty($row['cguid'])) {
                 continue;
             }
             
-            $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $row['cguid']));
-            if ($data['success']) {
-                $data = $data['result'];
-                /*$result = array(
-                    'emoney' => 'S/. 0.00',
-                    'emoneyvalue' => 0,
-                    'bonus' => 'S/. 0.00',
-                    'bonusvalue' => 0,
-                    'promotionbonus' => 'S/. 0.00',
-                    'bonusplusvalue' => 0,
-                    'gamepoints' => 0,
-                    'gamepointsvalue' => 0,
-                    'etickets' => 0,
-                );*/
-                if (!empty($data)) {
-                    $dataIn = array(
-                        'emoney' => $data['emoney'],
-                        'emoneyvalue' => (float)$data['emoneyvalue'],
-                        'bonus' => $data['bonus'],
-                        'bonusvalue' => (float)$data['bonusvalue'],
-                        'promotionbonus' => $data['promotionbonus'], //promotionbonus <equivalente> bonusplusvalue
-                        'bonusplusvalue' => (float)$data['bonusplusvalue'],
-                        'gamepoints' => (int)$data['gamepoints'],
-                        'gamepointsvalue' => (int)$data['gamepointsvalue'],
-                        'etickets' => (float)$data['etickets'],
-                        'fecha_edicion' => date('Y-m-d H:i:s'),
-                    );
-                    
-                    $this->_repository->save($dataIn, $row['id']);
-                }
-            }
+            $this->_cronTarjeta($row['id'], $row['cguid']);
         }
     }
     
+    private function _cronTarjeta($tarjetaId, $cguid)
+    {
+        $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
+        if ($data['success']) {
+            $data = $data['result'];
+            /*$result = array(
+                'emoney' => 'S/. 0.00',
+                'emoneyvalue' => 0,
+                'bonus' => 'S/. 0.00',
+                'bonusvalue' => 0,
+                'promotionbonus' => 'S/. 0.00',
+                'bonusplusvalue' => 0,
+                'gamepoints' => 0,
+                'gamepointsvalue' => 0,
+                'etickets' => 0,
+            );*/
+            if (!empty($data)) {
+                $dataIn = array(
+                    'emoney' => $data['emoney'],
+                    'emoneyvalue' => (float)$data['emoneyvalue'],
+                    'bonus' => $data['bonus'],
+                    'bonusvalue' => (float)$data['bonusvalue'],
+                    'promotionbonus' => $data['promotionbonus'], //promotionbonus <equivalente> bonusplusvalue
+                    'bonusplusvalue' => (float)$data['bonusplusvalue'],
+                    'gamepoints' => (int)$data['gamepoints'],
+                    'gamepointsvalue' => (int)$data['gamepointsvalue'],
+                    'etickets' => (float)$data['etickets'],
+                    'fecha_edicion' => date('Y-m-d H:i:s'),
+                );
+
+                $this->_repository->save($dataIn, $tarjetaId);
+            }
+        }
+    }
+
     public function getRepository()
     {
         return $this->_repository;
