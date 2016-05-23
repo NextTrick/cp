@@ -161,7 +161,7 @@ class UsuarioService
             }
             
             //sincronizar tarjetas registrados por otro sistema
-            //$this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
+            $this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
         }
         return $result;
     }
@@ -173,7 +173,9 @@ class UsuarioService
             $cards = $result['result']['cards'];
             if (!empty($cards)) {
                 $repositoryTar = $this->_getTarjetaService()->getRepository();
+                $index = 0;
                 foreach ($cards as $card) {
+                    $index++;
                     $row = $repositoryTar->findOne(array(
                         'where' => array('usuario_id' => $usuarioId, 'cguid' => $card['cguid'])
                     ));
@@ -185,6 +187,7 @@ class UsuarioService
                     } else {
                         $repositoryTar->save(array(
                             'usuario_id' => $usuarioId,
+                            'nombre' => 'Tarjeta ' . $index,
                             'numero' => $card['number'],
                             'cguid' => $card['cguid'],
                             'fecha_creacion' => date('Y-m-d H:i:s'),
