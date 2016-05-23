@@ -36,7 +36,7 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
             $selectInterno->join(array("p" => "paquete_paquete"), "p.id = od.paquete_id",
                 array("titulo1", 'titulo2', 'tipo'), 'left');
             $selectInterno->join(array("o" => "orden_orden"), "o.id = od.orden_id",
-                array("pago_estado", 'codigo'), 'inner');
+                array("pago_estado", 'codigo', 'pago_fecha_confirmacion'), 'inner');
             $selectInterno->join(array("u" => "usuario_usuario"), "u.id = o.usuario_id",
                 array("email"), 'left');
             $selectInterno->join(array("t" => "tarjeta_tarjeta"), "t.id = od.tarjeta_id",
