@@ -28,11 +28,14 @@ class CarritoController extends SecurityWebController
         $catidades = array(1 => '01', 2 => '02', 3 => '03', 4 => '04', 5 => '05');
 
         $usuarioTarjetas = $this->_getTarjetaService()->getDdlTarjetas($usuario->id);
+
+        $promociones = $this->_getPaqueteService()->grillaPromociones(GRID_PROMOCIONES_CARRITO, 0);
         
         $view = new ViewModel();
         $view->setVariable('cartModel', $cartModel);
         $view->setVariable('catidades', $catidades);
         $view->setVariable('usuarioTarjetas', $usuarioTarjetas);
+        $view->setVariable('promociones', $promociones);
         $view->setVariable('urlImg', $config['fileDir']['paquete_paquete']['down']);
         return $view;
     }

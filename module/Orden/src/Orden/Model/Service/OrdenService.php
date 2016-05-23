@@ -118,8 +118,6 @@ class OrdenService
         $ordenId = $this->getRepository()->save($data);
         $this->setCodigo($ordenId);
 
-        $this->getRepository()->save($data);
-
         $this->_saveDetalleOrden($ordenId, $cDate);
 
         $paymentProcessordata = array(
@@ -163,6 +161,7 @@ class OrdenService
                     break;
             }
             $return['data']['redirect'] = $response['data']['redirect'];
+            $cartModel->removeProducts();
         } else {
             $return['success'] = false;
             $ordenUpdateData = array(
