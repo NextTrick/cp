@@ -17,7 +17,7 @@
                 <div class="pay_box_white confirmation_box">
                     <h2>¡FELICITACIONES!</h2>
                     <P><?php echo $this->ordenData['nombres']; ?>, ¡tu recarga fue realizada con éxito!</P>
-                    <h5>Número de recarga: <?php echo $this->ordenData['id']; ?></h5>
+                    <h5>Número de recarga: <?php echo $this->ordenData['codigo']; ?></h5>
                     <div class="resume">
                         <div class="head">
                             <ul>
@@ -41,7 +41,7 @@
                                     </li>
                                     <li class="cantidad">
                                         <span class="label">Cantidad</span>
-                                        <span class="desc">1</span>
+                                        <span class="desc"><?php echo $ordenDetalle['cantidad']; ?></span>
                                     </li>
                                     <li class="precio">
                                         <span class="label">Precio</span>

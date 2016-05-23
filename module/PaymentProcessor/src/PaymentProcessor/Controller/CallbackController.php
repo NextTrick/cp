@@ -13,7 +13,8 @@ class CallbackController extends AbstractActionController
 {
     public function pagoEfectivoAction()
     {
-        $params = $this->getRequest()->getPost();        
+        $params = $this->getRequest()->getPost();
+        
         $paymentProcessor = new PaymentProcessor(PagoEfectivoProcessor::ALIAS,
                 $this->getServiceLocator());        
         $response = $paymentProcessor->processCallback($params);

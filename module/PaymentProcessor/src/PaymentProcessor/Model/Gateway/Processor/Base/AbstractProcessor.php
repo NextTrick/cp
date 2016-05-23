@@ -30,7 +30,6 @@ abstract class AbstractProcessor
     
     public function saveResquestHistorial($data)
     {
-        return;
         $client = $this->ws->getClient();
         $request = '';
         $response = null;        
@@ -45,7 +44,7 @@ abstract class AbstractProcessor
 
         if (empty($data['ordenId'])) {
             if (!empty($data['reference'])) {
-                $dataDb = $this->getOrderService()->getRepository()
+                $dataDb = $this->getOrdenService()->getRepository()
                     ->getIdByPagoReference($data['reference']);
 
                 if (!empty($dataDb)) {
@@ -60,6 +59,7 @@ abstract class AbstractProcessor
                 'response' => !empty ($response) ? serialize($response) : null,
                 'orden_id' => $data['ordenId'],
                 'method' => $data['method'],
+                'fecha_creacion' => date('Y-m-d H:i:s'),
                 'pago_referencia' => !empty ($data['reference']) ? $data['reference'] : null,
             );
 

@@ -35,7 +35,9 @@
     </div>
 </div>
 <div class="bottom_card">
-    <div class="price">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
+    <?php $noEmpty = Common\Helpers\Util::noEmptyDecimal($row['emoneyvalue']); ?>
+    <?php $classCero = $noEmpty ? '' : 'cero'; ?>
+    <div class="price <?php echo $classCero; ?>">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
     <a href="javascript:;" class="watch_more">Ver más</a>
     <a href="<?php echo BASE_URL ?>recargas/<?php echo $row['codigo']; ?>" class="recharge">Recargar</a>
 </div>

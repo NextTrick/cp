@@ -23,7 +23,32 @@ class OrdenService
 {
     protected $_repository = null;
     protected $_sl         = null;
-    
+
+    CONST TIPO_COMPROBANTE_BOLETA       = 1;
+    CONST TIPO_COMPROBANTE_FACTURA      = 2;
+    CONST TIPO_COMPROBANTE_NAME_BOLETA  = 'Boleta';
+    CONST TIPO_COMPROBANTE_NAME_FACTURA = 'Factura';
+
+    CONST TIPO_DOCUMENTO_RUC      = 1;
+    CONST TIPO_DOCUMENTO_DNI      = 2;
+    CONST TIPO_DOCUMENTO_NAME_RUC = 'RUC';
+    CONST TIPO_DOCUMENTO_NAME_DNI = 'DNI';
+
+    CONST METODO_PAGO_VISA        = 1;
+    CONST METODO_PAGO_PE          = 2;
+    CONST METODO_PAGO_MASTER      = 3;
+    CONST METODO_PAGO_NAME_VISA   = 'VISA';
+    CONST METODO_PAGO_NAME_PE     = 'PE';
+    CONST METODO_PAGO_NAME_MASTER = 'Master Card';
+
+    CONST ESTADO_PAGO_ERROR          = 1;
+    CONST ESTADO_PAGO_PAGADO         = 2;
+    CONST ESTADO_PAGO_PENDIENTE      = 3;
+    CONST ESTADO_PAGO_EXPIRADO       = 4;
+    CONST ESTADO_PAGO_NAME_ERROR     = 'Error';
+    CONST ESTADO_PAGO_NAME_PAGADO    = 'Pagado';
+    CONST ESTADO_PAGO_NAME_PENDIENTE = 'Pendiente';
+    const ESTADO_PAGO_NAME_EXPIRADO  = 'Expirado';
 
     public function __construct($repository, $serviceLocator)
     {
@@ -242,25 +267,34 @@ class OrdenService
             $ordenData = $this->getRepository()->getIdByPagoReference($reference);
             if (!empty($ordenData)) {
                 $ordenId = $ordenData['id'];
-                if ($response['success']) {
-                    $ordenUpdateData = array(
-                        'pago_error' => $response['data']['errorCode'],
-                        'pago_error_detalle' => $response['data']['errorDescription'],
-                    );
+                if ($ordenData['pago_estado'] != OrdenRepository::PAGO_ESTADO_PAGADO) {
+                    if ($response['success']) {
+                        $ordenUpdateData = array(
+                            'pago_error' => $response['data']['errorCode'],
+                            'pago_error_detalle' => $response['data']['errorDescription'],
+                        );
 
-                    if (!empty($response['data']['status'])) {
-                        $ordenUpdateData['pago_estado'] =  $response['data']['status'];
-                    }
-
-                    if (!empty($response['data']['confirmationDate'])) {
-                        $ordenUpdateData['pago_fecha_confirmacion'] =  $response['data']['confirmationDate'];
-                    }
-                    $this->getRepository()->save($ordenUpdateData, $ordenId);
-
-                    if (!empty($response['data']['status'])) {
-                        if ($response['data']['status'] == OrdenRepository::PAGO_ESTADO_PAGADO) {
-                            $this->setCreditPurchase($ordenId);
+                        if (!empty($response['data']['status'])) {
+                            $ordenUpdateData['pago_estado'] = $response['data']['status'];
                         }
+
+                        if (!empty($response['data']['confirmationDate'])) {
+                            $ordenUpdateData['pago_fecha_confirmacion'] = date('Y-m-d H:i:s');
+                        }
+                        $this->getRepository()->save($ordenUpdateData, $ordenId);
+
+                        if (!empty($response['data']['status'])) {
+                            if ($response['data']['status'] == OrdenRepository::PAGO_ESTADO_PAGADO) {
+                                $this->setCreditPurchase($ordenId);
+                            }
+                        }
+                    } else {
+                        $ordenUpdateData = array(
+                            'pago_error' => $response['error']['code'],
+                            'pago_error_detalle' => $response['error']['message'],
+                        );
+
+                        $this->getRepository()->save($ordenUpdateData, $ordenId);
                     }
                 }
             }

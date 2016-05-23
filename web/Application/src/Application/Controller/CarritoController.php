@@ -85,7 +85,7 @@ class CarritoController extends SecurityWebController
                 } else {
                     //Adiciona la cantidad y remueve el producto asocciado a la tarjeta antigua
                     $cartModel = $this->_getCartService()->addCart($producto, $tarjetaCode, true);
-                    $this->_getCartService()->removeCart($oldTarjetaCode);
+                    $this->_getCartService()->removeCart($oldTarjetaCode, $productoId);
                 }
                 
                 if (!empty($cartModel)) {
@@ -156,11 +156,8 @@ class CarritoController extends SecurityWebController
         if (empty($cartModel)) {
             return $this->redirect()->toRoute('web-carrito', array('controller' => 'index'));
         }
-        
-        $codPais = \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU;
-        $codDepa = \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA;
-        $codProv = \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA;
-        $distritos = $this->_getUbigeoService()->getSoloDistritos($codPais, $codDepa, $codProv);
+
+        $distritos = $this->_getUbigeoService()->getSoloDistritosLimaYCallao();
 
         $criteria = array(
             'where' => array('usuario_id' => $usuario->id),

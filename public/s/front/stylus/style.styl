@@ -245,6 +245,8 @@ header
 	width 90px
 	height 334px
 	background url(../images/bg_rectangle_right.png)
+	&.moveTop
+		top 20px
 	ul
 		margin 0
 		padding 0
@@ -461,6 +463,8 @@ section
 			transform rotate(-3deg)
 			right 10px
 			left auto
+		.top_bar
+			overflow hidden
 		p
 			margin-bottom 20px
 			font-size 20px
@@ -540,7 +544,6 @@ section
 					width 50%
 					height 220px
 					background #F29224
-					padding 20px
 					box-sizing border-box
 					.image
 						img
@@ -849,7 +852,7 @@ section
 									display inline-block
 									font-size 12px
 									margin-left 5px
-									padding-top 2px
+									padding-top 3px
 									box-sizing border-box
 									&.active
 										background #777777
@@ -899,10 +902,12 @@ section
 								float left
 								font-size 14px
 								margin-top 6px
+								border-right 1px solid lightgray
+								padding-right 5px
 							&.recharge
 								float right
 								font-size 16px
-								margin-left 10px
+								margin-left 5px
 		.recargas_content
 			.offers
 				padding-bottom 30px
@@ -1386,6 +1391,7 @@ section
 						margin-top 10px
 						font-size 16px
 						font-weight bold
+						margin-right 10%
 				.info
 					width 620px
 					margin 50px auto 50px
@@ -1464,6 +1470,39 @@ section
 		float left
 	.right
 		float right
+	.offers_box_three
+		margin 20px 0
+		overflow hidden
+		.col_3
+			width 32%
+			.box_white
+				background white
+				border-radius 15px
+				color black
+				min-height 258px
+				p
+					padding 8px
+					text-align left
+					font-size 18px
+					margin 0
+					&.breadcrumb
+						text-align left
+						color #FF0000
+						font-size 16px
+						a
+							color #AAAAAA
+							font-size 14px
+							text-decoration none
+			button
+				margin-top 10px
+				width 100%
+			&:first-child
+				margin-right 2%	
+			.image
+				height 145px
+				overflow hidden
+				img
+					width 100%
 	.offers_box
 		margin-top 40px
 		.col_3
@@ -1522,6 +1561,8 @@ section
 				margin 30px auto
 				input
 					height 36px
+				select
+					padding-left 10px
 		&.form_mis_datos
 			.bg_purple_change_email
 				background #310041
@@ -1544,6 +1585,7 @@ section
 							border-radius 50px
 							text-align center
 							padding-top 6px
+							overflow hidden
 					.right.user_image_right
 						width 68%
 						.image_info
@@ -1560,6 +1602,11 @@ section
 							cursor pointer
 							position relative
 							top -35px
+					.pass_info
+						margin-top 10px
+						font-size 13px
+						display block
+						text-align left
 			.disabled
 				disabled true
 				pointer-events none
@@ -1576,6 +1623,13 @@ section
 	padding 10px 20px
 	position relative
 	bottom -24px
+	.icon_arrow 
+		cursor pointer
+		display none
+		margin 0 auto 10px
+		sprite($arrow_bottom_white)
+		&.active
+			sprite($arrow_top_white)	
 	.select
 		display inline-block
 		margin 0px 20px 0 10px
@@ -1615,6 +1669,7 @@ section
 			&.total
 				color #FFBE00
 				margin-left 10px
+		
 	button
 		width 250px
 		border-radius 20px
@@ -1682,10 +1737,10 @@ footer
 			font-size 28px
 			font-weight bold
 		input
-			width 400px
+			width 100%
 		button
 		a
-			width 400px
+			width 100%
 			text-decoration none
 			display block
 		&.modal_recovery_content
@@ -1876,6 +1931,10 @@ i[class*=" icon-"]
 	
 	section
 		padding-top 20px
+		input
+			text-align left
+			&.center
+				text-align center
 		.welcome_box
 			padding 8px
 			h2
@@ -1907,6 +1966,16 @@ i[class*=" icon-"]
 				width 100%
 				img
 					width 100%
+		.offers_box_three
+			.col_3
+				display block
+				float none
+				width 100%
+				margin-bottom 10px
+				.box_white
+					border-radius 18px
+			&.carrito_offers
+				padding 0 15px
 		.app_box
 			.purple_box
 				border-radius 0
@@ -1941,7 +2010,6 @@ i[class*=" icon-"]
 						padding-right 0
 						border-bottom 1px dashed lightgray
 					>.right
-						padding-left 0
 						.credit_cards
 							padding-bottom 15px
 							border-bottom 1px dashed lightgray
@@ -2064,6 +2132,8 @@ i[class*=" icon-"]
 						margin-top 45px
 						.col_3
 							margin-bottom 45px
+							&.empty
+								display none
 				.options
 					padding 10px
 					.col_3
@@ -2101,6 +2171,8 @@ i[class*=" icon-"]
 								border-radius 18px
 				.cards_content
 					.col_3
+						&.empty
+							display none
 						&.add_card
 							.tooltip
 								top 25px
@@ -2151,17 +2223,33 @@ i[class*=" icon-"]
 		height auto
 		text-align center
 		border-radius 0
+		position fixed
+		z-index 99
+		bottom 0
+		.box_mobile
+			position relative
+			top -40px
+			background #370135
+			border-top-left-radius 40px
+			border-top-right-radius 40px
+			padding 10px 0
+		.icon_arrow
+			display block
 		span
 			&.text
 				display block
 				text-align center
 				margin-bottom 10px
+				&.hide
+					display none
 			&.bg
 				display block
 				width 100%
 				height auto
 				text-align center
 				margin 10px 0
+				&.hide
+					display none
 				.text
 					float none
 					width auto
@@ -2170,6 +2258,11 @@ i[class*=" icon-"]
 					margin-left 0
 		button
 			position static
+			margin 0 auto
+			&.hide
+				display none
+	.bg_purple_dark
+		display none
 							
 	footer
 		background white !important
@@ -2200,6 +2293,8 @@ i[class*=" icon-"]
 			margin-top 150px !important
 			width 52%
 			height 450px
+			.text_box
+				height 380px
 	
 
 
