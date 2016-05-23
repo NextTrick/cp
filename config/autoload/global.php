@@ -28,6 +28,7 @@ return array(
         'send_mail' => true,
         'local_log' => true,        
     ),
+    /*
     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
@@ -38,8 +39,7 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),
-    /*
+    ),*/
      'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
@@ -51,7 +51,6 @@ return array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
     ),
-    */
     'cacheCart' => array(
         'adapter' => 'filesystem',
         'options' => array(
