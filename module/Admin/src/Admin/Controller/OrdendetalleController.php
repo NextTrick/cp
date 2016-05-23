@@ -86,7 +86,7 @@ class OrdendetalleController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A1:K1')->applyFromArray($style['cabecera']);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:R1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Id');
             $sheet->setCellValue('B1', 'Cód. Transacción');
@@ -147,7 +147,7 @@ class OrdendetalleController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A2:K'.($index-1))->applyFromArray($style['body']);
+            $objPHPExcel->getActiveSheet()->getStyle('A2:R'.($index-1))->applyFromArray($style['body']);
             $nameFile = 'operaciones'. trim($date->format('Y-m-d_His')).'.xlsx';
 
 
