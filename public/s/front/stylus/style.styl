@@ -503,6 +503,13 @@ section
 		.content
 			overflow hidden
 			padding 20px 20px 0
+			span
+				&.or_icon
+					sprite($or_icon)
+					display block
+					position absolute
+					left 47%
+					top 130px
 			.left
 			.right
 				padding 0 40px 0
@@ -1560,6 +1567,13 @@ section
 				margin-top 5px
 		&.hide
 			display none
+	.success_message
+		background #0F9E6B
+		opacity 1
+		span
+			&.icon
+				margin-top 5px
+				sprite($success_icon)
 	.form_control
 		margin-bottom 10px
 	form
@@ -2014,6 +2028,12 @@ i[class*=" icon-"]
 						float none
 						width 100%
 						display block
+					span
+						&.or_icon
+							sprite($or_icon_mobile)
+							display block
+							margin 20px auto 0
+							position static
 				.options
 					.col_3
 						display block
