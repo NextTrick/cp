@@ -16,3 +16,10 @@ span.success {color: green;}
 .skin-red .main-header .navbar { background-color: #952283; }
 .skin-red .main-header li.user-header { background-color: #861F76; }
 .skin-red .sidebar-menu > li:hover > a, .skin-red .sidebar-menu > li.active > a { border-left-color:  #952283; }
+
+#formBuscar .control-label { width: 100px; margin-right: 10px; display: inline-block; }
+#formBuscar .form-group { padding-right: 20px!important; }
+#formBuscar select { width: 166px!important; }
+#formBuscar .filter-title {display: block; border-bottom: 1px solid #eee; padding: 5px 0;}
+#formBuscar .filter-one { display: block; padding-top: 5px; width: 50%; float: left; }
+#formBuscar .filter-two { display: block; padding-top: 5px; width: 50%; float: left; }
