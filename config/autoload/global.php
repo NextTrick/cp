@@ -39,7 +39,8 @@ return array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
     ),
-    /*'db' => array(
+    /*
+     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'pasarelaconeydev',
@@ -49,7 +50,8 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),*/
+    ),
+    */
     'cacheCart' => array(
         'adapter' => 'filesystem',
         'options' => array(

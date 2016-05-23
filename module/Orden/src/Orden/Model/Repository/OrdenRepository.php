@@ -95,7 +95,7 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 
         $criteria = array(
             'where'   => $where,
-            'columns' => array('id')
+            'columns' => array('id', 'pago_estado')
         );
 
         return $this->findOne($criteria);
