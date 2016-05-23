@@ -355,6 +355,12 @@ header nav ul li.logo img {
   height: 334px;
   background: url("../images/bg_rectangle_right.png");
 }
+.right_options.normal {
+  display: block;
+}
+.right_options.mobile {
+  display: none;
+}
 .right_options.moveTop {
   top: 20px;
 }
@@ -378,6 +384,7 @@ header nav ul li.logo img {
 .right_options ul li a {
   font-size: 10px;
   text-decoration: none;
+  color: #646473;
 }
 .right_options ul li a span.icon {
   display: block;
@@ -396,7 +403,7 @@ header nav ul li.logo img {
 }
 .right_options ul li a span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -252px 0px;
+  background-position: 0px -136px;
   width: 120px;
   height: 66px;
 }
@@ -422,7 +429,7 @@ header nav ul li.logo img {
 }
 .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -142px -202px;
+  background-position: -174px -202px;
   width: 32px;
   height: 32px;
 }
@@ -435,7 +442,7 @@ header nav ul li.logo img {
 }
 .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -174px -202px;
+  background-position: -142px -202px;
   width: 32px;
   height: 32px;
 }
@@ -557,6 +564,22 @@ section .welcome_box p.medium span {
 }
 section .welcome_box p.small {
   font-size: 18px;
+}
+section .welcome_box .how_to_signin {
+  margin-top: 40px;
+  text-align: center;
+}
+section .welcome_box .how_to_signin .col_4 {
+  display: inline-block;
+  vertical-align: top;
+  width: 24%;
+}
+section .welcome_box .how_to_signin .col_4 .image {
+  height: 110px;
+}
+section .welcome_box .how_to_signin .col_4 p {
+  margin: 0 auto;
+  width: 90%;
 }
 section .app_box {
   padding: 40px 0 50px;
@@ -694,10 +717,15 @@ section .purple_box .options .col_3.right {
 section .purple_box .options .col_3 .circle {
   width: 150px;
   height: 150px;
-  border-radius: 200px;
+  border-radius: 100px;
   background: #410041;
   display: block;
   margin: 0 auto;
+  overflow: hidden;
+}
+section .purple_box .options .col_3 .circle img {
+  width: 100%;
+  height: 100%;
 }
 section .purple_box .options .col_3 p {
   width: 85%;
@@ -901,7 +929,7 @@ section .purple_box .cart_box .cart {
 }
 section .purple_box .cart_box .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: 0px -243px;
+  background-position: -45px -243px;
   width: 23px;
   height: 20px;
   display: inline-block;
@@ -1034,7 +1062,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -52px -202px;
+  background-position: 0px -202px;
   width: 52px;
   height: 41px;
   display: block;
@@ -1104,7 +1132,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -57px -243px;
+  background-position: -102px -243px;
   width: 18px;
   height: 14px;
 }
@@ -1414,19 +1442,19 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
   background-image: url("../images/sprite.png");
-  background-position: -120px -136px;
+  background-position: -132px -66px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
   background-image: url("../images/sprite.png");
-  background-position: -132px -66px;
+  background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa {
   background-image: url("../images/sprite.png");
-  background-position: 0px -136px;
+  background-position: -252px 0px;
   width: 120px;
   height: 66px;
 }
@@ -2136,13 +2164,13 @@ section form.form_mis_datos .disabled {
   display: none;
   margin: 0 auto 10px;
   background-image: url("../images/sprite.png");
-  background-position: -40px -243px;
+  background-position: -85px -243px;
   width: 17px;
   height: 17px;
 }
 .bottom_bar .icon_arrow.active {
   background-image: url("../images/sprite.png");
-  background-position: -23px -243px;
+  background-position: -68px -243px;
   width: 17px;
   height: 17px;
 }
@@ -2204,6 +2232,17 @@ section form.form_mis_datos .disabled {
 }
 footer {
   display: block;
+}
+footer .top {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -243px;
+  width: 45px;
+  height: 44px;
+  display: none;
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  cursor: pointer;
 }
 footer img.bg {
   width: 100%;
@@ -2510,7 +2549,30 @@ i[class*=" icon-"] {
     font-size: 24px;
   }
   .right_options {
+    display: block;
+    z-index: 99;
+    background: #eceefb;
+    width: 90%;
+    height: 90px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    position: static;
+    box-shadow: -1px -1px 2px #808080;
+  }
+  .right_options.normal {
     display: none;
+  }
+  .right_options.mobile {
+    display: block;
+    margin: 0 auto;
+  }
+  .right_options ul {
+    padding: 0;
+    text-align: center;
+  }
+  .right_options ul li {
+    display: inline-block;
+    margin: 10px;
   }
   section {
     padding-top: 20px;
@@ -2523,6 +2585,10 @@ i[class*=" icon-"] {
   }
   section .welcome_box {
     padding: 8px;
+  }
+  section .welcome_box .how_to_signin .col_4 {
+    margin-top: 20px;
+    width: 49%;
   }
   section .welcome_box h2 {
     font-size: 24px;
@@ -2923,9 +2989,11 @@ i[class*=" icon-"] {
   }
   footer {
     background: #fff !important;
-    height: 120px;
     margin-top: 40px;
     position: relative;
+  }
+  footer .top {
+    display: block;
   }
   footer img.bg {
     display: none;
