@@ -8,7 +8,7 @@ define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
 define('URL_IMAGE_CMS', rtrim(URL_RESOURCES, '/').'/files/contenido/');
 
-define('VERSION_STATICO', '1.6');
+define('VERSION_STATICO', '1.7');
 
 define('OK_CREAR', 'El registro se creó correctamente');
 define('OK_EDITAR', 'El registro se editó correctamente');
