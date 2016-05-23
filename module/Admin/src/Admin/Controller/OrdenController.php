@@ -27,6 +27,7 @@ class OrdenController extends SecurityAdminController
             $form->setData($this->params()->fromPost());
 
             $criteria  = $this->_getOrdenService()->getDataCriteria($this->params()->fromPost());
+            //var_dump($criteria);exit;
             $gridList  = $this->_getOrdenService()->getRepository()->search($criteria);
             $countList = !empty($gridList)? count($gridList): 0;
 

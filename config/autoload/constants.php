@@ -8,7 +8,7 @@ define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
 define('URL_IMAGE_CMS', rtrim(URL_RESOURCES, '/').'/files/contenido/');
 
-define('VERSION_STATICO', '1.6');
+define('VERSION_STATICO', '1.7');
 
 define('OK_CREAR', 'El registro se creó correctamente');
 define('OK_EDITAR', 'El registro se editó correctamente');
@@ -22,7 +22,8 @@ define('AC_EDITAR', 'editar');
 
 define('NO_DATA', 'No existe data');
 define('ERROR_303', 'No tiene acceso.');
-define('ERROR_VALIDACION', 'Error de validación.');
+define('ERROR_VALIDACION', 'Error de validación');
+define('ERROR_VALIDACION_PAGOS', 'Por favor ingrese correctamente los datos necesarios');
 define('ERROR_TOKEN', 'Token invalido.');
 
 define('LIMIT_BUSCAR', 100);

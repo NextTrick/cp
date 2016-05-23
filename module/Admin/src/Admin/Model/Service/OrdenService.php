@@ -45,11 +45,14 @@ class OrdenService
 
     public function getDataCriteria($params)
     {
+        $order = array('pago_fecha_confirmacion DESC');
+        
         $criteria = array(
             'whereLike'    => null,
             'limit'        => null,
             'where'        => null,
-            'whereBetween' => null
+            'whereBetween' => null,
+            'order'        => $order
         );
 
         if (!empty($params)) {
@@ -72,11 +75,14 @@ class OrdenService
                     )
             );
 
+            
+            
             $criteria = array(
                 'whereLike'    => $paramsLike,
                 'limit'        => LIMIT_BUSCAR,
                 'where'        => $paramsWhere,
-                'whereBetween' => $betwween
+                'whereBetween' => $betwween,
+                'order'        => $order
             );
         }
 

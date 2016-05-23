@@ -145,14 +145,16 @@ class UsuarioService
             $res = $this->_getTrueFiTarjetaService()->addCard($dataServ);
             if ($res['success']) {
                 $card = $res['result'];
-                $save = $this->_getTarjetaService()->getRepository()->save(array(
+                $tarjetaId = $this->_getTarjetaService()->getRepository()->save(array(
                     'numero' => $data['numero'],
                     'usuario_id' => $data['usuario_id'],
                     'nombre' => $data['nombre'],
                     'cguid' => $card['cguid'],
                     'fecha_creacion' => date('Y-m-d H:i:s'),
+                    'fecha_actualizacion' => date('Y-m-d H:i:s'),
                 ));
-                if (!empty($save)) {
+                if (!empty($tarjetaId)) {
+                    $this->_getTarjetaService()->cronTarjetas($card['cguid']);
                     $result['success'] = true;
                     $result['message'] = null;
                 }
@@ -191,8 +193,10 @@ class UsuarioService
                             'numero' => $card['number'],
                             'cguid' => $card['cguid'],
                             'fecha_creacion' => date('Y-m-d H:i:s'),
+                            'fecha_actualizacion' => date('Y-m-d H:i:s'),
                             'estado_truefi' => $card['status'],
                         ));
+                        $this->_getTarjetaService()->cronTarjetas($row['cguid']);
                     }
                 }
                 return true;
