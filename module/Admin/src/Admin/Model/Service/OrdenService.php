@@ -107,7 +107,7 @@ class OrdenService
         }
 
         if (self::TIPO_DOCUMENTO_DNI == $tipoDocumento) {
-            $result = self::TIPO_DOCUMENTO_DNI;
+            $result = self::TIPO_DOCUMENTO_NAME_DNI;
         } elseif (self::TIPO_DOCUMENTO_RUC == $tipoDocumento) {
             $result = self::TIPO_DOCUMENTO_NAME_RUC;
         }
