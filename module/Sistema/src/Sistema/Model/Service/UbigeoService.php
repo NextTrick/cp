@@ -13,6 +13,8 @@ class UbigeoService
     const COD_PAIS_PERU = 'PE';
     const COD_DEPA_LIMA = '15';
     const COD_PROV_LIMA = '01';
+    const COD_DEPA_CALLAO = '07';
+    const COD_PROV_CALLAO = '01';
     
     protected $_repository = null;
     protected $_sl         = null;
@@ -87,6 +89,7 @@ class UbigeoService
         } else {
             $where->notEqualTo('cod_prov', '00');
         }
+        $where->notEqualTo('cod_dist', '00');
         
         $criteria = array(
             'where'   => $where,
@@ -96,18 +99,14 @@ class UbigeoService
         return $this->getRepository()->findPairs($criteria);
     }
     
-    public function getSoloDistritos($codPais, $codDepartamento, $codProvincia = null)
+    public function getSoloDistritosLimaYCallao()
     {
         $where = new \Zend\Db\Sql\Where();
-        $where->equalTo('cod_pais', $codPais);
-        $where->equalTo('cod_depa', $codDepartamento);
-        
-        if (!empty($codProvincia)) {
-            $where->equalTo('cod_prov', $codProvincia);
-        } else {
-            $where->notEqualTo('cod_prov', '00');
-        }
-        
+        $where->equalTo('cod_pais', self::COD_PAIS_PERU);
+        $where->in('cod_depa', array(self::COD_DEPA_LIMA, self::COD_DEPA_CALLAO));
+        $where->in('cod_prov', array(self::COD_PROV_LIMA, self::COD_PROV_CALLAO));
+        $where->notEqualTo('cod_dist', '00');
+
         $criteria = array(
             'where'   => $where,
             'columns' => array('id', 'nombre'),

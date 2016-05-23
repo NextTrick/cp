@@ -156,11 +156,8 @@ class CarritoController extends SecurityWebController
         if (empty($cartModel)) {
             return $this->redirect()->toRoute('web-carrito', array('controller' => 'index'));
         }
-        
-        $codPais = \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU;
-        $codDepa = \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA;
-        $codProv = \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA;
-        $distritos = $this->_getUbigeoService()->getSoloDistritos($codPais, $codDepa, $codProv);
+
+        $distritos = $this->_getUbigeoService()->getSoloDistritosLimaYCallao();
 
         $criteria = array(
             'where' => array('usuario_id' => $usuario->id),
