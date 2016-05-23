@@ -151,9 +151,10 @@ class UsuarioService
                     'nombre' => $data['nombre'],
                     'cguid' => $card['cguid'],
                     'fecha_creacion' => date('Y-m-d H:i:s'),
+                    'fecha_actualizacion' => date('Y-m-d H:i:s'),
                 ));
                 if (!empty($tarjetaId)) {
-                    $this->_getTarjetaService()->cronTarjeta($tarjetaId, $card['cguid']);
+                    $this->_getTarjetaService()->cronTarjetas($card['cguid']);
                     $result['success'] = true;
                     $result['message'] = null;
                 }
@@ -192,8 +193,10 @@ class UsuarioService
                             'numero' => $card['number'],
                             'cguid' => $card['cguid'],
                             'fecha_creacion' => date('Y-m-d H:i:s'),
+                            'fecha_actualizacion' => date('Y-m-d H:i:s'),
                             'estado_truefi' => $card['status'],
                         ));
+                        $this->_getTarjetaService()->cronTarjetas($row['cguid']);
                     }
                 }
                 return true;
@@ -245,54 +248,6 @@ class UsuarioService
         return $criteria;
     }
 
-    public function cronMisTarjetas($usuarioId = null, $cguid = null)
-    {
-        if (!empty($usuarioId) && !empty($cguid)) {
-            $criteria = array(
-                'where' => array(
-                    'usuario_id' => $usuarioId,
-                    'cguid' => $cguid,
-                ),
-            );
-            $row = $this->_getTarjetaService()->getRepository()->findOne($criteria);
-            if (!empty($row)) {
-                $this->_getTarjetaService()->cronTarjeta($row['id'], $row['cguid']);
-            }
-        } elseif (!empty($usuarioId)) {
-            $this->_cronMisTarjetas($usuarioId);
-        } else {
-            $criteria = array(
-                'where' => array(
-
-                ),
-                'limit' => '10'
-            );
-            $usuarios = $this->_repository->findAll($criteria);
-            
-            foreach ($usuarios as $row) {
-                $this->_cronMisTarjetas($row['id']);
-            }
-        }
-    }
-    
-    private function _cronMisTarjetas($usuarioId)
-    {
-        $criteria = array(
-            'where' => array(
-                'usuario_id' => $usuarioId,
-            ),
-            'order' => array('fecha_creacion DESC')
-        );
-        $rows = $this->_getTarjetaService()->getRepository()->findAll($criteria);
-        foreach ($rows as $row) {
-            if (empty($row['cguid'])) {
-                continue;
-            }
-            
-            $this->_getTarjetaService()->cronTarjeta($row['id'], $row['cguid']);
-        }
-    }
-    
     public function getEstados()
     {
         return array(
