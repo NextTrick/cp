@@ -30,7 +30,22 @@ class Module
         
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $translatorI = new \Zend\I18n\Translator\Translator();
+        $translatorI->setLocale('es');
+
+
+        $translator = new \Zend\Mvc\I18n\Translator($translatorI);
+        $translator->addTranslationFile(
+            'phpArray',
+            './vendor/zendframework/zendframework/resources/languages/es/Zend_Validate.php',
+            'default',
+            'es'
+        );
+
+        \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
     }
+
     public function bootstrapSession($e)
     {
         $session = $e->getApplication()

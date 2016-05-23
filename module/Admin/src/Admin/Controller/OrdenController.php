@@ -115,7 +115,7 @@ class OrdenController extends SecurityAdminController
             $sheet->setCellValue('Z1', 'Usuario Distrito');
 
             $sheet->setCellValue('AA1', 'Pago Error');
-            $sheet->setCellValue('BB1', 'Pago Detalle Error');
+            $sheet->setCellValue('AB1', 'Pago Detalle Error');
 
 
             $index = 2;
@@ -144,10 +144,10 @@ class OrdenController extends SecurityAdminController
                 $sheet->setCellValue('U'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['di_tipo']));
                 $sheet->setCellValue('V'.$index, $reg['di_valor']);
 
-                $sheet->setCellValue('W'.$index, $reg['usu_nombres']);
-                $sheet->setCellValue('X'.$index, $reg['usu_nombres']);
-                $sheet->setCellValue('Y'.$index, $reg['usu_nombres']);
-                $sheet->setCellValue('Z'.$index, $reg['usu_nombres']);
+                $sheet->setCellValue('W'.$index, $reg['nombrePais']);
+                $sheet->setCellValue('X'.$index, $reg['nombreDepa']);
+                $sheet->setCellValue('Y'.$index, $reg['nombreProv']);
+                $sheet->setCellValue('Z'.$index, $reg['nombreDist']);
 
                 $sheet->setCellValue('AA'.$index, $reg['pago_error']);
                 $sheet->setCellValue('AB'.$index, $reg['pago_error_detalle']);
