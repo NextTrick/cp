@@ -85,7 +85,7 @@ class CarritoController extends SecurityWebController
                 } else {
                     //Adiciona la cantidad y remueve el producto asocciado a la tarjeta antigua
                     $cartModel = $this->_getCartService()->addCart($producto, $tarjetaCode, true);
-                    $this->_getCartService()->removeCart($oldTarjetaCode);
+                    $this->_getCartService()->removeCart($oldTarjetaCode, $productoId);
                 }
                 
                 if (!empty($cartModel)) {

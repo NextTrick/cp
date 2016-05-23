@@ -57,7 +57,7 @@ return array(
             'dirPermission' => 0755,
             'filePermission' => 0666,
             'namespaceSeparator' => '-cart-',
-            'ttl' => 3600
+            'ttl' => 60*60
         ),
         'plugins' => array(
             'exception_handler' => array('throw_exceptions' => false),
@@ -71,7 +71,7 @@ return array(
             'dirPermission' => 0755,
             'filePermission' => 0666,
             'namespaceSeparator' => '-db-',
-            'ttl' => 3600
+            'ttl' => 60*60
         ),
         'plugins' => array(
             'exception_handler' => array('throw_exceptions' => false),
