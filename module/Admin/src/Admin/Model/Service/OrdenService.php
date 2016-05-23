@@ -151,6 +151,7 @@ class OrdenService
     {
         return array(
             'email'              => 'Correo',
+            'codigo'             => 'Codigo Transaccion',
             'comprobante_numero' => 'Nro. Comprobante',
             'pago_referencia'    => 'Cód. Pago',
             'fac_razon_social'   => 'R. Social',
