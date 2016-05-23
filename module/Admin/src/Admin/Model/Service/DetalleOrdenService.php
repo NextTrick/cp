@@ -72,6 +72,7 @@ class DetalleOrdenService
     public function getFiltrosBuscar()
     {
         return array(
+            'codigo' => 'Codigo Transaccion',
             'email'  => 'Correo',
             'numero' => 'Tarjeta'
         );
