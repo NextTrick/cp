@@ -1294,6 +1294,9 @@ section .purple_box .recargas_content .offers .col_3 .box_white .image {
   height: 143px;
   overflow: hidden;
 }
+section .purple_box .recargas_content .offers .col_3 .box_white .image img {
+  width: 100%;
+}
 section .purple_box .recargas_content .offers .col_3 .box_white p {
   padding: 0 10px;
   font-size: 15px;
