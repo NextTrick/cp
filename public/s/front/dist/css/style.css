@@ -2024,7 +2024,8 @@ section .offers_box .col_3 img {
 section .offers_box .col_3.left {
   margin-right: 2%;
 }
-section .error_message {
+section .error_message,
+section .success_message {
   background: #f1222d;
   opacity: 0.8;
   color: #fff;
@@ -2036,22 +2037,26 @@ section .error_message {
   position: absolute;
   left: 17%;
 }
-section .error_message span {
+section .error_message span,
+section .success_message span {
   display: inline-block;
   vertical-align: top;
 }
-section .error_message span.icon {
+section .error_message span.icon,
+section .success_message span.icon {
   background-image: url("../images/sprite.png");
   background-position: -257px -202px;
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
-section .error_message span.text {
+section .error_message span.text,
+section .success_message span.text {
   margin-left: 10px;
   margin-top: 5px;
 }
-section .error_message.hide {
+section .error_message.hide,
+section .success_message.hide {
   display: none;
 }
 section .form_control {
