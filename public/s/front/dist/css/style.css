@@ -1936,6 +1936,11 @@ section .left {
 section .right {
   float: right;
 }
+section .yellow_text {
+  color: #f7a100;
+  text-align: center;
+  font-weight: normal;
+}
 section .offers_box_three {
   margin: 20px 0;
   overflow: hidden;
@@ -2565,6 +2570,10 @@ i[class*=" icon-"] {
   }
   section .offers_box_three.carrito_offers {
     padding: 0 15px;
+  }
+  section .offers_box_three.carrito_offers h3 {
+    display: block;
+    text-align: center;
   }
   section .app_box .purple_box {
     border-radius: 0;
