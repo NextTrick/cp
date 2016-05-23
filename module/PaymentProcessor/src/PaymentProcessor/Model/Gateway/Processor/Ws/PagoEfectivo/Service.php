@@ -64,8 +64,9 @@ abstract class Service
             $info = $this->client->$service($data);
             return $info;
         } catch (\Exception $e) {
-            var_dump($e->getMessage(), $e->getTraceAsString()); exit;
-            echo $e->getMessage();
+            //var_dump($e->getMessage(), $e->getTraceAsString()); exit;
+            //echo $e->getMessage();
+            throw $e;
             return false;
         }
     }
