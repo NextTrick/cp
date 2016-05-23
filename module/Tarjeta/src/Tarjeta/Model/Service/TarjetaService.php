@@ -89,11 +89,11 @@ class TarjetaService
 
     public function cronTarjetas($cguid = null)
     {
-        if (!empty($cguid)) {
+        if (empty($cguid)) {
             $fecha = date('Y-m-d H:i:s', strtotime('-30 minute'));
             $where = new \Zend\Db\Sql\Where();
             $where->isNotNull('fecha_actualizacion');
-            $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion >= ", $fecha));
+            $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion < ?", $fecha));
             $criteria = array(
                 'where' => $where,
                 'order' => array('fecha_actualizacion DESC')
@@ -108,7 +108,7 @@ class TarjetaService
                     'cguid' => $cguid,
                 ),
             );
-            $row = $this->_repository->findAll($criteria);
+            $row = $this->_repository->findOne($criteria);
             if (!empty($row)) {
                 $this->_cronTarjetas($row['id'], $row['cguid']);
             }

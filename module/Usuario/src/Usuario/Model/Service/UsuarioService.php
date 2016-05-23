@@ -154,7 +154,7 @@ class UsuarioService
                     'fecha_actualizacion' => date('Y-m-d H:i:s'),
                 ));
                 if (!empty($tarjetaId)) {
-                    $this->_getTarjetaService()->cronTarjetas($tarjetaId, $card['cguid']);
+                    $this->_getTarjetaService()->cronTarjetas($card['cguid']);
                     $result['success'] = true;
                     $result['message'] = null;
                 }
@@ -196,7 +196,7 @@ class UsuarioService
                             'fecha_actualizacion' => date('Y-m-d H:i:s'),
                             'estado_truefi' => $card['status'],
                         ));
-                        $this->_getTarjetaService()->cronTarjetas($row['id'], $row['cguid']);
+                        $this->_getTarjetaService()->cronTarjetas($row['cguid']);
                     }
                 }
                 return true;
