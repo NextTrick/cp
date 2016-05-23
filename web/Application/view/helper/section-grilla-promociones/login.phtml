@@ -2,7 +2,7 @@
     <?php foreach ($rows['normal'] as $key => $row) : ?>
         <?php $float = (($key+1)%3 == 0) ? 'right' : 'left'; ?>
         <div class="col_3 <?php echo $float; ?>">
-            <img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/>
+            <a href=""><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a>
             <p><?php echo $row['titulo2']; ?></p>
         </div>
     <?php endforeach; ?>
