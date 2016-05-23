@@ -41,7 +41,7 @@ class TarjetaService
             'emoneyvalue' => 0,
             'bonus' => 'S/. 0.00',
             'bonusvalue' => 0,
-            'bonusplus' => 'S/. 0.00',
+            'promotionbonus' => 'S/. 0.00',
             'bonusplusvalue' => 0,
             'gamepoints' => 0,
             'gamepointsvalue' => 0,
@@ -56,7 +56,7 @@ class TarjetaService
                     'emoneyvalue' => $data['emoneyvalue'],
                     'bonus' => $data['bonus'],
                     'bonusvalue' => $data['bonusvalue'],
-                    'bonusplus' => $data['promotionbonus'], //se esta modificando el indice por el nombre correcto
+                    'promotionbonus' => $data['promotionbonus'], //promotionbonus <equivalente> bonusplusvalue
                     'bonusplusvalue' => $data['bonusplusvalue'],
                     'gamepoints' => $data['gamepoints'],
                     'gamepointsvalue' => $data['gamepointsvalue'],
@@ -86,7 +86,42 @@ class TarjetaService
         
         return $results;
     }
-    
+
+    public function cronTarjeta($tarjetaId, $cguid)
+    {
+        $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
+        if ($data['success']) {
+            $data = $data['result'];
+            /*$result = array(
+                'emoney' => 'S/. 0.00',
+                'emoneyvalue' => 0,
+                'bonus' => 'S/. 0.00',
+                'bonusvalue' => 0,
+                'promotionbonus' => 'S/. 0.00',
+                'bonusplusvalue' => 0,
+                'gamepoints' => 0,
+                'gamepointsvalue' => 0,
+                'etickets' => 0,
+            );*/
+            if (!empty($data)) {
+                $dataIn = array(
+                    'emoney' => $data['emoney'],
+                    'emoneyvalue' => (float)$data['emoneyvalue'],
+                    'bonus' => $data['bonus'],
+                    'bonusvalue' => (float)$data['bonusvalue'],
+                    'promotionbonus' => $data['promotionbonus'], //promotionbonus <equivalente> bonusplusvalue
+                    'bonusplusvalue' => (float)$data['bonusplusvalue'],
+                    'gamepoints' => (int)$data['gamepoints'],
+                    'gamepointsvalue' => (int)$data['gamepointsvalue'],
+                    'etickets' => (float)$data['etickets'],
+                    'fecha_edicion' => date('Y-m-d H:i:s'),
+                );
+
+                $this->_repository->save($dataIn, $tarjetaId);
+            }
+        }
+    }
+
     public function getRepository()
     {
         return $this->_repository;
@@ -95,5 +130,10 @@ class TarjetaService
     private function _getTrueFiTarjetaService()
     {
         return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
+    }
+    
+    private function _getUsuarioService()
+    {
+        return $this->_sl->get('Usuario\Model\Service\UsuarioService');
     }
 }
