@@ -293,6 +293,7 @@ class CarritoController extends SecurityWebController
                 $data[$key] = $value;
                 if ($valid->isValid($value) == false) {
                     $paramsInvalid[] = $key;
+                    $result['message'] = ERROR_VALIDACION_PAGOS;
                 }
             }
 
