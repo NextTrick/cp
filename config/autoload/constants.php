@@ -22,7 +22,8 @@ define('AC_EDITAR', 'editar');
 
 define('NO_DATA', 'No existe data');
 define('ERROR_303', 'No tiene acceso.');
-define('ERROR_VALIDACION', 'Error de validación.');
+define('ERROR_VALIDACION', 'Error de validación');
+define('ERROR_VALIDACION_PAGOS', 'Por favor ingrese correctamente los datos necesarios');
 define('ERROR_TOKEN', 'Token invalido.');
 
 define('LIMIT_BUSCAR', 100);

@@ -120,7 +120,7 @@ class MisTarjetasController extends SecurityWebController
                 );
                 $save = $this->_getTarjetaService()->getRepository()->save($data, $row['id']);
                 if (!empty($save)) {
-                    $this->_getTarjetaService()->cronTarjeta($row['id'], $row['cguid']);
+                    $this->_getTarjetaService()->cronTarjetas($row['cguid']);
                     $result['success'] = true;
                     $result['type'] = 'proceso';
                     $result['message'] = null;

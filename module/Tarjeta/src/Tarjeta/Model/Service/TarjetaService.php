@@ -87,7 +87,36 @@ class TarjetaService
         return $results;
     }
 
-    public function cronTarjeta($tarjetaId, $cguid)
+    public function cronTarjetas($cguid = null)
+    {
+        if (empty($cguid)) {
+            $fecha = date('Y-m-d H:i:s', strtotime('-30 minute'));
+            $where = new \Zend\Db\Sql\Where();
+            $where->isNotNull('fecha_actualizacion');
+            $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion < ?", $fecha));
+            $criteria = array(
+                'where' => $where,
+                'order' => array('fecha_actualizacion DESC')
+            );
+            $rows = $this->_repository->findAll($criteria);
+            foreach ($rows as $row) {
+                $this->_cronTarjetas($row['id'], $row['cguid']);
+            }
+        } else {
+            $criteria = array(
+                'where' => array(
+                    'cguid' => $cguid,
+                ),
+            );
+            $row = $this->_repository->findOne($criteria);
+            if (!empty($row)) {
+                $this->_cronTarjetas($row['id'], $row['cguid']);
+            }
+        }
+        
+    }
+    
+    public function _cronTarjetas($tarjetaId, $cguid)
     {
         $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
         if ($data['success']) {
@@ -114,7 +143,7 @@ class TarjetaService
                     'gamepoints' => (int)$data['gamepoints'],
                     'gamepointsvalue' => (int)$data['gamepointsvalue'],
                     'etickets' => (float)$data['etickets'],
-                    'fecha_edicion' => date('Y-m-d H:i:s'),
+                    'fecha_actualizacion' => date('Y-m-d H:i:s'),
                 );
 
                 $this->_repository->save($dataIn, $tarjetaId);

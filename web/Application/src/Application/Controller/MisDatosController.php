@@ -107,7 +107,7 @@ class MisDatosController extends SecurityWebController
                 $id = $this->_getUsuarioService()->getRepository()->save($dataIn, $usuario->id);
                 if (!empty($id)) {
                     $this->flashMessenger()->addMessage(array(
-                        'success' => '<b>Felicidades</b>, tus datos fueron actualizados correctamente.',
+                        'success' => '<b>Felicidades</b>, tus datos fueron actualizados correctamente. ' ,
                     ));
                 } else {
                     $this->flashMessenger()->addMessage(array(
