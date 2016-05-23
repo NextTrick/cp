@@ -248,6 +248,7 @@ class CarritoController extends SecurityWebController
             $validator1->setName('token_csrf');
             $isValidToken = $validator1->isValid($tokenCsrf);
             $result['token'] = $validator1->getHash(true);
+            $newToken = $result['token'];
             if (!$isValidToken) {
                 $result['message'] = ERROR_TOKEN;
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -306,6 +307,7 @@ class CarritoController extends SecurityWebController
             if (!empty($data)) {
                 $return = $this->_getOrdenService()->procesarPago($comprobanteTipo, $metodoPago, $usuario, $data);
                 $result = $return;
+                $result['token'] = $newToken;
             }
         }
 
