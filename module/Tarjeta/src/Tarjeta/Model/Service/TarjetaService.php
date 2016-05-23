@@ -87,6 +87,31 @@ class TarjetaService
         return $results;
     }
     
+    public function cronMisTarjetas($usuarioId = null)
+    {
+        $criteria = array(
+            'where' => array(
+                
+            ),
+        );
+        $usuarios = $this->_getUsuarioService()->findAll($criteria);
+        
+        $criteria1 = array(
+            'where' => array(
+                'usuario_id' => $usuarioId,
+            ),
+            'order' => array('fecha_creacion DESC'),
+            'limit' => LIMIT_USUARIO_TARJETAS,
+        );
+        $rows = $this->_repository->findAll($criteria1);
+        foreach ($rows as $key => $row) {
+            $row[$key] = $this->getOnlineTarjeta($row['cguid']);
+        }
+        $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
+        
+        return $results;
+    }
+    
     public function getRepository()
     {
         return $this->_repository;
@@ -95,5 +120,10 @@ class TarjetaService
     private function _getTrueFiTarjetaService()
     {
         return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
+    }
+    
+    private function _getUsuarioService()
+    {
+        return $this->_sl->get('Usuario\Model\Service\UsuarioService');
     }
 }
