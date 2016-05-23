@@ -485,8 +485,8 @@ $(function() {
       },
       ingresarRuc: function(e) {
         if ($(this).val().length >= 11) { 
-                $(this).val($(this).val().substr(0, 11));
-            }
+          $(this).val($(this).val().substr(0, 11));
+        }
       },
       salirRuc: function(e){
         if ($(this).val().length >= 11) { 
