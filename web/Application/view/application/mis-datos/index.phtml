@@ -4,6 +4,7 @@
             <div class="yellow_box">Mis datos</div>
             <div class="purple_box">
                 <div class="error_message hide"><span class="icon"></span><span class="text">Lo sentimos, no se pudo completar el proceso, por favor inténtalo mas tarde</span></div>
+                <div class="success_message"><span class="icon"></span><span class="text">Se actualizaron tus datos</span></div>
                 <?php echo $this->form()->openTag($this->form->setAttributes(array('class' => 'signin_form form_mis_datos', 'data-parsley-validate' => 'data-parsley-validate'))); ?>
                 <?php  $this->formElementerrors()->setMessageOpenFormat('<ul class="parsley-errors-list filled"><li class="parsley-required">')->setMessageCloseString('</li></ul>'); ?>
                     <h3>Tus datos de cuenta</h3>
