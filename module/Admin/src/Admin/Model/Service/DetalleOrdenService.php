@@ -48,8 +48,8 @@ class DetalleOrdenService
 
             $betwween = array(
                 "fecha_creacion" => array(
-                    "min"=> String::xssClean($params['txtFechaIni']),
-                    "max"=> String::xssClean($params['txtFechaFin'])
+                    "min" => String::xssClean($params['txtFechaIni']),
+                    "max" => String::xssClean($params['txtFechaFin'])
                 )
             );
 
