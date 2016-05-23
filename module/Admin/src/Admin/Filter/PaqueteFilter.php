@@ -66,11 +66,11 @@ class PaqueteFilter extends Zf2InputFilter
         $valExtension = new \Zend\Validator\File\Extension(array('jpg', 'jpeg', 'png'));
         $valExtension->setMessage('La imagen debe ser de tipo JPG o PNG');
 
-        $valSize = new \Zend\Validator\File\Size(array('min' => '1kB', 'max' => '3MB'));
-        $valSize->setMessage('El tamaño máximo permitido para la imagen es de 3MB', \Zend\Validator\File\Size::TOO_BIG);
+        $valSize = new \Zend\Validator\File\Size(array('min' => '1kB', 'max' => '2MB'));
+        $valSize->setMessage('El tamaño máximo permitido para la imagen es de 2MB', \Zend\Validator\File\Size::TOO_BIG);
 
         $valUpload = new \Zend\Validator\File\UploadFile();
-        $valUpload->setMessage('El tamaño máximo uoload permitido para la imagen es de 2MB', \Zend\Validator\File\UploadFile::INI_SIZE);
+        $valUpload->setMessage('El tamaño máximo  permitido para la imagen es de 2MB', \Zend\Validator\File\UploadFile::INI_SIZE);
 
         $image = new \Zend\InputFilter\FileInput('imagen');
         $image->setRequired(false);
