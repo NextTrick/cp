@@ -168,6 +168,7 @@ CREATE  TABLE IF NOT EXISTS `tarjeta_tarjeta` (
   `estado_truefi` TINYINT(1) NULL ,
   `fecha_creacion` DATETIME NULL ,
   `fecha_edicion` DATETIME NULL ,
+  `fecha_actualizacion` DATETIME NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `fk_tarjeta_tarjeta_usuario_usuario1_idx` (`usuario_id` ASC) ,
   UNIQUE INDEX `cguid_UNIQUE` (`cguid` ASC) ,
