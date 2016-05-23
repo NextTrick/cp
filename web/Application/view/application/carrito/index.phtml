@@ -130,7 +130,7 @@
                 <?php $float = (($key+1)%3 == 0) ? 'right' : 'left'; ?>
                 <div class="col_3 <?php echo $float; ?>">
                     <div class="box_white">
-                        <div class="image"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></div>
+                        <div class="image"><a href="<?php echo BASE_URL ?>recargas"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a></div>
                         <p class="breadcrumb" style="text-align:center;"><?php echo $row['titulo1']; ?> 
                             <?php if (!empty($row['legal'])) : ?>
                             <a href="#modal_watch_legal_nor_<?php echo $key; ?>" name="modal" class="watch_legal">. Ver legal</a>
