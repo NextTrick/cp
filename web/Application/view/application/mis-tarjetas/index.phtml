@@ -14,8 +14,52 @@
                     <?php foreach ($gridList as $key => $row) : ?>
                         <?php if ($row['show'] == 'lleno') : ?>
                             <div class="col_3 my_card init_card" id="init_card_<?php echo $key; ?>">
-                                <div class="meta_data" data-index="<?php echo $key; ?>" data-codigo="<?php echo $row['codigo'] ?>" data-cguid="<?php echo $row['cguid'] ?>" data-numero="<?php echo $row['numero'] ?>" data-nombre="<?php echo $row['nombre'] ?>" style="display: none;"></div>
-                                <div class="init_loading"><img src="<?php echo URL_RESOURCES ?>front/images/loading.gif" alt="Cargando..."/></div>
+                                <div class="top_card"><span class="cp_logo"></span>
+                                    <div class="card_title">
+                                        <input type="hidden" id="edit_numero_<?php echo $key; ?>" name="edit_numero_<?php echo $key; ?>" value="<?php echo $row['numero'] ?>"/>
+                                        <input type="text" id="edit_nombre_<?php echo $key; ?>" name="edit_nombre_<?php echo $key; ?>" class="input_name"/>
+                                        <span class="text" id="org_nombre_<?php echo $key; ?>"><?php echo $row['nombre'] ?></span>
+                                        <span class="edit_icon" data-sufix="<?php echo $key; ?>"></span>
+                                    </div>
+                                    <span class="card_number"><?php echo $row['numero'] ?></span>
+                                </div>
+                                <div class="show_more_content">
+                                    <div class="line">
+                                        <div class="left">Dinero<span>?</span></div>
+                                        <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
+                                        <div class="tooltip_bonus">Es el dinero (S/) con el que cuenta tu tarjeta. Este monto es válido para todos los juegos sin excepción.</div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="left">Coney Bonos<span>?</span></div>
+                                        <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonusvalue']); ?></div>
+                                        <div class="tooltip_bonus">Son bonos entregados por determinadas recargas. Son válidos para para todos los juegos con excepción de los juegos que entreguen tickets, Grúas, Barber Cut, Caritas pintadas, Yukids y Cine 6D. Si recibes Coney Bonos en tu tarjeta. Recuerda que primero se consume tu Dinero (válido para todos los juegos)  y luego los Coney Bonos. Por eso te recomendamos primero divertirte en los juegos que emiten ticket y luego los mecánicos y el resto de juegos que no emiten tickets para aprovecharlos al máximo!</div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="left">Coney Bonos Plus<span>?</span></div>
+                                        <div class="right">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['bonusplusvalue']); ?></div>
+                                        <div class="tooltip_bonus">Son bonos entregados por determinadas recargas, estos son válidos para todos los juegos a excepción de Grúas, Barber Cut, caritas pintadas, Yukids y Cine 6D.</div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="left">Tickets<span>?</span></div>
+                                        <div class="right"><?php echo $row['etickets']; ?></div>
+                                        <div class="tooltip_bonus">Es el número de tickets acumulados en tu tarjeta.</div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="left">Gamepoints<span>?</span></div>
+                                        <div class="right"><?php echo $row['gamepoints']; ?></div>
+                                        <div class="tooltip_bonus">Son puntos acumulables por recargas determinadas.</div>
+                                    </div>
+                                </div>
+                                <div class="bottom_card">
+                                    <?php $noEmpty = Common\Helpers\Util::noEmptyDecimal($row['emoneyvalue']); ?>
+                                    <?php $classCero = $noEmpty ? '' : 'cero'; ?>
+                                    <div class="price <?php echo $classCero; ?>">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
+                                    <a href="javascript:;" class="watch_more">Ver más</a>
+                                    <a href="<?php echo BASE_URL ?>recargas/<?php echo $row['codigo']; ?>" class="recharge">Recargar</a>
+                                </div>
+                                <div class="duplicate_box"><span class="icon"></span>
+                                    <p>El nombre <strong>"Ahijado-tarjeta" </strong>ya se encuentra en tu lista de tarjetas</p><a href="">Aceptar</a>
+                                </div>
                             </div>
                         <?php elseif ($row['show'] == 'por_llenar') : ?>
                             <div class="col_3 add_card">
@@ -62,29 +106,3 @@
         </div>
         <div id="mask"></div>
 </section>
-<script type="text/javascript">
-    function getCard(_this)
-    {
-        $.ajax({
-            type: "GET",
-            url: baseUrl + 'mis-tarjetas/tarjeta-unidad',
-            data: {index:$(_this).children('.meta_data').data('index'), codigo:$(_this).children('.meta_data').data('codigo'), cguid:$(_this).children('.meta_data').data('cguid'), numero:$(_this).children('.meta_data').data('numero'), nombre:$(_this).children('.meta_data').data('nombre'), destino:$(_this).attr('id')},
-            dataType:'json',
-            success: function(data) {
-                if (data.success) {
-                    $('#'+data.data.destino).html(data.data.html);
-                }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-            }
-        });
-    }
-    $(document).ready(function(){
-        var factor = 0;
-        $('.init_card').each(function(){
-            var _this = this;
-            setTimeout(function(){getCard(_this);}, factor*20000);
-            factor = factor+1;
-        });
-    });
-</script>

@@ -19,7 +19,8 @@ return array(
         'Tarjeta',
         'Paquete',
         'Sistema',        
-        'PaymentProcessor'
+        'PaymentProcessor',
+        'Cron'
     ),
     'module_listener_options' => array(
         'module_paths' => array(
