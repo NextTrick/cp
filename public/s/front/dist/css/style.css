@@ -769,6 +769,7 @@ section .purple_box .benefits_offers {
 }
 section .purple_box .benefits_offers .offers_box_two {
   overflow: hidden;
+  border-radius: 19px;
 }
 section .purple_box .benefits_offers .offers_box_two .left {
   width: 50%;
