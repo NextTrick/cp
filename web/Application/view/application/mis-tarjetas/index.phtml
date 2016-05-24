@@ -70,7 +70,6 @@
             url: baseUrl + 'mis-tarjetas/tarjeta-unidad',
             data: {index:$(_this).children('.meta_data').data('index'), codigo:$(_this).children('.meta_data').data('codigo'), cguid:$(_this).children('.meta_data').data('cguid'), numero:$(_this).children('.meta_data').data('numero'), nombre:$(_this).children('.meta_data').data('nombre'), destino:$(_this).attr('id')},
             dataType:'json',
-            async:false,
             success: function(data) {
                 if (data.success) {
                     $('#'+data.data.destino).html(data.data.html);
@@ -84,7 +83,7 @@
         var factor = 0;
         $('.init_card').each(function(){
             var _this = this;
-            setTimeout(function(){getCard(_this);}, factor*1000);
+            setTimeout(function(){getCard(_this);}, factor*5000);
             factor = factor+1;
         });
     });
