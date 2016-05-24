@@ -333,12 +333,13 @@ class OrdenService
             $this->_getDetalleOrdenService()->getRepository()->save($detalleOrdenData, $ordenDetalle['id']);
         }
 
-        //$this->enviarMailConfirmacion($ordenId);
+        $this->enviarMailConfirmacion($ordenId);
     }
 
     public function enviarMailConfirmacion($ordenId)
     {
-        $ordenData = $this->_getOrdenService()->getRepository()->getById($ordenId);
+        $ordenData = $this->_getOrdenService()->getRepository()->getConfirmacionMailDatosById($ordenId);
+
         $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
 
         $view = new ViewModel();
@@ -352,14 +353,14 @@ class OrdenService
         $viewRenderer = $this->_sl->get('viewrenderer');
         $html = $viewRenderer->render($view);
         try {
-
             $body = $html;
-            $to = $ordenData['email'];
+            $to = $ordenData['usuario_email'];
 
             $config = $this->_sl->get('config');
             $subject = ASUTO_PAGO_CONFIRMACION;
+            $bcc = $config['emails']['admin'];
 
-            \Util\Common\Email::send($subject, $body, $to, true, null);
+            \Util\Common\Email::send($subject, $body, $to, true, $bcc);
         } catch (Exception $e) {
             \Util\Common\Email::reportException($e);
         }
