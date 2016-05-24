@@ -12,7 +12,7 @@ span.success {color: green;}
 .login-logo a { color: #C126A7; font-weight: 500; }
 .login-logo a b { color: #FFF; }
 
-.skin-red .main-header .logo { background-color: #6c006c; }
+.skin-red .main-header .logo, .skin-red .main-header .logo:hover { background-color: #6c006c; }
 .skin-red .main-header .navbar { background-color: #952283; }
 .skin-red .main-header li.user-header { background-color: #861F76; }
 .skin-red .sidebar-menu > li:hover > a, .skin-red .sidebar-menu > li.active > a { border-left-color:  #952283; }
@@ -23,3 +23,5 @@ span.success {color: green;}
 #formBuscar .filter-title {display: block; border-bottom: 1px solid #eee; padding: 5px 0;}
 #formBuscar .filter-one { display: block; padding-top: 5px; width: 50%; float: left; }
 #formBuscar .filter-two { display: block; padding-top: 5px; width: 50%; float: left; }
+
+.skin-red .main-header .navbar .sidebar-toggle:hover { background-color: #861F76; }
