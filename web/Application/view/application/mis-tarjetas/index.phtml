@@ -81,12 +81,11 @@
         });
     }
     $(document).ready(function(){
-        //var factor = 0;
+        var factor = 0;
         $('.init_card').each(function(){
             var _this = this;
-            getCard(_this);
-            //setTimeout(function(){getCard(_this);}, factor*200);
-            //factor = factor+1;
+            setTimeout(function(){getCard(_this);}, factor*1000);
+            factor = factor+1;
         });
     });
 </script>
