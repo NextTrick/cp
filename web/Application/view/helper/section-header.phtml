@@ -14,11 +14,9 @@
                         <li>
                             <a href="#" class="user_account">
                                 <span class="text"><?php echo $data['nombres'] ?></span>
-                                <?php if (!empty($data['imagen'])) : ?>
-                                <span class="user_image"><img src="<?php echo $urlImg . '/' . $data['imagen']; ?>" alt="<?php echo $data['nombres'] ?>"/></span>
-                                <?php else: ?>
-                                <span class="icon"></span>
-                                <?php endif; ?>
+                                <?php $imagen = !empty($data['imagen']) ? $urlImg . '/' . $data['imagen'] : $urlImg . '/user-web-default.png'; ?>
+
+                                <span class="user_image"><img src="<?php echo $imagen; ?>" alt="<?php echo $data['nombres'] ?>"/></span>
                                 
                                 <span class="arrow_bottom"></span>
                             </a>
@@ -35,8 +33,9 @@
         <div class="user_option_mobile">
             <ul>
                 <li>
+                    <?php $imagen = !empty($data['imagen']) ? $urlImg . '/' . $data['imagen'] : $urlImg . '/user-web-default.png'; ?>
                     <span class="user_icon">
-                        <img src="<?php echo $urlImg . '/' . $data['imagen']; ?>" alt="<?php echo $data['nombres'] ?>">
+                        <img src="<?php echo $imagen; ?>" alt="<?php echo $data['nombres'] ?>">
                     </span>
                     <div class="menu_options">
                         <a href="<?php echo BASE_URL ?>mis-datos" class="logout">Mis datos</a>
@@ -44,8 +43,10 @@
                     </div>
                 </li>
                 <li>
+                    <a href="<?php echo BASE_URL ?>carrito">
                     <span class="cart_number"><?php echo $totalCarrito; ?></span>
                     <span class="cart_icon"></span>
+                    </a>
                 </li>
             </ul>
         </div>
