@@ -9,7 +9,7 @@ span.success {color: green;}
 
 .login-box-body { -webkit-border-radius: 12px; -moz-border-radius: 12px; border-radius: 12px; }
 .login-page { background: #6c006c; }
-.login-logo a { color: #C126A7; font-weight: 500; }
+.login-logo a { color: #ffb000; font-weight: 500; }
 .login-logo a b { color: #FFF; }
 
 .skin-red .main-header .logo, .skin-red .main-header .logo:hover { background-color: #6c006c; }
