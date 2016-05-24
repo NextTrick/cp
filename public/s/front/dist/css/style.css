@@ -40,14 +40,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -232px -202px;
+  background-position: -335px -202px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -206px -202px;
+  background-position: -309px -202px;
   width: 26px;
   height: 26px;
 }
@@ -99,7 +99,7 @@ header .user_option_mobile ul li .menu_options.active {
 }
 header .user_option_mobile ul li .cart_icon {
   background-image: url("../images/sprite.png");
-  background-position: -328px -202px;
+  background-position: -116px -264px;
   width: 24px;
   height: 21px;
   display: block;
@@ -130,7 +130,7 @@ header .user_option .user_outside a span {
 }
 header .user_option .user_outside a span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -358px -92px;
+  background-position: -358px -138px;
   width: 12px;
   height: 14px;
   margin-left: 6px;
@@ -165,7 +165,7 @@ header .user_option .user_inside ul li a span {
 }
 header .user_option .user_inside ul li a span.icon_cart {
   background-image: url("../images/sprite.png");
-  background-position: -304px -202px;
+  background-position: -92px -264px;
   width: 24px;
   height: 22px;
 }
@@ -355,6 +355,12 @@ header nav ul li.logo img {
   height: 334px;
   background: url("../images/bg_rectangle_right.png");
 }
+.right_options.normal {
+  display: block;
+}
+.right_options.mobile {
+  display: none;
+}
 .right_options.moveTop {
   top: 20px;
 }
@@ -378,6 +384,7 @@ header nav ul li.logo img {
 .right_options ul li a {
   font-size: 10px;
   text-decoration: none;
+  color: #646473;
 }
 .right_options ul li a span.icon {
   display: block;
@@ -396,7 +403,7 @@ header nav ul li.logo img {
 }
 .right_options ul li a span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -252px 0px;
+  background-position: 0px -136px;
   width: 120px;
   height: 66px;
 }
@@ -422,7 +429,7 @@ header nav ul li.logo img {
 }
 .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -142px -202px;
+  background-position: -245px -202px;
   width: 32px;
   height: 32px;
 }
@@ -435,7 +442,7 @@ header nav ul li.logo img {
 }
 .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -174px -202px;
+  background-position: -277px -202px;
   width: 32px;
   height: 32px;
 }
@@ -558,6 +565,22 @@ section .welcome_box p.medium span {
 section .welcome_box p.small {
   font-size: 18px;
 }
+section .welcome_box .how_to_signin {
+  margin-top: 40px;
+  text-align: center;
+}
+section .welcome_box .how_to_signin .col_4 {
+  display: inline-block;
+  vertical-align: top;
+  width: 24%;
+}
+section .welcome_box .how_to_signin .col_4 .image {
+  height: 110px;
+}
+section .welcome_box .how_to_signin .col_4 p {
+  margin: 0 auto;
+  width: 90%;
+}
 section .app_box {
   padding: 40px 0 50px;
   text-align: center;
@@ -660,6 +683,16 @@ section .purple_box .content {
   overflow: hidden;
   padding: 20px 20px 0;
 }
+section .purple_box .content span.or_icon {
+  background-image: url("../images/sprite.png");
+  background-position: -252px -66px;
+  width: 68px;
+  height: 46px;
+  display: block;
+  position: absolute;
+  left: 47%;
+  top: 130px;
+}
 section .purple_box .content .left,
 section .purple_box .content .right {
   padding: 0 40px 0;
@@ -694,10 +727,15 @@ section .purple_box .options .col_3.right {
 section .purple_box .options .col_3 .circle {
   width: 150px;
   height: 150px;
-  border-radius: 200px;
+  border-radius: 100px;
   background: #410041;
   display: block;
   margin: 0 auto;
+  overflow: hidden;
+}
+section .purple_box .options .col_3 .circle img {
+  width: 100%;
+  height: 100%;
 }
 section .purple_box .options .col_3 p {
   width: 85%;
@@ -721,7 +759,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -294px -167px;
+  background-position: -294px -168px;
   width: 32px;
   height: 26px;
 }
@@ -821,7 +859,7 @@ section .purple_box .info_box span.text {
 }
 section .purple_box .info_box span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -306px -66px;
+  background-position: -306px -112px;
   width: 52px;
   height: 52px;
   margin-right: 10px;
@@ -876,7 +914,7 @@ section .purple_box .cart_box.active .cart {
 }
 section .purple_box .cart_box.active .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -304px -202px;
+  background-position: -92px -264px;
   width: 24px;
   height: 22px;
   position: relative;
@@ -901,7 +939,7 @@ section .purple_box .cart_box .cart {
 }
 section .purple_box .cart_box .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: 0px -243px;
+  background-position: -140px -264px;
   width: 23px;
   height: 20px;
   display: inline-block;
@@ -1020,7 +1058,7 @@ section .purple_box .cards_content .col_3 .success_box {
 }
 section .purple_box .cards_content .col_3 .success_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -252px -122px;
+  background-position: -46px -202px;
   width: 55px;
   height: 45px;
   display: block;
@@ -1034,7 +1072,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -52px -202px;
+  background-position: -320px -66px;
   width: 52px;
   height: 41px;
   display: block;
@@ -1048,7 +1086,7 @@ section .purple_box .cards_content .col_3 .duplicate_box {
 }
 section .purple_box .cards_content .col_3 .duplicate_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -307px -122px;
+  background-position: -101px -202px;
   width: 54px;
   height: 44px;
   display: block;
@@ -1087,13 +1125,13 @@ section .purple_box .cards_content .col_3.my_card span {
 section .purple_box .cards_content .col_3.my_card span.cp_logo {
   display: block;
   background-image: url("../images/sprite.png");
-  background-position: -252px -66px;
+  background-position: -252px -112px;
   width: 54px;
   height: 56px;
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon {
   background-image: url("../images/sprite.png");
-  background-position: -281px -202px;
+  background-position: -69px -264px;
   width: 23px;
   height: 23px;
   display: inline-block;
@@ -1104,7 +1142,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -57px -243px;
+  background-position: -96px -247px;
   width: 18px;
   height: 14px;
 }
@@ -1256,6 +1294,9 @@ section .purple_box .recargas_content .offers .col_3 .box_white .image {
   height: 143px;
   overflow: hidden;
 }
+section .purple_box .recargas_content .offers .col_3 .box_white .image img {
+  width: 100%;
+}
 section .purple_box .recargas_content .offers .col_3 .box_white p {
   padding: 0 10px;
   font-size: 15px;
@@ -1275,7 +1316,7 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb a {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span {
   background-image: url("../images/sprite.png");
-  background-position: -358px -79px;
+  background-position: -358px -125px;
   width: 13px;
   height: 13px;
   cursor: pointer;
@@ -1286,7 +1327,7 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb spa
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span.active {
   background-image: url("../images/sprite.png");
-  background-position: -358px -66px;
+  background-position: -358px -112px;
   width: 13px;
   height: 13px;
 }
@@ -1414,19 +1455,19 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
   background-image: url("../images/sprite.png");
-  background-position: -120px -136px;
+  background-position: -132px -66px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
   background-image: url("../images/sprite.png");
-  background-position: -132px -66px;
+  background-position: -252px 0px;
   width: 120px;
   height: 66px;
 }
 section .purple_box .pay_box_white >.right .credit_cards .card.visa {
   background-image: url("../images/sprite.png");
-  background-position: 0px -136px;
+  background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }
@@ -1479,7 +1520,7 @@ section .purple_box .pay_box_white >.right .items_cart .item .right .card_type s
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right .card_type span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -252px -167px;
+  background-position: -252px -168px;
   width: 42px;
   height: 28px;
   margin-top: -6px;
@@ -1674,7 +1715,7 @@ section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .ca
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type .card_name span {
   background-image: url("../images/sprite.png");
-  background-position: -326px -167px;
+  background-position: -326px -168px;
   width: 33px;
   height: 22px;
   display: block;
@@ -1936,6 +1977,11 @@ section .left {
 section .right {
   float: right;
 }
+section .yellow_text {
+  color: #f7a100;
+  text-align: center;
+  font-weight: normal;
+}
 section .offers_box_three {
   margin: 20px 0;
   overflow: hidden;
@@ -1991,7 +2037,8 @@ section .offers_box .col_3 img {
 section .offers_box .col_3.left {
   margin-right: 2%;
 }
-section .error_message {
+section .error_message,
+section .success_message {
   background: #f1222d;
   opacity: 0.8;
   color: #fff;
@@ -2003,23 +2050,38 @@ section .error_message {
   position: absolute;
   left: 17%;
 }
-section .error_message span {
+section .error_message span,
+section .success_message span {
   display: inline-block;
   vertical-align: top;
 }
-section .error_message span.icon {
+section .error_message span.icon,
+section .success_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -257px -202px;
+  background-position: -45px -264px;
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
-section .error_message span.text {
+section .error_message span.text,
+section .success_message span.text {
   margin-left: 10px;
   margin-top: 5px;
 }
-section .error_message.hide {
+section .error_message.hide,
+section .success_message.hide {
   display: none;
+}
+section .success_message {
+  background: #0f9e6b;
+  opacity: 1;
+}
+section .success_message span.icon {
+  margin-top: 5px;
+  background-image: url("../images/sprite.png");
+  background-position: -80px -247px;
+  width: 16px;
+  height: 16px;
 }
 section .form_control {
   margin-bottom: 10px;
@@ -2131,13 +2193,13 @@ section form.form_mis_datos .disabled {
   display: none;
   margin: 0 auto 10px;
   background-image: url("../images/sprite.png");
-  background-position: -40px -243px;
+  background-position: -63px -247px;
   width: 17px;
   height: 17px;
 }
 .bottom_bar .icon_arrow.active {
   background-image: url("../images/sprite.png");
-  background-position: -23px -243px;
+  background-position: -46px -247px;
   width: 17px;
   height: 17px;
 }
@@ -2148,7 +2210,7 @@ section form.form_mis_datos .disabled {
 }
 .bottom_bar .select span {
   background-image: url("../images/sprite.png");
-  background-position: -252px -167px;
+  background-position: -252px -168px;
   width: 42px;
   height: 28px;
   display: block;
@@ -2200,6 +2262,17 @@ section form.form_mis_datos .disabled {
 footer {
   display: block;
 }
+footer .top {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -264px;
+  width: 45px;
+  height: 44px;
+  display: none;
+  position: absolute;
+  top: -40px;
+  right: 10px;
+  cursor: pointer;
+}
 footer img.bg {
   width: 100%;
   z-index: -1;
@@ -2225,7 +2298,7 @@ footer span.logo_icon {
   left: 46%;
   display: block;
   background-image: url("../images/sprite.png");
-  background-position: -252px -66px;
+  background-position: -252px -112px;
   width: 54px;
   height: 56px;
 }
@@ -2259,7 +2332,7 @@ footer span.logo_icon {
 }
 .modal_box .modal_content span.icon_logo {
   background-image: url("../images/sprite.png");
-  background-position: -252px -66px;
+  background-position: -252px -112px;
   width: 54px;
   height: 56px;
   display: block;
@@ -2316,7 +2389,7 @@ footer span.logo_icon {
 #modal_watch_legal .modal_content h3 span,
 .modal_box_legal .modal_content h3 span {
   background-image: url("../images/sprite.png");
-  background-position: -352px -202px;
+  background-position: -163px -264px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -2351,7 +2424,7 @@ footer span.logo_icon {
 }
 #how_asociate_card .modal_content h3 span {
   background-image: url("../images/sprite.png");
-  background-position: -352px -202px;
+  background-position: -163px -264px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -2505,7 +2578,30 @@ i[class*=" icon-"] {
     font-size: 24px;
   }
   .right_options {
+    display: block;
+    z-index: 99;
+    background: #eceefb;
+    width: 90%;
+    height: 90px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    position: static;
+    box-shadow: -1px -1px 2px #808080;
+  }
+  .right_options.normal {
     display: none;
+  }
+  .right_options.mobile {
+    display: block;
+    margin: 0 auto;
+  }
+  .right_options ul {
+    padding: 0;
+    text-align: center;
+  }
+  .right_options ul li {
+    display: inline-block;
+    margin: 10px;
   }
   section {
     padding-top: 20px;
@@ -2518,6 +2614,10 @@ i[class*=" icon-"] {
   }
   section .welcome_box {
     padding: 8px;
+  }
+  section .welcome_box .how_to_signin .col_4 {
+    margin-top: 20px;
+    width: 49%;
   }
   section .welcome_box h2 {
     font-size: 24px;
@@ -2544,6 +2644,15 @@ i[class*=" icon-"] {
     width: 100%;
     display: block;
   }
+  section .welcome_box .purple_box .content span.or_icon {
+    background-image: url("../images/sprite.png");
+    background-position: 0px -202px;
+    width: 46px;
+    height: 62px;
+    display: block;
+    margin: 20px auto 0;
+    position: static;
+  }
   section .welcome_box .purple_box .options .col_3 {
     display: block;
     float: none;
@@ -2565,6 +2674,10 @@ i[class*=" icon-"] {
   }
   section .offers_box_three.carrito_offers {
     padding: 0 15px;
+  }
+  section .offers_box_three.carrito_offers h3 {
+    display: block;
+    text-align: center;
   }
   section .app_box .purple_box {
     border-radius: 0;
@@ -2914,9 +3027,11 @@ i[class*=" icon-"] {
   }
   footer {
     background: #fff !important;
-    height: 120px;
     margin-top: 40px;
     position: relative;
+  }
+  footer .top {
+    display: block;
   }
   footer img.bg {
     display: none;

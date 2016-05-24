@@ -28,11 +28,14 @@ class DetalleOrdenService
 
     public function getDataCriteria($params)
     {
+        $order = array('pago_fecha_confirmacion DESC');
+
         $criteria = array(
             "whereLike"    => null,
             "limit"        => null,
             "where"        => null,
-            "whereBetween" => null
+            "whereBetween" => null,
+            'order'        => null
         );
 
         if (!empty($params)) {
@@ -48,16 +51,17 @@ class DetalleOrdenService
 
             $betwween = array(
                 "fecha_creacion" => array(
-                    "min"=> String::xssClean($params['txtFechaIni']),
-                    "max"=> String::xssClean($params['txtFechaFin'])
+                    "min" => String::xssClean($params['txtFechaIni']),
+                    "max" => String::xssClean($params['txtFechaFin'])
                 )
             );
-
+            
             $criteria = array(
                 "whereLike"    => $paramsLike,
                 //"limit"        => LIMIT_BUSCAR,
                 "where"        => $paramsWhere,
-                "whereBetween" => $betwween
+                "whereBetween" => $betwween,
+                'order'        => $order
             );
         }
 
@@ -72,6 +76,7 @@ class DetalleOrdenService
     public function getFiltrosBuscar()
     {
         return array(
+            'codigo' => 'Codigo Transaccion',
             'email'  => 'Correo',
             'numero' => 'Tarjeta'
         );

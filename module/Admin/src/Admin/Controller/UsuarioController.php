@@ -84,39 +84,41 @@ class UsuarioController extends SecurityAdminController
                     )
                 )
             );
-            $objPHPExcel->getActiveSheet()->getStyle('A1:N1')->applyFromArray($style['cabecera']);
+            $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($style['cabecera']);
 
-            $sheet->setCellValue('A1', 'Email');
-            $sheet->setCellValue('B1', 'Nombre');
-            $sheet->setCellValue('C1', 'A. Paterno');
-            $sheet->setCellValue('D1', 'A. Materno');
-            $sheet->setCellValue('E1', 'Tipo Documento');
-            $sheet->setCellValue('F1', 'Nro. Documento');
-            $sheet->setCellValue('G1', 'Pais');
-            $sheet->setCellValue('H1', 'Departamento');
-            $sheet->setCellValue('I1', 'Provincia');
-            $sheet->setCellValue('J1', 'Distrito');
-            $sheet->setCellValue('K1', 'F. Nacimiento');
-            $sheet->setCellValue('L1', 'F. Creación');
-            $sheet->setCellValue('M1', 'mguid');
-            $sheet->setCellValue('N1', 'Estado');
+            $sheet->setCellValue('A1', 'Id');
+            $sheet->setCellValue('B1', 'Email');
+            $sheet->setCellValue('C1', 'Nombre');
+            $sheet->setCellValue('D1', 'A. Paterno');
+            $sheet->setCellValue('E1', 'A. Materno');
+            $sheet->setCellValue('F1', 'Tipo Documento');
+            $sheet->setCellValue('G1', 'Nro. Documento');
+            $sheet->setCellValue('H1', 'Pais');
+            $sheet->setCellValue('I1', 'Departamento');
+            $sheet->setCellValue('J1', 'Provincia');
+            $sheet->setCellValue('K1', 'Distrito');
+            $sheet->setCellValue('L1', 'F. Nacimiento');
+            $sheet->setCellValue('M1', 'F. Creación');
+            $sheet->setCellValue('N1', 'mguid');
+            $sheet->setCellValue('O1', 'Estado');
 
             $index = 2;
             foreach ($data as $key => $reg) {
-                $sheet->setCellValue('A'.$index, $reg['email']);
-                $sheet->setCellValue('B'.$index, $reg['nombres']);
-                $sheet->setCellValue('C'.$index, $reg['paterno']);
-                $sheet->setCellValue('D'.$index, $reg['materno']);
-                $sheet->setCellValue('E'.$index, \Usuario\Model\Service\UsuarioService::getNombreTipoDocumento($reg['di_tipo']));
-                $sheet->setCellValue('F'.$index, $reg['di_valor']);
-                $sheet->setCellValue('G'.$index, $reg['nombrePais']);
-                $sheet->setCellValue('H'.$index, $reg['nombreDepa']);
-                $sheet->setCellValue('I'.$index, $reg['nombreProv']);
-                $sheet->setCellValue('J'.$index, $reg['nombreDist']);
-                $sheet->setCellValue('K'.$index, $reg['fecha_nac']);
-                $sheet->setCellValue('L'.$index, $reg['fecha_creacion']);
-                $sheet->setCellValue('M'.$index, $reg['mguid']);
-                $sheet->setCellValue('N'.$index, \Usuario\Model\Service\UsuarioService::getNombreEstado($reg['estado']));
+                $sheet->setCellValue('A'.$index, $reg['id']);
+                $sheet->setCellValue('B'.$index, $reg['email']);
+                $sheet->setCellValue('C'.$index, $reg['nombres']);
+                $sheet->setCellValue('D'.$index, $reg['paterno']);
+                $sheet->setCellValue('E'.$index, $reg['materno']);
+                $sheet->setCellValue('F'.$index, \Usuario\Model\Service\UsuarioService::getNombreTipoDocumento($reg['di_tipo']));
+                $sheet->setCellValue('G'.$index, $reg['di_valor']);
+                $sheet->setCellValue('H'.$index, $reg['nombrePais']);
+                $sheet->setCellValue('I'.$index, $reg['nombreDepa']);
+                $sheet->setCellValue('J'.$index, $reg['nombreProv']);
+                $sheet->setCellValue('K'.$index, $reg['nombreDist']);
+                $sheet->setCellValue('L'.$index, $reg['fecha_nac']);
+                $sheet->setCellValue('M'.$index, $reg['fecha_creacion']);
+                $sheet->setCellValue('N'.$index, $reg['mguid']);
+                $sheet->setCellValue('O'.$index, \Usuario\Model\Service\UsuarioService::getNombreEstado($reg['estado']));
                 $index ++;
             }
 
@@ -132,7 +134,7 @@ class UsuarioController extends SecurityAdminController
                 )
             );
 
-            $objPHPExcel->getActiveSheet()->getStyle('A2:N'.($index-1))->applyFromArray($style['body']);
+            $objPHPExcel->getActiveSheet()->getStyle('A2:O'.($index-1))->applyFromArray($style['body']);
             $nameFile = 'reporteUsuario_'. trim($date->format('Y-m-d_His')).'.xlsx';
 
             // Rename worksheet

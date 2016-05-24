@@ -16,26 +16,36 @@ $this->layout()->breadcrumb = array(
         <hr class="separator">
         <table id="gridMain" class="table table-bordered table-striped">
             <thead>
-            <tr>
-                <th>Id</th>
-                <th>Correo</th>
-                <th>Recarga</th>
-                <th>Monto</th>
-                <th style="white-space:nowrap;">Fecha</th>
-                <th style="white-space:nowrap;">Nro. Tarjeta</th>
-                <th>Estado Pago</th>
-            </tr>
+                <tr>
+                    <th>Id</th>
+                    <th style="white-space:nowrap;">Cód. Transacción</th>
+                    <th>Correo</th>
+                    <th>Paquete</th>
+                    <th>Monto</th>
+                    <th>Cantidad</th>
+                    <th style="white-space:nowrap;">Fecha Creación</th>
+                    <th style="white-space:nowrap;">Nro. Tarjeta</th>
+                    <th style="white-space:nowrap;">Estado Transacción</th>
+                    <th>Dinero</th>
+                    <th style="white-space:nowrap;">Coney Bonos</th>
+                    <th style="white-space:nowrap;">Game Points</th>
+                </tr>
             </thead>
             <tbody>
             <?php foreach ($gridList as $row) : ?>
                 <tr>
                     <td><?php echo $row['id'] ?></td>
+                    <td><?php echo $row['codigo'] ?></td>
                     <td><?php echo $row['email'] ?></td>
                     <td><?php echo $row['titulo1'] ?></td>
                     <td><?php echo $row['monto'] ?></td>
+                    <td><?php echo $row['cantidad'] ?></td>
                     <td><?php echo $row['fecha_creacion'] ?></td>
-                    <td><?php echo $row['numero'] ?></td>
-                    <td><?php echo \Orden\Model\Service\OrdenService::getNombreEstadoPago($row['pago_estado']); ?></td>
+                    <td><?php echo $row['numero']; ?></td>
+                    <td><?php echo $row['pago_estado'] ?></td>
+                    <td><?php echo $row['emoney']; ?></td>
+                    <td><?php echo $row['bonus'] ?></td>
+                    <td><?php echo $row['gamepoints']; ?></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

@@ -7,7 +7,6 @@
  */
 namespace Admin\Form;
 
-use Admin\Model\Service\DetalleOrdenService;
 use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -81,6 +80,6 @@ class DetalleOrdenBuscarForm extends Form
 
     private function getOrdenService()
     {
-        return $this->_sl->get('Orden\Model\Service\OrdenService');
+        return $this->_sl->get('Admin\Model\Service\OrdenService');
     }
 }

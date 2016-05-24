@@ -28,11 +28,14 @@ class CarritoController extends SecurityWebController
         $catidades = array(1 => '01', 2 => '02', 3 => '03', 4 => '04', 5 => '05');
 
         $usuarioTarjetas = $this->_getTarjetaService()->getDdlTarjetas($usuario->id);
+
+        $promociones = $this->_getPaqueteService()->grillaPromociones(GRID_PROMOCIONES_CARRITO, 0);
         
         $view = new ViewModel();
         $view->setVariable('cartModel', $cartModel);
         $view->setVariable('catidades', $catidades);
         $view->setVariable('usuarioTarjetas', $usuarioTarjetas);
+        $view->setVariable('promociones', $promociones);
         $view->setVariable('urlImg', $config['fileDir']['paquete_paquete']['down']);
         return $view;
     }
@@ -85,7 +88,7 @@ class CarritoController extends SecurityWebController
                 } else {
                     //Adiciona la cantidad y remueve el producto asocciado a la tarjeta antigua
                     $cartModel = $this->_getCartService()->addCart($producto, $tarjetaCode, true);
-                    $this->_getCartService()->removeCart($oldTarjetaCode);
+                    $this->_getCartService()->removeCart($oldTarjetaCode, $productoId);
                 }
                 
                 if (!empty($cartModel)) {
@@ -156,11 +159,8 @@ class CarritoController extends SecurityWebController
         if (empty($cartModel)) {
             return $this->redirect()->toRoute('web-carrito', array('controller' => 'index'));
         }
-        
-        $codPais = \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU;
-        $codDepa = \Sistema\Model\Service\UbigeoService::COD_DEPA_LIMA;
-        $codProv = \Sistema\Model\Service\UbigeoService::COD_PROV_LIMA;
-        $distritos = $this->_getUbigeoService()->getSoloDistritos($codPais, $codDepa, $codProv);
+
+        $distritos = $this->_getUbigeoService()->getSoloDistritosLimaYCallao();
 
         $criteria = array(
             'where' => array('usuario_id' => $usuario->id),
@@ -248,6 +248,7 @@ class CarritoController extends SecurityWebController
             $validator1->setName('token_csrf');
             $isValidToken = $validator1->isValid($tokenCsrf);
             $result['token'] = $validator1->getHash(true);
+            $newToken = $result['token'];
             if (!$isValidToken) {
                 $result['message'] = ERROR_TOKEN;
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
@@ -293,6 +294,7 @@ class CarritoController extends SecurityWebController
                 $data[$key] = $value;
                 if ($valid->isValid($value) == false) {
                     $paramsInvalid[] = $key;
+                    $result['message'] = ERROR_VALIDACION_PAGOS;
                 }
             }
 
@@ -305,6 +307,7 @@ class CarritoController extends SecurityWebController
             if (!empty($data)) {
                 $return = $this->_getOrdenService()->procesarPago($comprobanteTipo, $metodoPago, $usuario, $data);
                 $result = $return;
+                $result['token'] = $newToken;
             }
         }
 

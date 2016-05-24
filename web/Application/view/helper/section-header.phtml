@@ -1,7 +1,7 @@
 <!--HEADER-->
 <header><img src="<?php echo URL_RESOURCES ?>front/dist/images/top.png" alt="" class="bg"/>
     <div class="box_center">
-        <div class="social_icons"><a href=""><span class="fb"></span></a><a href=""><span class="in"></span></a></div>
+        <div class="social_icons"><a target="_blank" href="https://www.facebook.com/coneyparkperu"><span class="fb"></span></a><a target="_blank" href="https://www.instagram.com/coneyparkperu/"><span class="in"></span></a></div>
         <div class="user_option">
             <?php if (empty($data)) : ?>
                 <div class="user_outside">
@@ -14,11 +14,9 @@
                         <li>
                             <a href="#" class="user_account">
                                 <span class="text"><?php echo $data['nombres'] ?></span>
-                                <?php if (!empty($data['imagen'])) : ?>
-                                <span class="user_image"><img src="<?php echo $urlImg . '/' . $data['imagen']; ?>" alt=""/></span>
-                                <?php else: ?>
-                                <span class="icon"></span>
-                                <?php endif; ?>
+                                <?php $imagen = !empty($data['imagen']) ? $urlImg . '/' . $data['imagen'] : $urlImg . '/user-web-default.png'; ?>
+
+                                <span class="user_image"><img src="<?php echo $imagen; ?>" alt="<?php echo $data['nombres'] ?>"/></span>
                                 
                                 <span class="arrow_bottom"></span>
                             </a>
@@ -31,11 +29,13 @@
                 </div>
             <?php endif; ?>
         </div>
+        <?php if (!empty($data)) : ?>
         <div class="user_option_mobile">
             <ul>
                 <li>
+                    <?php $imagen = !empty($data['imagen']) ? $urlImg . '/' . $data['imagen'] : $urlImg . '/user-web-default.png'; ?>
                     <span class="user_icon">
-                        <img src="<?php echo URL_RESOURCES ?>front/images/user_image.png" alt="">
+                        <img src="<?php echo $imagen; ?>" alt="<?php echo $data['nombres'] ?>">
                     </span>
                     <div class="menu_options">
                         <a href="<?php echo BASE_URL ?>mis-datos" class="logout">Mis datos</a>
@@ -43,45 +43,48 @@
                     </div>
                 </li>
                 <li>
-                    <span class="cart_number">3</span>
+                    <a href="<?php echo BASE_URL ?>carrito">
+                    <span class="cart_number"><?php echo $totalCarrito; ?></span>
                     <span class="cart_icon"></span>
+                    </a>
                 </li>
             </ul>
         </div>
+        <?php endif; ?>
         <nav>
             <ul>
                 <li>
-                    <a href="">
+                    <a href="http://coneypark.pe/locales/">
                         <div class="icon"><i class="icon-locales"></i></div><span class="text">LOCALES</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="http://coneypark.pe/promociones/">
                         <div class="icon"><i class="icon-promociones"></i></div><span class="text">PROMOCIONES</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="http://coneypark.pe/juegos/">
                         <div class="icon"><i class="icon-consola"></i></div><span class="text">NUESTRAS ATRACCIONES</span>
                     </a>
                 </li>
                 <li class="logo">
-                    <a href="">
+                    <a href="http://coneypark.pe/">
                         <img src="<?php echo URL_RESOURCES ?>front/dist/images/logo.png" alt="Coney Park"/>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="http://coneypark.pe/ventas-corporativas/">
                         <div class="icon"><i class="icon-corporativa"></i></div><span class="text">VENTAS CORPORATIVAS</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="http://coneypark.pe/preguntas-frecuentes/">
                         <div class="icon"><i class="icon-conexxion"></i></div><span class="text">PREGUNTAS FRECUENTES</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="http://coneypark.pe/coney-club/">
                         <div class="icon"><i class="icon-gold"></i></span></div><span class="text">CONEY CLUB</span>
                     </a>
                 </li>

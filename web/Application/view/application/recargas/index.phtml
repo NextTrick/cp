@@ -94,6 +94,16 @@
                 });
             });
             $('input.cant').each(function(){
+                $(this).on( 'keydown' , function(){
+                    if($(this).val() > 5){
+                        $(this).val("5");
+                    }
+                });
+                $(this).on( 'keyup' , function(){
+                    if($(this).val() > 5){
+                        $(this).val("5");
+                    }
+                });
                 $(this).change(function(){
                     cart.sendCart($(this).parent().data('prefix'));
                 });

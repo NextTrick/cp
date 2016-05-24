@@ -2,7 +2,7 @@
 <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-inline isearch')); ?>
     <div class="box-body">
         <div class="form-group">
-            <label class="control-label" for="tipo"><strong>Buscar por</strong> </label>
+            <label class="control-label" for="tipo">Buscar por </label>
             <?php echo $this->formElement($this->form->get('cmbFiltro')->setAttribute('class', 'form-control')) ?>
         </div>
         <div class="form-group">
@@ -13,15 +13,15 @@
         </div>
         <br>
         <div class="form-group">
-            <label class="control-label" for="tipo">Filtrar por Activo :</label>
+            <label class="control-label" for="tipo">Filtrar por : Activo </label>
             <?php echo $this->formElement($this->form->get('cmbActivo')->setAttribute('class', 'form-control')) ?>
         </div>
         <div class="form-group">
-            <label class="control-label" for="tipo">Destacado : </label>
+            <label class="control-label" for="tipo">Destacado  </label>
             <?php echo $this->formElement($this->form->get('cmbDestacado')->setAttribute('class', 'form-control')) ?>
         </div>
         <div class="form-group">
-            <label class="control-label" for="tipo">Tipo : </label>
+            <label class="control-label" for="tipo">Tipo  </label>
             <?php echo $this->formElement($this->form->get('cmbTipo')->setAttribute('class', 'form-control')) ?>
         </div>
 

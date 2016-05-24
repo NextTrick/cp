@@ -105,11 +105,17 @@ class MisDatosController extends SecurityWebController
                 }
 
                 $id = $this->_getUsuarioService()->getRepository()->save($dataIn, $usuario->id);
-                $mensajeRegistro = 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.';
                 if (!empty($id)) {
-                    $mensajeRegistro = '<h3>¡Felicidades!, tu cuenta fué actualizada correctamente.</h3>';
-                    return $this->redirect()->toRoute('web-mis-datos', array('controller' => 'mis-datos'));
+                    $this->flashMessenger()->addMessage(array(
+                        'success' => '<b>Felicidades</b>, tus datos fueron actualizados correctamente. ' ,
+                    ));
+                } else {
+                    $this->flashMessenger()->addMessage(array(
+                        'error' => 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.',
+                    ));
                 }
+                
+                return $this->redirect()->toRoute('web-mis-datos', array('controller' => 'mis-datos'));
             }
         }
         

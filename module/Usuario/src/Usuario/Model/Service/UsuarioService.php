@@ -145,14 +145,16 @@ class UsuarioService
             $res = $this->_getTrueFiTarjetaService()->addCard($dataServ);
             if ($res['success']) {
                 $card = $res['result'];
-                $save = $this->_getTarjetaService()->getRepository()->save(array(
+                $tarjetaId = $this->_getTarjetaService()->getRepository()->save(array(
                     'numero' => $data['numero'],
                     'usuario_id' => $data['usuario_id'],
                     'nombre' => $data['nombre'],
                     'cguid' => $card['cguid'],
                     'fecha_creacion' => date('Y-m-d H:i:s'),
+                    'fecha_actualizacion' => date('Y-m-d H:i:s'),
                 ));
-                if (!empty($save)) {
+                if (!empty($tarjetaId)) {
+                    $this->_getTarjetaService()->cronTarjetas($card['cguid']);
                     $result['success'] = true;
                     $result['message'] = null;
                 }
@@ -161,7 +163,7 @@ class UsuarioService
             }
             
             //sincronizar tarjetas registrados por otro sistema
-            //$this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
+            $this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
         }
         return $result;
     }
@@ -173,7 +175,9 @@ class UsuarioService
             $cards = $result['result']['cards'];
             if (!empty($cards)) {
                 $repositoryTar = $this->_getTarjetaService()->getRepository();
+                $index = 0;
                 foreach ($cards as $card) {
+                    $index++;
                     $row = $repositoryTar->findOne(array(
                         'where' => array('usuario_id' => $usuarioId, 'cguid' => $card['cguid'])
                     ));
@@ -185,11 +189,14 @@ class UsuarioService
                     } else {
                         $repositoryTar->save(array(
                             'usuario_id' => $usuarioId,
+                            'nombre' => 'Tarjeta ' . $index,
                             'numero' => $card['number'],
                             'cguid' => $card['cguid'],
                             'fecha_creacion' => date('Y-m-d H:i:s'),
+                            'fecha_actualizacion' => date('Y-m-d H:i:s'),
                             'estado_truefi' => $card['status'],
                         ));
+                        $this->_getTarjetaService()->cronTarjetas($row['cguid']);
                     }
                 }
                 return true;

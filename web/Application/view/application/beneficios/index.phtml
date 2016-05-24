@@ -9,29 +9,29 @@
                 </ul>
             </div>
             <div class="purple_box">
-                <?php echo $this->sectionContenido(Cms\Model\Service\ContenidoService::SECCION_HEAD_MIS_TARJETAS); ?>
-<!--                <p class="yellow_text small_text">Beneficios para ti</p>
+                <?php //echo $this->sectionContenido(Cms\Model\Service\ContenidoService::SECCION_HEAD_MIS_TARJETAS); ?>
+                <p class="yellow_text small_text">Beneficios para ti</p>
                 <p class="small_text">Por ser <strong>miembro del Coney Club </strong>cuentas con las siguientes grandes beneficios</p>
                 <div class="options">
                     <div class="col_3 left">
                         <div class="circle">
-                            <img src="" alt="">
+                            <img src="./s/front/images/beneficio_1.png" alt="">
                         </div>
                         <p class="p_16">Hasta <span> <strong>20% de descuento en todos los juegos. </strong></span>Según el tipo de local</p>
                     </div>
                     <div class="col_3 left">
                         <div class="circle">
-                            <img src="" alt="">
+                            <img src="./s/front/images/beneficio_2.png" alt="">
                         </div>
                         <p class="p_16"><span><strong>20 Coney Bonos gratis </strong></span>el día de tu cumpleaños (Presentando su DNI)</p>
                     </div>
                     <div class="col_3 right">
                         <div class="circle">
-                            <img src="" alt="">
+                            <img src="./s/front/images/beneficio_3.png" alt="">
                         </div>
                         <p class="p_16"><span><strong>Descuentos exclusivos </strong></span>por recargas en fechas especiales (Día de los enamorados, día de la madre y padre, halloween, etc.)</p>
                     </div>
-                </div>-->
+                </div>
                 <div class="bar_info">
                     <div class="left">
                         <p class="p_16">Asocia tus tarjetas, haciendo clic en el siguiente botón: </p>
@@ -45,7 +45,7 @@
                     <div class="offers_box_two">        
                         <?php foreach ($rows['destacado'] as $key => $row) : ?>
                             <div class="left">
-                                <div class="image"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></div>
+                                <div class="image"><a href="<?php echo BASE_URL ?>recargas"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a></div>
                             </div>
                             <div class="right">
                                 <p class="breadcrumb"><?php echo $row['titulo1']; ?> 
@@ -63,7 +63,7 @@
                             <?php $float = (($key+1)%3 == 0) ? 'right' : 'left'; ?>
                             <div class="col_3 <?php echo $float; ?>">
                                 <div class="box_white">
-                                    <div class="image"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></div>
+                                    <div class="image"><a href="<?php echo BASE_URL ?>recargas"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a></div>
                                     <p class="breadcrumb"><?php echo $row['titulo1']; ?> 
                                         <?php if (!empty($row['legal'])) : ?>
                                         <a href="#modal_watch_legal_nor_<?php echo $key; ?>" name="modal" class="watch_legal">. Ver legal</a>

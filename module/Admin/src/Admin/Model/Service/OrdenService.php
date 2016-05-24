@@ -45,11 +45,14 @@ class OrdenService
 
     public function getDataCriteria($params)
     {
+        $order = array('pago_fecha_confirmacion DESC');
+        
         $criteria = array(
             'whereLike'    => null,
             'limit'        => null,
             'where'        => null,
-            'whereBetween' => null
+            'whereBetween' => null,
+            'order'        => $order
         );
 
         if (!empty($params)) {
@@ -62,7 +65,7 @@ class OrdenService
             $paramsWhere = array(
                 'comprobante_tipo' => String::xssClean($params['cmbTipoComp']),
                 'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
-                'pago_tarjeta'     => String::xssClean($params['cmbMetodoPago']),
+                'pago_metodo'     => String::xssClean($params['cmbMetodoPago']),
             );
 
             $betwween = array(
@@ -72,11 +75,14 @@ class OrdenService
                     )
             );
 
+            
+            
             $criteria = array(
                 'whereLike'    => $paramsLike,
                 'limit'        => LIMIT_BUSCAR,
                 'where'        => $paramsWhere,
-                'whereBetween' => $betwween
+                'whereBetween' => $betwween,
+                'order'        => $order
             );
         }
 
@@ -107,7 +113,7 @@ class OrdenService
         }
 
         if (self::TIPO_DOCUMENTO_DNI == $tipoDocumento) {
-            $result = self::TIPO_DOCUMENTO_NAME_RUC;
+            $result = self::TIPO_DOCUMENTO_NAME_DNI;
         } elseif (self::TIPO_DOCUMENTO_RUC == $tipoDocumento) {
             $result = self::TIPO_DOCUMENTO_NAME_RUC;
         }
@@ -151,6 +157,7 @@ class OrdenService
     {
         return array(
             'email'              => 'Correo',
+            'codigo'             => 'Codigo Transaccion',
             'comprobante_numero' => 'Nro. Comprobante',
             'pago_referencia'    => 'Cód. Pago',
             'fac_razon_social'   => 'R. Social',

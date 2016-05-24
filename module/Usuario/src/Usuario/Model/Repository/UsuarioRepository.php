@@ -77,7 +77,7 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             if (!empty($this->crLimit)) {
                 $selectMain->limit($this->crLimit);
             }
-
+           //echo $selectMain->getSqlString($this->getAdapter()->getPlatform());exit;
             $statement = $sql->prepareStatementForSqlObject($selectMain);
             $rows      = $this->resultSetPrototype->initialize($statement->execute())->toArray();
 

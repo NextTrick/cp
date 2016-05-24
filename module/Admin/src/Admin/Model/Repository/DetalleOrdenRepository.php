@@ -30,21 +30,25 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
 
             $selectInterno = $sql->select();
             $selectInterno->from(array("od"=> "orden_detalle_orden"));
-            $selectInterno->columns(array('id', 'monto', 'fecha_creacion', 'emoney', 'bonus', 'promotionbonus', 'etickets', 'gamepoints'
+            $selectInterno->columns(array('id', 'monto', 'cantidad', 'fecha_creacion', 'emoney', 'bonus', 'gamepoints',
+                 'etickets', 'promotionbonus', 'recarga_cantidad', 'recarga_error'
             ));
             $selectInterno->join(array("p" => "paquete_paquete"), "p.id = od.paquete_id",
-                array("titulo1"), 'inner');
+                array("titulo1", 'titulo2', 'tipo'), 'left');
             $selectInterno->join(array("o" => "orden_orden"), "o.id = od.orden_id",
-                array("pago_estado"), 'inner');
+                array("pago_estado", 'codigo', 'pago_fecha_confirmacion'), 'inner');
             $selectInterno->join(array("u" => "usuario_usuario"), "u.id = o.usuario_id",
-                array("email"), 'inner');
+                array("email"), 'left');
             $selectInterno->join(array("t" => "tarjeta_tarjeta"), "t.id = od.tarjeta_id",
-                array("numero"), 'inner');
+                array("numero"), 'left');
 
             $select = $sql->select();
             $select->from(array("r" => $selectInterno));
-            $select->columns(array("pago_estado", 'id', 'monto', 'fecha_creacion', 'emoney', 'bonus',
-                'promotionbonus', 'etickets', 'gamepoints', 'titulo1', "email", 'numero'));
+            $select->columns(array('id', 'monto', 'cantidad', 'fecha_creacion', 'emoney', 'bonus', 'gamepoints',
+                    'etickets', 'promotionbonus', 'recarga_cantidad', 'recarga_error', "titulo1", 'titulo2', 'tipo',
+                    "pago_estado", 'codigo', "email", "numero"
+                )
+            );
 
             $where = new \Zend\Db\Sql\Where();
             foreach ($this->crWhere as $key => $value) {
