@@ -193,7 +193,6 @@ class UsuarioService
                             'numero' => $card['number'],
                             'cguid' => $card['cguid'],
                             'fecha_creacion' => date('Y-m-d H:i:s'),
-                            'fecha_actualizacion' => date('Y-m-d H:i:s'),
                             'estado_truefi' => $card['status'],
                         ));
                         $this->_getTarjetaService()->cronTarjetas($row['cguid']);

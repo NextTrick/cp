@@ -154,18 +154,27 @@ class MisTarjetasController extends SecurityWebController
         $destino = $this->request->getQuery('destino');
 
         $tarjetaId = \Common\Helpers\Crypto::decrypt($codigo, \Common\Helpers\Util::VI_ENCODEID);
-        $row = $this->_getTarjetaService()->getRepository()->findOne(
-            array('where' => array('id' => $tarjetaId))
-        );
+        $row = $this->_getTarjetaService()->getRepository()->findOne(array('where' => array('id' => $tarjetaId)));
+        
         if (!empty($row)) {
-            $restarTiempo = $this->_getTarjetaService()->getRestarTiempo();
-            $tsActual = strtotime(date('Y-m-d H:i:s', $restarTiempo));
-            $tsRow = strtotime($row['fecha_actualizacion']);
-            if ($tsRow < $tsActual) {
+            $actualizo = false;
+            if (empty($row['fecha_actualizacion'])) {
                 $this->_getTarjetaService()->cronTarjetas($cguid);
+                $actualizo = true;
+            } else {
+                $restarTiempo = $this->_getTarjetaService()->getRestarTiempo();
+                $tsActual = strtotime(date('Y-m-d H:i:s', $restarTiempo));
+                $tsRow = strtotime($row['fecha_actualizacion']);
+                if ($tsRow < $tsActual) {
+                    $this->_getTarjetaService()->cronTarjetas($cguid);
+                    $actualizo = true;
+                }
+            }
+            if ($actualizo) {
+                $row = $this->_getTarjetaService()->getRepository()->findOne(array('where' => array('id' => $tarjetaId)));
             }
         }
-        
+
         $row['nombre'] = $nombre;
         $row['numero'] = $numero;
         $row['codigo'] = $codigo;
