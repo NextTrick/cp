@@ -95,7 +95,7 @@ return array(
         'transport' => array(
             'options' => array(
                 'host' => '204.232.198.40',
-                'port' => 25,
+               // 'port' => 25,
             ),
         ),
         'fromEmail' => 'contacto@coneypark.com',
