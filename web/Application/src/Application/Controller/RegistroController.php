@@ -44,6 +44,9 @@ class RegistroController extends AbstractActionController
                 $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $dataIni['email']));
                 return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
             }
+        } else {
+            $this->flashMessenger()->addMessage(array('error' => 'Este campo es requerido y no puede estar vacío.'));
+            return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
         }
 
         $mensajeRegistro = null;

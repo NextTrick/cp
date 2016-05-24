@@ -20,6 +20,9 @@ class RecargasController extends SecurityWebController
         }
         
         $usuarioTarjetas = $this->_getTarjetaService()->getDdlTarjetas($usuario->id);
+        if (empty($usuarioTarjetas)) {
+            return $this->redirect()->toRoute('web-mis-tarjetas', array('controller' => 'index'));
+        }
         
         $view = new ViewModel();
         $view->setVariable('cartModel', $cartModel);
