@@ -338,7 +338,7 @@ class OrdenService
 
     public function enviarMailConfirmacion($ordenId)
     {
-        $ordenData = $this->_getOrdenService()->getRepository()->getConfirmacionMailDatosById($ordenId);
+        $ordenData = $this->getRepository()->getConfirmacionMailDatosById($ordenId);
 
         $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
 
