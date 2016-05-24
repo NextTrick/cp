@@ -814,6 +814,7 @@ section .purple_box .benefits_offers .offers_box_three .col_3 .box_white {
   background: #fff;
   border-radius: 15px;
   color: #000;
+  overflow: hidden;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p {
   padding: 8px;
