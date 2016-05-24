@@ -84,7 +84,7 @@ class DetalleOrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGa
 
         $select = $sql->select();
         $select->from(array('a' => $this->table));
-        $select->columns(array('emoney', 'cantidad'));
+        $select->columns(array('emoney', 'cantidad', 'monto'));
         $select->join(array('b' => 'paquete_paquete'), 'a.paquete_id = b.id',
             array('paquete_id' => 'id', 'paquete_titulo1' => 'titulo1', 'paquete_titulo2' => 'titulo2'));
         $select->join(array('c' => 'tarjeta_tarjeta'), 'a.tarjeta_id = c.id',

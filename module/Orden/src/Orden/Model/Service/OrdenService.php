@@ -18,6 +18,7 @@ use Usuario\Model\Service\PerfilPagoService;
 use Usuario\Model\Service\UsuarioService;
 use Util\Model\Service\ErrorService;
 use Util\Util\Util;
+use Zend\View\Model\ViewModel;
 
 class OrdenService
 {
@@ -332,12 +333,36 @@ class OrdenService
             $this->_getDetalleOrdenService()->getRepository()->save($detalleOrdenData, $ordenDetalle['id']);
         }
 
-        $this->enviarMailConfirmacion($ordenDetalleData);
+        //$this->enviarMailConfirmacion($ordenId);
     }
 
-    public function enviarMailConfirmacion($ordenDetalleData)
+    public function enviarMailConfirmacion($ordenId)
     {
-        //enviarmail
+        $ordenData = $this->_getOrdenService()->getRepository()->getById($ordenId);
+        $ordenDetalleData = $this->_getDetalleOrdenService()->getRepository()->getConfirmacionDatosByOrderId($ordenId);
+
+        $view = new ViewModel();
+        $view->setTerminal(true)
+            ->setTemplate('application/pagos/email/confirmacion.phtml')
+            ->setVariables(array(
+                'ordenData' => $ordenData,
+                'ordenDetalleData' => $ordenDetalleData,
+            ));
+
+        $viewRenderer = $this->_sl->get('viewrenderer');
+        $html = $viewRenderer->render($view);
+        try {
+
+            $body = $html;
+            $to = $ordenData['email'];
+
+            $config = $this->_sl->get('config');
+            $subject = ASUTO_PAGO_CONFIRMACION;
+
+            \Util\Common\Email::send($subject, $body, $to, true, null);
+        } catch (Exception $e) {
+            \Util\Common\Email::reportException($e);
+        }
     }
 
     /**

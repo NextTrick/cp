@@ -38,6 +38,8 @@ define('LIMIT_DESTACADOS', 2);
 define('CANT_ACTIVO_TIPO_PROMOCION', 100);
 define('CANT_ACTIVO_TIPO_RECARGA', 100);
 
+define('ASUTO_PAGO_CONFIRMACION', 'Coney Park - Confirmación de Recarga');
+
 define('VERSION', 1000);
 
 //define('TEST_MOCK', 1);
