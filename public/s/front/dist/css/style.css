@@ -1482,7 +1482,11 @@ section .purple_box .pay_box_white >.right .items_cart .item {
   padding: 10px 0 20px;
 }
 section .purple_box .pay_box_white >.right .items_cart .item .left {
-  width: 100px;
+  width: 140px;
+}
+section .purple_box .pay_box_white >.right .items_cart .item .left img {
+  width: 100%;
+  border-radius: 5px;
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right {
   width: 450px;
@@ -1665,7 +1669,11 @@ section .purple_box .pay_box_white.cart_page >.left .items_cart .item:last-child
   border-bottom: 0;
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .left {
-  width: 100px;
+  width: 140px;
+}
+section .purple_box .pay_box_white.cart_page >.left .items_cart .item .left img {
+  width: 100%;
+  border-radius: 5px;
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right {
   width: 450px;
@@ -2016,7 +2024,6 @@ section .offers_box_three .col_3:first-child {
   margin-right: 2%;
 }
 section .offers_box_three .col_3 .image {
-  height: 145px;
   overflow: hidden;
 }
 section .offers_box_three .col_3 .image img {
@@ -2664,7 +2671,7 @@ i[class*=" icon-"] {
     display: block;
     float: none;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
   }
   section .offers_box_three .col_3 .box_white {
     border-radius: 18px;
@@ -2741,9 +2748,11 @@ i[class*=" icon-"] {
   section .app_box .purple_box .pay_box_white >.right .items_cart .item >.left {
     margin-top: 15px;
     margin-right: 10px;
+    width: 100px;
   }
   section .app_box .purple_box .pay_box_white >.right .items_cart .item >.left img {
     width: 100%;
+    border-radius: 5px;
   }
   section .app_box .purple_box .pay_box_white.cart_page >.left {
     padding: 15px;
@@ -2788,6 +2797,7 @@ i[class*=" icon-"] {
   section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.left {
     margin-top: 15px;
     margin-right: 10px;
+    width: 100px;
   }
   section .app_box .purple_box .pay_box_white.cart_page >.left .items_cart .item >.left img {
     width: 100%;
