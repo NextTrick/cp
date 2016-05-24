@@ -30,7 +30,7 @@ class IndexController extends AbstractActionController
 
             //Email::reportDebug(array(1,2,3));
         } catch (\Exception $e) {
-            var_dump($e->getTraceAsString()); exit;
+            var_dump($e->getMessage(), $e->getTraceAsString()); exit;
         }
 
         echo 'enviado ok'; exit;
