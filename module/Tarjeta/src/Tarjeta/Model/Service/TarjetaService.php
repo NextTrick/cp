@@ -96,11 +96,16 @@ class TarjetaService
             $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion < ?", $fecha));
             $criteria = array(
                 'where' => $where,
-                'order' => array('fecha_actualizacion DESC')
+                'order' => array('fecha_actualizacion DESC'),
+                'limit' => 50,
             );
             $rows = $this->_repository->findAll($criteria);
             foreach ($rows as $row) {
-                $this->_cronTarjetas($row['id'], $row['cguid']);
+                try {
+                    $this->_cronTarjetas($row['id'], $row['cguid']);
+                } catch (\Exception $e) {
+                    \Common\Helpers\Error::initialize()->logException($e);
+                }
             }
         } else {
             $criteria = array(
@@ -110,7 +115,11 @@ class TarjetaService
             );
             $row = $this->_repository->findOne($criteria);
             if (!empty($row)) {
-                $this->_cronTarjetas($row['id'], $row['cguid']);
+                try {
+                    $this->_cronTarjetas($row['id'], $row['cguid']);
+                } catch (\Exception $e) {
+                    \Common\Helpers\Error::initialize()->logException($e);
+                }
             }
         }
         
@@ -159,10 +168,5 @@ class TarjetaService
     private function _getTrueFiTarjetaService()
     {
         return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
-    }
-    
-    private function _getUsuarioService()
-    {
-        return $this->_sl->get('Usuario\Model\Service\UsuarioService');
     }
 }

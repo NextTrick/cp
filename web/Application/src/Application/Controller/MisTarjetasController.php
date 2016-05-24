@@ -135,50 +135,6 @@ class MisTarjetasController extends SecurityWebController
         return $response->setContent($jsonModel->serialize());
     }
     
-    public function tarjetaUnidadAction()
-    {
-        $response = $this->getResponse();
-        $result = array('success' => false, 'message' => ERROR_VALIDACION);
-        
-        if ($this->_isLogin() === false) {
-            $result['message'] = ERROR_303;
-            $jsonModel =  new \Zend\View\Model\JsonModel($result);
-            return $response->setContent($jsonModel->serialize());
-        }
-
-        $cguid = $this->request->getQuery('cguid');
-        $index = $this->request->getQuery('index');
-        $codigo = $this->request->getQuery('codigo');
-        $nombre = $this->request->getQuery('nombre');
-        $numero = $this->request->getQuery('numero');
-        $destino = $this->request->getQuery('destino');
-        
-        $row = $this->_getTarjetaService()->getOnlineTarjeta($cguid);
-        $row['nombre'] = $nombre;
-        $row['numero'] = $numero;
-        $row['codigo'] = $codigo;
-        
-        $view = new ViewModel();
-        $view->setTemplate('mis-tarjetas/tarjeta-unidad');
-        $view->setTerminal(true);
-        $view->setVariable('index', $index);
-        $view->setVariable('row', $row);
-        
-        $resolver = new \Zend\View\Resolver\TemplatePathStack(array(
-            'script_paths' => array(dirname(dirname(dirname(__DIR__))) . '/view/application/')
-        )); 
-        $renderer = new \Zend\View\Renderer\PhpRenderer();
-        $renderer->setResolver($resolver);
-        $viewHtml = $renderer->render($view);
-        
-        $result['success'] = true;
-        $result['message'] = null;
-        $result['data'] = array('html' => $viewHtml, 'destino' => $destino);
-
-        $jsonModel =  new \Zend\View\Model\JsonModel($result);
-        return $response->setContent($jsonModel->serialize());
-    }
-    
     private function _validateNombre($nombre, $numero)
     {
         $existe = false;

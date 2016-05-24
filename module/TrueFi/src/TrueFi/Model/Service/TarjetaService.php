@@ -80,7 +80,7 @@ class TarjetaService
             $url = $this->getUrl(self::METHOD_GET_CARD);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                     $result['result'] = $curlData['data']['data'];
                 } else {
@@ -105,7 +105,7 @@ class TarjetaService
             $url = $this->getUrl(self::METHOD_ADD_CARD);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                     $result['result'] = $curlData['data']['data'];
                 } else {
@@ -130,7 +130,7 @@ class TarjetaService
             $url = $this->getUrl(self::METHOD_CREDIT_PURCHESE);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                     $result['result'] = $curlData['data']['data'];
                 } else {
@@ -155,7 +155,7 @@ class TarjetaService
             $url = $this->getUrl(self::METHOD_DENOUNCE_CARD);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
@@ -183,7 +183,7 @@ class TarjetaService
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
                 var_dump($curlData);exit;
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
