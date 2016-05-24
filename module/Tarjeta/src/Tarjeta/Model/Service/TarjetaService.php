@@ -31,24 +31,7 @@ class TarjetaService
             'limit' => LIMIT_USUARIO_TARJETAS,
         );
         
-        $actualizo = false;
         $rows = $this->_repository->findAll($criteria);
-        foreach ($rows as $row) {
-            if (empty($row)) {
-                $actualizo = true;
-                $this->_cronTarjetas($row['id'], $row['cguid']);
-            } else {
-                $tsActual = $this->_restarTiempo;
-                $tsRow = strtotime($row['fecha_actualizacion']);
-                if ($tsRow < $tsActual) {
-                    $actualizo = true;
-                    $this->_cronTarjetas($row['id'], $row['cguid']);
-                }
-            }
-        }
-        if ($actualizo) {
-            $rows = $this->_repository->findAll($criteria);
-        }
         
         $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
         
@@ -85,6 +68,24 @@ class TarjetaService
                 );
             }
         }
+        
+        //        foreach ($rows as $row) {
+//            if (empty($row)) {
+//                $actualizo = true;
+//                $this->_cronTarjetas($row['id'], $row['cguid']);
+//            } else {
+//                $tsActual = $this->_restarTiempo;
+//                $tsRow = strtotime($row['fecha_actualizacion']);
+//                if ($tsRow < $tsActual) {
+//                    $actualizo = true;
+//                    $this->_cronTarjetas($row['id'], $row['cguid']);
+//                }
+//            }
+//        }
+//        if ($actualizo) {
+//            $rows = $this->_repository->findAll($criteria);
+//        }
+        
         return $result;
     }
 
@@ -106,6 +107,11 @@ class TarjetaService
         }
         
         return $results;
+    }
+
+    public function getRestarTiempo()
+    {
+        return $this->_restarTiempo;
     }
 
     public function cronTarjetas($cguid = null)
