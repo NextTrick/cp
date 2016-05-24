@@ -725,17 +725,10 @@ section .purple_box .options .col_3.right {
   padding: 0;
 }
 section .purple_box .options .col_3 .circle {
-  width: 150px;
-  height: 150px;
   border-radius: 100px;
-  background: #410041;
   display: block;
   margin: 0 auto;
   overflow: hidden;
-}
-section .purple_box .options .col_3 .circle img {
-  width: 100%;
-  height: 100%;
 }
 section .purple_box .options .col_3 p {
   width: 85%;
@@ -2888,11 +2881,10 @@ i[class*=" icon-"] {
   }
   section .app_box .purple_box .options .col_3 .circle {
     float: left;
-    width: 30%;
   }
   section .app_box .purple_box .options .col_3 .p_16 {
     float: right;
-    width: 68%;
+    width: 58%;
     text-align: left;
   }
   section .app_box .purple_box .bar_info {
