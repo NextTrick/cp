@@ -91,18 +91,18 @@ return array(
            'ViewJsonStrategy',
         ),
     ),
+    /*
     'mail' => array(
         'transport' => array(
             'options' => array(
                 'host' => '204.232.198.40',
-               // 'port' => 25,
+                'port' => 25,
             ),
         ),
         'fromEmail' => 'contacto@coneypark.com',
         'fromName' => 'ConeyPark',
         'subject' => 'ConeyPark'
-    ),
-/*
+    ),*/
     'mail' => array(
         'transport' => array(
             'options' => array(
@@ -120,8 +120,6 @@ return array(
         'fromName' => 'ConeyPark',
         'subject' => 'ConeyPark'
     ),
-*/
-         
     //Emails
     'emails' => array(
         'admin' => 'ing.angeljara@gmail.com', // email del administrador
