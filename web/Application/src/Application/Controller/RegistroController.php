@@ -31,6 +31,7 @@ class RegistroController extends AbstractActionController
         )));
         $form->setData($dataIni);
         
+        $registroForm = (float)$this->request->getPost('registro_form');
         $disabledEmail = false;
         $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
         if (!empty($dataIni['email'])) {
@@ -44,14 +45,13 @@ class RegistroController extends AbstractActionController
                 $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $dataIni['email']));
                 return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
             }
-        } else {
+        } elseif ($registroForm) {
             $this->flashMessenger()->addMessage(array('error' => 'Este campo es requerido y no puede estar vacío.'));
             return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
         }
 
         $mensajeRegistro = null;
         $openPopapConfRegistro = 0;
-        $registroForm = (float)$this->request->getPost('registro_form');
         if ($this->request->isPost() && !$registroForm) {
             //=========== Llenar los combos ===========
             $paisId = $this->request->getPost('pais_id');
