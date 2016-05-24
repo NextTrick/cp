@@ -158,11 +158,15 @@ class MisTarjetasController extends SecurityWebController
             array('where' => array('id' => $tarjetaId))
         );
         if (!empty($row)) {
-            $restarTiempo = $this->_getTarjetaService()->getRestarTiempo();
-            $tsActual = strtotime(date('Y-m-d H:i:s', $restarTiempo));
-            $tsRow = strtotime($row['fecha_actualizacion']);
-            if ($tsRow < $tsActual) {
+            if (empty($row['fecha_actualizacion'])) {
                 $this->_getTarjetaService()->cronTarjetas($cguid);
+            } else {
+                $restarTiempo = $this->_getTarjetaService()->getRestarTiempo();
+                $tsActual = strtotime(date('Y-m-d H:i:s', $restarTiempo));
+                $tsRow = strtotime($row['fecha_actualizacion']);
+                if ($tsRow < $tsActual) {
+                    $this->_getTarjetaService()->cronTarjetas($cguid);
+                }
             }
         }
         
