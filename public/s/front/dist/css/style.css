@@ -1268,6 +1268,7 @@ section .purple_box .recargas_content .offers .col_3.auto .box_white {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white {
   border-radius: 14px;
+  overflow: hidden;
   background: #fff;
   color: #000;
   text-align: left;
@@ -1994,6 +1995,7 @@ section .offers_box_three .col_3 {
 section .offers_box_three .col_3 .box_white {
   background: #fff;
   border-radius: 15px;
+  overflow: hidden;
   color: #000;
   min-height: 258px;
 }
