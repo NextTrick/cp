@@ -166,13 +166,16 @@ class RegistroController extends AbstractActionController
             $codigoRecuperar = \Common\Helpers\Util::generateToken($resultTrueFi['mguid']);
             $dataIn['codigo_activar'] = $codigoRecuperar;
             
-            $save = $repository->save($dataIn);
-            if ($save) {
+            $usuarioId = $repository->save($dataIn);
+            if ($usuarioId) {
                 //si es facebook activar cuenta en TrueFi
                 if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
                     $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $resultTrueFi['mguid']));
                 }
-                                
+                
+                //sincronizar tarjetas registrados por otro sistema
+                $this->_getUsuarioService()->syncTarjetasCliente($usuarioId, $dataIn['mguid']);
+                
                 $result['success'] = true;
                 $result['code'] = null;
                 
