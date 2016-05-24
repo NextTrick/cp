@@ -833,7 +833,7 @@ section .purple_box .benefits_offers .offers_box_three .col_3:first-child {
   margin-right: 2%;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3 .image {
-  height: 145px;
+  height: auto;
   overflow: hidden;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3 .image img {
@@ -2881,10 +2881,14 @@ i[class*=" icon-"] {
   }
   section .app_box .purple_box .options .col_3 .circle {
     float: left;
+    width: 40%;
+  }
+  section .app_box .purple_box .options .col_3 .circle img {
+    width: 100%;
   }
   section .app_box .purple_box .options .col_3 .p_16 {
     float: right;
-    width: 58%;
+    width: 54%;
     text-align: left;
   }
   section .app_box .purple_box .bar_info {
