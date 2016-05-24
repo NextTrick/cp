@@ -9,6 +9,10 @@ class RegistroController extends AbstractActionController
 {
     public function indexAction()
     {
+        if ($this->_getLoginGatewayService()->isLoggedIn()) {
+            return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
+        }
+        
         $view = new ViewModel();
         return $view;
     }
