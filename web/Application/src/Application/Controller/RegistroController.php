@@ -195,7 +195,7 @@ class RegistroController extends AbstractActionController
     
     public function activarCuentaAction()
     {
-        $mguid = $this->params('codigo');
+        $mguid = $this->request->getQuery('mguid');
         $repository = $this->_getUsuarioService()->getRepository();
         $criteria = array('where' => array('mguid' => $mguid));
         $row = $repository->findOne($criteria);
