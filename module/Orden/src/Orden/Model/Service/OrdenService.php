@@ -361,6 +361,7 @@ class OrdenService
             $bcc = $config['emails']['admin'];
 
             \Util\Common\Email::send($subject, $body, $to, true, $bcc);
+            var_dump($subject, $body, $to, true, $bcc); exit;
         } catch (Exception $e) {
             \Util\Common\Email::reportException($e);
         }
