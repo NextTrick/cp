@@ -117,7 +117,7 @@ return array(
                 'connection_class'  => 'login',
                 'connection_config' => array(
                     'username' => 'autopasioncompany@gmail.com',
-                    'password' => 'Cistensure2',
+                    'password' => 'Cistensure1',
                     'ssl' => 'tls',
                 ),
             ),
