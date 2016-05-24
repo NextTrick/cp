@@ -1,10 +1,10 @@
 <?php
 
-#define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
-#define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
+define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
+define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
-define('BASE_URL', 'http://dev.coneypark.pe/recargas/');
-define('URL_RESOURCES', 'http://dev.coneypark.pe/recargas/s/');
+#define('BASE_URL', 'http://dev.coneypark.pe/recargas/');
+#define('URL_RESOURCES', 'http://dev.coneypark.pe/recargas/s/');
 
 define('URL_IMAGE_CMS', rtrim(URL_RESOURCES, '/').'/files/contenido/');
 
@@ -37,6 +37,8 @@ define('LIMIT_USUARIO_TARJETAS', 5);
 define('LIMIT_DESTACADOS', 2);
 define('CANT_ACTIVO_TIPO_PROMOCION', 100);
 define('CANT_ACTIVO_TIPO_RECARGA', 100);
+
+define('ASUTO_PAGO_CONFIRMACION', 'Coney Park - Confirmación de Recarga');
 
 define('VERSION', 1000);
 
