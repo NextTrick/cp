@@ -80,9 +80,11 @@
         });
     }
     $(document).ready(function(){
+        var factor = 0;
         $('.init_card').each(function(){
-        var _this = this;
-            getCard(_this);
+            var _this = this;
+            setTimeout(function(){getCard(_this);}, factor*5000);
+            factor = factor+1;
         });
     });
 </script>
