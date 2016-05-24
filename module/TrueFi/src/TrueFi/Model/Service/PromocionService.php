@@ -57,7 +57,7 @@ class PromocionService
             $url = $this->getUrl(self::METHOD_GET_PROMOTIONS);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                     $result['result'] = $curlData['data']['data'];
                 } else {

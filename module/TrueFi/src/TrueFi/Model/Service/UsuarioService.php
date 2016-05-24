@@ -126,7 +126,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_LOGON);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                     $result['mguid'] = $curlData['data']['data']['mguid'];
                 } else {
@@ -151,7 +151,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_NEW_MEMBER);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                     $result['mguid'] = $curlData['data']['data']['mguid'];
                 } else {
@@ -176,7 +176,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_GET_MEMBER);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                     $result['result'] = $curlData['data']['data'];
                 } else {
@@ -201,7 +201,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_SET_MEMBER);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
@@ -225,7 +225,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_ACTIVATE_MEMBER);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
@@ -249,7 +249,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_DELETE_MEMBER);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
@@ -273,7 +273,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_RECOVER_PASSWORD);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
@@ -297,7 +297,7 @@ class UsuarioService
             $url = $this->getUrl(self::METHOD_CHANGE_PASSWORD);
             $curlData = Response::curl($url, $this->_config, $jsonData);
             if ($curlData['success']) {
-                if ($curlData['data']['code'] == 0) {
+                if (isset($curlData['data']['code']) && $curlData['data']['code'] == 0) {
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;

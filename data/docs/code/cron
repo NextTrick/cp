@@ -1,0 +1,4 @@
+Ejecutar cron:
+----------------------
+cd ../nombre_proyecto
+php public/index.php actualizar tarjetas

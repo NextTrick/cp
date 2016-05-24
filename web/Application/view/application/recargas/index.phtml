@@ -57,6 +57,7 @@
                         $('#spanSubtotal').html(' <span class="text">Recargas: </span>'+data.data.cantidad+' <span>/ </span>S/. '+data.data.subtotal);
                         $('#spanTotal').html('S/. '+data.data.total);
                         $('#spanCantidadTotal').html(data.data.cantidadTotal);
+                        $('.cart_count_header').html(data.data.cantidadTotal);
                         result = true;
                     }
                     cart.bloquear = 0;

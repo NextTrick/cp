@@ -8,7 +8,7 @@ define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
 define('URL_IMAGE_CMS', rtrim(URL_RESOURCES, '/').'/files/contenido/');
 
-define('VERSION_STATICO', '1.7');
+define('VERSION_STATICO', '1.8');
 
 define('OK_CREAR', 'El registro se creó correctamente');
 define('OK_EDITAR', 'El registro se editó correctamente');
@@ -37,6 +37,8 @@ define('LIMIT_USUARIO_TARJETAS', 5);
 define('LIMIT_DESTACADOS', 2);
 define('CANT_ACTIVO_TIPO_PROMOCION', 100);
 define('CANT_ACTIVO_TIPO_RECARGA', 100);
+
+define('ASUTO_PAGO_CONFIRMACION', 'Coney Park - Confirmación de Recarga');
 
 define('VERSION', 1000);
 
