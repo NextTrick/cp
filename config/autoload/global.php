@@ -91,24 +91,18 @@ return array(
            'ViewJsonStrategy',
         ),
     ),
-//    'mail' => array(
-//        'transport' => array(
-//            'options' => array(
-//                'host' => '204.232.198.40',
-//                'port' => 587,
-//                'connection_class'  => 'login',
-//                'connection_config' => array(
-//                    'username' => 'AKIAJSU2S4UPKXV4LUTA',
-//                    'password' => 'Aq/U/Mx/COu9VZpqAPASSkhjG958LHnBP9NeIujEF/qN',
-//                    'ssl' => 'tls',
-//                ),
-//            ),
-//        ),
-//        'fromEmail' => 'contacto@coneypark.com',
-//        'fromName' => 'ConeyPark',
-//        'subject' => 'ConeyPark'
-//    ),
-
+    'mail' => array(
+        'transport' => array(
+            'options' => array(
+                'host' => '204.232.198.40',
+                'port' => 25,
+            ),
+        ),
+        'fromEmail' => 'contacto@coneypark.com',
+        'fromName' => 'ConeyPark',
+        'subject' => 'ConeyPark'
+    ),
+/*
     'mail' => array(
         'transport' => array(
             'options' => array(
@@ -125,7 +119,8 @@ return array(
         'fromEmail' => 'contacto@coneypark.com',
         'fromName' => 'ConeyPark',
         'subject' => 'ConeyPark'
-    ), 
+    ),
+*/
          
     //Emails
     'emails' => array(
