@@ -117,8 +117,8 @@ return array(
             ),
         ),
         'fromEmail' => 'contacto@coneypark.com',
-        'fromName' => 'ConeyPark',
-        'subject' => 'ConeyPark'
+        'fromName' => 'Coney Club',
+        'subject' => 'Coney Club'
     ),
     //Emails
     'emails' => array(
