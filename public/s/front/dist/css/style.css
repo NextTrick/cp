@@ -2535,7 +2535,7 @@ i[class*=" icon-"] {
   content: "\ea91";
 }
 @media screen and (max-width: 667px) {
-  body {
+  body .wrapper {
     overflow-x: hidden;
   }
   .box_center {
