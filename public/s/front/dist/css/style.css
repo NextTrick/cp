@@ -725,17 +725,10 @@ section .purple_box .options .col_3.right {
   padding: 0;
 }
 section .purple_box .options .col_3 .circle {
-  width: 150px;
-  height: 150px;
   border-radius: 100px;
-  background: #410041;
   display: block;
   margin: 0 auto;
   overflow: hidden;
-}
-section .purple_box .options .col_3 .circle img {
-  width: 100%;
-  height: 100%;
 }
 section .purple_box .options .col_3 p {
   width: 85%;
@@ -769,6 +762,7 @@ section .purple_box .benefits_offers {
 }
 section .purple_box .benefits_offers .offers_box_two {
   overflow: hidden;
+  border-radius: 19px;
 }
 section .purple_box .benefits_offers .offers_box_two .left {
   width: 50%;
@@ -814,6 +808,7 @@ section .purple_box .benefits_offers .offers_box_three .col_3 .box_white {
   background: #fff;
   border-radius: 15px;
   color: #000;
+  overflow: hidden;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3 .box_white p {
   padding: 8px;
@@ -838,7 +833,7 @@ section .purple_box .benefits_offers .offers_box_three .col_3:first-child {
   margin-right: 2%;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3 .image {
-  height: 145px;
+  height: auto;
   overflow: hidden;
 }
 section .purple_box .benefits_offers .offers_box_three .col_3 .image img {
@@ -1266,6 +1261,7 @@ section .purple_box .recargas_content .offers .col_3.auto .box_white {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white {
   border-radius: 14px;
+  overflow: hidden;
   background: #fff;
   color: #000;
   text-align: left;
@@ -1992,6 +1988,7 @@ section .offers_box_three .col_3 {
 section .offers_box_three .col_3 .box_white {
   background: #fff;
   border-radius: 15px;
+  overflow: hidden;
   color: #000;
   min-height: 258px;
 }
@@ -2306,7 +2303,7 @@ footer span.logo_icon {
   display: none;
   width: 0;
   height: 0;
-  border-bottom: 60px solid #fff;
+  border-bottom: 59px solid #fff;
   border-right: 600px solid transparent;
 }
 /* Z-index of #mask must lower than #boxes .window */
@@ -2531,7 +2528,7 @@ i[class*=" icon-"] {
   content: "\ea91";
 }
 @media screen and (max-width: 667px) {
-  body {
+  body .wrapper {
     overflow-x: hidden;
   }
   .box_center {
@@ -2884,11 +2881,14 @@ i[class*=" icon-"] {
   }
   section .app_box .purple_box .options .col_3 .circle {
     float: left;
-    width: 30%;
+    width: 40%;
+  }
+  section .app_box .purple_box .options .col_3 .circle img {
+    width: 100%;
   }
   section .app_box .purple_box .options .col_3 .p_16 {
     float: right;
-    width: 68%;
+    width: 54%;
     text-align: left;
   }
   section .app_box .purple_box .bar_info {
