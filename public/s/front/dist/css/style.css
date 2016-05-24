@@ -2310,7 +2310,7 @@ footer span.logo_icon {
   display: none;
   width: 0;
   height: 0;
-  border-bottom: 60px solid #fff;
+  border-bottom: 59px solid #fff;
   border-right: 600px solid transparent;
 }
 /* Z-index of #mask must lower than #boxes .window */
