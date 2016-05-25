@@ -37,57 +37,6 @@ class TarjetaService
         
         return $results;
     }
-    
-    public function getOnlineTarjeta($cguid)
-    {
-        $result = array(
-            'emoney' => 'S/. 0.00',
-            'emoneyvalue' => 0,
-            'bonus' => 'S/. 0.00',
-            'bonusvalue' => 0,
-            'promotionbonus' => 'S/. 0.00',
-            'bonusplusvalue' => 0,
-            'gamepoints' => 0,
-            'gamepointsvalue' => 0,
-            'etickets' => 0,
-        );
-        $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
-        if ($data['success']) {
-            $data = $data['result'];
-            if (!empty($data)) {
-                $result = array(
-                    'emoney' => $data['emoney'],
-                    'emoneyvalue' => $data['emoneyvalue'],
-                    'bonus' => $data['bonus'],
-                    'bonusvalue' => $data['bonusvalue'],
-                    'promotionbonus' => $data['promotionbonus'], //promotionbonus <equivalente> bonusplusvalue
-                    'bonusplusvalue' => $data['bonusplusvalue'],
-                    'gamepoints' => $data['gamepoints'],
-                    'gamepointsvalue' => $data['gamepointsvalue'],
-                    'etickets' => $data['etickets'],
-                );
-            }
-        }
-        
-        //        foreach ($rows as $row) {
-//            if (empty($row)) {
-//                $actualizo = true;
-//                $this->_cronTarjetas($row['id'], $row['cguid']);
-//            } else {
-//                $tsActual = $this->_restarTiempo;
-//                $tsRow = strtotime($row['fecha_actualizacion']);
-//                if ($tsRow < $tsActual) {
-//                    $actualizo = true;
-//                    $this->_cronTarjetas($row['id'], $row['cguid']);
-//                }
-//            }
-//        }
-//        if ($actualizo) {
-//            $rows = $this->_repository->findAll($criteria);
-//        }
-        
-        return $result;
-    }
 
     public function getDdlTarjetas($usuarioId)
     {
