@@ -15,4 +15,4 @@ Vagrantfile
 composer.phar
 VirtualBox-*
 config/autoload/local.php
-
+public/s/files/*

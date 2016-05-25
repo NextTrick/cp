@@ -28,7 +28,7 @@ return array(
         'send_mail' => true,
         'local_log' => true,        
     ),
-
+    
      'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',

@@ -9,6 +9,10 @@ class RegistroController extends AbstractActionController
 {
     public function indexAction()
     {
+        if ($this->_getLoginGatewayService()->isLoggedIn()) {
+            return $this->redirect()->toRoute('web-beneficios', array('controller' => 'beneficios'));
+        }
+        
         $view = new ViewModel();
         return $view;
     }
@@ -31,6 +35,7 @@ class RegistroController extends AbstractActionController
         )));
         $form->setData($dataIni);
         
+        $registroForm = (float)$this->request->getPost('registro_form');
         $disabledEmail = false;
         $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
         if (!empty($dataIni['email'])) {
@@ -44,11 +49,13 @@ class RegistroController extends AbstractActionController
                 $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $dataIni['email']));
                 return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
             }
+        } elseif ($registroForm) {
+            $this->flashMessenger()->addMessage(array('error' => 'Este campo es requerido y no puede estar vacío.'));
+            return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
         }
 
         $mensajeRegistro = null;
         $openPopapConfRegistro = 0;
-        $registroForm = (float)$this->request->getPost('registro_form');
         if ($this->request->isPost() && !$registroForm) {
             //=========== Llenar los combos ===========
             $paisId = $this->request->getPost('pais_id');
@@ -159,13 +166,16 @@ class RegistroController extends AbstractActionController
             $codigoRecuperar = \Common\Helpers\Util::generateToken($resultTrueFi['mguid']);
             $dataIn['codigo_activar'] = $codigoRecuperar;
             
-            $save = $repository->save($dataIn);
-            if ($save) {
+            $usuarioId = $repository->save($dataIn);
+            if ($usuarioId) {
                 //si es facebook activar cuenta en TrueFi
                 if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
                     $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $resultTrueFi['mguid']));
                 }
-                                
+                
+                //sincronizar tarjetas registrados por otro sistema
+                $this->_getUsuarioService()->syncTarjetasCliente($usuarioId, $dataIn['mguid']);
+                
                 $result['success'] = true;
                 $result['code'] = null;
                 
@@ -185,7 +195,7 @@ class RegistroController extends AbstractActionController
     
     public function activarCuentaAction()
     {
-        $mguid = $this->params('codigo');
+        $mguid = $this->request->getQuery('mguid');
         $repository = $this->_getUsuarioService()->getRepository();
         $criteria = array('where' => array('mguid' => $mguid));
         $row = $repository->findOne($criteria);

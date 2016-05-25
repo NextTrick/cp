@@ -11,10 +11,12 @@
             <div class="purple_box">
                 <p class="yellow_text small_text">Mis tarjetas asociadas</p>
                 <div class="cards_content">
+                    <?php $index = 0; ?>
                     <?php foreach ($gridList as $key => $row) : ?>
                         <?php if ($row['show'] == 'lleno') : ?>
-                            <div class="col_3 my_card init_card" id="init_card_<?php echo $key; ?>">
-                                <div class="meta_data" data-index="<?php echo $key; ?>" data-codigo="<?php echo $row['codigo'] ?>" data-cguid="<?php echo $row['cguid'] ?>" data-numero="<?php echo $row['numero'] ?>" data-nombre="<?php echo $row['nombre'] ?>" style="display: none;"></div>
+                            <?php $index++; ?>
+                            <div class="col_3 my_card" id="init_card_<?php echo $index; ?>">
+                                <div class="meta_data" data-index="<?php echo $index; ?>" data-codigo="<?php echo $row['codigo'] ?>" data-cguid="<?php echo $row['cguid'] ?>" data-numero="<?php echo $row['numero'] ?>" data-nombre="<?php echo $row['nombre'] ?>" style="display: none;"></div>
                                 <div class="init_loading"><img src="<?php echo URL_RESOURCES ?>front/images/loading.gif" alt="Cargando..."/></div>
                             </div>
                         <?php elseif ($row['show'] == 'por_llenar') : ?>
@@ -63,16 +65,21 @@
         <div id="mask"></div>
 </section>
 <script type="text/javascript">
-    function getCard(_this)
+    var totalInitTarjeta = parseInt('<?php echo $index; ?>');
+    function getCard(index)
     {
+        var _this = $('#init_card_'+index);
         $.ajax({
             type: "GET",
             url: baseUrl + 'mis-tarjetas/tarjeta-unidad',
-            data: {index:$(_this).children('.meta_data').data('index'), codigo:$(_this).children('.meta_data').data('codigo'), cguid:$(_this).children('.meta_data').data('cguid'), numero:$(_this).children('.meta_data').data('numero'), nombre:$(_this).children('.meta_data').data('nombre'), destino:$(_this).attr('id')},
+            data: {index:_this.children('.meta_data').data('index'), codigo:_this.children('.meta_data').data('codigo'), cguid:_this.children('.meta_data').data('cguid'), numero:_this.children('.meta_data').data('numero'), nombre:_this.children('.meta_data').data('nombre'), destino:_this.attr('id')},
             dataType:'json',
             success: function(data) {
                 if (data.success) {
                     $('#'+data.data.destino).html(data.data.html);
+                    if (index < totalInitTarjeta) {
+                        getCard(index+1);
+                    }
                 }
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -80,11 +87,9 @@
         });
     }
     $(document).ready(function(){
-        var factor = 0;
-        $('.init_card').each(function(){
-            var _this = this;
-            setTimeout(function(){getCard(_this);}, factor*20000);
-            factor = factor+1;
-        });
+
+        if (totalInitTarjeta > 0) {
+            getCard(1);
+        }
     });
 </script>

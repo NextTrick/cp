@@ -1,5 +1,5 @@
 <?php
-//phpinfo();exit;
+# phpinfo();exit;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 /**

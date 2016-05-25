@@ -1,3 +1,4 @@
+
 label span {color: red;}
 span.error {color: red;}
 span.success {color: green;}
@@ -5,3 +6,22 @@ span.success {color: green;}
 .success ul li {color: green;}
 .separator{margin-bottom: 8px; margin-top: 5px;}
 .isearch div.form-group{padding: 5px;}
+
+.login-box-body { -webkit-border-radius: 12px; -moz-border-radius: 12px; border-radius: 12px; }
+.login-page { background: #6c006c; }
+.login-logo a { color: #ffb000; font-weight: 500; }
+.login-logo a b { color: #FFF; }
+
+.skin-red .main-header .logo, .skin-red .main-header .logo:hover { background-color: #6c006c; }
+.skin-red .main-header .navbar { background-color: #952283; }
+.skin-red .main-header li.user-header { background-color: #861F76; }
+.skin-red .sidebar-menu > li:hover > a, .skin-red .sidebar-menu > li.active > a { border-left-color:  #952283; }
+
+#formBuscar .control-label { width: 100px; margin-right: 10px; display: inline-block; }
+#formBuscar .form-group { padding-right: 20px!important; }
+#formBuscar select { width: 166px!important; }
+#formBuscar .filter-title {display: block; border-bottom: 1px solid #eee; padding: 5px 0;}
+#formBuscar .filter-one { display: block; padding-top: 5px; width: 50%; float: left; }
+#formBuscar .filter-two { display: block; padding-top: 5px; width: 50%; float: left; }
+
+.skin-red .main-header .navbar .sidebar-toggle:hover { background-color: #861F76; }

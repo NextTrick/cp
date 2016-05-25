@@ -1,29 +1,38 @@
 <?php $this->form->prepare(); ?>
 <?php echo $this->form()->openTag($this->form->setAttribute('class', 'form-inline isearch')); ?>
     <div class="box-body">
-        <div class="form-group">
-            <label class="control-label" for="tipo">Buscar por </label>
-            <?php echo $this->formElement($this->form->get('cmbFiltro')->setAttribute('class', 'form-control')) ?>
+        <div>
+            <div class="form-group">
+                <label class="control-label" for="tipo">Buscar por </label>
+                <?php echo $this->formElement($this->form->get('cmbFiltro')->setAttribute('class', 'form-control')) ?>
+            </div>
+            <div class="form-group">
+                <?php echo $this->formElement($this->form->get('txtBuscar')->setAttribute('class', 'form-control')) ?>
+            </div>
+            <div class="form-group">
+                <button id="btnBuscar" class="btn btn-primary" type="submit">Buscar</button>
+            </div>
         </div>
-        <div class="form-group">
-            <?php echo $this->formElement($this->form->get('txtBuscar')->setAttribute('class', 'form-control')) ?>
+        <div class="filter-title">
+            <div class="form-group">
+                <label class="control-label">Filtrar por: </label>
+            </div>
         </div>
-        <div class="form-group">
-            <button id="btnBuscar" class="btn btn-primary" type="submit">Buscar</button>
+        <div class="filter-one">
+            <div class="form-group">
+                <label class="control-label" for="tipo"> Activo </label>
+                <?php echo $this->formElement($this->form->get('cmbActivo')->setAttribute('class', 'form-control')) ?>
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="tipo">Destacado  </label>
+                <?php echo $this->formElement($this->form->get('cmbDestacado')->setAttribute('class', 'form-control')) ?>
+            </div>
         </div>
-        <br>
-        <div class="form-group">
-            <label class="control-label" for="tipo">Filtrar por : Activo </label>
-            <?php echo $this->formElement($this->form->get('cmbActivo')->setAttribute('class', 'form-control')) ?>
+        <div class="filter-two">
+            <div class="form-group">
+                <label class="control-label" for="tipo">Tipo  </label>
+                <?php echo $this->formElement($this->form->get('cmbTipo')->setAttribute('class', 'form-control')) ?>
+            </div>
         </div>
-        <div class="form-group">
-            <label class="control-label" for="tipo">Destacado  </label>
-            <?php echo $this->formElement($this->form->get('cmbDestacado')->setAttribute('class', 'form-control')) ?>
-        </div>
-        <div class="form-group">
-            <label class="control-label" for="tipo">Tipo  </label>
-            <?php echo $this->formElement($this->form->get('cmbTipo')->setAttribute('class', 'form-control')) ?>
-        </div>
-
     </div>
 <?php echo $this->form()->closeTag(); ?>

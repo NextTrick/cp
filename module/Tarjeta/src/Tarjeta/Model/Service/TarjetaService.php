@@ -12,11 +12,13 @@ class TarjetaService
 {
     protected $_repository = null;
     protected $_sl = null;
+    protected $_restarTiempo;
 
     public function __construct($repository, $serviceLocator)
     {
         $this->_repository = $repository;
         $this->_sl = $serviceLocator;
+        $this->_restarTiempo = strtotime('-30 minute');
     }
 
     public function misTarjetas($usuarioId)
@@ -28,43 +30,12 @@ class TarjetaService
             'order' => array('fecha_creacion DESC'),
             'limit' => LIMIT_USUARIO_TARJETAS,
         );
+        
         $rows = $this->_repository->findAll($criteria);
+        
         $results = \Common\Helpers\Util::formatoMisTarjeas($rows);
         
         return $results;
-    }
-    
-    public function getOnlineTarjeta($cguid)
-    {
-        $result = array(
-            'emoney' => 'S/. 0.00',
-            'emoneyvalue' => 0,
-            'bonus' => 'S/. 0.00',
-            'bonusvalue' => 0,
-            'promotionbonus' => 'S/. 0.00',
-            'bonusplusvalue' => 0,
-            'gamepoints' => 0,
-            'gamepointsvalue' => 0,
-            'etickets' => 0,
-        );
-        $data = $this->_getTrueFiTarjetaService()->getCard(array('CGUID' => $cguid));
-        if ($data['success']) {
-            $data = $data['result'];
-            if (!empty($data)) {
-                $result = array(
-                    'emoney' => $data['emoney'],
-                    'emoneyvalue' => $data['emoneyvalue'],
-                    'bonus' => $data['bonus'],
-                    'bonusvalue' => $data['bonusvalue'],
-                    'promotionbonus' => $data['promotionbonus'], //promotionbonus <equivalente> bonusplusvalue
-                    'bonusplusvalue' => $data['bonusplusvalue'],
-                    'gamepoints' => $data['gamepoints'],
-                    'gamepointsvalue' => $data['gamepointsvalue'],
-                    'etickets' => $data['etickets'],
-                );
-            }
-        }
-        return $result;
     }
 
     public function getDdlTarjetas($usuarioId)
@@ -87,20 +58,30 @@ class TarjetaService
         return $results;
     }
 
+    public function getRestarTiempo()
+    {
+        return $this->_restarTiempo;
+    }
+
     public function cronTarjetas($cguid = null)
     {
         if (empty($cguid)) {
-            $fecha = date('Y-m-d H:i:s', strtotime('-30 minute'));
+            $fecha = date('Y-m-d H:i:s', $this->_restarTiempo);
             $where = new \Zend\Db\Sql\Where();
             $where->isNotNull('fecha_actualizacion');
             $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion < ?", $fecha));
             $criteria = array(
                 'where' => $where,
-                'order' => array('fecha_actualizacion DESC')
+                'order' => array('fecha_actualizacion DESC'),
+                'limit' => 50,
             );
             $rows = $this->_repository->findAll($criteria);
             foreach ($rows as $row) {
-                $this->_cronTarjetas($row['id'], $row['cguid']);
+                try {
+                    $this->_cronTarjetas($row['id'], $row['cguid']);
+                } catch (\Exception $e) {
+                    \Common\Helpers\Error::initialize()->logException($e);
+                }
             }
         } else {
             $criteria = array(
@@ -110,7 +91,11 @@ class TarjetaService
             );
             $row = $this->_repository->findOne($criteria);
             if (!empty($row)) {
-                $this->_cronTarjetas($row['id'], $row['cguid']);
+                try {
+                    $this->_cronTarjetas($row['id'], $row['cguid']);
+                } catch (\Exception $e) {
+                    \Common\Helpers\Error::initialize()->logException($e);
+                }
             }
         }
         
@@ -159,10 +144,5 @@ class TarjetaService
     private function _getTrueFiTarjetaService()
     {
         return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
-    }
-    
-    private function _getUsuarioService()
-    {
-        return $this->_sl->get('Usuario\Model\Service\UsuarioService');
     }
 }
