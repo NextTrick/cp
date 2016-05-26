@@ -73,12 +73,14 @@ class PaqueteFilter extends Zf2InputFilter
         $valUpload->setMessage('El tamaño máximo  permitido para la imagen es de 2MB', \Zend\Validator\File\UploadFile::INI_SIZE);
 
         $image = new \Zend\InputFilter\FileInput('imagen');
-        $image->setRequired(false);
+        $image->setRequired(false)
+              ->setErrorMessage("El tamaño máximo permitido para la imagen es 2MB y debe ser de tipo JPG o PNG");
 
         $image->getValidatorChain()
             ->attach($valSize)
+            ->attach($valUpload)
             ->attach($valExtension)
-            ->attach($valUpload);
+           ;
 
         $image->getFilterChain()->attachByName(
             'filerenameupload',
