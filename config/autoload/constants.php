@@ -1,14 +1,14 @@
 <?php
 
-//define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
-//define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
+define('BASE_URL', 'http://dev.recargas.coneypark.pe/');
+define('URL_RESOURCES', 'http://dev.recargas.coneypark.pe/s/');
 
-define('BASE_URL', 'http://dev.coneypark.pe/recargas/');
-define('URL_RESOURCES', 'http://dev.coneypark.pe/recargas/s/');
+#define('BASE_URL', 'http://dev.coneypark.pe/recargas/');
+#define('URL_RESOURCES', 'http://dev.coneypark.pe/recargas/s/');
 
 define('URL_IMAGE_CMS', rtrim(URL_RESOURCES, '/').'/files/contenido/');
 
-define('VERSION_STATICO', '1.8');
+define('VERSION_STATICO', '1.9');
 
 define('OK_CREAR', 'El registro se creó correctamente');
 define('OK_EDITAR', 'El registro se editó correctamente');
