@@ -34,7 +34,6 @@ class Module
         $translatorI = new \Zend\I18n\Translator\Translator();
         $translatorI->setLocale('es');
 
-
         $translator = new \Zend\Mvc\I18n\Translator($translatorI);
         $translator->addTranslationFile(
             'phpArray',
