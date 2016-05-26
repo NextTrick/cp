@@ -63,11 +63,10 @@ class PaqueteService
         if ($resto > 0) {
             $where = new \Zend\Db\Sql\Where();
             $where->equalTo('activo', 1);
-            $where->equalTo('tipo', self::TIPO_PROMOCION);
             $criteria = array(
                 'where' => $where,
                 'limit' => $cantidad,
-                'order' => array('orden ASC'),
+                'order' => array('tipo DESC', 'orden ASC'),
             );
             $arrayNormal = $this->_repository->findAll($criteria);
             
