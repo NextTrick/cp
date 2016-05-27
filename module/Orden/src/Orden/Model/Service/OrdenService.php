@@ -420,6 +420,6 @@ class OrdenService
      */
     private function _getTarjetaService()
     {
-        return $this->getServiceLocator()->get('Tarjeta\Model\Service\TarjetaService');
+        return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
     }
 }
