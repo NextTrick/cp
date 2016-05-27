@@ -67,10 +67,10 @@ class PaqueteService
         $criteria = array(
             'where' => $where,
             'limit' => $cantidad,
-            'order' => array('tipo DESC', 'orden ASC'),
+            'order' => array('tipo', 'orden ASC'),
         );
         $arrayNormal = $this->_repository->findAll($criteria);
-        var_dump($arrayNormal); exit;
+
         if (!empty($arrayDestacado)) {
             foreach ($arrayNormal as $key => $row1) {
                 foreach ($arrayDestacado as $row2) {
