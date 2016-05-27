@@ -61,7 +61,7 @@ class PaqueteService
         $where->equalTo('activo', 1);
 
         if (!empty($arrayDestacado)) {
-            $where->nest()->and->isNull('destacado');
+            $where->nest()->isNull('destacado');
             $where->or->isNull('destacado', 0)->unnest();
         }
 
