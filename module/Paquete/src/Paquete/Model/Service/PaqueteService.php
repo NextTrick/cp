@@ -40,11 +40,9 @@ class PaqueteService
         );
     }
 
-    public function grillaPromociones($cantidad, $destacado = 0)
+    public function grillaBeneficios($cantidad, $destacado = 0)
     {
         $arrayDestacado = array();
-        $arrayNormal = array();
-        $subTotal = 0;
         if ($destacado > 0) {
             $where = new \Zend\Db\Sql\Where();
             $where->equalTo('activo', 1);
@@ -56,33 +54,45 @@ class PaqueteService
                 'order' => array('orden ASC'),
             );
             $arrayDestacado = $this->_repository->findAll($criteria);
-            $subTotal = count($arrayDestacado);
         }
         
-        $resto = $cantidad - $subTotal;
-        if ($resto > 0) {
-            $where = new \Zend\Db\Sql\Where();
-            $where->equalTo('activo', 1);
-            $criteria = array(
-                'where' => $where,
-                'limit' => $cantidad,
-                'order' => array('tipo DESC', 'orden ASC'),
-            );
-            $arrayNormal = $this->_repository->findAll($criteria);
-            
-            if (!empty($arrayDestacado)) {
-                foreach ($arrayNormal as $key => $row1) {
-                    foreach ($arrayDestacado as $row2) {
-                        if ($row1['id'] == $row2['id']) {
-                            //se elimina lo que ya esta en el array destacado
-                            unset($arrayNormal[$key]);
-                        }
+        
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('activo', 1);
+        $criteria = array(
+            'where' => $where,
+            'limit' => $cantidad,
+            'order' => array('tipo DESC', 'orden ASC'),
+        );
+        $arrayNormal = $this->_repository->findAll($criteria);
+
+        if (!empty($arrayDestacado)) {
+            foreach ($arrayNormal as $key => $row1) {
+                foreach ($arrayDestacado as $row2) {
+                    if ($row1['id'] == $row2['id']) {
+                        //se elimina lo que ya esta en el array destacado
+                        unset($arrayNormal[$key]);
                     }
                 }
-                $arrayNormal = array_values($arrayNormal);
             }
+            $arrayNormal = array_values($arrayNormal);
         }
         return array('destacado' => $arrayDestacado, 'normal' => $arrayNormal);
+    }
+    
+    public function grillaPromociones($cantidad)
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('activo', 1);
+        $criteria = array(
+            'where' => $where,
+            'limit' => $cantidad,
+            'tipo' => self::TIPO_PROMOCION,
+            'order' => array('orden ASC'),
+        );
+        $arrayNormal = $this->_repository->findAll($criteria);
+
+        return $arrayNormal;
     }
     
     public function recargaPromociones()

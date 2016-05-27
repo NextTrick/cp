@@ -29,7 +29,7 @@ class CarritoController extends SecurityWebController
 
         $usuarioTarjetas = $this->_getTarjetaService()->getDdlTarjetas($usuario->id);
 
-        $promociones = $this->_getPaqueteService()->grillaPromociones(GRID_PROMOCIONES_CARRITO, 0);
+        $promociones = $this->_getPaqueteService()->grillaPromociones(GRID_PROMOCIONES_CARRITO);
         
         $view = new ViewModel();
         $view->setVariable('cartModel', $cartModel);

@@ -1,5 +1,5 @@
 <div class="offers_box">
-    <?php foreach ($rows['normal'] as $key => $row) : ?>
+    <?php foreach ($rows as $key => $row) : ?>
         <?php $float = (($key+1)%3 == 0) ? 'right' : 'left'; ?>
         <div class="col_3 <?php echo $float; ?>">
             <a href=""><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a>
