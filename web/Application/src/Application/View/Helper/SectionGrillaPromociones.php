@@ -13,7 +13,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 
 class SectionGrillaPromociones extends AbstractHelper implements ServiceLocatorAwareInterface
 {
-    public function __invoke($cantidad, $destacado, $page)
+    public function __invoke($cantidad, $page)
     {
         $sl = $this->getServiceLocator()->getServiceLocator();
         $config = $sl->get('config');
@@ -21,7 +21,7 @@ class SectionGrillaPromociones extends AbstractHelper implements ServiceLocatorA
             throw new \Exception('No existe url configurada.');
         }
         
-        $rows = $sl->get('Paquete\Model\Service\PaqueteService')->grillaPromociones($cantidad, $destacado);
+        $rows = $sl->get('Paquete\Model\Service\PaqueteService')->grillaPromociones($cantidad);
         return $this->getView()->render('helper/section-grilla-promociones/' . $page . '.phtml', array(
             'rows' => $rows,
             'urlImg' => $config['fileDir']['paquete_paquete']['down'],

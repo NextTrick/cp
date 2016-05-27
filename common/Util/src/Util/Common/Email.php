@@ -202,10 +202,12 @@ class Email
             $options = $this->config['transport']['options'];
             $smptOptions['host'] = $options['host'];
             $smptOptions['port'] = $options['port'];
-                        
-            $smptOptions['connection_class'] = $options['connection_class'];
-            $smptOptions['connection_config'] = $options['connection_config'];
-            
+
+            if (!empty($options['connection_class'])) {
+                $smptOptions['connection_class'] = $options['connection_class'];
+                $smptOptions['connection_config'] = $options['connection_config'];
+            }
+
             $this->smtp->setOptions(new SmtpOptions($smptOptions));
         }
     }

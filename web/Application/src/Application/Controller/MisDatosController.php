@@ -31,7 +31,7 @@ class MisDatosController extends SecurityWebController
             $form->get('distrito_id')->setValueOptions($distritos);
             
             $form->setData($usuarioData);
-            $imagen = empty($usuarioData['imagen']) ? $urlImg . '/user-web-default.png' : $urlImg . '/' . $usuarioData['imagen'];
+            $imagen = empty($usuarioData['imagen']) ? 'user-web-default.png' : $usuarioData['imagen'];
         }
         
         $form->setAttribute('action', $this->url()->fromRoute('web-mis-datos', array(
@@ -120,6 +120,7 @@ class MisDatosController extends SecurityWebController
         }
         
         return new ViewModel(array(
+            'urlImg' => $urlImg,
             'imagen' => $imagen,
             'form' => $form,
             'mensajeRegistro' => $mensajeRegistro,

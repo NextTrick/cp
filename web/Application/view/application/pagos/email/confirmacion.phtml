@@ -13,16 +13,13 @@
             <td style="height:180px;"></td>
           </tr>
           <tr>
-            <td style="padding-left:30px;padding-right:30px;color:#EB9F00;height:42px;font-size:18px;" align="center">ASOCIAR TARJETA</td>
-          </tr>
-          <tr>
-            <td align="center" style="font-size:32px;color:#5218B7;font-weight:bold;height:36px;">¡Hola Alessandra!</td>
+            <td align="center" style="font-size:32px;color:#5218B7;font-weight:bold;height:36px;">¡Hola <?php echo $this->ordenData['usuario_nombres']; ?>!</td>
           </tr>
           <tr>
             <td align="center" style="padding-left:50px;padding-right:50px;color:#8C8C8C;height:50px;font-size:16px;">Tu compra se realizó con éxito. Para más detalles, puedes revisar la información general.</td>
           </tr>
           <tr>
-            <td align="center" style="height:60px;font-weight:bold;font-size:15px;color:black;">Número de recarga: 123456</td>
+            <td align="center" style="height:60px;font-weight:bold;font-size:15px;color:black;">Número de recarga: <?php echo $this->ordenData['codigo']; ?></td>
           </tr>
           <tr>
             <td align="center" height="200">
@@ -38,53 +35,27 @@
                     <div style="width:100%;height:10px;border-bottom:1px dashed lightgray;"></div>
                   </td>
                 </tr>
-                <tr>
-                  <td>Promoción 1</td>
-                  <td>
-                    <div>Tarjeta Cumpleaños</div>
-                    <div style="font-size:15px;">000 - 00000003 - 89</div>
-                  </td>
-                  <td>1</td>
-                  <td>S/. 50.00</td>
-                </tr>
-                <tr>
-                  <td colspan="4">
-                    <div style="width:100%;height:10px;border-bottom:1px dashed lightgray;"></div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Recarga 2</td>
-                  <td>
-                    <div>Tarjeta Ana</div>
-                    <div style="font-size:15px;">000 - 00000003 - 89</div>
-                  </td>
-                  <td>2</td>
-                  <td>S/.100.00</td>
-                </tr>
-                <tr>
-                  <td colspan="4">
-                    <div style="width:100%;height:10px;border-bottom:1px dashed lightgray;"></div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Promoción 3</td>
-                  <td>
-                    <div>Ahijado tarjeta</div>
-                    <div style="font-size:15px;">000 - 00000003 - 89</div>
-                  </td>
-                  <td>1</td>
-                  <td>S/. 50.00</td>
-                </tr>
-                <tr>
-                  <td colspan="4">
-                    <div style="width:100%;height:10px;border-bottom:1px dashed lightgray;"></div>
-                  </td>
-                </tr>
+                <?php foreach ($this->ordenDetalleData as $ordenDetalle) :?>
+                  <tr>
+                    <td><?php echo $ordenDetalle['paquete_titulo1']; ?></td>
+                    <td>
+                      <div><?php echo $ordenDetalle['tarjeta_nombre']; ?></div>
+                      <div style="font-size:15px;"><?php echo $ordenDetalle['tarjeta_numero']; ?></div>
+                    </td>
+                    <td><?php echo $ordenDetalle['cantidad']; ?></td>
+                    <td>S/. <?php echo $ordenDetalle['emoney']; ?></td>
+                  </tr>
+                  <tr>
+                    <td colspan="4">
+                      <div style="width:100%;height:10px;border-bottom:1px dashed lightgray;"></div>
+                    </td>
+                  </tr>
+                <?php endforeach; ?>
               </table>
             </td>
           </tr>
           <tr>
-            <td align="right" style="padding-right:100px;height:32px;font-weight:bold;font-size:16px;color:black;">TOTAL: S/. 250.00</td>
+            <td align="right" style="padding-right:100px;height:32px;font-weight:bold;font-size:16px;color:black;">TOTAL: S/. <?php echo $this->ordenData['monto']; ?></td>
           </tr>
           <tr>
             <td align="center" style="padding-left:50px;padding-right:50px;color:#8C8C8C;height:100px;font-size:16px;">Para activar tu tarjeta recuerda que primero debes pasarla por el punto de verificación del local en el que deseas jugar y recuerda hacerlo cada vez que cambies de local.</td>

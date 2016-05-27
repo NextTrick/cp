@@ -178,8 +178,8 @@ class MisDatosFilter extends Zf2InputFilter
             ->attachByName('filesize', array('max' => 2000000))
             ->attachByName('fileextension',  array(
                 'jpg', 'jpeg', 'png'
-            ))
-            ->attachByName('fileimagesize', array('maxWidth' => 500, 'maxHeight' => 500));
+            ));
+            //->attachByName('fileimagesize', array('maxWidth' => 500, 'maxHeight' => 500));
         
         $image->getFilterChain()->attachByName(
             'filerenameupload',

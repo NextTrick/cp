@@ -17,7 +17,7 @@ class BeneficiosController extends SecurityWebController
             throw new \Exception('No existe url configurada.');
         }
         
-        $rows = $this->_getPaqueteService()->grillaPromociones(GRID_PROMOCIONES_BENEFICIOS, 1);
+        $rows = $this->_getPaqueteService()->grillaBeneficios(GRID_PROMOCIONES_Y_RECARGAS, 1);
         
         $view = new ViewModel();
         $view->setVariable('rows', $rows);

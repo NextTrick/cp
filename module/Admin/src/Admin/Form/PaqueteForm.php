@@ -106,8 +106,7 @@ class PaqueteForm extends Form
         $legal = new Element\Textarea('legal');
         $legal->setAttributes(array(
                 'id' => 'legal',
-                'maxlength' => '1000',
-                'rows' => 3,
+                'rows' => 4,
                 'style' => 'width: 100%',
             ));
         $this->add($legal);

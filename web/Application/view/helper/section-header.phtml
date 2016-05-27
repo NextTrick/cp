@@ -16,7 +16,7 @@
                                 <span class="text"><?php echo $data['nombres'] ?></span>
                                 <?php $imagen = !empty($data['imagen']) ? $urlImg . '/' . $data['imagen'] : $urlImg . '/user-web-default.png'; ?>
 
-                                <span class="user_image"><img src="<?php echo $imagen; ?>" alt="<?php echo $data['nombres'] ?>"/></span>
+                                <span class="user_image"><img src="<?php echo $imagen; ?>" onerror="this.src='<?php echo $urlImg . '/user-web-default.png'; ?>';" alt="<?php echo $data['nombres'] ?>"/></span>
                                 
                                 <span class="arrow_bottom"></span>
                             </a>
@@ -35,7 +35,7 @@
                 <li>
                     <?php $imagen = !empty($data['imagen']) ? $urlImg . '/' . $data['imagen'] : $urlImg . '/user-web-default.png'; ?>
                     <span class="user_icon">
-                        <img src="<?php echo $imagen; ?>" alt="<?php echo $data['nombres'] ?>">
+                        <img src="<?php echo $imagen; ?>" onerror="this.src='<?php echo $urlImg . '/user-web-default.png'; ?>';" alt="<?php echo $data['nombres'] ?>">
                     </span>
                     <div class="menu_options">
                         <a href="<?php echo BASE_URL ?>mis-datos" class="logout">Mis datos</a>

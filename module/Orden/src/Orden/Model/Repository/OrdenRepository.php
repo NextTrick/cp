@@ -101,6 +101,25 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         return $this->findOne($criteria);
     }
 
+    public function getConfirmacionMailDatosById($ordenId)
+    {
+        $sql= new Sql($this->getAdapter());
+
+        $select = $sql->select();
+        $select->from(array('a' => $this->table));
+        $select->columns(array('id', 'codigo', 'monto'));
+        $select->join(array('b' => 'usuario_usuario'), 'a.usuario_id = b.id',
+            array('usuario_id' => 'id', 'usuario_email' => 'email', 'usuario_nombres' => 'nombres'));
+
+        $select->where->equalTo('a.id', $ordenId);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        //echo $sql->getSqlStringForSqlObject($select); exit;
+        $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
+
+        return $data[0];
+    }
+
     public function getById($ordenId)
     {
         $where = new \Zend\Db\Sql\Where();

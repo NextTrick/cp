@@ -20,7 +20,7 @@
                             <div class="right">
                                 <div class="left user_image_left">
                                     <div class="image">
-                                        <img id="img_imagen" width="88" height="88" src="<?php echo $imagen; ?>" alt="Mi foto"/>
+                                        <img id="img_imagen" width="88" height="88" src="<?php echo $urlImg . '/' . $imagen; ?>" onerror="this.src='<?php echo $urlImg . '/user-web-default.png'; ?>';" alt="Mi foto"/>
                                     </div>
                                 </div>
                                 <div class="right user_image_right">
