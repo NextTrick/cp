@@ -13,6 +13,9 @@
 body {
   background: url("../images/bg.jpg") repeat;
 }
+body.body_informativo {
+  background: #fff;
+}
 .box_center {
   width: 960px;
   margin: 0 auto;
@@ -347,6 +350,21 @@ header nav ul li.logo img {
     margin: -10px 0 0;
   }
 }
+header.header_informativo {
+  background: #fff;
+  height: 70px;
+  padding-top: 10px;
+  border-bottom: 1px solid #d3d3d3;
+}
+header.header_informativo .logo img {
+  width: 100px;
+}
+header.header_informativo .user_option .user_inside {
+  display: block;
+}
+header.header_informativo .user_option .user_outside {
+  display: none;
+}
 .right_options {
   position: fixed;
   right: 20px;
@@ -462,6 +480,50 @@ section {
   padding-bottom: 50px;
   overflow: hidden;
   color: #fff;
+}
+section.section_informativo {
+  padding-top: 32px;
+}
+section.section_informativo .breadcrumb a {
+  color: #ff6f00;
+  text-decoration: none;
+  margin-right: 4px;
+}
+section.section_informativo .breadcrumb span {
+  color: #444;
+  margin-left: 4px;
+  font-size: 14px;
+}
+section.section_informativo .content {
+  margin-top: 40px;
+  color: #444;
+  font-size: 15px;
+}
+section.section_informativo .content .purple {
+  color: #7d327f;
+}
+section.section_informativo .content h2 {
+  font-size: 25px;
+}
+section.section_informativo .content h3 {
+  font-size: 20px;
+}
+section.section_informativo .content p {
+  line-height: 22px;
+}
+section.section_informativo .content p.mr {
+  padding-left: 36px;
+}
+section.section_informativo .content p a {
+  color: #ff8b00;
+  text-decoration: none;
+}
+section.section_informativo .content ul {
+  padding-left: 50px;
+}
+section.section_informativo .content ul li {
+  padding: 5px 0;
+  line-height: 22px;
 }
 section.recargas {
   padding-bottom: 0;
@@ -1197,6 +1259,7 @@ section .purple_box .cards_content .col_3.my_card .show_more_content .line .tool
   position: absolute;
   z-index: 9;
   margin-top: 25px;
+  text-align: left;
 }
 section .purple_box .cards_content .col_3.my_card .show_more_content .line .tooltip_bonus:before {
   content: '';
@@ -2548,6 +2611,12 @@ i[class*=" icon-"] {
   body .wrapper {
     overflow-x: hidden;
   }
+  body.body_informativo .bg_diagonal_footer {
+    box-shadow: 0 -5px 10px #efe5e5;
+    transform: rotate(7deg);
+    position: relative;
+    top: 30px;
+  }
   .box_center {
     width: 100%;
   }
@@ -2556,6 +2625,9 @@ i[class*=" icon-"] {
     height: 120px;
     margin-top: -10px;
     padding-top: 12px;
+  }
+  header.header_informativo {
+    padding: 15px;
   }
   header nav ul li {
     display: none;
@@ -2619,6 +2691,9 @@ i[class*=" icon-"] {
   }
   section {
     padding-top: 20px;
+  }
+  section.section_informativo {
+    padding: 32px 15px;
   }
   section input {
     text-align: left;
