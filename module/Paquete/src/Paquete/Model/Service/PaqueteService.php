@@ -70,7 +70,7 @@ class PaqueteService
             'order' => array('tipo DESC', 'orden ASC'),
         );
         $arrayNormal = $this->_repository->findAll($criteria);
-
+        var_dump($arrayNormal); exit;
         if (!empty($arrayDestacado)) {
             foreach ($arrayNormal as $key => $row1) {
                 foreach ($arrayDestacado as $row2) {
