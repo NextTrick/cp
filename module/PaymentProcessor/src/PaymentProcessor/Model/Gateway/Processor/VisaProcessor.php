@@ -125,6 +125,7 @@ class VisaProcessor extends AbstractProcessor
                             'status' => $status,                                                        
                             'reference' => $eticket,
                             'clientReference' => $tempData['nordent'],
+                            'pan' => $tempData['pan'],
                             'confirmationDate' => date_format(date_create_from_format("d/m/Y h:i a",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),
                             'errorCode' => null,
                             'errorDescription' => null
@@ -135,9 +136,10 @@ class VisaProcessor extends AbstractProcessor
                             'status' => $status,
                             'reference' => $eticket,
                             'clientReference' => $tempData['nordent'],
+                            'pan' => $tempData['pan'],
                             'confirmationDate' => date_format(date_create_from_format("d/m/Y h:i a",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),
                             'errorCode' => $tempData['cod_accion'],
-                            'errorDescription' => !empty ($errorMessages[$tempData['cod_accion']]['commerceMessage'])
+                            'errorDescription' => !empty ($errorMessages[$tempData['cod_accion']]['clientMessage'])
                                 ? $errorMessages[$tempData['cod_accion']]['commerceMessage'] : 'No se encontró mensaje de error para el código'
                         );
                     }
