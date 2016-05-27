@@ -209,6 +209,7 @@ class RegistroController extends AbstractActionController
 
             $result = $this->_getLoginGatewayService()->loginOffline($row['email']);
             if ($result['success']) {
+                $this->_getUsuarioService()->syncTarjetasCliente($row['id'], $row['mguid']);
                 return $this->redirect()->toRoute('web-mis-tarjetas', array('controller' => 'mis-tarjetas'));
             }
         }
@@ -380,5 +381,10 @@ class RegistroController extends AbstractActionController
     protected function _getLoginGatewayService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\LoginGatewayService');
+    }
+    
+    private function _getTarjetaService()
+    {
+        return $this->getServiceLocator()->get('Tarjeta\Model\Service\TarjetaService');
     }
 }
