@@ -60,6 +60,10 @@ class PaqueteService
         $where = new \Zend\Db\Sql\Where();
         $where->equalTo('activo', 1);
 
+        if (!empty($arrayDestacado)) {
+            $where->AND->notEqualTo('destacado', 1);
+        }
+
         $criteria = array(
             'where' => $where,
             'limit' => $cantidad,
