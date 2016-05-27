@@ -61,13 +61,13 @@ class PaqueteService
         $where->equalTo('activo', 1);
 
         if ($destacado > 0) {
-            $where->notEqualTo('destacado', 1);
+            $where->AND->notEqualTo('destacado', 1);
         }
 
         $criteria = array(
             'where' => $where,
             'limit' => $cantidad,
-            'order' => array('orden ASC'),
+            'order' => array('tipo DESC', 'orden ASC'),
         );
         $arrayNormal = $this->_repository->findAll($criteria);
 
