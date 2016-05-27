@@ -59,6 +59,11 @@ class PaqueteService
         
         $where = new \Zend\Db\Sql\Where();
         $where->equalTo('activo', 1);
+
+        if ($destacado > 0) {
+            $where->notEqualTo('destacado', 1);
+        }
+
         $criteria = array(
             'where' => $where,
             'limit' => $cantidad,
@@ -87,8 +92,8 @@ class PaqueteService
         $criteria = array(
             'where' => $where,
             'limit' => $cantidad,
-            'tipo' => self::TIPO_PROMOCION,
-            'order' => array('orden ASC'),
+            //'tipo' => self::TIPO_PROMOCION,
+            'order' => array('tipo DESC', 'orden ASC'),
         );
         $arrayNormal = $this->_repository->findAll($criteria);
 
