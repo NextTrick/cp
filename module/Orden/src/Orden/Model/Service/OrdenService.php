@@ -408,7 +408,7 @@ class OrdenService
 
 
     /**
-     * @return TarjetaService
+     * @return \TrueFi\Model\Service\TarjetaService
      */
     private function _getTrueFiTarjetaService()
     {
