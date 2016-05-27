@@ -18,8 +18,8 @@ class ContenidoService
     const TIPO_NAME_PAGINA  = 'página';
     const TIPO_NAME_SECCION = 'sección';
     
-    const SECCION_LOGIN_INICIO_SESION = 'LOGIN_INICIO_SESION';
-    const SECCION_HEAD_MIS_TARJETAS = 'HEAD_MIS_TARJETAS';
+    const SECCION_INICIO_REGISTRO = 'INICIO_REGISTRO';
+    const SECCION_BENEFICIOS = 'BENEFICIOS';
 
 
     public function __construct($repository, $serviceLocator)
