@@ -14,6 +14,7 @@ use Orden\Model\Repository\OrdenRepository;
 use PaymentProcessor\Model\Gateway\Processor\PagoEfectivoProcessor;
 use PaymentProcessor\Model\Gateway\Processor\VisaProcessor;
 use PaymentProcessor\Model\PaymentProcessor;
+use Tarjeta\Model\Service\TarjetaService;
 use Usuario\Model\Service\PerfilPagoService;
 use Usuario\Model\Service\UsuarioService;
 use Util\Model\Service\ErrorService;
@@ -336,6 +337,8 @@ class OrdenService
             );
 
             $this->_getDetalleOrdenService()->getRepository()->save($detalleOrdenData, $ordenDetalle['id']);
+
+            $this->_getTarjetaService()->cronTarjetas($ordenDetalle['tarjeta_cguid']);
         }
 
         $this->enviarMailConfirmacion($ordenId);
@@ -410,5 +413,13 @@ class OrdenService
     private function _getTrueFiTarjetaService()
     {
         return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
+    }
+
+    /**
+     * @return TarjetaService
+     */
+    private function _getTarjetaService()
+    {
+        return $this->getServiceLocator()->get('Tarjeta\Model\Service\TarjetaService');
     }
 }
