@@ -19,6 +19,7 @@ class ContenidoService
     const TIPO_NAME_SECCION = 'sección';
     
     const SECCION_INICIO_REGISTRO = 'INICIO_REGISTRO';
+    const SECCION_INICIO_LOGIN = 'INICIO_LOGIN';
     const SECCION_BENEFICIOS = 'BENEFICIOS';
 
 
