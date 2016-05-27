@@ -329,6 +329,8 @@ class OrdenService
                 } else {
                     $error[$i]['error'] =  $response['message'];
                 }
+
+                var_dump($serviceData, $response); exit;
             }
 
             $detalleOrdenData  = array(
@@ -338,7 +340,8 @@ class OrdenService
 
             $this->_getDetalleOrdenService()->getRepository()->save($detalleOrdenData, $ordenDetalle['id']);
 
-            $this->_getTarjetaService()->cronTarjetas($ordenDetalle['tarjeta_cguid']);
+
+            //$this->_getTarjetaService()->cronTarjetas($ordenDetalle['tarjeta_cguid']);
         }
 
         $this->enviarMailConfirmacion($ordenId);
