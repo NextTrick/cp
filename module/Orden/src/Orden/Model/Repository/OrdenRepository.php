@@ -24,10 +24,20 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     const PAGO_ESTADO_EXPIRADO  = 'EXPIRADO';
 
     const ORDER_BASE_CODE = 1000;
-    
+
+    const MONEDA_DEFAULT_SIMBOL = 'S/.';
+
     public function __construct(Adapter $adapter)
     {
         parent::__construct($adapter);
+    }
+
+    public static function getMonedaSimbolos()
+    {
+        return array(
+            'PEN' => self::MONEDA_DEFAULT_SIMBOL,
+            'USD' => '$',
+        );
     }
 
     public function search($criteria)
@@ -107,9 +117,10 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 
         $select = $sql->select();
         $select->from(array('a' => $this->table));
-        $select->columns(array('id', 'codigo', 'monto'));
+        $select->columns(array('*'));
         $select->join(array('b' => 'usuario_usuario'), 'a.usuario_id = b.id',
-            array('usuario_id' => 'id', 'usuario_email' => 'email', 'usuario_nombres' => 'nombres'));
+            array('usuario_id' => 'id', 'usuario_email' => 'email', 'usuario_nombres' => 'nombres',
+                  'usuario_paterno' => 'paterno', 'usuario_materno' => 'materno'));
 
         $select->where->equalTo('a.id', $ordenId);
 

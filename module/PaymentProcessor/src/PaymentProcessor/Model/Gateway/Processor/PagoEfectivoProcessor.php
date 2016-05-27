@@ -91,14 +91,20 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 Switch ($solData->Estado) {
                     case 592:                        
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
+                        $return['error']['erroCode'] = 592;
+                        $return['error']['errorDescription'] = 'El CIP fué extornado, el banco realizó reversa de Pago';
                         break;
                     case 593: //Cip Pagado
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PAGADO;
                         break;
                     case 595://Cip Vencido
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_EXPIRADO;
+                        $return['error']['erroCode'] = 595;
+                        $return['error']['errorDescription'] = 'Sobrepasó el tiempo de expiración';
                     default:
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_ERROR;
+                        $return['error']['erroCode'] = 900;
+                        $return['error']['errorDescription'] = ErrorService::GENERAL_CODE;
                 }
                 // 31/12/2016 17:00:00
                 // date_format(date_create_from_format("d/m/Y H:i:s",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),

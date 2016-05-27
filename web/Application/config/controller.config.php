@@ -16,5 +16,7 @@ return array(
         'Application\Controller\Carrito' => 'Application\Controller\CarritoController',
         'Application\Controller\Pagos' => 'Application\Controller\PagosController',
         'Application\Controller\Test' => 'Application\Controller\TestController',
+        'Application\Controller\TerminosCondiciones' => 'Application\Controller\TerminosCondicionesController',
+        'Application\Controller\PoliticasPrivacidad' => 'Application\Controller\PoliticasPrivacidadController',
     ),
 );

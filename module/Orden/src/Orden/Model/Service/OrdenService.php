@@ -281,6 +281,11 @@ class OrdenService
                         if (!empty($response['data']['confirmationDate'])) {
                             $ordenUpdateData['pago_fecha_confirmacion'] = date('Y-m-d H:i:s');
                         }
+
+                        if (!empty($response['data']['pan'])) {
+                            $ordenUpdateData['pan'] = $response['data']['pan'];
+                        }
+
                         $this->getRepository()->save($ordenUpdateData, $ordenId);
 
                         if (!empty($response['data']['status'])) {
