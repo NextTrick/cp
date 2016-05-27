@@ -13,7 +13,8 @@ $(function() {
       closeErrorMessage: '.error_message .icon',
       watchLegal: '.watch_legal',
       closeLegalModal: '.modal_box_legal .modal_content h3 span',
-      closeAsociateCardModal: '#how_asociate_card .modal_content h3 span'
+      closeAsociateCardModal: '#how_asociate_card .modal_content h3 span',
+      offersLogin : '.offers_login'
     };
     catchDom = function() {
       dom.btn = $(st.btn);
@@ -26,6 +27,7 @@ $(function() {
       dom.watchLegal = $(st.watchLegal);
       dom.closeLegalModal = $(st.closeLegalModal);
       dom.closeAsociateCardModal = $(st.closeAsociateCardModal);
+      dom.offersLogin = $(st.offersLogin);
     };
     suscribeEvents = function() {
       dom.btn.on('click', events.openModal);
@@ -37,8 +39,15 @@ $(function() {
       dom.btnChangePass.on('click', events.closeNewPassModal);
       dom.closeErrorMessage.on('click', events.closeErrorMessage);
       dom.watchLegal.on('click', events.openModal);
+      dom.offersLogin.on('click', events.openMessage);
     };
     events = {
+      openMessage : function(){
+        $('.success_message').show();
+        setTimeout(function(){
+          $('.success_message').hide();
+        } , 5000);
+      },
       openModal: function(e) {
         var id;
         e.preventDefault();
