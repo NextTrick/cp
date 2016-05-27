@@ -693,6 +693,9 @@ section .purple_box .content span.or_icon {
   left: 47%;
   top: 130px;
 }
+section .purple_box .content span.or_icon.register {
+  top: 112px;
+}
 section .purple_box .content .left,
 section .purple_box .content .right {
   padding: 0 40px 0;
@@ -763,16 +766,15 @@ section .purple_box .benefits_offers {
 section .purple_box .benefits_offers .offers_box_two {
   overflow: hidden;
   border-radius: 19px;
+  background: #fff;
 }
 section .purple_box .benefits_offers .offers_box_two .left {
   width: 50%;
-  height: 220px;
   background: #f29224;
   box-sizing: border-box;
 }
 section .purple_box .benefits_offers .offers_box_two .left .image img {
   width: 100%;
-  height: 100%;
 }
 section .purple_box .benefits_offers .offers_box_two .right {
   padding: 20px;
@@ -1905,6 +1907,9 @@ section input {
   height: 42px;
   border-radius: 15px;
   padding: 0px 10px;
+  text-align: left;
+}
+section input.center {
   text-align: center;
 }
 section input.inp_right {
@@ -2034,6 +2039,11 @@ section .offers_box {
 }
 section .offers_box .col_3 {
   width: 32%;
+}
+section .offers_box .col_3 .image_radius {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
 }
 section .offers_box .col_3 img {
   width: 100%;
@@ -2197,13 +2207,13 @@ section form.form_mis_datos .disabled {
   display: none;
   margin: 0 auto 10px;
   background-image: url("../images/sprite.png");
-  background-position: -63px -247px;
+  background-position: -46px -247px;
   width: 17px;
   height: 17px;
 }
 .bottom_bar .icon_arrow.active {
   background-image: url("../images/sprite.png");
-  background-position: -46px -247px;
+  background-position: -63px -247px;
   width: 17px;
   height: 17px;
 }
@@ -2986,7 +2996,7 @@ i[class*=" icon-"] {
     border-radius: 0;
     position: fixed;
     z-index: 99;
-    bottom: 0;
+    bottom: -25;
   }
   .bottom_bar .box_mobile {
     position: relative;
