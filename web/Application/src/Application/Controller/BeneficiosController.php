@@ -18,7 +18,7 @@ class BeneficiosController extends SecurityWebController
         }
         
         $rows = $this->_getPaqueteService()->grillaBeneficios(GRID_PROMOCIONES_Y_RECARGAS, 1);
-        
+        var_dump($rows); exit; 
         $view = new ViewModel();
         $view->setVariable('rows', $rows);
         $view->setVariable('urlImg', $config['fileDir']['paquete_paquete']['down']);
