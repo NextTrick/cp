@@ -67,7 +67,7 @@ class PaqueteService
         $criteria = array(
             'where' => $where,
             'limit' => $cantidad,
-            'order' => array('tipo', 'orden ASC'),
+            'order' => array('orden ASC'),
         );
         $arrayNormal = $this->_repository->findAll($criteria);
 
