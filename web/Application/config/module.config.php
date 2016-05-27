@@ -125,10 +125,7 @@ return array(
             'web-activar-cuenta' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/activar-cuenta[/:codigo]',
-                    'constraints' => array(
-                        'code' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                    ),
+                    'route'    => '/activar-cuenta',
                     'defaults' => array(
                         'controller' => 'Application\Controller\Registro',
                         'action'     => 'activar-cuenta',
