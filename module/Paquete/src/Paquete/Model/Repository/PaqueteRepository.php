@@ -62,4 +62,22 @@ class PaqueteRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             throw new \Exception($e->getMessage());
         }
     }
+
+    public function getPaquetesSinDestacado($cantidad)
+    {
+        $sql= new Sql($this->getAdapter());
+
+        $select = $sql->select();
+        $select->from(array('a' => $this->table));
+        $select->columns(array('*'));
+        $select->where->equalTo('activo', 1);
+        $select->order(array('tipo DESC', 'orden ASC'));
+        $select->limit($cantidad);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        //echo $sql->getSqlStringForSqlObject($select); exit;
+        $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
+
+        return $data;
+    }
 }

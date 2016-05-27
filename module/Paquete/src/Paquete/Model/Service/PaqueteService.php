@@ -60,9 +60,7 @@ class PaqueteService
         $where = new \Zend\Db\Sql\Where();
         $where->equalTo('activo', 1);
 
-        if (!empty($arrayDestacado)) {
-            $where->notEqualTo('destacado', 1);
-        }
+        $cantidad = $cantidad + count($arrayDestacado);
 
         $criteria = array(
             'where' => $where,
@@ -72,17 +70,28 @@ class PaqueteService
         $arrayNormal = $this->_repository->findAll($criteria);
 
         if (!empty($arrayDestacado)) {
+            $destacadosIds = $this->getDestacadosIds($arrayDestacado);
+            $tempArrayNormal = array();
             foreach ($arrayNormal as $key => $row1) {
-                foreach ($arrayDestacado as $row2) {
-                    if ($row1['id'] == $row2['id']) {
-                        //se elimina lo que ya esta en el array destacado
-                        unset($arrayNormal[$key]);
-                    }
+                if (!in_array($row1['id'], $destacadosIds)) {
+                    $tempArrayNormal[] = $row1;
                 }
             }
-            $arrayNormal = array_values($arrayNormal);
+
+            $arrayNormal = $tempArrayNormal;
         }
+
         return array('destacado' => $arrayDestacado, 'normal' => $arrayNormal);
+    }
+
+    public function getDestacadosIds($arrayDestacado)
+    {
+        $destacadosIds = array();
+        foreach ($arrayDestacado as $item) {
+            $destacadosIds[] = $item['id'];
+        }
+
+        return $destacadosIds;
     }
     
     public function grillaPromociones($cantidad)
