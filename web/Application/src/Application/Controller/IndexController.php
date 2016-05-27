@@ -20,6 +20,7 @@ class IndexController extends AbstractActionController
 
     public function testEmailAction()
     {
+        echo __METHOD__; exit;
         try {
             $body = 'cuerpo del mensaje 2';
             $to = 'ing.angeljara@gmail.com';
@@ -35,6 +36,8 @@ class IndexController extends AbstractActionController
 
         echo 'enviado ok'; exit;
     }
+    
+    
     
     public function testPeAction()
     {

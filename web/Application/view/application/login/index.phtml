@@ -1,11 +1,12 @@
 <section>
     <div class="box_center">
         <div class="welcome_box">
-            <?php echo $this->sectionContenido(Cms\Model\Service\ContenidoService::SECCION_INICIO_REGISTRO); ?>
+            <?php echo $this->sectionContenido(Cms\Model\Service\ContenidoService::SECCION_INICIO_LOGIN); ?>
 <!--            <h2>¡Ahora <span>recárgate de diversión </span>con un click!</h2>
             <p class="subtitle">Te invitamos a ser parte de Coney Club y a realizar todas tus recargas de una manera más rápida, <strong>sin necesidad de hacer colas</strong>, además, tendrás <strong>promociones exclusivas </strong>que no te puedes perder.</p>-->
             <div class="yellow_box">Inicia sesión</div>
             <div class="purple_box">
+                <div class="success_message" style="display:none;"><span class="icon"></span><span class="text">Es necesario iniciar sesión para acceder a todas las promociones.</span></div>
                 <?php $flashMessage = $this->flashMessenger()->getMessages(); ?>
                 <?php if (count($flashMessage) > 0) : ?>
                     <?php foreach ($flashMessage as $msg) : ?>

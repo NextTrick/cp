@@ -18,6 +18,13 @@
                     <h2>¡FELICITACIONES!</h2>
                     <P><?php echo $this->ordenData['nombres']; ?>, ¡tu recarga fue realizada con éxito!</P>
                     <h5>Número de recarga: <?php echo $this->ordenData['codigo']; ?></h5>
+
+<!--                    --><?php //if ($this->ordenData['pago_metodo'] == \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS) :?>
+<!--                        Fecha de recarga: --><?php //echo $this->ordenData['pago_fecha_confirmacion']; ?>
+<!--                        Número de tarjeta: --><?php //echo $this->ordenData['pan']; ?>
+<!--                        Nombre del Tarjetahabiente: --><?php //echo $this->ordenData['usuario_nombres'] . ' ' . $this->ordenData['usuario_paterno'] . ' ' . $this->ordenData['usuario_materno']; ?>
+<!--                    --><?php //endif; ?>
+                    
                     <div class="resume">
                         <div class="head">
                             <ul>

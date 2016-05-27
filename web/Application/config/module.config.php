@@ -42,7 +42,55 @@ return array(
                             ),
                         ),
                     ),
+//                    'application-home' => array(
+//                        'type'    => 'Segment',
+//                        'options' => array(
+//                            // Change this to something specific to your module
+//                            'route' => '[:controller[/:action]]',
+//                            'constraints' => array(
+//                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                                'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+//                            ),
+//                            'defaults' => array(
+//                                // Change this value to reflect the namespace in which
+//                                // the controllers for your module are found
+//                                '__NAMESPACE__' => 'Application\Controller',
+//                                'controller'    => 'Index',
+//                                'action'        => 'index',
+//                            ),
+//                        ),
+//                    ),
                 )
+            ),
+            'web-terminos-condiciones' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/terminos-condiciones[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\TerminosCondiciones',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-politicas-privacidad' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/politicas-privacidad[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\PoliticasPrivacidad',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'web-registro' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/registrate[/]',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Registro',
+                        'action'     => 'index',
+                    ),
+                ),
             ),
             'web-registro' => array(
                 'type' => 'Segment',

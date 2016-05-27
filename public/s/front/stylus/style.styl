@@ -14,6 +14,8 @@
 	box-sizing border-box
 body
 	background url(../images/bg.jpg) repeat
+	&.body_informativo
+		background white
 .box_center
 	width 960px
 	margin 0 auto
@@ -238,6 +240,19 @@ header
 						animation none
 					img
 						width 200px
+	&.header_informativo
+		background white
+		height 70px
+		padding-top 10px
+		border-bottom 1px solid lightgray
+		.logo
+			img
+				width 100px
+		.user_option
+			.user_inside
+				display block
+			.user_outside
+				display none
 .right_options
 	position fixed
 	right 20px
@@ -317,6 +332,40 @@ section
 	padding-bottom 50px
 	overflow hidden
 	color white
+	&.section_informativo
+		padding-top 32px
+		.breadcrumb
+			a
+				color #FF6F00
+				text-decoration none
+				margin-right 4px
+			span
+				color #444444
+				margin-left 4px
+				font-size 14px
+		.content
+			margin-top 40px
+			color #444444
+			font-size 15px
+			.purple
+				color #7D327F
+			h2
+				font-size 25px
+			h3
+				font-size 20px
+			p
+				line-height 22px
+				&.mr
+					padding-left 36px
+				a
+					color #FF8B00
+					text-decoration none
+			ul
+				padding-left 50px
+				li
+					padding 5px 0
+					line-height 22px
+					
 	&.recargas
 		padding-bottom 0
 	&.app_content
@@ -896,6 +945,7 @@ section
 								position absolute
 								z-index 9
 								margin-top 25px
+								text-align left
 								&:before
 									content ''
 									color #E6E6E6
@@ -1952,6 +2002,13 @@ i[class*=" icon-"]
 	body
 		.wrapper
 			overflow-x hidden
+		&.body_informativo
+			.bg_diagonal_footer
+				box-shadow 0 -5px 10px #EFE5E5
+				transform rotate(7deg)
+				position relative
+				top 30px
+			
 	.box_center
 		width 100%
 	header
@@ -1959,6 +2016,8 @@ i[class*=" icon-"]
 		height 120px
 		margin-top -10px
 		padding-top 12px
+		&.header_informativo
+			padding 15px
 		nav
 			ul
 				li
@@ -2012,6 +2071,8 @@ i[class*=" icon-"]
 	
 	section
 		padding-top 20px
+		&.section_informativo
+			padding 32px 15px
 		input
 			text-align left
 			&.center
