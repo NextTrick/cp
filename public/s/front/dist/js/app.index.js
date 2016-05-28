@@ -14,7 +14,8 @@ $(function() {
       watchLegal: '.watch_legal',
       closeLegalModal: '.modal_box_legal .modal_content h3 span',
       closeAsociateCardModal: '#how_asociate_card .modal_content h3 span',
-      offersLogin : '.offers_login'
+      offersLogin : '.offers_login',
+      menuIcon: '.menu_icon'
     };
     catchDom = function() {
       dom.btn = $(st.btn);
@@ -28,6 +29,7 @@ $(function() {
       dom.closeLegalModal = $(st.closeLegalModal);
       dom.closeAsociateCardModal = $(st.closeAsociateCardModal);
       dom.offersLogin = $(st.offersLogin);
+      dom.menuIcon = $(st.menuIcon);
     };
     suscribeEvents = function() {
       dom.btn.on('click', events.openModal);
@@ -40,8 +42,24 @@ $(function() {
       dom.closeErrorMessage.on('click', events.closeErrorMessage);
       dom.watchLegal.on('click', events.openModal);
       dom.offersLogin.on('click', events.openMessage);
+      dom.menuIcon.on('click', events.openMenu);
     };
     events = {
+      openMenu: function(){
+        if($('#menuMovil').hasClass('ui-active')){
+          $('#menuMovil').removeClass('ui-active');
+          $('header').removeClass('menu_active');
+          dom.menuIcon.children('i').removeClass('icon-close');
+          dom.menuIcon.children('i').addClass('icon-menu');
+          
+        }
+        else{
+          $('#menuMovil').addClass('ui-active');
+          $('header').addClass('menu_active');
+          dom.menuIcon.children('i').removeClass('icon-menu');
+          dom.menuIcon.children('i').addClass('icon-close');
+        }
+      },
       openMessage : function(){
         $('.success_message').show();
         setTimeout(function(){

@@ -365,6 +365,121 @@ header.header_informativo .user_option .user_inside {
 header.header_informativo .user_option .user_outside {
   display: none;
 }
+.list-m.movil {
+  position: fixed;
+  color: #972483;
+  background: #fff;
+  display: none;
+  left: 0;
+  top: 110px;
+  overflow: auto;
+  width: 100%;
+  bottom: 0;
+  z-index: 9999;
+}
+.list-m.movil .list-m-inner {
+  background: url("../images/bg_menu_m.jpg") no-repeat center 260px;
+}
+.list-m.movil .list-m-inner .box-mmenu {
+  margin: 0px auto;
+  max-width: 290px;
+}
+.list-m.movil.ui-active {
+  display: block;
+}
+.list-m .list-menu {
+  margin-bottom: 50px;
+}
+.list-m .row-fluid {
+  width: 100%;
+  overflow: hidden;
+}
+.list-m .row-fluid [class*="span"] {
+  display: block;
+  float: left;
+  width: 48.93617021276595%;
+  min-height: 30px;
+  margin-left: 2.127659574468085%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.list-m .row-fluid [class*="span"]:first-child {
+  margin-left: 0;
+}
+.list-m .list-sub-menu {
+  text-align: center;
+}
+.list-m .list-sub-menu .span6 a {
+  font-size: 13px;
+  font-family: Arial;
+  color: #972483;
+  text-decoration: none;
+  font-weight: bold;
+}
+.list-m .social-media {
+  text-align: center;
+  margin-bottom: 45px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.list-m .social-media span {
+  font-family: Arial;
+  display: block;
+  font-size: 27px;
+  margin-bottom: 10px;
+}
+.list-m .social-media .social-list {
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  padding: 0;
+}
+.list-m .social-media .social-list li {
+  display: inline-block;
+  margin: 0 5px;
+}
+.list-m .menu-nav {
+  list-style: none;
+  margin: 0;
+  text-align: center;
+  margin-top: 4px;
+  padding: 0;
+}
+.list-m .menu-nav li {
+  margin: 26px 15px 0;
+  padding: 50px 18px 0;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  position: relative;
+}
+.list-m .menu-nav li a {
+  font-size: 12px;
+  font-family: Arial;
+  color: #972483;
+  text-transform: uppercase;
+  line-height: 15px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-decoration: none;
+}
+.list-m .menu-nav li a i {
+  display: block;
+  width: 100%;
+  margin: 0 auto 9px;
+  bottom: 31px;
+  left: 0;
+  position: absolute;
+  font-size: 40px !important;
+}
+.list-m .menu-nav li a span {
+  line-height: 15px;
+  display: inline-block;
+  height: 32px;
+  font-weight: bold;
+}
 .right_options {
   position: fixed;
   right: 20px;
@@ -2626,6 +2741,11 @@ i[class*=" icon-"] {
     height: 120px;
     margin-top: -10px;
     padding-top: 12px;
+  }
+  header.menu_active {
+    position: fixed;
+    z-index: 99999;
+    width: 100%;
   }
   header.header_informativo {
     padding: 15px;
