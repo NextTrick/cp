@@ -15,8 +15,8 @@ Vagrantfile
 composer.phar
 VirtualBox-*
 config/autoload/local.php
-public/s/files/usuario/usuario/*
-public/s/files/paquete/paquete/*
-public/s/files/contenido/images/*
+/public/s/files/usuario/usuario/*
+/public/s/files/paquete/paquete/*
+/public/s/files/contenido/images/*
 !public/s/files/usuario/usuario/user-default.png
 !public/s/files/usuario/usuario/user-web-default.png
