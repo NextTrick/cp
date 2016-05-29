@@ -16,3 +16,5 @@ composer.phar
 VirtualBox-*
 config/autoload/local.php
 public/s/files/*
+!public/s/files/usuario/usuario/user-default.png
+!public/s/files/usuario/usuario/user-web-default.png
