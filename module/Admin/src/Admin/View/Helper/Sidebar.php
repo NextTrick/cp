@@ -19,14 +19,19 @@ class Sidebar extends AbstractHelper implements ServiceLocatorAwareInterface
                 
         $menus = array();
         $identity = $sl->get('Admin\Model\Service\LoginService')->getRepository()->getIdentity();
+        
+        $config = $sl->get('config');
+        $urlImg = isset($config['fileDir']['usuario_usuario']['down']) ? $config['fileDir']['usuario_usuario']['down'] : null;
+        
         $user = new \stdClass();
         $user->username = null;
-        $user->urlImage = null;
+        $user->image = null;
+        $user->urlImg = null;
         $user->urlProfile = '#';
         if ($identity !== false) {
             $user->username = $identity->username;
-            $image = empty($identity->image) ? 'user-default.png' : $identity->image;
-            $user->urlImage = URL_RESOURCES . 'files/usuario/usuario/' . $image;
+            $user->image = empty($identity->image) ? 'user-default.png' : $identity->image;
+            $user->urlImg = $urlImg;
             $user->urlProfile = '#';
             
             $uriPath = $sl->get('Request')->getUri()->getPath();

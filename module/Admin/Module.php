@@ -48,8 +48,8 @@ class Module
     public function bootstrapSession($e)
     {
         $session = $e->getApplication()
-            ->getServiceManager()
-            ->get('Zend\Session\SessionManager');
+                     ->getServiceManager()
+                     ->get('Zend\Session\SessionManager');
         $session->start();
 
         $container = new Container('initialized');

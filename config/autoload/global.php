@@ -24,6 +24,24 @@ return array(
             'post_max_size' => '804857600',            
         )
     ),
+    'session' => array(
+        'config' => array(
+            'class' => 'Zend\Session\Config\SessionConfig',
+            'options' => array(
+                'name' => 'cookieName',
+                'cookie_httponly' => true,
+                'cookie_lifetime' => 60,
+                'gc_maxlifetime' => 60,
+                'remember_me_seconds' => 60,
+            ),
+            'authentication_expiration_time' => 60
+        ),
+        'storage' => 'Zend\Session\Storage\SessionArrayStorage',
+        'validators' => array(
+            'Zend\Session\Validator\RemoteAddr',
+            'Zend\Session\Validator\HttpUserAgent',
+        ),
+    ),
     'error' => array(
         'send_mail' => true,
         'local_log' => true,        
