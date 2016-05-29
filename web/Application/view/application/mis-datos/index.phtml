@@ -123,18 +123,6 @@
                             </div>
                         </div>
                         <div class="form_control">
-                            <label class="left" for="pais_id">País</label>
-                            <div class="right bg_white">
-                                <?php echo $this->formElement($this->form->get('pais_id')->setAttributes(array(
-                                    'class' => 'right',
-                                ))) ?>
-                                
-                            </div>
-                            <div class="right">
-                                <?php echo $this->formElementerrors($form->get('pais_id')); ?>
-                            </div>
-                        </div>
-                        <div class="form_control">
                             <label class="left" for="departamento_id">Departamento</label>
                             <div class="right bg_white">
                                 <?php echo $this->formElement($this->form->get('departamento_id')->setAttributes(array(
@@ -143,6 +131,18 @@
                             </div>
                             <div class="right">
                                 <?php echo $this->formElementerrors($form->get('departamento_id')); ?>
+                            </div>
+                        </div>
+                        <div class="form_control">
+                            <label class="left" for="provincia_id">Provincia</label>
+                            <div class="right bg_white">
+                                <?php echo $this->formElement($this->form->get('provincia_id')->setAttributes(array(
+                                    'class' => 'right',
+                                ))) ?>
+                                
+                            </div>
+                            <div class="right">
+                                <?php echo $this->formElementerrors($form->get('provincia_id')); ?>
                             </div>
                         </div>
                         <div class="form_control">
@@ -224,18 +224,18 @@
 </script>
 <script type="text/javascript">
     var ubigeo = {
-        loadDepartameto:function(){
+        loadProvincia:function(){
             $.ajax({
                 type: "GET",
-                url: '<?php echo BASE_URL; ?>application/ubigeo/departamento',
-                data:{pais_id:$('#pais_id').val()},
+                url: '<?php echo BASE_URL; ?>application/ubigeo/provincia',
+                data:{departamento_id:$('#departamento_id').val()},
                 dataType: 'json',
                 success: function(data){
                     var htmlDdl = '<option value="">- Seleccione -</option>';
                     for (var key in data) {
                         htmlDdl = htmlDdl+'<option value="'+key+'">'+data[key]+'</option>';
                     }
-                    $('#departamento_id').html(htmlDdl);
+                    $('#provincia_id').html(htmlDdl);
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 }
@@ -245,7 +245,7 @@
             $.ajax({
                 type: "GET",
                 url: '<?php echo BASE_URL; ?>application/ubigeo/distrito',
-                data:{pais_id:$('#pais_id').val(), departamento_id:$('#departamento_id').val()},
+                data:{provincia_id:$('#provincia_id').val()},
                 dataType: 'json',
                 success: function(data){
                     var htmlDdl = '<option value="">- Seleccione -</option>';
@@ -261,7 +261,7 @@
     };
     
     $(document).ready(function(){
-        $('#pais_id').change(function(){ubigeo.loadDepartameto();});
-        $('#departamento_id').change(function(){ubigeo.loadDistrito();});
+        $('#departamento_id').change(function(){ubigeo.loadProvincia();});
+        $('#provincia_id').change(function(){ubigeo.loadDistrito();});
     });
 </script>

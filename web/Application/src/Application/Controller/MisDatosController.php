@@ -23,11 +23,13 @@ class MisDatosController extends SecurityWebController
         $form = $this->_getMisDatosForm();
         if (!empty($usuarioData)) {
             unset($usuarioData['password']);
-            $paisId = $usuarioData['pais_id'];
             $departamentoId = $usuarioData['departamento_id'];
-            $departamentos = $this->_getUbigeoService()->getDepartamentos($paisId);
+            $provinciaId = $usuarioData['provincia_id'];
+            $departamentos = $this->_getUbigeoService()->getPeDepartamentos();
             $form->get('departamento_id')->setValueOptions($departamentos);
-            $distritos = $this->_getUbigeoService()->getDistritos($paisId, $departamentoId);
+            $provincias = $this->_getUbigeoService()->getProvincias($departamentoId);
+            $form->get('provincia_id')->setValueOptions($provincias);
+            $distritos = $this->_getUbigeoService()->getDistritos($provinciaId);
             $form->get('distrito_id')->setValueOptions($distritos);
             
             $form->setData($usuarioData);
@@ -42,11 +44,13 @@ class MisDatosController extends SecurityWebController
         $mensajeRegistro = null;
         if ($this->request->isPost()) {
             //=========== Llenar los combos ===========
-            $paisId = $this->request->getPost('pais_id');
             $departamentoId = $this->request->getPost('departamento_id');
-            $departamentos = $this->_getUbigeoService()->getDepartamentos($paisId);
+            $provinciaId = $this->request->getPost('provincia_id');
+            $departamentos = $this->_getUbigeoService()->getPeDepartamentos();
             $form->get('departamento_id')->setValueOptions($departamentos);
-            $distritos = $this->_getUbigeoService()->getDistritos($paisId, $departamentoId);
+            $provincias = $this->_getUbigeoService()->getProvincias($departamentoId);
+            $form->get('provincia_id')->setValueOptions($provincias);
+            $distritos = $this->_getUbigeoService()->getDistritos($provinciaId);
             $form->get('distrito_id')->setValueOptions($distritos);
             
             //=========== Aplicar filter ===========
@@ -88,8 +92,9 @@ class MisDatosController extends SecurityWebController
                     'nombres' => $data['nombres'],
                     'paterno' => $data['paterno'],
                     'materno' => $data['materno'],
-                    'pais_id' => $data['pais_id'],
+                    'pais_id' => $this->_getUbigeoService()->getPePaisId(),
                     'departamento_id' => $data['departamento_id'],
+                    'provincia_id' => $data['provincia_id'],
                     'distrito_id' => $data['distrito_id'],
                     'di_tipo' => $data['di_tipo'],
                     'di_valor' => $data['di_valor'],
