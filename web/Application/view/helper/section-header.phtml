@@ -29,9 +29,10 @@
                 </div>
             <?php endif; ?>
         </div>
-        <?php if (!empty($data)) : ?>
+        
         <div class="user_option_mobile">
             <ul>
+                <?php if (!empty($data)) : ?>
                 <li>
                     <?php $imagen = !empty($data['imagen']) ? $urlImg . '/' . $data['imagen'] : $urlImg . '/user-web-default.png'; ?>
                     <span class="user_icon">
@@ -48,9 +49,16 @@
                     <span class="cart_icon"></span>
                     </a>
                 </li>
+                <?php else : ?>
+                    <li>
+                        <a href="<?php echo BASE_URL ?>login"><span class="icon"></span></a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
-        <?php endif; ?>
+        
+
+        
         <nav>
             <ul>
                 <li>
