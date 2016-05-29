@@ -94,21 +94,21 @@ class MisDatosForm extends Form
                 'maxlength' => '11',
             ));
         $this->add($diValor);
-
-        $pais = $this->_getUbigeoService()->getPaises();
-        $codPais = new Element\Select('pais_id');
-        $codPais->setAttributes(array('id' => 'pais_id'));
-        $codPais->setValueOptions($pais);
-        $codPais->setEmptyOption('- Seleccione -');
-        $codPais->setDisableInArrayValidator(true);
-        $this->add($codPais);
         
+        $departamentos = $this->_getUbigeoService()->getPeDepartamentos();
         $codDepa = new Element\Select('departamento_id');
         $codDepa->setAttributes(array('id' => 'departamento_id'));
-        $codDepa->setValueOptions(array());
+        $codDepa->setValueOptions($departamentos);
         $codDepa->setEmptyOption('- Seleccione -');
         $codDepa->setDisableInArrayValidator(true);
         $this->add($codDepa);
+        
+        $codProv = new Element\Select('provincia_id');
+        $codProv->setAttributes(array('id' => 'provincia_id'));
+        $codProv->setValueOptions(array());
+        $codProv->setEmptyOption('- Seleccione -');
+        $codProv->setDisableInArrayValidator(true);
+        $this->add($codProv);
         
         $codDist = new Element\Select('distrito_id');
         $codDist->setAttributes(array('id' => 'distrito_id'));

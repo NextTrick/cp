@@ -38,12 +38,12 @@ class UbigeoService
         );
         return $this->getRepository()->findPairs($criteria);
     }
-    
+
     public function getDepartamentos($paisId)
     {
-        $codPais = $this->getCodPais($paisId);
+        $data = $this->getCodPais($paisId);
         $where = new \Zend\Db\Sql\Where();
-        $where->equalTo('cod_pais', $codPais);
+        $where->equalTo('cod_pais', $data->cod_pais);
         $where->notEqualTo('cod_depa', '00');
         $where->equalTo('cod_prov', '00');
         $where->equalTo('cod_dist', '00');
@@ -56,13 +56,12 @@ class UbigeoService
         return $this->getRepository()->findPairs($criteria);
     }
     
-    public function getProvincias($paisId, $departamentoId)
+    public function getProvincias($departamentoId)
     {
-        $codPais = $this->getCodPais($paisId);
-        $codDepartamento = $this->getCodDepartamento($departamentoId);
+        $data = $this->getCodDepartamento($departamentoId);
         $where = new \Zend\Db\Sql\Where();
-        $where->equalTo('cod_pais', $codPais);
-        $where->equalTo('cod_depa', $codDepartamento);
+        $where->equalTo('cod_pais', $data->cod_pais);
+        $where->equalTo('cod_depa', $data->cod_depa);
         $where->notEqualTo('cod_prov', '00');
         $where->equalTo('cod_dist', '00');
 
@@ -74,21 +73,14 @@ class UbigeoService
         return $this->getRepository()->findPairs($criteria);
     }
     
-    public function getDistritos($paisId, $departamentoId, $provinciaId = null)
+    public function getDistritos($provinciaId)
     {
-        $codPais = $this->getCodPais($paisId);
-        $codDepartamento = $this->getCodDepartamento($departamentoId);
+        $data = $this->getCodProvincia($provinciaId);
         
         $where = new \Zend\Db\Sql\Where();
-        $where->equalTo('cod_pais', $codPais);
-        $where->equalTo('cod_depa', $codDepartamento);
-        
-        if (!empty($provinciaId)) {
-            $codProvincia = $this->getCodProvincia($provinciaId);
-            $where->equalTo('cod_prov', $codProvincia);
-        } else {
-            $where->notEqualTo('cod_prov', '00');
-        }
+        $where->equalTo('cod_pais', $data->cod_pais);
+        $where->equalTo('cod_depa', $data->cod_depa);
+        $where->equalTo('cod_prov', $data->cod_prov);
         $where->notEqualTo('cod_dist', '00');
         
         $criteria = array(
@@ -117,44 +109,93 @@ class UbigeoService
 
     public function getCodPais($paisId)
     {
+        $result = new \stdClass();
+        $result->cod_pais = null;
         $data = $this->_repository->findOne(array('where' => array('id' => $paisId)));
         if (isset($data['cod_pais'])) {
-            return $data['cod_pais'];
+            $result->cod_pais = $data['cod_pais'];
         }
         
-        return null;
+        return $result->cod_pais;
     }
     
     public function getCodDepartamento($departamentoId)
     {
+        $result = new \stdClass();
+        $result->cod_pais = null;
+        $result->cod_depa = null;
         $data = $this->_repository->findOne(array('where' => array('id' => $departamentoId)));
         if (isset($data['cod_depa'])) {
-            return $data['cod_depa'];
+            $result->cod_pais = $data['cod_pais'];
+            $result->cod_depa = $data['cod_depa'];
         }
         
-        return null;
-    }
-    
-    public function getCodDistrito($distritoId)
-    {
-        $data = $this->_repository->findOne(array('where' => array('id' => $distritoId)));
-        if (isset($data['cod_dist'])) {
-            return $data['cod_dist'];
-        }
-        
-        return null;
-    }
-    
-    public function getCodProvincia($provinciaId)
-    {
-        $data = $this->_repository->findOne(array('where' => array('id' => $provinciaId)));
-        if (isset($data['cod_prov'])) {
-            return $data['cod_prov'];
-        }
-        
-        return null;
+        return $result;
     }
 
+    public function getCodProvincia($provinciaId)
+    {
+        $result = new \stdClass();
+        $result->cod_pais = null;
+        $result->cod_depa = null;
+        $result->cod_prov = null;
+        $data = $this->_repository->findOne(array('where' => array('id' => $provinciaId)));
+        if (isset($data['cod_prov'])) {
+            $result->cod_pais = $data['cod_pais'];
+            $result->cod_depa = $data['cod_depa'];
+            $result->cod_prov = $data['cod_prov'];
+        }
+        
+        return $result;
+    }
+
+    public function getCodDistrito($distritoId)
+    {
+        $result = new \stdClass();
+        $result->cod_pais = null;
+        $result->cod_depa = null;
+        $result->cod_prov = null;
+        $result->cod_dist = null;
+        $data = $this->_repository->findOne(array('where' => array('id' => $distritoId)));
+        if (isset($data['cod_dist'])) {
+            $result->cod_pais = $data['cod_pais'];
+            $result->cod_depa = $data['cod_depa'];
+            $result->cod_prov = $data['cod_prov'];
+            $result->cod_dist = $data['cod_dist'];
+        }
+        
+        return $result;
+    }
+    
+    public function getPePaisId()
+    {
+        $criteria = array('where' => array(
+            'cod_pais' => \Sistema\Model\Service\UbigeoService::COD_PAIS_PERU,
+            'cod_depa' => '00',
+            'cod_prov' => '00',
+            'cod_dist' => '00',
+        ));
+        $row = $this->getRepository()->findOne($criteria);
+        
+        return isset($row['id']) ? $row['id'] : null;
+    }
+
+    public function getPeDepartamentos()
+    {
+        $where = new \Zend\Db\Sql\Where();
+        $where->equalTo('cod_pais', self::COD_PAIS_PERU);
+        $where->notEqualTo('cod_depa', '00');
+        $where->equalTo('cod_prov', '00');
+        $where->equalTo('cod_dist', '00');
+        
+        $criteria = array(
+            'where'   => $where,
+            'columns' => array('id', 'nombre'),
+            'order'   => array('nombre ASC'),
+        );
+        return $this->getRepository()->findPairs($criteria);
+    }
+    
     public function getRepository()
     {
         return $this->_repository;

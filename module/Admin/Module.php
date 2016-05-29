@@ -32,7 +32,7 @@ class Module
         $moduleRouteListener->attach($eventManager);
 
         $translatorI = new \Zend\I18n\Translator\Translator();
-        $translatorI->setLocale('es');
+        $translatorI->setLocale('es_ES');
 
         $translator = new \Zend\Mvc\I18n\Translator($translatorI);
         $translator->addTranslationFile(
