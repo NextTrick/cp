@@ -128,7 +128,11 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
         //echo $sql->getSqlStringForSqlObject($select); exit;
         $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
 
-        return $data[0];
+        if (!empty($data)) {
+            return $data[0];
+        }
+
+        return array();
     }
 
     public function getById($ordenId)
