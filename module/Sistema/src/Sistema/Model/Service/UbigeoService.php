@@ -116,7 +116,7 @@ class UbigeoService
             $result->cod_pais = $data['cod_pais'];
         }
         
-        return $result->cod_pais;
+        return $result;
     }
     
     public function getCodDepartamento($departamentoId)
