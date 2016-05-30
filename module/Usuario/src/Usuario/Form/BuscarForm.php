@@ -158,12 +158,12 @@ class BuscarForm extends Form
         }
 
         if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento'])) {
-            $dataProv = $this->getUbigeoService()->getProvincias($params['cmbPais'],$params['cmbDepartamento']);
+            $dataProv = $this->getUbigeoService()->getProvincias($params['cmbDepartamento']);
             $this->get('cmbProvincia')->setValueOptions($dataProv);
         }
 
         if (!empty($params['cmbPais']) && !empty($params['cmbDepartamento']) && !empty($params['cmbProvincia'])) {
-            $dataDist = $this->getUbigeoService()->getDistritos($params['cmbPais'], $params['cmbDepartamento'], $params['cmbProvincia']);
+            $dataDist = $this->getUbigeoService()->getDistritos($params['cmbProvincia']);
             $this->get('cmbDistrito')->setValueOptions($dataDist);
         }
     }
