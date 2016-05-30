@@ -673,8 +673,10 @@ $(function() {
       dom.watchDetailBar.on('click', events.watchDetailBar);
       $(window).scroll(function() {
          if($(window).scrollTop() + $(window).height() > $(document).height()-100) {
-            console.log('bottom');
              $('.fixed_bottom_bar').css('position', 'static');
+         }
+         else{
+            $('.fixed_bottom_bar').css('position', 'fixed');
          }
       });
     };

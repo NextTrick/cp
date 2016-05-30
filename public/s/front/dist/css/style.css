@@ -600,6 +600,10 @@ header.header_informativo .user_option .user_outside {
 .btn.btn_orange {
   background: #ff5800;
 }
+.btn.btn_orange:hover {
+  background: #f95b08;
+  box-shadow: 1px 1px 1px #e45408;
+}
 .btn.btn_save_signin {
   margin-top: 20px;
 }
