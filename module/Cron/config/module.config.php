@@ -23,6 +23,18 @@ return array(
                         ),
                     ),
                 ),
+                'actualizar-promociones' => array(
+                    'type'    => 'simple',
+                    'options' => array(
+                        // add [ and ] if optional ( ex : [<doname>] )
+                        'route' => 'actualizar promociones', 
+                        'defaults' => array(
+                            '__NAMESPACE__' => 'Cron\Controller',
+                            'controller' => 'Paquete',
+                            'action' => 'actualizar'
+                        ),
+                    ),
+                ),
             )
         )
     ),
