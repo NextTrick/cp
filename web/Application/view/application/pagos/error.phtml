@@ -14,7 +14,7 @@
                     <P>No se pudo procesar correctamente tu recarga.</P>
 
                     <?php if ($this->ordenData['pago_metodo'] == \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS) :?>
-                        <p>Número de recarga: <?php echo $this->ordenData['id']; ?></p>
+                        <p>Número de recarga: <?php echo $this->ordenData['codigo']; ?></p>
                         <p>Fecha de recarga: <?php echo $this->ordenData['pago_fecha_confirmacion']; ?></p>
                         <p></p>Motivo: <?php echo $this->ordenData['pago_error_detalle']; ?></p>
                     <?php endif; ?>
