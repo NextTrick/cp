@@ -13,11 +13,11 @@
                     <h2>¡LO SENTIMOS :(!</h2>
                     <P>No se pudo procesar correctamente tu recarga.</P>
 
-<!--                    --><?php //if ($this->ordenData['pago_metodo'] == \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS) :?>
-<!--                        Número de recarga: --><?php //echo $this->ordenData['id']; ?>
-<!--                        Fecha de recarga: --><?php //echo $this->ordenData['pago_fecha_confirmacion']; ?>
-<!--                        Motivo: --><?php //echo $this->ordenData['pago_error_detalle']; ?>
-<!--                    --><?php //endif; ?>
+                    <?php /*if ($this->ordenData['pago_metodo'] == \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS) :*/?><!--
+                        <p>Número de recarga: <?php /*echo $this->ordenData['id']; */?></p>
+                        <p>Fecha de recarga: <?php /*echo $this->ordenData['pago_fecha_confirmacion']; */?></p>
+                        <p></p>Motivo: <?php /*echo $this->ordenData['pago_error_detalle']; */?></p>
+                    --><?php /*endif; */?>
 
                     <P><a href="<?php echo BASE_URL . 'carrito/pagos'?>">Intentar nuevamente</a></P>
                     <div class="info">
