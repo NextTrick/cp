@@ -19,11 +19,6 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-        
-//        $eventManager->attach(MvcEvent::EVENT_DISPATCH_ERROR, function(MvcEvent $event) {
-//            $viewModel = $event->getViewModel();
-//            $viewModel->setTemplate('layout/layout-error');
-//        }, -200);
     }
 
     public function getConfig()

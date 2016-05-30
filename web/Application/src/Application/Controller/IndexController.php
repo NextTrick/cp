@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use TwitterOAuth\OAuth\Exception;
 use Zend\Mvc\Controller\AbstractActionController;
 use PaymentProcessor\Model\PaymentProcessor;
 use Zend\View\Model\ViewModel;
@@ -11,6 +12,7 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
+        throw new \Exception('fsfsfsfs');
         $mguid = $this->request->getQuery('mguid');
         if (!empty($mguid)) {
             return $this->redirect()->toRoute('web-activar-cuenta', array('controller' => 'registro', 'action' => 'activar-cuenta'), array('query' => array('mguid' => $mguid)));
