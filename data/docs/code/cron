@@ -2,3 +2,4 @@ Ejecutar cron:
 ----------------------
 cd ../nombre_proyecto
 php public/index.php actualizar tarjetas
+php public/index.php actualizar promociones

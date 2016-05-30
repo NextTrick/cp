@@ -10,7 +10,6 @@ namespace Admin\Controller;
 
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
-use \Common\Helpers\String;
 
 class PaqueteController extends SecurityAdminController
 {   
@@ -24,7 +23,8 @@ class PaqueteController extends SecurityAdminController
 
             $form->setData($this->params()->fromPost());
 
-            $this->_syncPaquetes();
+            $this->getServiceLocator()->get('Paquete\Model\Service\PaqueteService')->syncPaquetes();
+            
             $criteria  = $this->_getPaqueteService()->getDataCriteria($this->params()->fromPost());
             $gridList  = $this->_getPaqueteService()->getRepository()->search($criteria);
             $countList = !empty($gridList)? count($gridList): 0;
@@ -37,47 +37,6 @@ class PaqueteController extends SecurityAdminController
             return $view;
         } catch (\Exception $e) {
             echo $e->getMessage();exit;
-        }
-    }
-
-    private function _syncPaquetes()
-    {
-        $results = $this->_getPaqueteService()->promocionesEnTrueFi();
-        $rows = array();
-        $referencias = array();
-        if ($results['success']) {
-            $results = $results['result'];
-            foreach ($results as $row) {
-                $json = json_encode($row);
-                $codigo = base64_encode($json);
-                $row['referencia'] = md5($codigo);
-                $referencias[] = md5($codigo);
-                $rows[] = $row;
-            }
-        }
-
-        $results2 = array();
-        if (!empty($referencias)) {
-            $results2 = $this->_getPaqueteService()->getRepository()->findByReferencia($referencias);
-        }
-
-        foreach ($rows as $key => $row) {
-            $referencia = $row['referencia'];
-            if (isset($results2[$referencia])) {
-                unset($rows[$key]);
-            }
-        }
-        
-        foreach ($rows as $row) {
-            $this->_getPaqueteService()->getRepository()->save(array(
-                'referencia' => $row['referencia'],
-                'emoney' => (float)$row['emoney'],
-                'bonus' => (float)$row['bonus'],
-                'promotionbonus' => isset($row['promotionbonus']) ? (float)$row['promotionbonus'] :  0,
-                'etickets' => isset($row['etickets']) ? $row['etickets'] : null,
-                'gamepoints' => $row['gamepoints'],
-                'fecha_creacion' => date('Y-m-d H:i:s'),
-            ));
         }
     }
 
