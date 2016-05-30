@@ -113,18 +113,6 @@ class MisDatosFilter extends Zf2InputFilter
         ));
 
         $this->add(array(
-            'name' => 'pais_id',
-            'required' => true,
-            'filters'  => array(
-                array('name' => 'StripTags'),
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-                self::validatorNotEmpty('Pais'),
-            )
-        ));
-
-        $this->add(array(
             'name' => 'departamento_id',
             'required' => true,
             'filters'  => array(
@@ -136,6 +124,18 @@ class MisDatosFilter extends Zf2InputFilter
             )
         ));
 
+        $this->add(array(
+            'name' => 'provincia_id',
+            'required' => true,
+            'filters'  => array(
+                array('name' => 'StripTags'),
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                self::validatorNotEmpty('Provincia'),
+            )
+        ));
+        
         $this->add(array(
             'name' => 'distrito_id',
             'required' => true,

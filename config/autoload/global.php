@@ -24,6 +24,24 @@ return array(
             'post_max_size' => '804857600',            
         )
     ),
+    'session' => array(
+        'config' => array(
+            'class' => 'Zend\Session\Config\SessionConfig',
+            'options' => array(
+                'name' => 'cookieName',
+                'cookie_httponly' => true,
+                'cookie_lifetime' => 60*60*24,
+                'gc_maxlifetime' => 60*60*24,
+                'remember_me_seconds' => 60*60*24,
+            ),
+            //'authentication_expiration_time' => 300
+        ),
+        'storage' => 'Zend\Session\Storage\SessionArrayStorage',
+        'validators' => array(
+            'Zend\Session\Validator\RemoteAddr',
+            'Zend\Session\Validator\HttpUserAgent',
+        ),
+    ),
     'error' => array(
         'send_mail' => true,
         'local_log' => true,        
@@ -58,7 +76,7 @@ return array(
             'dirPermission' => 0755,
             'filePermission' => 0666,
             'namespaceSeparator' => '-cart-',
-            'ttl' => 60*60
+            'ttl' => 60*60*24
         ),
         'plugins' => array(
             'exception_handler' => array('throw_exceptions' => false),
@@ -72,7 +90,7 @@ return array(
             'dirPermission' => 0755,
             'filePermission' => 0666,
             'namespaceSeparator' => '-db-',
-            'ttl' => 60*60
+            'ttl' => 60*60*24
         ),
         'plugins' => array(
             'exception_handler' => array('throw_exceptions' => false),

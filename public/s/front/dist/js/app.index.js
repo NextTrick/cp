@@ -14,7 +14,8 @@ $(function() {
       watchLegal: '.watch_legal',
       closeLegalModal: '.modal_box_legal .modal_content h3 span',
       closeAsociateCardModal: '#how_asociate_card .modal_content h3 span',
-      offersLogin : '.offers_login'
+      offersLogin : '.offers_login',
+      menuIcon: '.menu_icon'
     };
     catchDom = function() {
       dom.btn = $(st.btn);
@@ -28,6 +29,7 @@ $(function() {
       dom.closeLegalModal = $(st.closeLegalModal);
       dom.closeAsociateCardModal = $(st.closeAsociateCardModal);
       dom.offersLogin = $(st.offersLogin);
+      dom.menuIcon = $(st.menuIcon);
     };
     suscribeEvents = function() {
       dom.btn.on('click', events.openModal);
@@ -40,8 +42,24 @@ $(function() {
       dom.closeErrorMessage.on('click', events.closeErrorMessage);
       dom.watchLegal.on('click', events.openModal);
       dom.offersLogin.on('click', events.openMessage);
+      dom.menuIcon.on('click', events.openMenu);
     };
     events = {
+      openMenu: function(){
+        if($('#menuMovil').hasClass('ui-active')){
+          $('#menuMovil').removeClass('ui-active');
+          $('header').removeClass('menu_active');
+          dom.menuIcon.children('i').removeClass('icon-close');
+          dom.menuIcon.children('i').addClass('icon-menu');
+          
+        }
+        else{
+          $('#menuMovil').addClass('ui-active');
+          $('header').addClass('menu_active');
+          dom.menuIcon.children('i').removeClass('icon-menu');
+          dom.menuIcon.children('i').addClass('icon-close');
+        }
+      },
       openMessage : function(){
         $('.success_message').show();
         setTimeout(function(){
@@ -267,15 +285,9 @@ $(function() {
       },
       watchMore: function() {
         if ($(this).hasClass('active')) {
-          $(this).parent().parent().children(st.topCardContent).show();
-          $(this).parent().parent().children(st.showMoreContent).hide();
-          $(this).text('Ver más');
-          $(this).removeClass('active');
+          $(this).parent().parent().parent().css('transform','rotateY(0deg)');
         } else {
-          $(this).parent().parent().children(st.topCardContent).hide();
-          $(this).parent().parent().children(st.showMoreContent).show();
-          $(this).text('Ver menos');
-          $(this).addClass('active');
+          $(this).parent().parent().parent().css('transform','rotateY(180deg)');
         }
       },
       showTooltipBonus: function() {
@@ -292,7 +304,7 @@ $(function() {
           var nombre = $(this).parent().children('.input_name').val();
           if(nombre != ''){
             var duplicate_box, sufix;
-            duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
+            duplicate_box = $(this).parent().parent().parent().parent().children('.duplicate_box');
             
             //alert(duplicate_box.children('p').text())
             duplicate_box.children('p').children('strong').text('"' + nombre + '" ');
@@ -659,6 +671,14 @@ $(function() {
     suscribeEvents = function() {
       dom.openDetail.on('click', events.openDetail);
       dom.watchDetailBar.on('click', events.watchDetailBar);
+      $(window).scroll(function() {
+         if($(window).scrollTop() + $(window).height() > $(document).height()-100) {
+             $('.fixed_bottom_bar').css('position', 'static');
+         }
+         else{
+            $('.fixed_bottom_bar').css('position', 'fixed');
+         }
+      });
     };
     events = {
       openDetail: function(e) {

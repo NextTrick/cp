@@ -3,27 +3,30 @@
     <?php echo $this->sectionPromocionesYRecargas($cartModel, $tarjetaProductos);  ?>
     <div id="mask"></div>
 </section>
-<div class="bottom_bar">
-    <div class="box_mobile">
-        <span class="icon_arrow"></span>
-        <span class="text">Estás recargando: </span>
-        <div class="select"><span></span>
-            <select name="tarjeta" id="tarjeta">
-                <?php foreach ($usuarioTarjetas as $codigo => $nombre) : ?>
-                <?php $select = ($codigo == $tarjetaCodigo) ? 'selected="selected"' : ''; ?>
-                <option value="<?php echo $codigo; ?>" <?php echo $select; ?>><?php echo $nombre; ?></option>
-                <?php endforeach; ?>
-            </select>
+<div class="fixed_bottom_bar">
+    <div class="bottom_bar">
+        <div class="box_mobile">
+            <span class="icon_arrow"></span>
+            <span class="text">Estás recargando: </span>
+            <div class="select"><span></span>
+                <select name="tarjeta" id="tarjeta">
+                    <?php foreach ($usuarioTarjetas as $codigo => $nombre) : ?>
+                    <?php $select = ($codigo == $tarjetaCodigo) ? 'selected="selected"' : ''; ?>
+                    <option value="<?php echo $codigo; ?>" <?php echo $select; ?>><?php echo $nombre; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <?php $cantidad = empty($cartModel) ? '0' : $cartModel->getQuantityGroup(); ?>
+            <?php $monto = empty($cartModel) ? '0.00' : $cartModel->getAmountGroup(true); ?>
+            <span class="bg hide" id="spanSubtotal"> <span class="text">Recargas: </span><?php echo $cantidad; ?> <span>/ </span>S/. <?php echo $monto; ?></span>
+            <span class="text hide">Monto total: </span>
+            <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
+            <span class="bg total hide" id="spanTotal">S/. <?php echo $montoTotal; ?></span><button id="confirmarCompra" class="btn btn_orange hide">Confirmar compra </button>
         </div>
-        <?php $cantidad = empty($cartModel) ? '0' : $cartModel->getQuantityGroup(); ?>
-        <?php $monto = empty($cartModel) ? '0.00' : $cartModel->getAmountGroup(true); ?>
-        <span class="bg hide" id="spanSubtotal"> <span class="text">Recargas: </span><?php echo $cantidad; ?> <span>/ </span>S/. <?php echo $monto; ?></span>
-        <span class="text hide">Monto total: </span>
-        <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
-        <span class="bg total hide" id="spanTotal">S/. <?php echo $montoTotal; ?></span><button id="confirmarCompra" class="btn btn_orange hide">Confirmar compra </button>
+        
     </div>
-    
 </div>
+
 <div class="bg_purple_dark"></div>
 <style>
     footer{

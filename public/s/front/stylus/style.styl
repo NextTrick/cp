@@ -12,6 +12,8 @@
 	-moz-box-sizing border-box
 	-webkit-box-sizing border-box
 	box-sizing border-box
+	margin 0
+	padding 0
 body
 	background url(../images/bg.jpg) repeat
 	&.body_informativo
@@ -24,6 +26,10 @@ body
 	font-weight bold
 *:focus
 	outline 0px
+input[type=number]::-webkit-inner-spin-button 
+input[type=number]::-webkit-outer-spin-button
+	-webkit-appearance none
+	margin 0 
 header
 	img.bg
 		width 100%
@@ -48,11 +54,12 @@ header
 		display none
 		position absolute
 		right 10px
-		top 15px
+		top 30px
 		ul
 			li
 				list-style none
 				display inline-block
+				vertical-align top
 				.user_icon
 					cursor pointer
 					img
@@ -86,8 +93,13 @@ header
 				.cart_number
 					position absolute
 					right 5px
-					top 13px
+					top -4px
 					color #991985
+				span
+					vertical-align middle
+					display inline-block
+					&.icon
+						sprite($user_icon)
 					
 		
 	.user_option
@@ -253,6 +265,104 @@ header
 				display block
 			.user_outside
 				display none
+.list-m
+	&.movil
+		position fixed
+		color #972483
+		background #fff
+		display none
+		left 0
+		top 110px
+		overflow auto
+		width 100%
+		bottom 0
+		z-index 9999
+		.list-m-inner
+			background url(../images/bg_menu_m.jpg) no-repeat center 260px
+			.box-mmenu
+				margin 0px auto
+				max-width 290px
+		&.ui-active
+			display block
+	.list-menu
+		margin-bottom 50px
+	.row-fluid
+		width 100%
+		overflow hidden
+	.row-fluid [class*="span"]
+		display block
+		float left
+		width 48.93617021276595%
+		min-height 30px
+		margin-left 2.127659574468085%
+		-webkit-box-sizing border-box
+		-moz-box-sizing border-box
+		box-sizing border-box
+		&:first-child
+			margin-left 0
+	.list-sub-menu
+		text-align center
+		.span6
+			a
+				font-size 13px
+				font-family Arial
+				color #972483
+				text-decoration none
+				font-weight bold
+	.social-media
+		text-align center
+		margin-bottom 45px
+		margin-top 20px
+		font-weight bold
+		span
+			font-family Arial
+			display block
+			font-size 27px
+			margin-bottom 10px
+		.social-list
+			list-style none
+			margin 0
+			text-align center
+			padding 0
+			li
+				display inline-block
+				margin 0 5px
+	.menu-nav
+		list-style none
+		margin 0
+		text-align center
+		margin-top 4px
+		padding 0
+		li
+			margin 26px 15px 0
+			padding 50px 18px 0
+			display inline-block
+			vertical-align top
+			text-align center
+			position relative
+			a
+				font-size 12px
+				font-family Arial
+				color #972483
+				text-transform uppercase
+				line-height 15px
+				position relative
+				display inline-block
+				vertical-align top
+				text-decoration none
+				i
+					display block
+					width 100%
+					margin 0 auto 9px
+					bottom 31px
+					left 0
+					position absolute
+					font-size: 40px !important;
+				span
+					line-height 15px
+					display inline-block
+					height 32px
+					font-weight bold
 .right_options
 	position fixed
 	right 20px
@@ -321,6 +431,9 @@ header
 				sprite($tw_icon)
 	&.btn_orange
 		background #FF5800
+		&:hover
+			background #f95b08
+			box-shadow 1px 1px 1px #e45408
 	&.btn_save_signin
 		margin-top 20px
 .bg_purple_dark
@@ -377,7 +490,7 @@ section
 			margin 0 auto
 			position relative
 			z-index 9
-			margin-bottom -14px
+			bottom -14px
 			ul
 				margin 0
 				padding 0
@@ -479,10 +592,9 @@ section
 		font-size 24px
 		font-weight bold
 		margin 0 auto
-		margin-bottom -20px
 		z-index 999
 		position relative
-		margin-top 20px
+		top 21px
 		&:before
 			content ''
 			color #ffb000
@@ -509,7 +621,7 @@ section
 	.purple_box
 		background #6C006C
 		border-radius 20px
-		padding 20px 0
+		padding 36px 0 20px
 		position relative
 		&:before
 		&:after
@@ -540,6 +652,7 @@ section
 				font-size 20px
 			&.term
 				font-size 12px
+				padding 10px 0
 				a
 					color white
 			&.p_16
@@ -611,6 +724,7 @@ section
 		.benefits_offers
 			width 95%
 			margin 0 auto
+			padding-top 20px
 			.offers_box_two
 				overflow hidden
 				border-radius 19px
@@ -622,6 +736,7 @@ section
 					.image
 						img
 							width 100%
+							display block
 				.right
 					padding 20px
 					height 220px
@@ -645,6 +760,8 @@ section
 				overflow hidden
 				.col_3
 					width 32%
+					&.offer_important
+						display none
 					.box_white
 						background white
 						border-radius 15px
@@ -692,6 +809,7 @@ section
 				width 30%
 				text-decoration none
 				margin-top 20px
+				text-align right
 		.steps
 			width 120px
 			margin 0 auto
@@ -765,7 +883,31 @@ section
 				background url(../images/card_empty.png)
 				position relative
 				vertical-align top
+				perspective 1000
+				border-radius 10px
+				.container_card
+					color black
+					width 100%
+					height 100%
+					transform-style preserve-3d
+					transition all 1.0s linear
+					.face
+						background #EFEFEF
+						position absolute
+						border-radius 10px
+						padding 15px
+						width 100%
+						height 100%
+						backface-visibility hidden
+						&.back
+							display block
+							transform rotateY(180deg)
+				
 				.init_loading
+					width 100%
+					height 100%
+					border-radius 10px
+					background #EFEFEF
 					padding-top 50px
 				input
 				button
@@ -811,7 +953,7 @@ section
 					.parsley-errors-list
 						margin-top -10px
 					.link_orange
-						margin-top -10px
+						margin-top 5px
 						color #FF5800
 					display none
 				.loading
@@ -839,6 +981,8 @@ section
 					left 0
 					a
 						color white
+					p
+						margin-top 10px
 				.success_box
 					background #22B273
 					.icon
@@ -864,12 +1008,9 @@ section
 					p
 						font-size 15px
 						color white
+						margin-top 10px
 					
 				&.my_card
-					background #EFEFEF
-					border-radius 10px
-					color black
-					padding 15px
 					box-sizing border-box
 					.card_title
 						width 100%
@@ -905,9 +1046,7 @@ section
 							color gray
 					.top_card
 						text-align left
-						display block
 					.show_more_content
-						display none
 						.line
 							margin-bottom 10px
 							overflow hidden
@@ -960,12 +1099,11 @@ section
 									left 48%
 					.bottom_card
 						text-align left
-						margin-top 20px
+						top 158px
+						width 90%
 						position absolute
-						bottom 10px
 						.price
 							float left
-							width 124px
 							font-size 22px
 							font-weight bold
 							&.cero
@@ -975,7 +1113,7 @@ section
 							color #FF5800
 							margin-top 5px
 							&.watch_more
-								float left
+								float right
 								font-size 14px
 								margin-top 6px
 								border-right 1px solid lightgray
@@ -985,6 +1123,7 @@ section
 								font-size 16px
 								margin-left 5px
 		.recargas_content
+			padding-top 20px
 			.offers
 				padding-bottom 30px
 				.col_3
@@ -1080,13 +1219,15 @@ section
 			background white
 			color black
 			overflow hidden
-			padding 0px 15px
+			padding 20px 15px 0px
 			margin-top 20px
 			>.left
 				width 300px
 				text-align left
 				border-right 1px dashed lightgray
 				padding-right 15px
+				h4
+					margin-bottom 10px
 				p
 					font-size 14px
 				.error_message
@@ -1140,6 +1281,7 @@ section
 				text-align left
 				padding-left 15px
 				.credit_cards
+					padding 20px 0
 					.card
 						display inline-block
 						cursor pointer
@@ -1155,6 +1297,7 @@ section
 					.cards_option
 						display none
 				.items_cart
+					padding-top 20px
 					.item
 						overflow hidden
 						border-bottom 1px dashed lightgray
@@ -1251,6 +1394,7 @@ section
 				.total_box
 					padding 20px 0 50px
 					h3
+						padding 10px 0
 						span
 							font-weight normal
 							&.medium
@@ -1264,7 +1408,7 @@ section
 					a
 						color #FF6909
 						text-decoration none
-						margin-top 10px
+						margin-top 20px
 						display block
 			&.cart_page
 				padding 0
@@ -1419,10 +1563,12 @@ section
 					text-align center
 					h4
 						font-size 16px
+						padding 10px 0
 					.total_box
 						border-top 1px dashed #CCCCCC
 						border-bottom 1px dashed #CCCCCC
 			&.confirmation_box
+				position relative
 				h2
 					color #5218B6
 				p
@@ -1430,6 +1576,13 @@ section
 					margin-bottom 40px
 				h5
 					font-size 14px
+				.print
+					sprite($print)
+					display block
+					position absolute
+					top 30px
+					right 180px
+					cursor pointer
 				.resume
 					width 620px
 					margin 0 auto
@@ -1589,7 +1742,7 @@ section
 			button
 				margin-top 10px
 				width 100%
-			&:first-child
+			&:nth-child(2)
 				margin-right 2%	
 			.image
 				overflow hidden
@@ -1716,7 +1869,10 @@ section
 				pointer-events none
 				background #800079
 				color lightgray
-				
+.fixed_bottom_bar
+	position fixed
+	bottom 24px
+	width 100%			
 .bottom_bar
 	width 1228px
 	height 58px
@@ -1793,6 +1949,7 @@ footer
 	img.bg
 		width 100%
 		z-index -1
+		display block
 	ul
 		padding 0
 		margin-top -40px
@@ -1816,7 +1973,7 @@ footer
 	width 0
 	height 0
 	border-bottom 59px solid white
-	border-right 600px solid transparent
+	border-right 700px solid transparent
 
 
 
@@ -1848,6 +2005,9 @@ footer
 			color #FEB200
 			font-size 28px
 			font-weight bold
+			padding 20px 0
+		p
+			padding 20px 0
 		input
 			width 100%
 		button
@@ -2017,6 +2177,10 @@ i[class*=" icon-"]
 		height 120px
 		margin-top -10px
 		padding-top 12px
+		&.menu_active
+			position fixed
+			z-index 99999
+			width 100%
 		&.header_informativo
 			padding 15px
 		nav
@@ -2038,7 +2202,7 @@ i[class*=" icon-"]
 			overflow hidden
 			height 0
 			border-top 60px solid white
-			border-right 600px solid transparent
+			border-right 700px solid transparent
 		.menu_icon
 			display block
 			position absolute
@@ -2098,7 +2262,7 @@ i[class*=" icon-"]
 				padding 0
 			.purple_box
 				.content
-					padding 0
+					padding 20px 0
 					.left
 					.right
 						float none
@@ -2108,7 +2272,7 @@ i[class*=" icon-"]
 						&.or_icon
 							sprite($or_icon_mobile)
 							display block
-							margin 20px auto 0
+							margin 20px auto
 							position static
 				.options
 					.col_3
@@ -2117,6 +2281,7 @@ i[class*=" icon-"]
 		.offers_box
 			.col_3
 				width 100%
+				margin-bottom 20px
 				img
 					width 100%
 		.offers_box_three
@@ -2166,6 +2331,9 @@ i[class*=" icon-"]
 						padding-right 0
 						border-bottom 1px dashed lightgray
 					>.right
+						padding-left 0
+						h4
+							padding-top 15px
 						.credit_cards
 							padding-bottom 15px
 							border-bottom 1px dashed lightgray
@@ -2230,7 +2398,10 @@ i[class*=" icon-"]
 											width 100%
 						>.right
 							height auto !important
+							padding-left 15px
 					&.confirmation_box
+						.print
+							display none
 						.resume
 							width 100%
 							.head
@@ -2328,6 +2499,8 @@ i[class*=" icon-"]
 							float none
 							width 100%
 							margin-bottom 10px
+							&.offer_important
+								display block
 							.box_white
 								border-radius 18px
 				.cards_content
@@ -2435,7 +2608,7 @@ i[class*=" icon-"]
 			&.bg
 				display none
 		ul
-			padding-top 20px
+			padding 20px 0
 			li
 				margin-top 10px
 				display block

@@ -32,7 +32,7 @@ class Module
         $moduleRouteListener->attach($eventManager);
 
         $translatorI = new \Zend\I18n\Translator\Translator();
-        $translatorI->setLocale('es');
+        $translatorI->setLocale('es_ES');
 
         $translator = new \Zend\Mvc\I18n\Translator($translatorI);
         $translator->addTranslationFile(
@@ -48,8 +48,8 @@ class Module
     public function bootstrapSession($e)
     {
         $session = $e->getApplication()
-            ->getServiceManager()
-            ->get('Zend\Session\SessionManager');
+                     ->getServiceManager()
+                     ->get('Zend\Session\SessionManager');
         $session->start();
 
         $container = new Container('initialized');

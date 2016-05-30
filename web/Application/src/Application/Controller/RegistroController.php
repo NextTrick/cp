@@ -58,11 +58,13 @@ class RegistroController extends AbstractActionController
         $openPopapConfRegistro = 0;
         if ($this->request->isPost() && !$registroForm) {
             //=========== Llenar los combos ===========
-            $paisId = $this->request->getPost('pais_id');
             $departamentoId = $this->request->getPost('departamento_id');
-            $departamentos = $this->_getUbigeoService()->getDepartamentos($paisId);
+            $provinciaId = $this->request->getPost('provincia_id');
+            $departamentos = $this->_getUbigeoService()->getPeDepartamentos();
             $form->get('departamento_id')->setValueOptions($departamentos);
-            $distritos = $this->_getUbigeoService()->getDistritos($paisId, $departamentoId);
+            $provincias = $this->_getUbigeoService()->getProvincias($departamentoId);
+            $form->get('provincia_id')->setValueOptions($provincias);
+            $distritos = $this->_getUbigeoService()->getDistritos($provinciaId);
             $form->get('distrito_id')->setValueOptions($distritos);
             
             //=========== Aplicar filter ===========
@@ -144,8 +146,9 @@ class RegistroController extends AbstractActionController
                 'materno' => $data['materno'],
                 'di_tipo' => $data['di_tipo'],
                 'di_valor' => $data['di_valor'],
-                'pais_id' => $data['pais_id'],
+                'pais_id' => $this->_getUbigeoService()->getPePaisId(),
                 'departamento_id' => $data['departamento_id'],
+                'provincia_id' => $data['provincia_id'],
                 'distrito_id' => $data['distrito_id'],
                 'fecha_nac' => $data['fecha_nac'],
                 'fecha_creacion' => date('Y-m-d H:i:s'),
