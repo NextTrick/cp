@@ -122,6 +122,8 @@ class OrdenService
 
         $this->_saveDetalleOrden($ordenId, $cDate);
 
+        $dataAdicional = $this->getDataAdicional();
+
         $paymentProcessordata = array(
             'id' => $ordenId, // ID DE LA ORDEN
             'perfilpago_nombres' => $usuarioData['nombres'], // NOMBRE DEL PERFIL DE PAGO
@@ -138,6 +140,7 @@ class OrdenService
             'usuario_email' => $usuarioData['email'],  // CORREO DE USUARIO LOGUEADO
             'usuario_id' => $usuarioData['id'], // ID DE USUARIO LOGUEADO
             'monto' => (string) $monto, // MONTO EN CON 2 DECIMALES
+            'data_adicional' => !empty($dataAdicional) ? $dataAdicional : '',
         );
 
         $paymentProcessor = new PaymentProcessor($metodoPago, $this->_sl);
@@ -184,6 +187,37 @@ class OrdenService
         $this->getRepository()->save($ordenUpdateData, $ordenId);
 
         return $return;
+    }
+
+    public function getDataAdicional()
+    {
+        $cartModel = $this->_getCartService()->getCart();
+        $dataAdicional = '';
+        $tarjetaIds = array();
+        if (!empty($cartModel)) {
+            foreach ($cartModel->getProductsCart() as $productos) {
+                foreach ($productos as $producto) {
+                    $categoryCode = $producto->getCategoryCode();
+                    $tarjetaId = Crypto::decrypt($categoryCode, \Common\Helpers\Util::VI_ENCODEID);
+                    $tarjetaIds[] = $tarjetaId;
+                }
+            }
+        }
+
+        if (!empty($tarjetaIds)) {
+            $tarjetasData = $this->_getTarjetaService()->getRepository()->getTarjetasByIds($tarjetaIds);
+
+            if (!empty($tarjetasData)) {
+                $tarjetasNumeros = array();
+                foreach ($tarjetasData as $item) {
+                    $tarjetasNumeros[] = $item['numero'];
+                }
+
+                $dataAdicional = implode(';', $tarjetasNumeros);
+            }
+        }
+
+        return $dataAdicional;
     }
 
     public function setCodigo($ordenId)

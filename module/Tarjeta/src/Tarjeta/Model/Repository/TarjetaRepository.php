@@ -9,6 +9,7 @@
 namespace Tarjeta\Model\Repository;
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\Sql\Sql;
 
 class TarjetaRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 {
@@ -18,5 +19,20 @@ class TarjetaRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     public function __construct(Adapter $adapter)
     {
         parent::__construct($adapter);
+    }
+
+    public function getTarjetasByIds($tarjetaIds)
+    {
+        $sql= new Sql($this->getAdapter());
+
+        $select = $sql->select();
+        $select->from(array('a' => $this->table));
+        $select->columns(array('*'));
+        $select->where->in('a.id', $tarjetaIds);
+
+        $statement = $sql->prepareStatementForSqlObject($select);
+        $data = $this->resultSetPrototype->initialize($statement->execute())->toArray();
+
+        return $data;
     }
 }

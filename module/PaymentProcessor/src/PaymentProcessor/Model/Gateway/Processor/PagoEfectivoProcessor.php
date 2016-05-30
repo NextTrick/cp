@@ -153,7 +153,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'EmailComercio' => $options['mailAdmin'],
                     'FechaAExpirar' => $expirationDate,
                     'UsuarioId' => $data['usuario_id'],
-                    'DataAdicional' => '',
+                    'DataAdicional' => !empty($data['data_adicional']) ? $data['data_adicional'] : '',
                     'UsuarioNombre' => $data['perfilpago_nombres'],
                     'UsuarioApellidos' => $data['perfilpago_paterno'] . ' ' . $data['perfilpago_materno'],
                     'UsuarioLocalidad' => 'LIMA',
