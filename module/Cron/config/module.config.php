@@ -6,6 +6,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Cron\Controller\Tarjeta' => 'Cron\Controller\TarjetaController',
+            'Cron\Controller\Paquete' => 'Cron\Controller\PaqueteController',
         )
     ),
     'console' => array(
