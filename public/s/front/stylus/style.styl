@@ -757,6 +757,8 @@ section
 				overflow hidden
 				.col_3
 					width 32%
+					&.offer_important
+						display none
 					.box_white
 						background white
 						border-radius 15px
@@ -1737,7 +1739,7 @@ section
 			button
 				margin-top 10px
 				width 100%
-			&:first-child
+			&:nth-child(2)
 				margin-right 2%	
 			.image
 				overflow hidden
@@ -2494,6 +2496,8 @@ i[class*=" icon-"]
 							float none
 							width 100%
 							margin-bottom 10px
+							&.offer_important
+								display block
 							.box_white
 								border-radius 18px
 				.cards_content
