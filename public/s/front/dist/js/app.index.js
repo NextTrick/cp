@@ -285,15 +285,9 @@ $(function() {
       },
       watchMore: function() {
         if ($(this).hasClass('active')) {
-          $(this).parent().parent().children(st.topCardContent).show();
-          $(this).parent().parent().children(st.showMoreContent).hide();
-          $(this).text('Ver más');
-          $(this).removeClass('active');
+          $(this).parent().parent().parent().css('transform','rotateY(0deg)');
         } else {
-          $(this).parent().parent().children(st.topCardContent).hide();
-          $(this).parent().parent().children(st.showMoreContent).show();
-          $(this).text('Ver menos');
-          $(this).addClass('active');
+          $(this).parent().parent().parent().css('transform','rotateY(180deg)');
         }
       },
       showTooltipBonus: function() {
@@ -310,7 +304,7 @@ $(function() {
           var nombre = $(this).parent().children('.input_name').val();
           if(nombre != ''){
             var duplicate_box, sufix;
-            duplicate_box = $(this).parent().parent().parent().children('.duplicate_box');
+            duplicate_box = $(this).parent().parent().parent().parent().children('.duplicate_box');
             
             //alert(duplicate_box.children('p').text())
             duplicate_box.children('p').children('strong').text('"' + nombre + '" ');

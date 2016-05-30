@@ -878,7 +878,31 @@ section
 				background url(../images/card_empty.png)
 				position relative
 				vertical-align top
+				perspective 1000
+				border-radius 10px
+				.container_card
+					color black
+					width 100%
+					height 100%
+					transform-style preserve-3d
+					transition all 1.0s linear
+					.face
+						background #EFEFEF
+						position absolute
+						border-radius 10px
+						padding 15px
+						width 100%
+						height 100%
+						backface-visibility hidden
+						&.back
+							display block
+							transform rotateY(180deg)
+				
 				.init_loading
+					width 100%
+					height 100%
+					border-radius 10px
+					background #EFEFEF
 					padding-top 50px
 				input
 				button
@@ -924,7 +948,7 @@ section
 					.parsley-errors-list
 						margin-top -10px
 					.link_orange
-						margin-top -10px
+						margin-top 5px
 						color #FF5800
 					display none
 				.loading
@@ -952,6 +976,8 @@ section
 					left 0
 					a
 						color white
+					p
+						margin-top 10px
 				.success_box
 					background #22B273
 					.icon
@@ -977,12 +1003,9 @@ section
 					p
 						font-size 15px
 						color white
+						margin-top 10px
 					
 				&.my_card
-					background #EFEFEF
-					border-radius 10px
-					color black
-					padding 15px
 					box-sizing border-box
 					.card_title
 						width 100%
@@ -1018,9 +1041,7 @@ section
 							color gray
 					.top_card
 						text-align left
-						display block
 					.show_more_content
-						display none
 						.line
 							margin-bottom 10px
 							overflow hidden
@@ -1073,12 +1094,11 @@ section
 									left 48%
 					.bottom_card
 						text-align left
-						margin-top 20px
+						top 158px
+						width 90%
 						position absolute
-						bottom 10px
 						.price
 							float left
-							width 124px
 							font-size 22px
 							font-weight bold
 							&.cero
@@ -1088,7 +1108,7 @@ section
 							color #FF5800
 							margin-top 5px
 							&.watch_more
-								float left
+								float right
 								font-size 14px
 								margin-top 6px
 								border-right 1px solid lightgray
