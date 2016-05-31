@@ -34,7 +34,11 @@ class RecursoService
                     $newActive = true;
                     $active = true;
                 } else {
-                    $active = (!empty($row['url']) && strpos($uriPath, $row['url']) !== false);
+                    $urlBd = '/' . $row['url'];
+                    $variante = ($uriPath == $urlBd) || (strpos($uriPath, $urlBd . '/') !== false)
+                        || (strpos($uriPath, $urlBd . '?') !== false);
+                    
+                    $active = (!empty($row['url']) && $variante);
                     if ($active) {
                         $newActive = true;
                     }
@@ -68,7 +72,10 @@ class RecursoService
                 if ($xmenus['active'] === true) {
                     $active = true;
                 } else {
-                    $active = (!empty($row['url']) && strpos($uriPath, $row['url']) !== false);
+                    $urlBd = '/' . $row['url'];
+                    $variante = ($uriPath == $urlBd) || (strpos($uriPath, $urlBd . '/') !== false)
+                        || (strpos($uriPath, $urlBd . '?') !== false);
+                    $active = (!empty($row['url']) && $variante);
                 }
 
                 $row['hijos'] = $xmenus['items'];
