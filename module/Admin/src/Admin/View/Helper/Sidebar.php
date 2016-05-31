@@ -37,7 +37,7 @@ class Sidebar extends AbstractHelper implements ServiceLocatorAwareInterface
             $uriPath = $sl->get('Request')->getUri()->getPath();
             $menus = $sl->get('Admin\Model\Service\RecursoService')->getSidebarMenus($identity->rol_id, $uriPath);
         }
-        
+
         return $this->getView()->render('helper/sidebar.phtml',
                 array('menus' => $menus, 'user' => $user));
     }
