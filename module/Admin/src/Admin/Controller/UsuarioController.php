@@ -84,6 +84,7 @@ class UsuarioController extends SecurityAdminController
                     )
                 )
             );
+            
             $objPHPExcel->getActiveSheet()->getStyle('A1:O1')->applyFromArray($style['cabecera']);
 
             $sheet->setCellValue('A1', 'Id');
