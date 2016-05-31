@@ -3074,6 +3074,10 @@ i[class*=" icon-"] {
     padding-bottom: 15px;
     border-bottom: 1px dashed #d3d3d3;
   }
+  section .app_box .purple_box .pay_box_white >.right .credit_cards .card {
+    display: block;
+    margin: 10px 0;
+  }
   section .app_box .purple_box .pay_box_white >.right .items_cart .item {
     position: relative;
     margin-bottom: 10px;
