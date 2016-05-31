@@ -475,8 +475,8 @@ $(function() {
     };
     events = {
       pagar: function(e) {
-        console.log("formulario");
         if(dom.formPago.parsley().isValid() && !dom.btnPagar.hasClass('btn_disabled')){
+          e.preventDefault();
           dom.btnPagar.addClass('btn_disabled');
           $.ajax({
             type: "POST",
