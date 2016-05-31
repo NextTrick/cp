@@ -176,7 +176,7 @@ class AccessController extends AbstractActionController
         $recoverFilter = new RecoverFilter();
         $recoverFilter->init();
         
-        return $recoverFilter();
+        return $recoverFilter;
     }
     
     public function accessDeniedAction()

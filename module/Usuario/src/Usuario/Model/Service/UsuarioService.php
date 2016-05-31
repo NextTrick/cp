@@ -214,24 +214,26 @@ class UsuarioService
         );
 
         if (!empty($params)) {
+
             $nameFilter = String::xssClean($params['cmbFiltro']);
+
             $paramsLike = array(
                 $nameFilter => String::xssClean($params['txtBuscar']),
             );
 
             $paramsWhere = array(
-                'di_tipo'  => String::xssClean($params['cmbTipoDoc']),
-                'estado'   => String::xssClean($params['cmbEstado']),
-                'pais_id' => String::xssClean($params['cmbPais']),
+                'di_tipo'         => String::xssClean($params['cmbTipoDoc']),
+                'estado'          => String::xssClean($params['cmbEstado']),
+                //'pais_id'         => String::xssClean($params['cmbPais']),
                 'departamento_id' => String::xssClean($params['cmbDepartamento']),
-                'provincia_id' => String::xssClean($params['cmbProvincia']),
-                'distrito_id' => String::xssClean($params['cmbDistrito']),
+                'provincia_id'    => String::xssClean($params['cmbProvincia']),
+                'distrito_id'     => String::xssClean($params['cmbDistrito']),
             );
 
             $betwween = array(
                 'fecha_creacion' => array(
-                    'min'=> String::xssClean($params['txtFechaIni']),
-                    'max'=> String::xssClean($params['txtFechaFin'])
+                    'min' => String::xssClean($params['txtFechaIni']),
+                    'max' => String::xssClean($params['txtFechaFin'])
                 )
             );
 
