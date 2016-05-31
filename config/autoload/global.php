@@ -19,7 +19,7 @@ return array(
             'date.timezone' => 'America/Lima',
             'intl.default_locale' => 'es_PE',
             'display_startup_errors' => false,
-            'display_errors' => true,
+            'display_errors' => false,
             'error_reporting' => E_ALL,
             'post_max_size' => '804857600',            
         )
@@ -213,7 +213,7 @@ return array(
                 'medioPago' => '1,2',
                 'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key
 
-                'conceptoPago' => 'Recarga de Tarjeta ConeyPark',
+                'conceptoPago' => 'ConeyPark',
                 'cipExpiracionDias' => 3
             ),
             'visa' => array(                
