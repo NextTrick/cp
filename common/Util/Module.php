@@ -119,14 +119,16 @@ class Module
     }
     
     public function initError(MvcEvent $e)
-    {        
+    {
         $app = $e->getParam('application');
         
         $viewModel = $e->getViewModel();
         $viewModel->setTemplate('layout/error');
 
         $config = $app->getServiceManager()->get('config');
-                
+
+        $viewModel->setVariable('displayErrors', $config['php']['settings']['display_errors']);
+         
         $routeMatch = $e->getRouteMatch();
         $ex = $e->getParam('exception');
                

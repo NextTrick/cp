@@ -46,7 +46,7 @@ return array(
         'send_mail' => true,
         'local_log' => true,        
     ),
-/*     'db' => array(
+     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'coneypark',
@@ -56,8 +56,8 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),*/
-     'db' => array(
+    ),
+/*     'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
         'database' => 'pasarelaconeydev',
@@ -67,7 +67,7 @@ return array(
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
-    ),
+    ),*/
     'cacheCart' => array(
         'adapter' => 'filesystem',
         'options' => array(
@@ -161,7 +161,7 @@ return array(
             'down' => URL_RESOURCES . 'files/paquete/paquete',
         ),
     ),
-/*    'social' => array( //local
+    'social' => array( //local
         'facebook' => array(
             'app_id' => '1676429382610359',
             'api_secret' => 'c29480e4a45c99ce0040cb4b0801d6ee',
@@ -175,9 +175,9 @@ return array(
             'consumer_secret' => 'FC9HkFAi8B0yY4wn2NxObQDqRJcx0BcD6vtYNVlWxT0JDh71J4',
             'redirect_callback' => BASE_URL . 'login/callback/twitter',
         ),
-    ),*/
+    ),
 
-    'social' => array(
+/*    'social' => array(
         'facebook' => array(
             'app_id' => '1530224070617551',//dev
             'api_secret' => 'cc1d0233bf7c4f56d13fa2ea5a516192',
@@ -191,7 +191,7 @@ return array(
             'consumer_secret' => 'BRaBpn5TfW7nl0cskHT6fDkD59GqJKoCSXIHr3Tr3yfLDdaD4t',
             'redirect_callback' => BASE_URL . 'login/callback/twitter',
         ),
-    ),
+    ),*/
 
     //Application config params 
     'app' => array(
