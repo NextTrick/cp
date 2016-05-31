@@ -532,15 +532,24 @@ $(function() {
         $(this).parent().prev().hide();
       },
       changeCard: function() {
-        if ($(this).hasClass('pagoefectivo')) {
+        if ($(this).hasClass('pagoefectivo1')) {
           $(this).addClass('active');
-          $(this).next().removeClass('active');
+          $('.pagoefectivo2').removeClass('active');
+          $('.visa').removeClass('active');
+          dom.peOption.prop('checked', true);
+          dom.visaOption.prop('checked', false);
+        }
+        if ($(this).hasClass('pagoefectivo2')) {
+          $(this).addClass('active');
+          $('.pagoefectivo1').removeClass('active');
+          $('.visa').removeClass('active');
           dom.peOption.prop('checked', true);
           dom.visaOption.prop('checked', false);
         }
         if ($(this).hasClass('visa')) {
           $(this).addClass('active');
-          $(this).prev().removeClass('active');
+          $('.pagoefectivo1').removeClass('active');
+          $('.pagoefectivo2').removeClass('active');
           dom.visaOption.prop('checked', true);
           dom.peOption.prop('checked', false);
         }

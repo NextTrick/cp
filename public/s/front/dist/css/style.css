@@ -50,14 +50,14 @@ header .social_icons span {
 }
 header .social_icons span.fb {
   background-image: url("../images/sprite.png");
-  background-position: -77px -264px;
+  background-position: -307px -268px;
   width: 25px;
   height: 26px;
   margin-right: 5px;
 }
 header .social_icons span.in {
   background-image: url("../images/sprite.png");
-  background-position: -341px -202px;
+  background-position: -281px -268px;
   width: 26px;
   height: 26px;
 }
@@ -110,7 +110,7 @@ header .user_option_mobile ul li .menu_options.active {
 }
 header .user_option_mobile ul li .cart_icon {
   background-image: url("../images/sprite.png");
-  background-position: -173px -264px;
+  background-position: -129px -314px;
   width: 24px;
   height: 21px;
   display: block;
@@ -128,7 +128,7 @@ header .user_option_mobile ul li span {
 }
 header .user_option_mobile ul li span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -309px -202px;
+  background-position: -372px -236px;
   width: 32px;
   height: 32px;
 }
@@ -151,7 +151,7 @@ header .user_option .user_outside a span {
 }
 header .user_option .user_outside a span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -358px -138px;
+  background-position: -404px -204px;
   width: 12px;
   height: 14px;
   margin-left: 6px;
@@ -186,7 +186,7 @@ header .user_option .user_inside ul li a span {
 }
 header .user_option .user_inside ul li a span.icon_cart {
   background-image: url("../images/sprite.png");
-  background-position: -149px -264px;
+  background-position: -372px -348px;
   width: 24px;
   height: 22px;
 }
@@ -554,7 +554,7 @@ header.header_informativo .user_option .user_outside {
 }
 .right_options ul li a span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -132px 0px;
+  background-position: -240px -202px;
   width: 120px;
   height: 66px;
 }
@@ -580,7 +580,7 @@ header.header_informativo .user_option .user_outside {
 }
 .btn.btn_fb span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -245px -202px;
+  background-position: -372px -204px;
   width: 32px;
   height: 32px;
 }
@@ -593,7 +593,7 @@ header.header_informativo .user_option .user_outside {
 }
 .btn.btn_tw span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -45px -264px;
+  background-position: -372px -268px;
   width: 32px;
   height: 32px;
 }
@@ -905,7 +905,7 @@ section .purple_box .content {
 }
 section .purple_box .content span.or_icon {
   background-image: url("../images/sprite.png");
-  background-position: -252px -66px;
+  background-position: 0px -268px;
   width: 68px;
   height: 46px;
   display: block;
@@ -975,7 +975,7 @@ section .purple_box .bar_info button span {
 section .purple_box .bar_info button span.icon {
   margin: -7px 0px 0px 5px;
   background-image: url("../images/sprite.png");
-  background-position: -294px -168px;
+  background-position: -372px -300px;
   width: 32px;
   height: 26px;
 }
@@ -1082,7 +1082,7 @@ section .purple_box .info_box span.text {
 }
 section .purple_box .info_box span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -306px -112px;
+  background-position: -54px -314px;
   width: 52px;
   height: 52px;
   margin-right: 10px;
@@ -1138,7 +1138,7 @@ section .purple_box .cart_box.active .cart {
 }
 section .purple_box .cart_box.active .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -149px -264px;
+  background-position: -372px -348px;
   width: 24px;
   height: 22px;
   position: relative;
@@ -1163,7 +1163,7 @@ section .purple_box .cart_box .cart {
 }
 section .purple_box .cart_box .cart span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -197px -264px;
+  background-position: -153px -314px;
   width: 23px;
   height: 20px;
   display: inline-block;
@@ -1313,7 +1313,7 @@ section .purple_box .cards_content .col_3 .success_box {
 }
 section .purple_box .cards_content .col_3 .success_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -46px -202px;
+  background-position: -68px -268px;
   width: 55px;
   height: 45px;
   display: block;
@@ -1327,7 +1327,7 @@ section .purple_box .cards_content .col_3 .error_box {
 }
 section .purple_box .cards_content .col_3 .error_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -155px -202px;
+  background-position: -229px -268px;
   width: 52px;
   height: 41px;
   display: block;
@@ -1341,7 +1341,7 @@ section .purple_box .cards_content .col_3 .duplicate_box {
 }
 section .purple_box .cards_content .col_3 .duplicate_box .icon {
   background-image: url("../images/sprite.png");
-  background-position: -101px -202px;
+  background-position: -123px -268px;
   width: 54px;
   height: 44px;
   display: block;
@@ -1377,13 +1377,13 @@ section .purple_box .cards_content .col_3.my_card span {
 section .purple_box .cards_content .col_3.my_card span.cp_logo {
   display: block;
   background-image: url("../images/sprite.png");
-  background-position: -252px -112px;
+  background-position: 0px -314px;
   width: 54px;
   height: 56px;
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon {
   background-image: url("../images/sprite.png");
-  background-position: -126px -264px;
+  background-position: -106px -314px;
   width: 23px;
   height: 23px;
   display: inline-block;
@@ -1394,7 +1394,7 @@ section .purple_box .cards_content .col_3.my_card span.edit_icon {
 }
 section .purple_box .cards_content .col_3.my_card span.edit_icon.active {
   background-image: url("../images/sprite.png");
-  background-position: -96px -247px;
+  background-position: -281px -294px;
   width: 18px;
   height: 14px;
 }
@@ -1568,7 +1568,7 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb a {
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span {
   background-image: url("../images/sprite.png");
-  background-position: -358px -125px;
+  background-position: -404px -185px;
   width: 13px;
   height: 13px;
   cursor: pointer;
@@ -1579,7 +1579,7 @@ section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb spa
 }
 section .purple_box .recargas_content .offers .col_3 .box_white p.breadcrumb span.active {
   background-image: url("../images/sprite.png");
-  background-position: -358px -112px;
+  background-position: -404px -172px;
   width: 13px;
   height: 13px;
 }
@@ -1711,27 +1711,39 @@ section .purple_box .pay_box_white >.right .credit_cards .card {
   cursor: pointer;
   margin-right: 10px;
 }
-section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo {
-  background-image: url("../images/sprite.png");
-  background-position: 0px -136px;
-  width: 120px;
-  height: 66px;
-}
-section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo.active {
+section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo1 {
   background-image: url("../images/sprite.png");
   background-position: -120px -136px;
   width: 120px;
   height: 66px;
 }
-section .purple_box .pay_box_white >.right .credit_cards .card.visa {
+section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo1.active {
+  background-image: url("../images/sprite.png");
+  background-position: -252px -132px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo2 {
   background-image: url("../images/sprite.png");
   background-position: -252px 0px;
   width: 120px;
   height: 66px;
 }
+section .purple_box .pay_box_white >.right .credit_cards .card.pagoefectivo2.active {
+  background-image: url("../images/sprite.png");
+  background-position: -132px 0px;
+  width: 120px;
+  height: 66px;
+}
+section .purple_box .pay_box_white >.right .credit_cards .card.visa {
+  background-image: url("../images/sprite.png");
+  background-position: 0px -202px;
+  width: 120px;
+  height: 66px;
+}
 section .purple_box .pay_box_white >.right .credit_cards .card.visa.active {
   background-image: url("../images/sprite.png");
-  background-position: -132px -66px;
+  background-position: -120px -202px;
   width: 120px;
   height: 66px;
 }
@@ -1785,7 +1797,7 @@ section .purple_box .pay_box_white >.right .items_cart .item .right .card_type s
 }
 section .purple_box .pay_box_white >.right .items_cart .item .right .card_type span.icon_card {
   background-image: url("../images/sprite.png");
-  background-position: -252px -168px;
+  background-position: -372px -144px;
   width: 42px;
   height: 28px;
   margin-top: -6px;
@@ -1988,7 +2000,7 @@ section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .ca
 }
 section .purple_box .pay_box_white.cart_page >.left .items_cart .item .right .card_type .card_name span {
   background-image: url("../images/sprite.png");
-  background-position: -326px -168px;
+  background-position: -372px -326px;
   width: 33px;
   height: 22px;
   display: block;
@@ -2105,7 +2117,7 @@ section .purple_box .pay_box_white.confirmation_box h5 {
 }
 section .purple_box .pay_box_white.confirmation_box .print {
   background-image: url("../images/sprite.png");
-  background-position: -277px -202px;
+  background-position: -372px -172px;
   width: 32px;
   height: 32px;
   display: block;
@@ -2363,7 +2375,7 @@ section .success_message span {
 section .error_message span.icon,
 section .success_message span.icon {
   background-image: url("../images/sprite.png");
-  background-position: -102px -264px;
+  background-position: -332px -268px;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -2384,7 +2396,7 @@ section .success_message {
 section .success_message span.icon {
   margin-top: 5px;
   background-image: url("../images/sprite.png");
-  background-position: -80px -247px;
+  background-position: -356px -268px;
   width: 16px;
   height: 16px;
 }
@@ -2503,13 +2515,13 @@ section form.form_mis_datos .disabled {
   display: none;
   margin: 0 auto 10px;
   background-image: url("../images/sprite.png");
-  background-position: -63px -247px;
+  background-position: -176px -314px;
   width: 17px;
   height: 17px;
 }
 .bottom_bar .icon_arrow.active {
   background-image: url("../images/sprite.png");
-  background-position: -46px -247px;
+  background-position: -193px -314px;
   width: 17px;
   height: 17px;
 }
@@ -2520,7 +2532,7 @@ section form.form_mis_datos .disabled {
 }
 .bottom_bar .select span {
   background-image: url("../images/sprite.png");
-  background-position: -252px -168px;
+  background-position: -372px -144px;
   width: 42px;
   height: 28px;
   display: block;
@@ -2574,7 +2586,7 @@ footer {
 }
 footer .top {
   background-image: url("../images/sprite.png");
-  background-position: 0px -264px;
+  background-position: -372px -62px;
   width: 45px;
   height: 44px;
   display: none;
@@ -2609,7 +2621,7 @@ footer span.logo_icon {
   left: 46%;
   display: block;
   background-image: url("../images/sprite.png");
-  background-position: -252px -112px;
+  background-position: 0px -314px;
   width: 54px;
   height: 56px;
 }
@@ -2643,7 +2655,7 @@ footer span.logo_icon {
 }
 .modal_box .modal_content span.icon_logo {
   background-image: url("../images/sprite.png");
-  background-position: -252px -112px;
+  background-position: 0px -314px;
   width: 54px;
   height: 56px;
   display: block;
@@ -2704,7 +2716,7 @@ footer span.logo_icon {
 #modal_watch_legal .modal_content h3 span,
 .modal_box_legal .modal_content h3 span {
   background-image: url("../images/sprite.png");
-  background-position: -220px -264px;
+  background-position: -396px -348px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -2739,7 +2751,7 @@ footer span.logo_icon {
 }
 #how_asociate_card .modal_content h3 span {
   background-image: url("../images/sprite.png");
-  background-position: -220px -264px;
+  background-position: -396px -348px;
   width: 19px;
   height: 19px;
   position: absolute;
@@ -2978,7 +2990,7 @@ i[class*=" icon-"] {
   }
   section .welcome_box .purple_box .content span.or_icon {
     background-image: url("../images/sprite.png");
-    background-position: 0px -202px;
+    background-position: -372px 0px;
     width: 46px;
     height: 62px;
     display: block;
