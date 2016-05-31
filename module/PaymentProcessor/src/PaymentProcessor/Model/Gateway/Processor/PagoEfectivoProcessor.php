@@ -163,14 +163,14 @@ class PagoEfectivoProcessor extends AbstractProcessor
                     'UsuarioTipoDoc' => $data['documento_tipo'],
                     'UsuarioNumeroDoc' => $data['documento_numero'],
                     'UsuarioEmail' => $data['usuario_email'],
-                    'ConceptoPago' => 'Pago',
+                    'ConceptoPago' => $this->wsConfig['conceptoPago'] . ': ' . $data['id'],
             ));
         
         $solicitud->addDetalle(
             array(array(
                 'Cod_Origen' => 'CT',
                 'TipoOrigen' => 'TO',
-                'ConceptoPago' => $this->wsConfig['conceptoPago'],
+                'ConceptoPago' => $this->wsConfig['conceptoPago'] . ': ' . $data['id'],
                 'Importe' => $data['monto'])
             ));
         

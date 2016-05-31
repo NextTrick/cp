@@ -118,14 +118,14 @@ class OrdenService
         $data['fecha_creacion'] = $cDate = date('Y-m-d H:i:s');
         $data['monto'] = $monto;
         $ordenId = $this->getRepository()->save($data);
-        $this->setCodigo($ordenId);
+        $ordenCodigo = $this->setCodigo($ordenId);
 
         $this->_saveDetalleOrden($ordenId, $cDate);
 
         $dataAdicional = $this->getDataAdicional();
 
         $paymentProcessordata = array(
-            'id' => $ordenId, // ID DE LA ORDEN
+            'id' => $ordenCodigo, // CODIGO DE LA ORDEN
             'perfilpago_nombres' => $usuarioData['nombres'], // NOMBRE DEL PERFIL DE PAGO
             'perfilpago_paterno' => $usuarioData['paterno'], // APELLIDO PATERNO DEL PERFIL DE PAGO
             'perfilpago_materno' => $usuarioData['materno'], // APELLIDO MATERNO DEL PERFIL DE PAGO
@@ -226,6 +226,8 @@ class OrdenService
         $ordenCodigo = str_pad($tempOrdenId, 9, '0', STR_PAD_LEFT);
 
         $this->getRepository()->save(array('codigo' => $ordenCodigo), $ordenId);
+
+        return $ordenCodigo;
     }
 
     private function _saveDetalleOrden($ordenId, $cDate)
