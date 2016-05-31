@@ -644,9 +644,11 @@ section.section_informativo .content h2 {
 }
 section.section_informativo .content h3 {
   font-size: 20px;
+  padding: 15px 0;
 }
 section.section_informativo .content p {
   line-height: 22px;
+  padding: 10px 0;
 }
 section.section_informativo .content p.mr {
   padding-left: 36px;
@@ -743,12 +745,18 @@ section.app_content .menu.right_active:after {
 }
 section h2 {
   font-size: 32px;
+  padding: 10px 0;
 }
 section h2 span {
   color: #ffb000;
 }
 section .welcome_box {
   text-align: center;
+}
+section .welcome_box >h2,
+section .welcome_box >p {
+  padding: 15px;
+  line-height: 22px;
 }
 section .welcome_box p.subtitle {
   font-size: 20px;
@@ -880,7 +888,7 @@ section .purple_box hr {
 }
 section .purple_box .content {
   overflow: hidden;
-  padding: 20px 20px 0;
+  padding: 20px 20px;
 }
 section .purple_box .content span.or_icon {
   background-image: url("../images/sprite.png");
