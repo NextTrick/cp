@@ -1894,12 +1894,13 @@ section .purple_box .pay_box_white.cart_page >.left .empty_cart h2 {
   color: #808080;
   font-size: 36px;
   font-weight: normal;
+  margin: 20px 0;
 }
 section .purple_box .pay_box_white.cart_page >.left .empty_cart p {
   font-size: 20px;
   color: #808080;
   font-weight: normal;
-  margin: 0;
+  margin: 10px 0;
 }
 section .purple_box .pay_box_white.cart_page >.left .empty_cart a {
   color: #ff6909;
@@ -2293,6 +2294,7 @@ section .offers_box_three .col_3 button {
   margin-top: 10px;
   width: 100%;
 }
+section .offers_box_three .col_3:nth-child(1),
 section .offers_box_three .col_3:nth-child(2) {
   margin-right: 2%;
 }
