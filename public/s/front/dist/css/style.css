@@ -604,6 +604,14 @@ header.header_informativo .user_option .user_outside {
   background: #f95b08;
   box-shadow: 1px 1px 1px #e45408;
 }
+.btn.btn_orange.btn_disabled {
+  background: #d3d3d3;
+  color: #808080;
+}
+.btn.btn_orange.btn_disabled:hover {
+  background: #cac8c8;
+  box-shadow: 1px 1px 1px #808080;
+}
 .btn.btn_save_signin {
   margin-top: 20px;
 }

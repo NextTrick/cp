@@ -441,7 +441,9 @@ $(function() {
       peOption: '.cards_option .pe',
       visaOption: '.cards_option .visa',
       equalAddress: '.equal_address',
-      rucInput : '#ruc'
+      rucInput : '#ruc',
+      btnPagar : '#btnPagar',
+      formPago : '#formPago'
     };
     catchDom = function() {
       dom.optionBoleta = $(st.optionBoleta);
@@ -456,6 +458,8 @@ $(function() {
       dom.visaOption = $(st.visaOption);
       dom.equalAddress = $(st.equalAddress);
       dom.rucInput = $(st.rucInput);
+      dom.btnPagar = $(st.btnPagar);
+      dom.formPago = $(st.formPago);
     };
     suscribeEvents = function() {
       dom.optionBoleta.on('change', events.watchOpenBoletaForm);
@@ -466,16 +470,55 @@ $(function() {
       dom.equalAddress.on('change', events.copy);
       dom.rucInput.on( 'keydown' , events.ingresarRuc);
       dom.rucInput.on( 'keyup' , events.salirRuc);
+      dom.btnPagar.on('click', events.pagar);
 
     };
     events = {
+      pagar: function(e) {
+        e.preventDefault();
+        console.log("formulario");
+        if(dom.formPago.parsley().isValid()){
+          dom.btnPagar.addClass('btn_disabled');
+          $.ajax({
+            type: "POST",
+            url: baseUrl + 'carrito/pagar',
+            data: $('#formPago').serialize(),
+            dataType: 'json',
+            success: function(response) {
+              $('#token_csrf').val(response.token);
+              if (response.success) {
+                  dom.btnPagar.removeClass('btn_disabled');
+                  $('.error_message').hide();
+                  window.location.href = response.data.redirect;
+              } else {
+                dom.btnPagar.removeClass('btn_disabled');
+                $('#messageError').html(response.message);
+                $('.error_message').show();
+              }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                $('#messageError').html('Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde');
+                $('.error_message').show();
+            }
+          });
+        }
+        
+      },
       watchOpenBoletaForm: function(e) {
         dom.contentBoleta.show();
         dom.contentFactura.hide();
+        dom.formPago.parsley().destroy();
+        dom.formPago.parsley({
+          excluded: '.content_factura input'
+        });
       },
       watchOpenFacturaForm: function(e) {
         dom.contentBoleta.hide();
         dom.contentFactura.show();
+        dom.formPago.parsley().destroy();
+        dom.formPago.parsley({
+          excluded: '.content_boleta input'
+        });
       },
       watchDetail: function() {
         $(this).hide();
@@ -516,11 +559,17 @@ $(function() {
       },
     };
     functions = {
-      example: function() {}
+      initial: function() {
+        console.log("aaaaaaaa");
+        dom.formPago.parsley({
+          excluded: '.content_factura input'
+        });
+      }
     };
     initialize = function() {
       catchDom();
       suscribeEvents();
+      functions.initial();
     };
     return {
       init: initialize
