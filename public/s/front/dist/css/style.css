@@ -753,9 +753,14 @@ section h2 span {
 section .welcome_box {
   text-align: center;
 }
-section .welcome_box >h2,
+section .welcome_box >h2 {
+  padding: 15px 0 20px;
+}
+section .welcome_box >h3 {
+  padding: 15px 0 0;
+}
 section .welcome_box >p {
-  padding: 15px;
+  padding: 10px 0;
   line-height: 22px;
 }
 section .welcome_box p.subtitle {
