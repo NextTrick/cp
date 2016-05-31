@@ -475,9 +475,8 @@ $(function() {
     };
     events = {
       pagar: function(e) {
-        e.preventDefault();
         console.log("formulario");
-        if(dom.formPago.parsley().isValid()){
+        if(dom.formPago.parsley().isValid() && !dom.btnPagar.hasClass('btn_disabled')){
           dom.btnPagar.addClass('btn_disabled');
           $.ajax({
             type: "POST",
@@ -502,6 +501,7 @@ $(function() {
             }
           });
         }
+        
         
       },
       watchOpenBoletaForm: function(e) {
