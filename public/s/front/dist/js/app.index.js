@@ -475,32 +475,33 @@ $(function() {
     };
     events = {
       pagar: function(e) {
-        e.preventDefault();
-        console.log("formulario");
         if(dom.formPago.parsley().isValid()){
-          dom.btnPagar.addClass('btn_disabled');
-          $.ajax({
-            type: "POST",
-            url: baseUrl + 'carrito/pagar',
-            data: $('#formPago').serialize(),
-            dataType: 'json',
-            success: function(response) {
-              $('#token_csrf').val(response.token);
-              if (response.success) {
+          e.preventDefault();
+          if(!dom.btnPagar.hasClass('btn_disabled')){
+            dom.btnPagar.addClass('btn_disabled');
+            $.ajax({
+              type: "POST",
+              url: baseUrl + 'carrito/pagar',
+              data: $('#formPago').serialize(),
+              dataType: 'json',
+              success: function(response) {
+                $('#token_csrf').val(response.token);
+                if (response.success) {
+                    dom.btnPagar.removeClass('btn_disabled');
+                    $('.error_message').hide();
+                    window.location.href = response.data.redirect;
+                } else {
                   dom.btnPagar.removeClass('btn_disabled');
-                  $('.error_message').hide();
-                  window.location.href = response.data.redirect;
-              } else {
-                dom.btnPagar.removeClass('btn_disabled');
-                $('#messageError').html(response.message);
-                $('.error_message').show();
+                  $('#messageError').html(response.message);
+                  $('.error_message').show();
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  $('#messageError').html('Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde');
+                  $('.error_message').show();
               }
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                $('#messageError').html('Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde');
-                $('.error_message').show();
-            }
-          });
+            });
+          }
         }
         
       },
