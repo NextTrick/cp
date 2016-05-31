@@ -21,9 +21,15 @@
                     <span class="print" onclick="window.print()"></span>
 
                     <?php if ($this->ordenData['pago_metodo'] == \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS) :?>
-                        <p>Fecha de recarga: <?php echo $this->ordenData['pago_fecha_confirmacion']; ?></p>
-                        <p>Número de tarjeta: <?php echo $this->ordenData['pan']; ?></p>
-                        <p>Nombre del Tarjetahabiente: <?php echo $this->ordenData['usuario_nombres'] . ' ' . $this->ordenData['usuario_paterno'] . ' ' . $this->ordenData['usuario_materno']; ?></p>
+                        <div class="resume">
+                            <div class="details_confirmation">
+                                <p>Fecha de recarga: <?php echo $this->ordenData['pago_fecha_confirmacion']; ?></p>
+                                <p>Número de tarjeta: <?php echo $this->ordenData['pan']; ?></p>
+                                <p>Nombre del Tarjetahabiente: <?php echo $this->ordenData['usuario_nombres'] . ' ' . $this->ordenData['usuario_paterno'] . ' ' . $this->ordenData['usuario_materno']; ?></p>
+                            </div>
+                        </div>
+                        
+                        
                     <?php endif; ?>
                     
                     <div class="resume">

@@ -2076,7 +2076,7 @@ section .purple_box .pay_box_white.confirmation_box h2 {
 }
 section .purple_box .pay_box_white.confirmation_box p {
   color: #666;
-  margin-bottom: 40px;
+  margin: 20px 0 40px;
 }
 section .purple_box .pay_box_white.confirmation_box h5 {
   font-size: 14px;
@@ -2091,6 +2091,14 @@ section .purple_box .pay_box_white.confirmation_box .print {
   top: 30px;
   right: 180px;
   cursor: pointer;
+}
+section .purple_box .pay_box_white.confirmation_box .details_confirmation {
+  text-align: left;
+  padding: 20px 0;
+}
+section .purple_box .pay_box_white.confirmation_box .details_confirmation p {
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 section .purple_box .pay_box_white.confirmation_box .resume {
   width: 620px;
