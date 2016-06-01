@@ -12,23 +12,19 @@
   *      @link http://kcfinder.sunhater.com
   */
 
-require('../../../../../../config/autoload/constants.php');
+define('APP_PATH2', dirname(__FILE__)."/../../../../../files/contenido");
 
 /* IMPORTANT!!! Do not comment or remove uncommented settings in this file
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
 
 $_CONFIG = array(
-
-
 // GENERAL SETTINGS
-
     'disabled' => false,
     //'uploadURL' => "http://dev.recargas.coneypark.pe/s/files/contenido/",
-    'uploadURL' => URL_IMAGE_CMS,
-    'uploadDir' => "",
+    'uploadURL' => "",
+    'uploadDir' => APP_PATH2,
     'theme' => "default",
-
     'types' => array(
 
     // (F)CKEditor types
