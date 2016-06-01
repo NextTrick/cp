@@ -7,23 +7,24 @@ INSERT INTO `cms_contenido` (`id`, `codigo`, `tipo`, `titulo`, `url`, `contenido
 
 <div class="options">
 <div class="col_3 left">
-<div class="circle"><img alt="" src="http://dev.coneypark.pe/recargas/s/front/images/beneficio_1.png" /></div>
+<div class="circle"><img alt="" src="http://coneypark.pe/recargas/s/front/images/beneficio_1.png" /></div>
 
 <p><span style="font-size:16px">Hasta <strong><span style="color:#FFA500">20% de descuento en todos los juegos.</span> </strong>Seg&uacute;n el tipo de local</span></p>
 </div>
 
 <div class="col_3 left">
-<div class="circle"><img alt="" src="http://dev.coneypark.pe/recargas/s/front/images/beneficio_2.png" /></div>
+<div class="circle"><img alt="" src="http://coneypark.pe/recargas/s/front/images/beneficio_2.png" /></div>
 
 <p><span style="font-size:16px"><strong><span style="color:#FFA500">20 Coney Bonos gratis</span> </strong>el d&iacute;a de tu cumplea&ntilde;os (Presentando su DNI)</span></p>
 </div>
 
 <div class="col_3 right">
-<div class="circle"><img alt="" src="http://dev.coneypark.pe/recargas/s/front/images/beneficio_3.png" /></div>
+<div class="circle"><img alt="" src="http://coneypark.pe/recargas/s/front/images/beneficio_3.png" /></div>
 
 <p><span style="font-size:16px"><strong><span style="color:#FFA500">Descuentos exclusivos</span> </strong>por recargas en fechas especiales (D&iacute;a de los enamorados, d&iacute;a de la madre y padre, halloween, etc.)</span></p>
 </div>
-</div>', 1, '2016-05-21 04:15:29', '2016-05-27 07:33:36'),
+</div>
+', 1, '2016-05-21 04:15:29', '2016-05-27 07:33:36'),
 (3, 'INICIO_REGISTRO', 2, '1', '', '<h2>¡Bienvenido a <span>Coney Club </span>recargas virtuales!</h2> <h3>¡Un club creado para todos aquellos que buscan <span>más diversión </span>por mucho menos!</h3><p>Ahora podrás hacer tus recargas <strong>sin necesidad de hacer colas, </strong>además podrás gozar de <strong>muchos beneficios</strong></p>', 1, '2016-04-16 01:53:19', '2016-05-21 04:15:48'),
 (4, 'TERMINOS_CONDICIONES', 1, 'Términos y Condicionones', 'http://coneypark.pe/recargas/terminos-condiciones', '<p style="text-align:justify"><span style="font-size:18px"><span style="color:rgb(128, 0, 128)"><strong>Vigente a partir del fecha&nbsp; 01 de&nbsp; junio de 2016</strong></span></span></p>
 
