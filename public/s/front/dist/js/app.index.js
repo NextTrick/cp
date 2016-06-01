@@ -778,7 +778,7 @@ $(function() {
         else if(location.hash == '#promocion'){
           console.log('promocion');
           //$(document).animate({ scrollTop: $('.promocion_title').offset().top }, 1000);
-          $(document).scrollTop( $("#promocion_title").offset().top - 50 ); 
+          $(document).scrollTop( $("#promocion_title").offset().top - 160 ); 
         }
       }
     };
