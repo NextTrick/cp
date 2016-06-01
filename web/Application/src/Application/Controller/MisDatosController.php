@@ -31,6 +31,14 @@ class MisDatosController extends SecurityWebController
             $form->get('provincia_id')->setValueOptions($provincias);
             $distritos = $this->_getUbigeoService()->getDistritos($provinciaId);
             $form->get('distrito_id')->setValueOptions($distritos);
+            if (!empty($usuarioData['fecha_nac'])) {
+                $partDate = explode('-', $usuarioData['fecha_nac']);
+                if (count($partDate) >= 3) {
+                    $usuarioData['anio'] = $partDate[0];
+                    $usuarioData['mes'] = $partDate[1];
+                    $usuarioData['dia'] = $partDate[2];
+                }
+            }
             
             $form->setData($usuarioData);
             $imagen = empty($usuarioData['imagen']) ? 'user-web-default.png' : $usuarioData['imagen'];
@@ -84,7 +92,7 @@ class MisDatosController extends SecurityWebController
             } else {
                 $form->get('dia')->setMessages(array('noValido' => 'El campo fecha no es válido.'));
             }
-
+            
             if ($fechaValida && $form->isValid()) {
                 $data = $form->getData();
                 $dataIn = array(
