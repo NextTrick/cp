@@ -778,7 +778,15 @@ $(function() {
         else if(location.hash == '#promocion'){
           console.log('promocion');
           //$(document).animate({ scrollTop: $('.promocion_title').offset().top }, 1000);
-          $(document).scrollTop( $("#promocion_title").offset().top - 160 ); 
+          $(document).scrollTop( $("#promocion_title").offset().top - 170 ); 
+        }
+      },
+      heightOffer: function(){
+        console.log("heightOffer");
+        for(var i = 0 ; i < $(".breadcrumb").length ; i++){
+          if($(".breadcrumb").eq(i).height()>25){
+            $(".breadcrumb").eq(i).children("a").css("display","block");
+          }
         }
       }
     };
@@ -786,6 +794,7 @@ $(function() {
       catchDom();
       suscribeEvents();
       functions.ancla();
+      functions.heightOffer();
     };
     return {
       init: initialize
