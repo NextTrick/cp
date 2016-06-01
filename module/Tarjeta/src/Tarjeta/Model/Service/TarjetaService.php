@@ -18,7 +18,7 @@ class TarjetaService
     {
         $this->_repository = $repository;
         $this->_sl = $serviceLocator;
-        $this->_restarTiempo = strtotime('-30 minute');
+        $this->_restarTiempo = strtotime('-60 minute');
     }
 
     public function misTarjetas($usuarioId)
@@ -63,13 +63,17 @@ class TarjetaService
         return $this->_restarTiempo;
     }
 
-    public function cronTarjetas($cguid = null)
+    public function cronTarjetas($cguid = null, $validarFechaActualizacion = true)
     {
         if (empty($cguid)) {
             $fecha = date('Y-m-d H:i:s', $this->_restarTiempo);
             $where = new \Zend\Db\Sql\Where();
-            $where->isNotNull('fecha_actualizacion');
-            $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion < ?", $fecha));
+
+            if ($validarFechaActualizacion) {
+                $where->isNotNull('fecha_actualizacion');
+                $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion < ?", $fecha));
+            }
+
             $criteria = array(
                 'where' => $where,
                 'order' => array('fecha_actualizacion DESC'),
@@ -84,12 +88,8 @@ class TarjetaService
                 }
             }
         } else {
-            $criteria = array(
-                'where' => array(
-                    'cguid' => $cguid,
-                ),
-            );
-            $row = $this->_repository->findOne($criteria);
+
+            $row = $this->getRepository()->getParaSyncByIdTiempo($cguid, $this->_restarTiempo, $validarFechaActualizacion);
             if (!empty($row)) {
                 try {
                     $this->_cronTarjetas($row['id'], $row['cguid']);
