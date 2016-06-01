@@ -53,7 +53,7 @@
                                     <a href="#modal_watch_legal_des_<?php echo $key; ?>" name="modal" class="watch_legal">. Ver legal</a>
                                     <?php endif; ?>
                                 </p>
-                                <p><?php echo $row['titulo2']; ?></p>
+                                <p><?php echo \Util\Common\String::cortarCadena($row['titulo2'], 102); ?></p>
                                 <button class="btn btn_orange btnComprar">Comprar</button>
                             </div>
                         <?php endforeach; ?>
@@ -63,12 +63,12 @@
                             <div class="col_3 left offer_important">
                                 <div class="box_white">
                                     <div class="image"><a href="<?php echo BASE_URL ?>recargas"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a></div>
-                                    <p class="breadcrumb"><?php echo $row['titulo1']; ?> 
+                                    <p class="breadcrumb"><?php echo $row['titulo1']; ?>
                                         <?php if (!empty($row['legal'])) : ?>
                                         <a href="#modal_watch_legal_des2_<?php echo $key; ?>" name="modal" class="watch_legal">. Ver legal</a>
                                         <?php endif; ?>
                                     </p>
-                                    <p><?php echo $row['titulo2']; ?></p>
+                                    <p><?php echo \Util\Common\String::cortarCadena($row['titulo2'], 90); ?></p>
                                 </div>
                                 <button class="btn btn_orange btnComprar">Comprar</button>
                             </div>
@@ -78,12 +78,12 @@
                             <div class="col_3 <?php echo $float; ?>">
                                 <div class="box_white">
                                     <div class="image"><a href="<?php echo BASE_URL ?>recargas"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a></div>
-                                    <p class="breadcrumb"><?php echo $row['titulo1']; ?> 
+                                    <p class="breadcrumb"><?php echo $row['titulo1']; ?>
                                         <?php if (!empty($row['legal'])) : ?>
                                         <a href="#modal_watch_legal_nor_<?php echo $key; ?>" name="modal" class="watch_legal">. Ver legal</a>
                                         <?php endif; ?>
                                     </p>
-                                    <p><?php echo $row['titulo2']; ?></p>
+                                    <p><?php echo \Util\Common\String::cortarCadena($row['titulo2'], 85); ?></p>
                                 </div>
                                 <button class="btn btn_orange btnComprar">Comprar</button>
                             </div>
