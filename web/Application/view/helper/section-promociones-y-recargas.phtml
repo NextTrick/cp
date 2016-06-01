@@ -25,7 +25,7 @@
             </div>
             
             <div class="recargas_content">
-                <p class="yellow_text small_text">Promociones</p>
+                <p class="yellow_text small_text" id="promocion_title">Promociones</p>
                 <div class="offers">
                     <?php foreach ($rowPromociones as $key => $row) : ?>
                         <?php if ($row['show'] == 'lleno') : ?>
@@ -87,7 +87,7 @@
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
-                <p class="yellow_text small_text">Recargas</p>
+                <p class="yellow_text small_text" id="recarga_title">Recargas</p>
                 <div class="offers">
                     <?php foreach ($rowRecargas as $key =>  $row) : ?>
                         <?php if ($row['show'] == 'lleno') : ?>
