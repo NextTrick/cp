@@ -46,28 +46,28 @@ return array(
         'send_mail' => true,
         'local_log' => true,        
     ),
-//     'db' => array(
-//        'driver' => 'pdo_mysql',
-//        'hostname' => 'localhost',
-//        'database' => 'coneypark',
-//        'username' => 'root',
-//        'password' => '',
-//        'port' => '3306',
-//        'driver_options' => array(
-//            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
-//        )
-//    ),
      'db' => array(
         'driver' => 'pdo_mysql',
         'hostname' => 'localhost',
-        'database' => 'pasarelaconeydev',
-        'username' => 'idigital',
-        'password' => '1D1g1t4L',
+        'database' => 'coneypark',
+        'username' => 'root',
+        'password' => '',
         'port' => '3306',
         'driver_options' => array(
             PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
         )
     ),
+//     'db' => array(
+//        'driver' => 'pdo_mysql',
+//        'hostname' => 'localhost',
+//        'database' => 'pasarelaconeydev',
+//        'username' => 'idigital',
+//        'password' => '1D1g1t4L',
+//        'port' => '3306',
+//        'driver_options' => array(
+//            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'utf8\''
+//        )
+//    ),
     'cacheCart' => array(
         'adapter' => 'filesystem',
         'options' => array(
@@ -161,37 +161,37 @@ return array(
             'down' => URL_RESOURCES . 'files/paquete/paquete',
         ),
     ),
-//    'social' => array( //local
-//        'facebook' => array(
-//            'app_id' => '1676429382610359',
-//            'api_secret' => 'c29480e4a45c99ce0040cb4b0801d6ee',
-//            'default_scope' => 'email,user_friends,user_location',
-//            'redirect_callback' => BASE_URL . 'login/callback/facebook',
-//        ),
-//        'twitter' => array(
-//            'oauth_access_token' => '382920909-7o6d7IzogwJTc8PtKDMpC8oUm5TaXXEA50NHDm62',
-//            'oauth_access_token_secret' => '4VfBvFULklW59WTPsJa5gS0zrPCILltVHcxJFcdEC9ovi',
-//            'consumer_key' => 'KAkyvbsAq5GvegoIuhdMLuBo0',
-//            'consumer_secret' => 'FC9HkFAi8B0yY4wn2NxObQDqRJcx0BcD6vtYNVlWxT0JDh71J4',
-//            'redirect_callback' => BASE_URL . 'login/callback/twitter',
-//        ),
-//    ),
-
-    'social' => array(
+    'social' => array( //local
         'facebook' => array(
-            'app_id' => '1530224070617551',//dev
-            'api_secret' => 'cc1d0233bf7c4f56d13fa2ea5a516192',
+            'app_id' => '1676429382610359',
+            'api_secret' => 'c29480e4a45c99ce0040cb4b0801d6ee',
             'default_scope' => 'email,user_friends,user_location',
             'redirect_callback' => BASE_URL . 'login/callback/facebook',
         ),
         'twitter' => array(
             'oauth_access_token' => '382920909-7o6d7IzogwJTc8PtKDMpC8oUm5TaXXEA50NHDm62',
             'oauth_access_token_secret' => '4VfBvFULklW59WTPsJa5gS0zrPCILltVHcxJFcdEC9ovi',
-            'consumer_key' => 'K0IyDQeeAd8Lv4opyH4FmOnK7',
-            'consumer_secret' => 'BRaBpn5TfW7nl0cskHT6fDkD59GqJKoCSXIHr3Tr3yfLDdaD4t',
+            'consumer_key' => 'KAkyvbsAq5GvegoIuhdMLuBo0',
+            'consumer_secret' => 'FC9HkFAi8B0yY4wn2NxObQDqRJcx0BcD6vtYNVlWxT0JDh71J4',
             'redirect_callback' => BASE_URL . 'login/callback/twitter',
         ),
     ),
+
+//    'social' => array(
+//        'facebook' => array(
+//            'app_id' => '1530224070617551',//dev
+//            'api_secret' => 'cc1d0233bf7c4f56d13fa2ea5a516192',
+//            'default_scope' => 'email,user_friends,user_location',
+//            'redirect_callback' => BASE_URL . 'login/callback/facebook',
+//        ),
+//        'twitter' => array(
+//            'oauth_access_token' => '382920909-7o6d7IzogwJTc8PtKDMpC8oUm5TaXXEA50NHDm62',
+//            'oauth_access_token_secret' => '4VfBvFULklW59WTPsJa5gS0zrPCILltVHcxJFcdEC9ovi',
+//            'consumer_key' => 'K0IyDQeeAd8Lv4opyH4FmOnK7',
+//            'consumer_secret' => 'BRaBpn5TfW7nl0cskHT6fDkD59GqJKoCSXIHr3Tr3yfLDdaD4t',
+//            'redirect_callback' => BASE_URL . 'login/callback/twitter',
+//        ),
+//    ),
 
     //Application config params 
     'app' => array(
