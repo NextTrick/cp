@@ -31,10 +31,10 @@ CKEDITOR.editorConfig = function( config ) {
 
     config.image_previewText = " ";
 
-    config.filebrowserBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=files';
-    config.filebrowserImageBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=images';
-    config.filebrowserFlashBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=flash';
-    config.filebrowserUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=files';
-    config.filebrowserImageUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=images';
-    config.filebrowserFlashUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=flash';
+    //config.filebrowserBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=files';
+    //config.filebrowserImageBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=images';
+    //config.filebrowserFlashBrowseUrl = '/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=flash';
+    //config.filebrowserUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=files';
+    //config.filebrowserImageUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=images';
+    //config.filebrowserFlashUploadUrl = '/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=flash';
 };

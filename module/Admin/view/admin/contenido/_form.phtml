@@ -59,9 +59,15 @@
   $(function () {
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
-      var editor = CKEDITOR.replace('contenido',
+      CKEDITOR.replace('contenido',
       {
-          uiColor : '#5b5656'
+          uiColor : '#5b5656',
+          filebrowserBrowseUrl : "<?php echo rtrim(BASE_URL,'/');?>/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=files",
+          filebrowserImageBrowseUrl : "<?php echo rtrim(BASE_URL,'/');?>/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=images",
+          filebrowserFlashBrowseUrl : "<?php echo rtrim(BASE_URL,'/');?>'/s/b/adminlte/plugins/kcfinder/browse.php?opener=ckeditor&type=flash",
+          filebrowserUploadUrl : "<?php echo rtrim(BASE_URL,'/');?>'/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=files",
+          filebrowserImageUploadUrl : "<?php echo rtrim(BASE_URL,'/');?>'/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=images",
+          filebrowserFlashUploadUrl : "<?php echo rtrim(BASE_URL,'/');?>'/s/b/adminlte/plugins/kcfinder/upload.php?opener=ckeditor&type=flash",
       });
 
 

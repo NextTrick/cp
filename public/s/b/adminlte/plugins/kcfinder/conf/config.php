@@ -11,8 +11,8 @@
   *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
   *      @link http://kcfinder.sunhater.com
   */
-
-define('APP_PATH2', dirname(__FILE__)."/../../../../../files/contenido");
+require('../../../../../../config/autoload/constants.php');
+//define('APP_PATH2', dirname(__FILE__)."/../../../../../files/contenido");
 
 /* IMPORTANT!!! Do not comment or remove uncommented settings in this file
    even if you are using session configuration.
@@ -21,9 +21,8 @@ define('APP_PATH2', dirname(__FILE__)."/../../../../../files/contenido");
 $_CONFIG = array(
 // GENERAL SETTINGS
     'disabled' => false,
-    //'uploadURL' => "http://dev.recargas.coneypark.pe/s/files/contenido/",
-    'uploadURL' => "",
-    'uploadDir' => APP_PATH2,
+    'uploadURL' => URL_IMAGE_CMS,
+    'uploadDir' => "",
     'theme' => "default",
     'types' => array(
 
