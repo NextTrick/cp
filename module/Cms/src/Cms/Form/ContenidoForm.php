@@ -58,7 +58,7 @@ class ContenidoForm extends Form
         $titulo = new Element\Text('titulo');
         $titulo->setAttributes(array(
                 'id' => 'titulo',
-                'maxlength' => '20',
+                'maxlength' => '50',
             ));
         $this->add($titulo);
         

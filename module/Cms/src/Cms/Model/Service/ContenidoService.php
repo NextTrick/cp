@@ -21,6 +21,8 @@ class ContenidoService
     const SECCION_INICIO_REGISTRO = 'INICIO_REGISTRO';
     const SECCION_INICIO_LOGIN = 'INICIO_LOGIN';
     const SECCION_BENEFICIOS = 'BENEFICIOS';
+    const SECCION_TERMINOS_CONDICIONES = 'TERMINOS_CONDICIONES';
+    const SECCION_POLITICAS_PRIVACIDAD = 'POLITICAS_PRIVACIDAD';
 
 
     public function __construct($repository, $serviceLocator)
