@@ -9,6 +9,7 @@
 namespace Usuario\Model\Service;
 
 use \Common\Helpers\String;
+use Tarjeta\Model\Service\TarjetaService;
 
 
 class UsuarioService
@@ -154,16 +155,13 @@ class UsuarioService
                     'fecha_actualizacion' => date('Y-m-d H:i:s'),
                 ));
                 if (!empty($tarjetaId)) {
-                    $this->_getTarjetaService()->cronTarjetas($card['cguid']);
+                    $this->_getTarjetaService()->cronTarjetas($card['cguid'], false);
                     $result['success'] = true;
                     $result['message'] = null;
                 }
             } else {
                 $result['message'] = $res['message'];
             }
-            
-            //sincronizar tarjetas registrados por otro sistema
-            $this->syncTarjetasCliente($usuario['id'], $usuario['mguid']);
         }
         return $result;
     }
@@ -195,9 +193,11 @@ class UsuarioService
                             'fecha_creacion' => date('Y-m-d H:i:s'),
                             'estado_truefi' => $card['status'],
                         ));
+
                         $this->_getTarjetaService()->cronTarjetas($row['cguid']);
                     }
                 }
+
                 return true;
             }
         }
@@ -328,7 +328,10 @@ class UsuarioService
     {
         return $this->_sl->get('TrueFi\Model\Service\TarjetaService');
     }
-    
+
+    /**
+     * @return TarjetaService
+     */
     private function _getTarjetaService()
     {
         return $this->_sl->get('Tarjeta\Model\Service\TarjetaService');
