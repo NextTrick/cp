@@ -12,8 +12,10 @@
   *      @link http://kcfinder.sunhater.com
   */
 require('../../../../../../config/autoload/constants.php');
-//define('APP_PATH2', dirname(__FILE__)."/../../../../../files/contenido");
+define('APP_PATH2', realpath(dirname(__FILE__)."/../../../../../files/contenido/"));
 
+//echo realpath(dirname(__FILE__)."/../../../../../files/contenido/");
+//echo APP_PATH2;
 /* IMPORTANT!!! Do not comment or remove uncommented settings in this file
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
@@ -21,8 +23,9 @@ require('../../../../../../config/autoload/constants.php');
 $_CONFIG = array(
 // GENERAL SETTINGS
     'disabled' => false,
+    //'uploadURL' => URL_IMAGE_CMS,
     'uploadURL' => URL_IMAGE_CMS,
-    'uploadDir' => "",
+    'uploadDir' => APP_PATH2.'/',
     'theme' => "default",
     'types' => array(
 
