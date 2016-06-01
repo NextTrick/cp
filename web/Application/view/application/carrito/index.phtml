@@ -136,7 +136,7 @@
                             <a href="#modal_watch_legal_nor_<?php echo $key; ?>" name="modal" class="watch_legal">. Ver legal</a>
                             <?php endif; ?>
                         </p>
-                        <p><?php echo $row['titulo2']; ?></p>
+                        <p><?php echo \Util\Common\String::cortarCadena($row['titulo2'], 85); ?></p>
                     </div>
                     <button class="btn btn_orange btnComprar">Comprar</button>
                 </div>
