@@ -773,12 +773,12 @@ $(function() {
         if(location.hash == '#recarga'){
           console.log('recarga');
           //$(document).animate({ scrollTop: $('.recarga_title').offset().top }, 1000);
-          $(document).scrollTop( $("#recarga_title").offset().top ); 
+          $(document).scrollTop( $("#recarga_title").offset().top - 50 ); 
         }
         else if(location.hash == '#promocion'){
           console.log('promocion');
           //$(document).animate({ scrollTop: $('.promocion_title').offset().top }, 1000);
-          $(document).scrollTop( $("#promocion_title").offset().top ); 
+          $(document).scrollTop( $("#promocion_title").offset().top - 50 ); 
         }
       }
     };
