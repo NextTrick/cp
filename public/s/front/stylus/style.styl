@@ -909,11 +909,14 @@ section
 					width 100%
 					height 100%
 					-webkit-transform-style preserve-3d
+					transform-style preserve-3d
 					transition all 1.0s linear
 					&.gira_adelante
 						-webkit-transform rotateY(180deg)
+						transform rotateY(180deg)
 					&.gira_atras
 						-webkit-transform rotateY(0deg)
+						transform rotateY(0deg)
 					.face
 						background #EFEFEF
 						position absolute
@@ -925,6 +928,7 @@ section
 						&.back
 							display block
 							-webkit-transform rotateY(180deg)
+							transform rotateY(180deg)
 				
 				.init_loading
 					width 100%
@@ -1020,6 +1024,12 @@ section
 						sprite($card_error)
 						display block
 						margin 0 auto
+					.close_icon
+						sprite($close_modal)
+						position absolute
+						right 5px
+						top 5px
+						cursor pointer
 					p
 						font-size 15px
 				.duplicate_box
@@ -2067,6 +2077,9 @@ footer
 	width 651px
 	height 686px
 	background url(../images/modal_bg.png)
+	.modal_content
+		h3
+			padding 5px 0
 #modal_watch_legal
 .modal_box_legal
 	.modal_content

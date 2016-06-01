@@ -225,6 +225,9 @@ $(function() {
       $('body').on('mouseenter', st.activeTooltipBonus, events.showTooltipBonus);
       $('body').on('mouseleave', st.activeTooltipBonus, events.hideTooltipBonus);
       $('body').on('click', st.editCardName, events.editCardName);
+      $('.error_box .close_icon').on('click', function(){
+        location.reload();
+      });
     };
     events = {
       openTooltip: function() {
