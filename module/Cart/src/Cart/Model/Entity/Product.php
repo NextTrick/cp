@@ -23,6 +23,7 @@ class Product
     private $productImage = null;
     private $categoryCode = null;
     private $categoryName = null;
+    private $timestamp = null;
     private $options = array();
 
     public function __construct($config)
@@ -77,6 +78,10 @@ class Product
         return $this->options;
     }
     
+    public function getTimestamp() {
+        return $this->timestamp;
+    }
+    
     public function getOption($key, $format = false) {
         if (isset($this->options[$key])) {
             $value = $this->options[$key];
@@ -95,7 +100,7 @@ class Product
     }
 
     public function setQuantity($quantity) {
-        $this->quantity = $quantity;
+        $this->quantity = (int)$quantity;
     }
 
     public function setProductId($productId) {
@@ -130,6 +135,10 @@ class Product
         $this->options[$key] = $value;
     }
     
+    public function setTimestamp($timestamp) {
+        $this->timestamp = $timestamp;
+    }
+        
     public function toArray()
     {
         return get_object_vars($this);

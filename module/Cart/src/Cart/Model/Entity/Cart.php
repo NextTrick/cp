@@ -93,15 +93,47 @@ class Cart
 
     public function getProductsCart()
     {
-        return $this->products;
+        $order = array();
+        foreach ($this->products as $groupProduct => $products) {
+            foreach ($products as $productId => $product) {
+                $order[$product->getTimestamp()] = array(
+                    $groupProduct => array($productId => $product)
+                );
+            }
+        }
+        krsort($order);
+        
+        $results = array();
+        foreach ($order as $groupProducts) {
+            foreach ($groupProducts as $groupProduct => $products) {
+                foreach ($products as $productId => $product) {
+                    $results[$groupProduct][$productId] = $product;
+                }
+            }
+        }
+        
+        return $results;
     }
     
     public function getProductsGroup()
     {
+        $results = array();
         if (isset($this->products[$this->groupProduct])) {
-            return $this->products[$this->groupProduct];
+            $groupProducts = $this->products[$this->groupProduct];
+            
+            $order = array();
+            foreach ($groupProducts as $productId => $product) {
+                $order[$product->getTimestamp()] = array($productId => $product);
+            }
+            krsort($order);
+
+            foreach ($order as $products) {
+                foreach ($products as $productId => $product) {
+                    $results[$productId] = $product;
+                }
+            }
         }
-        return array();
+        return $results;
     }
 
     public function setCurrency($currency)
@@ -112,10 +144,10 @@ class Cart
     public function setProducts(Product $product, $adding = false)
     {
         if ($product->getProductId() != null) {
-            $quantity = $product->getQuantity();
+                $quantity = $product->getQuantity();
             if (isset($this->products[$this->groupProduct][$product->getProductId()])) {
+                $xproduct = $this->products[$this->groupProduct][$product->getProductId()];
                 if ($adding) {
-                    $xproduct = $this->products[$this->groupProduct][$product->getProductId()];
                     $quantity = $quantity + $xproduct->getQuantity();
                 }
                 
@@ -126,17 +158,33 @@ class Cart
                     unset($this->products[$this->groupProduct][$product->getProductId()]);
                 } else {
                     $product->setQuantity($quantity);
+                    $product->setTimestamp($xproduct->getTimestamp());
                     $this->products[$this->groupProduct][$product->getProductId()] = $product;
                 }
             } else {
                 if ($quantity > $this->quantityMaxByProduct) {
                     $quantity = $this->quantityMaxByProduct;
                 }
+                $product->setTimestamp($this->_createTimestamp());
                 $this->products[$this->groupProduct][$product->getProductId()] = $product;
             }
         }
     }
-    
+
+    private function _createTimestamp()
+    {
+        $timestamp = time();
+        foreach ($this->products as $products) {
+            foreach ($products as $product) {
+                if ($timestamp == $product->getTimestamp()) {
+                    $timestamp = $timestamp + 1;
+                    break 2;
+                }
+            }
+        }
+        return $timestamp;
+    }
+
     public function removeProducts($productId = null)
     {
         if (!empty($productId)) {
