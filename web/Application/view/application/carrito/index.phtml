@@ -127,10 +127,11 @@
         <h3 class="yellow_text small_text">¡Añade más promociones y recargas!</h3>
         <div class="offers_box_three carrito_offers">
             <?php foreach ($promociones as $key => $row) : ?>
+                <?php $ancla = ($row['tipo'] == 1) ? 'recarga' : 'promocion' ?>
                 <?php $float = (($key+1)%3 == 0) ? 'right' : 'left'; ?>
                 <div class="col_3 <?php echo $float; ?>">
                     <div class="box_white">
-                        <div class="image"><a href="<?php echo BASE_URL ?>recargas"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a></div>
+                        <div class="image"><a href="<?php echo BASE_URL ?>recargas#<?php echo $ancla; ?>"><img src="<?php echo $urlImg . '/' . $row['imagen']; ?>" alt="<?php echo $row['titulo1']; ?>"/></a></div>
                         <p class="breadcrumb" style="text-align:center;"><?php echo $row['titulo1']; ?> 
                             <?php if (!empty($row['legal'])) : ?>
                             <a href="#modal_watch_legal_nor_<?php echo $key; ?>" name="modal" class="watch_legal">. Ver legal</a>
@@ -138,7 +139,7 @@
                         </p>
                         <p><?php echo \Util\Common\String::cortarCadena($row['titulo2'], 85); ?></p>
                     </div>
-                    <button class="btn btn_orange btnComprar">Comprar</button>
+                    <button class="btn btn_orange btnComprar" data-for="<?php echo $ancla; ?>">Comprar</button>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -177,6 +178,9 @@
 </section>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('.btnComprar').click(function(){location.href = '<?php echo BASE_URL ?>recargas';});
+        $('.btnComprar').click(function() {
+            var ancla = $(this).attr('data-for');
+            location.href = '<?php echo BASE_URL ?>recargas#' + ancla;
+        });
     });
 </script>
