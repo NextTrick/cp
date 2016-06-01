@@ -1345,6 +1345,16 @@ section .purple_box .cards_content .col_3 .error_box .icon {
   display: block;
   margin: 0 auto;
 }
+section .purple_box .cards_content .col_3 .error_box .close_icon {
+  background-image: url("../images/sprite.png");
+  background-position: -396px -348px;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
 section .purple_box .cards_content .col_3 .error_box p {
   font-size: 15px;
 }
