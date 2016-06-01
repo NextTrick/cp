@@ -1512,8 +1512,9 @@ section .purple_box .recargas_content .offers .col_3 {
   vertical-align: top;
   margin: 10px 7px 50px;
   width: 286px;
-  height: 240px;
-  background: url("../images/offer_bg.png");
+  height: 265px;
+  background-size: 286px 265px, cover;
+  background-image: url("../images/offer_bg.png");
 }
 section .purple_box .recargas_content .offers .col_3.auto {
   height: auto;
@@ -2313,7 +2314,7 @@ section .offers_box_three .col_3 .box_white {
   border-radius: 15px;
   overflow: hidden;
   color: #000;
-  min-height: 258px;
+  min-height: 297px;
 }
 section .offers_box_three .col_3 .box_white p {
   padding: 8px;
