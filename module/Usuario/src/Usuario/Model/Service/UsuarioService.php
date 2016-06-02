@@ -205,10 +205,13 @@ class UsuarioService
 
     public function getDataCriteria($params)
     {
+        $order = array('id DESC', 'fecha_creacion DESC');
+
         $criteria = array(
             'whereLike' => null,
             'limit'     => null,
-            'where'     => null
+            'where'     => null,
+            'order'     => $order
         );
 
         if (!empty($params)) {
@@ -239,7 +242,8 @@ class UsuarioService
                 'whereLike'    => $paramsLike,
                 'limit'        => LIMIT_BUSCAR,
                 'where'        => $paramsWhere,
-                'whereBetween' => $betwween
+                'whereBetween' => $betwween,
+                'order'        => $order
             );
 
         }
