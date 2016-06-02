@@ -97,17 +97,18 @@ class OrdendetalleController extends SecurityAdminController
             $sheet->setCellValue('F1', 'Cantidad');
             $sheet->setCellValue('G1', 'Fecha Creación');
             $sheet->setCellValue('H1', 'Nro Tarjeta');
-            $sheet->setCellValue('I1', 'Estado Transacción');
-            $sheet->setCellValue('J1', 'Dinero');
-            $sheet->setCellValue('K1', 'Coney Bonos');
+            $sheet->setCellValue('I1', 'Estado');
+            $sheet->setCellValue('J1', 'Pago estado');
+            $sheet->setCellValue('K1', 'Dinero');
+            $sheet->setCellValue('L1', 'Coney Bonos');
 
-            $sheet->setCellValue('L1', 'Game Points');
-            $sheet->setCellValue('M1', 'Tickets');
-            $sheet->setCellValue('N1', 'Coney Bonos Plus');
-            $sheet->setCellValue('O1', 'Paquete Título 2');
-            $sheet->setCellValue('P1', 'Paquete Tipo');
-            $sheet->setCellValue('Q1', 'Recarga Cantidad');
-            $sheet->setCellValue('R1', 'Recarga Error');
+            $sheet->setCellValue('M1', 'Game Points');
+            $sheet->setCellValue('N1', 'Tickets');
+            $sheet->setCellValue('O1', 'Coney Bonos Plus');
+            $sheet->setCellValue('P1', 'Paquete Título 2');
+            $sheet->setCellValue('Q1', 'Paquete Tipo');
+            $sheet->setCellValue('R1', 'Recarga Cantidad');
+            $sheet->setCellValue('S1', 'Recarga Error');
 
 
             $index = 2;
@@ -120,18 +121,19 @@ class OrdendetalleController extends SecurityAdminController
                 $sheet->setCellValue('F'.$index, $reg['cantidad']);
                 $sheet->setCellValue('G'.$index, $reg['fecha_creacion']);
                 $sheet->setCellValue('H'.$index, $reg['numero']);
-                $sheet->setCellValue('I'.$index, $reg['pago_estado']);
-                $sheet->setCellValue('J'.$index, $reg['emoney']);
-                $sheet->setCellValue('K'.$index, $reg['bonus']);
+                $sheet->setCellValue('I'.$index, $reg['estado']);
+                $sheet->setCellValue('J'.$index, $reg['pago_estado']);
+                $sheet->setCellValue('K'.$index, $reg['emoney']);
+                $sheet->setCellValue('L'.$index, $reg['bonus']);
 
-                $sheet->setCellValue('l'.$index, $reg['gamepoints']);
-                $sheet->setCellValue('M'.$index, $reg['etickets']);
-                $sheet->setCellValue('N'.$index, $reg['promotionbonus']);
-                $sheet->setCellValue('O'.$index, $reg['titulo2']);
-                $sheet->setCellValue('P'.$index, $reg['tipo']);
+                $sheet->setCellValue('M'.$index, $reg['gamepoints']);
+                $sheet->setCellValue('N'.$index, $reg['etickets']);
+                $sheet->setCellValue('O'.$index, $reg['promotionbonus']);
+                $sheet->setCellValue('P'.$index, $reg['titulo2']);
+                $sheet->setCellValue('Q'.$index, $reg['tipo']);
 
-                $sheet->setCellValue('Q'.$index, $reg['recarga_cantidad']);
-                $sheet->setCellValue('R'.$index, $reg['recarga_error']);
+                $sheet->setCellValue('R'.$index, $reg['recarga_cantidad']);
+                $sheet->setCellValue('S'.$index, $reg['recarga_error']);
 
                 $index ++;
             }
