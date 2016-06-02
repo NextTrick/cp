@@ -18,7 +18,8 @@ class Sidebar extends AbstractHelper implements ServiceLocatorAwareInterface
         $sl = $this->getServiceLocator()->getServiceLocator();
                 
         $menus = array();
-        $identity = $sl->get('Admin\Model\Service\LoginService')->getRepository()->getIdentity();
+        $loginService = $sl->get('Admin\Model\Service\LoginService')->getRepository();
+        $identity = $loginService->getIdentity();
         
         $config = $sl->get('config');
         $urlImg = isset($config['fileDir']['usuario_usuario']['down']) ? $config['fileDir']['usuario_usuario']['down'] : null;
@@ -29,10 +30,14 @@ class Sidebar extends AbstractHelper implements ServiceLocatorAwareInterface
         $user->urlImg = null;
         $user->urlProfile = '#';
         if ($identity !== false) {
+            $data = $loginService->getData();
             $user->username = $identity->username;
             $user->image = empty($identity->image) ? 'user-default.png' : $identity->image;
             $user->urlImg = $urlImg;
-            $user->urlProfile = '#';
+            if (!empty($data)) {
+                $codeUser = \Common\Helpers\Crypto::encrypt($data->id, \Common\Helpers\Util::VI_ENCODEID);
+                $user->urlProfile = BASE_URL . 'admin/main/mi-perfil?u=' . $codeUser;
+            }
             
             $uriPath = $sl->get('Request')->getUri()->getPath();
             $menus = $sl->get('Admin\Model\Service\RecursoService')->getSidebarMenus($identity->rol_id, $uriPath);

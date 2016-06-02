@@ -19,7 +19,6 @@ $this->layout()->breadcrumb = array(
                 <tr>
                     <th>Rol</th>
                     <th>Email</th>
-                    <th>Imagen</th>
                     <th>Estado</th>
                     <th style="max-width: 60px"></th>
                 </tr>
@@ -29,7 +28,6 @@ $this->layout()->breadcrumb = array(
                     <tr>
                         <td><?php echo $row['rol_nombre'] ?></td>
                         <td><?php echo $row['email'] ?></td>
-                        <td><?php echo $row['imagen'] ?></td>
                         <td><?php echo ($row['estado'] == 1) ? '<i class="fa fa-check-square-o"></i>' : '<i class="fa fa-times"></i>'; ?></td>
                         <td>
                             <a href="<?php echo BASE_URL ?>admin/usuarioadmin/editar/<?php echo $row['id']; ?>" class="btn btn-primary" title="Editar"><i class="fa fa-edit"></i></a>

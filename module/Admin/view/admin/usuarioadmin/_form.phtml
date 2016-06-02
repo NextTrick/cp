@@ -35,13 +35,13 @@
             </div>
         </div>
         <?php endif; ?>
-        <div class="form-group">
+<!--        <div class="form-group">
             <label class="col-sm-2 control-label" for="imagen">Imagen</label>
             <div class="col-sm-8">
                 <?php echo $this->formElement($this->form->get('imagen')->setAttribute('class', 'form-control')) ?>
                 <span class="error"><?php echo $this->formElementerrors($form->get('imagen')); ?></span>
             </div>
-        </div>
+        </div>-->
         <div class="form-group">
             <label class="col-sm-2 control-label" for="estado">Estado</label>
             <div class="col-sm-8">
@@ -50,7 +50,9 @@
             </div>
         </div>
         <div class="box-footer">
+            <?php if (empty($noRegresar)) : ?>
             <a class="btn btn-default" href="<?php echo BASE_URL; ?>admin/usuarioadmin/index">Regresar</a>
+            <?php endif; ?>
             <?php if (!empty($id)) : ?>
             <a class="btn btn-warning" href="<?php echo BASE_URL; ?>admin/usuarioadmin/editar-password/<?php echo $id; ?>">Modificar Password</a>
             <?php endif; ?>

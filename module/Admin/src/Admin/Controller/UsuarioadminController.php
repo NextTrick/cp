@@ -140,8 +140,18 @@ class UsuarioadminController extends SecurityAdminController
         $request = $this->getRequest();
         $data = $request->getPost()->toArray();
 
-        $repeat = (in_array($action, array(AC_CREAR, self::AC_EDITAR_PASS))) ? true : false;
-        
+        $repeat = false;
+        switch ($action) {
+            case AC_CREAR:
+                $repeat = true;
+                break;
+            case self::AC_EDITAR_PASS:
+                if (!empty($data['password']) || !empty($data['password_repeat'])) {
+                    $repeat = true;
+                }
+                break;
+        }
+
         $filter = new \Admin\Filter\UsuarioFilter(array('repeat' => $repeat));
 
         $form->setInputFilter($filter);
@@ -226,12 +236,12 @@ class UsuarioadminController extends SecurityAdminController
         return $form;
     }
     
-    protected function _getUsuarioForm()
+    private function _getUsuarioForm()
     {
         return $this->getServiceLocator()->get('Admin\Form\UsuarioForm');
     }
 
-    protected function _getUsuarioService()
+    private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Admin\Model\Service\UsuarioService');
     }
