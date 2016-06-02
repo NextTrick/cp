@@ -165,9 +165,10 @@
                             <?php endforeach; ?>
                         </div>
 
-                        <input id="acepto" name="acepto" type="checkbox" class="" data-parsley-required="true" data-parsley-required-message="Debe aceptar los términos y condiciones del sitio"/>Declaro conocer y aceptar los <a target="_blank" href="<?php echo BASE_URL ?>terminos-condiciones" >Términos y condiciones</a> del sitio.
 
                         <div align="center" class="total_box">
+                            <p><input id="acepto" name="acepto" type="checkbox" class="" data-parsley-required="true" data-parsley-required-message="Debe aceptar los términos y condiciones del sitio"/>Declaro conocer y aceptar los <a target="_blank" href="<?php echo BASE_URL ?>terminos-condiciones" >Términos y condiciones</a> del sitio.</p>
+
                             <?php $montoTotal = empty($cartModel) ? '0.00' : $cartModel->getAmountCart(true); ?>
                             <?php $partMontoTotal = explode('.', $montoTotal); ?>
                             <h3>
