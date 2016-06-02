@@ -82,6 +82,9 @@ class MiPerfilForm extends Form
         $this->add($imagen);
         
         $estado = new Element\Checkbox('estado');
+        $estado->setAttributes(array(
+            'disabled' => true,
+        ));
         $estado->setUseHiddenElement(true);
         $estado->setCheckedValue('1');
         $estado->setUncheckedValue('0');
