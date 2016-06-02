@@ -175,10 +175,7 @@ class RegistroController extends AbstractActionController
                 if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
                     $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $resultTrueFi['mguid']));
                 }
-                
-                //sincronizar tarjetas registrados por otro sistema
-                $this->_getUsuarioService()->syncTarjetasCliente($usuarioId, $dataIn['mguid']);
-                
+
                 $result['success'] = true;
                 $result['code'] = null;
                 
@@ -212,7 +209,6 @@ class RegistroController extends AbstractActionController
 
             $result = $this->_getLoginGatewayService()->loginOffline($row['email']);
             if ($result['success']) {
-                $this->_getUsuarioService()->syncTarjetasCliente($row['id'], $row['mguid']);
                 return $this->redirect()->toRoute('web-mis-tarjetas', array('controller' => 'mis-tarjetas'));
             }
         }
