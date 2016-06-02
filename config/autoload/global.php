@@ -19,7 +19,7 @@ return array(
             'date.timezone' => 'America/Lima',
             'intl.default_locale' => 'es_PE',
             'display_startup_errors' => false,
-            'display_errors' => false,
+            'display_errors' => true,
             'error_reporting' => E_ALL,
             'post_max_size' => '804857600',            
         )
