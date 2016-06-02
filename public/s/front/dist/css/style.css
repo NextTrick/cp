@@ -1907,6 +1907,20 @@ section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .
 section .purple_box .pay_box_white >.right .total_box {
   padding: 20px 0 50px;
 }
+section .purple_box .pay_box_white >.right .total_box .terminos input {
+  width: 20px;
+  height: 15px;
+}
+section .purple_box .pay_box_white >.right .total_box .terminos p {
+  display: inline;
+  font-size: 16px;
+}
+section .purple_box .pay_box_white >.right .total_box .terminos p a {
+  display: inline;
+}
+section .purple_box .pay_box_white >.right .total_box ul.parsley-errors-list {
+  text-align: center !important;
+}
 section .purple_box .pay_box_white >.right .total_box h3 {
   padding: 10px 0;
 }
