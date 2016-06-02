@@ -45,7 +45,7 @@ class PaqueteForm extends Form
         $titulo1 = new Element\Text('titulo1');
         $titulo1->setAttributes(array(
                 'id' => 'titulo1',
-                'maxlength' => '200',
+                'maxlength' => '25',
             ));
         $this->add($titulo1);
         
