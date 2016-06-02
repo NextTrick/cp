@@ -1195,17 +1195,21 @@ section .purple_box .cards_content .col_3 .container_card {
   color: #000;
   width: 100%;
   height: 100%;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  transition: all 1s linear;
 }
 section .purple_box .cards_content .col_3 .container_card.gira_adelante {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 section .purple_box .cards_content .col_3 .container_card.gira_atras {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+section .purple_box .cards_content .col_3 .container_card.transition {
+  transition: all 1s linear;
 }
 section .purple_box .cards_content .col_3 .container_card .face {
   background: #efefef;
@@ -1218,6 +1222,8 @@ section .purple_box .cards_content .col_3 .container_card .face {
 }
 section .purple_box .cards_content .col_3 .container_card .face.back {
   display: block;
+}
+section .purple_box .cards_content .col_3 .container_card .face.back.rotate_back {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
