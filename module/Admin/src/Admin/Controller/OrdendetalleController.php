@@ -8,6 +8,7 @@
 
 namespace Admin\Controller;
 
+use Admin\Model\Service\DetalleOrdenService;
 use Zend\View\Model\ViewModel;
 use Common\Controller\SecurityAdminController;
 use PHPExcel;
@@ -173,6 +174,9 @@ class OrdendetalleController extends SecurityAdminController
         }
     }
 
+    /**
+     * @return DetalleOrdenService
+     */
     protected function _getDetalleOrdenService()
     {
         return $this->getServiceLocator()->get('Admin\Model\Service\DetalleOrdenService');

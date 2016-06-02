@@ -31,7 +31,7 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
             $selectInterno = $sql->select();
             $selectInterno->from(array("od"=> "orden_detalle_orden"));
             $selectInterno->columns(array('id', 'monto', 'cantidad', 'fecha_creacion', 'emoney', 'bonus', 'gamepoints',
-                 'etickets', 'promotionbonus', 'recarga_cantidad', 'recarga_error'
+                 'etickets', 'promotionbonus', 'recarga_cantidad', 'recarga_error', 'estado'
             ));
             $selectInterno->join(array("p" => "paquete_paquete"), "p.id = od.paquete_id",
                 array("titulo1", 'titulo2', 'tipo'), 'left');
@@ -46,7 +46,7 @@ class DetalleOrdenRepository extends  \Common\Model\Repository\Zf2AbstractTableG
             $select->from(array("r" => $selectInterno));
             $select->columns(array('id', 'monto', 'cantidad', 'fecha_creacion', 'emoney', 'bonus', 'gamepoints',
                     'etickets', 'promotionbonus', 'recarga_cantidad', 'recarga_error', "titulo1", 'titulo2', 'tipo',
-                    "pago_estado", 'codigo', "email", "numero"
+                    "pago_estado", 'codigo', "email", "numero", 'estado'
                 )
             );
 

@@ -8,6 +8,7 @@
 
 namespace Admin\Controller;
 
+use Admin\Model\Service\OrdenService;
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
 use PHPExcel;
@@ -339,6 +340,9 @@ class OrdenController extends SecurityAdminController
         return $this->getServiceLocator()->get('Admin\Form\OrdenForm');
     }
 
+    /**
+     * @return OrdenService
+     */
     protected function _getOrdenService()
     {
         return $this->getServiceLocator()->get('Admin\Model\Service\OrdenService');

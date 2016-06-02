@@ -25,7 +25,8 @@ $this->layout()->breadcrumb = array(
                     <th>Cantidad</th>
                     <th style="white-space:nowrap;">Fecha Creación</th>
                     <th style="white-space:nowrap;">Nro. Tarjeta</th>
-                    <th style="white-space:nowrap;">Estado Transacción</th>
+                    <th style="white-space:nowrap;">Estado</th>
+                    <th style="white-space:nowrap;">Pago Estado</th>
                     <th>Dinero</th>
                     <th style="white-space:nowrap;">Coney Bonos</th>
                     <th style="white-space:nowrap;">Game Points</th>
@@ -42,6 +43,7 @@ $this->layout()->breadcrumb = array(
                     <td><?php echo $row['cantidad'] ?></td>
                     <td><?php echo $row['fecha_creacion'] ?></td>
                     <td><?php echo $row['numero']; ?></td>
+                    <td><?php echo $row['estado'] ?></td>
                     <td><?php echo $row['pago_estado'] ?></td>
                     <td><?php echo $row['emoney']; ?></td>
                     <td><?php echo $row['bonus'] ?></td>
@@ -80,6 +82,10 @@ $this->layout()->breadcrumb = array(
         });
 
         $("#cmbPagoEstado").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbEstado").on('change', function() {
             $("#formBuscar").submit();
         });
 
