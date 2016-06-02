@@ -297,6 +297,15 @@ class CarritoController extends SecurityWebController
                 }
             }
 
+            $aceptoValue = $params['acepto'];
+            $filter = new \Zend\Filter\StripTags();
+            $value = $filter->filter($aceptoValue);
+            $valid = new \Zend\Validator\NotEmpty();
+            if ($valid->isValid($value) == false) {
+                $paramsInvalid[] = 'acepto';
+                $result['message'] = ERROR_VALIDACION_PAGOS;
+            }
+
             if (empty($data) || !empty($paramsInvalid)) {
                 $result['paramsInvalid'] = $paramsInvalid;
                 $jsonModel =  new \Zend\View\Model\JsonModel($result);
