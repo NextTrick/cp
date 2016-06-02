@@ -72,6 +72,7 @@ class OauthTwitterService
                     'registrado' => $registrado,
                 );
                 if ($registrado == false) {
+                    $this->_container->offsetUnset('access_token_tw');
                     $this->_container->offsetSet('temp_registro', $data);
                 } else {
                     //===============  Data Login ==============
@@ -116,7 +117,8 @@ class OauthTwitterService
 
     public function isLoggedIn()
     {
-        if ($this->_container->offsetExists('access_token_tw')) {
+        $usuario = $this->getData();
+        if ($this->_container->offsetExists('access_token_tw') && !empty($usuario)) {
             return true;
         }
         return false;
