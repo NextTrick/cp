@@ -191,7 +191,7 @@ class RegistroController extends AbstractActionController
             }
         } else {
             \Util\Common\Email::reportDebug($resultTrueFi, null, 'Error completar registro');
-            $result['message'] = 'EXISTE_EMAIL';
+            $result['code'] = 'EXISTE_EMAIL';
         }
         
         $this->_removeDataRegistroTemp();
