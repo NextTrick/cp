@@ -38,7 +38,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
             $estado = (string) $paymentResponse->Estado;
             if ($estado == '1') {
                 $return['data'] = array(
-                    'status' => OrdenRepository::PAGO_ESTADO_PENDIENTE,
+                    'status' => OrdenRepository::PAGO_ESTADO_NUEVO,
                     'token' => (string) $paymentResponse->Token,
                     'cip' => (string) $paymentResponse->CIP->NumeroOrdenPago,
                     'reference' => (string) $paymentResponse->CIP->IdOrdenPago,
