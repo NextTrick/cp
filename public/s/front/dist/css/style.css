@@ -1913,7 +1913,7 @@ section .purple_box .pay_box_white >.right .total_box .terminos input {
 }
 section .purple_box .pay_box_white >.right .total_box .terminos p {
   display: inline;
-  font-size: 16px;
+  font-size: 14px;
 }
 section .purple_box .pay_box_white >.right .total_box .terminos p a {
   display: inline;
