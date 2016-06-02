@@ -7,6 +7,7 @@
  */
 namespace Admin\Form;
 
+use Admin\Model\Service\OrdenService;
 use Zend\Form\Form;
 use Zend\Form\Element;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -48,13 +49,21 @@ class DetalleOrdenBuscarForm extends Form
         $cmbFiltro->setDisableInArrayValidator(true);
         $this->add($cmbFiltro);
 
-        $filtroEstado = $this->getOrdenService()->getPagoEstados();
+        $filtroPagoEstado = $this->getOrdenService()->getPagoEstados();
         $cmbPagoEstado    = new Element\Select('cmbPagoEstado');
         $cmbPagoEstado->setAttributes(array('id' => 'cmbPagoEstado'));
-        $cmbPagoEstado->setValueOptions($filtroEstado);
+        $cmbPagoEstado->setValueOptions($filtroPagoEstado);
         $cmbPagoEstado->setEmptyOption('- Seleccione -');
         $cmbPagoEstado->setDisableInArrayValidator(true);
         $this->add($cmbPagoEstado);
+
+        $filtroEstado = $this->getOrdenService()->getEstados();
+        $cmbEstado    = new Element\Select('cmbEstado');
+        $cmbEstado->setAttributes(array('id' => 'cmbEstado'));
+        $cmbEstado->setValueOptions($filtroEstado);
+        $cmbEstado->setEmptyOption('- Seleccione -');
+        $cmbEstado->setDisableInArrayValidator(true);
+        $this->add($cmbEstado);
 
 
         $txtFechaIni = new Element\Text('txtFechaIni');
@@ -78,6 +87,9 @@ class DetalleOrdenBuscarForm extends Form
         return $this->_sl->get('Admin\Model\Service\DetalleOrdenService');
     }
 
+    /**
+     * @return OrdenService
+     */
     private function getOrdenService()
     {
         return $this->_sl->get('Admin\Model\Service\OrdenService');

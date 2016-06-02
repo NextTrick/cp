@@ -90,7 +90,7 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 //Según el estado de la solicitud  Procesar
                 Switch ($solData->Estado) {
                     case 592:                        
-                        $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PENDIENTE;
+                        $return['data']['status'] = OrdenRepository::PAGO_ESTADO_EXTORNADO;
                         $return['error']['erroCode'] = 592;
                         $return['error']['errorDescription'] = 'El CIP fué extornado, el banco realizó reversa de Pago';
                         break;

@@ -29,8 +29,14 @@ class OrdenService
     
     CONST ESTADO_PAGO_NAME_ERROR     = 'Error';
     CONST ESTADO_PAGO_NAME_PAGADO    = 'Pagado';
-    CONST ESTADO_PAGO_NAME_PENDIENTE = 'Pendiente';
     const ESTADO_PAGO_NAME_EXPIRADO  = 'Expirado';
+    const ESTADO_PAGO_NAME_EXTORNADO  = 'Extornado';
+    const ESTADO_PAGO_NAME_NUEVO  = 'Nuevo';
+    //CONST ESTADO_PAGO_NAME_PENDIENTE = 'Pendiente';
+
+    CONST ESTADO_NAME_ERROR     = 'Error';
+    CONST ESTADO_NAME_NUEVO     = 'Nuevo';
+    CONST ESTADO_NAME_PROCESADO = 'Procesado';
 
     public function __construct($repository, $serviceLocator)
     {
@@ -66,6 +72,7 @@ class OrdenService
                 'comprobante_tipo' => String::xssClean($params['cmbTipoComp']),
                 'pago_estado'      => String::xssClean($params['cmbPagoEstado']),
                 'pago_metodo'     => String::xssClean($params['cmbMetodoPago']),
+                'o.estado'     => String::xssClean($params['cmbEstado']),
             );
 
             $betwween = array(
@@ -125,10 +132,20 @@ class OrdenService
     public function getPagoEstados()
     {
         return array(
-            self::ESTADO_PAGO_NAME_ERROR     => self::ESTADO_PAGO_NAME_ERROR,
+            self::ESTADO_PAGO_NAME_NUEVO => self::ESTADO_PAGO_NAME_NUEVO,
             self::ESTADO_PAGO_NAME_PAGADO    => self::ESTADO_PAGO_NAME_PAGADO,
-            self::ESTADO_PAGO_NAME_PENDIENTE => self::ESTADO_PAGO_NAME_PENDIENTE,
-            self::ESTADO_PAGO_NAME_EXPIRADO  => self::ESTADO_PAGO_NAME_EXPIRADO
+            self::ESTADO_PAGO_NAME_ERROR     => self::ESTADO_PAGO_NAME_ERROR,
+            self::ESTADO_PAGO_NAME_EXPIRADO  => self::ESTADO_PAGO_NAME_EXPIRADO,
+            self::ESTADO_PAGO_NAME_EXTORNADO  => self::ESTADO_PAGO_NAME_EXTORNADO
+        );
+    }
+
+    public function getEstados()
+    {
+        return array(
+            self::ESTADO_NAME_NUEVO => self::ESTADO_NAME_NUEVO,
+            self::ESTADO_NAME_PROCESADO     => self::ESTADO_NAME_PROCESADO,
+            self::ESTADO_NAME_ERROR   => self::ESTADO_NAME_ERROR,
         );
     }
 

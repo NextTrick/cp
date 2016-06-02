@@ -25,6 +25,7 @@ $this->layout()->breadcrumb = array(
                 <th>Monto</th>
                 <th style="white-space:nowrap;">F. Confirmación</th>
                 <th>Estado</th>
+                <th style="white-space:nowrap;">Pago Estado</th>
                 <th>Comprobante</th>
                 <th style="white-space:nowrap;">Tipo Documento</th>
                 <th style="white-space:nowrap;">Nro. Documento</th>
@@ -42,6 +43,7 @@ $this->layout()->breadcrumb = array(
                     <td><?php echo $row['pago_metodo']; ?></td>
                     <td><?php echo $row['monto']; ?></td>
                     <td><?php echo $row['pago_fecha_confirmacion']; ?></td>
+                    <td><?php echo $row['estado']; ?></td>
                     <td><?php echo $row['pago_estado']; ?></td>
                     <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoComprobante($row['comprobante_tipo']); ?></td>
                     <td><?php echo \Admin\Model\Service\OrdenService::getNombreTipoDocumento($row['documento_tipo']); ?></td>
@@ -86,6 +88,10 @@ $this->layout()->breadcrumb = array(
         });
 
         $("#cmbPagoEstado").on('change', function() {
+            $("#formBuscar").submit();
+        });
+
+        $("#cmbEstado").on('change', function() {
             $("#formBuscar").submit();
         });
 
