@@ -291,19 +291,26 @@ $(function() {
           //$(this).parent().parent().parent().css('-webkit-transform','rotateY(0deg)');
           $(this).parent().parent().parent().addClass('gira_atras');
           $(this).parent().parent().parent().removeClass('gira_adelante');
+          $(this).parent().parent().parent().addClass('transition');
         } else {
           //$(this).parent().parent().parent().css('-webkit-transform','rotateY(180deg)');
           $(this).parent().parent().parent().addClass('gira_adelante');
           $(this).parent().parent().parent().removeClass('gira_atras');
+          $(this).parent().parent().parent().addClass('transition');
         }
       },
       showTooltipBonus: function() {
         $(this).addClass('active');
         $(this).parent().parent().children(st.tooltipBonus).show();
+        $(this).parent().parent().parent().parent().parent().removeClass('gira_adelante');
+        $(this).parent().parent().parent().parent().parent().children('.back').removeClass('rotate_back');
+        $(this).parent().parent().parent().parent().parent().removeClass('transition');
       },
       hideTooltipBonus: function() {
         $(this).removeClass('active');
         $(this).parent().parent().children(st.tooltipBonus).hide();
+        $(this).parent().parent().parent().parent().parent().addClass('gira_adelante');
+        $(this).parent().parent().parent().parent().parent().children('.back').addClass('rotate_back');
       },
       editCardName: function() {
         
