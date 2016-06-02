@@ -147,7 +147,7 @@ class OrdenService
 
         $paymentProcessor = new PaymentProcessor($metodoPago, $this->_sl);
         $response = $paymentProcessor->createCharge($paymentProcessordata);
-        var_dump($response); exit;
+        
         if (!empty($response['success'])) {
             switch ($metodoPago) {
                 case PagoEfectivoProcessor::ALIAS :
