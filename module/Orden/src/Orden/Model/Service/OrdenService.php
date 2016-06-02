@@ -374,7 +374,7 @@ class OrdenService
 
             $this->_getDetalleOrdenService()->getRepository()->save($detalleOrdenData, $ordenDetalle['id']);
             
-            $this->_getTarjetaService()->cronTarjetas($ordenDetalle['tarjeta_cguid']);
+            $this->_getTarjetaService()->cronTarjetas($ordenDetalle['tarjeta_cguid'], false);
         }
 
         $this->enviarMailConfirmacion($ordenId);

@@ -48,6 +48,7 @@ return array(
         //forms
         'Admin\Form\LoginForm' => 'Admin\Form\Factory\LoginFactory',
         'Admin\Form\UsuarioForm' => 'Admin\Form\Factory\UsuarioFactory',
+        'Admin\Form\MiPerfilForm' => 'Admin\Form\Factory\MiPerfilFactory',
         'Admin\Form\RolForm' => 'Admin\Form\Factory\RolFactory',
         'Admin\Form\RecursoForm' => 'Admin\Form\Factory\RecursoFactory',
         'Admin\Form\PermisoForm' => 'Admin\Form\Factory\PermisoFactory',

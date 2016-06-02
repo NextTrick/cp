@@ -2,6 +2,7 @@
 namespace Application\Controller;
 
 use Application\Controller\SecurityWebController;
+use Usuario\Model\Service\UsuarioService;
 use Zend\View\Model\ViewModel;
 
 class MisTarjetasController extends SecurityWebController
@@ -13,6 +14,9 @@ class MisTarjetasController extends SecurityWebController
         }
         
         $usuario = $this->_getUsuarioData();
+
+        $this->_getUsuarioService()->syncTarjetasCliente($usuario->id, $usuario->mguid);
+
         $gridList = $this->_getTarjetaService()->misTarjetas($usuario->id);
         $view = new ViewModel();
         $view->setVariable('gridList', $gridList);
@@ -219,6 +223,9 @@ class MisTarjetasController extends SecurityWebController
         return $existe;
     }
 
+    /**
+     * @return UsuarioService
+     */
     private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');

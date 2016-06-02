@@ -28,7 +28,7 @@ class DetalleOrdenService
 
     public function getDataCriteria($params)
     {
-        $order = array('pago_fecha_confirmacion DESC');
+        $order = array('pago_fecha_confirmacion DESC', 'id DESC',);
 
         $criteria = array(
             "whereLike"    => null,

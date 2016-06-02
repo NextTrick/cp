@@ -41,7 +41,7 @@ class CartService
         return null;
     }
     
-    public function addCart($product, $groupProduct = 0, $adding = false)
+    public function addCart($product, $groupProduct = 0, $oldTarjetaCode = 0, $adding = false)
     {
         $productModel = new Product($this->_config);
         $productModel->setProductId($product['product_id']);
@@ -63,7 +63,7 @@ class CartService
         }
         
         $cartModel->setGroupProduct($groupProduct);
-        $cartModel->setProducts($productModel, $adding);
+        $cartModel->setProducts($productModel, $oldTarjetaCode, $adding);
         
         $cache->setItem($keyCart, $cartModel);
         $cartModel2 = $cache->getItem($keyCart);

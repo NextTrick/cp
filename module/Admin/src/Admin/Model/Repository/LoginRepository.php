@@ -102,6 +102,14 @@ class LoginRepository
         }
         return false;
     }
+    
+    public function getData()
+    {
+        if ($this->_auth->hasIdentity()) {
+            return $this->_auth->getStorage()->read();
+        }
+        return array();
+    }
 
     public function isLoggedIn()
     {

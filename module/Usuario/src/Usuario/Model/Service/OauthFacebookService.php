@@ -95,6 +95,7 @@ class OauthFacebookService
                     'registrado' => $registrado,
                 );
                 if ($registrado == false) {
+                    $this->_container->offsetUnset('access_token_fb');
                     $this->_container->offsetSet('temp_registro', $data);
                 } else {
                     //===============  Data Login ==============
@@ -137,7 +138,8 @@ class OauthFacebookService
     
     public function isLoggedIn()
     {
-        if ($this->_container->offsetExists('access_token_fb')) {
+        $usuario = $this->getData();
+        if ($this->_container->offsetExists('access_token_fb') && !empty($usuario)) {
             return true;
         }
         return false;
