@@ -214,7 +214,7 @@ return array(
                 'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key
 
                 'conceptoPago' => 'ConeyPark',
-                'cipExpiracionDias' => 3
+                'cipExpiracionDias' => 2
             ),
             'visa' => array(                
                 'baseUrl' => 'http://qas.multimerchantvisanet.com/',
