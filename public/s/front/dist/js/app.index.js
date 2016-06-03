@@ -141,7 +141,8 @@ $(function() {
           'width': maskWidth,
           'height': maskHeight
         });
-        $('body').animate({
+        console.log("asdasda");
+        $('html, body').animate({
           scrollTop: 0
         }, '500');
         $('#mask').fadeIn(500);
