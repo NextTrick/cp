@@ -260,7 +260,7 @@ header nav ul {
   text-align: center;
 }
 header nav ul li {
-  width: 110px;
+  width: 108px;
   height: 80px;
   list-style: none;
   display: inline-block;
@@ -276,12 +276,13 @@ header nav ul li:hover {
 header nav ul li a {
   text-decoration: none;
   color: #972482;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: bold;
   position: relative;
 }
 header nav ul li a .icon {
   height: 40px;
+  margin-bottom: 3px;
 }
 header nav ul li a .icon i {
   font-size: 36px;
@@ -328,7 +329,7 @@ header nav ul li a .icon span.icon_gold {
 }
 header nav ul li.logo {
   width: 200px;
-  margin: -10px 20px 0;
+  margin: -10px 36px 0;
 }
 header nav ul li.logo:hover {
   animation: none;
