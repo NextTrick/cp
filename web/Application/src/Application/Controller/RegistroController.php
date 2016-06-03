@@ -104,6 +104,7 @@ class RegistroController extends AbstractActionController
                     } elseif ($saveData['code'] == 'EXISTE_EMAIL') {
                         $openPopapConfRegistro = 0;
                         $mensajeRegistro = null;
+                        $disabledEmail = false;
                         $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
                     }
                 }
@@ -191,7 +192,7 @@ class RegistroController extends AbstractActionController
             }
         } else {
             \Util\Common\Email::reportDebug($resultTrueFi, null, 'Error completar registro');
-            $result['message'] = 'EXISTE_EMAIL';
+            $result['code'] = 'EXISTE_EMAIL';
         }
         
         $this->_removeDataRegistroTemp();
