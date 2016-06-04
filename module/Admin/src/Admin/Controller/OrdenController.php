@@ -8,6 +8,7 @@
 
 namespace Admin\Controller;
 
+use Admin\Model\Service\OrdenService;
 use Common\Controller\SecurityAdminController;
 use Zend\View\Model\ViewModel;
 use PHPExcel;
@@ -93,30 +94,31 @@ class OrdenController extends SecurityAdminController
             $sheet->setCellValue('E1', 'Metodo Pago');
             $sheet->setCellValue('F1', 'Monto');
             $sheet->setCellValue('G1', 'Fecha Confirmacion');
-            $sheet->setCellValue('H1', 'Estado Pago');
-            $sheet->setCellValue('I1', 'Comprobante');
-            $sheet->setCellValue('J1', 'Tipo Documento');
-            $sheet->setCellValue('K1', 'Nro. Documento');
-            $sheet->setCellValue('L1', 'Razón Social');
-            $sheet->setCellValue('M1', 'Nombres');
-            $sheet->setCellValue('N1', 'Paterno');
-            $sheet->setCellValue('O1', 'Materno');
-            $sheet->setCellValue('P1', 'Dirección Fiscal');
-            $sheet->setCellValue('Q1', 'Dirección Entrega');
+            $sheet->setCellValue('H1', 'Estado');
+            $sheet->setCellValue('I1', 'Pago Estado');
+            $sheet->setCellValue('J1', 'Comprobante');
+            $sheet->setCellValue('K1', 'Tipo Documento');
+            $sheet->setCellValue('L1', 'Nro. Documento');
+            $sheet->setCellValue('M1', 'Razón Social');
+            $sheet->setCellValue('N1', 'Nombres');
+            $sheet->setCellValue('O1', 'Paterno');
+            $sheet->setCellValue('P1', 'Materno');
+            $sheet->setCellValue('Q1', 'Dirección Fiscal');
+            $sheet->setCellValue('R1', 'Dirección Entrega');
 
-            $sheet->setCellValue('R1', 'Usuario Nombres');
-            $sheet->setCellValue('S1', 'Usuario Paterno');
-            $sheet->setCellValue('T1', 'Usuario Materno');
-            $sheet->setCellValue('U1', 'Usuario Tipo Documento');
-            $sheet->setCellValue('V1', 'Usuario Nro Documento');
+            $sheet->setCellValue('S1', 'Usuario Nombres');
+            $sheet->setCellValue('T1', 'Usuario Paterno');
+            $sheet->setCellValue('U1', 'Usuario Materno');
+            $sheet->setCellValue('V1', 'Usuario Tipo Documento');
+            $sheet->setCellValue('W1', 'Usuario Nro Documento');
 
-            $sheet->setCellValue('W1', 'Usuario País');
-            $sheet->setCellValue('X1', 'Usuario Departamento');
-            $sheet->setCellValue('Y1', 'Usuario Provincia');
-            $sheet->setCellValue('Z1', 'Usuario Distrito');
+            $sheet->setCellValue('X1', 'Usuario País');
+            $sheet->setCellValue('Y1', 'Usuario Departamento');
+            $sheet->setCellValue('Z1', 'Usuario Provincia');
+            $sheet->setCellValue('AA1', 'Usuario Distrito');
 
-            $sheet->setCellValue('AA1', 'Pago Error');
-            $sheet->setCellValue('AB1', 'Pago Detalle Error');
+            $sheet->setCellValue('AB1', 'Pago Error');
+            $sheet->setCellValue('AC1', 'Pago Detalle Error');
 
 
             $index = 2;
@@ -128,30 +130,31 @@ class OrdenController extends SecurityAdminController
                 $sheet->setCellValue('E'.$index, $reg['pago_metodo']);
                 $sheet->setCellValue('F'.$index, $reg['monto']);
                 $sheet->setCellValue('G'.$index, $reg['pago_fecha_confirmacion']);
-                $sheet->setCellValue('H'.$index, $reg['pago_estado']);
-                $sheet->setCellValue('I'.$index, \Admin\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
-                $sheet->setCellValue('J'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['documento_tipo']));
-                $sheet->setCellValue('K'.$index, $reg['documento_numero']);
-                $sheet->setCellValue('L'.$index, $reg['fac_razon_social']);
-                $sheet->setCellValue('M'.$index, $reg['nombres']);
-                $sheet->setCellValue('N'.$index, $reg['paterno']);
-                $sheet->setCellValue('O'.$index, $reg['materno']);
-                $sheet->setCellValue('P'.$index, $reg['fac_direccion_fiscal']);
-                $sheet->setCellValue('Q'.$index, $reg['fac_direccion_entrega_factura']);
+                $sheet->setCellValue('H'.$index, $reg['estado']);
+                $sheet->setCellValue('I'.$index, $reg['pago_estado']);
+                $sheet->setCellValue('J'.$index, \Admin\Model\Service\OrdenService::getNombreTipoComprobante($reg['comprobante_tipo']));
+                $sheet->setCellValue('K'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['documento_tipo']));
+                $sheet->setCellValue('L'.$index, $reg['documento_numero']);
+                $sheet->setCellValue('M'.$index, $reg['fac_razon_social']);
+                $sheet->setCellValue('N'.$index, $reg['nombres']);
+                $sheet->setCellValue('O'.$index, $reg['paterno']);
+                $sheet->setCellValue('P'.$index, $reg['materno']);
+                $sheet->setCellValue('Q'.$index, $reg['fac_direccion_fiscal']);
+                $sheet->setCellValue('R'.$index, $reg['fac_direccion_entrega_factura']);
 
-                $sheet->setCellValue('R'.$index, $reg['usu_nombres']);
-                $sheet->setCellValue('S'.$index, $reg['usu_paterno']);
-                $sheet->setCellValue('T'.$index, $reg['usu_materno']);
-                $sheet->setCellValue('U'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['di_tipo']));
-                $sheet->setCellValue('V'.$index, $reg['di_valor']);
+                $sheet->setCellValue('S'.$index, $reg['usu_nombres']);
+                $sheet->setCellValue('T'.$index, $reg['usu_paterno']);
+                $sheet->setCellValue('U'.$index, $reg['usu_materno']);
+                $sheet->setCellValue('V'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['di_tipo']));
+                $sheet->setCellValue('W'.$index, $reg['di_valor']);
 
-                $sheet->setCellValue('W'.$index, $reg['nombrePais']);
-                $sheet->setCellValue('X'.$index, $reg['nombreDepa']);
-                $sheet->setCellValue('Y'.$index, $reg['nombreProv']);
-                $sheet->setCellValue('Z'.$index, $reg['nombreDist']);
+                $sheet->setCellValue('X'.$index, $reg['nombrePais']);
+                $sheet->setCellValue('Y'.$index, $reg['nombreDepa']);
+                $sheet->setCellValue('Z'.$index, $reg['nombreProv']);
+                $sheet->setCellValue('AA'.$index, $reg['nombreDist']);
 
-                $sheet->setCellValue('AA'.$index, $reg['pago_error']);
-                $sheet->setCellValue('AB'.$index, $reg['pago_error_detalle']);
+                $sheet->setCellValue('AB'.$index, $reg['pago_error']);
+                $sheet->setCellValue('AC'.$index, $reg['pago_error_detalle']);
 
                 $index ++;
             }
@@ -339,6 +342,9 @@ class OrdenController extends SecurityAdminController
         return $this->getServiceLocator()->get('Admin\Form\OrdenForm');
     }
 
+    /**
+     * @return OrdenService
+     */
     protected function _getOrdenService()
     {
         return $this->getServiceLocator()->get('Admin\Model\Service\OrdenService');

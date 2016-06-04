@@ -40,7 +40,7 @@ class VisaProcessor extends AbstractProcessor
                     $eticket = $this->ws->recuperaEticket($xmlDocument);
                     $html = $this->ws->htmlRedirecFormEticket($eticket);
                     $return['data'] = array(
-                        'status' => OrdenRepository::PAGO_ESTADO_PENDIENTE,
+                        'status' => OrdenRepository::PAGO_ESTADO_NUEVO,
                         'token' => null,
                         'clientReference' => $data['id'],
                         'reference' => $eticket,

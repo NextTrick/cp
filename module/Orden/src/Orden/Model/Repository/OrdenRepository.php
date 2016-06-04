@@ -18,10 +18,15 @@ class OrdenRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
     
     protected $cache;
     
-    const PAGO_ESTADO_PENDIENTE = 'PENDIENTE';
+    const PAGO_ESTADO_NUEVO = 'NUEVO';
     const PAGO_ESTADO_PAGADO    = 'PAGADO';
     const PAGO_ESTADO_ERROR     = 'ERROR';
     const PAGO_ESTADO_EXPIRADO  = 'EXPIRADO';
+    const PAGO_ESTADO_EXTORNADO  = 'EXTORNADO';
+
+    const ESTADO_NUEVO  = 'NUEVO';
+    const ESTADO_PROCESADO = 'PROCESADO'; // recarga procesada y completada con éxito
+    const ESTADO_ERROR = 'ERROR'; // recarga con error con éxito
 
     const ORDER_BASE_CODE = 1000;
 

@@ -46,7 +46,8 @@ class DetalleOrdenService
             );
 
             $paramsWhere = array(
-                "pago_estado" => String::xssClean($params['cmbPagoEstado'])
+                "pago_estado" => String::xssClean($params['cmbPagoEstado']),
+                "estado" => String::xssClean($params['cmbEstado'])
             );
 
             $betwween = array(

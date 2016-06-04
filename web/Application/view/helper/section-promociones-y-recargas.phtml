@@ -139,7 +139,7 @@
                                 <div class="cant_box" data-prefix="<?php echo $prefix; ?>">
                                     <span class="less">-</span>
                                     <?php $cantidad = isset($tarjetaProductos[$row['id']]) ? $tarjetaProductos[$row['id']]->getQuantity() : null; ?>
-                                    <input id="cantidad_<?php echo $prefix; ?>" type="text" placeholder="0" class="cant center" value="<?php echo $cantidad; ?>"/>
+                                    <input id="cantidad_<?php echo $prefix; ?>" type="number" placeholder="0" class="cant center" value="<?php echo $cantidad; ?>"/>
                                     <input id="id_<?php echo $prefix; ?>" type="hidden" value="<?php echo $row['id']; ?>"/>
                                     <span class="more">+</span>
                                 </div>

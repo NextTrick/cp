@@ -104,6 +104,7 @@ class RegistroController extends AbstractActionController
                     } elseif ($saveData['code'] == 'EXISTE_EMAIL') {
                         $openPopapConfRegistro = 0;
                         $mensajeRegistro = null;
+                        $disabledEmail = false;
                         $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
                     }
                 }
@@ -136,57 +137,62 @@ class RegistroController extends AbstractActionController
         //registrar en True-Fi
         $resultTrueFi = $this->_getUsuarioService()->registrarEnTrueFi($dataTrueFi);
         if ($resultTrueFi['success']) {
-            $dataIn = array(
-                'email' => $data['email'],
-                'password' => \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']),
-                'mguid' => $resultTrueFi['mguid'],
-                //'codigo_activar' => \Common\Helpers\Util::generateToken($resultTrueFi['mguid']),
-                'nombres' => $data['nombres'],
-                'paterno' => $data['paterno'],
-                'materno' => $data['materno'],
-                'di_tipo' => $data['di_tipo'],
-                'di_valor' => $data['di_valor'],
-                'pais_id' => $this->_getUbigeoService()->getPePaisId(),
-                'departamento_id' => $data['departamento_id'],
-                'provincia_id' => $data['provincia_id'],
-                'distrito_id' => $data['distrito_id'],
-                'fecha_nac' => $data['fecha_nac'],
-                'fecha_creacion' => date('Y-m-d H:i:s'),
-                'estado' => 0,
-            );
+            try {
+                $dataIn = array(
+                    'email' => $data['email'],
+                    'password' => \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']),
+                    'mguid' => $resultTrueFi['mguid'],
+                    //'codigo_activar' => \Common\Helpers\Util::generateToken($resultTrueFi['mguid']),
+                    'nombres' => $data['nombres'],
+                    'paterno' => $data['paterno'],
+                    'materno' => $data['materno'],
+                    'di_tipo' => $data['di_tipo'],
+                    'di_valor' => $data['di_valor'],
+                    'pais_id' => $this->_getUbigeoService()->getPePaisId(),
+                    'departamento_id' => $data['departamento_id'],
+                    'provincia_id' => $data['provincia_id'],
+                    'distrito_id' => $data['distrito_id'],
+                    'fecha_nac' => $data['fecha_nac'],
+                    'fecha_creacion' => date('Y-m-d H:i:s'),
+                    'estado' => 0,
+                );
 
-            $gateway = $this->_getDataRegistroTemp('gateway');   
-            switch ($gateway) {
-                case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
-                    $dataIn['facebook_id'] = $this->_getDataRegistroTemp('id');
-                    $dataIn['estado'] = 1;
-                    break;
-                case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
-                    $dataIn['twitter_id'] = $this->_getDataRegistroTemp('id');
-                    break;
-            }
-            
-            $codigoRecuperar = \Common\Helpers\Util::generateToken($resultTrueFi['mguid']);
-            $dataIn['codigo_activar'] = $codigoRecuperar;
-            
-            $usuarioId = $repository->save($dataIn);
-            if ($usuarioId) {
-                //si es facebook activar cuenta en TrueFi
-                if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
-                    $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $resultTrueFi['mguid']));
+                $gateway = $this->_getDataRegistroTemp('gateway');   
+                switch ($gateway) {
+                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_FACEBOOK:
+                        $dataIn['facebook_id'] = $this->_getDataRegistroTemp('id');
+                        $dataIn['estado'] = 1;
+                        break;
+                    case \Usuario\Model\Service\LoginGatewayService::LOGIN_TWITTER:
+                        $dataIn['twitter_id'] = $this->_getDataRegistroTemp('id');
+                        break;
                 }
 
-                $result['success'] = true;
-                $result['code'] = null;
-                
-                unset($data);
-                unset($dataIn);
-                unset($dataTrueFi);
-            } else {
-                $result['code'] = 'ERROR_PROCESO';
+                $codigoRecuperar = \Common\Helpers\Util::generateToken($resultTrueFi['mguid']);
+                $dataIn['codigo_activar'] = $codigoRecuperar;
+
+                $usuarioId = $repository->save($dataIn);
+                if ($usuarioId) {
+                    //si es facebook activar cuenta en TrueFi
+                    if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
+                        $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $resultTrueFi['mguid']));
+                    }
+
+                    $result['success'] = true;
+                    $result['code'] = null;
+
+                    unset($data);
+                    unset($dataIn);
+                    unset($dataTrueFi);
+                } else {
+                    $result['code'] = 'ERROR_PROCESO';
+                }
+            } catch (\Exception $e) {
+                \Util\Common\Email::reportException($e);
             }
         } else {
-            $result['message'] = 'EXISTE_EMAIL';
+            \Util\Common\Email::reportDebug($resultTrueFi, null, 'Error completar registro');
+            $result['code'] = 'EXISTE_EMAIL';
         }
         
         $this->_removeDataRegistroTemp();

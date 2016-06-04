@@ -140,7 +140,7 @@ return array(
     //Emails
     'emails' => array(
         'admin' => 'ing.angeljara@gmail.com', // email del administrador
-        'developers' => 'ing.angeljara@gmail.com', // emails de los dev
+        'developers' => 'ing.angeljara@gmail.com, montesinos2005ii@gmail.com', // emails de los dev
         'from' => 'contacto@coneypark.pe',
     ), 
     
@@ -214,7 +214,7 @@ return array(
                 'adminEmail' => 'ing.angeljara@gmail.com', // PE's secret key
 
                 'conceptoPago' => 'ConeyPark',
-                'cipExpiracionDias' => 3
+                'cipExpiracionDias' => 2
             ),
             'visa' => array(                
                 'baseUrl' => 'http://qas.multimerchantvisanet.com/',

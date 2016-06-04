@@ -260,7 +260,7 @@ header nav ul {
   text-align: center;
 }
 header nav ul li {
-  width: 110px;
+  width: 108px;
   height: 80px;
   list-style: none;
   display: inline-block;
@@ -276,12 +276,13 @@ header nav ul li:hover {
 header nav ul li a {
   text-decoration: none;
   color: #972482;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: bold;
   position: relative;
 }
 header nav ul li a .icon {
   height: 40px;
+  margin-bottom: 3px;
 }
 header nav ul li a .icon i {
   font-size: 36px;
@@ -328,7 +329,7 @@ header nav ul li a .icon span.icon_gold {
 }
 header nav ul li.logo {
   width: 200px;
-  margin: -10px 20px 0;
+  margin: -10px 36px 0;
 }
 header nav ul li.logo:hover {
   animation: none;
@@ -1195,17 +1196,21 @@ section .purple_box .cards_content .col_3 .container_card {
   color: #000;
   width: 100%;
   height: 100%;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  transition: all 1s linear;
 }
 section .purple_box .cards_content .col_3 .container_card.gira_adelante {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 section .purple_box .cards_content .col_3 .container_card.gira_atras {
   -webkit-transform: rotateY(0deg);
   transform: rotateY(0deg);
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+section .purple_box .cards_content .col_3 .container_card.transition {
+  transition: all 1s linear;
 }
 section .purple_box .cards_content .col_3 .container_card .face {
   background: #efefef;
@@ -1218,6 +1223,8 @@ section .purple_box .cards_content .col_3 .container_card .face {
 }
 section .purple_box .cards_content .col_3 .container_card .face.back {
   display: block;
+}
+section .purple_box .cards_content .col_3 .container_card .face.back.rotate_back {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
@@ -1900,6 +1907,20 @@ section .purple_box .pay_box_white >.right .items_cart .item .right .link_show .
 }
 section .purple_box .pay_box_white >.right .total_box {
   padding: 20px 0 50px;
+}
+section .purple_box .pay_box_white >.right .total_box .terminos input {
+  width: 20px;
+  height: 15px;
+}
+section .purple_box .pay_box_white >.right .total_box .terminos p {
+  display: inline;
+  font-size: 14px;
+}
+section .purple_box .pay_box_white >.right .total_box .terminos p a {
+  display: inline;
+}
+section .purple_box .pay_box_white >.right .total_box ul.parsley-errors-list {
+  text-align: center !important;
 }
 section .purple_box .pay_box_white >.right .total_box h3 {
   padding: 10px 0;

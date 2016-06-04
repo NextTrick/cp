@@ -34,16 +34,11 @@ class PermisoRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             $select->join(array('c' => 'admin_recurso'), 'a.recurso_id = c.id', array('recurso_nombre' => 'nombre'), 'left');
 
             $where = new \Zend\Db\Sql\Where();
-            foreach ($this->crWhere as $key => $value) {
-                if (!empty($value)) {
-                    $where->or->equalTo($key, $value) ;
-                }
+            if (!empty($this->crWhere['rol_id'])) {
+                $where->and->equalTo('a.rol_id', $this->crWhere['rol_id']) ;
             }
-
-            foreach ($this->crWhereLike as $key => $value) {
-                if (!empty($value)) {
-                    $where->or->like($key, "%$value%") ;
-                }
+            if (!empty($this->crWhere['recurso_id'])) {
+                $where->and->equalTo('a.recurso_id', $this->crWhere['recurso_id']) ;
             }
             
             $select->where($where, \Zend\Db\Sql\Predicate\PredicateSet::OP_OR);

@@ -204,7 +204,7 @@ header
 			padding 0
 			text-align center
 			li
-				width 110px
+				width 108px
 				height 80px
 				list-style none
 				display inline-block
@@ -223,11 +223,12 @@ header
 				a
 					text-decoration none
 					color #972482
-					font-size 10px
+					font-size 11px
 					font-weight bold
 					position relative
 					.icon
 						height 40px
+						margin-bottom 3px
 						i
 							font-size 36px
 						span
@@ -247,7 +248,7 @@ header
 								sprite($gold)
 				&.logo
 					width 200px
-					margin -10px 20px 0
+					margin -10px 36px 0
 					&:hover
 						animation none
 					img
@@ -908,15 +909,18 @@ section
 					color black
 					width 100%
 					height 100%
-					-webkit-transform-style preserve-3d
-					transform-style preserve-3d
-					transition all 1.0s linear
 					&.gira_adelante
 						-webkit-transform rotateY(180deg)
 						transform rotateY(180deg)
+						-webkit-transform-style preserve-3d
+						transform-style preserve-3d
 					&.gira_atras
 						-webkit-transform rotateY(0deg)
 						transform rotateY(0deg)
+						-webkit-transform-style preserve-3d
+						transform-style preserve-3d
+					&.transition
+						transition all 1.0s linear
 					.face
 						background #EFEFEF
 						position absolute
@@ -927,8 +931,9 @@ section
 						backface-visibility hidden
 						&.back
 							display block
-							-webkit-transform rotateY(180deg)
-							transform rotateY(180deg)
+							&.rotate_back
+								-webkit-transform rotateY(180deg)
+								transform rotateY(180deg)
 				
 				.init_loading
 					width 100%
@@ -1431,6 +1436,17 @@ section
 										border-bottom solid 5px #FF6909
 				.total_box
 					padding 20px 0 50px
+					.terminos
+						input
+							width 20px
+							height 15px
+						p
+							display inline
+							font-size 14px
+							a
+								display inline
+					ul.parsley-errors-list
+						text-align center !important
 					h3
 						padding 10px 0
 						span
