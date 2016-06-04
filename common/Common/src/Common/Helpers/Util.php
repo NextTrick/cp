@@ -166,4 +166,17 @@ class Util
         }
         return false;
     }
+    
+    public static function clearBlankSpaceMiddle($text, $returnArray = false)
+    {
+        $partText = explode(' ', $text);
+        $result = array();
+        foreach ($partText as $text) {
+            if (!empty($text)) {
+                $result[] = $text;
+            }
+        }
+        
+        return $returnArray ? $result : implode(' ', $result);
+    }
 }

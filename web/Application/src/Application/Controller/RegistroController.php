@@ -57,7 +57,7 @@ class RegistroController extends AbstractActionController
         $mensajeRegistro = null;
         $openPopapConfRegistro = 0;
         if ($this->request->isPost() && !$registroForm) {
-            //=========== Llenar los combos ===========
+            //==================== Llenar los combos ===========================
             $departamentoId = $this->request->getPost('departamento_id');
             $provinciaId = $this->request->getPost('provincia_id');
             $departamentos = $this->_getUbigeoService()->getPeDepartamentos();
@@ -66,14 +66,16 @@ class RegistroController extends AbstractActionController
             $form->get('provincia_id')->setValueOptions($provincias);
             $distritos = $this->_getUbigeoService()->getDistritos($provinciaId);
             $form->get('distrito_id')->setValueOptions($distritos);
+            //==================== Fin llenar los combos =======================
             
-            //=========== Aplicar filter ===========
+            //====================== Aplicar filter ============================
             $form->setInputFilter(new \Application\Filter\RegistroFilter());
             $data = $this->request->getPost();
             
             $form->setData($data);
+            //====================== Fin Aplicar filter ========================
             
-            //=========== Validar fecha ===========
+            //======================== Validar fecha ===========================
             $fechaValida = false;
             $fechaNac = null;
             if (\Common\Helpers\Util::checkDate($data['mes'], $data['dia'], $data['anio'])) {
@@ -82,6 +84,7 @@ class RegistroController extends AbstractActionController
             } else {
                 $form->get('dia')->setMessages(array('noValido' => 'El campo fecha no es válido.'));
             }
+            //======================== Fin validar fecha =======================
 
             if ($form->isValid() && $fechaValida) {
                 $data = $form->getData();

@@ -13,6 +13,11 @@ class MisDatosController extends SecurityWebController
         }
         
         $usuario = $this->_getUsuarioData();
+        
+        if (!$this->request->isPost()) {
+            $this->_getUsuarioService()->actualizarUsuarioDesdeTrueFi($usuario->id);
+        }
+        
         $criteria = array('where' => array('id' => $usuario->id));
         $usuarioData = $this->_getUsuarioService()->getRepository()->findOne($criteria);
 
@@ -51,7 +56,7 @@ class MisDatosController extends SecurityWebController
         $request = $this->getRequest();
         $mensajeRegistro = null;
         if ($this->request->isPost()) {
-            //=========== Llenar los combos ===========
+            //========================== Llenar los combos =====================
             $departamentoId = $this->request->getPost('departamento_id');
             $provinciaId = $this->request->getPost('provincia_id');
             $departamentos = $this->_getUbigeoService()->getPeDepartamentos();
@@ -60,8 +65,9 @@ class MisDatosController extends SecurityWebController
             $form->get('provincia_id')->setValueOptions($provincias);
             $distritos = $this->_getUbigeoService()->getDistritos($provinciaId);
             $form->get('distrito_id')->setValueOptions($distritos);
+            //========================== Fin llenar los combos =================
             
-            //=========== Aplicar filter ===========
+            //========================== Aplicar filter ========================
             $data = array_merge_recursive(
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
@@ -82,8 +88,9 @@ class MisDatosController extends SecurityWebController
                 'changePassword' => $changePassword,
             )));
             $form->setData($data);
+            //========================== Fin aplicar filter ====================
             
-            //=========== Validar fecha ===========
+            //========================== Validar fecha =========================
             $fechaValida = false;
             $fechaNac = null;
             if (\Common\Helpers\Util::checkDate($data['mes'], $data['dia'], $data['anio'])) {
@@ -92,33 +99,15 @@ class MisDatosController extends SecurityWebController
             } else {
                 $form->get('dia')->setMessages(array('noValido' => 'El campo fecha no es válido.'));
             }
+            //========================== Fin validar fecha =====================
             
             if ($fechaValida && $form->isValid()) {
                 $data = $form->getData();
-                $dataIn = array(
-                    'email' => $data['email'],
-                    'nombres' => $data['nombres'],
-                    'paterno' => $data['paterno'],
-                    'materno' => $data['materno'],
-                    'pais_id' => $this->_getUbigeoService()->getPePaisId(),
-                    'departamento_id' => $data['departamento_id'],
-                    'provincia_id' => $data['provincia_id'],
-                    'distrito_id' => $data['distrito_id'],
-                    'di_tipo' => $data['di_tipo'],
-                    'di_valor' => $data['di_valor'],
-                    'fecha_nac' => $fechaNac,
-                    'fecha_edicion' => date('Y-m-d H:i:s'),
-                );
+                $data['fecha_nac'] = $fechaNac;
+                $data['new_file_name'] = $newFileName;
                 
-                if (!empty($newFileName)) {
-                    $dataIn['imagen'] = $newFileName;
-                }
-                if (!empty($data['password'])) {
-                    $dataIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']);
-                }
-
-                $id = $this->_getUsuarioService()->getRepository()->save($dataIn, $usuario->id);
-                if (!empty($id)) {
+                $success = $this->_saveData($data, $usuarioData['id'], $usuarioData['mguid']);
+                if ($success) {
                     $this->flashMessenger()->addMessage(array(
                         'success' => '<b>Felicidades</b>, tus datos fueron actualizados correctamente. ' ,
                     ));
@@ -127,7 +116,7 @@ class MisDatosController extends SecurityWebController
                         'error' => 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.',
                     ));
                 }
-                
+
                 return $this->redirect()->toRoute('web-mis-datos', array('controller' => 'mis-datos'));
             }
         }
@@ -141,6 +130,57 @@ class MisDatosController extends SecurityWebController
     }
     
 
+    private function _saveData($data, $id, $mguid)
+    {
+        //======================  Actualizar datos en TrueFi ===================
+        $dataArray = array(
+            'FIRSTNAME' => $data['nombres'],
+            'LASTNAME' => $data['paterno'] . ' ' . $data['materno'],
+            'EMAIL' => $data['email'],
+            'IDNUMBER' => $data['di_valor'],
+        );
+        if (!empty($data['fecha_nac'])) {
+            $dataArray['BIRTHDATE'] = $data['fecha_nac'];
+        }
+        $dataTrueFi = array(
+            'MGUID' => $mguid,
+            'Data' => $dataArray,
+        );
+        $result = $this->_getUsuarioService()->actualizarEnTrueFi($dataTrueFi);
+        //==================== Fin  Actualizar datos en TrueFi =================
+
+        if ($result['success']) {
+            $dataIn = array(
+                'email' => $data['email'],
+                'nombres' => $data['nombres'],
+                'paterno' => $data['paterno'],
+                'materno' => $data['materno'],
+                'pais_id' => $this->_getUbigeoService()->getPePaisId(),
+                'departamento_id' => $data['departamento_id'],
+                'provincia_id' => $data['provincia_id'],
+                'distrito_id' => $data['distrito_id'],
+                'di_tipo' => $data['di_tipo'],
+                'di_valor' => $data['di_valor'],
+                'fecha_nac' => $data['fecha_nac'],
+                'fecha_edicion' => date('Y-m-d H:i:s'),
+            );
+
+            if (!empty($data['new_file_name'])) {
+                $dataIn['imagen'] = $data['new_file_name'];
+            }
+            if (!empty($data['password'])) {
+                $dataIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']);
+            }
+
+            $id = $this->_getUsuarioService()->getRepository()->save($dataIn, $id);
+            if (!empty($id)) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
