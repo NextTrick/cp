@@ -68,7 +68,7 @@
                     <div class="bg_purple_change_email">
 
                         <p>Si haz cambiado de cuenta de correo electrónico o deseas
-                            actualizar algún dato personal <a href="http://coneypark.pe/contactos">contáctanos</a> para ayudarte a actualizarlo.</p>
+                            actualizar algún dato personal <a href="http://coneypark.pe/contactos" target="_blank">contáctanos</a> para ayudarte a actualizarlo.</p>
                     </div>
                     <h3>Tus datos personales</h3>
                     <div class="content_form">
@@ -131,7 +131,7 @@
                                     'class' => 'right',
                                 ))) ?>
                             </div>
-                            <div class="right">
+                            <div class="right error_message_dep">
                                 <?php echo $this->formElementerrors($form->get('departamento_id')); ?>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                                 ))) ?>
                                 
                             </div>
-                            <div class="right">
+                            <div class="right error_message_pro">
                                 <?php echo $this->formElementerrors($form->get('provincia_id')); ?>
                             </div>
                         </div>
@@ -154,7 +154,7 @@
                                     'class' => 'right',
                                 ))) ?>
                             </div>
-                            <div class="right">
+                            <div class="right error_message_dis">
                                 <?php echo $this->formElementerrors($form->get('distrito_id')); ?>
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                         <div class="form_control">
                             <div class="right">
                                 <?php echo $this->formRow($form->get('token_csrf')); ?>
-                                <button type="submit" class="btn btn_orange btn_save_signin">Actualizar mis datos</button>
+                                <button type="submit" class="btn btn_orange btn_save_signin btn_save_dates">Actualizar mis datos</button>
                             </div>
                         </div>
                     </div>

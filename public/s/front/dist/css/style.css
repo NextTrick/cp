@@ -2484,12 +2484,13 @@ section form.signin_form .content_form select {
 }
 section form.form_mis_datos .bg_purple_change_email {
   background: #310041;
-  padding: 20px 10px;
+  padding: 20px;
 }
 section form.form_mis_datos .bg_purple_change_email p {
   color: #fff;
   font-size: 18px;
   line-height: 24px;
+  margin-bottom: 0;
 }
 section form.form_mis_datos .bg_purple_change_email p a {
   color: #f63a00;
