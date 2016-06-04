@@ -31,77 +31,75 @@
                         <?php else : ?>
                         <div class="items_cart">
                             <?php $index = 0; ?>
-                            <?php foreach ($cartModel->getProductsCart() as $productos) : ?>
-                                <?php foreach ($productos as $producto) : ?>
-                                    <?php $index++; ?>
-                                    <div class="item">
-                                        <div class="left">
-                                            <img src="<?php echo $urlImg . '/' . $producto->getProductImage(); ?>" alt="<?php echo $producto->getProductName(); ?>"/>
-                                        </div>
-                                        <div class="right" data-prefix="<?php echo $index; ?>">
-                                            <span class="remove_icon">x</span>
-                                            <h5><?php echo $producto->getProductName(); ?> <span>. </span>
-                                                <?php if ($producto->getOption('legal') != '') : ?>
-                                                <a href="#modal_watch_legal_<?php echo $index; ?>" name="modal" class="legal">Ver legal</a>
-                                                <?php endif; ?>
-                                            </h5>
-                                            <h4 class="item_title">
-                                                <?php echo $producto->getProductName2(); ?>
-                                            </h4>
-                                            <div class="card_type">
-                                                <span>En:</span>
-                                                <div class="card_name">
-                                                    <span></span>
-                                                    <select id="tarjeta_<?php echo $index; ?>" class="change_card" data-pre="<?php echo $producto->getCategoryCode(); ?>">
-                                                        <?php foreach ($usuarioTarjetas as $codigo => $nombre) : ?>
-                                                        <?php $select = ($codigo == $producto->getCategoryCode()) ? 'selected="selected"' : ''; ?>
-                                                        <option value="<?php echo $codigo; ?>" <?php echo $select; ?>><?php echo $nombre; ?></option>
-                                                        <?php endforeach; ?>
-                                                    </select>
-                                                </div>
-                                                <select id="cantidad_<?php echo $index; ?>" class="cant change_cant"> 
-                                                    <?php foreach ($catidades as $key => $value) : ?>
-                                                    <?php $select = ($key == $producto->getQuantity()) ? 'selected="selected"' : ''; ?>
-                                                    <option value="<?php echo $key; ?>" <?php echo $select; ?>><?php echo $value; ?></option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                                <input id="id_<?php echo $index; ?>" type="hidden" value="<?php echo $producto->getProductId(); ?>">
-                                            </div>
-                                            <div class="detail">
-                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('emoney'))) : ?>
-                                                <div class="line">
-                                                    <div class="left">Dinero</div>
-                                                    <div class="right">S/. <?php echo $producto->getOption('emoney', true); ?></div>
-                                                </div>
-                                                <?php endif; ?>
-                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('bonus'))) : ?>
-                                                <div class="line">
-                                                    <div class="left">Coney Bonos</div>
-                                                    <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
-                                                </div>
-                                                <?php endif; ?>
-                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('promotionbonus'))) : ?>
-                                                <div class="line">
-                                                    <div class="left">Coney Bonos Plus</div>
-                                                    <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
-                                                </div>
-                                                <?php endif; ?>
-                                                <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('etickets'))) : ?>
-                                                <div class="line">
-                                                    <div class="left">Tickets</div>
-                                                    <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
-                                                </div>
-                                                <?php endif; ?>
-                                            </div>
-                                            <div class="link_show">
-                                                <div class="watch_detail">Ver detalle</div>
-                                                <div class="hidden_detail">Ocultar detalle</div>
-                                            </div>
-                                            <?php $partMonto = explode('.', $producto->getAmount(true)); ?>
-                                            <div class="total">S/. <span><?php echo $partMonto[0]; ?></span>.<?php echo $partMonto[1]; ?> </div>
-                                        </div>
+                            <?php foreach ($cartModel->getProductsCart() as $producto) : ?>
+                                <?php $index++; ?>
+                                <div class="item">
+                                    <div class="left">
+                                        <img src="<?php echo $urlImg . '/' . $producto->getProductImage(); ?>" alt="<?php echo $producto->getProductName(); ?>"/>
                                     </div>
-                                <?php endforeach; ?>
+                                    <div class="right" data-prefix="<?php echo $index; ?>">
+                                        <span class="remove_icon">x</span>
+                                        <h5><?php echo $producto->getProductName(); ?> <span>. </span>
+                                            <?php if ($producto->getOption('legal') != '') : ?>
+                                            <a href="#modal_watch_legal_<?php echo $index; ?>" name="modal" class="legal">Ver legal</a>
+                                            <?php endif; ?>
+                                        </h5>
+                                        <h4 class="item_title">
+                                            <?php echo $producto->getProductName2(); ?>
+                                        </h4>
+                                        <div class="card_type">
+                                            <span>En:</span>
+                                            <div class="card_name">
+                                                <span></span>
+                                                <select id="tarjeta_<?php echo $index; ?>" class="change_card" data-pre="<?php echo $producto->getCategoryCode(); ?>">
+                                                    <?php foreach ($usuarioTarjetas as $codigo => $nombre) : ?>
+                                                    <?php $select = ($codigo == $producto->getCategoryCode()) ? 'selected="selected"' : ''; ?>
+                                                    <option value="<?php echo $codigo; ?>" <?php echo $select; ?>><?php echo $nombre; ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                            <select id="cantidad_<?php echo $index; ?>" class="cant change_cant"> 
+                                                <?php foreach ($catidades as $key => $value) : ?>
+                                                <?php $select = ($key == $producto->getQuantity()) ? 'selected="selected"' : ''; ?>
+                                                <option value="<?php echo $key; ?>" <?php echo $select; ?>><?php echo $value; ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <input id="id_<?php echo $index; ?>" type="hidden" value="<?php echo $producto->getProductId(); ?>">
+                                        </div>
+                                        <div class="detail">
+                                            <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('emoney'))) : ?>
+                                            <div class="line">
+                                                <div class="left">Dinero</div>
+                                                <div class="right">S/. <?php echo $producto->getOption('emoney', true); ?></div>
+                                            </div>
+                                            <?php endif; ?>
+                                            <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('bonus'))) : ?>
+                                            <div class="line">
+                                                <div class="left">Coney Bonos</div>
+                                                <div class="right">S/. <?php echo $producto->getOption('bonus', true); ?></div>
+                                            </div>
+                                            <?php endif; ?>
+                                            <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('promotionbonus'))) : ?>
+                                            <div class="line">
+                                                <div class="left">Coney Bonos Plus</div>
+                                                <div class="right">S/. <?php echo $producto->getOption('promotionbonus', true); ?></div>
+                                            </div>
+                                            <?php endif; ?>
+                                            <?php if (\Common\Helpers\Util::noEmptyDecimal($producto->getOption('etickets'))) : ?>
+                                            <div class="line">
+                                                <div class="left">Tickets</div>
+                                                <div class="right"><?php echo $producto->getOption('etickets'); ?></div>
+                                            </div>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="link_show">
+                                            <div class="watch_detail">Ver detalle</div>
+                                            <div class="hidden_detail">Ocultar detalle</div>
+                                        </div>
+                                        <?php $partMonto = explode('.', $producto->getAmount(true)); ?>
+                                        <div class="total">S/. <span><?php echo $partMonto[0]; ?></span>.<?php echo $partMonto[1]; ?> </div>
+                                    </div>
+                                </div>
                             <?php endforeach; ?>
                         </div>
                         <?php endif; ?>
@@ -159,19 +157,17 @@
     
     <?php if (!empty($cartModel)) : ?>
     <?php $index = 0; ?>
-    <?php foreach ($cartModel->getProductsCart() as $productos) : ?>
-        <?php foreach ($productos as $producto) : ?>
-            <?php $index++; ?>
-                <div id="modal_watch_legal_<?php echo $index;?>" class="modal_box modal_box_legal">
-                  <div class="modal_content">
-                    <h3>Importante: <span></span></h3>
-                    <hr/>
-                    <div class="text_box">
-                      <p><?php echo $producto->getOption('legal'); ?></p>
-                    </div>
-                  </div>
-                </div>
-        <?php endforeach; ?>
+    <?php foreach ($cartModel->getProductsCart() as $producto) : ?>
+        <?php $index++; ?>
+        <div id="modal_watch_legal_<?php echo $index;?>" class="modal_box modal_box_legal">
+          <div class="modal_content">
+            <h3>Importante: <span></span></h3>
+            <hr/>
+            <div class="text_box">
+              <p><?php echo $producto->getOption('legal'); ?></p>
+            </div>
+          </div>
+        </div>
     <?php endforeach; ?>
     <?php endif; ?>
     <div id="mask"></div>

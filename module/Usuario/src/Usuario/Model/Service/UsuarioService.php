@@ -38,6 +38,11 @@ class UsuarioService
         return $this->_getTrueFiUsuarioService()->newMember($data);
     }
     
+    public function actualizarEnTrueFi($data)
+    {
+        return $this->_getTrueFiUsuarioService()->setMember($data);
+    }
+    
     public function traerDeTrueFi($data)
     {
         return $this->_getTrueFiUsuarioService()->getMember($data);
@@ -58,7 +63,7 @@ class UsuarioService
         return $this->_getTrueFiUsuarioService()->logon($data);
     }
     
-    public function registrarUsuarioDeTrueFi($mguid, $password)
+    public function registrarUsuarioDesdeTrueFi($mguid, $password)
     {
         $result = $this->_getTrueFiUsuarioService()->getMember(array('MGUID' => $mguid));
         if ($result['success']) {
@@ -78,6 +83,47 @@ class UsuarioService
 
             try {
                 $this->_repository->save($data);
+                return true;
+            } catch (\Exception $e) {
+                \Common\Helpers\Error::initialize()->logException($e);
+            }
+        }
+        return false;
+    }
+    
+    public function actualizarUsuarioDesdeTrueFi($id)
+    {
+        $criteria = array('where' => array('id' => $id));
+        $usuarioData = $this->_repository->findOne($criteria);
+        
+        if (empty($usuarioData)) {
+            return false;
+        }
+
+        $result = $this->_getTrueFiUsuarioService()->getMember(array('MGUID' => $usuarioData['mguid']));
+        if ($result['success']) {
+            $result = $result['result'];
+
+            $lastName = \Common\Helpers\Util::clearBlankSpaceMiddle($result['lastname'], true);
+            
+            $data = array(
+                'mguid' => $usuarioData['mguid'],
+                'nombres' => $result['firstname'],
+                'paterno' => isset($lastName[0]) ? $lastName[0] : $result['lastname'],
+                'materno' => isset($lastName[1]) ? $lastName[1] : null,
+                'email' => $result['email'],
+                'estado' => (int)$result['active'],
+            );
+            
+            if (!empty($result['birthdate'])) {
+                $data['fecha_nac'] = $result['birthdate'];
+            }
+            if (!empty($result['idnumber'])) {
+                $data['di_valor'] = $result['idnumber'];
+            }
+
+            try {
+                $this->_repository->save($data, $id);
                 return true;
             } catch (\Exception $e) {
                 \Common\Helpers\Error::initialize()->logException($e);
