@@ -197,12 +197,10 @@ class OrdenService
         $dataAdicional = '';
         $tarjetaIds = array();
         if (!empty($cartModel)) {
-            foreach ($cartModel->getProductsCart() as $productos) {
-                foreach ($productos as $producto) {
-                    $categoryCode = $producto->getCategoryCode();
-                    $tarjetaId = Crypto::decrypt($categoryCode, \Common\Helpers\Util::VI_ENCODEID);
-                    $tarjetaIds[] = $tarjetaId;
-                }
+            foreach ($cartModel->getProductsCart() as $producto) {
+                $categoryCode = $producto->getCategoryCode();
+                $tarjetaId = Crypto::decrypt($categoryCode, \Common\Helpers\Util::VI_ENCODEID);
+                $tarjetaIds[] = $tarjetaId;
             }
         }
 
@@ -237,26 +235,24 @@ class OrdenService
         $cartModel = $this->_getCartService()->getCart();
 
         if (!empty($cartModel)) {
-            foreach ($cartModel->getProductsCart() as $productos) {
-                foreach ($productos as $producto) {
-                    $ordenDetalleData = array(
-                        'orden_id' => $ordenId,
-                    );
-                    $options = $this->_getValidOptions($producto);
-                    $ordenDetalleData = $ordenDetalleData + $options;
+            foreach ($cartModel->getProductsCart() as $producto) {
+                $ordenDetalleData = array(
+                    'orden_id' => $ordenId,
+                );
+                $options = $this->_getValidOptions($producto);
+                $ordenDetalleData = $ordenDetalleData + $options;
 
-                    $categoryCode = $producto->getCategoryCode();
-                    $tarjetaId = Crypto::decrypt($categoryCode, \Common\Helpers\Util::VI_ENCODEID);
+                $categoryCode = $producto->getCategoryCode();
+                $tarjetaId = Crypto::decrypt($categoryCode, \Common\Helpers\Util::VI_ENCODEID);
 
-                    $ordenDetalleData['paquete_id'] = $producto->getProductId();
-                    $ordenDetalleData['tarjeta_id'] = $tarjetaId;
-                    $ordenDetalleData['monto'] = $producto->getPrice(true);
-                    $ordenDetalleData['fecha_creacion'] = $cDate;
-                    $ordenDetalleData['cantidad'] = $producto->getQuantity();
-                    $ordenDetalleData['estado'] = OrdenRepository::ESTADO_NUEVO;
+                $ordenDetalleData['paquete_id'] = $producto->getProductId();
+                $ordenDetalleData['tarjeta_id'] = $tarjetaId;
+                $ordenDetalleData['monto'] = $producto->getPrice(true);
+                $ordenDetalleData['fecha_creacion'] = $cDate;
+                $ordenDetalleData['cantidad'] = $producto->getQuantity();
+                $ordenDetalleData['estado'] = OrdenRepository::ESTADO_NUEVO;
 
-                    $this->_getDetalleOrdenService()->getRepository()->save($ordenDetalleData);
-                }
+                $this->_getDetalleOrdenService()->getRepository()->save($ordenDetalleData);
             }
         }
     }

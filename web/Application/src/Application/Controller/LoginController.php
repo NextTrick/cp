@@ -85,7 +85,7 @@ class LoginController extends SecurityWebController
             if ($usuarioWs['success']) {
                 $mguid = $usuarioWs['mguid'];
                 $success = $this->_getUsuarioService()
-                    ->registrarUsuarioDeTrueFi($mguid, $password);
+                    ->registrarUsuarioDesdeTrueFi($mguid, $password);
                 if ($success) {
                     //activar en True-Fi
                     $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $mguid));
