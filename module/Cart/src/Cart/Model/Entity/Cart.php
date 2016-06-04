@@ -101,13 +101,13 @@ class Cart
                 );
             }
         }
-        ksort($order);
+        ksort($order, SORT_NUMERIC);
         
         $results = array();
         foreach ($order as $groupProducts) {
             foreach ($groupProducts as $groupProduct => $products) {
                 foreach ($products as $productId => $product) {
-                    $results[$groupProduct][$productId] = $product;
+                    $results[] = $product;
                 }
             }
         }
@@ -125,11 +125,11 @@ class Cart
             foreach ($groupProducts as $productId => $product) {
                 $order[$product->getTimestamp()] = array($productId => $product);
             }
-            ksort($order);
+            ksort($order, SORT_NUMERIC);
 
             foreach ($order as $products) {
                 foreach ($products as $productId => $product) {
-                    $results[$productId] = $product;
+                    $results[] = $product;
                 }
             }
         }

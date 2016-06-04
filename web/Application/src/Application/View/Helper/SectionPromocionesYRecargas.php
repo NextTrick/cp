@@ -21,13 +21,18 @@ class SectionPromocionesYRecargas extends AbstractHelper implements ServiceLocat
             throw new \Exception('No existe url configurada.');
         }
         
+        $rowsTarjetaProductos = array();
+        foreach ($tarjetaProductos as $producto) {
+            $rowsTarjetaProductos[$producto->getProductId()] = $producto;
+        }
+        
         $rowPromociones = $sl->get('Paquete\Model\Service\PaqueteService')->recargaPromociones();
         $rowRecargas = $sl->get('Paquete\Model\Service\PaqueteService')->recargaRecargas();
         return $this->getView()->render('helper/section-promociones-y-recargas.phtml', array(
             'rowPromociones' => $rowPromociones,
             'rowRecargas' => $rowRecargas,
             'cartModel' => $cartModel,
-            'tarjetaProductos' => $tarjetaProductos,
+            'tarjetaProductos' => $rowsTarjetaProductos,
             'urlImg' => $config['fileDir']['paquete_paquete']['down'],
         ));
     }
