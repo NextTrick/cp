@@ -38,7 +38,6 @@ class LoginController extends SecurityWebController
             return $this->_toUrlLogin();
         }
 
-        $opcion = 'form';
         $form = $this->_getLoginForm();
         $form->setInputFilter(new \Application\Filter\LoginFilter());
         $data = $this->request->getPost();
@@ -59,37 +58,39 @@ class LoginController extends SecurityWebController
         $email = $values['email'];
         $password = $values['password'];
 
-        $usuarioBd = $this->_getUsuarioService()->getRepository()->findOne(array(
-            'where' => array('email' => $email),
-        ));
-
         $messageError = 'Lo sentimos, no se pudo completar el proceso, por favor inténtalo más tarde';
-        
         $result = new \stdClass();
         $result->error = true;
         $result->message = $messageError;
-        if (!empty($usuarioBd)) {
-            $data = $this->_getLoginGatewayService()
-                ->setGateway($opcion)
-                ->setCredential($email, $password)
-                ->login();
-            $result->error = $data->error;
-            $result->message = $data->message;
-        } else {
-            //validar en TrueFi y registrar cuenta
-            $usuarioWs = $this->_getUsuarioService()->logonEnTrueFi(array(
-                'EMail' => $email,
-                'Password' => $password,
-            ));
+        
+        //validar en TrueFi y registrar cuenta
+        $usuarioWs = $this->_getUsuarioService()->logonEnTrueFi(array(
+            'EMail' => $email,
+            'Password' => $password,
+        ));
 
-            if ($usuarioWs['success']) {
+        if ($usuarioWs['success']) {
+            $usuarioBd = $this->_getUsuarioService()->getRepository()->findOne(array(
+                'where' => array('email' => $email),
+            ));
+            
+            if (!empty($usuarioBd)) {
+                $this->_getUsuarioService()->modificarPasswordEnDb($usuarioBd['id'], $email, $password);
+                
+                $data = $this->_getLoginGatewayService()->loginOffline($email);
+                if ($data['success']) {
+                    $result->error = false;
+                    $result->message = null;
+                } else {
+                    $result->error = true;
+                    $result->message = $data['message'];
+                }
+            } else {
                 $mguid = $usuarioWs['mguid'];
-                $success = $this->_getUsuarioService()
-                    ->registrarUsuarioDesdeTrueFi($mguid, $password);
+                $success = $this->_getUsuarioService()->registrarUsuarioDesdeTrueFi($mguid, $password);
                 if ($success) {
-                    //activar en True-Fi
                     $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $mguid));
-                    
+
                     $data = $this->_getLoginGatewayService()->loginOffline($email);
                     if ($data['success']) {
                         $result->error = false;
@@ -102,13 +103,21 @@ class LoginController extends SecurityWebController
                     $result->error = true;
                     $result->message = 'Los datos ingresados son incorrectos.';
                 }
-            } else {
-                $noRegistrado = (strpos($usuarioWs['message'], 'registrado') !== false 
-                        && strpos($usuarioWs['message'], 'incorrecta') !== false);
-
-                $result->error = true;
-                $result->message = $noRegistrado ? 'Los datos ingresados son incorrectos.' : $messageError;
             }
+        } else {
+            $noActivo = (strpos($usuarioWs['message'], 'Cliente') !== false 
+                    && strpos($usuarioWs['message'], 'activo') !== false);
+            $noRegistrado = (strpos($usuarioWs['message'], 'registrado') !== false 
+                    && strpos($usuarioWs['message'], 'incorrecta') !== false);
+            if ($noActivo) {
+                $messageError = 'El usuario no se encuentra activado.';
+            }
+            if ($noRegistrado) {
+                $messageError = 'Los datos ingresados son incorrectos.';
+            }
+            
+            $result->error = true;
+            $result->message = $messageError;
         }
 
         if ($result->error === false) {

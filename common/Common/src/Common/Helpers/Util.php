@@ -50,6 +50,11 @@ class Util
         return Crypto::encrypt($password, $email);
     }
     
+    public static function passwordDecrypt($password, $email)
+    {
+        return Crypto::decrypt($password, $email);
+    }
+    
     public static function generateToken($data)
     {
         return hash('sha256', hash('sha512', $data . microtime()));
