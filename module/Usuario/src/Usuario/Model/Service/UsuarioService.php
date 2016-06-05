@@ -118,12 +118,15 @@ class UsuarioService
             $result = $result['result'];
 
             $lastName = \Common\Helpers\Util::clearBlankSpaceMiddle($result['lastname'], true);
+            $paterno = isset($lastName[0]) ? $lastName[0] : $result['lastname'];
+            unset($lastName[0]);
+            $materno = implode(' ', $lastName);
             
             $data = array(
                 'mguid' => $usuarioData['mguid'],
                 'nombres' => $result['firstname'],
-                'paterno' => isset($lastName[0]) ? $lastName[0] : $result['lastname'],
-                'materno' => isset($lastName[1]) ? $lastName[1] : null,
+                'paterno' => $paterno,
+                'materno' => $materno,
                 'email' => $result['email'],
                 'estado' => (int)$result['active'],
             );
