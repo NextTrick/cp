@@ -126,7 +126,8 @@ class OauthTwitterService
     
     public function logout()
     {
-        $this->_container->getManager()->getStorage()->clear();
+        $this->_container->offsetUnset('access_token_tw');
+        $this->_container->offsetUnset('usuario');
     }
     
     public function getData()
