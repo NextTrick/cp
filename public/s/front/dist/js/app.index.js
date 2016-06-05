@@ -697,13 +697,17 @@ $(function() {
     var catchDom, dom, events, functions, initialize, st, suscribeEvents;
     dom = {};
     st = {
-      btnChangeImage: '.change_user_image'
+      btnChangeImage: '.change_user_image',
+      selectError: '.bg_white ul',
+      btnSave: '.btn_save_dates'
     };
     catchDom = function() {
       dom.btnChangeImage = $(st.btnChangeImage);
+      dom.btnSave = $(st.btnSave);
     };
     suscribeEvents = function() {
       dom.btnChangeImage.on('click', events.changeImage);
+      dom.btnSave.on('click', events.validateForm);
       $(window).scroll(function (event) {
         var scroll = $(window).scrollTop();
         if(scroll > 200){
@@ -718,6 +722,29 @@ $(function() {
     events = {
       changeImage: function(e) {
         $('.image_file').click();
+      },
+      validateForm: function(){
+        var html = "<ul class='parsley-errors-list filled' id='parsley-id-23'><li class='parsley-required'>Este campo es requerido y no puede estar vacío</li></ul>";
+        var test = 0;
+        $(".error_message_dep").empty();
+        $(".error_message_pro").empty();
+        $(".error_message_dis").empty();
+        if(!$("#departamento_id").val()){
+          $(".error_message_dep").html(html);
+          test = 1;
+        }
+        if(!$("#provincia_id").val()){
+          $(".error_message_pro").html(html);
+          test = 1;
+
+        }
+        if(!$("#distrito_id").val()){
+          $(".error_message_dis").html(html);
+          test = 1;
+        }
+        if(test == 1){
+          return false;
+        }
       }
     };
     functions = {
