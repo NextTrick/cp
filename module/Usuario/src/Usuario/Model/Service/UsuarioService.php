@@ -38,6 +38,19 @@ class UsuarioService
         return $this->_getTrueFiUsuarioService()->newMember($data);
     }
     
+    public function modificarPasswordEnDb($id, $email, $password)
+    {
+        $dataIn1 = array(
+            'password' => \Common\Helpers\Util::passwordEncrypt($password, $email)
+        );
+        return $this->_repository->save($dataIn1, $id);
+    }
+    
+    public function modificarPasswordEnTrueFi($data)
+    {
+        return $this->_getTrueFiUsuarioService()->changePassword($data);
+    }
+    
     public function actualizarEnTrueFi($data)
     {
         return $this->_getTrueFiUsuarioService()->setMember($data);

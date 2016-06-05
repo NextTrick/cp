@@ -106,7 +106,7 @@ class MisDatosController extends SecurityWebController
                 $data['fecha_nac'] = $fechaNac;
                 $data['new_file_name'] = $newFileName;
                 
-                $success = $this->_saveData($data, $usuarioData['id'], $usuarioData['mguid']);
+                $success = $this->_saveData($data, $usuarioData);
                 if ($success) {
                     $this->flashMessenger()->addMessage(array(
                         'success' => '<b>Felicidades</b>, tus datos fueron actualizados correctamente. ' ,
@@ -130,54 +130,67 @@ class MisDatosController extends SecurityWebController
     }
     
 
-    private function _saveData($data, $id, $mguid)
+    private function _saveData($dataForm, $dataBd)
     {
-        //======================  Actualizar datos en TrueFi ===================
-        $dataArray = array(
-            'FIRSTNAME' => $data['nombres'],
-            'LASTNAME' => $data['paterno'] . ' ' . $data['materno'],
-            'EMAIL' => $data['email'],
-            'IDNUMBER' => $data['di_valor'],
-        );
-        if (!empty($data['fecha_nac'])) {
-            $dataArray['BIRTHDATE'] = $data['fecha_nac'];
-        }
-        $dataTrueFi = array(
-            'MGUID' => $mguid,
-            'Data' => $dataArray,
-        );
-        $result = $this->_getUsuarioService()->actualizarEnTrueFi($dataTrueFi);
-        //==================== Fin  Actualizar datos en TrueFi =================
-
-        if ($result['success']) {
-            $dataIn = array(
-                'email' => $data['email'],
-                'nombres' => $data['nombres'],
-                'paterno' => $data['paterno'],
-                'materno' => $data['materno'],
-                'pais_id' => $this->_getUbigeoService()->getPePaisId(),
-                'departamento_id' => $data['departamento_id'],
-                'provincia_id' => $data['provincia_id'],
-                'distrito_id' => $data['distrito_id'],
-                'di_tipo' => $data['di_tipo'],
-                'di_valor' => $data['di_valor'],
-                'fecha_nac' => $data['fecha_nac'],
-                'fecha_edicion' => date('Y-m-d H:i:s'),
+        $id = $dataBd['id'];
+        $email = $dataBd['email'];
+        $changePassword = true;
+        if (!empty($dataForm['password'])) {
+            $oldPassword = \Common\Helpers\Util::passwordDecrypt($dataBd['password'], $email);
+            $dataTrueFi1 = array(
+                'MGUID' => $dataBd['mguid'],
+                'Password' => $dataForm['password'],
+                'OldPassword' => $oldPassword,
             );
-
-            if (!empty($data['new_file_name'])) {
-                $dataIn['imagen'] = $data['new_file_name'];
+            $result1 = $this->_getUsuarioService()->modificarPasswordEnTrueFi($dataTrueFi1);
+            if ($result1['success']) {
+                $this->_getUsuarioService()->modificarPasswordEnDb($id, $email, $dataForm['password']);
             }
-            if (!empty($data['password'])) {
-                $dataIn['password'] = \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']);
-            }
-
-            $id = $this->_getUsuarioService()->getRepository()->save($dataIn, $id);
-            if (!empty($id)) {
-                return true;
-            }
+            $changePassword = $result1['success'];
         }
         
+        if ($changePassword) {
+            $dataArray = array(
+                'FIRSTNAME' => $dataForm['nombres'],
+                'LASTNAME' => $dataForm['paterno'] . ' ' . $dataForm['materno'],
+                'IDNUMBER' => $dataForm['di_valor'],
+            );
+            if (!empty($dataForm['fecha_nac'])) {
+                $dataArray['BIRTHDATE'] = $dataForm['fecha_nac'];
+            }
+            $dataTrueFi2 = array(
+                'MGUID' => $dataBd['mguid'],
+                'Data' => $dataArray,
+            );
+            $result2 = $this->_getUsuarioService()->actualizarEnTrueFi($dataTrueFi2);
+            if ($result2['success']) {
+                $dataIn = array(
+                    'nombres' => $dataForm['nombres'],
+                    'paterno' => $dataForm['paterno'],
+                    'materno' => $dataForm['materno'],
+                    'pais_id' => $this->_getUbigeoService()->getPePaisId(),
+                    'departamento_id' => $dataForm['departamento_id'],
+                    'provincia_id' => $dataForm['provincia_id'],
+                    'distrito_id' => $dataForm['distrito_id'],
+                    'di_tipo' => $dataForm['di_tipo'],
+                    'di_valor' => $dataForm['di_valor'],
+                    'fecha_nac' => $dataForm['fecha_nac'],
+                    'fecha_edicion' => date('Y-m-d H:i:s'),
+                );
+
+                if (!empty($dataForm['new_file_name'])) {
+                    $dataIn['imagen'] = $dataForm['new_file_name'];
+                }
+
+                $id = $this->_getUsuarioService()->getRepository()->save($dataIn, $dataBd['id']);
+                if (!empty($id)) {
+                    return true;
+                }
+            } else {
+                \Util\Common\Email::reportDebug($result2, null, 'Error modificar mis datos');
+            }
+        }
+
         return false;
     }
     
