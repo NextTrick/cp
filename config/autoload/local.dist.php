@@ -11,14 +11,6 @@
  * file.
  */
 
-if (file_exists('production.constants.php')) {
-    require_once 'production.constants.php';
-} else if (file_exists('local.constants.php')) {
-    require_once 'local.constants.php';
-} else {
-    require_once 'constants.php';
-}
-
 return array(
     'php' => array(
         'settings' => array(
@@ -29,24 +21,6 @@ return array(
             'error_reporting' => E_ALL,
             'post_max_size' => '804857600',
         )
-    ),
-    'session' => array(
-        'config' => array(
-            'class' => 'Zend\Session\Config\SessionConfig',
-            'options' => array(
-                'name' => 'cookieName',
-                'cookie_httponly' => true,
-                'cookie_lifetime' => 60*60*24,
-                'gc_maxlifetime' => 60*60*24,
-                'remember_me_seconds' => 60*60*24,
-            ),
-            //'authentication_expiration_time' => 300
-        ),
-        'storage' => 'Zend\Session\Storage\SessionArrayStorage',
-        'validators' => array(
-            'Zend\Session\Validator\RemoteAddr',
-            'Zend\Session\Validator\HttpUserAgent',
-        ),
     ),
     'error' => array(
         'send_mail' => true,
@@ -91,18 +65,6 @@ return array(
             'serializer'
         )
     ),
-
-    'view_manager' => array(
-        'base_path' => BASE_URL,
-        'display_not_found_reason' => true,
-        'display_exceptions' => true,
-        'charset' => 'UTF-8',
-        'doctype' => 'HTML5',
-        'title' => 'Videl',
-        'strategies' => array(
-            'ViewJsonStrategy',
-        ),
-    ),
     /*
     'mail' => array(
         'transport' => array(
@@ -143,17 +105,6 @@ return array(
         'true_fi' => array(
             'url' => 'http://65.52.221.92:8088/ITFIMemberServices/',
             'password' => 'Admin123.',
-        ),
-    ),
-
-    'fileDir' => array(
-        'usuario_usuario' => array(
-            'up' => APP_PATH . '/public/s/files/usuario/usuario',
-            'down' => URL_RESOURCES . 'files/usuario/usuario',
-        ),
-        'paquete_paquete' => array(
-            'up' => APP_PATH . '/public/s/files/paquete/paquete',
-            'down' => URL_RESOURCES . 'files/paquete/paquete',
         ),
     ),
     'social' => array( //local
@@ -204,11 +155,4 @@ return array(
             ),
         ),
     ),
-    'cart' => array(
-        'amount_decimal_length' => 2,
-        'amount_decimal_separator' => '.',
-        'amount_thousands_separator' => ',',
-        'quantity_max_by_product' => 5,
-        'currency' => 'NS',
-    )
 );

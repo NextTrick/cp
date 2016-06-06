@@ -11,9 +11,9 @@
  * file.
  */
 
-if (file_exists('production.constants.php')) {
+if (file_exists(__DIR__ . '/production.constants.php')) {
     require_once 'production.constants.php';
-} else if (file_exists('local.constants.php')) {
+} else if (file_exists(__DIR__ . '/local.constants.php')) {
     require_once 'local.constants.php';
 } else {
     require_once 'constants.php';
