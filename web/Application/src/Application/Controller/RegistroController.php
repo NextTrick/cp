@@ -16,47 +16,38 @@ class RegistroController extends AbstractActionController
         $view = new ViewModel();
         return $view;
     }
-    
+
     public function completaTuRegistroAction()
     {
-        $dataIni = array();
-        if ($this->request->isPost()) {
-            //desde formulario
-            $dataIni['email'] = $this->request->getPost('email');
-        } else {
-            // desde red social
-            $dataIni['email'] = $this->_getDataRegistroTemp('email');
-        }
-        
+        $origen = $this->_getOrigen();
+
         $form = $this->_getRegistroForm();
         $form->setAttribute('action', $this->url()->fromRoute('web-completa-tu-registro', array(
             'controller' => 'registro',
             'action' => 'completa-tu-registro',
         )));
-        $form->setData($dataIni);
+        $form->setData(array('email' => $origen->email));
         
-        $registroForm = (float)$this->request->getPost('registro_form');
         $disabledEmail = false;
         $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
-        if (!empty($dataIni['email'])) {
+        if (!empty($origen->email)) {
             $disabledEmail = true;
             //verificar en base de datos
-            $criteria = array('where' => array('email' => $dataIni['email']));
             $repository = $this->_getUsuarioService()->getRepository();
-            $row = $repository->findOne($criteria);
+            $row = $repository->findOne(array('where' => array('email' => $origen->email)));
             if (!empty($row)) {
                 $this->flashMessenger()->addMessage(array('error' => $messageExistsEmail));
-                $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $dataIni['email']));
+                $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $origen->email));
                 return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
             }
-        } elseif ($registroForm) {
+        } elseif ($origen->registroForm) {
             $this->flashMessenger()->addMessage(array('error' => 'Este campo es requerido y no puede estar vacío.'));
             return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
         }
 
         $mensajeRegistro = null;
         $openPopapConfRegistro = 0;
-        if ($this->request->isPost() && !$registroForm) {
+        if ($this->request->isPost() && !$origen->registroForm) {
             //==================== Llenar los combos ===========================
             $departamentoId = $this->request->getPost('departamento_id');
             $provinciaId = $this->request->getPost('provincia_id');
@@ -92,8 +83,7 @@ class RegistroController extends AbstractActionController
 
                 $repository = $this->_getUsuarioService()->getRepository();
                 //verificar en base de datos
-                $criteria = array('where' => array('email' => $data['email']));
-                $row = $repository->findOne($criteria);
+                $row = $repository->findOne(array('where' => array('email' => $data['email'])));
                 if (!empty($row)) {
                     $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
                 } else {
@@ -122,6 +112,21 @@ class RegistroController extends AbstractActionController
         ));
     }
     
+    private function _getOrigen()
+    {
+        $data = new \stdClass();
+        if ($this->request->isPost()) {
+            //desde formulario
+            $data->email = $this->request->getPost('email');
+        } else {
+            // desde red social
+            $data->email = $this->_getDataRegistroTemp('email');
+        }
+        $data->registroForm = (float)$this->request->getPost('registro_form');
+        
+        return $data;
+    }
+    
     private function _saveData($data)
     {
         $result = array(
@@ -145,7 +150,6 @@ class RegistroController extends AbstractActionController
                     'email' => $data['email'],
                     'password' => \Common\Helpers\Util::passwordEncrypt($data['password'], $data['email']),
                     'mguid' => $resultTrueFi['mguid'],
-                    //'codigo_activar' => \Common\Helpers\Util::generateToken($resultTrueFi['mguid']),
                     'nombres' => $data['nombres'],
                     'paterno' => $data['paterno'],
                     'materno' => $data['materno'],
@@ -381,18 +385,13 @@ class RegistroController extends AbstractActionController
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
     }
     
-    protected function _getUbigeoService()
+    private function _getUbigeoService()
     {
         return $this->getServiceLocator()->get('Sistema\Model\Service\UbigeoService');
     }
     
-    protected function _getLoginGatewayService()
+    private function _getLoginGatewayService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\LoginGatewayService');
-    }
-    
-    private function _getTarjetaService()
-    {
-        return $this->getServiceLocator()->get('Tarjeta\Model\Service\TarjetaService');
     }
 }

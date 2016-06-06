@@ -249,6 +249,10 @@ class TestController extends SecurityAdminController
 
     public function mailAcAction()
     {
+        session_start();
+        var_dump($_SESSION);
+        exit;
+        
         $data = array(
             'email' => 'montesinos2005ii@gmail.com',
         );

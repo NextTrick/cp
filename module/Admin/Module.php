@@ -43,6 +43,8 @@ class Module
         );
 
         \Zend\Validator\AbstractValidator::setDefaultTranslator($translator);
+        
+        $this->bootstrapSession($e);
     }
 
     public function bootstrapSession($e)
@@ -52,7 +54,7 @@ class Module
                      ->get('Zend\Session\SessionManager');
         $session->start();
 
-        $container = new Container('initialized');
+        $container = new \Zend\Session\Container('initialized');
         if (!isset($container->init)) {
             $serviceManager = $e->getApplication()->getServiceManager();
             $request        = $serviceManager->get('Request');

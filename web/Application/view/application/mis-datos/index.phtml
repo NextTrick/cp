@@ -75,8 +75,9 @@
                         <div class="form_control">
                             <label class="left" for="nombres">Nombre</label>
                             <div class="right">
+                                <?php $disabled = ($this->form->get('nombres')->getValue() != '') ? 'disabled' : ''; ?>
                                 <?php echo $this->formElement($this->form->get('nombres')->setAttributes(array(
-                                    'class' => 'disabled',
+                                    'class' => $disabled,
                                     'data-parsley-required' => 'true',
                                     'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
@@ -86,8 +87,9 @@
                         <div class="form_control">
                             <label class="left" for="paterno">Apellido paterno</label>
                             <div class="right">
+                                <?php $disabled = ($this->form->get('paterno')->getValue() != '') ? 'disabled' : ''; ?>
                                 <?php echo $this->formElement($this->form->get('paterno')->setAttributes(array(
-                                    'class' => 'disabled',
+                                    'class' => $disabled,
                                     'data-parsley-required' => 'true',
                                     'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
@@ -97,8 +99,9 @@
                         <div class="form_control">
                             <label class="left" for="materno">Apellido materno</label>
                             <div class="right">
+                                <?php $disabled = ($this->form->get('materno')->getValue() != '') ? 'disabled' : ''; ?>
                                 <?php echo $this->formElement($this->form->get('materno')->setAttributes(array(
-                                    'class' => 'disabled',
+                                    'class' => $disabled,
                                     'data-parsley-required' => 'true',
                                     'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
                                 ))) ?>
@@ -109,12 +112,14 @@
                             <label class="left" for="di_valor">Documento de identidad</label>
                             <div class="right">
                                 <div class="bg_white doc_type">
+                                    <?php $disabled = ($this->form->get('di_valor')->getValue() != '') ? 'disabled' : ''; ?>
                                     <?php echo $this->formElement($this->form->get('di_tipo')->setAttributes(array(
-                                        'class' => 'disabled',
+                                        'class' => $disabled,
                                     ))) ?>
                                 </div>
+                                <?php $disabled = ($this->form->get('di_valor')->getValue() != '') ? 'disabled' : ''; ?>
                                 <?php echo $this->formElement($this->form->get('di_valor')->setAttributes(array(
-                                        'class' => 'inp_right disabled',
+                                        'class' => "inp_right $disabled",
                                         'placeholder' => 'Nro de documento',
                                         'data-parsley-required' => 'true',
                                         'data-parsley-required-message' => 'Este campo es requerido y no puede estar vacío'
