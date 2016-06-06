@@ -1,0 +1,96 @@
+.success_content {
+  text-align: center;
+}
+.success_content h2 {
+  color: #5218b6;
+}
+.success_content p {
+  color: #666;
+  margin: 20px 0 40px;
+}
+.success_content h5 {
+  font-size: 14px;
+}
+.success_content .print {
+  display: block;
+  position: absolute;
+  top: 30px;
+  right: 180px;
+  cursor: pointer;
+}
+.success_content .details_confirmation {
+  text-align: left;
+  padding: 20px 0;
+}
+.success_content .details_confirmation p {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+.success_content .resume {
+  width: 620px;
+  margin: 0 auto;
+}
+.success_content .resume .head ul,
+.success_content .resume .body ul {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px dashed #999;
+}
+.success_content .resume .head ul li,
+.success_content .resume .body ul li {
+  width: 20%;
+  padding: 12px 10px;
+  list-style: none;
+  display: inline-block;
+  text-align: left;
+  vertical-align: top;
+}
+.success_content .resume .head ul li:nth-child(2),
+.success_content .resume .body ul li:nth-child(2) {
+  width: 32%;
+}
+.success_content .resume .head ul li:nth-child(3),
+.success_content .resume .body ul li:nth-child(3) {
+  text-align: center;
+}
+.success_content .resume .head ul li span.name,
+.success_content .resume .body ul li span.name,
+.success_content .resume .head ul li span.number,
+.success_content .resume .body ul li span.number {
+  display: block;
+}
+.success_content .resume .head ul li span.number,
+.success_content .resume .body ul li span.number {
+  margin-top: 8px;
+}
+.success_content .resume .head ul li {
+  color: #999;
+  font-size: 14px;
+}
+.success_content .resume .body ul li span.number {
+  color: #999;
+  font-size: 14px;
+}
+.success_content .resume .body ul li span.label {
+  display: none;
+}
+.success_content .resume .total {
+  float: right;
+  text-align: right;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 10%;
+}
+.success_content .info {
+  width: 620px;
+  margin: 50px auto 50px;
+}
+.success_content .info p {
+  font-size: 16px;
+  text-align: center;
+}
+.success_content .info a {
+  color: #ff771d;
+  text-decoration: none;
+}

@@ -458,7 +458,8 @@ $(function() {
       equalAddress: '.equal_address',
       rucInput : '#ruc',
       btnPagar : '#btnPagar',
-      formPago : '#formPago'
+      formPago : '#formPago',
+      btnPrint : '.print'
     };
     catchDom = function() {
       dom.optionBoleta = $(st.optionBoleta);
@@ -475,6 +476,7 @@ $(function() {
       dom.rucInput = $(st.rucInput);
       dom.btnPagar = $(st.btnPagar);
       dom.formPago = $(st.formPago);
+      dom.btnPrint = $(st.btnPrint);
     };
     suscribeEvents = function() {
       dom.optionBoleta.on('change', events.watchOpenBoletaForm);
@@ -486,9 +488,24 @@ $(function() {
       dom.rucInput.on( 'keydown' , events.ingresarRuc);
       dom.rucInput.on( 'keyup' , events.salirRuc);
       dom.btnPagar.on('click', events.pagar);
+      dom.btnPrint.on('click', events.btnPrint);
 
     };
     events = {
+      btnPrint: function(){
+        $('.confirmation_box').printThis({
+          debug: false,               // show the iframe for debugging
+          importCSS: true,            // import page CSS
+          importStyle: false,         // import style tags
+          printContainer: true,       // grab outer container as well as the contents of the selector
+          loadCSS: "./s/front/dist/css/print.css",  // path to additional css file - us an array [] for multiple
+          pageTitle: "",              // add title to print page
+          removeInline: false,        // remove all inline styles from print elements
+          printDelay: 333,            // variable print delay; depending on complexity a higher value may be necessary
+          header: null,               // prefix to html
+          formValues: true            // preserve input/form values
+        });
+      },
       pagar: function(e) {
         if(dom.formPago.parsley().isValid()){
           e.preventDefault();
@@ -585,7 +602,6 @@ $(function() {
     };
     functions = {
       initial: function() {
-        console.log("aaaaaaaa");
         dom.formPago.parsley({
           excluded: '.content_factura input'
         });
@@ -699,7 +715,7 @@ $(function() {
     st = {
       btnChangeImage: '.change_user_image',
       selectError: '.bg_white ul',
-      btnSave: '.btn_save_dates'
+      btnSave: '.btn_save_signin'
     };
     catchDom = function() {
       dom.btnChangeImage = $(st.btnChangeImage);
@@ -742,9 +758,11 @@ $(function() {
           $(".error_message_dis").html(html);
           test = 1;
         }
-        if(test == 1){
+        
+        if ($('.signin_form').parsley().isValid() && test == 1) {
           return false;
         }
+        
       }
     };
     functions = {
