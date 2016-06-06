@@ -344,8 +344,6 @@ class OrdenService
             }
         }
 
-        var_dump($ordenId); exit;
-
         return $ordenId;
     }
 
