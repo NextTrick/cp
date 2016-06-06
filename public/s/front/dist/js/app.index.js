@@ -602,7 +602,6 @@ $(function() {
     };
     functions = {
       initial: function() {
-        console.log("aaaaaaaa");
         dom.formPago.parsley({
           excluded: '.content_factura input'
         });
@@ -716,7 +715,7 @@ $(function() {
     st = {
       btnChangeImage: '.change_user_image',
       selectError: '.bg_white ul',
-      btnSave: '.btn_save_dates'
+      btnSave: '.btn_save_signin'
     };
     catchDom = function() {
       dom.btnChangeImage = $(st.btnChangeImage);
@@ -759,9 +758,11 @@ $(function() {
           $(".error_message_dis").html(html);
           test = 1;
         }
-        if(test == 1){
+        
+        if ($('.signin_form').parsley().isValid() && test == 1) {
           return false;
         }
+        
       }
     };
     functions = {
