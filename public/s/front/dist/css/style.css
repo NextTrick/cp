@@ -2149,6 +2149,9 @@ section .purple_box .pay_box_white.cart_page >.right .total_box {
 section .purple_box .pay_box_white.confirmation_box {
   position: relative;
 }
+section .purple_box .pay_box_white.confirmation_box .success_content .logo_exito {
+  display: none;
+}
 section .purple_box .pay_box_white.confirmation_box h2 {
   color: #5218b6;
 }

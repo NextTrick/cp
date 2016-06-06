@@ -1,6 +1,11 @@
 .success_content {
   text-align: center;
 }
+.success_content .logo_exito {
+  display: block;
+  width: 200px;
+  margin: 0 auto 20px;
+}
 .success_content h2 {
   color: #5218b6;
 }
@@ -91,6 +96,5 @@
   text-align: center;
 }
 .success_content .info a {
-  color: #ff771d;
-  text-decoration: none;
+  display: none;
 }
