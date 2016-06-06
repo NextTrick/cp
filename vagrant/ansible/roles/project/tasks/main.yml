@@ -39,6 +39,7 @@
 - name: Copy local cp config file
   copy: src={{item}} dest=/root/{{item}} owner=vagrant
   with_items:
-     - local.php       
+     - local.php
+     - local.constants.php
        
 - command: mv -f /root/local.php /opt/fcb/{{ project_name }}/config/autoload/
