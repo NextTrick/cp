@@ -21,7 +21,7 @@
                 <br><br>
                 <div class="pay_box_white cart_page">
                     <div class="left">
-                        <?php if (empty($cartModel)) : ?>
+                        <?php if (empty($cartModel) || (!empty($cartModel) && $cartModel->getQuantityCart() < 1)) : ?>
                         <div class="empty_cart">
                             <span class="icon"></span>
                             <h2>¡Tu carrito esta vacío!</h2>
