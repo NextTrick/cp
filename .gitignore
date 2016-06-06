@@ -21,3 +21,8 @@ config/autoload/local.php
 !public/s/files/usuario/usuario/user-default.png
 !public/s/files/usuario/usuario/user-web-default.png
 public/s/front/node_modules
+
+config/autoload/production.constants.php
+config/autoload/production.local.php
+
+config/autoload/local.constants.php
