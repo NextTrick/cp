@@ -16,6 +16,7 @@
                 </div>
                 <div class="pay_box_white confirmation_box">
                     <div class="success_content">
+                        <img class="logo_exito" src="<?php echo URL_RESOURCES ?>front/dist/images/logo.png" alt="Coney Park"/>
                         <h2>¡FELICITACIONES!</h2>
                         <P><?php echo $this->ordenData['usuario_nombres']; ?>, ¡tu recarga fue realizada con éxito!</P>
                         <h5>Número de recarga: <?php echo $this->ordenData['codigo']; ?></h5>
@@ -68,7 +69,8 @@
                             <div class="total">TOTAL: S/. <?php echo $this->ordenData['monto']; ?></div>
                         </div>
                         <div class="info">
-                            <p>Para activar tu tarjeta recuerda que primero debes pasarla por el punto de verificación del local en el que deseas jugar y recuerda hacerlo cada vez que cambies de local. <br/>Te hemos enviado un correo con el detalle de tu compra.</p><a href="<?php echo BASE_URL . 'recargas'?>">Seguir comprando</a>
+                            <p>Para activar tu tarjeta recuerda que primero debes pasarla por el punto de verificación del local en el que deseas jugar y recuerda hacerlo cada vez que cambies de local. <br/>Te hemos enviado un correo con el detalle de tu compra.</p>
+                            <a class="seguir" href="<?php echo BASE_URL . 'recargas'?>">Seguir comprando</a>
                         </div>
                     </div>
                     
