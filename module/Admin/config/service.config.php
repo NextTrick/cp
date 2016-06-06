@@ -27,11 +27,11 @@ return array(
                     $sessionSaveHandler = $sm->get($session['save_handler']);
                 }
 
-                $sessionManager = new SessionManager($sessionConfig, $sessionStorage, $sessionSaveHandler);
+                $sessionManager = new \Zend\Session\SessionManager($sessionConfig, $sessionStorage, $sessionSaveHandler);
             } else {
-                $sessionManager = new SessionManager();
+                $sessionManager = new \Zend\Session\SessionManager();
             }
-            Container::setDefaultManager($sessionManager);
+            \Zend\Session\Container::setDefaultManager($sessionManager);
             return $sessionManager;
         },
         //services
