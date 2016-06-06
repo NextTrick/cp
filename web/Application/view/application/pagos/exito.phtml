@@ -15,62 +15,66 @@
                     <div class="step active">2</div>
                 </div>
                 <div class="pay_box_white confirmation_box">
-                    <h2>¡FELICITACIONES!</h2>
-                    <P><?php echo $this->ordenData['usuario_nombres']; ?>, ¡tu recarga fue realizada con éxito!</P>
-                    <h5>Número de recarga: <?php echo $this->ordenData['codigo']; ?></h5>
-                    <span class="print" onclick="window.print()"></span>
+                    <div class="success_content">
+                        <h2>¡FELICITACIONES!</h2>
+                        <P><?php echo $this->ordenData['usuario_nombres']; ?>, ¡tu recarga fue realizada con éxito!</P>
+                        <h5>Número de recarga: <?php echo $this->ordenData['codigo']; ?></h5>
+                        <span class="print"></span>
 
-                    <?php if ($this->ordenData['pago_metodo'] == \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS) :?>
-                        <div class="resume">
-                            <div class="details_confirmation">
-                                <p>Fecha de recarga: <?php echo $this->ordenData['pago_fecha_confirmacion']; ?></p>
-                                <p>Número de tarjeta: <?php echo $this->ordenData['pan']; ?></p>
-                                <p>Nombre del Tarjetahabiente: <?php echo $this->ordenData['usuario_nombres'] . ' ' . $this->ordenData['usuario_paterno'] . ' ' . $this->ordenData['usuario_materno']; ?></p>
+                        <?php if ($this->ordenData['pago_metodo'] == \PaymentProcessor\Model\Gateway\Processor\VisaProcessor::ALIAS) :?>
+                            <div class="resume">
+                                <div class="details_confirmation">
+                                    <p>Fecha de recarga: <?php echo $this->ordenData['pago_fecha_confirmacion']; ?></p>
+                                    <p>Número de tarjeta: <?php echo $this->ordenData['pan']; ?></p>
+                                    <p>Nombre del Tarjetahabiente: <?php echo $this->ordenData['usuario_nombres'] . ' ' . $this->ordenData['usuario_paterno'] . ' ' . $this->ordenData['usuario_materno']; ?></p>
+                                </div>
                             </div>
-                        </div>
+                            
+                            
+                        <?php endif; ?>
                         
-                        
-                    <?php endif; ?>
-                    
-                    <div class="resume">
-                        <div class="head">
-                            <ul>
-                                <li>Promoción</li>
-                                <li>Tarjeta</li>
-                                <li>Cantidad</li>
-                                <li>Precio</li>
-                            </ul>
-                        </div>
-                        <div class="body">
-                            <?php foreach ($this->ordenDetalleData as $ordenDetalle) :?>
+                        <div class="resume">
+                            <div class="head">
                                 <ul>
-                                    <li>
-                                        <span class="label">Promoción</span>
-                                        <span class="desc"><?php echo $ordenDetalle['paquete_titulo1']; ?></span>
-                                    </li>
-                                    <li>
-                                        <span class="label">Tarjeta</span>
-                                        <span class="name"><?php echo $ordenDetalle['tarjeta_nombre']; ?></span>
-                                        <span class="number"><?php echo $ordenDetalle['tarjeta_numero']; ?></span>
-                                    </li>
-                                    <li class="cantidad">
-                                        <span class="label">Cantidad</span>
-                                        <span class="desc"><?php echo $ordenDetalle['cantidad']; ?></span>
-                                    </li>
-                                    <li class="precio">
-                                        <span class="label">Precio</span>
-                                        <span class="desc">S/. <?php echo $ordenDetalle['emoney']; ?></span>
-                                    </li>
+                                    <li>Promoción</li>
+                                    <li>Tarjeta</li>
+                                    <li>Cantidad</li>
+                                    <li>Precio</li>
                                 </ul>
-                            <?php endforeach; ?>
+                            </div>
+                            <div class="body">
+                                <?php foreach ($this->ordenDetalleData as $ordenDetalle) :?>
+                                    <ul>
+                                        <li>
+                                            <span class="label">Promoción</span>
+                                            <span class="desc"><?php echo $ordenDetalle['paquete_titulo1']; ?></span>
+                                        </li>
+                                        <li>
+                                            <span class="label">Tarjeta</span>
+                                            <span class="name"><?php echo $ordenDetalle['tarjeta_nombre']; ?></span>
+                                            <span class="number"><?php echo $ordenDetalle['tarjeta_numero']; ?></span>
+                                        </li>
+                                        <li class="cantidad">
+                                            <span class="label">Cantidad</span>
+                                            <span class="desc"><?php echo $ordenDetalle['cantidad']; ?></span>
+                                        </li>
+                                        <li class="precio">
+                                            <span class="label">Precio</span>
+                                            <span class="desc">S/. <?php echo $ordenDetalle['emoney']; ?></span>
+                                        </li>
+                                    </ul>
+                                <?php endforeach; ?>
+                            </div>
+                            <div class="total">TOTAL: S/. <?php echo $this->ordenData['monto']; ?></div>
                         </div>
-                        <div class="total">TOTAL: S/. <?php echo $this->ordenData['monto']; ?></div>
+                        <div class="info">
+                            <p>Para activar tu tarjeta recuerda que primero debes pasarla por el punto de verificación del local en el que deseas jugar y recuerda hacerlo cada vez que cambies de local. <br/>Te hemos enviado un correo con el detalle de tu compra.</p><a href="<?php echo BASE_URL . 'recargas'?>">Seguir comprando</a>
+                        </div>
                     </div>
-                    <div class="info">
-                        <p>Para activar tu tarjeta recuerda que primero debes pasarla por el punto de verificación del local en el que deseas jugar y recuerda hacerlo cada vez que cambies de local. <br/>Te hemos enviado un correo con el detalle de tu compra.</p><a href="<?php echo BASE_URL . 'recargas'?>">Seguir comprando</a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
+    <script src="<?php echo URL_RESOURCES ?>front/dist/js/plugins/printThis.js"></script>
 </section>
