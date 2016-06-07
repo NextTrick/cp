@@ -19,7 +19,9 @@
 # Set up prject Vitual host
 - name: vhost dev.recargas.coneypark.pe
   template: src=dev.recargas.coneypark.pe.conf dest=/etc/httpd/vhosts.d/
-  notify: restart httpd
+  notify:
+       - restart httpd
+       - restart memcache
   
 - name: host file | update host file
   lineinfile: "dest=/etc/hosts
@@ -27,7 +29,9 @@
     line='127.0.0.1  dev.recargas.coneypark.pe'
     regexp='127.0.0.1  dev.recargas.coneypark.pe'
     state=present"
-  notify: restart httpd
+  notify:
+     - restart httpd
+     - restart memcache
 
 # Set Up project configuration
 - name: Create vhosts cp Data Directories
