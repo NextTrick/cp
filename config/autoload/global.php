@@ -91,42 +91,6 @@ return array(
             'serializer'
         )
     ),
-//    'cacheCart' => array(
-//        'adapter' => array(
-//            'name'     =>'memcached',
-//            'options'  => array(
-//                'servers'   => array(
-//                    array(
-//                        '127.0.0.1',11211
-//                    )
-//                ),
-//                'namespace'  => '-cart-',
-//                'ttl' => 60*60*24,
-//            )
-//        ),
-//        'plugins' => array(
-//            'exception_handler' => array('throw_exceptions' => false),
-//            'serializer',
-//        ),
-//    ),
-//    'cacheDb' => array(
-//        'adapter' => array(
-//            'name'     =>'memcached',
-//            'options'  => array(
-//                'servers'   => array(
-//                    array(
-//                        '127.0.0.1',11211
-//                    )
-//                ),
-//                'namespace'  => '-db-',
-//                'ttl' => 60*60*24,
-//            )
-//        ),
-//        'plugins' => array(
-//            'exception_handler' => array('throw_exceptions' => false),
-//            'serializer',
-//        ),
-//    ),
 
     'view_manager' => array(
         'base_path' => BASE_URL,
