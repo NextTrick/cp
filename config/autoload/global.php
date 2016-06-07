@@ -25,7 +25,7 @@ return array(
             'date.timezone' => 'America/Lima',
             'intl.default_locale' => 'es_PE',
             'display_startup_errors' => false,
-            'display_errors' => true,
+            'display_errors' => false,
             'error_reporting' => E_ALL,
             'post_max_size' => '804857600',            
         )
@@ -64,41 +64,69 @@ return array(
         )
     ),
     'cacheCart' => array(
-        'adapter' => array(
-            'name'     =>'memcached',
-            'options'  => array(
-                'servers'   => array(
-                    array(
-                        '127.0.0.1',11211
-                    )
-                ),
-                'namespace'  => '-cart-',
-                'ttl' => 60*60*24,
-            )
+        'adapter' => 'filesystem',
+        'options' => array(
+            'cache_dir' => './data/cache',
+            'dirPermission' => 0755,
+            'filePermission' => 0666,
+            'namespaceSeparator' => '-cart-',
+            'ttl' => 60*60*24
         ),
         'plugins' => array(
             'exception_handler' => array('throw_exceptions' => false),
-            'serializer',
-        ),
+            'serializer'
+        )
     ),
     'cacheDb' => array(
-        'adapter' => array(
-            'name'     =>'memcached',
-            'options'  => array(
-                'servers'   => array(
-                    array(
-                        '127.0.0.1',11211
-                    )
-                ),
-                'namespace'  => '-db-',
-                'ttl' => 60*60*24,
-            )
+        'adapter' => 'filesystem',
+        'options' => array(
+            'cache_dir' => './data/cache',
+            'dirPermission' => 0755,
+            'filePermission' => 0666,
+            'namespaceSeparator' => '-db-',
+            'ttl' => 60*60*24
         ),
         'plugins' => array(
             'exception_handler' => array('throw_exceptions' => false),
-            'serializer',
-        ),
+            'serializer'
+        )
     ),
+//    'cacheCart' => array(
+//        'adapter' => array(
+//            'name'     =>'memcached',
+//            'options'  => array(
+//                'servers'   => array(
+//                    array(
+//                        '127.0.0.1',11211
+//                    )
+//                ),
+//                'namespace'  => '-cart-',
+//                'ttl' => 60*60*24,
+//            )
+//        ),
+//        'plugins' => array(
+//            'exception_handler' => array('throw_exceptions' => false),
+//            'serializer',
+//        ),
+//    ),
+//    'cacheDb' => array(
+//        'adapter' => array(
+//            'name'     =>'memcached',
+//            'options'  => array(
+//                'servers'   => array(
+//                    array(
+//                        '127.0.0.1',11211
+//                    )
+//                ),
+//                'namespace'  => '-db-',
+//                'ttl' => 60*60*24,
+//            )
+//        ),
+//        'plugins' => array(
+//            'exception_handler' => array('throw_exceptions' => false),
+//            'serializer',
+//        ),
+//    ),
 
     'view_manager' => array(
         'base_path' => BASE_URL,
