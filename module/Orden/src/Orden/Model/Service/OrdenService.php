@@ -119,6 +119,7 @@ class OrdenService
 
         $data['fecha_creacion'] = $cDate = date('Y-m-d H:i:s');
         $data['monto'] = $monto;
+        $data['pago_metodo'] = $metodoPago;
         $ordenId = $this->getRepository()->save($data);
         $ordenCodigo = $this->setCodigo($ordenId);
 
