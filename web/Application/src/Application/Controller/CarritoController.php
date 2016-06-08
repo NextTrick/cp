@@ -154,8 +154,8 @@ class CarritoController extends SecurityWebController
         if (!isset($config['fileDir']['paquete_paquete']['down'])) {
             throw new \Exception('No existe url configurada.');
         }
-
-        if (empty($cartModel)) {
+        
+        if (empty($cartModel) || (!empty($cartModel) && $cartModel->getQuantityCart() < 1)) {
             return $this->redirect()->toRoute('web-carrito', array('controller' => 'index'));
         }
 

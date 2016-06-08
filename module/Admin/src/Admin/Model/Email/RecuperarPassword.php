@@ -27,7 +27,7 @@ class RecuperarPassword
         }
         
         try {
-            $data['subject'] = 'Asunto: Admin Coney Park - Recuperar Contraseña';
+            $data['subject'] = 'Admin Coney Park - Recuperar Contraseña';
             $data['toEmail'] = $data['email'];
             $view = new \Zend\View\Model\ViewModel();
             $view->setTemplate('recuperar-password');

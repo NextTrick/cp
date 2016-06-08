@@ -30,7 +30,7 @@ return array(
             './common'
         ),
         'config_glob_paths' => array(
-            'config/autoload/{{,*.}constants,{,*.}global,{,*.}local}.php'
+            'config/autoload/{{,*.}global,{,*.}local}.php'
         )
     )
 );
