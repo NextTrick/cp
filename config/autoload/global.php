@@ -115,23 +115,6 @@ return array(
         'fromName' => 'ConeyPark',
         'subject' => 'ConeyPark'
     ),*/
-    'mail' => array(
-        'transport' => array(
-            'options' => array(
-                'host' => 'smtp.gmail.com',
-                'port' => 587,
-                'connection_class'  => 'login',
-                'connection_config' => array(
-                    'username' => 'autopasioncompany@gmail.com',
-                    'password' => 'Cistensure1',
-                    'ssl' => 'tls',
-                ),
-            ),
-        ),
-        'fromEmail' => 'contacto@coneypark.com',
-        'fromName' => 'ConeyPark',
-        'subject' => 'ConeyPark'
-    ),
     //Emails
     'emails' => array(
         'admin' => 'ing.angeljara@gmail.com', // email del administrador
