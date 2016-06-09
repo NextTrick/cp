@@ -47,3 +47,5 @@
      - local.constants.php
        
 - command: mv -f /root/local.php /opt/fcb/{{ project_name }}/config/autoload/
+
+- command: mv -f /root/local.constants.php /opt/fcb/{{ project_name }}/config/autoload/
