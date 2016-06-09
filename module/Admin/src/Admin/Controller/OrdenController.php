@@ -10,6 +10,7 @@ namespace Admin\Controller;
 
 use Admin\Model\Service\OrdenService;
 use Common\Controller\SecurityAdminController;
+use Usuario\Model\Service\UsuarioService;
 use Zend\View\Model\ViewModel;
 use PHPExcel;
 use \PHPExcel_IOFactory;
@@ -145,7 +146,8 @@ class OrdenController extends SecurityAdminController
                 $sheet->setCellValue('S'.$index, $reg['usu_nombres']);
                 $sheet->setCellValue('T'.$index, $reg['usu_paterno']);
                 $sheet->setCellValue('U'.$index, $reg['usu_materno']);
-                $sheet->setCellValue('V'.$index, \Admin\Model\Service\OrdenService::getNombreTipoDocumento($reg['di_tipo']));
+                $sheet->setCellValue('V'.$index, UsuarioService::getNombreTipoDocumento($reg['di_tipo']));
+
                 $sheet->setCellValue('W'.$index, $reg['di_valor']);
 
                 $sheet->setCellValue('X'.$index, $reg['nombrePais']);

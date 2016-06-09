@@ -12,7 +12,12 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $mguid = $this->request->getQuery('mguid');
+        $mguid = $this->request->getQuery('mguid', null);
+
+        if (empty($mguid)) {
+            $mguid = $this->request->getQuery('cmguid', null);
+        }
+
         if (!empty($mguid)) {
             return $this->redirect()->toRoute('web-activar-cuenta', array('controller' => 'registro', 'action' => 'activar-cuenta'), array('query' => array('mguid' => $mguid)));
         }
