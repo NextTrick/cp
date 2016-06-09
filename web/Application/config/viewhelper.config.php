@@ -8,5 +8,6 @@ return array(
         'sectionGrillaPromociones' => 'Application\View\Helper\SectionGrillaPromociones',
         'sectionPromocionesYRecargas' => 'Application\View\Helper\SectionPromocionesYRecargas',
         'sectionContenido' => 'Application\View\Helper\SectionContenido',
+        'mobileDetect' => 'Application\View\Helper\MobileDetect',
     )
 );
