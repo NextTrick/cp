@@ -1458,9 +1458,13 @@ section .purple_box .cards_content .col_3.my_card .show_more_content .line .tool
 }
 section .purple_box .cards_content .col_3.my_card .bottom_card {
   text-align: left;
-  top: 158px;
-  width: 90%;
-  position: absolute;
+  width: 100%;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card.bottom_front {
+  margin-top: 15px;
+}
+section .purple_box .cards_content .col_3.my_card .bottom_card.bottom_back {
+  margin-top: 11px;
 }
 section .purple_box .cards_content .col_3.my_card .bottom_card .price {
   float: left;

@@ -9,7 +9,7 @@
             </div>
             <span class="card_number"><?php echo $row['numero'] ?></span>
         </div>
-        <div class="bottom_card">
+        <div class="bottom_card bottom_front">
             <?php $noEmpty = Common\Helpers\Util::noEmptyDecimal($row['emoneyvalue']); ?>
             <?php $classCero = $noEmpty ? '' : 'cero'; ?>
             <div class="price <?php echo $classCero; ?>">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
@@ -46,7 +46,7 @@
                 <div class="tooltip_bonus">Son puntos acumulables por recargas determinadas.</div>
             </div>
         </div>
-        <div class="bottom_card">
+        <div class="bottom_card bottom_back">
             <?php $noEmpty = Common\Helpers\Util::noEmptyDecimal($row['emoneyvalue']); ?>
             <?php $classCero = $noEmpty ? '' : 'cero'; ?>
             <div class="price <?php echo $classCero; ?>">S/. <?php echo \Common\Helpers\Util::formatDecimal($row['emoneyvalue']); ?></div>
