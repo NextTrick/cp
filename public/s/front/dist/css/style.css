@@ -2883,6 +2883,11 @@ i[class*=" icon-"] {
 .icon-twitter:before {
   content: "\ea91";
 }
+@media screen and (max-width: 1170px) {
+  .right_options {
+    display: none !important;
+  }
+}
 @media screen and (max-width: 667px) {
   body .wrapper {
     overflow-x: hidden;
