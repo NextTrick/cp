@@ -1,0 +1,1 @@
+ALTER TABLE paquete_paquete ADD `historial` TEXT NULL;

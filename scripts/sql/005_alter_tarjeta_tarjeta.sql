@@ -1,0 +1,1 @@
+ALTER TABLE tarjeta_tarjeta ADD `sincronizar` SMALLINT(1) NOT NULL DEFAULT 1;
