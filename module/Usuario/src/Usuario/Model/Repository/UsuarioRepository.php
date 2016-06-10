@@ -16,6 +16,9 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 {
     protected $table = 'usuario_usuario';
     protected $cache;
+
+    const ELIMINADO_TRUEFI_SI = 1;
+    const ELIMINADO_TRUEFI_NO = 0;
     
     public function __construct(Adapter $adapter)
     {
@@ -43,6 +46,8 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
                 array('provincia_id' => 'id', 'nombreProv' => 'nombre'), 'left');
             $selectInterno->join(array('u4' => 'sistema_ubigeo'), 'u4.id = u.distrito_id',
                 array('distrito_id' => 'id', 'nombreDist' => 'nombre'), 'left');
+
+            $selectInterno->where->notEqualTo('eliminado_truefi', self::ELIMINADO_TRUEFI_SI);
 
             $selectMain = $sql->select();
             $selectMain->from(array('u'=>$selectInterno));

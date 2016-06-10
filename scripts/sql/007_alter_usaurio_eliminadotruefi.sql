@@ -1,0 +1,1 @@
+ALTER TABLE usuario_usuario ADD `eliminado_truefi` TINYINT(1) NULL DEFAULT 0 COMMENT '1:eliminado en trueFi\n0: no elminado\n';

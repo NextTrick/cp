@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Orden\Model\Service\OrdenService;
 use TwitterOAuth\OAuth\Exception;
 use Zend\Mvc\Controller\AbstractActionController;
 use PaymentProcessor\Model\PaymentProcessor;
@@ -127,5 +128,19 @@ class IndexController extends AbstractActionController
     protected function _getLoginGatewayService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\LoginGatewayService');
+    }
+
+    public function enviarOrdenMailAction()
+    {
+        $this->_getOrdenService()->enviarMailConfirmacion(221);
+        echo 'Email Orden enviado'; exit;
+    }
+
+    /**
+     * @return OrdenService
+     */
+    private function _getOrdenService()
+    {
+        return $this->getServiceLocator()->get('Orden\Model\Service\OrdenService');
     }
 }

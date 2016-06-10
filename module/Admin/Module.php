@@ -55,7 +55,7 @@ class Module
         $session->start();
 
         $container = new \Zend\Session\Container('initialized');
-        if (!isset($container->init)) {
+        if (empty($container->init)) {
             $serviceManager = $e->getApplication()->getServiceManager();
             $request        = $serviceManager->get('Request');
 

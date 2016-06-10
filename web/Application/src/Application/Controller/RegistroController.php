@@ -174,6 +174,7 @@ class RegistroController extends AbstractActionController
                             'mguid' => $row['mguid'],
                             'email' => $row['email'],
                         )),
+                        'eliminado_truefi' => \Usuario\Model\Repository\UsuarioRepository::ELIMINADO_TRUEFI_SI,
                         'estado' => 0,
                     );
                     $repository->save($dataBq, $row['id']);
