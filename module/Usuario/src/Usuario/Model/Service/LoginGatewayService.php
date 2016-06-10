@@ -66,6 +66,11 @@ class LoginGatewayService
         $this->_getLoginService(self::LOGIN_FORM)->logout();
         $this->_getLoginService(self::LOGIN_FACEBOOK)->logout();
         $this->_getLoginService(self::LOGIN_TWITTER)->logout();
+        
+        $container = new \Zend\Session\Container('initialized');
+        $container->offsetUnset('init');
+        $container->offsetUnset('remoteAddr');
+        $container->offsetUnset('httpUserAgent');
     }
 
     public function isLoggedIn()

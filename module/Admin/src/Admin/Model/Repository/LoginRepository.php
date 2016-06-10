@@ -92,6 +92,10 @@ class LoginRepository
     public function logout()
     {
         $this->_auth->clearIdentity();
+        $container = new \Zend\Session\Container('initialized');
+        $container->offsetUnset('init');
+        $container->offsetUnset('remoteAddr');
+        $container->offsetUnset('httpUserAgent');
         return $this;
     }
 
