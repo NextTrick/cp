@@ -153,7 +153,7 @@ class Security
                 return true;
             }
 
-            $slug = ($module == 'admin') ? $module . '/' . $controller . '/' . strtolower($currentAction) : 'admin/' . $module . '/' . $controller . '/' . strtolower($currentAction);
+            $slug = ($module == 'admin') ? $module . '/' . $controller : 'admin/' . $module . '/' . $controller;
             $aclString = $this->_getLoginService()->getRepository()->getAcl($identity->id, $slug);
             return $this->_checkAction($currentController, $currentAction, $aclString);
         }
