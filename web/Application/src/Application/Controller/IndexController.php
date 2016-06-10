@@ -132,7 +132,7 @@ class IndexController extends AbstractActionController
 
     public function enviarOrdenMailAction()
     {
-        $this->_getOrdenService()->enviarMailConfirmacion(221);
+        $this->_getOrdenService()->enviarMailConfirmacion(1000);
         echo 'Email Orden enviado'; exit;
     }
 
