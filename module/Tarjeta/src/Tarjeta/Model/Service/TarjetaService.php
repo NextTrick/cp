@@ -18,7 +18,7 @@ class TarjetaService
     {
         $this->_repository = $repository;
         $this->_sl = $serviceLocator;
-        $this->_restarTiempo = strtotime('-60 minute');
+        $this->_restarTiempo = strtotime('-30 minute');
     }
 
     public function misTarjetas($usuarioId)
