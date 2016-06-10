@@ -47,6 +47,8 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
             $selectInterno->join(array('u4' => 'sistema_ubigeo'), 'u4.id = u.distrito_id',
                 array('distrito_id' => 'id', 'nombreDist' => 'nombre'), 'left');
 
+            $selectInterno->where->notEqualTo('eliminado_truefi', self::ELIMINADO_TRUEFI_SI);
+
             $selectMain = $sql->select();
             $selectMain->from(array('u'=>$selectInterno));
 
