@@ -97,7 +97,7 @@ class RegistroForm extends Form
         $diValor = new Element\Text('di_valor');
         $diValor->setAttributes(array(
                 'id' => 'di_valor',
-                'maxlength' => '11',
+                'maxlength' => '8'
             ));
         $this->add($diValor);
 
