@@ -5,7 +5,7 @@ namespace Application\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class RegistroController extends AbstractActionController
+class RegistroController_bk extends AbstractActionController
 {
     public function indexAction()
     {
@@ -32,6 +32,14 @@ class RegistroController extends AbstractActionController
         $messageExistsEmail = 'El correo ingresado ya fue registrado anteriormente.';
         if (!empty($origen->email)) {
             $disabledEmail = true;
+            //verificar en base de datos
+            $repository = $this->_getUsuarioService()->getRepository();
+            $row = $repository->findOne(array('where' => array('email' => $origen->email)));
+            if (!empty($row)) {
+                $this->flashMessenger()->addMessage(array('error' => $messageExistsEmail));
+                $this->flashMessenger()->setNamespace('data')->addMessage(array('email' => $origen->email));
+                return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
+            }
         } elseif ($origen->registroForm) {
             $this->flashMessenger()->addMessage(array('error' => 'Este campo es requerido y no puede estar vacío.'));
             return $this->redirect()->toRoute('web-registro', array('controller' => 'registro'));
@@ -73,17 +81,25 @@ class RegistroController extends AbstractActionController
                 $data = $form->getData();
                 $data['fecha_nac'] = $fechaNac;
 
-                $saveData = $this->_saveData($data);
-                $openPopapConfRegistro = 1;
-                $mensajeRegistro = 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.';
-                if ($saveData['success']) {
-                    $mensajeRegistro = '<h3>¡Felicidades!, estás a punto de ser parte de Coney Club</h3>'
-                        . '<p>Te hemos enviado un correo con las instrucciones para activar tu cuenta.</p>';
-                } elseif ($saveData['code'] == 'EXISTE_EMAIL') {
-                    $openPopapConfRegistro = 0;
-                    $mensajeRegistro = null;
-                    $disabledEmail = false;
+                $repository = $this->_getUsuarioService()->getRepository();
+                //verificar en base de datos
+                $row = $repository->findOne(array('where' => array('email' => $data['email'])));
+                if (!empty($row)) {
                     $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
+                } else {
+                    $saveData = $this->_saveData($data);
+
+                    $openPopapConfRegistro = 1;
+                    $mensajeRegistro = 'Lo sentimos, no se pudo completar el proceso, por favor inténtelo más tarde.';
+                    if ($saveData['success']) {
+                        $mensajeRegistro = '<h3>¡Felicidades!, estás a punto de ser parte de Coney Club</h3>'
+                            . '<p>Te hemos enviado un correo con las instrucciones para activar tu cuenta.</p>';
+                    } elseif ($saveData['code'] == 'EXISTE_EMAIL') {
+                        $openPopapConfRegistro = 0;
+                        $mensajeRegistro = null;
+                        $disabledEmail = false;
+                        $form->get('email')->setMessages(array('existsEmail' => $messageExistsEmail));
+                    }
                 }
             }
         }
@@ -162,27 +178,7 @@ class RegistroController extends AbstractActionController
                 $codigoRecuperar = \Common\Helpers\Util::generateToken($resultTrueFi['mguid']);
                 $dataIn['codigo_activar'] = $codigoRecuperar;
 
-                //verificar en base de datos
-                $row = $repository->findOne(array('where' => array('email' => $data['email'])));
-                if (!empty($row)) {
-                    //===================== Desechar registro  =================
-                    $bloqueo = $row['id'] . '__' . date('YmdHis');
-                    $dataBq = array(
-                        'email' => $bloqueo,
-                        'mguid' => $bloqueo,
-                        'historial' => json_encode(array(
-                            'mguid' => $row['mguid'],
-                            'email' => $row['email'],
-                        )),
-                        'estado' => 0,
-                    );
-                    $repository->save($dataBq, $row['id']);
-                    $this->_getTarjetaService()->getRepository()
-                        ->update(array('sincronizar' => 0), array('usuario_id' => $row['id']));
-                    //===================== Fin desachar registro  =============
-                }
                 $usuarioId = $repository->save($dataIn);
-                
                 if ($usuarioId) {
                     //si es facebook activar cuenta en TrueFi
                     if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
@@ -402,11 +398,6 @@ class RegistroController extends AbstractActionController
     private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
-    }
-    
-    private function _getTarjetaService()
-    {
-        return $this->getServiceLocator()->get('Tarjeta\Model\Service\TarjetaService');
     }
     
     private function _getUbigeoService()

@@ -3,6 +3,7 @@
 namespace Application\Controller;
 
 use Application\Controller\SecurityWebController;
+use Cart\Model\Service\CartService;
 use Zend\View\Model\ViewModel;
 
 class LoginController extends SecurityWebController
@@ -146,6 +147,8 @@ class LoginController extends SecurityWebController
     public function logoutAction()
     {
         $this->_getLoginGatewayService()->logout();
+        $this->_getCartService()->removeCart();
+
         return $this->redirect()->toRoute('web-login', array('controller' => 'login'));
     }
     
@@ -157,5 +160,13 @@ class LoginController extends SecurityWebController
     private function _getUsuarioService()
     {
         return $this->getServiceLocator()->get('Usuario\Model\Service\UsuarioService');
+    }
+
+    /**
+     * @return CartService;
+     */
+    private function _getCartService()
+    {
+        return $this->getServiceLocator()->get('Cart\Model\Service\CartService');
     }
 }

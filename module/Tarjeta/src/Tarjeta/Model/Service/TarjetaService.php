@@ -70,6 +70,7 @@ class TarjetaService
             $where = new \Zend\Db\Sql\Where();
 
             if ($validarFechaActualizacion) {
+                $where->equalTo('sincronizar', 1);
                 $where->isNotNull('fecha_actualizacion');
                 $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("fecha_actualizacion < ?", $fecha));
             }
