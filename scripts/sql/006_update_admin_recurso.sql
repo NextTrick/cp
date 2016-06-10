@@ -1,0 +1,9 @@
+UPDATE admin_recurso SET `url` = 'admin/usuarioadmin/index' WHERE id = 4;
+UPDATE admin_recurso SET `url` = 'admin/recurso/index' WHERE id = 5;
+UPDATE admin_recurso SET `url` = 'admin/rol/index' WHERE id = 6;
+UPDATE admin_recurso SET `url` = 'admin/permiso/index' WHERE id = 7;
+UPDATE admin_recurso SET `url` = 'admin/paquete/index' WHERE id = 9;
+UPDATE admin_recurso SET `url` = 'admin/usuario/index' WHERE id = 11;
+UPDATE admin_recurso SET `url` = 'admin/orden/index' WHERE id = 12;
+UPDATE admin_recurso SET `url` = 'admin/ordendetalle/index' WHERE id = 13;
+UPDATE admin_recurso SET `url` = 'admin/contenido/index' WHERE id = 15;
