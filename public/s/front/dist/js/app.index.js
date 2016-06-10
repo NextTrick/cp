@@ -394,7 +394,9 @@ $(function() {
       menuOptions: '.menu_options',
       userAccountMobile: '.user_option_mobile ul li .user_icon',
       menuAccountMobile: '.user_option_mobile ul li .menu_options',
-      topPage : 'footer .top'
+      topPage : 'footer .top',
+      docType: '.doc_type #di_tipo',
+      docNumber: '#di_valor'
     };
     catchDom = function() {
       dom.userAccount = $(st.userAccount);
@@ -402,13 +404,34 @@ $(function() {
       dom.userAccountMobile = $(st.userAccountMobile);
       dom.menuAccountMobile = $(st.menuAccountMobile);
       dom.topPage = $(st.topPage);
+      dom.docType = $(st.docType);
+      dom.docNumber = $(st.docNumber);
     };
     suscribeEvents = function() {
       dom.userAccount.on('click', events.openLogoutOption);
       dom.userAccountMobile.on('click', events.openMenu);
       dom.topPage.on('click', events.moveTop);
+      dom.docType.on('change', events.changeDocument);
+      $('body').on("keypress keyup blur", '.dni_input', function (event) {
+          //this.value = this.value.replace(/[^0-9\.]/g,'');
+          $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+          if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+              event.preventDefault();
+          }
+      });
     };
     events = {
+      changeDocument: function () {
+        dom.docNumber.val('');
+        if($(this).val() == 1){
+          dom.docNumber.attr('maxlength','8');
+          dom.docNumber.addClass('dni_input');
+        }
+        else{
+          dom.docNumber.attr('maxlength','12');
+          dom.docNumber.removeClass('dni_input');
+        }
+      },
       openLogoutOption: function(e) {
         e.preventDefault();
         if (dom.userAccount.hasClass('active')) {
@@ -429,9 +452,10 @@ $(function() {
       moveTop: function(){
         $("html, body").animate({ scrollTop: 0 }, "slow");
       }
+      
     };
     functions = {
-      successAsociate: function() {}
+      
     };
     initialize = function() {
       catchDom();
@@ -865,4 +889,5 @@ $(function() {
   pagos().init();
   carrito().init();
   recargas().init();
+
 });
