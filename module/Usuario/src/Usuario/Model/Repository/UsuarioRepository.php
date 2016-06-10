@@ -16,6 +16,9 @@ class UsuarioRepository extends \Common\Model\Repository\Zf2AbstractTableGateway
 {
     protected $table = 'usuario_usuario';
     protected $cache;
+
+    const ELIMINADO_TRUEFI_SI = 1;
+    const ELIMINADO_TRUEFI_NO = 0;
     
     public function __construct(Adapter $adapter)
     {
