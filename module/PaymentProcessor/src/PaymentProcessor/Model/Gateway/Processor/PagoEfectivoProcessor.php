@@ -87,24 +87,28 @@ class PagoEfectivoProcessor extends AbstractProcessor
                 $solData = simplexml_load_string($this->ws->desencriptarData($data));
 
                 $return['data']['clientReference'] = (string) $solData->CodTrans;
+                $return['data']['errorCode'] = null;
+                $return['data']['errorDescription'] = null;
                 //Según el estado de la solicitud  Procesar
                 Switch ($solData->Estado) {
                     case 592:                        
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_EXTORNADO;
-                        $return['error']['erroCode'] = 592;
-                        $return['error']['errorDescription'] = 'El CIP fué extornado, el banco realizó reversa de Pago';
+                        $return['data']['errorCode'] = 592;
+                        $return['data']['errorDescription'] = 'El CIP fué extornado, el banco realizó reversa de Pago';
                         break;
                     case 593: //Cip Pagado
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_PAGADO;
                         break;
                     case 595://Cip Vencido
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_EXPIRADO;
-                        $return['error']['erroCode'] = 595;
-                        $return['error']['errorDescription'] = 'Sobrepasó el tiempo de expiración';
+                        $return['data']['errorCode'] = 595;
+                        $return['data']['errorDescription'] = 'Sobrepasó el tiempo de expiración';
+                        break;
                     default:
                         $return['data']['status'] = OrdenRepository::PAGO_ESTADO_ERROR;
-                        $return['error']['erroCode'] = 900;
-                        $return['error']['errorDescription'] = ErrorService::GENERAL_CODE;
+                        $return['data']['errorCode'] = 900;
+                        $return['data']['errorDescription'] = ErrorService::GENERAL_MESSAGE;
+                        break;
                 }
                 // 31/12/2016 17:00:00
                 // date_format(date_create_from_format("d/m/Y H:i:s",$tempData['fechayhora_tx']), 'Y-m-d H:i:s'),
