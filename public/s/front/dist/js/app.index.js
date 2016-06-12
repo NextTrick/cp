@@ -82,8 +82,9 @@ $(function() {
         $('.modal_box').hide();
       },
       closeRecoveryModal: function() {
-        
-        if ($("#email_recuperar").parsley().isValid()) {
+        var _this = $(this);
+        if ($("#email_recuperar").parsley().isValid() && !_this.hasClass('btn_disabled')) {
+          _this.addClass('btn_disabled');
           $.ajax({
             type: "POST",
             url: baseUrl + 'recuperar-password',
@@ -100,6 +101,7 @@ $(function() {
               } else {
                 $('#error_recuperar_password').html(data.message);
               }
+              _this.removeClass('btn_disabled');
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {}
           });
@@ -758,12 +760,16 @@ $(function() {
         }
         // Do something
       });
+      $('#formUsuario').submit(function(){
+        dom.btnSave.prop('disabled', true);
+        dom.btnSave.addClass('btn_disabled');
+      });
     };
     events = {
       changeImage: function(e) {
         $('.image_file').click();
       },
-      validateForm: function(){
+      validateForm: function(e){
         var html = "<ul class='parsley-errors-list filled' id='parsley-id-23'><li class='parsley-required'>Este campo es requerido y no puede estar vacío</li></ul>";
         var test = 0;
         $(".error_message_dep").empty();
