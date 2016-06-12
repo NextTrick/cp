@@ -855,7 +855,7 @@ $(function() {
     };
     functions = {
       ancla: function() {
-        if(window.location.pathname == '/recargas'){
+        if(window.location.pathname == '/recargas' || window.location.pathname == '/recargas/recargas'){
           if(location.hash == '#recarga'){
             console.log('recarga');
             //$(document).animate({ scrollTop: $('.recarga_title').offset().top }, 1000);
