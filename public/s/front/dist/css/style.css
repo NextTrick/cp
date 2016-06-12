@@ -2613,6 +2613,10 @@ section form.form_mis_datos .disabled {
   color: #ffbe00;
   margin-left: 10px;
 }
+.bottom_bar .inline_block {
+  display: inline-block;
+  margin: 10px 0;
+}
 .bottom_bar button {
   width: 250px;
   border-radius: 20px;
@@ -2919,6 +2923,11 @@ i[class*=" icon-"] {
 @media screen and (max-width: 1170px) {
   .right_options {
     display: none !important;
+  }
+}
+@media screen and (max-width: 706px) {
+  .bottom_bar {
+    height: 132px;
   }
 }
 @media screen and (max-width: 667px) {
@@ -3408,7 +3417,7 @@ i[class*=" icon-"] {
     border-radius: 0;
     position: fixed;
     z-index: 99;
-    bottom: -25;
+    bottom: -25px;
   }
   .bottom_bar .box_mobile {
     position: relative;
@@ -3416,7 +3425,10 @@ i[class*=" icon-"] {
     background: #370135;
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
-    padding: 10px 0;
+    padding: 10px 0 0;
+  }
+  .bottom_bar .inline_block {
+    display: block;
   }
   .bottom_bar .icon_arrow {
     display: block;
@@ -3424,6 +3436,8 @@ i[class*=" icon-"] {
   .bottom_bar span.text {
     display: block;
     text-align: center;
+  }
+  .bottom_bar span.text.mb {
     margin-bottom: 10px;
   }
   .bottom_bar span.text.hide {

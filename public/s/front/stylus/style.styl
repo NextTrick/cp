@@ -2018,6 +2018,9 @@ section
 			&.total
 				color #FFBE00
 				margin-left 10px
+	.inline_block
+		display inline-block
+		margin 10px 0
 		
 	button
 		width 250px
@@ -2262,6 +2265,9 @@ i[class*=" icon-"]
 @media screen and (max-width: 1170px)
 	.right_options
 		display none !important
+@media screen and (max-width: 706px)
+	.bottom_bar
+		height 132px		
 @media screen and (max-width: 667px)
 	body
 		.wrapper
@@ -2665,21 +2671,24 @@ i[class*=" icon-"]
 		border-radius 0
 		position fixed
 		z-index 99
-		bottom -25
+		bottom -25px
 		.box_mobile
 			position relative
 			top -40px
 			background #370135
 			border-top-left-radius 40px
 			border-top-right-radius 40px
-			padding 10px 0
+			padding 10px 0 0
+		.inline_block
+			display block
 		.icon_arrow
 			display block
 		span
 			&.text
 				display block
 				text-align center
-				margin-bottom 10px
+				&.mb
+					margin-bottom 10px
 				&.hide
 					display none
 			&.bg
