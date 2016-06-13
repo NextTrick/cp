@@ -53,7 +53,7 @@ class RegistroForm extends Form
         $password->setAttributes(array(
                 'id' => 'password',
                 'autocomplete' => 'off',
-                'maxlength' => '100',
+                'maxlength' => '32',
             ));
         $this->add($password);
         
@@ -61,7 +61,7 @@ class RegistroForm extends Form
         $passwordRep->setAttributes(array(
                 'id' => 'password_repeat',
                 'autocomplete' => 'off',
-                'maxlength' => '100',
+                'maxlength' => '32',
             ));
         $this->add($passwordRep);
         
@@ -174,7 +174,7 @@ class RegistroForm extends Form
     {
         $anios = array();
         $anioActual = (int)date('Y');
-        for ($anio = 1980; $anio < $anioActual; $anio++) {
+        for ($anio = 1960; $anio < $anioActual; $anio++) {
             $anios[$anio] = $anio;
         }
         
