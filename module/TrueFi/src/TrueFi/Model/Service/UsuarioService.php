@@ -131,7 +131,7 @@ class UsuarioService
                     $result['mguid'] = $curlData['data']['data']['mguid'];
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -156,7 +156,7 @@ class UsuarioService
                     $result['mguid'] = $curlData['data']['data']['mguid'];
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -181,7 +181,7 @@ class UsuarioService
                     $result['result'] = $curlData['data']['data'];
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -205,7 +205,7 @@ class UsuarioService
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -229,7 +229,7 @@ class UsuarioService
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -253,7 +253,7 @@ class UsuarioService
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -277,7 +277,7 @@ class UsuarioService
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -301,7 +301,7 @@ class UsuarioService
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
