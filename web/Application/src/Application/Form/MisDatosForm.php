@@ -172,7 +172,7 @@ class MisDatosForm extends Form
     {
         $anios = array();
         $anioActual = (int)date('Y');
-        for ($anio = 1960; $anio < $anioActual; $anio++) {
+        for ($anio = 1940; $anio < $anioActual; $anio++) {
             $anios[$anio] = $anio;
         }
         
