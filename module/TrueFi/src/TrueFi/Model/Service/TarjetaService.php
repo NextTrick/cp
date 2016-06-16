@@ -85,7 +85,7 @@ class TarjetaService
                     $result['result'] = $curlData['data']['data'];
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -110,7 +110,7 @@ class TarjetaService
                     $result['result'] = $curlData['data']['data'];
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -135,7 +135,7 @@ class TarjetaService
                     $result['result'] = $curlData['data']['data'];
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -159,7 +159,7 @@ class TarjetaService
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
@@ -187,7 +187,7 @@ class TarjetaService
                     $result['success'] = true;
                 } else {
                     $result['success'] = false;
-                    $result['message'] = $curlData['data']['message'];
+                    $result['message'] = !empty($curlData['data']['message']) ? $curlData['data']['message'] : null;
                 }
             } else {
                 $result['success'] = false;
