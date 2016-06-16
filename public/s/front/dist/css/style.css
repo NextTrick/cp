@@ -3023,6 +3023,11 @@ i[class*=" icon-"] {
   section.section_informativo {
     padding: 32px 15px;
   }
+  section .success_message,
+  section .error_message {
+    width: 100%;
+    left: 0;
+  }
   section input {
     text-align: left;
   }
