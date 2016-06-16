@@ -92,6 +92,7 @@ class UsuarioService
                 'email' => $result['email'],
                 'password' => $password,
                 'estado' => (int)$result['active'],
+                'fecha_creacion' => date('Y-m-d H:i:s'),
             );
 
             try {
