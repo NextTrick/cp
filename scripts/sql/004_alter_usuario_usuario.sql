@@ -1,1 +1,1 @@
-ALTER TABLE paquete_paquete ADD `historial` TEXT NULL;
+ALTER TABLE usuario_usuario ADD `historial` TEXT NULL;
