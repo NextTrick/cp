@@ -187,6 +187,23 @@ class RegistroController extends AbstractActionController
                 if ($usuarioId) {
                     //si es facebook activar cuenta en TrueFi
                     if ($dataIn['estado'] == 1 && !empty($dataIn['facebook_id'])) {
+                        
+                        //Actualizar datos pendientes en TrueFi
+                        $dataArray = array();
+                        if (!empty($dataIn['fecha_nac'])) {
+                            $dataArray['BIRTHDATE'] = $dataIn['fecha_nac'];
+                        }
+                        if (!empty($dataIn['di_valor'])) {
+                            $dataArray['IDNUMBER'] = $dataIn['di_valor'];
+                        }
+                        if (!empty($dataArray)) {
+                            $this->_getUsuarioService()->actualizarEnTrueFi(array(
+                                'MGUID' => $resultTrueFi['mguid'],
+                                'Data' => $dataArray,
+                            ));
+                        }
+                        
+                        //Activar cuenta
                         $this->_getUsuarioService()->activarEnTrueFi(array('MGUID' => $resultTrueFi['mguid']));
                     }
 
@@ -225,12 +242,12 @@ class RegistroController extends AbstractActionController
             if (!empty($row['di_valor'])) {
                 $dataArray['IDNUMBER'] = $row['di_valor'];
             }
-            $dataTrueFi2 = array(
-                'MGUID' => $mguid,
-                'Data' => $dataArray,
-            );
+
             if (!empty($dataArray)) {
-                $this->_getUsuarioService()->actualizarEnTrueFi($dataTrueFi2);
+                $this->_getUsuarioService()->actualizarEnTrueFi(array(
+                    'MGUID' => $mguid,
+                    'Data' => $dataArray,
+                ));
             }
             
             //activar en True-Fi
