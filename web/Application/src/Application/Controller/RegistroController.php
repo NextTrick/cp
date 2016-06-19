@@ -222,6 +222,12 @@ class RegistroController extends AbstractActionController
                         && strpos($resultTrueFi['message'], 'cuenta') !== false
                         && strpos($resultTrueFi['message'], 'email') !== false);
             
+            $resultTrueFi['data'] = array(
+                'email' => $data['email'],
+                'nombres' => $data['nombres'],
+                'paterno' => $data['paterno'],
+                'materno' => $data['materno'],
+            );
             \Util\Common\Email::reportDebug($resultTrueFi, null, 'Error completar registro');
             if ($noRegistrado) {
                 $result['code'] = 'EXISTE_EMAIL';
