@@ -265,6 +265,31 @@ class TestController extends SecurityAdminController
         exit;
     }
 
+    public function syncDataUserAction()
+    {
+        $maxId = (int)$this->request->getQuery('maxId');
+        $minId = (int)$this->request->getQuery('minId');
+        $where = new \Zend\Db\Sql\Where();
+        $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("id <= ?", $maxId));
+        $where->addPredicate(new \Zend\Db\Sql\Predicate\Expression("id >= ?", $minId));
+        $usuarios = $this->_getUsuarioService()->getRepository()->findAll(array('where' => $where));
+        foreach ($usuarios as $row) {
+            $dataArray = array();
+            if (!empty($row['fecha_nac'])) {
+                $dataArray['BIRTHDATE'] = $row['fecha_nac'];
+            }
+            if (!empty($row['di_valor'])) {
+                $dataArray['IDNUMBER'] = $row['di_valor'];
+            }
+            if (!empty($dataArray)) {
+                $this->_getUsuarioService()->actualizarEnTrueFi(array(
+                    'MGUID' => $row['mguid'],
+                    'Data' => $dataArray,
+                ));
+            }
+        }
+    }
+
     private function _getTrueFiPromocionService()
     {
         return $this->getServiceLocator()->get('TrueFi\Model\Service\PromocionService');
