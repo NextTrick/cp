@@ -218,8 +218,14 @@ class RegistroController extends AbstractActionController
                 \Util\Common\Email::reportException($e);
             }
         } else {
+            $noRegistrado = (strpos($resultTrueFi['message'], 'existe') !== false 
+                        && strpos($resultTrueFi['message'], 'cuenta') !== false
+                        && strpos($resultTrueFi['message'], 'email') !== false);
+            
             \Util\Common\Email::reportDebug($resultTrueFi, null, 'Error completar registro');
-            $result['code'] = 'EXISTE_EMAIL';
+            if ($noRegistrado) {
+                $result['code'] = 'EXISTE_EMAIL';
+            }
         }
         
         $this->_removeDataRegistroTemp();
