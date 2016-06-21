@@ -88,7 +88,7 @@ class OrdenService
             
             $criteria = array(
                 'whereLike'    => $paramsLike,
-                'limit'        => LIMIT_BUSCAR,
+                //'limit'        => LIMIT_BUSCAR,
                 'where'        => $paramsWhere,
                 'whereBetween' => $betwween,
                 'order'        => $order

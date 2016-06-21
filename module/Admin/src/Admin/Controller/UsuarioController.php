@@ -30,7 +30,7 @@ class UsuarioController extends SecurityAdminController
             $criteria = $this->_getUsuarioService()->getDataCriteria($this->params()->fromPost());
 
             $gridList  = $this->_getUsuarioService()->getRepository()->search($criteria);
-            $countList = $this->_getUsuarioService()->getRepository()->countTotal($criteria);
+            $countList = !empty($gridList)? count($gridList): 0;
 
             $view = new ViewModel();
             $view->setVariable('gridList', $gridList);

@@ -149,7 +149,8 @@ class Zf2AbstractTableGateway extends AbstractTableGateway
                 foreach ($this->crWhereBetween as $key => $value) {
                     if (!empty($value['min']) && !empty($key)) {
                         $where->and->greaterThanOrEqualTo($key, $value['min']) ;
-                    } elseif (!empty($value['max']) && !empty($key)) {
+                    }
+                    if (!empty($value['max']) && !empty($key)) {
                         $where->and->lessThanOrEqualTo($key, $value['max']) ;
                     }
                 }
