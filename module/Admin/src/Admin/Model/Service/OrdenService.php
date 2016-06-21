@@ -62,7 +62,9 @@ class OrdenService
         );
 
         if (!empty($params)) {
-            $nameFilter = String::xssClean($params['cmbFiltro']);
+            $nameFilter            = String::xssClean($params['cmbFiltro']);
+            $params['txtFechaFin'] = (!empty($params['txtFechaFin']))? $params['txtFechaFin']." 23:59:59" : null;
+
 
             $paramsLike = array(
                 $nameFilter => String::xssClean($params['txtBuscar']),
@@ -76,7 +78,7 @@ class OrdenService
             );
 
             $betwween = array(
-                'o.fecha_creacion' => array(
+                'o.pago_fecha_confirmacion' => array(
                     'min'=> String::xssClean($params['txtFechaIni']),
                     'max'=> String::xssClean($params['txtFechaFin'])
                     )

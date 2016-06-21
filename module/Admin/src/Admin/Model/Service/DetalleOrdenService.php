@@ -39,7 +39,8 @@ class DetalleOrdenService
         );
 
         if (!empty($params)) {
-            $nameFilter = String::xssClean($params['cmbFiltro']);
+            $nameFilter            = String::xssClean($params['cmbFiltro']);
+            $params['txtFechaFin'] = (!empty($params['txtFechaFin']))? $params['txtFechaFin']." 23:59:59" : null;
 
             $paramsLike = array(
                 $nameFilter => String::xssClean($params['txtBuscar']),

@@ -268,8 +268,7 @@ class UsuarioService
 
     public function getDataCriteria($params)
     {
-        $order = array('id DESC', 'fecha_creacion DESC');
-
+        $order    = array('id DESC', 'fecha_creacion DESC');
         $criteria = array(
             'whereLike' => null,
             'limit'     => null,
@@ -278,8 +277,8 @@ class UsuarioService
         );
 
         if (!empty($params)) {
-
-            $nameFilter = String::xssClean($params['cmbFiltro']);
+            $params['txtFechaFin'] = (!empty($params['txtFechaFin']))? $params['txtFechaFin']." 23:59:59" : null;
+            $nameFilter            = String::xssClean($params['cmbFiltro']);
 
             $paramsLike = array(
                 $nameFilter => String::xssClean($params['txtBuscar']),
