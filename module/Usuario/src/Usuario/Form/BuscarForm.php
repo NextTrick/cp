@@ -38,7 +38,7 @@ class BuscarForm extends Form
         $txtBuscar = new Element\Text('txtBuscar');
         $txtBuscar->setAttributes(array(
                 'id' => 'txtBuscar',
-                'maxlength' => '20',
+                'maxlength' => '65',
             ));
         $this->add($txtBuscar);
         

@@ -37,14 +37,14 @@ class UsuarioForm extends Form
         $email = new Element\Text('email');
         $email->setAttributes(array(
                 'id' => 'email',
-                'maxlength' => '20',
+                'maxlength' => '30',
             ));
         $this->add($email);
         
         $password = new Element\Text('password');
         $password->setAttributes(array(
                 'id' => 'password',
-                'maxlength' => '20',
+                'maxlength' => '32',
             ));
         $this->add($password);
         
