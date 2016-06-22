@@ -45,7 +45,7 @@ class RegistroForm extends Form
         $email->setAttributes(array(
                 'id' => 'email',
                 'autocomplete' => 'off',
-                'maxlength' => '50',
+                'maxlength' => '65',
             ));
         $this->add($email);
         
