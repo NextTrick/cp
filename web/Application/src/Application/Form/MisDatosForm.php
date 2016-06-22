@@ -39,7 +39,7 @@ class MisDatosForm extends Form
         $email->setAttributes(array(
                 'id' => 'email',
                 'autocomplete' => 'off',
-                'maxlength' => '65',
+                'maxlength' => '50',
             ));
         $this->add($email);
         
