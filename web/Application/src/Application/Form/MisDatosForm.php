@@ -39,7 +39,7 @@ class MisDatosForm extends Form
         $email->setAttributes(array(
                 'id' => 'email',
                 'autocomplete' => 'off',
-                'maxlength' => '30',
+                'maxlength' => '65',
             ));
         $this->add($email);
         
@@ -182,7 +182,7 @@ class MisDatosForm extends Form
     private function _getDias()
     {
         $anios = array();
-        for ($dia = 1; $dia < 31; $dia++) {
+        for ($dia = 1; $dia <= 31; $dia++) {
             $sDia = $dia < 10 ? str_pad($dia, 2, '0', STR_PAD_LEFT) : $dia;
             $anios[$sDia] = $sDia;
         }
