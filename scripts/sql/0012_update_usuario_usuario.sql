@@ -1,0 +1,1 @@
+UPDATE usuario_usuario set `email` = 'cristinatorreskongsan@gmail.com' WHERE `email` = 'cristinatorreskongsan@gmail.co';
