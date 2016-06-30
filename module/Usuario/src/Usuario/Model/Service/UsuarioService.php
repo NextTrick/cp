@@ -325,7 +325,7 @@ class UsuarioService
     {
         return array(
             self::DI_DNI       => self::DI_NAME_DNI,
-            self::DI_PASAPORTE => self::DI_NAME_PASAPORTE,
+            //self::DI_PASAPORTE => self::DI_NAME_PASAPORTE,
         );
     }
 
